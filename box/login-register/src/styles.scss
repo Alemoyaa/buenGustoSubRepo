@@ -1,0 +1,31 @@
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
+.blue-snackbar {
+    background: #2196F3;
+}
+.green-snackbar {
+    background: rgb(0, 161, 86);
+    color: #ffffff;
+}
+.red-snackbar {
+    background: red;
+    color: #ffffff;
+}
+
+.parentDisable{
+    position: fixed;
+
+    background: #000;
+    opacity: 0.8;
+    z-index: 998;
+    height: 100%;
+    width: 100%;
+}
+
+.popup{
+    position: fixed;
+    top: 45%;
+    left: 45%;
+}
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

@@ -1,0 +1,71 @@
+<div *ngIf="show" class="parentDisable">
+    <mat-spinner  class="popup parentDisable" color="accent"></mat-spinner>
+</div>
+<mat-card class="example-card">
+  <mat-card-header class="make-center">
+    <!-- <mat-card-title><h1>Login</h1></mat-card-title> -->
+    <img
+      src="data:image/png;base64,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"
+      width="250px"
+      height="250px"
+    />
+  </mat-card-header>
+  
+  <mat-card-content>
+    <form
+      class="example-form"
+      [formGroup]="signupForm"
+      (ngSubmit)="PostData(signupForm)"
+    >
+      <div class="example-container">
+        <mat-form-field>
+          <input
+            matInput
+            placeholder="Enter your Email"
+            formControlName="email"
+            name="email"
+            type="text"
+            class="example-right-align"
+          />
+        </mat-form-field>
+
+        <mat-form-field>
+          <input
+            matInput
+            placeholder="Enter your Password"
+            formControlName="password"
+            name="password"
+            [type]="hide ? 'password' : 'text'"
+          />
+          <button
+            mat-icon-button
+            matSuffix
+            (click)="hide = !hide"
+            [attr.aria-label]="'Hide password'"
+            [attr.aria-pressed]="hide"
+          >
+            <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
+          </button>
+        </mat-form-field>
+      </div>
+
+      <mat-card-actions>
+        <button
+          mat-raised-button
+          color="primary"
+          [disabled]="!signupForm.valid"
+          class="full"
+          type="submit"
+        >
+          Login
+        </button>
+      </mat-card-actions>
+      <mat-card-actions>
+        <a routerLink="/register" href="#">
+          <button mat-raised-button color="accent" type="button" class="full">Register</button>
+        </a>
+      </mat-card-actions>
+    </form>
+  </mat-card-content>
+</mat-card>
+<router-outlet></router-outlet>
