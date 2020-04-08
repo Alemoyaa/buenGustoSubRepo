@@ -1,0 +1,40 @@
+package com.utn.app.buenGusto.domicilio;
+
+import java.io.Serializable;
+
+import javax.persistence.Entity;
+import javax.validation.constraints.NotEmpty;
+
+import com.utn.app.buenGusto.commons.commonEntity;
+
+@Entity
+public class domicilioEntity extends commonEntity implements Serializable{
+ 
+	private static final long serialVersionUID = 5685412683798686451L;
+	
+	@NotEmpty
+	private String calle;
+	@NotEmpty
+	private int numero;
+	@NotEmpty
+	private String localidad;
+	
+	public String getCalle() {
+		return calle;
+	}
+	public void setCalle(String calle) {
+		this.calle = calle;
+	}
+	public int getNumero() {
+		return numero;
+	}
+	public void setNumero(int numero) {
+		this.numero = numero;
+	}
+	public String getLocalidad() {
+		return localidad;
+	}
+	public void setLocalidad(String localidad) {
+		this.localidad = localidad;
+	}	
+}
