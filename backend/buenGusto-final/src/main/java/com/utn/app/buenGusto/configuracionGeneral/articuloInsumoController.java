@@ -1,4 +1,4 @@
-package com.utn.app.buenGusto.factura;
+package com.utn.app.buenGusto.configuracionGeneral;
  
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,5 +11,5 @@ import com.utn.app.buenGusto.commons.commonController;
 @CrossOrigin(origins = "*",
 			 methods={RequestMethod.GET,RequestMethod.POST,
 					  RequestMethod.DELETE,RequestMethod.PUT})
-@RequestMapping(path = "api/factura")
-public class facturaController extends commonController<facturaEntity, facturaService>{}
+@RequestMapping(path = "api/articuloInsumo")
+public class articuloInsumoController extends commonController<articuloInsumoEntity, articuloInsumoService>{}
