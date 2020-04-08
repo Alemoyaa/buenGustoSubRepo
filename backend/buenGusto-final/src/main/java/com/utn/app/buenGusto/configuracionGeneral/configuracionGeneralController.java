@@ -11,5 +11,5 @@ import com.utn.app.buenGusto.commons.commonController;
 @CrossOrigin(origins = "*",
 			 methods={RequestMethod.GET,RequestMethod.POST,
 					  RequestMethod.DELETE,RequestMethod.PUT})
-@RequestMapping(path = "api/articuloInsumo")
-public class articuloInsumoController extends commonController<articuloInsumoEntity, articuloInsumoService>{}
+@RequestMapping(path = "api/configuracionGenerealNDEAAA")
+public class configuracionGeneralController extends commonController<configuracionGeneralEntity, configuracionGeneralService>{}
