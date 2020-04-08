@@ -3,11 +3,13 @@ package com.utn.app.buenGusto.domicilio;
 import java.io.Serializable;
 
 import javax.persistence.Entity;
+import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 
 import com.utn.app.buenGusto.commons.commonEntity;
 
 @Entity
+@Table(name = "domicilio")
 public class domicilioEntity extends commonEntity implements Serializable{
  
 	private static final long serialVersionUID = 5685412683798686451L;

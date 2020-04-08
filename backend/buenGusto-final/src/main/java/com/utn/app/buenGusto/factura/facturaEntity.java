@@ -5,6 +5,7 @@ import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.PrePersist;
+import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotEmpty;
@@ -12,6 +13,7 @@ import javax.validation.constraints.NotEmpty;
 import com.utn.app.buenGusto.commons.commonEntity;
 
 @Entity
+@Table(name = "factura")
 public class facturaEntity extends commonEntity implements Serializable {
 
 	private static final long serialVersionUID = -8356649232468048872L;
