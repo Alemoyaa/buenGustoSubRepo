@@ -1,16 +1,20 @@
 # Frontend
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.0.2.
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.1.0.
 
 ## Development server
 
+1- ng add @angular/material
+2- npm install @angular/flex-layout@latest --save
+3- npm install jquery @types/jquery    
+4- npm i
+5- ng serve
+
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
-## Install Dependencies
+## Code scaffolding
 
-1. npm i
-2. npm i @angular/fire
-3. npm install firebase
+Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
 
 ## Build
 

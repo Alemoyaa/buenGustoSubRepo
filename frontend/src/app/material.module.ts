@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
 
 // Form Controls
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
@@ -49,54 +50,17 @@ import { MatTableModule } from '@angular/material/table';
 
 
 
-
-const modules = [
-  // Form Controls
-  MatAutocompleteModule,
-  MatCheckboxModule,
-  MatDatepickerModule,
-  MatFormFieldModule,
-  MatInputModule,
-  MatRadioModule,
-  MatSelectModule,
-  MatSliderModule,
-  MatSlideToggleModule,
-  // Navigation
-  MatMenuModule,
-  MatSidenavModule,
-  MatToolbarModule,
-  // Layout
-  MatCardModule,
-  MatDividerModule,
-  MatExpansionModule,
-  MatGridListModule,
-  MatListModule,
-  MatStepperModule,
-  MatTabsModule,
-  MatTreeModule,
-  // Buttons & Indicators
-  MatButtonModule,
-  MatButtonToggleModule,
-  MatBadgeModule,
-  MatChipsModule,
-  MatIconModule,
-  MatProgressSpinnerModule,
-  MatProgressBarModule,
-  MatRippleModule,
-  // Popups & Modals
-  MatBottomSheetModule,
-  MatDialogModule,
-  MatSnackBarModule,
-  MatTooltipModule,
-  // Data table
-  MatPaginatorModule,
-  MatSortModule,
-  MatTableModule
-];
-
 @NgModule({
   declarations: [],
-  imports: [ modules ],
-  exports: [ modules ]
+  imports: [
+    CommonModule,MatButtonModule, MatCheckboxModule, MatCardModule, MatDividerModule, MatIconModule,
+    MatSidenavModule, MatToolbarModule, MatListModule, MatTooltipModule, MatTabsModule,
+    MatTableModule, MatFormFieldModule, MatInputModule, MatDialogModule
+  ],
+  exports: [MatButtonModule, MatCheckboxModule, MatCardModule, MatDividerModule, MatIconModule,
+    MatSidenavModule, MatToolbarModule, MatListModule, MatTooltipModule, MatTabsModule,
+    MatTableModule, MatFormFieldModule, MatInputModule, MatDialogModule]
 })
+
+
 export class MaterialModule { }

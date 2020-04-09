@@ -1,47 +1,49 @@
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { FormsModule, ReactiveFormsModule }   from '@angular/forms';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { DirectivesModule } from './directives/directives.module';
+
+
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
-import { AngularFireModule } from '@angular/fire';
-import { AngularFireAuth } from '@angular/fire/auth';
-import { environment } from 'src/environments/environment';
-
-import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { PortfolioComponent } from './portfolio/portfolio.component';
+import { AboutComponent } from './about/about.component';
+import { HeadingComponent } from './heading/heading.component';
+import { PricingComponent } from './pricing/pricing.component';
+import { BlogComponent } from './blog/blog.component';
+import { ContactComponent } from './contact/contact.component';
+import { ContactDialogComponent } from './contact-dialog/contact-dialog.component';
 import { MaterialModule } from './material.module';
-import { LoginComponent } from './components/auth/login/login.component';
-import { RegisterComponent } from './components/auth/register/register.component';
-import { HomeComponent } from './components/client/home/home.component';
-import { PagenotfoundComponent } from './components/client/pagenotfound/pagenotfound.component';
-import { NavbarComponent } from './components/client/navbar/navbar.component';
-import { UserProfileComponent } from './components/client/user-profile/user-profile.component';
+
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent,
-    RegisterComponent,
-    HomeComponent,
-    PagenotfoundComponent,
-    NavbarComponent,
-    UserProfileComponent
+    PortfolioComponent,
+    AboutComponent,
+    HeadingComponent,
+    PricingComponent,
+    BlogComponent,
+    ContactComponent,
+    ContactDialogComponent
   ],
   imports: [
-    CommonModule,
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    AngularFireModule.initializeApp(environment.firebaseConfig),
-    ReactiveFormsModule,
+    MaterialModule,
+    FlexLayoutModule,
+    DirectivesModule,
     FormsModule,
+    ReactiveFormsModule,
     MaterialModule
   ],
-  providers: [AngularFireAuth],
+  providers: [],
+  entryComponents: [ ContactDialogComponent ],
   bootstrap: [AppComponent]
-
 })
 export class AppModule { }
