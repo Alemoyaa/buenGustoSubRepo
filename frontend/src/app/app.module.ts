@@ -14,7 +14,7 @@ import { MaterialModule } from './material.module';
 import { LoginComponent } from './components/auth/login/login.component';
 import { RegisterComponent } from './components/auth/register/register.component';
 import { HomeComponent } from './components/dashboard/home/home.component';
-import { Notfound404Component } from './components/dashboard/404/notfound404.component';
+import { PagenotfoundComponent } from './components/dashboard/pagenotfound/pagenotfound.component';
 import { NavbarComponent } from './components/dashboard/navbar/navbar.component';
 import { UserProfileComponent } from './components/dashboard/user-profile/user-profile.component';
 
@@ -24,7 +24,7 @@ import { UserProfileComponent } from './components/dashboard/user-profile/user-p
     LoginComponent,
     RegisterComponent,
     HomeComponent,
-    Notfound404Component,
+    PagenotfoundComponent,
     NavbarComponent,
     UserProfileComponent
   ],
