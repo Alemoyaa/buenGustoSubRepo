@@ -3,7 +3,7 @@
   <mat-icon
     (click)="onToolbarMenuToggle()"
     id="toolbarMenu">subject</mat-icon>
-  SideNav
+  El Buen Gusto
   <span class="toolbar-spacer"></span>
   <a  mat-button  routerLink="/register">Register</a>
       <a  mat-button  routerLink="/login">Login</a>
@@ -19,7 +19,7 @@
                                   VER QUE VA EN LA SIDENAV
                                 Y QUE EN LA NAVBAR-->
 
-<!--Sidenav  Vertical-->
+<!-- Sidenav  Vertical -->
 <mat-sidenav-container
 
   id="sidenavContainer"
@@ -43,7 +43,7 @@
           <mat-card-subtitle>"  El rana"</mat-card-subtitle>
         </mat-card-header>
       </mat-card>
-      <mat-list-item>
+      <mat-list-item >
         <button
         class="menu-item"
           mat-flat-button>
@@ -68,9 +68,14 @@
           </mat-list-item>
 
     </mat-list>
+
+
   </mat-sidenav>
+  <mat-sidenav-content>
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
 
 
 
 </mat-sidenav-container>
-<router-outlet></router-outlet>
+
