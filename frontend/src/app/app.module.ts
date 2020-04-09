@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -17,7 +18,7 @@ import { HomeComponent } from './components/dashboard/home/home.component';
 import { PagenotfoundComponent } from './components/dashboard/pagenotfound/pagenotfound.component';
 import { NavbarComponent } from './components/dashboard/navbar/navbar.component';
 import { UserProfileComponent } from './components/dashboard/user-profile/user-profile.component';
-import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/compiler';
+
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/compiler';
     UserProfileComponent
   ],
   imports: [
+    CommonModule,
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
