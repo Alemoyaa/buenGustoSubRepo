@@ -8,10 +8,10 @@ import { Routes, RouterModule } from '@angular/router';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
-{ path: 'login', component: LoginComponent },
-{ path: 'home', component: HomeComponent },
-{ path: 'register', component: RegisterComponent},
-{ path: '**', component: PagenotfoundComponent }
+  { path: 'home', component: HomeComponent },
+  { path: 'login', component: LoginComponent },
+  { path: 'register', component: RegisterComponent },
+  { path: '**', component: PagenotfoundComponent }
 ];
 
 @NgModule({
