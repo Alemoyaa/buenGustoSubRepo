@@ -1,15 +1,26 @@
 package com.utn.app.buenGusto.pedido;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotEmpty;
 
+import com.utn.app.buenGusto.cliente.clienteEntity;
 import com.utn.app.buenGusto.commons.commonEntity;
+import com.utn.app.buenGusto.detallePedido.detallePedidoEntity;
+import com.utn.app.buenGusto.factura.facturaEntity;
 
 @Entity
 @Table(name = "pedido")
@@ -31,6 +42,40 @@ public class pedidoEntity extends commonEntity implements Serializable{
 	
 	@NotEmpty
 	private int tipoEnvio;
+	
+	//--------Cliente--------
+	@ManyToOne(fetch = FetchType.LAZY, optional = false)
+	@JoinColumn(name = "cliente_id", nullable = false)
+	private clienteEntity cliente;
+	
+	//--------Factura----------
+	@OneToOne(cascade= CascadeType.ALL, fetch = FetchType.EAGER)
+	private facturaEntity factura;
+
+	//-------detallePedido----------
+	@OneToMany(mappedBy = "pedido", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	private List<detallePedidoEntity> detallePedidos;
+	
+	
+	public pedidoEntity () {
+		this.detallePedidos = new ArrayList<detallePedidoEntity>();
+	}
+	
+	public facturaEntity getFactura() {
+		return factura;
+	}
+
+	public void setFactura(facturaEntity factura) {
+		this.factura = factura;
+	}
+
+	public List<detallePedidoEntity> getDetallePedidos() {
+		return detallePedidos;
+	}
+
+	public void setDetallePedidos(List<detallePedidoEntity> detallePedidos) {
+		this.detallePedidos = detallePedidos;
+	}
 
 	public int getFecha() {
 		return fecha;
@@ -71,5 +116,15 @@ public class pedidoEntity extends commonEntity implements Serializable{
 	public void setTipoEnvio(int tipoEnvio) {
 		this.tipoEnvio = tipoEnvio;
 	}
+
+	public clienteEntity getCliente() {
+		return cliente;
+	}
+
+	public void setCliente(clienteEntity cliente) {
+		this.cliente = cliente;
+	}
+	
+	
 	
 }
