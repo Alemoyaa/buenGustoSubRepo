@@ -1,11 +1,12 @@
 <!--Navbar Horizontal -->
 <mat-toolbar id="mainToolbar" color="primary">
+
   <mat-icon
     (click)="onToolbarMenuToggle()"
     id="toolbarMenu">subject</mat-icon>
   El Buen Gusto
   <span class="toolbar-spacer"></span>
-  <a  mat-button  routerLink="/register">Register</a>
+  <a  mat-button  [routerLink]="['/register']" >Register</a>
       <a  mat-button  routerLink="/login">Login</a>
   <mat-icon
     class="toolbar-icon"
@@ -21,6 +22,8 @@
 
 <!-- Sidenav  Vertical -->
 <mat-sidenav-container
+
+
 
   id="sidenavContainer"
  fullscreen>
@@ -71,7 +74,7 @@
 
 
   </mat-sidenav>
-  
+
   <mat-sidenav-content>
     <router-outlet></router-outlet>
   </mat-sidenav-content>
