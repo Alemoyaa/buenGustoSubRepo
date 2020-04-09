@@ -9,7 +9,8 @@ Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app w
 ## Install Dependencies
 
 1. npm i
-2.
+2. npm i @angular/fire
+3. npm install firebase
 
 ## Build
 
