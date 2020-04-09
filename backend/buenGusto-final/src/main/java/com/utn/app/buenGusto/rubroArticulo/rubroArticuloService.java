@@ -5,6 +5,4 @@ import org.springframework.stereotype.Service;
 import com.utn.app.buenGusto.commons.commonService;
 
 @Service
-public class rubroArticuloService extends commonService<rubroArticuloEntity, rubroArticuloRepository>{
-
-}
+public class rubroArticuloService extends commonService<rubroArticuloEntity, rubroArticuloRepository>{}

@@ -24,7 +24,5 @@ public class rubroGeneralEntity extends commonEntity implements Serializable{
 	public void setDenominacion(String denominacion) {
 		this.denominacion = denominacion;
 	}
-	
-	
-	
+	  
 }

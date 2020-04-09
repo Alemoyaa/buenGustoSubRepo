@@ -5,6 +5,4 @@ import org.springframework.stereotype.Service;
 import com.utn.app.buenGusto.commons.commonService;
 
 @Service
-public class pedidoService extends commonService<pedidoEntity, pedidoRepository>{
-
-}
+public class pedidoService extends commonService<pedidoEntity, pedidoRepository>{}

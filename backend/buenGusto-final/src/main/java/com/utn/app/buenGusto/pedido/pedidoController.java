@@ -12,6 +12,4 @@ import com.utn.app.buenGusto.commons.commonController;
 			 methods={RequestMethod.GET,RequestMethod.POST,
 					  RequestMethod.DELETE,RequestMethod.PUT})
 @RequestMapping(path = "api/pedido")
-public class pedidoController extends commonController<pedidoEntity, pedidoService>{
-
-}
+public class pedidoController extends commonController<pedidoEntity, pedidoService>{}

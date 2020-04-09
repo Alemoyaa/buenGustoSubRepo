@@ -12,6 +12,4 @@ import com.utn.app.buenGusto.commons.commonController;
 			 methods={RequestMethod.GET,RequestMethod.POST,
 					  RequestMethod.DELETE,RequestMethod.PUT})
 @RequestMapping(path = "api/rubro_articulo")
-public class rubroArticuloController extends commonController<rubroArticuloEntity, rubroArticuloService>{
-
-}
+public class rubroArticuloController extends commonController<rubroArticuloEntity, rubroArticuloService>{}
