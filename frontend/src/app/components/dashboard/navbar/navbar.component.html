@@ -1,1 +1,76 @@
-<p>navbar works!</p>
+
+<mat-toolbar id="mainToolbar" color="primary">
+  <mat-icon
+    (click)="onToolbarMenuToggle()"
+    id="toolbarMenu">subject</mat-icon>
+  SideNav
+  <span class="toolbar-spacer"></span>
+  <mat-icon
+    class="toolbar-icon"
+    matBadge=""
+    matBadgePosition="after"
+    matBadgeColor="accent"
+  >notifications</mat-icon>
+</mat-toolbar>
+
+<mat-sidenav-container
+  id="sidenavContainer"
+ fullscreen>
+  <mat-sidenav
+    mode="side"
+    #sidenav
+    id="sidenav"
+    [class.menu-open]="isMenuOpen"
+    [class.menu-close]="!isMenuOpen"
+    opened>
+
+    <mat-list id="menus">
+      <mat-card>
+        <mat-card-header>
+          <div
+            mat-card-avatar
+            class="avatar"></div>
+
+          <mat-card-title>Rami Murua  </mat-card-title>
+          <mat-card-subtitle>"  El rana"</mat-card-subtitle>
+        </mat-card-header>
+      </mat-card>
+      <mat-list-item>
+        <button
+        class="menu-item"
+          mat-flat-button>
+          <mat-icon>favorite</mat-icon>
+        Pedidos Favoritos</button>
+      </mat-list-item>
+
+      <mat-list-item>
+          <button
+          class="menu-item"
+            mat-flat-button>
+            <mat-icon>account_circle</mat-icon>
+          Perfil</button>
+        </mat-list-item>
+
+        <mat-list-item>
+            <button
+            class="menu-item"
+              mat-flat-button>
+              <mat-icon>power_settings_new</mat-icon>
+            Salir</button>
+          </mat-list-item>
+
+    </mat-list>
+  </mat-sidenav>
+
+  <mat-sidenav-content
+  [ngStyle]="{ 'margin-left.px': contentMargin }"
+  >
+    <mat-selection-list class="dash-list">
+      <h3>TITULO INTERESANTE</h3>
+      <mat-list-option *ngFor="let todo of task">
+        {{todo}}
+      </mat-list-option>
+    </mat-selection-list>
+  </mat-sidenav-content>
+</mat-sidenav-container>
+<router-outlet></router-outlet>
