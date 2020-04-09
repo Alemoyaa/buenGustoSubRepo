@@ -14,10 +14,10 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { MaterialModule } from './material.module';
 import { LoginComponent } from './components/auth/login/login.component';
 import { RegisterComponent } from './components/auth/register/register.component';
-import { HomeComponent } from './components/dashboard/home/home.component';
-import { PagenotfoundComponent } from './components/dashboard/pagenotfound/pagenotfound.component';
-import { NavbarComponent } from './components/dashboard/navbar/navbar.component';
-import { UserProfileComponent } from './components/dashboard/user-profile/user-profile.component';
+import { HomeComponent } from './components/client/home/home.component';
+import { PagenotfoundComponent } from './components/client/pagenotfound/pagenotfound.component';
+import { NavbarComponent } from './components/client/navbar/navbar.component';
+import { UserProfileComponent } from './components/client/user-profile/user-profile.component';
 
 
 @NgModule({
