@@ -32,6 +32,39 @@ public class rubroGeneralEntity extends commonEntity implements Serializable{
 		 @OneToMany(mappedBy = "rubroGeneral",cascade = CascadeType.ALL, orphanRemoval = true)
 		    private List<articuloManufacturadoEntity> articuloManufacturado = new ArrayList<>();
 
+		    
+		    
+		    
+	public rubroGeneralEntity() {
+			
+		}
+
+
+
+
+	public rubroGeneralEntity(@NotEmpty String denominacion, List<articuloManufacturadoEntity> articuloManufacturado) {
+		
+		this.denominacion = denominacion;
+		this.articuloManufacturado = articuloManufacturado;
+	}
+
+
+
+
+	public List<articuloManufacturadoEntity> getArticuloManufacturado() {
+			return articuloManufacturado;
+		}
+
+
+
+
+		public void setArticuloManufacturado(List<articuloManufacturadoEntity> articuloManufacturado) {
+			this.articuloManufacturado = articuloManufacturado;
+		}
+
+
+
+
 	public void setDenominacion(String denominacion) {
 		this.denominacion = denominacion;
 	}

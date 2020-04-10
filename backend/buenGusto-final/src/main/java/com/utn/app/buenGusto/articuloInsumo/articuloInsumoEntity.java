@@ -1,16 +1,22 @@
 package com.utn.app.buenGusto.articuloInsumo;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 import javax.persistence.PrePersist;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotEmpty;
 
+import com.utn.app.buenGusto.articuloManufacturadoDetalle.articuloManufacturadoDetalleEntity;
 import com.utn.app.buenGusto.commons.commonEntity;
+import com.utn.app.buenGusto.detallePedido.detallePedidoEntity;
 
 @Entity
 @Table(name = "articulo_insumo")
@@ -39,6 +45,48 @@ public class articuloInsumoEntity extends commonEntity implements Serializable {
 	@NotEmpty
 	private boolean esInsumo;
 	
+	
+	 // relacion OneToMany bidireccional ArticuloInsumo -- ArticuloManufacturadoDetalle
+	 @OneToMany(mappedBy = "articuloInsumo",cascade = CascadeType.ALL, orphanRemoval = true)
+	    private List<articuloManufacturadoDetalleEntity> articuloManufacturadoDetalle = new ArrayList<>();    
+
+	 // relacion OneToMany bidireccional ArticuloInsumo -- DetallePedido
+		 @OneToMany(mappedBy = "articuloInsumo",cascade = CascadeType.ALL, orphanRemoval = true)
+		    private List<detallePedidoEntity> detallePedido = new ArrayList<>();
+	    
+	
+		    
+	public articuloInsumoEntity() {
+		
+	}
+	public articuloInsumoEntity(@NotEmpty String denominacion, @NotEmpty double precioCompra,
+			@NotEmpty double precioVenta, @NotEmpty double stockActual, @NotEmpty double stockMinimo,
+			@NotEmpty String unidadMedida, @NotEmpty boolean esInsumo,
+			List<articuloManufacturadoDetalleEntity> articuloManufacturadoDetalle,
+			List<detallePedidoEntity> detallePedido) {
+		
+		this.denominacion = denominacion;
+		this.precioCompra = precioCompra;
+		this.precioVenta = precioVenta;
+		this.stockActual = stockActual;
+		this.stockMinimo = stockMinimo;
+		this.unidadMedida = unidadMedida;
+		this.esInsumo = esInsumo;
+		this.articuloManufacturadoDetalle = articuloManufacturadoDetalle;
+		this.detallePedido = detallePedido;
+	}
+	public List<articuloManufacturadoDetalleEntity> getArticuloManufacturadoDetalle() {
+			return articuloManufacturadoDetalle;
+		}
+		public void setArticuloManufacturadoDetalle(List<articuloManufacturadoDetalleEntity> articuloManufacturadoDetalle) {
+			this.articuloManufacturadoDetalle = articuloManufacturadoDetalle;
+		}
+		public List<detallePedidoEntity> getDetallePedido() {
+			return detallePedido;
+		}
+		public void setDetallePedido(List<detallePedidoEntity> detallePedido) {
+			this.detallePedido = detallePedido;
+		}
 	public String getDenominacion() {
 		return denominacion;
 	}

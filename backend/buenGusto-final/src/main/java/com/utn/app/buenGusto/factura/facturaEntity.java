@@ -51,13 +51,43 @@ public class facturaEntity extends commonEntity implements Serializable {
 	private List<detallePedidoEntity> detallePedidosF;
 	 
 	
+	
+	
 	public facturaEntity() {
 		this.detallePedidosF = new ArrayList<detallePedidoEntity>();
 	}
 	
+	
+	
+	public facturaEntity(@NotEmpty int número, Date fecha, @NotEmpty double montoDescuento, @NotEmpty double total,
+			@NotEmpty String formaPago, String nroTarjeta, pedidoEntity pedido,
+			List<detallePedidoEntity> detallePedidosF) {
+		super();
+		this.número = número;
+		this.fecha = fecha;
+		this.montoDescuento = montoDescuento;
+		this.total = total;
+		this.formaPago = formaPago;
+		this.nroTarjeta = nroTarjeta;
+		this.pedido = pedido;
+		this.detallePedidosF = new ArrayList<detallePedidoEntity>();
+	}
+
+
+
 	@PrePersist
 	public void prePersist() {
 		this.fecha = new Date();
+	}
+
+	
+	
+	public List<detallePedidoEntity> getDetallePedidosF() {
+		return detallePedidosF;
+	}
+
+	public void setDetallePedidosF(List<detallePedidoEntity> detallePedidosF) {
+		this.detallePedidosF = detallePedidosF;
 	}
 
 	public pedidoEntity getPedido() {

@@ -46,6 +46,21 @@ public class clienteEntity extends commonEntity implements Serializable {
 		this.pedidos = new ArrayList<>();
 	}
 	
+	
+	
+	public clienteEntity(@NotEmpty String nombre, @NotEmpty String apellido, @NotEmpty long telefono,
+			@NotEmpty String email, domicilioEntity domicilio, List<pedidoEntity> pedidos) {
+		super();
+		this.nombre = nombre;
+		this.apellido = apellido;
+		this.telefono = telefono;
+		this.email = email;
+		this.domicilio = domicilio;
+		this.pedidos = pedidos;
+	}
+
+
+
 	public String getNombre() {
 		return nombre;
 	}

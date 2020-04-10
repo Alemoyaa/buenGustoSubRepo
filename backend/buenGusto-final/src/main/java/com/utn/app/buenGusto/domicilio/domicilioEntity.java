@@ -27,6 +27,27 @@ public class domicilioEntity extends commonEntity implements Serializable{
 	@OneToOne(mappedBy = "domicilio", cascade = CascadeType.ALL)
 	private clienteEntity cliente;
 	
+	
+	
+	
+	public domicilioEntity() {
+		
+	}
+	public domicilioEntity(@NotEmpty String calle, @NotEmpty int numero, @NotEmpty String localidad,
+			clienteEntity cliente) {
+		
+		this.calle = calle;
+		this.numero = numero;
+		this.localidad = localidad;
+		this.cliente = cliente;
+	}
+	
+	public clienteEntity getCliente() {
+		return cliente;
+	}
+	public void setCliente(clienteEntity cliente) {
+		this.cliente = cliente;
+	}
 	public String getCalle() {
 		return calle;
 	}

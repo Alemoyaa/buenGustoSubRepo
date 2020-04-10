@@ -9,6 +9,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 
+import com.utn.app.buenGusto.articuloInsumo.articuloInsumoEntity;
 import com.utn.app.buenGusto.articuloManufacturado.articuloManufacturadoEntity;
 import com.utn.app.buenGusto.commons.commonEntity;
 import com.utn.app.buenGusto.factura.facturaEntity;
@@ -42,7 +43,52 @@ public class detallePedidoEntity extends commonEntity implements Serializable{
     @JoinColumn(name= "detallePedido_fk_articuloManufacturado")
     private articuloManufacturadoEntity articuloManufacturado;
 	
+    
+ // relacion ManyToOne bidireccional detallePedido --- ArticuloManufacturado
+    @ManyToOne(fetch = FetchType.EAGER) //trae atributos y sus correspondientes relaciones
+    @JoinColumn(name= "detallePedido_fk_articuloInsumo")
+    private articuloInsumoEntity articuloInsumo;
+    
+    
 	
+	public detallePedidoEntity() {
+		
+	}
+
+	public detallePedidoEntity(@NotEmpty int cantidad, @NotEmpty double subtotal, pedidoEntity pedido,
+			facturaEntity facturaDetalle, articuloManufacturadoEntity articuloManufacturado) {
+		
+		this.cantidad = cantidad;
+		this.subtotal = subtotal;
+		this.pedido = pedido;
+		this.facturaDetalle = facturaDetalle;
+		this.articuloManufacturado = articuloManufacturado;
+	}
+
+	public pedidoEntity getPedido() {
+		return pedido;
+	}
+
+	public void setPedido(pedidoEntity pedido) {
+		this.pedido = pedido;
+	}
+
+	public facturaEntity getFacturaDetalle() {
+		return facturaDetalle;
+	}
+
+	public void setFacturaDetalle(facturaEntity facturaDetalle) {
+		this.facturaDetalle = facturaDetalle;
+	}
+
+	public articuloManufacturadoEntity getArticuloManufacturado() {
+		return articuloManufacturado;
+	}
+
+	public void setArticuloManufacturado(articuloManufacturadoEntity articuloManufacturado) {
+		this.articuloManufacturado = articuloManufacturado;
+	}
+
 	public int getCantidad() {
 		return cantidad;
 	}
