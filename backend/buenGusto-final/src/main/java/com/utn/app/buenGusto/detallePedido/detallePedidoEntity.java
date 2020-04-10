@@ -9,6 +9,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 
+import com.utn.app.buenGusto.articuloManufacturado.articuloManufacturadoEntity;
 import com.utn.app.buenGusto.commons.commonEntity;
 import com.utn.app.buenGusto.factura.facturaEntity;
 import com.utn.app.buenGusto.pedido.pedidoEntity;
@@ -34,6 +35,12 @@ public class detallePedidoEntity extends commonEntity implements Serializable{
 	@ManyToOne(fetch = FetchType.LAZY, optional = false)
 	@JoinColumn(name = "factura_id", nullable = false)
 	private facturaEntity facturaDetalle;
+	
+	
+	// relacion ManyToOne bidireccional detallePedido --- ArticuloManufacturado
+    @ManyToOne(fetch = FetchType.EAGER) //trae atributos y sus correspondientes relaciones
+    @JoinColumn(name= "detallePedido_fk_articuloManufacturado")
+    private articuloManufacturadoEntity articuloManufacturado;
 	
 	
 	public int getCantidad() {

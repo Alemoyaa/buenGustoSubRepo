@@ -1,9 +1,16 @@
 package com.utn.app.buenGusto.articuloManufacturado;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.PrePersist;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -11,6 +18,8 @@ import javax.persistence.TemporalType;
 import javax.validation.constraints.NotEmpty;
 
 import com.utn.app.buenGusto.commons.commonEntity;
+import com.utn.app.buenGusto.detallePedido.detallePedidoEntity;
+import com.utn.app.buenGusto.rubroGeneral.rubroGeneralEntity;
 
 @Entity
 @Table(name = "articulo_manufacturado")
@@ -26,6 +35,16 @@ public class articuloManufacturadoEntity extends commonEntity implements Seriali
 	
 	@NotEmpty
 	private double precioVenta;
+	
+	// relacion OneToMany bidireccional ArticuloManufacturado -- detallePedido
+	 @OneToMany(mappedBy = "articuloManufacturado",cascade = CascadeType.ALL, orphanRemoval = true)
+	    private List<detallePedidoEntity> detallePedido = new ArrayList<>();
+	    
+		// relacion ManyToOne bidireccional detallePedido --- ArticuloManufacturado
+	    @ManyToOne(fetch = FetchType.EAGER) //trae atributos y sus correspondientes relaciones
+	    @JoinColumn(name= "articuloManufacturado_fk_rubroGeneral")
+	    private rubroGeneralEntity rubroGeneral;    
+	    
 
 	public int getTiempoEstimadoCocina() {
 		return tiempoEstimadoCocina;
