@@ -3,7 +3,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { DirectivesModule } from './directives/directives.module';
+import { DirectivesModule } from './components/cliente/directives/directives.module';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
