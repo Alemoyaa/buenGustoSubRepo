@@ -6,10 +6,10 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.FetchType; 
+import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
-import javax.persistence.Table; 
+import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 
 import com.utn.app.buenGusto.commons.commonEntity;
@@ -24,33 +24,29 @@ public class clienteEntity extends commonEntity implements Serializable {
 
 	@NotEmpty
 	private String nombre;
-	
+
 	@NotEmpty
 	private String apellido;
-	
+
 	@NotEmpty
 	private long telefono;
-	
+
 	@NotEmpty
 	private String email;
-	
-	//Dependencia con domicilio
-	@OneToOne(cascade= CascadeType.ALL, fetch = FetchType.EAGER) 
+
+	// Dependencia con domicilio
+	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private domicilioEntity domicilio;
 
-	//-----Pedido------
+	// -----Pedido------
 	@OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	private List<pedidoEntity> pedidos;
-	
+	private List<pedidoEntity> pedidos = new ArrayList<>();
+
 	public clienteEntity() {
-		this.pedidos = new ArrayList<>();
 	}
-	
-	
-	
+
 	public clienteEntity(@NotEmpty String nombre, @NotEmpty String apellido, @NotEmpty long telefono,
 			@NotEmpty String email, domicilioEntity domicilio, List<pedidoEntity> pedidos) {
-		super();
 		this.nombre = nombre;
 		this.apellido = apellido;
 		this.telefono = telefono;
@@ -58,8 +54,6 @@ public class clienteEntity extends commonEntity implements Serializable {
 		this.domicilio = domicilio;
 		this.pedidos = pedidos;
 	}
-
-
 
 	public String getNombre() {
 		return nombre;
@@ -105,7 +99,8 @@ public class clienteEntity extends commonEntity implements Serializable {
 		return pedidos;
 	}
 
-	public void setPedidos(List<pedidoEntity> pedido) {
-		this.pedidos = pedido;
-	} 
+	public void setPedidos(List<pedidoEntity> pedidos) {
+		this.pedidos = pedidos;
+	}
+
 }

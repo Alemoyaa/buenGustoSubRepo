@@ -13,11 +13,10 @@ import javax.validation.constraints.NotEmpty;
 import com.utn.app.buenGusto.articuloManufacturado.articuloManufacturadoEntity;
 import com.utn.app.buenGusto.commons.commonEntity;
 
-
 @Entity
 @Table(name = "rubro_general")
-public class rubroGeneralEntity extends commonEntity implements Serializable{
- 
+public class rubroGeneralEntity extends commonEntity implements Serializable {
+
 	private static final long serialVersionUID = -2061211142699575304L;
 
 	@NotEmpty
@@ -26,47 +25,32 @@ public class rubroGeneralEntity extends commonEntity implements Serializable{
 	public String getDenominacion() {
 		return denominacion;
 	}
-	
-	
+
 	// relacion OneToMany bidireccional RubroGeneral -- ArticuloManufacturado
-		 @OneToMany(mappedBy = "rubroGeneral",cascade = CascadeType.ALL, orphanRemoval = true)
-		    private List<articuloManufacturadoEntity> articuloManufacturado = new ArrayList<>();
+	@OneToMany(mappedBy = "rubroGeneral", cascade = CascadeType.ALL, orphanRemoval = true)
+	private List<articuloManufacturadoEntity> articuloManufacturado = new ArrayList<>();
 
-		    
-		    
-		    
 	public rubroGeneralEntity() {
-			
-		}
 
-
-
+	}
 
 	public rubroGeneralEntity(@NotEmpty String denominacion, List<articuloManufacturadoEntity> articuloManufacturado) {
-		
+
 		this.denominacion = denominacion;
 		this.articuloManufacturado = articuloManufacturado;
 	}
 
-
-
-
-	public List<articuloManufacturadoEntity> getArticuloManufacturado() {
-			return articuloManufacturado;
-		}
-
-
-
-
-		public void setArticuloManufacturado(List<articuloManufacturadoEntity> articuloManufacturado) {
-			this.articuloManufacturado = articuloManufacturado;
-		}
-
-
-
-
 	public void setDenominacion(String denominacion) {
 		this.denominacion = denominacion;
 	}
-	  
+
+	public List<articuloManufacturadoEntity> getArticuloManufacturado() {
+		return articuloManufacturado;
+	}
+
+	public void setArticuloManufacturado(List<articuloManufacturadoEntity> articuloManufacturado) {
+		this.articuloManufacturado = articuloManufacturado;
+	}
+
+	
 }

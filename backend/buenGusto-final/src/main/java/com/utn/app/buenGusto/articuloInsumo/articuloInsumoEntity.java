@@ -81,85 +81,59 @@ public class articuloInsumoEntity extends commonEntity implements Serializable {
 		this.detallePedido = detallePedido;
 		this.rubrosArticulo = rubroArticulo;
 	}
-	
-	public rubroArticuloEntity getRubrosArticulo() {
-		return rubrosArticulo;
-	}
-
-	public void setRubrosArticulo(rubroArticuloEntity rubroArticulo) {
-		this.rubrosArticulo = rubroArticulo;
-	}
-
-	public List<articuloManufacturadoDetalleEntity> getArticuloManufacturadoDetalle() {
-		return articuloManufacturadoDetalle;
-	}
-
-	public void setArticuloManufacturadoDetalle(List<articuloManufacturadoDetalleEntity> articuloManufacturadoDetalle) {
-		this.articuloManufacturadoDetalle = articuloManufacturadoDetalle;
-	}
-
-	public List<detallePedidoEntity> getDetallePedido() {
-		return detallePedido;
-	}
-
-	public void setDetallePedido(List<detallePedidoEntity> detallePedido) {
-		this.detallePedido = detallePedido;
-	}
-
 	public String getDenominacion() {
 		return denominacion;
 	}
-
 	public void setDenominacion(String denominacion) {
 		this.denominacion = denominacion;
 	}
-
 	public double getPrecioCompra() {
 		return precioCompra;
 	}
-
 	public void setPrecioCompra(double precioCompra) {
 		this.precioCompra = precioCompra;
 	}
-
 	public double getPrecioVenta() {
 		return precioVenta;
 	}
-
 	public void setPrecioVenta(double precioVenta) {
 		this.precioVenta = precioVenta;
 	}
-
 	public double getStockActual() {
 		return stockActual;
 	}
-
 	public void setStockActual(double stockActual) {
 		this.stockActual = stockActual;
 	}
-
 	public double getStockMinimo() {
 		return stockMinimo;
 	}
-
 	public void setStockMinimo(double stockMinimo) {
 		this.stockMinimo = stockMinimo;
 	}
-
 	public String getUnidadMedida() {
 		return unidadMedida;
 	}
-
 	public void setUnidadMedida(String unidadMedida) {
 		this.unidadMedida = unidadMedida;
 	}
-
 	public boolean isEsInsumo() {
 		return esInsumo;
 	}
-
 	public void setEsInsumo(boolean esInsumo) {
 		this.esInsumo = esInsumo;
 	}
-
+	public List<articuloManufacturadoDetalleEntity> getArticuloManufacturadoDetalle() {
+		return articuloManufacturadoDetalle;
+	}
+	public void setArticuloManufacturadoDetalle(List<articuloManufacturadoDetalleEntity> articuloManufacturadoDetalle) {
+		this.articuloManufacturadoDetalle = articuloManufacturadoDetalle;
+	}
+	public List<detallePedidoEntity> getDetallePedido() {
+		return detallePedido;
+	}
+	public void setDetallePedido(List<detallePedidoEntity> detallePedido) {
+		this.detallePedido = detallePedido;
+	} 
+	
 }

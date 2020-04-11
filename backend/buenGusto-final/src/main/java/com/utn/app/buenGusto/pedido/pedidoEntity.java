@@ -24,52 +24,45 @@ import com.utn.app.buenGusto.factura.facturaEntity;
 
 @Entity
 @Table(name = "pedido")
-public class pedidoEntity extends commonEntity implements Serializable{
- 
+public class pedidoEntity extends commonEntity implements Serializable {
+
 	private static final long serialVersionUID = -1998183735641277350L;
-	
+
 	@NotEmpty
 	private int fecha;
-	
+
 	@NotEmpty
 	private int numero;
-	
+
 	@NotEmpty
 	private int estado;
-	
+
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date horaEstimadaFin;
-	
+
 	@NotEmpty
 	private int tipoEnvio;
-	
-	//--------Cliente--------
+
+	// --------Cliente--------
 	@ManyToOne(fetch = FetchType.LAZY, optional = false)
 	@JoinColumn(name = "cliente_id", nullable = false)
 	private clienteEntity cliente;
-	
-	//--------Factura----------
-	@OneToOne(cascade= CascadeType.ALL, fetch = FetchType.EAGER)
+
+	// --------Factura----------
+	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private facturaEntity factura;
 
-	//-------detallePedido----------
+	// -------detallePedido----------
 	@OneToMany(mappedBy = "pedido", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<detallePedidoEntity> detallePedidos;
-	
-	
-	
-	
-	public pedidoEntity () {
+
+	public pedidoEntity() {
 		this.detallePedidos = new ArrayList<detallePedidoEntity>();
 	}
-	
-	
-	
-	
+
 	public pedidoEntity(@NotEmpty int fecha, @NotEmpty int numero, @NotEmpty int estado, Date horaEstimadaFin,
 			@NotEmpty int tipoEnvio, clienteEntity cliente, facturaEntity factura,
 			List<detallePedidoEntity> detallePedidos) {
-		super();
 		this.fecha = fecha;
 		this.numero = numero;
 		this.estado = estado;
@@ -78,25 +71,6 @@ public class pedidoEntity extends commonEntity implements Serializable{
 		this.cliente = cliente;
 		this.factura = factura;
 		this.detallePedidos = new ArrayList<detallePedidoEntity>();
-	}
-
-
-
-
-	public facturaEntity getFactura() {
-		return factura;
-	}
-
-	public void setFactura(facturaEntity factura) {
-		this.factura = factura;
-	}
-
-	public List<detallePedidoEntity> getDetallePedidos() {
-		return detallePedidos;
-	}
-
-	public void setDetallePedidos(List<detallePedidoEntity> detallePedidos) {
-		this.detallePedidos = detallePedidos;
 	}
 
 	public int getFecha() {
@@ -139,14 +113,21 @@ public class pedidoEntity extends commonEntity implements Serializable{
 		this.tipoEnvio = tipoEnvio;
 	}
 
-	public clienteEntity getCliente() {
-		return cliente;
+	public facturaEntity getFactura() {
+		return factura;
 	}
 
-	public void setCliente(clienteEntity cliente) {
-		this.cliente = cliente;
+	public void setFactura(facturaEntity factura) {
+		this.factura = factura;
 	}
-	
-	
+
+	public List<detallePedidoEntity> getDetallePedidos() {
+		return detallePedidos;
+	}
+
+	public void setDetallePedidos(List<detallePedidoEntity> detallePedidos) {
+		this.detallePedidos = detallePedidos;
+	}
+
 	
 }
