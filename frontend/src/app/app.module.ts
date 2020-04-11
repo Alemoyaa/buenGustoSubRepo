@@ -1,24 +1,20 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
-import { FormsModule, ReactiveFormsModule }   from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { DirectivesModule } from './directives/directives.module';
 
-
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { PortfolioComponent } from './portfolio/portfolio.component';
-import { AboutComponent } from './about/about.component';
-import { HeadingComponent } from './heading/heading.component';
-import { PricingComponent } from './pricing/pricing.component';
-import { BlogComponent } from './blog/blog.component';
-import { ContactComponent } from './contact/contact.component';
-import { ContactDialogComponent } from './contact-dialog/contact-dialog.component';
+import { PortfolioComponent } from './components/cliente/portfolio/portfolio.component';
+import { AboutComponent } from './components/cliente/about/about.component';
+import { HeadingComponent } from './components/cliente/heading/heading.component';
+import { PricingComponent } from './components/cliente/pricing/pricing.component';
+import { BlogComponent } from './components/cliente/blog/blog.component';
+import { ContactComponent } from './components/cliente/contact/contact.component';
+import { ContactDialogComponent } from './components/cliente/contact-dialog/contact-dialog.component';
 import { MaterialModule } from './material.module';
-
-
 
 @NgModule({
   declarations: [
@@ -29,7 +25,7 @@ import { MaterialModule } from './material.module';
     PricingComponent,
     BlogComponent,
     ContactComponent,
-    ContactDialogComponent
+    ContactDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -40,10 +36,10 @@ import { MaterialModule } from './material.module';
     DirectivesModule,
     FormsModule,
     ReactiveFormsModule,
-    MaterialModule
+    MaterialModule,
   ],
   providers: [],
-  entryComponents: [ ContactDialogComponent ],
-  bootstrap: [AppComponent]
+  entryComponents: [ContactDialogComponent],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
