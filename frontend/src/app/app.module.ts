@@ -8,10 +8,10 @@ import { RegisterComponent } from './components/admin/register/register.componen
 import { HomeComponent } from './components/cliente/home/home.component';
 import { NavbarComponent } from './components/cliente/navbar/navbar.component';
 import { NotfoundComponent } from './components/cliente/notfound/notfound.component';
-import { UserProfileComponent } from './components/cliente/userProfile/userProfile.component';
+import { UserProfileComponent } from './components/cliente/user-profile/user-profile.component';
 import { CatalogoComponent } from './components/cliente/catalogo/catalogo.component';
 import { OfertasComponent } from './components/cliente/ofertas/ofertas.component';
-import {FormsModule} from '@angular/forms';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -26,8 +26,7 @@ import {FormsModule} from '@angular/forms';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
-    FormsModule
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]

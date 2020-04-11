@@ -1,7 +1,7 @@
 #promo {
   text-align: center;
   padding: 200px;
- 
+  background: url(../../assets/img/Fast_food_Pizza.jpg) no-repeat;
   background-size: cover;
 }
 
@@ -37,8 +37,7 @@
 }
 
 body {
-  font-family: -apple-system, BlinkMacSystemFont, Raleway, "Segoe UI", Roboto,
-   "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  font-family: -apple-system, BlinkMacSystemFont, Raleway, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
 }
 
 #promo h1 {
@@ -75,8 +74,7 @@ body {
   margin-bottom: 30px;
 }
 
-.btn-primary:not(:disabled):not(.disabled):active,
- .btn-primary:not(:disabled):not(.disabled).active, .show > .btn-primary.dropdown-toggle {
+.btn-primary:not(:disabled):not(.disabled):active, .btn-primary:not(:disabled):not(.disabled).active, .show > .btn-primary.dropdown-toggle {
   color: #fff;
   background-color: #33d743;
   border-color: #33d743;
@@ -101,14 +99,12 @@ body {
   font-size: 42px;
 }
 
-.navbar-light .navbar-nav .show > .nav-link, .navbar-light .navbar-nav .active > .nav-link,
- .navbar-light .navbar-nav .nav-link.show, .navbar-light .navbar-nav .nav-link.active {
+.navbar-light .navbar-nav .show > .nav-link, .navbar-light .navbar-nav .active > .nav-link, .navbar-light .navbar-nav .nav-link.show, .navbar-light .navbar-nav .nav-link.active {
   color: #3399f3;
   background-color: #ffff;
 }
 
-.btn-primary:not(:disabled):not(.disabled):active, .btn-primary:not(:disabled):not(.disabled).active,
- .show > .btn-primary.dropdown-toggle {
+.btn-primary:not(:disabled):not(.disabled):active, .btn-primary:not(:disabled):not(.disabled).active, .show > .btn-primary.dropdown-toggle {
   color: #fff;
   background-color: #345578;
   border-color: #314f6f;
