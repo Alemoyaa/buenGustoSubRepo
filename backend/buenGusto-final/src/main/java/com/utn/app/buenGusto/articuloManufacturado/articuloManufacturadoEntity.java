@@ -62,30 +62,6 @@ public class articuloManufacturadoEntity extends commonEntity implements Seriali
 		this.rubroGeneral = rubroGeneral;
 		this.articuloManufacturadoDetalle = articuloManufacturadoDetalle;
 	}
-	
-	public List<detallePedidoEntity> getDetallePedido() {
-		return detallePedido;
-	}
-
-	public void setDetallePedido(List<detallePedidoEntity> detallePedido) {
-		this.detallePedido = detallePedido;
-	}
-
-	public rubroGeneralEntity getRubroGeneral() {
-		return rubroGeneral;
-	}
-
-	public void setRubroGeneral(rubroGeneralEntity rubroGeneral) {
-		this.rubroGeneral = rubroGeneral;
-	}
-
-	public List<articuloManufacturadoDetalleEntity> getArticuloManufacturadoDetalle() {
-		return articuloManufacturadoDetalle;
-	}
-
-	public void setArticuloManufacturadoDetalle(List<articuloManufacturadoDetalleEntity> articuloManufacturadoDetalle) {
-		this.articuloManufacturadoDetalle = articuloManufacturadoDetalle;
-	}
 
 	public int getTiempoEstimadoCocina() {
 		return tiempoEstimadoCocina;
@@ -111,4 +87,20 @@ public class articuloManufacturadoEntity extends commonEntity implements Seriali
 		this.precioVenta = precioVenta;
 	}
 
+	public List<detallePedidoEntity> getDetallePedido() {
+		return detallePedido;
+	}
+
+	public void setDetallePedido(List<detallePedidoEntity> detallePedido) {
+		this.detallePedido = detallePedido;
+	}
+
+	public List<articuloManufacturadoDetalleEntity> getArticuloManufacturadoDetalle() {
+		return articuloManufacturadoDetalle;
+	}
+
+	public void setArticuloManufacturadoDetalle(List<articuloManufacturadoDetalleEntity> articuloManufacturadoDetalle) {
+		this.articuloManufacturadoDetalle = articuloManufacturadoDetalle;
+	} 
+	
 }

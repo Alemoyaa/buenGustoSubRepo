@@ -1,8 +1,7 @@
 package com.utn.app.buenGusto.domicilio;
 
 import java.io.Serializable;
-
-import javax.persistence.CascadeType;
+ 
 import javax.persistence.Entity;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -22,31 +21,19 @@ public class domicilioEntity extends commonEntity implements Serializable{
 	@NotEmpty
 	private int numero;
 	@NotEmpty
-	private String localidad;
+	private String localidad; 
 	
-	@OneToOne(mappedBy = "domicilio", cascade = CascadeType.ALL)
+	@OneToOne(mappedBy = "domicilio")
 	private clienteEntity cliente;
-	
-	
-	
 	
 	public domicilioEntity() {
 		
 	}
-	public domicilioEntity(@NotEmpty String calle, @NotEmpty int numero, @NotEmpty String localidad,
-			clienteEntity cliente) {
+	public domicilioEntity(@NotEmpty String calle, @NotEmpty int numero, @NotEmpty String localidad ) {
 		
 		this.calle = calle;
 		this.numero = numero;
-		this.localidad = localidad;
-		this.cliente = cliente;
-	}
-	
-	public clienteEntity getCliente() {
-		return cliente;
-	}
-	public void setCliente(clienteEntity cliente) {
-		this.cliente = cliente;
+		this.localidad = localidad; 
 	}
 	public String getCalle() {
 		return calle;
@@ -65,5 +52,6 @@ public class domicilioEntity extends commonEntity implements Serializable{
 	}
 	public void setLocalidad(String localidad) {
 		this.localidad = localidad;
-	}	
+	} 
+	
 }

@@ -60,16 +60,14 @@ public class facturaEntity extends commonEntity implements Serializable {
 	
 	
 	public facturaEntity(@NotEmpty int número, Date fecha, @NotEmpty double montoDescuento, @NotEmpty double total,
-			@NotEmpty String formaPago, String nroTarjeta, pedidoEntity pedido,
-			List<detallePedidoEntity> detallePedidosF) {
-		super();
+			@NotEmpty String formaPago, String nroTarjeta, 
+			List<detallePedidoEntity> detallePedidosF) { 
 		this.número = número;
 		this.fecha = fecha;
 		this.montoDescuento = montoDescuento;
 		this.total = total;
 		this.formaPago = formaPago;
-		this.nroTarjeta = nroTarjeta;
-		this.pedido = pedido;
+		this.nroTarjeta = nroTarjeta; 
 		this.detallePedidosF = new ArrayList<detallePedidoEntity>();
 	}
 
@@ -80,69 +78,77 @@ public class facturaEntity extends commonEntity implements Serializable {
 		this.fecha = new Date();
 	}
 
-	
-	
-	public List<detallePedidoEntity> getDetallePedidosF() {
-		return detallePedidosF;
-	}
 
-	public void setDetallePedidosF(List<detallePedidoEntity> detallePedidosF) {
-		this.detallePedidosF = detallePedidosF;
-	}
-
-	public pedidoEntity getPedido() {
-		return pedido;
-	}
-
-	public void setPedido(pedidoEntity pedido) {
-		this.pedido = pedido;
-	}
-
-	public String getNroTarjeta() {
-		return nroTarjeta;
-	}
-
-	public void setNroTarjeta(String nroTarjeta) {
-		this.nroTarjeta = nroTarjeta;
-	}
 
 	public int getNúmero() {
 		return número;
 	}
 
+
+
 	public void setNúmero(int número) {
 		this.número = número;
 	}
+
+
 
 	public Date getFecha() {
 		return fecha;
 	}
 
+
+
 	public void setFecha(Date fecha) {
 		this.fecha = fecha;
 	}
+
+
 
 	public double getMontoDescuento() {
 		return montoDescuento;
 	}
 
+
+
 	public void setMontoDescuento(double montoDescuento) {
 		this.montoDescuento = montoDescuento;
 	}
+
+
 
 	public double getTotal() {
 		return total;
 	}
 
+
+
 	public void setTotal(double total) {
 		this.total = total;
 	}
+
+
 
 	public String getFormaPago() {
 		return formaPago;
 	}
 
+
+
 	public void setFormaPago(String formaPago) {
 		this.formaPago = formaPago;
 	}
+
+
+
+	public String getNroTarjeta() {
+		return nroTarjeta;
+	}
+
+
+
+	public void setNroTarjeta(String nroTarjeta) {
+		this.nroTarjeta = nroTarjeta;
+	}
+
+	 
 }

@@ -65,30 +65,6 @@ public class detallePedidoEntity extends commonEntity implements Serializable{
 		this.articuloManufacturado = articuloManufacturado;
 	}
 
-	public pedidoEntity getPedido() {
-		return pedido;
-	}
-
-	public void setPedido(pedidoEntity pedido) {
-		this.pedido = pedido;
-	}
-
-	public facturaEntity getFacturaDetalle() {
-		return facturaDetalle;
-	}
-
-	public void setFacturaDetalle(facturaEntity facturaDetalle) {
-		this.facturaDetalle = facturaDetalle;
-	}
-
-	public articuloManufacturadoEntity getArticuloManufacturado() {
-		return articuloManufacturado;
-	}
-
-	public void setArticuloManufacturado(articuloManufacturadoEntity articuloManufacturado) {
-		this.articuloManufacturado = articuloManufacturado;
-	}
-
 	public int getCantidad() {
 		return cantidad;
 	}
@@ -103,5 +79,7 @@ public class detallePedidoEntity extends commonEntity implements Serializable{
 
 	public void setSubtotal(double subtotal) {
 		this.subtotal = subtotal;
-	} 	
+	} 
+  
+	
 }

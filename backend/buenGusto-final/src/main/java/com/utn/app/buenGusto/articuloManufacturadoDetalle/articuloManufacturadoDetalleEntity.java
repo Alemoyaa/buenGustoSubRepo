@@ -21,8 +21,6 @@ import com.utn.app.buenGusto.articuloInsumo.articuloInsumoEntity;
 import com.utn.app.buenGusto.articuloManufacturado.articuloManufacturadoEntity;
 import com.utn.app.buenGusto.commons.commonEntity;
 
-
-
 @Entity
 @Table(name = "articulo_manufacturado_detalle")
 public class articuloManufacturadoDetalleEntity extends commonEntity implements Serializable {
@@ -31,51 +29,32 @@ public class articuloManufacturadoDetalleEntity extends commonEntity implements 
 
 	@NotEmpty
 	private double cantidad;
-	
+
 	@NotEmpty
 	private String unidadMedida;
-	
-	
-	// relacion ManyToOne bidireccional  ArticuloManufacturadoDetalle --- ArticuloManufacturado
-    @ManyToOne(fetch = FetchType.EAGER) //trae atributos y sus correspondientes relaciones
-    @JoinColumn(name= "articuloManufacturadoDetalle_fk_articuloManufacturado")
-    private articuloManufacturadoEntity articuloManufacturado;
-    
- // relacion ManyToOne bidireccional  ArticuloManufacturadoDetalle --- ArticuloInsumo
-    @ManyToOne(fetch = FetchType.EAGER) //trae atributos y sus correspondientes relaciones
-    @JoinColumn(name= "articuloManufacturadoDetalle_fk_articuloInsumo")
-    private articuloInsumoEntity articuloInsumo;
-    
-    
-    
+
+	// relacion ManyToOne bidireccional ArticuloManufacturadoDetalle ---
+	// ArticuloManufacturado
+	@ManyToOne(fetch = FetchType.EAGER) // trae atributos y sus correspondientes relaciones
+	@JoinColumn(name = "articuloManufacturadoDetalle_fk_articuloManufacturado")
+	private articuloManufacturadoEntity articuloManufacturado;
+
+	// relacion ManyToOne bidireccional ArticuloManufacturadoDetalle ---
+	// ArticuloInsumo
+	@ManyToOne(fetch = FetchType.EAGER) // trae atributos y sus correspondientes relaciones
+	@JoinColumn(name = "articuloManufacturadoDetalle_fk_articuloInsumo")
+	private articuloInsumoEntity articuloInsumo;
 
 	public articuloManufacturadoDetalleEntity(@NotEmpty double cantidad, @NotEmpty String unidadMedida,
-		articuloManufacturadoEntity articuloManufacturado, articuloInsumoEntity articuloInsumo) {
-	
-	this.cantidad = cantidad;
-	this.unidadMedida = unidadMedida;
-	this.articuloManufacturado = articuloManufacturado;
-	this.articuloInsumo = articuloInsumo;
-}
+			articuloManufacturadoEntity articuloManufacturado, articuloInsumoEntity articuloInsumo) {
+
+		this.cantidad = cantidad;
+		this.unidadMedida = unidadMedida;
+		this.articuloManufacturado = articuloManufacturado;
+		this.articuloInsumo = articuloInsumo;
+	}
 
 	public articuloManufacturadoDetalleEntity() {
-	super();
-}
-
-	public articuloManufacturadoEntity getArticuloManufacturado() {
-		return articuloManufacturado;
-	}
-
-	public void setArticuloManufacturado(articuloManufacturadoEntity articuloManufacturado) {
-		this.articuloManufacturado = articuloManufacturado;
-	}
-
-	public articuloInsumoEntity getArticuloInsumo() {
-		return articuloInsumo;
-	}
-
-	public void setArticuloInsumo(articuloInsumoEntity articuloInsumo) {
-		this.articuloInsumo = articuloInsumo;
 	}
 
 	public double getCantidad() {
@@ -93,5 +72,5 @@ public class articuloManufacturadoDetalleEntity extends commonEntity implements 
 	public void setUnidadMedida(String unidadMedida) {
 		this.unidadMedida = unidadMedida;
 	}
-	
+
 }

@@ -51,12 +51,12 @@ public class rubroArticuloEntity extends commonEntity implements Serializable{
 		this.hijos = hijos;
 	}
 
-	public List<articuloInsumoEntity> getArticuloInsumo() {
-		return articuloInsumo;
+	public String getDenominacion() {
+		return denominacion;
 	}
 
-	public void setArticuloInsumo(List<articuloInsumoEntity> articuloInsumo) {
-		this.articuloInsumo = articuloInsumo;
+	public void setDenominacion(String denominacion) {
+		this.denominacion = denominacion;
 	}
 
 	public rubroArticuloEntity getPadre() {
@@ -75,12 +75,13 @@ public class rubroArticuloEntity extends commonEntity implements Serializable{
 		this.hijos = hijos;
 	}
 
-	public String getDenominacion() {
-		return denominacion;
+	public List<articuloInsumoEntity> getArticuloInsumo() {
+		return articuloInsumo;
 	}
 
-	public void setDenominacion(String denominacion) {
-		this.denominacion = denominacion;
+	public void setArticuloInsumo(List<articuloInsumoEntity> articuloInsumo) {
+		this.articuloInsumo = articuloInsumo;
 	}
+ 
 	
 }
