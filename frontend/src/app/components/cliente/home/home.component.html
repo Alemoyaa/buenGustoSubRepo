@@ -1,21 +1,23 @@
 <nav class="navbar navbar-light navbar-expand-md sticky-top">
   <div class="container"><img id="logo" src="../../../../assets/assetsHome/img/foodLogo.png">
-    <a class="navbar-brand text-success" href="#">Fast <strong>Food</strong></a><button data-toggle="collapse"
+    <a class="navbar-brand text-success" href="/">Fast <strong>Food</strong></a><button data-toggle="collapse"
       class="navbar-toggler" data-target="#navcol-1">
       <span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
     <div class="collapse navbar-collapse" id="navcol-1">
       <ul class="nav navbar-nav ml-auto">
         <li class="nav-item" role="presentation"><a class="nav-link active" href="/login">Iniciar</a></li>
         <li class="nav-item" role="presentation"><a class="nav-link" href="/register">Registrar</a></li>
-        <li class="nav-item" role="presentation"><a class="nav-link" href="#">Contacto</a></li>
-      </ul><a class="btn btn-primary active btn-lg" role="button" id="boton-ofertas">Ofertas</a>
+        <li class="nav-item" role="presentation"><a class="nav-link" href="/user-profile">Perfil</a></li>
+        <a class="btn btn-success" id="boton-ofertas" href="/ofertas" role="button">Ofertas</a>
+
+      </ul>
     </div>
   </div>
 </nav>
 <div id="promo">
   <div class="jumbotron">
     <h1><br>Tu comida favorita, a la velocidad de Fast <strong>Food</strong><br><br></h1>
-    <p><a class="btn btn-primary active btn-lg" role="button" id="boton-ver-mas">Catalogo</a></p>
+    <p><a class="btn btn-primary active btn-lg" role="button" id="boton-ver-mas" href="/catalogo">Catalogo</a></p>
   </div>
 </div>
 <div class="container site-section" id="wellcome">
@@ -72,9 +74,11 @@
   <div class="container">
     <div class="row">
       <div class="col-sm-6 col-md-4 footer-navigation">
-        <h3><a href="#">Fast <strong>Food</strong></a></h3>
-        <p class="links"><a href="#">Home</a><strong> · </strong><a href="#">Catalago</a><strong> · </strong><a
-            href="#">Perfil</a><strong> · </strong><a href="#">Contacto</a><strong> · </strong><a
+        <h3><a href="/">Fast <strong>Food</strong></a></h3>
+        <p class="links"><a href="/">Home</a><strong> ·
+           </strong><a href="/catalogo">Catalago</a><strong> · </strong><a
+            href="#">Perfil</a><strong> ·
+               </strong><a href="#">Contacto</a><strong> · </strong><a
             href="#">Ruta1</a><strong> · </strong><a href="#">Ruta2</a></p>
         <p class="company-name">Fast Food © 2020</p>
       </div>

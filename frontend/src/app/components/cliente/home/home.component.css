@@ -101,12 +101,12 @@ i {
 .btn-primary:not(:disabled):not(.disabled).active,
 .show > .btn-primary.dropdown-toggle {
   color: #fff;
-  background-color: #33d743;
-  border-color: #33d743;
+  background-color: #000000;
+  border-color: #000000;
 }
 
 #boton-ver-mas {
-  background: #5bb263;
+  background: #0088ff;
 }
 
 #why .item h2 {
