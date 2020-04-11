@@ -70,7 +70,7 @@ public class pedidoEntity extends commonEntity implements Serializable {
 		this.tipoEnvio = tipoEnvio;
 		this.cliente = cliente;
 		this.factura = factura;
-		this.detallePedidos = new ArrayList<detallePedidoEntity>();
+		this.detallePedidos = detallePedidos;
 	}
 
 	public int getFecha() {
@@ -127,7 +127,6 @@ public class pedidoEntity extends commonEntity implements Serializable {
 
 	public void setDetallePedidos(List<detallePedidoEntity> detallePedidos) {
 		this.detallePedidos = detallePedidos;
-	}
-
+	} 
 	
 }

@@ -1,20 +1,12 @@
 package com.utn.app.buenGusto.articuloManufacturadoDetalle;
 
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-
-import javax.persistence.CascadeType;
+import java.io.Serializable; 
+ 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.PrePersist;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import javax.persistence.ManyToOne; 
+import javax.persistence.Table; 
 import javax.validation.constraints.NotEmpty;
 
 import com.utn.app.buenGusto.articuloInsumo.articuloInsumoEntity;
