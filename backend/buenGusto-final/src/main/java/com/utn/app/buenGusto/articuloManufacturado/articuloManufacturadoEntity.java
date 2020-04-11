@@ -38,7 +38,7 @@ public class articuloManufacturadoEntity extends commonEntity implements Seriali
 	private List<detallePedidoEntity> detallePedido = new ArrayList<>();
 
 	// relacion ManyToOne bidireccional ArticuloManufacturado ---detallePedido
-	@ManyToOne(fetch = FetchType.EAGER) // trae atributos y sus correspondientes relaciones
+	@ManyToOne(fetch = FetchType.LAZY) // trae atributos y sus correspondientes relaciones
 	@JoinColumn(name = "articuloManufacturado_fk_rubroGeneral")
 	private rubroGeneralEntity rubroGeneral;
 

@@ -17,7 +17,6 @@ import com.utn.app.buenGusto.articuloManufacturadoDetalle.articuloManufacturadoD
 import com.utn.app.buenGusto.commons.commonEntity;
 import com.utn.app.buenGusto.detallePedido.detallePedidoEntity;
 import com.utn.app.buenGusto.rubroArticulo.rubroArticuloEntity;
-import com.utn.app.buenGusto.rubroGeneral.rubroGeneralEntity;
 
 @Entity
 @Table(name = "articulo_insumo")

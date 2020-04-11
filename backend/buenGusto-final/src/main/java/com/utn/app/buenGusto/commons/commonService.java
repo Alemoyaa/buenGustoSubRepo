@@ -1,17 +1,12 @@
 package com.utn.app.buenGusto.commons;
-
-import java.lang.reflect.Type;
+ 
 import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
-
-import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
+import java.util.Optional; 
+ 
+import org.springframework.beans.factory.annotation.Autowired; 
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.transaction.annotation.Transactional;
+import org.springframework.data.jpa.repository.JpaRepository; 
 
 public abstract class commonService <ENTITY extends commonEntity, R extends JpaRepository<ENTITY, Long>> implements commonIService<ENTITY>{
 	

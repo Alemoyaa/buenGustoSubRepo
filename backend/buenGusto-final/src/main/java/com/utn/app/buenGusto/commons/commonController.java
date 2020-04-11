@@ -1,5 +1,5 @@
 package com.utn.app.buenGusto.commons;
-  
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,23 +13,24 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Transactional
-public class commonController <ENTITY, S extends commonIService<ENTITY>>{
+public class commonController<ENTITY, S extends commonIService<ENTITY>> {
 	@Autowired
 	protected S service;
-	
+
 	@GetMapping("/count")
-	public ResponseEntity<?> getCount(@RequestParam(value =  "size", defaultValue = "10") int size) {
+	public ResponseEntity<?> getCount(@RequestParam(value = "size", defaultValue = "10") int size) {
 		try {
-			return ResponseEntity.status(HttpStatus.OK).body("{\"pages\": "+service.countPages(size)+"}");
+			return ResponseEntity.status(HttpStatus.OK).body("{\"pages\": " + service.countPages(size) + "}");
 		} catch (Exception e) {
 			return null;
 		}
-		
+
 	}
-	
+
 	@GetMapping("")
 	@Transactional
-	public ResponseEntity<?> getAll(@RequestParam(value = "page", defaultValue = "0") int page, @RequestParam(value =  "size", defaultValue = "10") int size){
+	public ResponseEntity<?> getAll(@RequestParam(value = "page", defaultValue = "0") int page,
+			@RequestParam(value = "size", defaultValue = "10") int size) {
 		try {
 			return ResponseEntity.status(HttpStatus.OK).body(service.findAll(page, size));
 		} catch (Exception e) {
@@ -40,33 +41,25 @@ public class commonController <ENTITY, S extends commonIService<ENTITY>>{
 
 	@GetMapping("/{id}")
 	@Transactional
-	public ResponseEntity<?> getOne(@PathVariable int id) {
+	public ResponseEntity<?> getOne(@PathVariable long id) {
 
 		try {
-
 			return ResponseEntity.status(HttpStatus.OK).body(service.findById(id));
-
 		} catch (Exception e) {
-
 			return ResponseEntity.status(HttpStatus.NOT_FOUND)
 					.body("{\"Mi mensaje get uno\": \"" + e.getMessage() + "\"}");
-
 		}
-
 	}
 
 	@PostMapping("/")
 	@Transactional
 	public ResponseEntity<?> post(@RequestBody ENTITY personaForm) {
-
 		try {
-
 			return ResponseEntity.status(HttpStatus.CREATED).body(service.save(personaForm));
-
 		} catch (Exception e) {
 
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-					.body("{\"Mi mensaje post\": \"" + e.getMessage() + "\"}");
+					.body("{\"Mi mensaje post\": \"" + e.getLocalizedMessage() + "\" "+ e.getClass()+" }");
 
 		}
 
@@ -74,7 +67,7 @@ public class commonController <ENTITY, S extends commonIService<ENTITY>>{
 
 	@PutMapping("/{id}")
 	@Transactional
-	public ResponseEntity<?> put(@PathVariable int id, @RequestBody ENTITY personaForm) {
+	public ResponseEntity<?> put(@PathVariable long id, @RequestBody ENTITY personaForm) {
 
 		try {
 
@@ -87,10 +80,10 @@ public class commonController <ENTITY, S extends commonIService<ENTITY>>{
 		}
 
 	}
-	
+
 	@DeleteMapping("/{id}")
 	@Transactional
-	public ResponseEntity<?> delete(@PathVariable int id) {
+	public ResponseEntity<?> delete(@PathVariable long id) {
 
 		try {
 
@@ -103,5 +96,5 @@ public class commonController <ENTITY, S extends commonIService<ENTITY>>{
 		}
 
 	}
-	
+
 }

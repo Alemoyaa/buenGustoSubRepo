@@ -42,113 +42,80 @@ public class facturaEntity extends commonEntity implements Serializable {
 	private String formaPago;
 	private String nroTarjeta;
 
-	//------pedido--------
+	// ------pedido--------
 	@OneToOne(mappedBy = "factura", cascade = CascadeType.ALL)
 	private pedidoEntity pedido;
 
-	//-----detallePedido---------
+	// -----detallePedido---------
 	@OneToMany(mappedBy = "facturaDetalle", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<detallePedidoEntity> detallePedidosF;
-	 
-	
-	
-	
+
 	public facturaEntity() {
 		this.detallePedidosF = new ArrayList<detallePedidoEntity>();
 	}
-	
-	
-	
+
 	public facturaEntity(@NotEmpty int número, Date fecha, @NotEmpty double montoDescuento, @NotEmpty double total,
-			@NotEmpty String formaPago, String nroTarjeta, 
-			List<detallePedidoEntity> detallePedidosF) { 
+			@NotEmpty String formaPago, String nroTarjeta, List<detallePedidoEntity> detallePedidosF) {
 		this.número = número;
 		this.fecha = fecha;
 		this.montoDescuento = montoDescuento;
 		this.total = total;
 		this.formaPago = formaPago;
-		this.nroTarjeta = nroTarjeta; 
-		this.detallePedidosF = new ArrayList<detallePedidoEntity>();
+		this.nroTarjeta = nroTarjeta;
+		this.detallePedidosF = detallePedidosF;
 	}
-
-
 
 	@PrePersist
 	public void prePersist() {
 		this.fecha = new Date();
 	}
 
-
-
 	public int getNúmero() {
 		return número;
 	}
-
-
 
 	public void setNúmero(int número) {
 		this.número = número;
 	}
 
-
-
 	public Date getFecha() {
 		return fecha;
 	}
-
-
 
 	public void setFecha(Date fecha) {
 		this.fecha = fecha;
 	}
 
-
-
 	public double getMontoDescuento() {
 		return montoDescuento;
 	}
-
-
 
 	public void setMontoDescuento(double montoDescuento) {
 		this.montoDescuento = montoDescuento;
 	}
 
-
-
 	public double getTotal() {
 		return total;
 	}
-
-
 
 	public void setTotal(double total) {
 		this.total = total;
 	}
 
-
-
 	public String getFormaPago() {
 		return formaPago;
 	}
-
-
 
 	public void setFormaPago(String formaPago) {
 		this.formaPago = formaPago;
 	}
 
-
-
 	public String getNroTarjeta() {
 		return nroTarjeta;
 	}
-
-
 
 	public void setNroTarjeta(String nroTarjeta) {
 		this.nroTarjeta = nroTarjeta;
 	}
 
-	 
 }
