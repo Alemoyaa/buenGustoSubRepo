@@ -1,3 +1,5 @@
+import { RegisterComponent } from './components/admin/register/register.component';
+import { LoginComponent } from './components/admin/login/login.component';
 import { OfertasComponent } from './components/cliente/ofertas/ofertas.component';
 import { NotfoundComponent } from './components/cliente/notfound/notfound.component';
 import { NavbarComponent } from './components/cliente/navbar/navbar.component';
@@ -9,6 +11,8 @@ import { Routes, RouterModule } from '@angular/router';
 
 const routes: Routes = [
   { path:'', component: HomeComponent },
+  { path:'login', component: LoginComponent },
+  { path:'register', component: RegisterComponent },
   { path:'catalogo', component: CatalogoComponent },
   { path:'navbar', component: NavbarComponent },
   { path:'ofertas', component: OfertasComponent },
