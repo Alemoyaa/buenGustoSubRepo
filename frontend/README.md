@@ -4,12 +4,6 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 ## Development server
 
-1- ng add @angular/material
-2- npm install @angular/flex-layout@latest --save
-3- npm install jquery @types/jquery    
-4- npm i
-5- ng serve
-
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
 ## Code scaffolding
