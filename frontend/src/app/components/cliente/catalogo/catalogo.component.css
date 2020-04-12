@@ -4,16 +4,24 @@
 
 .text-info {
   color: #3b99e0!important;
+  background: rgba(0, 0, 0, 0.211);
+}
+
+.text-info2{
+  background: rgba(0, 0, 0, 0.211);
 }
 
 .h2, h2 {
-  font-size: 5rem;
+  font-size: 3rem;
 }
 
 .h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6 {
   margin-bottom: .5rem;
   font-weight: 500;
   line-height: 1.2;
+  font-family: -apple-system, BlinkMacSystemFont, Raleway, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
+    "Segoe UI Symbol";
 }
 
 h1, h2, h3, h4, h5, h6 {
