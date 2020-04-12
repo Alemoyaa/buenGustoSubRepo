@@ -19,7 +19,7 @@ public class commonService <ENTITY extends commonEntity, DTO extends commonDTO> 
 	private ModelMapper mMapper;
 	
 	
-	public commonService(JpaRepository<ENTITY, Long> repository, Class<DTO> dtoClass, Class<ENTITY> entityClass, ModelMapper mMapper) {
+	public commonService(JpaRepository<ENTITY, Long> repository, Class<DTO> dtoClass, Class entityClass, ModelMapper mMapper) {
         this.repository = repository;
         this.dtoClass = dtoClass;
         this.entityClass = entityClass;
@@ -47,20 +47,8 @@ public class commonService <ENTITY extends commonEntity, DTO extends commonDTO> 
         } 
     }
     
-    @Override
-    @Transactional
-    public DTO findById(Long id) throws Exception {
-        Optional<ENTITY> entityOptional = repository.findById(id);
-        try {
-            if (entityOptional.isPresent()) {
-                return convertToDto(entityOptional.get());
-            } else {
-                throw new Exception();
-            }
-        } catch (Exception e) {
-            throw new Exception();
-        }
-    }
+    
+ 
     
     @Override
     @Transactional
@@ -96,20 +84,7 @@ public class commonService <ENTITY extends commonEntity, DTO extends commonDTO> 
         }
     }
 
-    @Override
-    @Transactional
-    public boolean delete(Long id) throws Exception {
-        try {
-            if (repository.existsById(id)) {
-                repository.deleteById(id);
-                return true;
-            } else {
-                throw new Exception();
-            }
-        } catch (Exception e) {
-            throw new Exception();
-        }
-    }
+ 
  
 	@Override
 	public int countPages(int size) throws Exception {
@@ -122,11 +97,47 @@ public class commonService <ENTITY extends commonEntity, DTO extends commonDTO> 
 		}
 	}
 
+	
+
+	@Override
+	public DTO findById(long id) throws Exception {
+		
+
+        Optional<ENTITY> entityOptional = repository.findById(id);
+        try {
+            if (entityOptional.isPresent()) {
+                return convertToDto(entityOptional.get());
+            } else {
+                throw new Exception();
+            }
+        } catch (Exception e) {
+            throw new Exception();
+        }
+		
+	}
+
+	@Override
+	public boolean delete(long id) throws Exception {
+		try {
+            if (repository.existsById(id)) {
+                repository.deleteById(id);
+                return true;
+            } else {
+                throw new Exception();
+            }
+        } catch (Exception e) {
+            throw new Exception();
+        }
+	}
+
 	@Override
 	public List<DTO> findAll(int page, int size) throws Exception {
 		try {
 			Pageable pageable = PageRequest.of(page, size);
-			return repository.findAll(pageable).getContent();			
+			
+			List<ENTITY> entities = repository.findAll(pageable).getContent();
+			
+			return  entities.stream().map(this::convertToDto).collect(Collectors.toList());			
 
 		} catch (Exception e) {
 			throw new Exception(e.getMessage());
