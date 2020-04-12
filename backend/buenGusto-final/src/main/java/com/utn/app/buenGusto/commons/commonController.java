@@ -4,18 +4,27 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+@CrossOrigin(origins = "*",
+methods={RequestMethod.GET,RequestMethod.POST,
+		  RequestMethod.DELETE,RequestMethod.PUT})
 @Transactional
-public class commonController<ENTITY, S extends commonIService<ENTITY>> {
+public class commonController<DTO> {
 	@Autowired
-	protected S service;
+	protected commonIService<DTO> service;
+	
+	public commonController(commonIService<DTO> service) {
+		this.service=service;
+	}
 
 	@GetMapping("/count")
 	public ResponseEntity<?> getCount(@RequestParam(value = "size", defaultValue = "10") int size) {
@@ -27,7 +36,7 @@ public class commonController<ENTITY, S extends commonIService<ENTITY>> {
 
 	}
 
-	@GetMapping("")
+	@GetMapping("/")
 	@Transactional
 	public ResponseEntity<?> getAll(@RequestParam(value = "page", defaultValue = "0") int page,
 			@RequestParam(value = "size", defaultValue = "10") int size) {
@@ -53,9 +62,9 @@ public class commonController<ENTITY, S extends commonIService<ENTITY>> {
 
 	@PostMapping("/")
 	@Transactional
-	public ResponseEntity<?> post(@RequestBody ENTITY personaForm) {
+	public ResponseEntity<?> post(@RequestBody DTO dto) {
 		try {
-			return ResponseEntity.status(HttpStatus.CREATED).body(service.save(personaForm));
+			return ResponseEntity.status(HttpStatus.CREATED).body(service.save(dto));
 		} catch (Exception e) {
 
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST)
@@ -67,11 +76,11 @@ public class commonController<ENTITY, S extends commonIService<ENTITY>> {
 
 	@PutMapping("/{id}")
 	@Transactional
-	public ResponseEntity<?> put(@PathVariable long id, @RequestBody ENTITY personaForm) {
+	public ResponseEntity<?> put(@PathVariable long id, @RequestBody DTO dto) {
 
 		try {
 
-			return ResponseEntity.status(HttpStatus.OK).body(service.update(id, personaForm));
+			return ResponseEntity.status(HttpStatus.OK).body(service.update(id, dto));
 
 		} catch (Exception e) {
 
