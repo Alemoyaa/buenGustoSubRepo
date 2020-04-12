@@ -176,3 +176,21 @@ div.social-links {
   margin-right: 5px;
   margin-bottom: 5px;
 }
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, Raleway, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
+    "Segoe UI Symbol";
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  font-family: -apple-system, BlinkMacSystemFont, Raleway, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
+    "Segoe UI Symbol";
+}
