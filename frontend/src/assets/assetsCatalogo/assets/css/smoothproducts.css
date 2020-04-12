@@ -1,78 +1,3 @@
-.clean-block .block-heading h1, .clean-block .block-heading h2, .clean-block .block-heading h3 {
-  margin-bottom: 1.2rem;
-}
-
-@media (min-width:768px) {
-  .clean-block.clean-catalog .products .clean-product-item {
-    border-right: 1px solid #e8e6e6;
-  }
-}
-
-
-
-.text-info {
-  color: #3b99e0!important;
-  background: rgba(0, 0, 0, 0.211);
-}
-
-.text-info2{
-  background: rgba(0, 0, 0, 0.211);
-}
-
-.h2, h2 {
-  font-size: 3rem;
-}
-
-.h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6 {
-  margin-bottom: .5rem;
-  font-weight: 500;
-  line-height: 1.2;
-  font-family: -apple-system, BlinkMacSystemFont, Raleway, "Segoe UI", Roboto,
-    "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
-    "Segoe UI Symbol";
-}
-
-h1, h2, h3, h4, h5, h6 {
-  margin-top: 0;
-  margin-bottom: .5rem;
-}
-
-.clean-block .block-heading {
-  padding-top: 50px;
-  margin-bottom: 40px;
-  text-align: center;
-}
-
-/* PRODUCTOS */
-.clean-product-item {
-  padding: 10px;
-  border-right: none;
-  border-bottom: 1px solid #e8e6e6;
-  height: 100%;
-}
-
-
-
-body {
-  margin: 0;
-  font-family: Montserrat,sans-serif;
-  font-size: 1rem;
-  font-weight: 400;
-  line-height: 1.5;
-  color: #212529;
-  text-align: left;
-  background-color: #fff;
-}
-
-html {
-  font-family: sans-serif;
-  line-height: 1.15;
-  -webkit-text-size-adjust: 100%;
-  -webkit-tap-highlight-color: rgba(0,0,0,0);
-}
-
-/* Smoth product */
-
 html, body {
   height: 100%;
   width: 100%;
@@ -247,5 +172,4 @@ html, body {
     bottom: 25px;
   }
 }
-
 
