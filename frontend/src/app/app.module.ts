@@ -11,6 +11,7 @@ import { NotfoundComponent } from './components/cliente/notfound/notfound.compon
 import { UserProfileComponent } from './components/cliente/user-profile/user-profile.component';
 import { CatalogoComponent } from './components/cliente/catalogo/catalogo.component';
 import { OfertasComponent } from './components/cliente/ofertas/ofertas.component';
+import { FooterComponent } from './components/cliente/footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { OfertasComponent } from './components/cliente/ofertas/ofertas.component
     NotfoundComponent,
     UserProfileComponent,
     CatalogoComponent,
-    OfertasComponent
+    OfertasComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
