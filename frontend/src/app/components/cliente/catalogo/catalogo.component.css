@@ -2,6 +2,14 @@
   margin-bottom: 1.2rem;
 }
 
+@media (min-width:768px) {
+  .clean-block.clean-catalog .products .clean-product-item {
+    border-right: 1px solid #e8e6e6;
+  }
+}
+
+
+
 .text-info {
   color: #3b99e0!important;
   background: rgba(0, 0, 0, 0.211);
@@ -34,6 +42,16 @@ h1, h2, h3, h4, h5, h6 {
   margin-bottom: 40px;
   text-align: center;
 }
+
+/* PRODUCTOS */
+.clean-product-item {
+  padding: 10px;
+  border-right: none;
+  border-bottom: 1px solid #e8e6e6;
+  height: 100%;
+}
+
+
 
 body {
   margin: 0;
