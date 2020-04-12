@@ -6,8 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.Table;
-import javax.validation.constraints.NotEmpty;
+import javax.persistence.Table; 
 
 import com.utn.app.buenGusto.articuloInsumo.articuloInsumoEntity;
 import com.utn.app.buenGusto.articuloManufacturado.articuloManufacturadoEntity;
@@ -20,38 +19,34 @@ import com.utn.app.buenGusto.pedido.pedidoEntity;
 public class detallePedidoEntity extends commonEntity implements Serializable {
 
 	private static final long serialVersionUID = -7168593642662662191L;
-
-	@NotEmpty
-	private int cantidad;
-
-	@NotEmpty
+ 
+	private int cantidad; 
 	private double subtotal;
 
 	// ---------pedido---------
-	@ManyToOne(fetch = FetchType.LAZY, optional = false)
-	@JoinColumn(name = "pedido_id", nullable = false)
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "pedido_id")
 	private pedidoEntity pedido;
 
 	// ----------factura----------
-	@ManyToOne(fetch = FetchType.LAZY, optional = false)
-	@JoinColumn(name = "factura_id", nullable = false)
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "factura_id")
 	private facturaEntity facturaDetalle;
 
 	// relacion ManyToOne bidireccional detallePedido --- ArticuloManufacturado
-	@ManyToOne(fetch = FetchType.EAGER) // trae atributos y sus correspondientes relaciones
+	@ManyToOne(fetch = FetchType.LAZY) // trae atributos y sus correspondientes relaciones
 	@JoinColumn(name = "detallePedido_fk_articuloManufacturado")
 	private articuloManufacturadoEntity articuloManufacturado;
 
 	// relacion ManyToOne bidireccional detallePedido --- ArticuloManufacturado
-	@ManyToOne(fetch = FetchType.EAGER) // trae atributos y sus correspondientes relaciones
+	@ManyToOne(fetch = FetchType.LAZY) // trae atributos y sus correspondientes relaciones
 	@JoinColumn(name = "detallePedido_fk_articuloInsumo")
 	private articuloInsumoEntity articuloInsumo;
 
-	public detallePedidoEntity() {
-
+	public detallePedidoEntity() { 
 	}
 
-	public detallePedidoEntity(@NotEmpty int cantidad, @NotEmpty double subtotal, pedidoEntity pedido,
+	public detallePedidoEntity(int cantidad, double subtotal, pedidoEntity pedido,
 			facturaEntity facturaDetalle, articuloManufacturadoEntity articuloManufacturado) {
 
 		this.cantidad = cantidad;
@@ -76,5 +71,36 @@ public class detallePedidoEntity extends commonEntity implements Serializable {
 	public void setSubtotal(double subtotal) {
 		this.subtotal = subtotal;
 	}
-	
+
+	public Long getPedido() {
+		return pedido.getId();
+	}
+
+	public void setPedido(pedidoEntity pedido) {
+		this.pedido = pedido;
+	}
+
+	public Long getFacturaDetalle() {
+		return facturaDetalle.getId();
+	}
+
+	public void setFacturaDetalle(facturaEntity facturaDetalle) {
+		this.facturaDetalle = facturaDetalle;
+	}
+
+	public articuloManufacturadoEntity getArticuloManufacturado() {
+		return articuloManufacturado;
+	}
+
+	public void setArticuloManufacturado(articuloManufacturadoEntity articuloManufacturado) {
+		this.articuloManufacturado = articuloManufacturado;
+	}
+
+	public articuloInsumoEntity getArticuloInsumo() {
+		return articuloInsumo;
+	}
+
+	public void setArticuloInsumo(articuloInsumoEntity articuloInsumo) {
+		this.articuloInsumo = articuloInsumo;
+	}
 }

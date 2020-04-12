@@ -11,13 +11,11 @@ import org.springframework.data.jpa.repository.JpaRepository;
 public abstract class commonService <ENTITY extends commonEntity, R extends JpaRepository<ENTITY, Long>> implements commonIService<ENTITY>{
 	
 	@Autowired
-	protected R repository;	
-	
+	protected R repository;	 
 
 	@Override
 	public ENTITY findById(long id) throws Exception {
-		try {
-
+		try { 
 			// se usa para atrapar un null
 			Optional<ENTITY> varOptional = repository.findById(id);
 
@@ -35,7 +33,7 @@ public abstract class commonService <ENTITY extends commonEntity, R extends JpaR
 	@Override
 	public ENTITY save(ENTITY entityForm) throws Exception {
 		try {
-
+			 
 			entityForm = repository.save(entityForm);
 
 			return entityForm;

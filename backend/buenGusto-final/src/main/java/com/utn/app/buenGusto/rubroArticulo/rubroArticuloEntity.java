@@ -9,8 +9,7 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.Table;
-import javax.validation.constraints.NotEmpty;
+import javax.persistence.Table; 
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.utn.app.buenGusto.articuloInsumo.articuloInsumoEntity;
@@ -21,8 +20,7 @@ import com.utn.app.buenGusto.commons.commonEntity;
 public class rubroArticuloEntity extends commonEntity implements Serializable{
  
 	private static final long serialVersionUID = 7182685621323307119L;
-	
-	@NotEmpty
+	 
 	private String denominacion;
 	
 	//ArticuloInsumo varios rubros
@@ -42,7 +40,7 @@ public class rubroArticuloEntity extends commonEntity implements Serializable{
 	public rubroArticuloEntity() { 
 	}
 
-	public rubroArticuloEntity(@NotEmpty String denominacion, List<articuloInsumoEntity> articuloInsumo,
+	public rubroArticuloEntity(String denominacion, List<articuloInsumoEntity> articuloInsumo,
 			rubroArticuloEntity padre, List<rubroArticuloEntity> hijos) { 
 		
 		this.denominacion = denominacion;

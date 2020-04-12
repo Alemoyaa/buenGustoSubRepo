@@ -10,8 +10,7 @@ import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.Table;
-import javax.validation.constraints.NotEmpty;
+import javax.persistence.Table; 
 
 import com.utn.app.buenGusto.articuloManufacturadoDetalle.articuloManufacturadoDetalleEntity;
 import com.utn.app.buenGusto.commons.commonEntity;
@@ -24,25 +23,12 @@ public class articuloInsumoEntity extends commonEntity implements Serializable {
 
 	private static final long serialVersionUID = -8356649232468048872L;
 
-	@NotEmpty
 	private String denominacion;
-
-	@NotEmpty
 	private double precioCompra;
-
-	@NotEmpty
 	private double precioVenta;
-
-	@NotEmpty
 	private double stockActual;
-
-	@NotEmpty
 	private double stockMinimo;
-
-	@NotEmpty
 	private String unidadMedida;
-
-	@NotEmpty
 	private boolean esInsumo;
 
 	// relacion OneToMany bidireccional ArticuloInsumo --
@@ -50,22 +36,23 @@ public class articuloInsumoEntity extends commonEntity implements Serializable {
 	@OneToMany(mappedBy = "articuloInsumo", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<articuloManufacturadoDetalleEntity> articuloManufacturadoDetalle = new ArrayList<>();
 
+	
 	// relacion OneToMany bidireccional ArticuloInsumo -- DetallePedido
 	@OneToMany(mappedBy = "articuloInsumo", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<detallePedidoEntity> detallePedido = new ArrayList<>();
 	
 
 	//rubrosArticulo
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name= "articuloInsumo_fk_rubroArticulo")
 	private rubroArticuloEntity rubrosArticulo;
 	
 	public articuloInsumoEntity() {
 
 	} 
-	public articuloInsumoEntity(@NotEmpty String denominacion, @NotEmpty double precioCompra,
-			@NotEmpty double precioVenta, @NotEmpty double stockActual, @NotEmpty double stockMinimo,
-			@NotEmpty String unidadMedida, @NotEmpty boolean esInsumo,
+	public articuloInsumoEntity(String denominacion, double precioCompra,
+			double precioVenta, double stockActual, double stockMinimo,
+			String unidadMedida, boolean esInsumo,
 			List<articuloManufacturadoDetalleEntity> articuloManufacturadoDetalle,
 			List<detallePedidoEntity> detallePedido, rubroArticuloEntity rubroArticulo) { 
 		
