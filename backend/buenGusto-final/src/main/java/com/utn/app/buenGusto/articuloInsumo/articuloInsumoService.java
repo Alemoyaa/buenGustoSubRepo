@@ -1,7 +1,9 @@
 package com.utn.app.buenGusto.articuloInsumo;
  
+
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
 
 import com.utn.app.buenGusto.commons.commonService;
@@ -16,4 +18,6 @@ public class articuloInsumoService extends commonService<articuloInsumoEntity, a
 		super(Arepository, articuloInsumoDTO.class, articuloInsumoEntity.class, modelMapper );
 		this.repository= Arepository;
 	}
+	
+	
 }
