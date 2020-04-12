@@ -14,8 +14,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-import javax.validation.constraints.NotEmpty;
+import javax.persistence.TemporalType; 
 
 import com.utn.app.buenGusto.cliente.clienteEntity;
 import com.utn.app.buenGusto.commons.commonEntity;
@@ -27,20 +26,13 @@ import com.utn.app.buenGusto.factura.facturaEntity;
 public class pedidoEntity extends commonEntity implements Serializable {
 
 	private static final long serialVersionUID = -1998183735641277350L;
-
-	@NotEmpty
-	private int fecha;
-
-	@NotEmpty
-	private int numero;
-
-	@NotEmpty
+ 
+	private int fecha; 
+	private int numero; 
 	private int estado;
 
 	@Temporal(TemporalType.TIMESTAMP)
-	private Date horaEstimadaFin;
-
-	@NotEmpty
+	private Date horaEstimadaFin; 
 	private int tipoEnvio;
 
 	// --------Cliente--------
@@ -49,7 +41,8 @@ public class pedidoEntity extends commonEntity implements Serializable {
 	private clienteEntity cliente;
 
 	// --------Factura----------
-	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@JoinColumn(name = "pedido_id")
 	private facturaEntity factura;
 
 	// -------detallePedido----------
@@ -60,8 +53,8 @@ public class pedidoEntity extends commonEntity implements Serializable {
 		this.detallePedidos = new ArrayList<detallePedidoEntity>();
 	}
 
-	public pedidoEntity(@NotEmpty int fecha, @NotEmpty int numero, @NotEmpty int estado, Date horaEstimadaFin,
-			@NotEmpty int tipoEnvio, clienteEntity cliente, facturaEntity factura,
+	public pedidoEntity(int fecha, int numero, int estado, Date horaEstimadaFin,
+			int tipoEnvio, clienteEntity cliente, facturaEntity factura,
 			List<detallePedidoEntity> detallePedidos) {
 		this.fecha = fecha;
 		this.numero = numero;
@@ -121,8 +114,8 @@ public class pedidoEntity extends commonEntity implements Serializable {
 		this.factura = factura;
 	}
 
-	public List<detallePedidoEntity> getDetallePedidos() {
-		return detallePedidos;
+	public Long getDetallePedidos() {
+		return (long) detallePedidos.size();
 	}
 
 	public void setDetallePedidos(List<detallePedidoEntity> detallePedidos) {

@@ -7,8 +7,7 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
-import javax.persistence.Table;
-import javax.validation.constraints.NotEmpty;
+import javax.persistence.Table; 
 
 import com.utn.app.buenGusto.articuloManufacturado.articuloManufacturadoEntity;
 import com.utn.app.buenGusto.commons.commonEntity;
@@ -18,8 +17,7 @@ import com.utn.app.buenGusto.commons.commonEntity;
 public class rubroGeneralEntity extends commonEntity implements Serializable {
 
 	private static final long serialVersionUID = -2061211142699575304L;
-
-	@NotEmpty
+ 
 	private String denominacion;
 
 	public String getDenominacion() {
@@ -34,7 +32,7 @@ public class rubroGeneralEntity extends commonEntity implements Serializable {
 
 	}
 
-	public rubroGeneralEntity(@NotEmpty String denominacion, List<articuloManufacturadoEntity> articuloManufacturado) {
+	public rubroGeneralEntity(String denominacion, List<articuloManufacturadoEntity> articuloManufacturado) {
 
 		this.denominacion = denominacion;
 		this.articuloManufacturado = articuloManufacturado;

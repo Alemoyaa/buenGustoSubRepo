@@ -1,17 +1,15 @@
-package com.utn.app.buenGusto.cliente;
+ package com.utn.app.buenGusto.cliente;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
+import javax.persistence.Entity; 
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
-import javax.persistence.Table;
-import javax.validation.constraints.NotEmpty;
-
+import javax.persistence.Table; 
 import com.utn.app.buenGusto.commons.commonEntity;
 import com.utn.app.buenGusto.domicilio.domicilioEntity;
 import com.utn.app.buenGusto.pedido.pedidoEntity;
@@ -21,32 +19,26 @@ import com.utn.app.buenGusto.pedido.pedidoEntity;
 public class clienteEntity extends commonEntity implements Serializable {
 
 	private static final long serialVersionUID = -8356649232468048872L;
-
-	@NotEmpty
-	private String nombre;
-
-	@NotEmpty
-	private String apellido;
-
-	@NotEmpty
-	private long telefono;
-
-	@NotEmpty
+ 
+	private String nombre;  
+	private String apellido;  
+	private long telefono;  
 	private String email;
 
 	// Dependencia con domicilio
-	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "fk_domicilio")
 	private domicilioEntity domicilio;
 
 	// -----Pedido------
-	@OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL)
 	private List<pedidoEntity> pedidos = new ArrayList<>();
 
 	public clienteEntity() {
 	}
 
-	public clienteEntity(@NotEmpty String nombre, @NotEmpty String apellido, @NotEmpty long telefono,
-			@NotEmpty String email, domicilioEntity domicilio, List<pedidoEntity> pedidos) {
+	public clienteEntity(String nombre, String apellido, long telefono,
+			String email, domicilioEntity domicilio, List<pedidoEntity> pedidos) {
 		this.nombre = nombre;
 		this.apellido = apellido;
 		this.telefono = telefono;

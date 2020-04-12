@@ -6,8 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne; 
-import javax.persistence.Table; 
-import javax.validation.constraints.NotEmpty;
+import javax.persistence.Table;  
 
 import com.utn.app.buenGusto.articuloInsumo.articuloInsumoEntity;
 import com.utn.app.buenGusto.articuloManufacturado.articuloManufacturadoEntity;
@@ -19,25 +18,22 @@ public class articuloManufacturadoDetalleEntity extends commonEntity implements 
 
 	private static final long serialVersionUID = -8356649232468048872L;
 
-	@NotEmpty
 	private double cantidad;
-
-	@NotEmpty
 	private String unidadMedida;
 
 	// relacion ManyToOne bidireccional ArticuloManufacturadoDetalle ---
 	// ArticuloManufacturado
-	@ManyToOne(fetch = FetchType.EAGER) // trae atributos y sus correspondientes relaciones
+	@ManyToOne(fetch = FetchType.LAZY) // trae atributos y sus correspondientes relaciones
 	@JoinColumn(name = "articuloManufacturadoDetalle_fk_articuloManufacturado")
 	private articuloManufacturadoEntity articuloManufacturado;
 
 	// relacion ManyToOne bidireccional ArticuloManufacturadoDetalle ---
 	// ArticuloInsumo
-	@ManyToOne(fetch = FetchType.EAGER) // trae atributos y sus correspondientes relaciones
+	@ManyToOne(fetch = FetchType.LAZY) // trae atributos y sus correspondientes relaciones
 	@JoinColumn(name = "articuloManufacturadoDetalle_fk_articuloInsumo")
 	private articuloInsumoEntity articuloInsumo;
 
-	public articuloManufacturadoDetalleEntity(@NotEmpty double cantidad, @NotEmpty String unidadMedida,
+	public articuloManufacturadoDetalleEntity(double cantidad, String unidadMedida,
 			articuloManufacturadoEntity articuloManufacturado, articuloInsumoEntity articuloInsumo) {
 
 		this.cantidad = cantidad;

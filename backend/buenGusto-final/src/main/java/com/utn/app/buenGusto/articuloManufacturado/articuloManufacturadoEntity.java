@@ -10,8 +10,7 @@ import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.Table;
-import javax.validation.constraints.NotEmpty;
+import javax.persistence.Table; 
 
 import com.utn.app.buenGusto.articuloManufacturadoDetalle.articuloManufacturadoDetalleEntity;
 import com.utn.app.buenGusto.commons.commonEntity;
@@ -24,13 +23,8 @@ public class articuloManufacturadoEntity extends commonEntity implements Seriali
 
 	private static final long serialVersionUID = -8356649232468048872L;
 
-	@NotEmpty
 	private int tiempoEstimadoCocina;
-
-	@NotEmpty
 	private String denominacion;
-
-	@NotEmpty
 	private double precioVenta;
 
 	// relacion OneToMany bidireccional ArticuloManufacturado -- detallePedido
@@ -49,19 +43,7 @@ public class articuloManufacturadoEntity extends commonEntity implements Seriali
 
 	public articuloManufacturadoEntity() {
 
-	}
-
-	public articuloManufacturadoEntity(@NotEmpty int tiempoEstimadoCocina, @NotEmpty String denominacion,
-			@NotEmpty double precioVenta, List<detallePedidoEntity> detallePedido, rubroGeneralEntity rubroGeneral,
-			List<articuloManufacturadoDetalleEntity> articuloManufacturadoDetalle) {
-
-		this.tiempoEstimadoCocina = tiempoEstimadoCocina;
-		this.denominacion = denominacion;
-		this.precioVenta = precioVenta;
-		this.detallePedido = detallePedido;
-		this.rubroGeneral = rubroGeneral;
-		this.articuloManufacturadoDetalle = articuloManufacturadoDetalle;
-	}
+	} 
 
 	public int getTiempoEstimadoCocina() {
 		return tiempoEstimadoCocina;
