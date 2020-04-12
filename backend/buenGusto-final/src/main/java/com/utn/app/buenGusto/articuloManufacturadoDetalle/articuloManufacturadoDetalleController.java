@@ -5,11 +5,24 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.utn.app.buenGusto.commons.commonController; 
+import com.utn.app.buenGusto.commons.commonController;
+import com.utn.app.buenGusto.commons.commonIService; 
 
 @RestController
-@CrossOrigin(origins = "*",
-			 methods={RequestMethod.GET,RequestMethod.POST,
-					  RequestMethod.DELETE,RequestMethod.PUT})
+
 @RequestMapping(path = "api/articulo_manufacturado_detalle")
-public class articuloManufacturadoDetalleController extends commonController<articuloManufacturadoDetalleEntity, articuloManufacturadoDetalleService>{}
+public class articuloManufacturadoDetalleController extends commonController<articuloManufacturadoDetalleDTO>{
+	
+	private articuloManufacturadoDetalleService servicio;
+
+	public articuloManufacturadoDetalleController(commonIService<articuloManufacturadoDetalleDTO> service, articuloManufacturadoDetalleService Aservicio) {
+		super(service);
+		this.servicio= Aservicio;
+	}
+
+	
+
+	
+	
+	
+}
