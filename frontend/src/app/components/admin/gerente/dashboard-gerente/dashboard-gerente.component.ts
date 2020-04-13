@@ -10,5 +10,26 @@ export class DashboardGerenteComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  clearBoards() {}
+  tableroPizzaCrud = true;
+  tableroStock = false;
+  tableroEstadisticas = false;
+
+  clearBoards() {
+    this.tableroPizzaCrud = false;
+    this.tableroStock = false;
+    this.tableroEstadisticas = false;
+  }
+
+  setBoard(board) {
+    this.clearBoards();
+    if (board == 'tableroPizzaCrud') {
+      this.tableroPizzaCrud = true;
+    }
+    if (board == 'tableroStock') {
+      this.tableroStock = true;
+    }
+    if (board == 'tableroEstadisticas') {
+      this.tableroEstadisticas = true;
+    }
+  }
 }
