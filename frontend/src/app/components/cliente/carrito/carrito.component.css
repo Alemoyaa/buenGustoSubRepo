@@ -1,3 +1,36 @@
+article, aside, figcaption, figure, footer, header, hgroup, main, nav, section {
+  display: block;
+}
+
+body {
+  margin: 0;
+  font-family: Montserrat,sans-serif;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #212529;
+  text-align: left;
+  background-color: #fff;
+}
+
+html {
+  font-family: sans-serif;
+  line-height: 1.15;
+  -webkit-text-size-adjust: 100%;
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+
+
+/* SmoothProducts */
+
+html, body {
+  height: 100%;
+  width: 100%;
+}
+
+
+
+
 .clean-block.dark {
   background-color: #f6f6f6;
 }
@@ -43,6 +76,8 @@ h1, h2, h3, h4, h5, h6 {
   margin-bottom: .5rem;
 }
 
+/* Content */
+
 .clean-block .block-content, .clean-block .content {
   box-shadow: 0 2px 10px rgba(0,0,0,.075);
   background-color: #fff;
@@ -62,6 +97,8 @@ h1, h2, h3, h4, h5, h6 {
   height: 100%;
   padding: 30px;
 }
+
+/* Container */
 
 @media (min-width:1200px) {
   .container, .container-lg, .container-md, .container-sm, .container-xl {
@@ -136,6 +173,7 @@ h1, h2, h3, h4, h5, h6 {
   margin-left: -15px;
 }
 
+
 /* Col-md-12 */
 
 .no-gutters > .col, .no-gutters > [class*=col-] {
@@ -165,6 +203,23 @@ h1, h2, h3, h4, h5, h6 {
   padding-right: 15px;
   padding-left: 15px;
 }
+
+/* col-md-12 col-lg-4 */
+.no-gutters > .col, .no-gutters > [class*=col-] {
+  padding-right: 0;
+  padding-left: 0;
+}
+
+@media (min-width:992px) {
+  .col-lg-4 {
+    -ms-flex: 0 0 33.33333%;
+    flex: 0 0 33.33333%;
+    max-width: 33.33333%;
+  }
+}
+
+/* Summary */
+
 
 
 /* Items */
@@ -299,35 +354,6 @@ a {
 
 
 
-article, aside, figcaption, figure, footer, header, hgroup, main, nav, section {
-  display: block;
-}
-
-body {
-  margin: 0;
-  font-family: Montserrat,sans-serif;
-  font-size: 1rem;
-  font-weight: 400;
-  line-height: 1.5;
-  color: #212529;
-  text-align: left;
-  background-color: #fff;
-}
-
-html {
-  font-family: sans-serif;
-  line-height: 1.15;
-  -webkit-text-size-adjust: 100%;
-  -webkit-tap-highlight-color: rgba(0,0,0,0);
-}
-
-
-/* SmoothProducts */
-
-html, body {
-  height: 100%;
-  width: 100%;
-}
 
 
 /* Col-6 quantity */
@@ -489,7 +515,7 @@ button, input, optgroup, select, textarea {
   height: 100%;
   padding: 30px;
 }
-
+/* Resumen */
 .clean-block.clean-cart .summary h3 {
   text-align: center;
   font-size: 1.25em;
