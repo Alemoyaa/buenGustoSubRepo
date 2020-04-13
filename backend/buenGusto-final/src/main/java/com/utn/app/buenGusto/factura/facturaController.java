@@ -5,11 +5,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.utn.app.buenGusto.commons.commonController; 
+import com.utn.app.buenGusto.commons.commonController;
+import com.utn.app.buenGusto.commons.commonIService; 
 
 @RestController
-@CrossOrigin(origins = "*",
-			 methods={RequestMethod.GET,RequestMethod.POST,
-					  RequestMethod.DELETE,RequestMethod.PUT})
 @RequestMapping(path = "api/factura")
-public class facturaController extends commonController<facturaEntity, facturaService>{}
+public class facturaController extends commonController<facturaDTO>{
+	private facturaService service;
+
+	public facturaController(commonIService<facturaDTO> service, facturaService fservice) {
+		super(service);
+		this.service=fservice;
+	}
+	
+	
+}

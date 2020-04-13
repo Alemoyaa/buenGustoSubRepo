@@ -6,10 +6,19 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.utn.app.buenGusto.commons.commonController;
+import com.utn.app.buenGusto.commons.commonIService;
 
 @RestController
-@CrossOrigin(origins = "*",
-			 methods={RequestMethod.GET,RequestMethod.POST,
-					  RequestMethod.DELETE,RequestMethod.PUT})
+
 @RequestMapping(path = "api/pedido")
-public class pedidoController extends commonController<pedidoEntity, pedidoService>{}
+public class pedidoController extends commonController<pedidoDTO>{
+	
+	private pedidoService servicio;
+
+	public pedidoController(commonIService<pedidoDTO> service, pedidoService pservice) {
+		super(service);
+		this.servicio=pservice;
+	}
+	
+	
+}

@@ -16,6 +16,7 @@ import { DashboardGerenteComponent } from './components/admin/gerente/dashboard-
 import { CatalogoCrudComponent } from './components/admin/gerente/dashboardGerenteComponents/catalogo-crud/catalogo-crud.component';
 import { StockComponent } from './components/admin/gerente/dashboardGerenteComponents/stock/stock.component';
 import { EstadisticasComponent } from './components/admin/gerente/dashboardGerenteComponents/estadisticas/estadisticas.component';
+import { CarritoComponent } from './components/cliente/carrito/carrito.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import { EstadisticasComponent } from './components/admin/gerente/dashboardGeren
     CatalogoCrudComponent,
     StockComponent,
     EstadisticasComponent,
+    CarritoComponent,
   ],
   imports: [BrowserModule, AppRoutingModule],
   providers: [],
