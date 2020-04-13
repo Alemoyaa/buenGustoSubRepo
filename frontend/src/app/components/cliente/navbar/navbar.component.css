@@ -6,6 +6,10 @@ body {
     "Segoe UI Symbol";
 }
 
+.boton-ofertas{
+  text-align: center;
+}
+
 h1,
 h2,
 h3,
@@ -24,12 +28,34 @@ i {
   color: gray;
 }
 
+/* Esto es del home */
 #promo {
   text-align: center;
   padding: 200px;
   background: url("../../../../assets/assetsHome/img/Fast_food_Pizza.jpg")
     no-repeat;
   background-size: cover;
+}
+
+#logo-letra{
+  max-height: 42px;
+  margin-right: 18px;
+  margin-top: 5px;
+  display: inline-block;
+}
+
+#boton-ofertas{
+  max-height: 42px;
+  margin-right: 1px;
+  margin-top: 4px;
+  display: inline-block;
+}
+
+#avatar{
+  max-height: 22px;
+  margin-right: 5px;
+  margin-top: -5px;
+  display: inline-block;
 }
 
 #logo {
@@ -80,18 +106,19 @@ i {
   background-color: #eff7fb;
 }
 
+/* Homeeeee */
 #wellcome p {
   max-width: 800px;
   font-size: 20px;
   margin: 0 auto;
 }
-
+/* Homeeeee */
 .site-section h1 {
   font-weight: normal;
   margin-bottom: 30px;
   margin-top: 60px;
 }
-
+/* Homeeeee */
 .site-section h3 {
   font-weight: normal;
   margin-bottom: 30px;
@@ -105,24 +132,29 @@ i {
   border-color: #000000;
 }
 
+/* Esto es solo del home */
 #boton-ver-mas {
   background: #0088ff;
 }
-
+/* Homeeeee */
 #why .item h2 {
   font-weight: normal;
   margin-top: 13px;
   margin-bottom: 20px;
   font-size: 24px;
 }
-
+/* Homeeeee */
 #why .item {
   padding-top: 36px;
 }
-
+/* Homeeeee */
 #why .item i {
   font-size: 42px;
 }
+
+
+
+
 
 .navbar-light .navbar-nav .show > .nav-link,
 .navbar-light .navbar-nav .active > .nav-link,
@@ -139,3 +171,28 @@ i {
   background-color: #345578;
   border-color: #314f6f;
 }
+
+
+.rounded-circle {
+  border-radius: 50%!important;
+}
+
+element.style {
+}
+
+.sidebar .nav-item .nav-link .img-profile, .topbar .nav-item .nav-link .img-profile {
+
+  height: 3rem;
+  width: 3rem;
+}
+
+img {
+  border-style: none;
+}
+
+img, svg {
+  vertical-align: middle;
+}
+
+
+
