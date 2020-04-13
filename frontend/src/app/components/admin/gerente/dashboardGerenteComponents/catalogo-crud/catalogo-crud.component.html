@@ -1,0 +1,130 @@
+<div class="container">
+
+  <div class="row mb-4 ml-2">
+    <button class="btn btn-success mr-3" data-toggle="modal" data-target="#ModalNuevo">Nuevo</button>
+    <button class="btn btn-info mr-3" data-toggle="modal" data-target="#ModalEditar">Editar</button>
+    <button class="btn btn-danger mr-3" data-toggle="modal" data-target="#ModalBorrar">Borrar</button>
+  </div>
+
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Pizza</th>
+        <th scope="col">Ingredientes</th>
+        <th scope="col">Precio</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th scope="row">1</th>
+        <td>Mozzarella</td>
+        <td>Salsa
+          Aceitunas
+          Orégano
+          Mozzarella
+        </td>
+        <td>$300</td>
+      </tr>
+      <tr>
+        <th scope="row">2</th>
+        <td>Especial</td>
+        <td>Ingredientes especiales</td>
+        <td>$250</td>
+      </tr>
+      <tr>
+        <th scope="row">3</th>
+        <td>Cuatro quesos</td>
+        <td>Queso queso queso queso</td>
+        <td>$320</td>
+      </tr>
+    </tbody>
+  </table>
+
+</div>
+
+<!-- Modal NUEVO -->
+<div class="modal fade" id="ModalNuevo" tabindex="-1" role="form" aria-labelledby="ModalNuevoLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Nuevo</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <input type="text" placeholder="Nombre">
+        <br>
+        <input type="text" placeholder="Ingredientes">
+        <br>
+        <input type="text" placeholder="Precio">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-success">Nuevo</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Modal EDITAR -->
+<div class="modal fade" id="ModalEditar" tabindex="-1" role="form" aria-labelledby="ModalEditarLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Editar</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <select id="pizzas" name="pizzas">
+          <option value="1">Mozzarella</option>
+          <option value="2">Especial</option>
+          <option value="3">Cuatro quesos</option>
+        </select>
+        <br>
+        <input type="text" placeholder="Nombre">
+        <br>
+        <input type="text" placeholder="Ingredientes">
+        <br>
+        <input type="text" placeholder="Precio">
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-info">Editar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Modal BORRAR -->
+<div class="modal fade" id="ModalBorrar" tabindex="-1" role="form" aria-labelledby="ModalBorrarLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Borrar</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <select id="pizzas" name="pizzas">
+          <option value="1">Mozzarella</option>
+          <option value="2">Especial</option>
+          <option value="3">Cuatro quesos</option>
+        </select>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Cancelar</button>
+        <button type="submit" class="btn btn-danger">Borrar</button>
+      </div>
+    </div>
+  </div>
+</div>
