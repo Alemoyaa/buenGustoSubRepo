@@ -1,202 +1,265 @@
-<app-navbar></app-navbar>
-
-<!-- <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>Catalog - Brand</title>
-    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,400i,700,700i,600,600i">
-    <link rel="stylesheet" href="assets/fonts/simple-line-icons.min.css">
-
-    <link rel="stylesheet" href="assets/css/smoothproducts.css">
-</head> -->
-
-
-    <main class="page catalog-page">
-        <section class="clean-block clean-catalog dark">
-            <div class="container">
-                <div class="block-heading">
-                    <h2 class="text-info">Catalogo</h2>
-                    <p><a class="btn btn-primary active btn-lg"  id="boton-home" href="/">Home :)</a></p>
-
+<main class="page catalog-page">
+  <section class="clean-block clean-catalog dark">
+    <div class="container">
+      <div class="block-heading">
+        <h2 class="text-info">Catalogo</h2>
+      </div>
+      <div class="content">
+        <div class="row">
+          <div class="col-md-3">
+            <div class="d-none d-md-block">
+              <div class="filters">
+                <div class="filter-item">
+                  <div>
+                    <h3 class="text-info2">Categoria</h3>
+                  </div>
+                  <div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-1"><label
+                      class="form-check-label" for="formCheck-1">
+                      <h6>Pizza</h6>
+                    </label></div>
+                  <div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-2"><label
+                      class="form-check-label" for="formCheck-2">
+                      <h6>Lomo</h6>
+                    </label></div>
+                  <div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-3"><label
+                      class="form-check-label" for="formCheck-3">
+                      <h6> Hamburguesa</h6>
+                    </label></div>
+                  <div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-4"><label
+                      class="form-check-label" for="formCheck-4">
+                      <h6>Pancho</h6>
+                    </label></div>
                 </div>
-                <div class="content">
-                    <div class="row">
-                        <div class="col-md-3">
-                            <div class="d-none d-md-block">
-                                <div class="filters">
-                                    <div class="filter-item">
-                                    <div><h3 class="text-info2">Categoria</h3></div>
-                                        <div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-1"><label class="form-check-label" for="formCheck-1"> <h6>Pizza</h6></label></div>
-                                        <div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-2"><label class="form-check-label" for="formCheck-2"><h6>Lomo</h6> </label></div>
-                                        <div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-3"><label class="form-check-label" for="formCheck-3"> <h6> Hamburguesa</h6> </label></div>
-                                        <div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-4"><label class="form-check-label" for="formCheck-4"> <h6>Pancho</h6>  </label></div>
-                                    </div>
-                                    <div class="filter-item">
-                                      <div><h3 class="text-info2">Bebidas</h3></div>
-                                        <div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-5"><label class="form-check-label" for="formCheck-5"> <h6>Gaseosas</h6> </label></div>
-                                        <div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-6"><label class="form-check-label" for="formCheck-6"> <h6>Agua</h6>  </label></div>
-                                        <div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-7"><label class="form-check-label" for="formCheck-7"> <h6>Cerveza</h6>  </label></div>
-                                    </div>
-                                    <div class="filter-item">
-                                      <div>  <h3 class="text-info2">Otra Categoria</h3></div>
-                                        <div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-8"><label class="form-check-label" for="formCheck-8"> <h6>Otro Filtro</h6> </label></div>
-                                        <div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-9"><label class="form-check-label" for="formCheck-9"> <h6>Otro Filtro</h6> </label></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="d-md-none"><a class="btn btn-link d-md-none filter-collapse" data-toggle="collapse" aria-expanded="false" aria-controls="filters" href="#filters" role="button">Filters<i class="icon-arrow-down filter-caret"></i></a>
-                                <div class="collapse"
-                                    id="filters">
-                                    <div class="filters">
-                                        <div class="filter-item">
-                                            <h3>Categoria</h3>
-                                            <div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-1"><label class="form-check-label" for="formCheck-1">Phones</label></div>
-                                            <div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-2"><label class="form-check-label" for="formCheck-2">Laptops</label></div>
-                                            <div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-3"><label class="form-check-label" for="formCheck-3">PC</label></div>
-                                            <div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-4"><label class="form-check-label" for="formCheck-4">Tablets</label></div>
-                                        </div>
-                                        <div class="filter-item">
-                                            <h3>Brands</h3>
-                                            <div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-5"><label class="form-check-label" for="formCheck-5">Samsung</label></div>
-                                            <div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-6"><label class="form-check-label" for="formCheck-6">Apple</label></div>
-                                            <div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-7"><label class="form-check-label" for="formCheck-7">HTC</label></div>
-                                        </div>
-                                        <div class="filter-item">
-                                            <h3>OS</h3>
-                                            <div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-8"><label class="form-check-label" for="formCheck-8">Android</label></div>
-                                            <div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-9"><label class="form-check-label" for="formCheck-9">iOS</label></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-9">
-                            <div class="products">
-                                <div class="row no-gutters">
-                                    <div class="col-12 col-md-6 col-lg-4">
-                                        <div class="clean-product-item">
-                                            <div class="image"><a href="#"><img class="img-fluid d-block mx-auto" src="../../../../assets/pizza/pizza1.jpg"></a></div>
-                                            <div class="product-name"><a href="#">Pizza Calabresa</a></div>
-                                            <div class="about">
-                                                <div class="rating"><img src="../../../../assets/star/star.svg"><img src="../../../../assets/star/star.svg"><img src="../../../../assets/star/star.svg"><img src="../../../../assets/star/star-half-empty.svg"><img src="../../../../assets/star/star-empty.svg"></div>
-                                                <div class="price">
-                                                    <h3>$100</h3>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-12 col-md-6 col-lg-4">
-                                        <div class="clean-product-item">
-                                            <div class="image"><a href="#"><img class="img-fluid d-block mx-auto" src="../../../../assets/pizza/pizza2.jpg"></a></div>
-                                            <div class="product-name"><a href="#">Pizza Calabresa</a></div>
-                                            <div class="about">
-                                                <div class="rating"><img src="../../../../assets/star/star.svg"><img src="../../../../assets/star/star.svg"><img src="../../../../assets/star/star.svg"><img src="../../../../assets/star/star-half-empty.svg"><img src="../../../../assets/star/star-empty.svg"></div>
-                                                <div class="price">
-                                                    <h3>$100</h3>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-12 col-md-6 col-lg-4">
-                                        <div class="clean-product-item">
-                                            <div class="image"><a href="#"><img class="img-fluid d-block mx-auto " src="../../../../assets/pizza/pizza3.jpg"></a></div>
-                                            <div class="product-name"><a href="#">Pizza Calabresa</a></div>
-                                            <div class="about">
-                                                <div class="rating"><img src="../../../../assets/star/star.svg"><img src="../../../../assets/star/star.svg"><img src="../../../../assets/star/star.svg"><img src="../../../../assets/star/star-half-empty.svg"><img src="../../../../assets/star/star-empty.svg"></div>
-                                                <div class="price">
-                                                    <h3>$100</h3>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-12 col-md-6 col-lg-4">
-                                        <div class="clean-product-item">
-                                            <div class="image"><a href="#"><img class="img-fluid d-block mx-auto" src="../../../../assets/hamburguesa/hamburguesa1.jpg"></a></div>
-                                            <div class="product-name"><a href="#">Hamburguesa</a></div>
-                                            <div class="about">
-                                                <div class="rating"><img src="../../../../assets/star/star.svg"><img src="../../../../assets/star/star.svg"><img src="../../../../assets/star/star.svg"><img src="../../../../assets/star/star-half-empty.svg"><img src="../../../../assets/star/star-empty.svg"></div>
-                                                <div class="price">
-                                                    <h3>$100</h3>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-12 col-md-6 col-lg-4">
-                                        <div class="clean-product-item">
-                                            <div class="image"><a href="#"><img class="img-fluid d-block mx-auto" src="../../../../assets/hamburguesa/hamburguesa2.jpg"></a></div>
-                                            <div class="product-name"><a href="#">Hamburguesa</a></div>
-                                            <div class="about">
-                                                <div class="rating"><img src="../../../../assets/star/star.svg"><img src="../../../../assets/star/star.svg"><img src="../../../../assets/star/star.svg"><img src="../../../../assets/star/star-half-empty.svg"><img src="../../../../assets/star/star-empty.svg"></div>
-                                                <div class="price">
-                                                    <h3>$100</h3>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-12 col-md-6 col-lg-4">
-                                        <div class="clean-product-item">
-                                            <div class="image"><a href="#"><img class="img-fluid d-block mx-auto" src="../../../../assets/hamburguesa/hamburguesa3.jpg"></a></div>
-                                            <div class="product-name"><a href="#">Hamburguesa</a></div>
-                                            <div class="about">
-                                                <div class="rating"><img src="../../../../assets/star/star.svg"><img src="../../../../assets/star/star.svg"><img src="../../../../assets/star/star.svg"><img src="../../../../assets/star/star-half-empty.svg"><img src="../../../../assets/star/star-empty.svg"></div>
-                                                <div class="price">
-                                                    <h3>$100</h3>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-12 col-md-6 col-lg-4">
-                                        <div class="clean-product-item">
-                                            <div class="image"><a href="#"><img class="img-fluid d-block mx-auto" src="../../../../assets/panchos/pancho1.jpg"></a></div>
-                                            <div class="product-name"><a href="#">Hot dog</a></div>
-                                            <div class="about">
-                                                <div class="rating"><img src="../../../../assets/star/star.svg"><img src="../../../../assets/star/star.svg"><img src="../../../../assets/star/star.svg"><img src="../../../../assets/star/star-half-empty.svg"><img src="../../../../assets/star/star-empty.svg"></div>
-                                                <div class="price">
-                                                    <h3>$100</h3>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-12 col-md-6 col-lg-4">
-                                        <div class="clean-product-item">
-                                            <div class="image"><a href="#"><img class="img-fluid d-block mx-auto" src="../../../../assets/panchos/pancho1.jpg"></a></div>
-                                            <div class="product-name"><a href="#">Hot dog</a></div>
-                                            <div class="about">
-                                                <div class="rating"><img src="../../../../assets/star/star.svg"><img src="../../../../assets/star/star.svg"><img src="../../../../assets/star/star.svg"><img src="../../../../assets/star/star-half-empty.svg"><img src="../../../../assets/star/star-empty.svg"></div>
-                                                <div class="price">
-                                                    <h3>$100</h3>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-12 col-md-6 col-lg-4">
-                                        <div class="clean-product-item">
-                                            <div class="image"><a href="#"><img class="img-fluid d-block mx-auto" src="../../../../assets/panchos/pancho1.jpg"></a><a href="#"></a></div>
-                                            <div class="product-name"><a href="#">Hot dog</a></div>
-                                            <div class="about">
-                                                <div class="rating"><img src="../../../../assets/star/star.svg"><img src="../../../../assets/star/star.svg"><img src="../../../../assets/star/star.svg"><img src="../../../../assets/star/star-half-empty.svg"><img src="../../../../assets/star/star-empty.svg"></div>
-                                                <div class="price">
-                                                    <h3>$100</h3>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <nav>
-                                    <ul class="pagination">
-                                        <li class="page-item disabled"><a class="page-link" href="#" aria-label="Previous"><span aria-hidden="true">«</span></a></li>
-                                        <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                                        <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                        <li class="page-item"><a class="page-link" href="#" aria-label="Next"><span aria-hidden="true">»</span></a></li>
-                                    </ul>
-                                </nav>
-                            </div>
-                        </div>
-                    </div>
+                <div class="filter-item">
+                  <div>
+                    <h3 class="text-info2">Bebidas</h3>
+                  </div>
+                  <div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-5"><label
+                      class="form-check-label" for="formCheck-5">
+                      <h6>Gaseosas</h6>
+                    </label></div>
+                  <div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-6"><label
+                      class="form-check-label" for="formCheck-6">
+                      <h6>Agua</h6>
+                    </label></div>
+                  <div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-7"><label
+                      class="form-check-label" for="formCheck-7">
+                      <h6>Cerveza</h6>
+                    </label></div>
                 </div>
+                <div class="filter-item">
+                  <div>
+                    <h3 class="text-info2">Otra Categoria</h3>
+                  </div>
+                  <div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-8"><label
+                      class="form-check-label" for="formCheck-8">
+                      <h6>Otro Filtro</h6>
+                    </label></div>
+                  <div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-9"><label
+                      class="form-check-label" for="formCheck-9">
+                      <h6>Otro Filtro</h6>
+                    </label></div>
+                </div>
+              </div>
             </div>
-        </section>
-<!-- Footer -->
-        <app-footer></app-footer>
+            <div class="d-md-none"><a class="btn btn-link d-md-none filter-collapse" data-toggle="collapse"
+                aria-expanded="false" aria-controls="filters" href="#filters" role="button">Filters<i
+                  class="icon-arrow-down filter-caret"></i></a>
+              <div class="collapse" id="filters">
+                <div class="filters">
+                  <div class="filter-item">
+                    <h3>Categoria</h3>
+                    <div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-1"><label
+                        class="form-check-label" for="formCheck-1">Phones</label></div>
+                    <div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-2"><label
+                        class="form-check-label" for="formCheck-2">Laptops</label></div>
+                    <div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-3"><label
+                        class="form-check-label" for="formCheck-3">PC</label></div>
+                    <div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-4"><label
+                        class="form-check-label" for="formCheck-4">Tablets</label></div>
+                  </div>
+                  <div class="filter-item">
+                    <h3>Brands</h3>
+                    <div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-5"><label
+                        class="form-check-label" for="formCheck-5">Samsung</label></div>
+                    <div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-6"><label
+                        class="form-check-label" for="formCheck-6">Apple</label></div>
+                    <div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-7"><label
+                        class="form-check-label" for="formCheck-7">HTC</label></div>
+                  </div>
+                  <div class="filter-item">
+                    <h3>OS</h3>
+                    <div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-8"><label
+                        class="form-check-label" for="formCheck-8">Android</label></div>
+                    <div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-9"><label
+                        class="form-check-label" for="formCheck-9">iOS</label></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-9">
+            <div class="products">
+              <div class="row no-gutters">
+                <div class="col-12 col-md-6 col-lg-4">
+                  <div class="clean-product-item">
+                    <div class="image"><a href="#"><img class="img-fluid d-block mx-auto"
+                          src="../../../../assets/pizza/pizza1.jpg"></a></div>
+                    <div class="product-name"><a href="#">Pizza Calabresa</a></div>
+                    <div class="about">
+                      <div class="rating"><img src="../../../../assets/star/star.svg"><img
+                          src="../../../../assets/star/star.svg"><img src="../../../../assets/star/star.svg"><img
+                          src="../../../../assets/star/star-half-empty.svg"><img
+                          src="../../../../assets/star/star-empty.svg"></div>
+                      <div class="price">
+                        <h3>$100</h3>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-12 col-md-6 col-lg-4">
+                  <div class="clean-product-item">
+                    <div class="image"><a href="#"><img class="img-fluid d-block mx-auto"
+                          src="../../../../assets/pizza/pizza2.jpg"></a></div>
+                    <div class="product-name"><a href="#">Pizza Calabresa</a></div>
+                    <div class="about">
+                      <div class="rating"><img src="../../../../assets/star/star.svg"><img
+                          src="../../../../assets/star/star.svg"><img src="../../../../assets/star/star.svg"><img
+                          src="../../../../assets/star/star-half-empty.svg"><img
+                          src="../../../../assets/star/star-empty.svg"></div>
+                      <div class="price">
+                        <h3>$100</h3>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-12 col-md-6 col-lg-4">
+                  <div class="clean-product-item">
+                    <div class="image"><a href="#"><img class="img-fluid d-block mx-auto "
+                          src="../../../../assets/pizza/pizza3.jpg"></a></div>
+                    <div class="product-name"><a href="#">Pizza Calabresa</a></div>
+                    <div class="about">
+                      <div class="rating"><img src="../../../../assets/star/star.svg"><img
+                          src="../../../../assets/star/star.svg"><img src="../../../../assets/star/star.svg"><img
+                          src="../../../../assets/star/star-half-empty.svg"><img
+                          src="../../../../assets/star/star-empty.svg"></div>
+                      <div class="price">
+                        <h3>$100</h3>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-12 col-md-6 col-lg-4">
+                  <div class="clean-product-item">
+                    <div class="image"><a href="#"><img class="img-fluid d-block mx-auto"
+                          src="../../../../assets/hamburguesa/hamburguesa1.jpg"></a></div>
+                    <div class="product-name"><a href="#">Hamburguesa</a></div>
+                    <div class="about">
+                      <div class="rating"><img src="../../../../assets/star/star.svg"><img
+                          src="../../../../assets/star/star.svg"><img src="../../../../assets/star/star.svg"><img
+                          src="../../../../assets/star/star-half-empty.svg"><img
+                          src="../../../../assets/star/star-empty.svg"></div>
+                      <div class="price">
+                        <h3>$100</h3>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-12 col-md-6 col-lg-4">
+                  <div class="clean-product-item">
+                    <div class="image"><a href="#"><img class="img-fluid d-block mx-auto"
+                          src="../../../../assets/hamburguesa/hamburguesa2.jpg"></a></div>
+                    <div class="product-name"><a href="#">Hamburguesa</a></div>
+                    <div class="about">
+                      <div class="rating"><img src="../../../../assets/star/star.svg"><img
+                          src="../../../../assets/star/star.svg"><img src="../../../../assets/star/star.svg"><img
+                          src="../../../../assets/star/star-half-empty.svg"><img
+                          src="../../../../assets/star/star-empty.svg"></div>
+                      <div class="price">
+                        <h3>$100</h3>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-12 col-md-6 col-lg-4">
+                  <div class="clean-product-item">
+                    <div class="image"><a href="#"><img class="img-fluid d-block mx-auto"
+                          src="../../../../assets/hamburguesa/hamburguesa3.jpg"></a></div>
+                    <div class="product-name"><a href="#">Hamburguesa</a></div>
+                    <div class="about">
+                      <div class="rating"><img src="../../../../assets/star/star.svg"><img
+                          src="../../../../assets/star/star.svg"><img src="../../../../assets/star/star.svg"><img
+                          src="../../../../assets/star/star-half-empty.svg"><img
+                          src="../../../../assets/star/star-empty.svg"></div>
+                      <div class="price">
+                        <h3>$100</h3>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-12 col-md-6 col-lg-4">
+                  <div class="clean-product-item">
+                    <div class="image"><a href="#"><img class="img-fluid d-block mx-auto"
+                          src="../../../../assets/panchos/pancho1.jpg"></a></div>
+                    <div class="product-name"><a href="#">Hot dog</a></div>
+                    <div class="about">
+                      <div class="rating"><img src="../../../../assets/star/star.svg"><img
+                          src="../../../../assets/star/star.svg"><img src="../../../../assets/star/star.svg"><img
+                          src="../../../../assets/star/star-half-empty.svg"><img
+                          src="../../../../assets/star/star-empty.svg"></div>
+                      <div class="price">
+                        <h3>$100</h3>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-12 col-md-6 col-lg-4">
+                  <div class="clean-product-item">
+                    <div class="image"><a href="#"><img class="img-fluid d-block mx-auto"
+                          src="../../../../assets/panchos/pancho1.jpg"></a></div>
+                    <div class="product-name"><a href="#">Hot dog</a></div>
+                    <div class="about">
+                      <div class="rating"><img src="../../../../assets/star/star.svg"><img
+                          src="../../../../assets/star/star.svg"><img src="../../../../assets/star/star.svg"><img
+                          src="../../../../assets/star/star-half-empty.svg"><img
+                          src="../../../../assets/star/star-empty.svg"></div>
+                      <div class="price">
+                        <h3>$100</h3>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-12 col-md-6 col-lg-4">
+                  <div class="clean-product-item">
+                    <div class="image"><a href="#"><img class="img-fluid d-block mx-auto"
+                          src="../../../../assets/panchos/pancho1.jpg"></a><a href="#"></a></div>
+                    <div class="product-name"><a href="#">Hot dog</a></div>
+                    <div class="about">
+                      <div class="rating"><img src="../../../../assets/star/star.svg"><img
+                          src="../../../../assets/star/star.svg"><img src="../../../../assets/star/star.svg"><img
+                          src="../../../../assets/star/star-half-empty.svg"><img
+                          src="../../../../assets/star/star-empty.svg"></div>
+                      <div class="price">
+                        <h3>$100</h3>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <nav>
+                <ul class="pagination">
+                  <li class="page-item disabled"><a class="page-link" href="#" aria-label="Previous"><span
+                        aria-hidden="true">«</span></a></li>
+                  <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                  <li class="page-item"><a class="page-link" href="#">2</a></li>
+                  <li class="page-item"><a class="page-link" href="#">3</a></li>
+                  <li class="page-item"><a class="page-link" href="#" aria-label="Next"><span
+                        aria-hidden="true">»</span></a></li>
+                </ul>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>

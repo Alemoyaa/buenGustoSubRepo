@@ -12,6 +12,7 @@ import { UserProfileComponent } from './components/cliente/user-profile/user-pro
 import { CatalogoComponent } from './components/cliente/catalogo/catalogo.component';
 import { OfertasComponent } from './components/cliente/ofertas/ofertas.component';
 import { FooterComponent } from './components/cliente/footer/footer.component';
+import { CarritoComponent } from './components/cliente/carrito/carrito.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { FooterComponent } from './components/cliente/footer/footer.component';
     UserProfileComponent,
     CatalogoComponent,
     OfertasComponent,
-    FooterComponent
+    FooterComponent,
+    CarritoComponent
   ],
   imports: [
     BrowserModule,

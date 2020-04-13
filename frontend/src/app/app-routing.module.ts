@@ -1,3 +1,4 @@
+import { CarritoComponent } from './components/cliente/carrito/carrito.component';
 import { UserProfileComponent } from './components/cliente/user-profile/user-profile.component';
 import { RegisterComponent } from './components/admin/register/register.component';
 import { LoginComponent } from './components/admin/login/login.component';
@@ -18,6 +19,7 @@ const routes: Routes = [
   { path:'navbar', component: NavbarComponent },
   { path:'user-profile', component: UserProfileComponent },
   { path:'ofertas', component: OfertasComponent },
+  { path:'carrito', component: CarritoComponent },
   { path:'**', component: NotfoundComponent }
 
 ];
