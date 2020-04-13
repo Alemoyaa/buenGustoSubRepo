@@ -28,14 +28,7 @@ i {
   color: gray;
 }
 
-/* Esto es del home */
-#promo {
-  text-align: center;
-  padding: 200px;
-  background: url("../../../../assets/assetsHome/img/Fast_food_Pizza.jpg")
-    no-repeat;
-  background-size: cover;
-}
+
 
 #logo-letra{
   max-height: 42px;
@@ -75,13 +68,6 @@ i {
   }
 }
 
-#promo .jumbotron {
-  border-radius: 30px;
-  padding: 40px;
-  background-color: rgba(255, 255, 255, 0.75);
-  max-width: 800px;
-  margin: 0 auto;
-}
 
 @media (max-width: 360px) {
   #promo .jumbotron {
@@ -106,23 +92,7 @@ i {
   background-color: #eff7fb;
 }
 
-/* Homeeeee */
-#wellcome p {
-  max-width: 800px;
-  font-size: 20px;
-  margin: 0 auto;
-}
-/* Homeeeee */
-.site-section h1 {
-  font-weight: normal;
-  margin-bottom: 30px;
-  margin-top: 60px;
-}
-/* Homeeeee */
-.site-section h3 {
-  font-weight: normal;
-  margin-bottom: 30px;
-}
+
 
 .btn-primary:not(:disabled):not(.disabled):active,
 .btn-primary:not(:disabled):not(.disabled).active,
@@ -131,29 +101,6 @@ i {
   background-color: #000000;
   border-color: #000000;
 }
-
-/* Esto es solo del home */
-#boton-ver-mas {
-  background: #0088ff;
-}
-/* Homeeeee */
-#why .item h2 {
-  font-weight: normal;
-  margin-top: 13px;
-  margin-bottom: 20px;
-  font-size: 24px;
-}
-/* Homeeeee */
-#why .item {
-  padding-top: 36px;
-}
-/* Homeeeee */
-#why .item i {
-  font-size: 42px;
-}
-
-
-
 
 
 .navbar-light .navbar-nav .show > .nav-link,

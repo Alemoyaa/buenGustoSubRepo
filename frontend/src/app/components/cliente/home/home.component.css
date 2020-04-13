@@ -26,22 +26,13 @@ i {
 
 #promo {
   text-align: center;
-  padding: 200px;
+  padding: 207px;
   background: url("../../../../assets/assetsHome/img/Fast_food_Pizza.jpg")
     no-repeat;
   background-size: cover;
 }
 
-#logo {
-  max-height: 42px;
-  margin-right: 18px;
-  margin-top: -3px;
-  display: inline-block;
-}
 
-.navbar {
-  background-color: white;
-}
 
 @media (max-width: 991px) {
   #promo {
@@ -50,11 +41,12 @@ i {
 }
 
 #promo .jumbotron {
-  border-radius: 30px;
+  border-radius: 40px;
   padding: 40px;
   background-color: rgba(255, 255, 255, 0.75);
   max-width: 800px;
   margin: 0 auto;
+  margin-top: -70px;
 }
 
 @media (max-width: 360px) {
