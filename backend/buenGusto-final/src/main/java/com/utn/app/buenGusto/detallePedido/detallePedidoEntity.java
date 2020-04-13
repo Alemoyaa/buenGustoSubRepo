@@ -24,7 +24,7 @@ public class detallePedidoEntity extends commonEntity implements Serializable {
 	private double subtotal;
 
 	// ---------pedido---------
-	/*@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "pedido_id")
 	private pedidoEntity pedido_detallePedido;
 
@@ -42,7 +42,7 @@ public class detallePedidoEntity extends commonEntity implements Serializable {
 	@ManyToOne(cascade = CascadeType.ALL) // trae atributos y sus correspondientes relaciones
 	@JoinColumn(name = "detallePedido_fk_articuloInsumo")
 	private articuloInsumoEntity articuloInsumo;
-*/
+
 	public detallePedidoEntity() { 
 	}
  
@@ -62,5 +62,47 @@ public class detallePedidoEntity extends commonEntity implements Serializable {
 	public void setSubtotal(double subtotal) {
 		this.subtotal = subtotal;
 	}
+
+
+	public pedidoEntity getPedido_detallePedido() {
+		return pedido_detallePedido;
+	}
+
+
+	public void setPedido_detallePedido(pedidoEntity pedido_detallePedido) {
+		this.pedido_detallePedido = pedido_detallePedido;
+	}
+
+
+	public facturaEntity getFacturaDetalle() {
+		return facturaDetalle;
+	}
+
+
+	public void setFacturaDetalle(facturaEntity facturaDetalle) {
+		this.facturaDetalle = facturaDetalle;
+	}
+
+
+	public articuloManufacturadoEntity getArticuloManufacturado() {
+		return articuloManufacturado;
+	}
+
+
+	public void setArticuloManufacturado(articuloManufacturadoEntity articuloManufacturado) {
+		this.articuloManufacturado = articuloManufacturado;
+	}
+
+
+	public articuloInsumoEntity getArticuloInsumo() {
+		return articuloInsumo;
+	}
+
+
+	public void setArticuloInsumo(articuloInsumoEntity articuloInsumo) {
+		this.articuloInsumo = articuloInsumo;
+	}
+
+	
  
 }

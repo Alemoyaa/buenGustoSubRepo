@@ -4,7 +4,6 @@ import java.util.Date;
 
 import com.utn.app.buenGusto.cliente.clienteDTO; 
 import com.utn.app.buenGusto.commons.commonDTO;
-import com.utn.app.buenGusto.detallePedido.detallePedidoDTO; 
 import com.utn.app.buenGusto.factura.facturaDTO; 
 
 public class pedidoDTO  extends commonDTO {
@@ -15,12 +14,10 @@ public class pedidoDTO  extends commonDTO {
 	private int estado;
 	private Date horaEstimadaFin; 
 	private int tipoEnvio;
-	
-	private clienteDTO cliente;
-	
-	//private facturaDTO factura;
+	 
+	private facturaDTO factura;
 	//private List<detallePedidoDTO> detallePedidos;
-	
+	private clienteDTO cliente;
  
 	public int getFecha() {
 		return fecha;
@@ -51,6 +48,12 @@ public class pedidoDTO  extends commonDTO {
 	}
 	public void setTipoEnvio(int tipoEnvio) {
 		this.tipoEnvio = tipoEnvio;
+	} 
+	public facturaDTO getFactura() {
+		return factura;
+	}
+	public void setFactura(facturaDTO factura) {
+		this.factura = factura;
 	}
 	public clienteDTO getCliente() {
 		return cliente;
@@ -58,5 +61,5 @@ public class pedidoDTO  extends commonDTO {
 	public void setCliente(clienteDTO cliente) {
 		this.cliente = cliente;
 	}
-	
+	  
 }

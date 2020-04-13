@@ -3,17 +3,19 @@ package com.utn.app.buenGusto.pedido;
 import java.io.Serializable;
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-
-import com.fasterxml.jackson.annotation.JsonBackReference;
+ 
 import com.utn.app.buenGusto.cliente.clienteEntity;
 import com.utn.app.buenGusto.commons.commonEntity;
+import com.utn.app.buenGusto.factura.facturaEntity;
 
 @Entity
 @Table(name = "pedido")
@@ -35,15 +37,16 @@ public class pedidoEntity extends commonEntity implements Serializable {
 	private clienteEntity cliente;
 
 	// --------Factura---------- 
-	/*@OneToOne
-	@JoinColumn(name = "factura_id")
-	@JsonIgnoreProperties("pedido")
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "factura_id") 
 	private facturaEntity factura;
-
+	
+	/*
 	// -------detallePedido----------
 	@OneToMany(mappedBy = "pedido_detallePedido")
 	private List<detallePedidoEntity> detallePedidos;
-*/ 
+	*/ 
+	
 	public int getFecha() {
 		return fecha;
 	}
@@ -82,6 +85,14 @@ public class pedidoEntity extends commonEntity implements Serializable {
 
 	public void setTipoEnvio(int tipoEnvio) {
 		this.tipoEnvio = tipoEnvio;
+	} 
+
+	public facturaEntity getFactura() {
+		return factura;
+	}
+
+	public void setFactura(facturaEntity factura) {
+		this.factura = factura;
 	}
 
 	public clienteEntity getCliente() {
@@ -90,6 +101,8 @@ public class pedidoEntity extends commonEntity implements Serializable {
 
 	public void setCliente(clienteEntity cliente) {
 		this.cliente = cliente;
-	}
+	} 
+	
+
 	
 }

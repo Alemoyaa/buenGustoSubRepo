@@ -1,5 +1,5 @@
 package com.utn.app.buenGusto.domicilio;
-
+ 
 import com.utn.app.buenGusto.commons.commonDTO;
 
 public class domicilioDTO extends commonDTO {
@@ -7,6 +7,7 @@ public class domicilioDTO extends commonDTO {
 	private String calle;
 	private int numero;
 	private String localidad;
+	 
 
 	public String getCalle() {
 		return calle;
@@ -30,6 +31,6 @@ public class domicilioDTO extends commonDTO {
 
 	public void setLocalidad(String localidad) {
 		this.localidad = localidad;
-	}
-
+	} 
+	
 }

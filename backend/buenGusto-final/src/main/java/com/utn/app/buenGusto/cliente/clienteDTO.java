@@ -1,11 +1,7 @@
-package com.utn.app.buenGusto.cliente;
-
-import java.util.ArrayList;
-import java.util.List;
+package com.utn.app.buenGusto.cliente; 
 
 import com.utn.app.buenGusto.commons.commonDTO;
-import com.utn.app.buenGusto.domicilio.domicilioDTO; 
-import com.utn.app.buenGusto.pedido.pedidoDTO;
+import com.utn.app.buenGusto.domicilio.domicilioDTO;  
 
 public class clienteDTO extends commonDTO  {
 	
@@ -14,9 +10,7 @@ public class clienteDTO extends commonDTO  {
 	private long telefono;  
 	private String email;
 	
-	private domicilioDTO domicilio;
-	
-	private List<pedidoDTO> pedidos = new ArrayList<>();
+	private domicilioDTO domicilio; 
 	   
 	public String getNombre() {
 		return nombre;
@@ -48,10 +42,5 @@ public class clienteDTO extends commonDTO  {
 	public void setDomicilio(domicilioDTO domicilio) {
 		this.domicilio = domicilio;
 	}
-	public List<pedidoDTO> getPedidos() {
-		return pedidos;
-	}
-	public void setPedidos(List<pedidoDTO> pedidos) {
-		this.pedidos = pedidos;
-	} 
+	 
 }

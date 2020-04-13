@@ -10,9 +10,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+ 
 import com.utn.app.buenGusto.commons.commonEntity;
 import com.utn.app.buenGusto.domicilio.domicilioEntity;
 import com.utn.app.buenGusto.pedido.pedidoEntity; 
@@ -30,14 +28,13 @@ public class clienteEntity extends commonEntity implements Serializable {
 
 	// Dependencia con domicilio
 	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "fk_domicilio")
-	@JsonBackReference
+	@JoinColumn(name = "fk_domicilio") 
 	private domicilioEntity domicilio;
 
 	// -----Pedido------ 
-	/*@OneToMany(mappedBy= "cliente", cascade = CascadeType.ALL)
-	private List<pedidoEntity> pedidos = new ArrayList<>();
-*/
+	//@OneToMany(cascade = CascadeType.ALL)
+	//private List<pedidoEntity> pedidos = new ArrayList<>();
+ 
 	public String getNombre() {
 		return nombre;
 	}
