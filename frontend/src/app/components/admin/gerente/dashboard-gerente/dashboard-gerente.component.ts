@@ -9,4 +9,6 @@ export class DashboardGerenteComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {}
+
+  clearBoards() {}
 }
