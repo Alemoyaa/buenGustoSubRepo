@@ -1,25 +1,19 @@
 package com.utn.app.buenGusto.pedido;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
-import javax.persistence.TemporalType; 
+import javax.persistence.TemporalType;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.utn.app.buenGusto.cliente.clienteEntity;
 import com.utn.app.buenGusto.commons.commonEntity;
-import com.utn.app.buenGusto.detallePedido.detallePedidoEntity;
-import com.utn.app.buenGusto.factura.facturaEntity;
 
 @Entity
 @Table(name = "pedido")
@@ -36,36 +30,20 @@ public class pedidoEntity extends commonEntity implements Serializable {
 	private int tipoEnvio;
 
 	// --------Cliente--------
-	@ManyToOne(fetch = FetchType.LAZY, optional = false)
-	@JoinColumn(name = "cliente_id", nullable = false)
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "cliente_id")
 	private clienteEntity cliente;
 
-	// --------Factura----------
-	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	@JoinColumn(name = "pedido_id")
+	// --------Factura---------- 
+	/*@OneToOne
+	@JoinColumn(name = "factura_id")
+	@JsonIgnoreProperties("pedido")
 	private facturaEntity factura;
 
 	// -------detallePedido----------
-	@OneToMany(mappedBy = "pedido", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "pedido_detallePedido")
 	private List<detallePedidoEntity> detallePedidos;
-
-	public pedidoEntity() {
-		this.detallePedidos = new ArrayList<detallePedidoEntity>();
-	}
-
-	public pedidoEntity(int fecha, int numero, int estado, Date horaEstimadaFin,
-			int tipoEnvio, clienteEntity cliente, facturaEntity factura,
-			List<detallePedidoEntity> detallePedidos) {
-		this.fecha = fecha;
-		this.numero = numero;
-		this.estado = estado;
-		this.horaEstimadaFin = horaEstimadaFin;
-		this.tipoEnvio = tipoEnvio;
-		this.cliente = cliente;
-		this.factura = factura;
-		this.detallePedidos = detallePedidos;
-	}
-
+*/ 
 	public int getFecha() {
 		return fecha;
 	}
@@ -106,20 +84,12 @@ public class pedidoEntity extends commonEntity implements Serializable {
 		this.tipoEnvio = tipoEnvio;
 	}
 
-	public facturaEntity getFactura() {
-		return factura;
+	public clienteEntity getCliente() {
+		return cliente;
 	}
 
-	public void setFactura(facturaEntity factura) {
-		this.factura = factura;
+	public void setCliente(clienteEntity cliente) {
+		this.cliente = cliente;
 	}
-
-	public Long getDetallePedidos() {
-		return (long) detallePedidos.size();
-	}
-
-	public void setDetallePedidos(List<detallePedidoEntity> detallePedidos) {
-		this.detallePedidos = detallePedidos;
-	} 
 	
 }

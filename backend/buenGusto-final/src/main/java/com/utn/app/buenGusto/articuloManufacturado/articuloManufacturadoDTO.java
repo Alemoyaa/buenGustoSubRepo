@@ -7,24 +7,11 @@ public class articuloManufacturadoDTO extends commonDTO {
 	
 	private int tiempoEstimadoCocina;
 	private String denominacion;
-	private double precioVenta;
-	private rubroGeneralEntity rubroGeneral;
-	
-	
-	
-	
+	private double precioVenta; 
 	
 	public articuloManufacturadoDTO() {
 		super();
-	}
-	public articuloManufacturadoDTO(int tiempoEstimadoCocina, String denominacion, double precioVenta,
-			rubroGeneralEntity rubroGeneral) {
-		super();
-		this.tiempoEstimadoCocina = tiempoEstimadoCocina;
-		this.denominacion = denominacion;
-		this.precioVenta = precioVenta;
-		this.rubroGeneral = rubroGeneral;
-	}
+	} 
 	public int getTiempoEstimadoCocina() {
 		return tiempoEstimadoCocina;
 	}
@@ -42,14 +29,5 @@ public class articuloManufacturadoDTO extends commonDTO {
 	}
 	public void setPrecioVenta(double precioVenta) {
 		this.precioVenta = precioVenta;
-	}
-	public rubroGeneralEntity getRubroGeneral() {
-		return rubroGeneral;
-	}
-	public void setRubroGeneral(rubroGeneralEntity rubroGeneral) {
-		this.rubroGeneral = rubroGeneral;
-	}
-	
-	
-	
+	} 
 }

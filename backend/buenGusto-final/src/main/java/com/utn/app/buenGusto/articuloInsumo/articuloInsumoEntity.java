@@ -30,43 +30,27 @@ public class articuloInsumoEntity extends commonEntity implements Serializable {
 	private double stockMinimo;
 	private String unidadMedida;
 	private boolean esInsumo;
-
+/*
 	// relacion OneToMany bidireccional ArticuloInsumo --
 	// ArticuloManufacturadoDetalle
-	@OneToMany(mappedBy = "articuloInsumo", cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToMany(mappedBy = "articuloInsumo", fetch = FetchType.LAZY, orphanRemoval = true)
 	private List<articuloManufacturadoDetalleEntity> articuloManufacturadoDetalle = new ArrayList<>();
 
 	
 	// relacion OneToMany bidireccional ArticuloInsumo -- DetallePedido
-	@OneToMany(mappedBy = "articuloInsumo", cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToMany(mappedBy = "articuloInsumo", fetch = FetchType.LAZY, orphanRemoval = true)
 	private List<detallePedidoEntity> detallePedido = new ArrayList<>();
 	
 
 	//rubrosArticulo
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name= "articuloInsumo_fk_rubroArticulo")
 	private rubroArticuloEntity rubrosArticulo;
 	
+	*/
 	public articuloInsumoEntity() {
 
 	} 
-	public articuloInsumoEntity(String denominacion, double precioCompra,
-			double precioVenta, double stockActual, double stockMinimo,
-			String unidadMedida, boolean esInsumo,
-			List<articuloManufacturadoDetalleEntity> articuloManufacturadoDetalle,
-			List<detallePedidoEntity> detallePedido, rubroArticuloEntity rubroArticulo) { 
-		
-		this.denominacion = denominacion;
-		this.precioCompra = precioCompra;
-		this.precioVenta = precioVenta;
-		this.stockActual = stockActual;
-		this.stockMinimo = stockMinimo;
-		this.unidadMedida = unidadMedida;
-		this.esInsumo = esInsumo;
-		this.articuloManufacturadoDetalle = articuloManufacturadoDetalle;
-		this.detallePedido = detallePedido;
-		this.rubrosArticulo = rubroArticulo;
-	}
 	public String getDenominacion() {
 		return denominacion;
 	}
@@ -109,17 +93,4 @@ public class articuloInsumoEntity extends commonEntity implements Serializable {
 	public void setEsInsumo(boolean esInsumo) {
 		this.esInsumo = esInsumo;
 	}
-	public List<articuloManufacturadoDetalleEntity> getArticuloManufacturadoDetalle() {
-		return articuloManufacturadoDetalle;
-	}
-	public void setArticuloManufacturadoDetalle(List<articuloManufacturadoDetalleEntity> articuloManufacturadoDetalle) {
-		this.articuloManufacturadoDetalle = articuloManufacturadoDetalle;
-	}
-	public List<detallePedidoEntity> getDetallePedido() {
-		return detallePedido;
-	}
-	public void setDetallePedido(List<detallePedidoEntity> detallePedido) {
-		this.detallePedido = detallePedido;
-	} 
-	
 }

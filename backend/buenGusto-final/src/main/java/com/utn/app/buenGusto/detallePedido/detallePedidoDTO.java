@@ -10,30 +10,14 @@ public class detallePedidoDTO extends commonDTO {
 	
 	
 	private int cantidad; 
-	private double subtotal;
-	
-	private pedidoEntity pedido;
-	private facturaEntity facturaDetalle;
-	private articuloManufacturadoEntity articuloManufacturado;
-	private articuloInsumoEntity articuloInsumo;
-	
-	
+	private double subtotal; 
 	
 	
 	
 	public detallePedidoDTO() {
 		super();
-	}
-	public detallePedidoDTO(int cantidad, double subtotal, pedidoEntity pedido, facturaEntity facturaDetalle,
-			articuloManufacturadoEntity articuloManufacturado, articuloInsumoEntity articuloInsumo) {
-		super();
-		this.cantidad = cantidad;
-		this.subtotal = subtotal;
-		this.pedido = pedido;
-		this.facturaDetalle = facturaDetalle;
-		this.articuloManufacturado = articuloManufacturado;
-		this.articuloInsumo = articuloInsumo;
-	}
+	} 
+	
 	public int getCantidad() {
 		return cantidad;
 	}
@@ -45,35 +29,6 @@ public class detallePedidoDTO extends commonDTO {
 	}
 	public void setSubtotal(double subtotal) {
 		this.subtotal = subtotal;
-	}
-	public pedidoEntity getPedido() {
-		return pedido;
-	}
-	public void setPedido(pedidoEntity pedido) {
-		this.pedido = pedido;
-	}
-	public facturaEntity getFacturaDetalle() {
-		return facturaDetalle;
-	}
-	public void setFacturaDetalle(facturaEntity facturaDetalle) {
-		this.facturaDetalle = facturaDetalle;
-	}
-	public articuloManufacturadoEntity getArticuloManufacturado() {
-		return articuloManufacturado;
-	}
-	public void setArticuloManufacturado(articuloManufacturadoEntity articuloManufacturado) {
-		this.articuloManufacturado = articuloManufacturado;
-	}
-	public articuloInsumoEntity getArticuloInsumo() {
-		return articuloInsumo;
-	}
-	public void setArticuloInsumo(articuloInsumoEntity articuloInsumo) {
-		this.articuloInsumo = articuloInsumo;
-	}
-	
-	
-	
-	
-	
+	} 
 
 }

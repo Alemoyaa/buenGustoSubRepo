@@ -1,12 +1,11 @@
 package com.utn.app.buenGusto.pedido;
 
 import java.util.Date;
-import java.util.List;
 
-import com.utn.app.buenGusto.cliente.clienteEntity;
+import com.utn.app.buenGusto.cliente.clienteDTO; 
 import com.utn.app.buenGusto.commons.commonDTO;
-import com.utn.app.buenGusto.detallePedido.detallePedidoEntity;
-import com.utn.app.buenGusto.factura.facturaEntity;
+import com.utn.app.buenGusto.detallePedido.detallePedidoDTO; 
+import com.utn.app.buenGusto.factura.facturaDTO; 
 
 public class pedidoDTO  extends commonDTO {
 	
@@ -17,29 +16,12 @@ public class pedidoDTO  extends commonDTO {
 	private Date horaEstimadaFin; 
 	private int tipoEnvio;
 	
-	private clienteEntity cliente;
-	private facturaEntity factura;
-	private List<detallePedidoEntity> detallePedidos;
+	private clienteDTO cliente;
 	
+	//private facturaDTO factura;
+	//private List<detallePedidoDTO> detallePedidos;
 	
-	
-	
-	
-	public pedidoDTO() {
-		super();
-	}
-	public pedidoDTO(int fecha, int numero, int estado, Date horaEstimadaFin, int tipoEnvio, clienteEntity cliente,
-			facturaEntity factura, List<detallePedidoEntity> detallePedidos) {
-		super();
-		this.fecha = fecha;
-		this.numero = numero;
-		this.estado = estado;
-		this.horaEstimadaFin = horaEstimadaFin;
-		this.tipoEnvio = tipoEnvio;
-		this.cliente = cliente;
-		this.factura = factura;
-		this.detallePedidos = detallePedidos;
-	}
+ 
 	public int getFecha() {
 		return fecha;
 	}
@@ -70,25 +52,11 @@ public class pedidoDTO  extends commonDTO {
 	public void setTipoEnvio(int tipoEnvio) {
 		this.tipoEnvio = tipoEnvio;
 	}
-	public clienteEntity getCliente() {
+	public clienteDTO getCliente() {
 		return cliente;
 	}
-	public void setCliente(clienteEntity cliente) {
+	public void setCliente(clienteDTO cliente) {
 		this.cliente = cliente;
 	}
-	public facturaEntity getFactura() {
-		return factura;
-	}
-	public void setFactura(facturaEntity factura) {
-		this.factura = factura;
-	}
-	public List<detallePedidoEntity> getDetallePedidos() {
-		return detallePedidos;
-	}
-	public void setDetallePedidos(List<detallePedidoEntity> detallePedidos) {
-		this.detallePedidos = detallePedidos;
-	}
-	
-	
 	
 }

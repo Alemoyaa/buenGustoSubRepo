@@ -26,21 +26,21 @@ public class articuloManufacturadoEntity extends commonEntity implements Seriali
 	private int tiempoEstimadoCocina;
 	private String denominacion;
 	private double precioVenta;
-
+/*
 	// relacion OneToMany bidireccional ArticuloManufacturado -- detallePedido
-	@OneToMany(mappedBy = "articuloManufacturado", cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToMany(mappedBy = "articuloManufacturado",orphanRemoval = true, fetch = FetchType.LAZY)
 	private List<detallePedidoEntity> detallePedido = new ArrayList<>();
 
 	// relacion ManyToOne bidireccional ArticuloManufacturado ---detallePedido
-	@ManyToOne(fetch = FetchType.LAZY) // trae atributos y sus correspondientes relaciones
+	@ManyToOne() // trae atributos y sus correspondientes relaciones
 	@JoinColumn(name = "articuloManufacturado_fk_rubroGeneral")
 	private rubroGeneralEntity rubroGeneral;
 
 	// relacion OneToMany bidireccional ArticuloManufacturado --
 	// ArticuloManufacturadoDetalle
-	@OneToMany(mappedBy = "articuloManufacturado", cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToMany(mappedBy = "articuloManufacturado",orphanRemoval = true, fetch = FetchType.LAZY)
 	private List<articuloManufacturadoDetalleEntity> articuloManufacturadoDetalle = new ArrayList<>();
-
+*/
 	public articuloManufacturadoEntity() {
 
 	} 
@@ -68,21 +68,5 @@ public class articuloManufacturadoEntity extends commonEntity implements Seriali
 	public void setPrecioVenta(double precioVenta) {
 		this.precioVenta = precioVenta;
 	}
-
-	public List<detallePedidoEntity> getDetallePedido() {
-		return detallePedido;
-	}
-
-	public void setDetallePedido(List<detallePedidoEntity> detallePedido) {
-		this.detallePedido = detallePedido;
-	}
-
-	public List<articuloManufacturadoDetalleEntity> getArticuloManufacturadoDetalle() {
-		return articuloManufacturadoDetalle;
-	}
-
-	public void setArticuloManufacturadoDetalle(List<articuloManufacturadoDetalleEntity> articuloManufacturadoDetalle) {
-		this.articuloManufacturadoDetalle = articuloManufacturadoDetalle;
-	} 
-	
+ 
 }
