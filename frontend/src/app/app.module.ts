@@ -12,6 +12,10 @@ import { UserProfileComponent } from './components/cliente/user-profile/user-pro
 import { CatalogoComponent } from './components/cliente/catalogo/catalogo.component';
 import { OfertasComponent } from './components/cliente/ofertas/ofertas.component';
 import { FooterComponent } from './components/cliente/footer/footer.component';
+import { DashboardGerenteComponent } from './components/admin/gerente/dashboard-gerente/dashboard-gerente.component';
+import { CatalogoCrudComponent } from './components/admin/gerente/dashboardGerenteComponents/catalogo-crud/catalogo-crud.component';
+import { StockComponent } from './components/admin/gerente/dashboardGerenteComponents/stock/stock.component';
+import { EstadisticasComponent } from './components/admin/gerente/dashboardGerenteComponents/estadisticas/estadisticas.component';
 
 @NgModule({
   declarations: [
@@ -24,13 +28,14 @@ import { FooterComponent } from './components/cliente/footer/footer.component';
     UserProfileComponent,
     CatalogoComponent,
     OfertasComponent,
-    FooterComponent
+    FooterComponent,
+    DashboardGerenteComponent,
+    CatalogoCrudComponent,
+    StockComponent,
+    EstadisticasComponent,
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule
-  ],
+  imports: [BrowserModule, AppRoutingModule],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
