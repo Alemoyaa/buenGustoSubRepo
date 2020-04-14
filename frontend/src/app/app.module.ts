@@ -10,7 +10,6 @@ import { NavbarComponent } from './components/cliente/navbar/navbar.component';
 import { NotfoundComponent } from './components/cliente/notfound/notfound.component';
 import { UserProfileComponent } from './components/cliente/user-profile/user-profile.component';
 import { CatalogoComponent } from './components/cliente/catalogo/catalogo.component';
-import { OfertasComponent } from './components/cliente/ofertas/ofertas.component';
 import { FooterComponent } from './components/cliente/footer/footer.component';
 import { DashboardGerenteComponent } from './components/admin/gerente/dashboard-gerente/dashboard-gerente.component';
 import { CatalogoCrudComponent } from './components/admin/gerente/dashboardGerenteComponents/catalogo-crud/catalogo-crud.component';
@@ -28,7 +27,6 @@ import { CarritoComponent } from './components/cliente/carrito/carrito.component
     NotfoundComponent,
     UserProfileComponent,
     CatalogoComponent,
-    OfertasComponent,
     FooterComponent,
     DashboardGerenteComponent,
     CatalogoCrudComponent,
