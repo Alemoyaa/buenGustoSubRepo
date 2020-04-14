@@ -12,6 +12,8 @@ public class clienteDTO extends commonDTO  {
 	private long telefono;  
 	private String email;
 	
+	private String contrasena;
+	
 	private domicilioDTO domicilio; 
 	   
 	public String getNombre() {
@@ -43,6 +45,12 @@ public class clienteDTO extends commonDTO  {
 	}
 	public void setDomicilio(domicilioDTO domicilio) {
 		this.domicilio = domicilio;
+	}
+	public String getContrasena() {
+		return contrasena;
+	}
+	public void setContrasena(String contrasena) {
+		this.contrasena = contrasena;
 	}
 	 
 }

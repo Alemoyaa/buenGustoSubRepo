@@ -15,8 +15,6 @@ public class facturaDTO extends commonDTO  {
 	private String formaPago;
 	private String nroTarjeta;
 	 
-	//private List<detallePedidoDTO> detallePedidosF; 
-	 
 	public int getNúmero() {
 		return número;
 	}

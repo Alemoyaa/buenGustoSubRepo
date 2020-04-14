@@ -17,7 +17,7 @@ public class pedidoDTO  extends commonDTO {
 	private int tipoEnvio;
 	 
 	private facturaDTO factura;
-	//private List<detallePedidoDTO> detallePedidos;
+
 	private clienteDTO cliente;
  
 	public int getFecha() {

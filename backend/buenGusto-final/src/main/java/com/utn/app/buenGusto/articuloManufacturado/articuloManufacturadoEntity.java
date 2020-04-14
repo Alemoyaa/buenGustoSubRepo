@@ -21,19 +21,10 @@ public class articuloManufacturadoEntity extends commonEntity implements Seriali
 	private String denominacion;
 	private double precioVenta;
 
-	// relacion OneToMany bidireccional ArticuloManufacturado -- detallePedido
-	//@OneToMany(mappedBy = "articuloManufacturado",orphanRemoval = true, fetch = FetchType.LAZY)
-	//private List<detallePedidoEntity> detallePedido = new ArrayList<>();
-
 	// relacion ManyToOne bidireccional ArticuloManufacturado ---detallePedido
 	@ManyToOne(cascade = CascadeType.ALL) // trae atributos y sus correspondientes relaciones
 	@JoinColumn(name = "articuloManufacturado_fk_rubroGeneral")
 	private rubroGeneralEntity rubroGeneral;
-
-	// relacion OneToMany bidireccional ArticuloManufacturado --
-	// ArticuloManufacturadoDetalle
-	//@OneToMany(mappedBy = "articuloManufacturado",orphanRemoval = true, fetch = FetchType.LAZY)
-	//private List<articuloManufacturadoDetalleEntity> articuloManufacturadoDetalle = new ArrayList<>();
 
 	public int getTiempoEstimadoCocina() {
 		return tiempoEstimadoCocina;
