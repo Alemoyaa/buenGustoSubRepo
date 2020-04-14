@@ -3,9 +3,9 @@ package com.utn.app.buenGusto.rubroGeneral;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-
-import javax.persistence.CascadeType;
+ 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 import javax.persistence.Table; 
 
@@ -25,30 +25,15 @@ public class rubroGeneralEntity extends commonEntity implements Serializable {
 	}
 
 	// relacion OneToMany bidireccional RubroGeneral -- ArticuloManufacturado
-	@OneToMany(mappedBy = "rubroGeneral", cascade = CascadeType.ALL, orphanRemoval = true)
-	private List<articuloManufacturadoEntity> articuloManufacturado = new ArrayList<>();
+	///@OneToMany(mappedBy = "rubroGeneral", fetch = FetchType.LAZY, orphanRemoval = true)
+	//private List<articuloManufacturadoEntity> articuloManufacturado = new ArrayList<>();
 
 	public rubroGeneralEntity() {
 
-	}
-
-	public rubroGeneralEntity(String denominacion, List<articuloManufacturadoEntity> articuloManufacturado) {
-
-		this.denominacion = denominacion;
-		this.articuloManufacturado = articuloManufacturado;
-	}
+	} 
 
 	public void setDenominacion(String denominacion) {
 		this.denominacion = denominacion;
 	}
-
-	public List<articuloManufacturadoEntity> getArticuloManufacturado() {
-		return articuloManufacturado;
-	}
-
-	public void setArticuloManufacturado(List<articuloManufacturadoEntity> articuloManufacturado) {
-		this.articuloManufacturado = articuloManufacturado;
-	}
-
-	
+ 
 }

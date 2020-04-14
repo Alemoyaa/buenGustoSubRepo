@@ -20,38 +20,21 @@ public class commonService <ENTITY extends commonEntity, DTO extends commonDTO> 
 	private ModelMapper mMapper;
 	
 	
-	public commonService(JpaRepository<ENTITY, Long> repository, Class<DTO> dtoClass, Class entityClass, ModelMapper mMapper) {
+	public commonService(JpaRepository<ENTITY, Long> repository, Class<DTO> dtoClass, Class<ENTITY> entityClass, ModelMapper mMapper) {
         this.repository = repository;
         this.dtoClass = dtoClass;
         this.entityClass = entityClass;
         this.mMapper = mMapper;
     }
 	
-	   private DTO convertToDto(ENTITY entity) {
-	        return  mMapper.map(entity, (Type) dtoClass);
-	    }
+	private DTO convertToDto(ENTITY entity) {
+	    return  mMapper.map(entity, (Type) dtoClass);
+	}
 
-	    private ENTITY convertToEntity(DTO dto) {
-	        return  mMapper.map(dto, (Type) entityClass);
-	    }
-	
-	    
-	    
-	
-    @Override
-    @Transactional
-    public List<DTO> findAll() throws Exception {
-        List<ENTITY> entities = repository.findAll();
-        try {
-            return entities.stream().map(this::convertToDto).collect(Collectors.toList());
-        } catch (Exception e) {
-            throw new Exception();
-        } 
-    }
-    
-    
- 
-    
+	private ENTITY convertToEntity(DTO dto) {
+	    return  mMapper.map(dto, (Type) entityClass);
+	}
+	 
     @Override
     @Transactional
     public DTO save(DTO dto) throws Exception {

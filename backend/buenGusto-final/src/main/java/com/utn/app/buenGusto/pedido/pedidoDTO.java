@@ -1,12 +1,10 @@
 package com.utn.app.buenGusto.pedido;
 
 import java.util.Date;
-import java.util.List;
 
-import com.utn.app.buenGusto.cliente.clienteEntity;
+import com.utn.app.buenGusto.cliente.clienteDTO; 
 import com.utn.app.buenGusto.commons.commonDTO;
-import com.utn.app.buenGusto.detallePedido.detallePedidoEntity;
-import com.utn.app.buenGusto.factura.facturaEntity;
+import com.utn.app.buenGusto.factura.facturaDTO; 
 
 public class pedidoDTO  extends commonDTO {
 	
@@ -16,30 +14,11 @@ public class pedidoDTO  extends commonDTO {
 	private int estado;
 	private Date horaEstimadaFin; 
 	private int tipoEnvio;
-	
-	private clienteEntity cliente;
-	private facturaEntity factura;
-	private List<detallePedidoEntity> detallePedidos;
-	
-	
-	
-	
-	
-	public pedidoDTO() {
-		super();
-	}
-	public pedidoDTO(int fecha, int numero, int estado, Date horaEstimadaFin, int tipoEnvio, clienteEntity cliente,
-			facturaEntity factura, List<detallePedidoEntity> detallePedidos) {
-		super();
-		this.fecha = fecha;
-		this.numero = numero;
-		this.estado = estado;
-		this.horaEstimadaFin = horaEstimadaFin;
-		this.tipoEnvio = tipoEnvio;
-		this.cliente = cliente;
-		this.factura = factura;
-		this.detallePedidos = detallePedidos;
-	}
+	 
+	private facturaDTO factura;
+	//private List<detallePedidoDTO> detallePedidos;
+	private clienteDTO cliente;
+ 
 	public int getFecha() {
 		return fecha;
 	}
@@ -69,26 +48,18 @@ public class pedidoDTO  extends commonDTO {
 	}
 	public void setTipoEnvio(int tipoEnvio) {
 		this.tipoEnvio = tipoEnvio;
-	}
-	public clienteEntity getCliente() {
-		return cliente;
-	}
-	public void setCliente(clienteEntity cliente) {
-		this.cliente = cliente;
-	}
-	public facturaEntity getFactura() {
+	} 
+	public facturaDTO getFactura() {
 		return factura;
 	}
-	public void setFactura(facturaEntity factura) {
+	public void setFactura(facturaDTO factura) {
 		this.factura = factura;
 	}
-	public List<detallePedidoEntity> getDetallePedidos() {
-		return detallePedidos;
+	public clienteDTO getCliente() {
+		return cliente;
 	}
-	public void setDetallePedidos(List<detallePedidoEntity> detallePedidos) {
-		this.detallePedidos = detallePedidos;
+	public void setCliente(clienteDTO cliente) {
+		this.cliente = cliente;
 	}
-	
-	
-	
+	  
 }

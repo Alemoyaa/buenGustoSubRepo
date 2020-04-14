@@ -1,7 +1,8 @@
 package com.utn.app.buenGusto.articuloManufacturadoDetalle;
 
-import java.io.Serializable; 
- 
+import java.io.Serializable;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
@@ -23,25 +24,16 @@ public class articuloManufacturadoDetalleEntity extends commonEntity implements 
 
 	// relacion ManyToOne bidireccional ArticuloManufacturadoDetalle ---
 	// ArticuloManufacturado
-	@ManyToOne(fetch = FetchType.LAZY) // trae atributos y sus correspondientes relaciones
+	/*@ManyToOne(cascade = CascadeType.ALL) // trae atributos y sus correspondientes relaciones
 	@JoinColumn(name = "articuloManufacturadoDetalle_fk_articuloManufacturado")
 	private articuloManufacturadoEntity articuloManufacturado;
 
 	// relacion ManyToOne bidireccional ArticuloManufacturadoDetalle ---
 	// ArticuloInsumo
-	@ManyToOne(fetch = FetchType.LAZY) // trae atributos y sus correspondientes relaciones
+	@ManyToOne(cascade = CascadeType.ALL) // trae atributos y sus correspondientes relaciones
 	@JoinColumn(name = "articuloManufacturadoDetalle_fk_articuloInsumo")
 	private articuloInsumoEntity articuloInsumo;
-
-	public articuloManufacturadoDetalleEntity(double cantidad, String unidadMedida,
-			articuloManufacturadoEntity articuloManufacturado, articuloInsumoEntity articuloInsumo) {
-
-		this.cantidad = cantidad;
-		this.unidadMedida = unidadMedida;
-		this.articuloManufacturado = articuloManufacturado;
-		this.articuloInsumo = articuloInsumo;
-	}
-
+*/ 
 	public articuloManufacturadoDetalleEntity() {
 	}
 

@@ -2,8 +2,8 @@ package com.utn.app.buenGusto.detallePedido;
 
 import java.io.Serializable;
 
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity; 
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table; 
@@ -24,37 +24,28 @@ public class detallePedidoEntity extends commonEntity implements Serializable {
 	private double subtotal;
 
 	// ---------pedido---------
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "pedido_id")
-	private pedidoEntity pedido;
+	private pedidoEntity pedido_detallePedido;
 
 	// ----------factura----------
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "factura_id")
 	private facturaEntity facturaDetalle;
 
 	// relacion ManyToOne bidireccional detallePedido --- ArticuloManufacturado
-	@ManyToOne(fetch = FetchType.LAZY) // trae atributos y sus correspondientes relaciones
+	@ManyToOne(cascade = CascadeType.ALL) // trae atributos y sus correspondientes relaciones
 	@JoinColumn(name = "detallePedido_fk_articuloManufacturado")
 	private articuloManufacturadoEntity articuloManufacturado;
 
 	// relacion ManyToOne bidireccional detallePedido --- ArticuloManufacturado
-	@ManyToOne(fetch = FetchType.LAZY) // trae atributos y sus correspondientes relaciones
+	@ManyToOne(cascade = CascadeType.ALL) // trae atributos y sus correspondientes relaciones
 	@JoinColumn(name = "detallePedido_fk_articuloInsumo")
 	private articuloInsumoEntity articuloInsumo;
 
 	public detallePedidoEntity() { 
 	}
-
-	public detallePedidoEntity(int cantidad, double subtotal, pedidoEntity pedido,
-			facturaEntity facturaDetalle, articuloManufacturadoEntity articuloManufacturado) {
-
-		this.cantidad = cantidad;
-		this.subtotal = subtotal;
-		this.pedido = pedido;
-		this.facturaDetalle = facturaDetalle;
-		this.articuloManufacturado = articuloManufacturado;
-	}
+ 
 
 	public int getCantidad() {
 		return cantidad;
@@ -72,35 +63,46 @@ public class detallePedidoEntity extends commonEntity implements Serializable {
 		this.subtotal = subtotal;
 	}
 
-	public Long getPedido() {
-		return pedido.getId();
+
+	public pedidoEntity getPedido_detallePedido() {
+		return pedido_detallePedido;
 	}
 
-	public void setPedido(pedidoEntity pedido) {
-		this.pedido = pedido;
+
+	public void setPedido_detallePedido(pedidoEntity pedido_detallePedido) {
+		this.pedido_detallePedido = pedido_detallePedido;
 	}
 
-	public Long getFacturaDetalle() {
-		return facturaDetalle.getId();
+
+	public facturaEntity getFacturaDetalle() {
+		return facturaDetalle;
 	}
+
 
 	public void setFacturaDetalle(facturaEntity facturaDetalle) {
 		this.facturaDetalle = facturaDetalle;
 	}
 
+
 	public articuloManufacturadoEntity getArticuloManufacturado() {
 		return articuloManufacturado;
 	}
+
 
 	public void setArticuloManufacturado(articuloManufacturadoEntity articuloManufacturado) {
 		this.articuloManufacturado = articuloManufacturado;
 	}
 
+
 	public articuloInsumoEntity getArticuloInsumo() {
 		return articuloInsumo;
 	}
 
+
 	public void setArticuloInsumo(articuloInsumoEntity articuloInsumo) {
 		this.articuloInsumo = articuloInsumo;
 	}
+
+	
+ 
 }

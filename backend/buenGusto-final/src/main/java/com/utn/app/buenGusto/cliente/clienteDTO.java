@@ -1,7 +1,7 @@
-package com.utn.app.buenGusto.cliente;
+package com.utn.app.buenGusto.cliente; 
 
 import com.utn.app.buenGusto.commons.commonDTO;
-import com.utn.app.buenGusto.domicilio.domicilioEntity;
+import com.utn.app.buenGusto.domicilio.domicilioDTO;  
 
 public class clienteDTO extends commonDTO  {
 	
@@ -9,25 +9,9 @@ public class clienteDTO extends commonDTO  {
 	private String apellido;  
 	private long telefono;  
 	private String email;
-	private domicilioEntity domicilio;
 	
-	
-	
-	
-	
-	
-	
-	public clienteDTO() {
-		super();
-	}
-	public clienteDTO(String nombre, String apellido, long telefono, String email, domicilioEntity domicilio) {
-		super();
-		this.nombre = nombre;
-		this.apellido = apellido;
-		this.telefono = telefono;
-		this.email = email;
-		this.domicilio = domicilio;
-	}
+	private domicilioDTO domicilio; 
+	   
 	public String getNombre() {
 		return nombre;
 	}
@@ -52,14 +36,11 @@ public class clienteDTO extends commonDTO  {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public domicilioEntity getDomicilio() {
+	public domicilioDTO getDomicilio() {
 		return domicilio;
 	}
-	public void setDomicilio(domicilioEntity domicilio) {
+	public void setDomicilio(domicilioDTO domicilio) {
 		this.domicilio = domicilio;
 	}
-	
-	
-	
-	
+	 
 }

@@ -9,12 +9,7 @@ public class rubroGeneralDTO extends commonDTO  {
 
 	public rubroGeneralDTO() {
 		super();
-	}
-
-	public rubroGeneralDTO(String denominacion) {
-		super();
-		this.denominacion = denominacion;
-	}
+	} 
 
 	public String getDenominacion() {
 		return denominacion;
