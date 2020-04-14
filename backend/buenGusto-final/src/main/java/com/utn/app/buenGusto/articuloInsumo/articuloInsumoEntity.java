@@ -1,20 +1,14 @@
 package com.utn.app.buenGusto.articuloInsumo;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table; 
-
-import com.utn.app.buenGusto.articuloManufacturadoDetalle.articuloManufacturadoDetalleEntity;
-import com.utn.app.buenGusto.commons.commonEntity;
-import com.utn.app.buenGusto.detallePedido.detallePedidoEntity;
+ 
+import com.utn.app.buenGusto.commons.commonEntity; 
 import com.utn.app.buenGusto.rubroArticulo.rubroArticuloEntity;
 
 @Entity
@@ -40,17 +34,13 @@ public class articuloInsumoEntity extends commonEntity implements Serializable {
 	// relacion OneToMany bidireccional ArticuloInsumo -- DetallePedido
 	@OneToMany(mappedBy = "articuloInsumo", fetch = FetchType.LAZY, orphanRemoval = true)
 	private List<detallePedidoEntity> detallePedido = new ArrayList<>();
-	
+	*/
 
 	//rubrosArticulo
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name= "articuloInsumo_fk_rubroArticulo")
 	private rubroArticuloEntity rubrosArticulo;
-	
-	*/
-	public articuloInsumoEntity() {
-
-	} 
+	 
 	public String getDenominacion() {
 		return denominacion;
 	}
@@ -93,4 +83,12 @@ public class articuloInsumoEntity extends commonEntity implements Serializable {
 	public void setEsInsumo(boolean esInsumo) {
 		this.esInsumo = esInsumo;
 	}
+	public rubroArticuloEntity getRubrosArticulo() {
+		return rubrosArticulo;
+	}
+	public void setRubrosArticulo(rubroArticuloEntity rubrosArticulo) {
+		this.rubrosArticulo = rubrosArticulo;
+	}
+
+	
 }

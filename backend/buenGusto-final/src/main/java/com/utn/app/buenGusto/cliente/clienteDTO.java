@@ -4,6 +4,8 @@ import com.utn.app.buenGusto.commons.commonDTO;
 import com.utn.app.buenGusto.domicilio.domicilioDTO;  
 
 public class clienteDTO extends commonDTO  {
+
+	private static final long serialVersionUID = 1L;
 	
 	private String nombre;  
 	private String apellido;  

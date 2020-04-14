@@ -1,18 +1,13 @@
 package com.utn.app.buenGusto.rubroArticulo;
 
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
+import java.io.Serializable; 
 
 import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
+import javax.persistence.Entity; 
+import javax.persistence.ManyToOne; 
 import javax.persistence.Table; 
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.utn.app.buenGusto.articuloInsumo.articuloInsumoEntity;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties; 
 import com.utn.app.buenGusto.commons.commonEntity; 
 
 @Entity
@@ -24,20 +19,18 @@ public class rubroArticuloEntity extends commonEntity implements Serializable{
 	private String denominacion;
 	
 	//ArticuloInsumo varios rubros
-	/*
-	 * @OneToMany(mappedBy = "rubrosArticulo", fetch = FetchType.LAZY, orphanRemoval = true)
-	private List<articuloInsumoEntity> articuloInsumo = new ArrayList<articuloInsumoEntity>();
+	//@OneToMany(mappedBy = "rubrosArticulo", fetch = FetchType.LAZY, orphanRemoval = true)
+	//private List<articuloInsumoEntity> articuloInsumo = new ArrayList<articuloInsumoEntity>();
 
 	@JsonIgnoreProperties(value = {"hijos"}) //Ignoramos el valor de el hijo cuando cargan un padre
 	@ManyToOne(cascade = CascadeType.ALL)
 	private rubroArticuloEntity padre;
 	
+	/*
 	@JsonIgnoreProperties(value = {"padre"}, allowSetters = true) //Ignoramos al padre
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "padre")
 	private List<rubroArticuloEntity> hijos = new ArrayList<rubroArticuloEntity>();
-	
 	*/
-	
 	public rubroArticuloEntity() { 
 	} 
 
@@ -47,6 +40,14 @@ public class rubroArticuloEntity extends commonEntity implements Serializable{
 
 	public void setDenominacion(String denominacion) {
 		this.denominacion = denominacion;
-	} 
+	}
+
+	public rubroArticuloEntity getPadre() {
+		return padre;
+	}
+
+	public void setPadre(rubroArticuloEntity padre) {
+		this.padre = padre;
+	}
 	
 }

@@ -35,9 +35,6 @@ public class facturaEntity extends commonEntity implements Serializable {
 	//@OneToMany(mappedBy = "facturaDetalle")
 	//private List<detallePedidoEntity> detallePedidosF;
 
-	public facturaEntity() { 
-		
-	}
 
 	@PrePersist
 	public void prePersist() {

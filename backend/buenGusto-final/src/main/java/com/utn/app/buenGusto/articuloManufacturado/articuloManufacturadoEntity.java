@@ -1,20 +1,14 @@
 package com.utn.app.buenGusto.articuloManufacturado;
 
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
+import java.io.Serializable; 
 
 import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
+import javax.persistence.Entity; 
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToOne; 
 import javax.persistence.Table; 
-
-import com.utn.app.buenGusto.articuloManufacturadoDetalle.articuloManufacturadoDetalleEntity;
-import com.utn.app.buenGusto.commons.commonEntity;
-import com.utn.app.buenGusto.detallePedido.detallePedidoEntity;
+ 
+import com.utn.app.buenGusto.commons.commonEntity; 
 import com.utn.app.buenGusto.rubroGeneral.rubroGeneralEntity;
 
 @Entity
@@ -26,24 +20,20 @@ public class articuloManufacturadoEntity extends commonEntity implements Seriali
 	private int tiempoEstimadoCocina;
 	private String denominacion;
 	private double precioVenta;
-/*
+
 	// relacion OneToMany bidireccional ArticuloManufacturado -- detallePedido
-	@OneToMany(mappedBy = "articuloManufacturado",orphanRemoval = true, fetch = FetchType.LAZY)
-	private List<detallePedidoEntity> detallePedido = new ArrayList<>();
+	//@OneToMany(mappedBy = "articuloManufacturado",orphanRemoval = true, fetch = FetchType.LAZY)
+	//private List<detallePedidoEntity> detallePedido = new ArrayList<>();
 
 	// relacion ManyToOne bidireccional ArticuloManufacturado ---detallePedido
-	@ManyToOne() // trae atributos y sus correspondientes relaciones
+	@ManyToOne(cascade = CascadeType.ALL) // trae atributos y sus correspondientes relaciones
 	@JoinColumn(name = "articuloManufacturado_fk_rubroGeneral")
 	private rubroGeneralEntity rubroGeneral;
 
 	// relacion OneToMany bidireccional ArticuloManufacturado --
 	// ArticuloManufacturadoDetalle
-	@OneToMany(mappedBy = "articuloManufacturado",orphanRemoval = true, fetch = FetchType.LAZY)
-	private List<articuloManufacturadoDetalleEntity> articuloManufacturadoDetalle = new ArrayList<>();
-*/
-	public articuloManufacturadoEntity() {
-
-	} 
+	//@OneToMany(mappedBy = "articuloManufacturado",orphanRemoval = true, fetch = FetchType.LAZY)
+	//private List<articuloManufacturadoDetalleEntity> articuloManufacturadoDetalle = new ArrayList<>();
 
 	public int getTiempoEstimadoCocina() {
 		return tiempoEstimadoCocina;
@@ -68,5 +58,12 @@ public class articuloManufacturadoEntity extends commonEntity implements Seriali
 	public void setPrecioVenta(double precioVenta) {
 		this.precioVenta = precioVenta;
 	}
- 
+
+	public rubroGeneralEntity getRubroGeneral() {
+		return rubroGeneral;
+	}
+
+	public void setRubroGeneral(rubroGeneralEntity rubroGeneral) {
+		this.rubroGeneral = rubroGeneral;
+	} 
 }

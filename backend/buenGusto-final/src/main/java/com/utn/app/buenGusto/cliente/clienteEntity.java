@@ -1,19 +1,15 @@
  package com.utn.app.buenGusto.cliente;
 
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
+import java.io.Serializable; 
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity; 
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
+import javax.persistence.JoinColumn; 
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
  
 import com.utn.app.buenGusto.commons.commonEntity;
-import com.utn.app.buenGusto.domicilio.domicilioEntity;
-import com.utn.app.buenGusto.pedido.pedidoEntity; 
+import com.utn.app.buenGusto.domicilio.domicilioEntity; 
 
 @Entity
 @Table(name = "cliente")
