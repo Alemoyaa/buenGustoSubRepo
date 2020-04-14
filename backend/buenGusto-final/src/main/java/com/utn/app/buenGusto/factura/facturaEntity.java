@@ -1,22 +1,15 @@
 package com.utn.app.buenGusto.factura;
 
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-
-import javax.persistence.CascadeType;
+import java.io.Serializable; 
+import java.util.Date; 
+ 
 import javax.persistence.Entity; 
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.PrePersist;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
-import javax.persistence.TemporalType; 
-
-import com.utn.app.buenGusto.commons.commonEntity;
-import com.utn.app.buenGusto.detallePedido.detallePedidoEntity;
-import com.utn.app.buenGusto.pedido.pedidoEntity;
+import javax.persistence.TemporalType;
+ 
+import com.utn.app.buenGusto.commons.commonEntity; 
 
 @Entity
 @Table(name = "factura")
@@ -34,17 +27,17 @@ public class facturaEntity extends commonEntity implements Serializable {
 	private String formaPago;
 	private String nroTarjeta;
 
-	// ------pedido--------
-	@OneToOne(mappedBy = "factura", cascade = CascadeType.ALL)
-	private pedidoEntity pedido;
+	// ------pedido-------- 
+	//@OneToOne(fetch = FetchType.LAZY)
+	//private pedidoEntity pedido;
 
 	// -----detallePedido---------
-	@OneToMany(mappedBy = "facturaDetalle", cascade = CascadeType.ALL)
-	private List<detallePedidoEntity> detallePedidosF;
+	//@OneToMany(mappedBy = "facturaDetalle")
+	//private List<detallePedidoEntity> detallePedidosF;
 
-	public facturaEntity() {
-		this.detallePedidosF = new ArrayList<detallePedidoEntity>();
-	} 
+	public facturaEntity() { 
+		
+	}
 
 	@PrePersist
 	public void prePersist() {
@@ -97,22 +90,5 @@ public class facturaEntity extends commonEntity implements Serializable {
 
 	public void setNroTarjeta(String nroTarjeta) {
 		this.nroTarjeta = nroTarjeta;
-	}
-
-	public pedidoEntity getPedido() {
-		return pedido;
-	}
-
-	public void setPedido(pedidoEntity pedido) {
-		this.pedido = pedido;
-	}
-
-	public List<detallePedidoEntity> getDetallePedidosF() {
-		return detallePedidosF;
-	}
-
-	public void setDetallePedidosF(List<detallePedidoEntity> detallePedidosF) {
-		this.detallePedidosF = detallePedidosF;
-	}
- 
+	} 
 }

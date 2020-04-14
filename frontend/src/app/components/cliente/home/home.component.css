@@ -24,10 +24,13 @@ i {
   color: gray;
 }
 
+
+
 #promo {
   text-align: center;
   padding: 207px;
-  background: url("../../../../assets/assetsHome/img/Fast_food_Pizza.jpg")
+
+   background: url("../../../../assets/assetsHome/img/Fast_food_Pizza3.jpg")
     no-repeat;
   background-size: cover;
 }

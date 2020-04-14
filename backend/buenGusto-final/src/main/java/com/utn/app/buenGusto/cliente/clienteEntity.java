@@ -9,10 +9,11 @@ import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
-import javax.persistence.Table; 
+import javax.persistence.Table;
+ 
 import com.utn.app.buenGusto.commons.commonEntity;
 import com.utn.app.buenGusto.domicilio.domicilioEntity;
-import com.utn.app.buenGusto.pedido.pedidoEntity;
+import com.utn.app.buenGusto.pedido.pedidoEntity; 
 
 @Entity
 @Table(name = "cliente")
@@ -27,26 +28,13 @@ public class clienteEntity extends commonEntity implements Serializable {
 
 	// Dependencia con domicilio
 	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "fk_domicilio")
+	@JoinColumn(name = "fk_domicilio") 
 	private domicilioEntity domicilio;
 
-	// -----Pedido------
-	@OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL)
-	private List<pedidoEntity> pedidos = new ArrayList<>();
-
-	public clienteEntity() {
-	}
-
-	public clienteEntity(String nombre, String apellido, long telefono,
-			String email, domicilioEntity domicilio, List<pedidoEntity> pedidos) {
-		this.nombre = nombre;
-		this.apellido = apellido;
-		this.telefono = telefono;
-		this.email = email;
-		this.domicilio = domicilio;
-		this.pedidos = pedidos;
-	}
-
+	// -----Pedido------ 
+	//@OneToMany(cascade = CascadeType.ALL)
+	//private List<pedidoEntity> pedidos = new ArrayList<>();
+ 
 	public String getNombre() {
 		return nombre;
 	}
@@ -87,12 +75,11 @@ public class clienteEntity extends commonEntity implements Serializable {
 		this.domicilio = domicilio;
 	}
 
-	public List<pedidoEntity> getPedidos() {
+	/*public List<pedidoEntity> getPedidos() {
 		return pedidos;
 	}
 
 	public void setPedidos(List<pedidoEntity> pedidos) {
 		this.pedidos = pedidos;
-	}
-
+	}*/
 }

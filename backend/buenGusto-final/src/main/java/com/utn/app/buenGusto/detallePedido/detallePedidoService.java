@@ -13,8 +13,9 @@ public class detallePedidoService extends commonService<detallePedidoEntity, det
 	private detallePedidoRepository repository;
 	
 	public detallePedidoService(detallePedidoRepository detallePRepository, ModelMapper modelMapper) {
-		super(detallePRepository, detallePedidoDTO.class, detallePedidoEntity.class,modelMapper);
+		super(detallePRepository, detallePedidoDTO.class, detallePedidoEntity.class, modelMapper);
 		this.repository=detallePRepository;
 	}
-	
+
+
 }

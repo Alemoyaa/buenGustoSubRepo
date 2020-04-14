@@ -16,7 +16,7 @@ public class articuloInsumoDTO extends commonDTO {
 	private boolean esInsumo;
 	
 	//relacion detallePedido
-    private List<detallePedidoEntity> detallePedido;
+    //private List<detallePedidoEntity> detallePedido;
     
     
     
@@ -24,18 +24,6 @@ public class articuloInsumoDTO extends commonDTO {
     
 	public articuloInsumoDTO() {
 		super();
-	}
-	public articuloInsumoDTO(String denominacion, double precioCompra, double precioVenta, double stockActual,
-			double stockMinimo, String unidadMedida, boolean esInsumo, List<detallePedidoEntity> detallePedido) {
-		super();
-		this.denominacion = denominacion;
-		this.precioCompra = precioCompra;
-		this.precioVenta = precioVenta;
-		this.stockActual = stockActual;
-		this.stockMinimo = stockMinimo;
-		this.unidadMedida = unidadMedida;
-		this.esInsumo = esInsumo;
-		this.detallePedido = detallePedido;
 	}
 	public String getDenominacion() {
 		return denominacion;
@@ -78,14 +66,5 @@ public class articuloInsumoDTO extends commonDTO {
 	}
 	public void setEsInsumo(boolean esInsumo) {
 		this.esInsumo = esInsumo;
-	}
-	public List<detallePedidoEntity> getDetallePedido() {
-		return detallePedido;
-	}
-	public void setDetallePedido(List<detallePedidoEntity> detallePedido) {
-		this.detallePedido = detallePedido;
-	}
-    
-    
-    
+	} 
 }

@@ -1,39 +1,22 @@
 package com.utn.app.buenGusto.factura;
+ 
+import java.util.Date; 
 
-import java.util.Date;
-
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-
-import com.utn.app.buenGusto.commons.commonDTO;
+import com.utn.app.buenGusto.commons.commonDTO; 
 
 public class facturaDTO extends commonDTO  {
-		
-	
-	
+		 
 	private int número;
 	private Date fecha;
 	private double montoDescuento;
 	private double total;
 	private String formaPago;
 	private String nroTarjeta;
-	
-	
-	
-	
+	 
+	//private List<detallePedidoDTO> detallePedidosF; 
 	
 	public facturaDTO() {
-		super();
-	}
-	public facturaDTO(int número, Date fecha, double montoDescuento, double total, String formaPago,
-			String nroTarjeta) {
-		super();
-		this.número = número;
-		this.fecha = fecha;
-		this.montoDescuento = montoDescuento;
-		this.total = total;
-		this.formaPago = formaPago;
-		this.nroTarjeta = nroTarjeta;
+		super(); 
 	}
 	public int getNúmero() {
 		return número;
@@ -70,9 +53,5 @@ public class facturaDTO extends commonDTO  {
 	}
 	public void setNroTarjeta(String nroTarjeta) {
 		this.nroTarjeta = nroTarjeta;
-	}
-	
-	
-	
-	
+	} 
 }

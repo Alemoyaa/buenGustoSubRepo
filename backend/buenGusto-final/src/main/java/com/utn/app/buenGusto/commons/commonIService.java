@@ -2,10 +2,7 @@ package com.utn.app.buenGusto.commons;
 
 import java.util.List; 
 
-public interface commonIService<DTO> {
-
-	List<DTO> findAll() throws Exception; 
-	
+public interface commonIService<DTO> { 
 	List<DTO> findAll(int page, int size) throws Exception; 
 
 	DTO findById(long id) throws Exception;
@@ -16,6 +13,5 @@ public interface commonIService<DTO> {
 	
 	int countPages(int size) throws Exception; 
 
-	boolean delete(long id) throws Exception;
-
+	boolean delete(long id) throws Exception; 
 }
