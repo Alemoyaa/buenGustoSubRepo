@@ -16,8 +16,6 @@ public class articuloInsumoDTO extends commonDTO {
 	private String unidadMedida;
 	private boolean esInsumo;
 	
-	//relacion detallePedido
-	//private List<detallePedidoEntity> detallePedido;
 	private rubroArticuloDTO rubroArticulo;
      
 	public String getDenominacion() {

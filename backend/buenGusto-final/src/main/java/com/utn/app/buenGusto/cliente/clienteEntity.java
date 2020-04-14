@@ -20,17 +20,16 @@ public class clienteEntity extends commonEntity implements Serializable {
 	private String nombre;  
 	private String apellido;  
 	private long telefono;  
+	
 	private String email;
+	
+	private String contrasena;
 
 	// Dependencia con domicilio
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "fk_domicilio") 
 	private domicilioEntity domicilio;
 
-	// -----Pedido------ 
-	//@OneToMany(cascade = CascadeType.ALL)
-	//private List<pedidoEntity> pedidos = new ArrayList<>();
- 
 	public String getNombre() {
 		return nombre;
 	}
@@ -71,11 +70,12 @@ public class clienteEntity extends commonEntity implements Serializable {
 		this.domicilio = domicilio;
 	}
 
-	/*public List<pedidoEntity> getPedidos() {
-		return pedidos;
+	public String getContrasena() {
+		return contrasena;
 	}
 
-	public void setPedidos(List<pedidoEntity> pedidos) {
-		this.pedidos = pedidos;
-	}*/
+	public void setContrasena(String contrasena) {
+		this.contrasena = contrasena;
+	}
+
 }

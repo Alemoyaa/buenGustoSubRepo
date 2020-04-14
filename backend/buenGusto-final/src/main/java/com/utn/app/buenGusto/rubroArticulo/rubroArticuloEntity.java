@@ -17,20 +17,10 @@ public class rubroArticuloEntity extends commonEntity implements Serializable{
 	private static final long serialVersionUID = 7182685621323307119L;
 	 
 	private String denominacion;
-	
-	//ArticuloInsumo varios rubros
-	//@OneToMany(mappedBy = "rubrosArticulo", fetch = FetchType.LAZY, orphanRemoval = true)
-	//private List<articuloInsumoEntity> articuloInsumo = new ArrayList<articuloInsumoEntity>();
-
 	@JsonIgnoreProperties(value = {"hijos"}) //Ignoramos el valor de el hijo cuando cargan un padre
 	@ManyToOne(cascade = CascadeType.ALL)
 	private rubroArticuloEntity padre;
-	
-	/*
-	@JsonIgnoreProperties(value = {"padre"}, allowSetters = true) //Ignoramos al padre
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "padre")
-	private List<rubroArticuloEntity> hijos = new ArrayList<rubroArticuloEntity>();
-	*/
+
 	public rubroArticuloEntity() { 
 	} 
 

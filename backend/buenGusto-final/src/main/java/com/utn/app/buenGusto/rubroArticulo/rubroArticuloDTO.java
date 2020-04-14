@@ -10,10 +10,6 @@ public class rubroArticuloDTO extends commonDTO  {
 
 	private rubroArticuloDTO padre;
 	
-	//private List<articuloInsumoDTO> articuloInsumo = new ArrayList<articuloInsumoDTO>();
-	
-	//private List<rubroArticuloDTO> hijo = new ArrayList<rubroArticuloDTO>();
-	
 	public String getDenominacion() {
 		return denominacion;
 	}
@@ -26,19 +22,5 @@ public class rubroArticuloDTO extends commonDTO  {
 	public void setPadre(rubroArticuloDTO padre) {
 		this.padre = padre;
 	}
-	
-	/*
-	public List<articuloInsumoDTO> getArticuloInsumo() {
-		return articuloInsumo;
-	}
-	public void setArticuloInsumo(List<articuloInsumoDTO> articuloInsumo) {
-		this.articuloInsumo = articuloInsumo;
-	}
-	public List<rubroArticuloDTO> getHijo() {
-		return hijo;
-	}
-	public void setHijo(List<rubroArticuloDTO> hijo) {
-		this.hijo = hijo;
-	}*/
 
 }

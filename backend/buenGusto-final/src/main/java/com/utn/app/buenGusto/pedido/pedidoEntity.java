@@ -41,12 +41,6 @@ public class pedidoEntity extends commonEntity implements Serializable {
 	@JoinColumn(name = "factura_id") 
 	private facturaEntity factura;
 	
-	/*
-	// -------detallePedido----------
-	@OneToMany(mappedBy = "pedido_detallePedido")
-	private List<detallePedidoEntity> detallePedidos;
-	*/ 
-	
 	public int getFecha() {
 		return fecha;
 	}

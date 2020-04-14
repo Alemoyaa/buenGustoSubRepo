@@ -24,17 +24,6 @@ public class articuloInsumoEntity extends commonEntity implements Serializable {
 	private double stockMinimo;
 	private String unidadMedida;
 	private boolean esInsumo;
-/*
-	// relacion OneToMany bidireccional ArticuloInsumo --
-	// ArticuloManufacturadoDetalle
-	@OneToMany(mappedBy = "articuloInsumo", fetch = FetchType.LAZY, orphanRemoval = true)
-	private List<articuloManufacturadoDetalleEntity> articuloManufacturadoDetalle = new ArrayList<>();
-
-	
-	// relacion OneToMany bidireccional ArticuloInsumo -- DetallePedido
-	@OneToMany(mappedBy = "articuloInsumo", fetch = FetchType.LAZY, orphanRemoval = true)
-	private List<detallePedidoEntity> detallePedido = new ArrayList<>();
-	*/
 
 	//rubrosArticulo
 	@ManyToOne(cascade = CascadeType.ALL)
