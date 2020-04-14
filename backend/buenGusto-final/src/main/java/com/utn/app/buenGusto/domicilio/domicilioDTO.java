@@ -4,6 +4,8 @@ import com.utn.app.buenGusto.commons.commonDTO;
 
 public class domicilioDTO extends commonDTO {
 
+	private static final long serialVersionUID = 1L;
+	
 	private String calle;
 	private int numero;
 	private String localidad;

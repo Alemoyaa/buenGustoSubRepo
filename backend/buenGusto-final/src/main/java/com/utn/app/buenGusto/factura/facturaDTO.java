@@ -6,6 +6,8 @@ import com.utn.app.buenGusto.commons.commonDTO;
 
 public class facturaDTO extends commonDTO  {
 		 
+	private static final long serialVersionUID = 1L;
+	
 	private int número;
 	private Date fecha;
 	private double montoDescuento;
@@ -14,10 +16,7 @@ public class facturaDTO extends commonDTO  {
 	private String nroTarjeta;
 	 
 	//private List<detallePedidoDTO> detallePedidosF; 
-	
-	public facturaDTO() {
-		super(); 
-	}
+	 
 	public int getNúmero() {
 		return número;
 	}

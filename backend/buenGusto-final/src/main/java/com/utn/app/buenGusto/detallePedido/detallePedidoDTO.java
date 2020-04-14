@@ -8,6 +8,7 @@ import com.utn.app.buenGusto.pedido.pedidoDTO;
 
 public class detallePedidoDTO extends commonDTO {
 	
+	private static final long serialVersionUID = 1L;
 	
 	private int cantidad; 
 	private double subtotal; 
@@ -20,19 +21,18 @@ public class detallePedidoDTO extends commonDTO {
 
 	private pedidoDTO pedido;
 
-	public detallePedidoDTO() {
-		super();
-	} 
-	
 	public int getCantidad() {
 		return cantidad;
 	}
+
 	public void setCantidad(int cantidad) {
 		this.cantidad = cantidad;
 	}
+
 	public double getSubtotal() {
 		return subtotal;
 	}
+
 	public void setSubtotal(double subtotal) {
 		this.subtotal = subtotal;
 	}
@@ -67,6 +67,8 @@ public class detallePedidoDTO extends commonDTO {
 
 	public void setPedido(pedidoDTO pedido) {
 		this.pedido = pedido;
-	} 
+	}
+  
+	
 
 }
