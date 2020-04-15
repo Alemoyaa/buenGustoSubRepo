@@ -20,6 +20,7 @@
     "@angular/platform-browser": "~9.1.0",
     "@angular/platform-browser-dynamic": "~9.1.0",
     "@angular/router": "~9.1.0",
+    "@fortawesome/angular-fontawesome": "^0.6.1",
     "angular-font-awesome": "^3.1.2",
     "bootstrap": "^4.4.1",
     "firebase": "^7.13.2",

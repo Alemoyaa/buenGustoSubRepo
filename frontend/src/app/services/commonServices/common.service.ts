@@ -7,10 +7,9 @@ import { Observable } from 'rxjs';
 })
 export class CommonService<Entity> {
 
-  _url:string = 'http://localhost:8080/api/articulo_manufacturado/';
+  protected _url:string;
 
   constructor(private http:HttpClient) {
-
   }
 
   getAll() : Observable<Entity[]>{

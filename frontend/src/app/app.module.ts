@@ -1,3 +1,5 @@
+import { ProductosService } from './services/productosServices/productos.service';
+import { CommonService } from './services/commonServices/common.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
@@ -21,6 +23,7 @@ import { CarritoComponent } from './components/cliente/carrito/carrito.component
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { environment } from 'src/environments/environment';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -39,10 +42,12 @@ import { environment } from 'src/environments/environment';
     EstadisticasComponent,
     CarritoComponent,
   ],
-  imports: [BrowserModule,
+  imports: [
+    BrowserModule,
+    HttpClientModule,
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebaseConfig)],
-  providers: [AngularFireAuth],
+  providers: [AngularFireAuth, ProductosService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
