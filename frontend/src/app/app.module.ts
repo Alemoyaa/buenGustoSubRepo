@@ -17,6 +17,11 @@ import { StockComponent } from './components/admin/gerente/dashboardGerenteCompo
 import { EstadisticasComponent } from './components/admin/gerente/dashboardGerenteComponents/estadisticas/estadisticas.component';
 import { CarritoComponent } from './components/cliente/carrito/carrito.component';
 
+// firebase
+import { AngularFireModule } from '@angular/fire';
+import { AngularFireAuth } from '@angular/fire/auth';
+import { environment } from 'src/environments/environment';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -34,8 +39,10 @@ import { CarritoComponent } from './components/cliente/carrito/carrito.component
     EstadisticasComponent,
     CarritoComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule],
-  providers: [],
+  imports: [BrowserModule,
+    AppRoutingModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig)],
+  providers: [AngularFireAuth],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
