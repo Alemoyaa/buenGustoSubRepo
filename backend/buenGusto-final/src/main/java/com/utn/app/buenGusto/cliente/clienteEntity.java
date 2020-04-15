@@ -1,19 +1,15 @@
  package com.utn.app.buenGusto.cliente;
 
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
+import java.io.Serializable; 
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity; 
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
+import javax.persistence.JoinColumn; 
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
  
 import com.utn.app.buenGusto.commons.commonEntity;
-import com.utn.app.buenGusto.domicilio.domicilioEntity;
-import com.utn.app.buenGusto.pedido.pedidoEntity; 
+import com.utn.app.buenGusto.domicilio.domicilioEntity; 
 
 @Entity
 @Table(name = "cliente")
@@ -24,17 +20,16 @@ public class clienteEntity extends commonEntity implements Serializable {
 	private String nombre;  
 	private String apellido;  
 	private long telefono;  
+	
 	private String email;
+	
+	private String contrasena;
 
 	// Dependencia con domicilio
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "fk_domicilio") 
 	private domicilioEntity domicilio;
 
-	// -----Pedido------ 
-	//@OneToMany(cascade = CascadeType.ALL)
-	//private List<pedidoEntity> pedidos = new ArrayList<>();
- 
 	public String getNombre() {
 		return nombre;
 	}
@@ -75,11 +70,12 @@ public class clienteEntity extends commonEntity implements Serializable {
 		this.domicilio = domicilio;
 	}
 
-	/*public List<pedidoEntity> getPedidos() {
-		return pedidos;
+	public String getContrasena() {
+		return contrasena;
 	}
 
-	public void setPedidos(List<pedidoEntity> pedidos) {
-		this.pedidos = pedidos;
-	}*/
+	public void setContrasena(String contrasena) {
+		this.contrasena = contrasena;
+	}
+
 }

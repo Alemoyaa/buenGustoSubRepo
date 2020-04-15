@@ -4,10 +4,9 @@ import java.io.Serializable;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne; 
-import javax.persistence.Table;  
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 import com.utn.app.buenGusto.articuloInsumo.articuloInsumoEntity;
 import com.utn.app.buenGusto.articuloManufacturado.articuloManufacturadoEntity;
@@ -24,7 +23,7 @@ public class articuloManufacturadoDetalleEntity extends commonEntity implements 
 
 	// relacion ManyToOne bidireccional ArticuloManufacturadoDetalle ---
 	// ArticuloManufacturado
-	/*@ManyToOne(cascade = CascadeType.ALL) // trae atributos y sus correspondientes relaciones
+	@ManyToOne(cascade = CascadeType.ALL) // trae atributos y sus correspondientes relaciones
 	@JoinColumn(name = "articuloManufacturadoDetalle_fk_articuloManufacturado")
 	private articuloManufacturadoEntity articuloManufacturado;
 
@@ -33,10 +32,7 @@ public class articuloManufacturadoDetalleEntity extends commonEntity implements 
 	@ManyToOne(cascade = CascadeType.ALL) // trae atributos y sus correspondientes relaciones
 	@JoinColumn(name = "articuloManufacturadoDetalle_fk_articuloInsumo")
 	private articuloInsumoEntity articuloInsumo;
-*/ 
-	public articuloManufacturadoDetalleEntity() {
-	}
-
+  
 	public double getCantidad() {
 		return cantidad;
 	}
@@ -53,4 +49,21 @@ public class articuloManufacturadoDetalleEntity extends commonEntity implements 
 		this.unidadMedida = unidadMedida;
 	}
 
+	public articuloManufacturadoEntity getArticuloManufacturado() {
+		return articuloManufacturado;
+	}
+
+	public void setArticuloManufacturado(articuloManufacturadoEntity articuloManufacturado) {
+		this.articuloManufacturado = articuloManufacturado;
+	}
+
+	public articuloInsumoEntity getArticuloInsumo() {
+		return articuloInsumo;
+	}
+
+	public void setArticuloInsumo(articuloInsumoEntity articuloInsumo) {
+		this.articuloInsumo = articuloInsumo;
+	}
+
+	
 }

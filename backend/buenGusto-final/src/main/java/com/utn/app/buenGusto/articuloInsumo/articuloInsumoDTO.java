@@ -1,11 +1,12 @@
 package com.utn.app.buenGusto.articuloInsumo;
-
-import java.util.List;
+ 
 
 import com.utn.app.buenGusto.commons.commonDTO;
-import com.utn.app.buenGusto.detallePedido.detallePedidoEntity;
+import com.utn.app.buenGusto.rubroArticulo.rubroArticuloDTO; 
 
 public class articuloInsumoDTO extends commonDTO {
+
+	private static final long serialVersionUID = 1L;
 	
 	private String denominacion;
 	private double precioCompra;
@@ -15,16 +16,8 @@ public class articuloInsumoDTO extends commonDTO {
 	private String unidadMedida;
 	private boolean esInsumo;
 	
-	//relacion detallePedido
-    //private List<detallePedidoEntity> detallePedido;
-    
-    
-    
-    
-    
-	public articuloInsumoDTO() {
-		super();
-	}
+	private rubroArticuloDTO rubroArticulo;
+     
 	public String getDenominacion() {
 		return denominacion;
 	}
@@ -66,5 +59,11 @@ public class articuloInsumoDTO extends commonDTO {
 	}
 	public void setEsInsumo(boolean esInsumo) {
 		this.esInsumo = esInsumo;
-	} 
+	}
+	public rubroArticuloDTO getRubroArticulo() {
+		return rubroArticulo;
+	}
+	public void setRubroArticulo(rubroArticuloDTO rubroArticulo) {
+		this.rubroArticulo = rubroArticulo;
+	}  
 }

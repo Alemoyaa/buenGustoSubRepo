@@ -1,32 +1,14 @@
 package com.utn.app.buenGusto.configuracionGeneral;
 
-import javax.validation.constraints.NotEmpty;
-
 import com.utn.app.buenGusto.commons.commonDTO;
 
 public class configuracionGeneralDTO extends commonDTO  {
 	
-	
-	
+	private static final long serialVersionUID = 1L;
+
 	private int cantidadCocineros;
-
 	
-	private String emailEmpresa;
-	
-	
-	
-	
-
-	public configuracionGeneralDTO() {
-		super();
-	}
-
-
-	public configuracionGeneralDTO(int cantidadCocineros, String emailEmpresa) {
-		super();
-		this.cantidadCocineros = cantidadCocineros;
-		this.emailEmpresa = emailEmpresa;
-	}
+	private String emailEmpresa; 
 
 
 	public int getCantidadCocineros() {

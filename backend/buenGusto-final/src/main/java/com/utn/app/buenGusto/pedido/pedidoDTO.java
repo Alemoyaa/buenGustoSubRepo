@@ -8,6 +8,7 @@ import com.utn.app.buenGusto.factura.facturaDTO;
 
 public class pedidoDTO  extends commonDTO {
 	
+	private static final long serialVersionUID = 1L;
 	
 	private int fecha; 
 	private int numero; 
@@ -16,7 +17,7 @@ public class pedidoDTO  extends commonDTO {
 	private int tipoEnvio;
 	 
 	private facturaDTO factura;
-	//private List<detallePedidoDTO> detallePedidos;
+
 	private clienteDTO cliente;
  
 	public int getFecha() {

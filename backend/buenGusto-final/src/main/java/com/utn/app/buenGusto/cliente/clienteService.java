@@ -1,7 +1,6 @@
 package com.utn.app.buenGusto.cliente;
  
-import org.modelmapper.ModelMapper;
-import org.springframework.data.jpa.repository.JpaRepository;
+import org.modelmapper.ModelMapper; 
 import org.springframework.stereotype.Service;
 
 import com.utn.app.buenGusto.commons.commonService;

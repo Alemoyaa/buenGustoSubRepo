@@ -27,18 +27,6 @@ public class facturaEntity extends commonEntity implements Serializable {
 	private String formaPago;
 	private String nroTarjeta;
 
-	// ------pedido-------- 
-	//@OneToOne(fetch = FetchType.LAZY)
-	//private pedidoEntity pedido;
-
-	// -----detallePedido---------
-	//@OneToMany(mappedBy = "facturaDetalle")
-	//private List<detallePedidoEntity> detallePedidosF;
-
-	public facturaEntity() { 
-		
-	}
-
 	@PrePersist
 	public void prePersist() {
 		this.fecha = new Date();
