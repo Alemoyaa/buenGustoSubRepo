@@ -3,17 +3,51 @@
     <div class="container col-lg-4 col-md-8 col-sm-12">
       <div class="block-heading">
         <h2 class="text-info">Ingresar a mi cuenta</h2>
-        <p><button class="btn btn-primary btn-block" type="submit">Continuar con Google</button></p>
+        <p><button class="btn btn-primary btn-block" type="submit" (click)="ingresarConGoogle()">Continuar con Google</button></p>
       </div>
-      <form>
-        <div class="form-group"><label for="email">Email</label><input class="form-control item" type="email"
-            id="email"></div>
-        <div class="form-group"><label for="password">Contraseña</label>
-          <input class="form-control" type="password" id="password">
-        </div><button class="btn btn-primary btn-block" type="submit">Ingresar</button>
-        <label for="email" style="margin-left: 400px;margin-top: 15px;">
+      <form [formGroup]="formularioLogin" class="text-center">
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input class="form-control item" type="email" id="email" formControlName="email" placeholder="ingrese su email">
+          <div class="alert alert-danger" *ngIf="
+          formularioLogin.controls['email'].invalid &&
+          formularioLogin.controls['email'].dirty
+        " role="alert">
+                <span *ngIf="formularioLogin.controls['email'].errors.required">El email es requerido</span>
+                <span *ngIf="formularioLogin.controls['email'].errors.email">El email no es valido</span>
+          </div>
+          </div>
+        <div class="form-group">
+          <label for="password">Contraseña</label>
+          <input class="form-control" type="password" id="password" formControlName="password" placeholder="ingrese su password">
+          <div class="alert alert-danger" *ngIf="
+          formularioLogin.controls['password'].invalid &&
+          formularioLogin.controls['password'].dirty
+        " role="alert">
+                <span *ngIf="formularioLogin.controls['password'].errors.required">password requerida</span>
+            </div>
+        </div>
+        <button *ngIf="!mostrarCargar" class="btn btn-primary btn-block" type="submit" [disabled]="!formularioLogin.valid" (click)="ingresarConEmailPassword()">Ingresar</button>
+        <button *ngIf="mostrarCargar" class="btn btn-primary btn-block" type="button" disabled>
+          <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
+          <span class="sr-only">Loading...</span>
+        </button>
+        
+        
+
+        <label for="email" class="text-center" >
           ¿Todavia no tenes una cuenta?&nbsp;<a href="/register">&nbsp;Registrar</a>&nbsp;</label>
       </form>
+
+      <div class="alert alert-warning" role="alert" *ngIf="!datosCorrectos">
+        {{ textoError }}
+    </div>
+
     </div>
   </section>
 </main>
+
+<!-- cerrar sesion provisorio  -->
+<button (click)="logout">cerrar sesion</button>
+
+

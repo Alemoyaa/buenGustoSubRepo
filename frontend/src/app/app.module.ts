@@ -25,6 +25,8 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { environment } from 'src/environments/environment';
 import { HttpClientModule } from '@angular/common/http';
 
+// Formularios
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 @NgModule({
   declarations: [
     AppComponent,
@@ -46,7 +48,10 @@ import { HttpClientModule } from '@angular/common/http';
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,
-    AngularFireModule.initializeApp(environment.firebaseConfig)],
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    FormsModule,
+    ReactiveFormsModule,
+  ],
   providers: [AngularFireAuth, ProductosService],
   bootstrap: [AppComponent],
 })
