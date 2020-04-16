@@ -3,7 +3,8 @@
     <div class="container col-lg-4 col-md-8 col-sm-12">
       <div class="block-heading">
         <h2 class="text-info">Ingresar a mi cuenta</h2>
-        <p><button class="btn btn-primary btn-block" type="submit" (click)="ingresarConGoogle()">Continuar con Google</button></p>
+        
+        
       </div>
       <form [formGroup]="formularioLogin" class="text-center">
         <div class="form-group">
@@ -33,7 +34,7 @@
           <span class="sr-only">Loading...</span>
         </button>
         
-        
+        <p><button class="btn btn-danger btn-block mt-4" type="submit" (click)="ingresarConGoogle()"><i class="fab fa-google"></i>  Continuar con Google</button></p>
 
         <label for="email" class="text-center" >
           ¿Todavia no tenes una cuenta?&nbsp;<a href="/register">&nbsp;Registrar</a>&nbsp;</label>
