@@ -23,7 +23,6 @@ import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { environment } from 'src/environments/environment';
 import { HttpClientModule } from '@angular/common/http';
-import { ArticuloManufacturado } from './entidades/ArticuloManufacturado';
 
 // Formularios
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';

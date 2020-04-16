@@ -1,3 +1,4 @@
+import { RubroArticulo } from './RubroArticulo';
 import { Common } from './Common';
 
 export class ArticuloInsumo extends Common{
@@ -8,4 +9,5 @@ export class ArticuloInsumo extends Common{
   stockMinimo: number;
   unidadMedida: string;
   esInsumo: boolean;
+  rubroArticulo: RubroArticulo;
 }

@@ -1,9 +1,13 @@
+import { Factura } from './Factura';
+import { Cliente } from './Cliente';
 import { Common } from './Common';
 
 export class Pedido extends Common{
-  fecha: number;
+  fecha: Date;
   numero: number;
   estado: number;
-  tipoEnvio: number;
   horaEstimadaFin: Date;
+  tipoEnvio: number;
+  cliente: Cliente;
+  factura: Factura;
 }
