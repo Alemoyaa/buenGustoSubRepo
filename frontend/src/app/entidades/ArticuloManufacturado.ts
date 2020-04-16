@@ -1,6 +1,6 @@
+import { Common } from './Common';
 import { RubroGeneral } from './RubroGeneral';
-export class ArticuloManufacturado{
-  id?: number;
+export class ArticuloManufacturado extends Common{
   tiempoEstimadoCocina: number;
   denominacion: string;
   precioVenta: number;

@@ -1,4 +1,6 @@
-export class Pedido{
+import { Common } from './Common';
+
+export class Pedido extends Common{
   fecha: number;
   numero: number;
   estado: number;

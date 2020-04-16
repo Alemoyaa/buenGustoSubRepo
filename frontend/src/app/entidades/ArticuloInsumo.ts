@@ -1,4 +1,6 @@
-export class ArticuloInsumo{
+import { Common } from './Common';
+
+export class ArticuloInsumo extends Common{
   denominacion: string;
   precioCompra: number;
   precioVenta: number;

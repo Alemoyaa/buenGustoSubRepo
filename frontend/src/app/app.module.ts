@@ -1,5 +1,4 @@
-import { ProductosService } from './services/productosServices/productos.service';
-import { CommonService } from './services/commonServices/common.service';
+import { CommonService } from './services/serviciosCliente/commonServices/common.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
@@ -24,6 +23,7 @@ import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { environment } from 'src/environments/environment';
 import { HttpClientModule } from '@angular/common/http';
+import { ArticuloManufacturado } from './entidades/ArticuloManufacturado';
 
 @NgModule({
   declarations: [
@@ -47,7 +47,7 @@ import { HttpClientModule } from '@angular/common/http';
     HttpClientModule,
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebaseConfig)],
-  providers: [AngularFireAuth, ProductosService],
+  providers: [AngularFireAuth, CommonService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

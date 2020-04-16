@@ -143,14 +143,6 @@
                     </div>
                   </div>
                 </div>
-
-                <tr *ngFor="let articulo of articulosManufacturados">
-                  <td>{{articulo.id}}</td>
-                  <td><h6>{{articulo.denominacion}}</h6></td>
-                  <td>{{articulo.precioVenta}}</td>
-                  <td>{{articulo.rubroGeneral}}</td>
-                </tr>
-
                 <div class="col-12 col-md-6 col-lg-4">
                   <div class="clean-product-item">
                     <div class="image"><a href="../../../../assets/pizza/pizza3.jpg" target="_blank" data-lightbox="comidas" data-title="Pizza Calabresa">
@@ -295,4 +287,14 @@
       </div>
     </div>
   </section>
+</div>
+
+
+
+<div *ngFor="let articulo of articulosManufacturados">
+  <h6>{{articulo.denominacion}}</h6>
+  <td>{{articulo.id}}</td>
+  <td>{{articulo.precioVenta}}</td>
+  <td>{{articulo.rubroGeneral.denominacion}}</td>
+  <br>
 </div>

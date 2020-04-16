@@ -1,3 +1,5 @@
-export class RubroGeneral{
+import { Common } from './Common';
+
+export class RubroGeneral extends Common{
   denominacion: string;
 }

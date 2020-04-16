@@ -9,7 +9,7 @@ export class CommonService<Entity> {
 
   protected _url:string;
 
-  constructor(private http:HttpClient) {
+  constructor(protected http:HttpClient) {
   }
 
   getAll() : Observable<Entity[]>{

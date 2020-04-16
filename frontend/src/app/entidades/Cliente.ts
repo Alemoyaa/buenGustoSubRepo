@@ -1,5 +1,6 @@
 import { Domicilio } from './Domicilio';
-export class Cliente{
+import { Common } from './Common';
+export class Cliente extends Common{
   nombre: string;
   apellido: string;
   telefono: number;

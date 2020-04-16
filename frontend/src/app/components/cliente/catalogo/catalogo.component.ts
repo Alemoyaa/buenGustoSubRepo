@@ -1,5 +1,6 @@
+import { ArticuloManufacturadoService } from '../../../services/serviciosCliente/articuloManufacturadoServices/articuloManufacturado.service';
 import { ArticuloManufacturado } from 'src/app/entidades/ArticuloManufacturado';
-import { ProductosService } from './../../../services/productosServices/productos.service';
+
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -11,17 +12,16 @@ export class CatalogoComponent implements OnInit {
 
   articulosManufacturados: ArticuloManufacturado[] = [];
 
-  constructor(public service: ProductosService) { }
+  constructor(public service: ArticuloManufacturadoService) { }
 
   ngOnInit(): void {
     this.getAll();
   }
 
-  getAll(){
-    this.service.getAll().subscribe((data)=>{
-      console.log(data);
+  async getAll(){
+    await this.service.getAll().subscribe((data)=>{
+      //console.log(data);
       this.articulosManufacturados = data;
-    })
+    });
   }
-
 }

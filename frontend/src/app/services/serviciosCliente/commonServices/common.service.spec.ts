@@ -1,9 +1,9 @@
+import { Common } from './../../../entidades/Common';
 import { TestBed } from '@angular/core/testing';
-
 import { CommonService } from './common.service';
 
 describe('CommonService', () => {
-  let service: CommonService;
+  let service: CommonService<Common>;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
