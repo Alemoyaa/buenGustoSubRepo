@@ -5,7 +5,7 @@ import { LoginService } from '../../../services/loginServices/login.service';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.css'],
 })
 export class LoginComponent implements OnInit {
   // formulario para logear
@@ -13,12 +13,11 @@ export class LoginComponent implements OnInit {
   mostrarCargar: boolean = false;
   datosCorrectos: boolean = true;
   textoError: string = '';
-  constructor(private fb: FormBuilder, private loginservice: LoginService) { }
+  constructor(private fb: FormBuilder, private loginService: LoginService) {}
 
   ngOnInit(): void {
     this.crearFormularioLogin();
   }
-
 
   // crear formulario para logear
   crearFormularioLogin() {
@@ -26,24 +25,27 @@ export class LoginComponent implements OnInit {
       // validamos el email para que sea requerido y que tenga formato de email,
       // mientras que a la pw solamente le ponemos una validacion de requerimiento
       email: ['', Validators.compose([Validators.required, Validators.email])],
-      password: ['', Validators.required]
+      password: ['', Validators.required],
     });
   }
-
 
   ingresarConEmailPassword() {
     if (this.formularioLogin.valid) {
       this.datosCorrectos = true;
       this.mostrarCargar = true;
-      this.loginservice.loginEmailPassword(this.formularioLogin.value.email, this.formularioLogin.value.password).then(
-        (data) => {
+      this.loginService
+        .loginEmailPassword(
+          this.formularioLogin.value.email,
+          this.formularioLogin.value.password
+        )
+        .then((data) => {
           console.log(data);
           this.mostrarCargar = false;
-        }).catch((error) => {
+        })
+        .catch((error) => {
           this.datosCorrectos = false;
           this.mostrarCargar = false;
           this.textoError = error.message;
-
         });
     } else {
       this.datosCorrectos = false;
@@ -52,13 +54,11 @@ export class LoginComponent implements OnInit {
     }
   }
 
-  ingresarConGoogle(){
-    this.loginservice.loginGoogle();
+  ingresarConGoogle() {
+    this.loginService.loginGoogle();
   }
 
-
-  logout(){
-    this.loginservice.logout();
+  logout() {
+    this.loginService.logout();
   }
-
 }

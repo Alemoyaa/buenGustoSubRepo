@@ -1,4 +1,58 @@
-<main class="page registration-page">
+<main class="page register-page">
+  <section class="clean-block clean-form dark">
+    <div class="container col-lg-4 col-md-8 col-sm-12">
+      <div class="block-heading">
+        <h2 class="text-info">Crear una cuenta</h2>
+
+
+      </div>
+      <form [formGroup]="formularioRegister" class="text-center">
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input class="form-control item" type="email" id="email" formControlName="email"
+            placeholder="ingrese su email">
+          <div class="alert alert-danger" *ngIf="
+          formularioRegister.controls['email'].invalid &&
+          formularioRegister.controls['email'].dirty
+        " role="alert">
+            <span *ngIf="formularioRegister.controls['email'].errors.required">El email es requerido</span>
+            <span *ngIf="formularioRegister.controls['email'].errors.email">El email no es valido</span>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="password">Contraseña</label>
+          <input class="form-control" type="password" id="password" formControlName="password"
+            placeholder="ingrese su password">
+          <div class="alert alert-danger" *ngIf="
+          formularioRegister.controls['password'].invalid &&
+          formularioRegister.controls['password'].dirty
+        " role="alert">
+            <span *ngIf="formularioRegister.controls['password'].errors.required">password requerida</span>
+          </div>
+        </div>
+
+
+        <button *ngIf="!mostrarCargar" class="btn btn-primary btn-block" type="submit"
+          [disabled]="!formularioRegister.valid" (click)="registrarConMailPassword()">Ingresar</button>
+        <button *ngIf="mostrarCargar" class="btn btn-primary btn-block" type="button" disabled>
+          <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
+          <span class="sr-only">Cargando...</span>
+        </button>
+
+        <p><button class="btn btn-danger btn-block mt-4" type="submit" (click)="ingresarConGoogle()"><i
+              class="fab fa-google"></i> Continuar con Google</button></p>
+
+      </form>
+
+      <div class="alert alert-warning" role="alert" *ngIf="!datosCorrectos">
+        {{ textoError }}
+      </div>
+
+    </div>
+  </section>
+</main>
+
+<!-- <main class="page registration-page">
   <section class="clean-block clean-form dark">
     <div class="container col-lg-4 col-md-8 col-sm-12">
       <div class="block-heading">
@@ -22,4 +76,4 @@
       </form>
     </div>
   </section>
-</main>
+</main> -->
