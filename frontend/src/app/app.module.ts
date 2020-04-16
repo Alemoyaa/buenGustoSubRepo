@@ -25,6 +25,8 @@ import { environment } from 'src/environments/environment';
 import { HttpClientModule } from '@angular/common/http';
 import { ArticuloManufacturado } from './entidades/ArticuloManufacturado';
 
+// Formularios
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 @NgModule({
   declarations: [
     AppComponent,
@@ -46,7 +48,10 @@ import { ArticuloManufacturado } from './entidades/ArticuloManufacturado';
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,
-    AngularFireModule.initializeApp(environment.firebaseConfig)],
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    FormsModule,
+    ReactiveFormsModule,
+  ],
   providers: [AngularFireAuth, CommonService],
   bootstrap: [AppComponent],
 })
