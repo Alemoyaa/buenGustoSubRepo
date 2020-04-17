@@ -5,6 +5,7 @@ import * as jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
 import { ActivatedRoute } from '@angular/router';
 
+
 @Component({
   selector: 'app-user-profile',
   templateUrl: './user-profile.component.html',
@@ -29,6 +30,7 @@ export class UserProfileComponent implements OnInit {
   constructor(
     private service: UserProfileService,
     private rutaActiva: ActivatedRoute
+
   ) { }
 
   ngOnInit(): void {
@@ -37,6 +39,10 @@ export class UserProfileComponent implements OnInit {
         //this.getOne(data.id);
       //}
     //});
+
+    
+    
+
   }
 
   async getOne(id: number){
