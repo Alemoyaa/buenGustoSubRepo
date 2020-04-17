@@ -59,7 +59,7 @@ i {
 }
 
 .navbar {
-  background-color: white;
+  background-color: rgb(250, 250, 250);
 }
 
 @media (max-width: 991px) {
@@ -122,9 +122,8 @@ i {
 
 .rounded-circle {
   border-radius: 50%!important;
-}
-
-element.style {
+  height: 3rem;
+  width: 3rem;
 }
 
 .sidebar .nav-item .nav-link .img-profile, .topbar .nav-item .nav-link .img-profile {

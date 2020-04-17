@@ -26,6 +26,8 @@ import { HttpClientModule } from '@angular/common/http';
 
 // Formularios
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { FacturaComponent } from './components/cliente/factura/factura.component';
+import { PedidosComponent } from './components/cliente/pedidos/pedidos.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -42,6 +44,8 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
     StockComponent,
     EstadisticasComponent,
     CarritoComponent,
+    FacturaComponent,
+    PedidosComponent,
   ],
   imports: [
     BrowserModule,
