@@ -1,0 +1,30 @@
+<div class="container">
+  <table class="table table-striped table-dark mt-3">
+    <thead class="thead-light">
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Fecha</th>
+        <th scope="col">Numero</th>
+        <th scope="col">Estado</th>
+        <th scope="col">Hora estimada fin</th>
+        <th scope="col">Tipo Envio</th>
+        <th scope="col">Nombre Cliente</th>
+        <th scope="col">Factura</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let pedido of pedidosCliente">
+        <td>{{pedido.id}}</td>
+        <td>{{pedido.fecha}}</td>
+        <td>{{pedido.numero}}</td>
+        <td>{{pedido.estado}}</td>
+        <td>{{pedido.horaEstimadaFin}}</td>
+        <td>{{pedido.tipoEnvio}}</td>
+        <td>{{pedido.cliente.nombre}}</td>
+        <td>
+          <a [routerLink]="['/factura',pedido.factura.id]">Ver factura</a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

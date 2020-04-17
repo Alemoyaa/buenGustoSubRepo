@@ -3,14 +3,20 @@
     <div class="d-flex flex-column" id="content-wrapper">
       <div id="content">
         <div class="container-fluid">
-          <h3 class="text-dark mb-4">Perfil</h3>
+          <h3 class="text-dark p-4">Perfil</h3>
           <div class="row mb-3">
             <div class="col-lg-4">
               <div class="card mb-3">
                 <div class="card-body text-center shadow"><img class="rounded-circle mb-3 mt-4"
                     src="../../../../assets/dogs/image2.jpeg" width="160" height="160">
                   <div class="mb-3">
-                    <button class="btn btn-primary btn-sm" type="button">Cambiar imagen</button>
+                    <div class="col mt-2">
+                      <button class="btn btn-primary btn-sm" type="button">Cambiar imagen</button>
+                    </div>
+                    <div class="col mt-3">
+                      <a class="btn btn-primary btn-sm" type="button" [routerLink]="['/pedido/',cliente.id]">Historial
+                        de pedidos</a>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -26,25 +32,35 @@
                       <form>
                         <div class="form-row">
                           <div class="col">
-                            <div class="form-group"><label for="email"><strong>Email</strong></label><input
-                                class="form-control" type="email" placeholder="Ingrese su Email" name="email"></div>
+                            <div class="form-group"><label for="first_name"><strong>Nombre</strong></label>
+                              <input class="form-control" type="text" placeholder="Ingrese su nombre" name="first_name"
+                                [(ngModel)]="cliente.nombre">
+                            </div>
                           </div>
                           <div class="col">
-                            <div class="form-group"><label for="telefono"><strong>Telefono</strong></label><input
-                                class="form-control" type="number" placeholder="Ingrese su telefono" name="telefono"></div>
+                            <div class="form-group"><label for="last_name"><strong>Apellido</strong></label>
+                              <input class="form-control" type="text" placeholder="Ingrese su apellido" name="last_name"
+                                [(ngModel)]="cliente.apellido">
+                            </div>
                           </div>
                         </div>
                         <div class="form-row">
                           <div class="col">
-                            <div class="form-group"><label for="first_name"><strong>Nombre</strong></label><input
-                                class="form-control" type="text" placeholder="Ingrese su nombre" name="first_name"></div>
+                            <div class="form-group"><label for="email"><strong>Email</strong></label>
+                              <input class="form-control" type="email" placeholder="Ingrese su Email" name="email"
+                                [(ngModel)]="cliente.email">
+                            </div>
                           </div>
                           <div class="col">
-                            <div class="form-group"><label for="last_name"><strong>Apellido</strong></label><input
-                                class="form-control" type="text" placeholder="Ingrese su apellido" name="last_name"></div>
+                            <div class="form-group"><label for="telefono"><strong>Telefono</strong></label>
+                              <input class="form-control" type="number" placeholder="Ingrese su telefono"
+                                name="telefono" [(ngModel)]="cliente.telefono">
+                            </div>
                           </div>
                         </div>
-                        <div class="form-group"><button class="btn btn-primary btn-sm" type="submit">Guardar configuracion</button></div>
+                        <div class="form-group">
+                          <button class="btn btn-primary btn-sm" type="submit">Guardar configuracion</button>
+                        </div>
                       </form>
                     </div>
                   </div>
@@ -54,20 +70,24 @@
                     </div>
                     <div class="card-body">
                       <form>
-                        <div class="form-group"><label for="address"><strong>Calle</strong></label><input
-                            class="form-control" type="text" placeholder="Ingrese su calle" name="address"></div>
+                        <div class="form-group"><label for="address"><strong>Calle</strong></label>
+                          <input class="form-control" type="text" placeholder="Ingrese su calle" name="address" [(ngModel)]="cliente.domicilio.calle">
+                        </div>
                         <div class="form-row">
                           <div class="col">
-                            <div class="form-group"><label for="city"><strong>Numeracion</strong></label><input
-                                class="form-control" type="number" placeholder="Ingrese su numeracion" name="city"></div>
+                            <div class="form-group"><label for="city"><strong>Numeracion</strong></label>
+                              <input class="form-control" type="number" placeholder="Ingrese su numeracion" name="city" [(ngModel)]="cliente.domicilio.numero">
+                            </div>
                           </div>
                           <div class="col">
-                            <div class="form-group"><label for="country"><strong>Localidad</strong></label><input
-                                class="form-control" type="text" name="Ingrese su localidad"></div>
+                            <div class="form-group"><label for="country"><strong>Localidad</strong></label>
+                              <input class="form-control" type="text" name="Ingrese su localidad" [(ngModel)]="cliente.domicilio.localidad">
+                            </div>
                           </div>
                         </div>
-                        <div class="form-group"><button class="btn btn-primary btn-sm"
-                            type="submit">Guardar configuracion</button></div>
+                        <div class="form-group">
+                          <button class="btn btn-primary btn-sm" type="submit">Guardar configuracion</button>
+                        </div>
                       </form>
                     </div>
                   </div>
