@@ -1,4 +1,4 @@
-import { RegisterService } from './../../../services/registerServices/register.service';
+
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { LoginService } from './../../../services/loginServices/login.service';
 import { Component, OnInit } from '@angular/core';
@@ -16,7 +16,7 @@ export class RegisterComponent implements OnInit {
   textoError: string = '';
   constructor(
     private fb: FormBuilder,
-    private registerService: RegisterService,
+    
     private loginService: LoginService
   ) {}
 
@@ -38,7 +38,7 @@ export class RegisterComponent implements OnInit {
     if (this.formularioRegister.valid) {
       this.datosCorrectos = true;
       this.mostrarCargar = true;
-      this.registerService
+      this.loginService
         .register(
           this.formularioRegister.value.email,
           this.formularioRegister.value.password

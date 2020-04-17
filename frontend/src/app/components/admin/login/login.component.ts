@@ -13,6 +13,9 @@ export class LoginComponent implements OnInit {
   mostrarCargar: boolean = false;
   datosCorrectos: boolean = true;
   textoError: string = '';
+
+
+
   constructor(private fb: FormBuilder, private loginService: LoginService) {}
 
   ngOnInit(): void {
@@ -61,4 +64,11 @@ export class LoginComponent implements OnInit {
   logout() {
     this.loginService.logout();
   }
+
+
+
+
+
+
+  
 }
