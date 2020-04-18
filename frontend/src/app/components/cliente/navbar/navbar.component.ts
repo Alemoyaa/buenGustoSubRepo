@@ -27,8 +27,29 @@ export class NavbarComponent implements OnInit {
     }
   };
 
+  navbarUsuario = true;
+
   ngOnInit(): void {
-  this.serviceLogin.datosGoogle(this.cliente);//para mostrar la foto de perfil en el navbar
+
+    this.existeUsuario();
+
+    this.serviceLogin.datosGoogle(this.cliente);//para mostrar la foto de perfil en el navbar
+  }
+
+
+  existeUsuario() {
+
+    this.serviceLogin.isAuth().subscribe(user => {
+      if (user) {
+        this.navbarUsuario = true;
+      }else{
+      this.navbarUsuario = false;
+      }
+    });
+  }
+
+  cerrarSesion(){
+    this.serviceLogin.logout();
   }
 
 }
