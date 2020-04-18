@@ -1,3 +1,4 @@
+import { LoginService } from './../../../services/loginServices/login.service';
 import { Cliente } from './../../../entidades/Cliente';
 import { UserProfileService } from './../../../services/serviciosCliente/userProfileServices/user-profile.service';
 import { Component, OnInit } from '@angular/core';
@@ -19,6 +20,7 @@ export class UserProfileComponent implements OnInit {
     apellido: '',
     telefono: null,
     email: '',
+    foto: '',
     domicilio: {
       id: 0,
       calle: '',
@@ -27,9 +29,12 @@ export class UserProfileComponent implements OnInit {
     }
   };
 
+
+
   constructor(
     private service: UserProfileService,
-    private rutaActiva: ActivatedRoute
+    private rutaActiva: ActivatedRoute,
+    private serviceLogin: LoginService
 
   ) { }
 
@@ -39,11 +44,14 @@ export class UserProfileComponent implements OnInit {
         //this.getOne(data.id);
       //}
     //});
-
-    
-    
-
+this.datosUser();
   }
+
+  datosUser(){
+    return this.serviceLogin.datosGoogle(this.cliente);//me traigo los datos de google desde el service
+  }
+
+
 
   async getOne(id: number){
     await this.service.getOne(id).subscribe((data)=>{

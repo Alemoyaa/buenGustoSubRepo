@@ -16,7 +16,8 @@ h3,
 h4,
 h5,
 h6,
-p {
+p ,
+a{
   font-family: -apple-system, BlinkMacSystemFont, Raleway, "Segoe UI", Roboto,
     "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
     "Segoe UI Symbol";
@@ -122,8 +123,10 @@ i {
 
 .rounded-circle {
   border-radius: 50%!important;
-  height: 3rem;
-  width: 3rem;
+
+  height: 4rem;
+  width: 4rem;
+
 }
 
 .sidebar .nav-item .nav-link .img-profile, .topbar .nav-item .nav-link .img-profile {

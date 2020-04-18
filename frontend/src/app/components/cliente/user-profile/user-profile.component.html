@@ -8,11 +8,8 @@
             <div class="col-lg-4">
               <div class="card mb-3">
                 <div class="card-body text-center shadow"><img class="rounded-circle mb-3 mt-4"
-                    src="../../../../assets/dogs/image2.jpeg" width="160" height="160">
+                    src="{{cliente.foto}}" width="160" height="160">
                   <div class="mb-3">
-                    <div class="col mt-2">
-                      <button class="btn btn-primary btn-sm" type="button">Cambiar imagen</button>
-                    </div>
                     <div class="col mt-3">
                       <a class="btn btn-primary btn-sm" type="button" [routerLink]="['/pedido/',cliente.id]">Historial
                         de pedidos</a>
