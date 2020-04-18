@@ -2,6 +2,8 @@
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { LoginService } from './../../../services/loginServices/login.service';
 import { Component, OnInit } from '@angular/core';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
+
 
 @Component({
   selector: 'app-register',
@@ -44,7 +46,7 @@ export class RegisterComponent implements OnInit {
           this.formularioRegister.value.password
         )
         .then((data) => {
-          console.log(data);
+          
           this.mostrarCargar = false;
         })
         .catch((error) => {
@@ -63,7 +65,5 @@ export class RegisterComponent implements OnInit {
     this.loginService.loginGoogle();
   }
 
-  logout() {
-    this.loginService.logout();
-  }
+ 
 }

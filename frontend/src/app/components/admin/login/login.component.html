@@ -40,6 +40,11 @@
         <p><button class="btn btn-danger btn-block mt-4" type="submit" (click)="ingresarConGoogle()"><i
               class="fab fa-google"></i> Continuar con Google</button></p>
 
+              <label for="email" class="text-center"> ¿Olvidaste tu Contraseña?
+                 <button class="btn btn-warning" [disabled]="formularioLogin.controls['email'].invalid"
+                  (click)="recuperarPassword()"
+                 >Recuperar Contraseña</button></label>      
+
         <label for="email" class="text-center">
           ¿Todavia no tenes una cuenta?&nbsp;<a href="/register">&nbsp;Registrar</a>&nbsp;</label>
       </form>
@@ -53,4 +58,4 @@
 </main>
 
 <!-- cerrar sesion provisorio  -->
-<button (click)="logout">cerrar sesion</button>
+<button (click)="logout()">cerrar sesion</button>

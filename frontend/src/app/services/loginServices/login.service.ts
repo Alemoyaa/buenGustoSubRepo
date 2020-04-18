@@ -41,8 +41,15 @@ export class LoginService {
     });
   }
 
+  recuperarPassword(email: string) {
 
-  logout(){
+    return this.afsAuth.sendPasswordResetEmail(email);
+  }
+
+  
+
+  logout() {
     this.afsAuth.signOut();
   }
+
 }
