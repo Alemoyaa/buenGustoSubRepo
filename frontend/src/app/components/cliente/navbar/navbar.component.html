@@ -1,16 +1,16 @@
 <nav class="navbar navbar-light navbar-expand-md sticky-top">
   <div class="container"><img id="logo" src="../../../../assets/assetsHome/img/foodLogo.png">
 
-  <h5>
-    <a class="navbar-brand text-success" id="logo-letra" [routerLink]="['/']">Fast<strong>Food</strong></a>
-  </h5>
+    <h5>
+      <a class="navbar-brand text-success" id="logo-letra" [routerLink]="['/']">Fast<strong>Food</strong></a>
+    </h5>
 
     <div class="collapse navbar-collapse" id="navcol-1">
       <ul class="nav navbar-nav ml-auto">
-        <li class="nav-item" role="presentation">
+        <li *ngIf="!navbarUsuario" class="nav-item" role="presentation">
           <a class="nav-link" [routerLink]="['/login']">Iniciar</a>
         </li>
-        <li class="nav-item" role="presentation">
+        <li *ngIf="!navbarUsuario" class="nav-item" role="presentation">
           <a class="nav-link" [routerLink]="['/register']">Registrar</a>
         </li>
         <li class="nav-item" role="presentation">
@@ -21,12 +21,12 @@
         </li>
         <li *ngIf="navbarUsuario" class="nav-item" role="presentation">
           <a class="nav-link" id="avatar" [routerLink]="['/user-profile']"><img class="border rounded-circle"
-          src="{{cliente.foto}}"/></a>
+              src="{{cliente.foto}}" /></a>
         </li>
         <li *ngIf="navbarUsuario" class="nav-item" role="presentation">
           <button class="nav-link btn btn-outline-light" (click)="cerrarSesion()">Cerrar Sesion</button>
         </li>
-        
+
       </ul>
     </div>
   </div>
