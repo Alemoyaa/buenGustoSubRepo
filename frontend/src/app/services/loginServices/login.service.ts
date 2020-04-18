@@ -72,13 +72,23 @@ export class LoginService {
     });
   }
 
+<<<<<<< HEAD
   //Para saber si esta logueado
   isAuth() {
     return this.afsAuth.authState.pipe(map(auth => auth));
   }
 
+=======
+  recuperarPassword(email: string) {
+>>>>>>> 35047f643b2e3b4064085fd2f8a6403936ecc253
 
-  logout(){
+    return this.afsAuth.sendPasswordResetEmail(email);
+  }
+
+  
+
+  logout() {
     this.afsAuth.signOut();
   }
+
 }

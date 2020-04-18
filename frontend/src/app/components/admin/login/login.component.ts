@@ -61,6 +61,14 @@ export class LoginComponent implements OnInit {
     this.loginService.loginGoogle();
   }
 
+
+  recuperarPassword(){
+
+    this.loginService.recuperarPassword(this.formularioLogin.value.email).then(() => {
+      alert('Se ha enviado un correo a su cuenta. Porfavor siga los pasos indicados');
+    });
+  }
+
   logout() {
     this.loginService.logout();
   }
@@ -70,5 +78,5 @@ export class LoginComponent implements OnInit {
 
 
 
-  
+
 }
