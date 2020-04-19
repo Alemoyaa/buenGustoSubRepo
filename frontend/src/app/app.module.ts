@@ -28,6 +28,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { FacturaComponent } from './components/cliente/factura/factura.component';
 import { PedidosComponent } from './components/cliente/pedidos/pedidos.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 @NgModule({
   declarations: [
     AppComponent,
@@ -54,6 +55,7 @@ import { PedidosComponent } from './components/cliente/pedidos/pedidos.component
     AngularFireModule.initializeApp(environment.firebaseConfig),
     FormsModule,
     ReactiveFormsModule,
+    FontAwesomeModule,
   ],
   providers: [AngularFireAuth, CommonService],
   bootstrap: [AppComponent],
