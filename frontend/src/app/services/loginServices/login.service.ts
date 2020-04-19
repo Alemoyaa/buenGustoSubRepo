@@ -2,7 +2,7 @@ import { Cliente } from './../../entidades/Cliente';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { Injectable } from '@angular/core';
 import { map } from 'rxjs/operators';
-import { auth } from 'firebase';
+import { auth } from 'firebase/app';
 
 @Injectable({
   providedIn: 'root'
@@ -30,7 +30,7 @@ export class LoginService {
   datosGoogle(clienta : Cliente) {
   this.isAuth().subscribe(cliente =>{
     if(cliente){
-      clienta.nombre= cliente.displayName;
+      clienta.nombre = cliente.displayName;
      //clienta.apellido=
    // clienta.telefono= cliente.
       clienta.email= cliente.email;
