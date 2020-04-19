@@ -21,9 +21,7 @@ public class clienteEntity extends commonEntity implements Serializable {
 	private String apellido;  
 	private long telefono;  
 	
-	private String email;
-	
-	private String contrasena;
+	private String email; 
 
 	// Dependencia con domicilio
 	@OneToOne(cascade = CascadeType.ALL)
@@ -68,14 +66,6 @@ public class clienteEntity extends commonEntity implements Serializable {
 
 	public void setDomicilio(domicilioEntity domicilio) {
 		this.domicilio = domicilio;
-	}
-
-	public String getContrasena() {
-		return contrasena;
-	}
-
-	public void setContrasena(String contrasena) {
-		this.contrasena = contrasena;
-	}
+	} 
 
 }
