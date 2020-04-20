@@ -1,1 +1,17 @@
-<p>factura works!</p>
+<div class="container" id="facturaPDF">
+  <table class="table table-striped table-dark mt-3">
+    <tbody>
+      <tr>
+        <td hidden>{{factura.id}}</td>
+        <td>{{factura.fecha}}</td>
+        <td>{{factura.formaPago}}</td>
+        <td>{{factura.montoDescuento}}</td>
+        <td>{{factura.nroTarjeta}}</td>
+        <td>{{factura.numero}}</td>
+        <td>{{factura.total}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<button (click)="crearFacturaPDF()">Crear factura PDF</button>

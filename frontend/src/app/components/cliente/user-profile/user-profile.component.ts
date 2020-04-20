@@ -1,9 +1,7 @@
 import { LoginService } from './../../../services/loginServices/login.service';
 import { Cliente } from './../../../entidades/Cliente';
 import { UserProfileService } from './../../../services/serviciosCliente/userProfileServices/user-profile.service';
-import { Component, OnInit } from '@angular/core';
-import * as jsPDF from 'jspdf';
-import html2canvas from 'html2canvas';
+import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 
@@ -63,7 +61,6 @@ this.datosUser();
 
   /*
   HTML DE FACTURA:
-  <button (click)="crearFacturaPDF()">Crear factura PDF</button>
 
   Typescript:
   crearFacturaPDF(){
