@@ -1,9 +1,6 @@
-
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { LoginService } from './../../../services/loginServices/login.service';
 import { Component, OnInit } from '@angular/core';
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
-
 
 @Component({
   selector: 'app-register',
@@ -16,11 +13,8 @@ export class RegisterComponent implements OnInit {
   mostrarCargar: boolean = false;
   datosCorrectos: boolean = true;
   textoError: string = '';
-  constructor(
-    private fb: FormBuilder,
-    
-    private loginService: LoginService
-  ) {}
+
+  constructor(private fb: FormBuilder, private loginService: LoginService) {}
 
   ngOnInit(): void {
     this.crearFormularioRegister();
@@ -46,7 +40,6 @@ export class RegisterComponent implements OnInit {
           this.formularioRegister.value.password
         )
         .then((data) => {
-          
           this.mostrarCargar = false;
         })
         .catch((error) => {
@@ -57,13 +50,11 @@ export class RegisterComponent implements OnInit {
     } else {
       this.datosCorrectos = false;
       this.mostrarCargar = false;
-      this.textoError = 'Porfavor revisa que los datos sean correctos';
+      this.textoError = 'Por favor revisa que los datos sean correctos';
     }
   }
 
   ingresarConGoogle() {
     this.loginService.loginGoogle();
   }
-
- 
 }
