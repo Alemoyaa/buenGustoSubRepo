@@ -1,5 +1,61 @@
-<div class="container" id="facturaPDF">
-  <table class="table table-striped table-dark mt-3">
+<div id="wrapper" class="justify-content-center d-flex">
+  <div class="container col-lg-11 mt-4" id="facturaPDF">
+    <div class="row">
+      <div class="col-lg-6 justify-content-center d-flex p-5">
+        <h1>El Buen Gusto</h1>
+      </div>
+      <div class="col-lg-6 justify-content-end d-flex p-5">
+        <p>Número de factura: </p>
+      </div>
+    </div>
+    <div class="datos col-lg-12">
+      <div class="row cuadro justify-content-between">
+        <h5>Mendoza, {{factura.fecha}}</h5>
+        <h5>Comprador: Alejandro Moya</h5>
+      </div>
+    </div>
+    <div class="tabla col-lg-12">
+      <div class="row cuadro">
+        <table class="table table-striped table-bordered">
+          <thead>
+            <tr>
+              <th scope="col">Cantidad</th>
+              <th scope="col">Concepto</th>
+              <th scope="col">Precio unitario</th>
+              <th scope="col">Total</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">...</th>
+              <td>...</td>
+              <td>...</td>
+              <td>$...</td>
+            </tr>
+            <tr>
+              <th scope="row"></th>
+              <td></td>
+              <td>Total </td>
+              <td>$...</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="row col-lg-12 justify-content-end d-flex">
+      <b>
+        <p>La alteración, falsificación o comercialización ilegal de este documento está penado por la ley</p>
+      </b>
+    </div>
+  </div>
+
+
+</div>
+<div class="printFactura mt-3 mb-3">
+  <button class="btn btn-success" (click)="crearFacturaPDF()">Crear factura PDF</button>
+</div>
+
+<!-- <table class="table table-striped mt-3">
     <tbody>
       <tr>
         <td hidden>{{factura.id}}</td>
@@ -11,7 +67,4 @@
         <td>{{factura.total}}</td>
       </tr>
     </tbody>
-  </table>
-</div>
-
-<button (click)="crearFacturaPDF()">Crear factura PDF</button>
+  </table> -->

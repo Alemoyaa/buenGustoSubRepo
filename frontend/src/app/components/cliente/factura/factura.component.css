@@ -1,63 +1,63 @@
-*
-{
-	padding: 0;
-	margin: 0;
+.container,
+.container-fluid,
+.container-lg,
+.container-md,
+.container-sm,
+.container-xl {
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
 }
-body
-{
-	background-color: orange;
 
+.container-fluid,
+.container-lg,
+.container-md,
+.container-sm,
+.container-xl {
+  width: 100%;
+  padding-right: 0.75rem;
+  padding-left: 0.75rem;
+  margin-right: auto;
+  margin-left: auto;
 }
-div#Principal
-{
-	background-color:black;
-	width: 1024px;
-	height: 800px;
-	margin:0 auto;
-	padding: 0 auto;
-}
-div#header
-{
-	background-color:red;
-	width: 1024px;
-	height: 100px;
-	margin:0 auto;
-	padding: 0 auto;
-}
-#navegador
-{
-	background-color:yellow;
-	width: 1024px;
-	height: 50px;
-	margin:0 auto;
-	padding: 0 auto;
-}
-#main
-{
-	background-color:pink;
-	width: 800px;
-	height: auto;
 
+body {
+  margin: 0;
+  font-family: Nunito, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
+    Helvetica Neue, Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji,
+    Segoe UI Symbol, Noto Color Emoji;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #858796;
+  text-align: left;
+  background-color: #fff;
 }
-#sidebar
-{
-	background-color:yellow;
-	width: 200px;
-	height: 400px;
-	float: left;
 
+html {
+  font-family: sans-serif;
+  line-height: 1.15;
+  -webkit-text-size-adjust: 100%;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
-#content
-{
-	background-color:blue;
-	width: 600px;
-	height: 400px;
-	float: right;
-}
-#footer
-{
-	background-color:white;
-	width: 1024px;
-	height: 50px;
 
+.printFactura {
+  text-align: center;
+}
+
+#facturaPDF {
+  margin: 10px;
+  border-radius: 1em;
+  border-style: solid;
+  border-color: black;
+  border-width: 2px;
+}
+
+.cuadro {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  padding: 20px;
+  border-radius: 1em;
+  border-style: solid;
+  border-color: black;
+  border-width: 2px;
 }
