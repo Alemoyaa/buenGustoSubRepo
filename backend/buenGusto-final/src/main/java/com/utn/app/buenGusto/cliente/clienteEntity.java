@@ -1,33 +1,33 @@
- package com.utn.app.buenGusto.cliente;
+package com.utn.app.buenGusto.cliente;
 
-import java.io.Serializable; 
+import java.io.Serializable;
 
 import javax.persistence.CascadeType;
-import javax.persistence.Entity; 
-import javax.persistence.JoinColumn; 
+import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
- 
+
 import com.utn.app.buenGusto.commons.commonEntity;
-import com.utn.app.buenGusto.domicilio.domicilioEntity; 
+import com.utn.app.buenGusto.domicilio.domicilioEntity;
 
 @Entity
 @Table(name = "cliente")
 public class clienteEntity extends commonEntity implements Serializable {
 
 	private static final long serialVersionUID = -8356649232468048872L;
- 
-	private String nombre;  
-	private String apellido;  
-	private long telefono;  
-	
-	private String email; 
-	
-	private String uidFirebase; 
+
+	private String nombre;
+	private String apellido;
+	private long telefono;
+
+	private String email;
+
+	private String uidFirebase;
 
 	// Dependencia con domicilio
 	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "fk_domicilio") 
+	@JoinColumn(name = "fk_domicilio")
 	private domicilioEntity domicilio;
 
 	public String getNombre() {
@@ -76,7 +76,6 @@ public class clienteEntity extends commonEntity implements Serializable {
 
 	public void setUidFirebase(String uidFirebase) {
 		this.uidFirebase = uidFirebase;
-	} 
+	}
 
-	
 }

@@ -12,12 +12,12 @@ export class LoginService {
   public providerId: string = 'null';
   cliente: Cliente = {
     id: 0,
-    uidFirebase: '',
     nombre: '',
     apellido: '',
     telefono: null,
     email: '',
     foto: '',
+    uidFirebase: '',
     domicilio: {
       id: 0,
       calle: '',
@@ -41,17 +41,24 @@ export class LoginService {
         cliente.email = user.email;
         cliente.foto = user.photoURL;
         cliente.uidFirebase = user.uid;
-        // this.providerId = user.providerData[0].providerId; //hacer ngIf para que solo se guarde con google
+        //this.providerId = user.providerData[0].providerId; //hacer ngIf para que solo se guarde con google
       }
     });
   }
 
-  loginGoogle() {
+  async loginGoogle() {
+    let idDelCliente = 0;
     return new Promise((resolve, reject) => {
       this.afsAuth.signInWithPopup(new auth.GoogleAuthProvider()).then(
         (data) => {
           console.log('data', data);
           let uidCliente = data.user.uid;
+
+          this.clienteService.getByUidFirebase(uidCliente).subscribe((data)=>{
+            console.log(data);
+          })
+
+          this.route.navigate(['user-profile']);
         },
         (error) => reject(error)
       );

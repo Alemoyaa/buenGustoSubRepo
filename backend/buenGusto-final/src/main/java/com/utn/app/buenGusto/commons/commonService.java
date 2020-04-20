@@ -26,11 +26,11 @@ public class commonService <ENTITY extends commonEntity, DTO extends commonDTO> 
         this.mMapper = mMapper;
     }
 	
-	private DTO convertToDto(ENTITY entity) {
+	protected DTO convertToDto(ENTITY entity) {
 	    return  mMapper.map(entity, (Type) dtoClass);
 	}
 
-	private ENTITY convertToEntity(DTO dto) {
+	protected ENTITY convertToEntity(DTO dto) {
 	    return  mMapper.map(dto, (Type) entityClass);
 	}
 	 
