@@ -1,3 +1,4 @@
+import { ClienteService } from './../serviciosCliente/clienteServices/cliente.service';
 import { Router } from '@angular/router';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { Cliente } from './../../entidades/Cliente';
@@ -11,6 +12,7 @@ export class LoginService {
   public providerId: string = 'null';
   cliente: Cliente = {
     id: 0,
+    uidFirebase: '',
     nombre: '',
     apellido: '',
     telefono: null,
@@ -24,16 +26,22 @@ export class LoginService {
     },
   };
 
-  constructor(private afsAuth: AngularFireAuth, private route: Router) {}
+  constructor(
+    private afsAuth: AngularFireAuth,
+    private route: Router,
+    private clienteService: ClienteService
+  ) {}
 
   //me traigo los datos que me da google
-  datosGoogle(clienta: Cliente) {
-    this.isAuth().subscribe((cliente) => {
-      if (cliente) {
-        clienta.nombre = cliente.displayName;
-        clienta.email = cliente.email;
-        clienta.foto = cliente.photoURL;
-        this.providerId = cliente.providerData[0].providerId; //hacer ngIf para que solo se guarde con google
+  datosGoogle(cliente: Cliente) {
+    this.isAuth().subscribe((user) => {
+      if (user) {
+        cliente.nombre = user.displayName;
+        cliente.apellido = user.displayName;
+        cliente.email = user.email;
+        cliente.foto = user.photoURL;
+        cliente.uidFirebase = user.uid;
+        // this.providerId = user.providerData[0].providerId; //hacer ngIf para que solo se guarde con google
       }
     });
   }
@@ -41,7 +49,10 @@ export class LoginService {
   loginGoogle() {
     return new Promise((resolve, reject) => {
       this.afsAuth.signInWithPopup(new auth.GoogleAuthProvider()).then(
-        (data) => resolve(console.log('data', data)),
+        (data) => {
+          console.log('data', data);
+          let uidCliente = data.user.uid;
+        },
         (error) => reject(error)
       );
     });
@@ -55,6 +66,7 @@ export class LoginService {
           if (res.user.emailVerified !== true) {
             this.logout();
             alert('Verifica tu mail');
+            window.location.reload();
           } else {
             this.route.navigate(['user-profile']);
           }
@@ -75,13 +87,19 @@ export class LoginService {
           data.user
             .sendEmailVerification()
             .then(function () {
-              this.logout();
               alert(
-                'Se envió un mail de verificación a tu dirección de correo ndeaaaaa'
+                'Se envió un mail de verificación a tu dirección de correo'
               );
+            })
+            .then(() => {
+              this.afsAuth.signOut();
+            })
+            .catch(function (error) {
+              console.log(error);
+            })
+            .finally(() => {
               this.route.navigate(['login']);
             })
-            .catch(function (error) {})
         );
     });
   }

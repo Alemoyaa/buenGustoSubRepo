@@ -6,14 +6,14 @@ import { Component, OnInit } from '@angular/core';
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
-  styleUrls: ['./navbar.component.css']
+  styleUrls: ['./navbar.component.css'],
 })
 export class NavbarComponent implements OnInit {
-
-  constructor(private serviceLogin: LoginService) { }
+  constructor(private serviceLogin: LoginService) {}
 
   cliente: Cliente = {
     id: 0,
+    uidFirebase: '',
     nombre: '',
     apellido: '',
     telefono: null,
@@ -23,33 +23,29 @@ export class NavbarComponent implements OnInit {
       id: 0,
       calle: '',
       localidad: '',
-      numero: null
-    }
+      numero: null,
+    },
   };
 
   navbarUsuario = true;
 
   ngOnInit(): void {
-
     this.existeUsuario();
 
-    this.serviceLogin.datosGoogle(this.cliente);//para mostrar la foto de perfil en el navbar
+    this.serviceLogin.datosGoogle(this.cliente); //para mostrar la foto de perfil en el navbar
   }
 
-
   existeUsuario() {
-
-    this.serviceLogin.isAuth().subscribe(user => {
+    this.serviceLogin.isAuth().subscribe((user) => {
       if (user) {
         this.navbarUsuario = true;
-      }else{
-      this.navbarUsuario = false;
+      } else {
+        this.navbarUsuario = false;
       }
     });
   }
 
-  cerrarSesion(){
+  cerrarSesion() {
     this.serviceLogin.logout();
   }
-
 }
