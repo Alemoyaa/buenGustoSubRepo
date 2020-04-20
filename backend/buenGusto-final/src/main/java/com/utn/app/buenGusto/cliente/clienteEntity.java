@@ -22,6 +22,8 @@ public class clienteEntity extends commonEntity implements Serializable {
 	private long telefono;  
 	
 	private String email; 
+	
+	private String uidFirebase; 
 
 	// Dependencia con domicilio
 	@OneToOne(cascade = CascadeType.ALL)
@@ -66,6 +68,15 @@ public class clienteEntity extends commonEntity implements Serializable {
 
 	public void setDomicilio(domicilioEntity domicilio) {
 		this.domicilio = domicilio;
+	}
+
+	public String getUidFirebase() {
+		return uidFirebase;
+	}
+
+	public void setUidFirebase(String uidFirebase) {
+		this.uidFirebase = uidFirebase;
 	} 
 
+	
 }

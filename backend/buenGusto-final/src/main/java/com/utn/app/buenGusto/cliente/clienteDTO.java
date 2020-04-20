@@ -11,6 +11,7 @@ public class clienteDTO extends commonDTO  {
 	private String apellido;  
 	private long telefono;  
 	private String email; 
+	private String uidFirebase;
 	
 	private domicilioDTO domicilio; 
 	   
@@ -43,6 +44,13 @@ public class clienteDTO extends commonDTO  {
 	}
 	public void setDomicilio(domicilioDTO domicilio) {
 		this.domicilio = domicilio;
+	}
+	public String getUidFirebase() {
+		return uidFirebase;
+	}
+	public void setUidFirebase(String uidFirebase) {
+		this.uidFirebase = uidFirebase;
 	} 
+	
 	 
 }
