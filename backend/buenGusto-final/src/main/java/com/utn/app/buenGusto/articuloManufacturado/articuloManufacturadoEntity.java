@@ -20,6 +20,8 @@ public class articuloManufacturadoEntity extends commonEntity implements Seriali
 	private int tiempoEstimadoCocina;
 	private String denominacion;
 	private double precioVenta;
+	
+	private String _urlImagen;
 
 	// relacion ManyToOne bidireccional ArticuloManufacturado ---detallePedido
 	@ManyToOne(cascade = CascadeType.ALL) // trae atributos y sus correspondientes relaciones
@@ -56,5 +58,14 @@ public class articuloManufacturadoEntity extends commonEntity implements Seriali
 
 	public void setRubroGeneral(rubroGeneralEntity rubroGeneral) {
 		this.rubroGeneral = rubroGeneral;
-	} 
+	}
+
+	public String get_urlImagen() {
+		return _urlImagen;
+	}
+
+	public void set_urlImagen(String _urlImagen) {
+		this._urlImagen = _urlImagen;
+	}
+
 }
