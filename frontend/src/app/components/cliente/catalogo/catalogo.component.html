@@ -120,7 +120,11 @@
                     </p>
                     <div style="display: flex; justify-content: space-between; align-items: center;">
                       <a [routerLink]="['/catalogo-detalle/',articulo.id]" class="btn btn-sm btn-outline-primary">Ver Detalles</a>
+                      
                         <p class="card-text text-muted">Coccion:  {{articulo.tiempoEstimadoCocina}} min</p>
+                    </div>
+                    <div>
+                      <button class="btn btn-success mt-2" (click)="pasarProducto(articulo.id)"> agregar a carro</button>
                     </div>
 
                     <div class="about">

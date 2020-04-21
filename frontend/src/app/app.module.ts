@@ -30,6 +30,7 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { FacturaComponent } from './components/cliente/factura/factura.component';
 import { PedidosComponent } from './components/cliente/pedidos/pedidos.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { UsuariosComponent } from './components/admin/gerente/dashboardGerenteComponents/usuarios/usuarios.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -49,6 +50,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     FacturaComponent,
     PedidosComponent,
     CatalogoDetalleComponent,
+    UsuariosComponent,
   ],
   imports: [
     BrowserModule,
