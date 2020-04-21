@@ -48,6 +48,14 @@
         <span>Stock</span></a
       >
     </li>
+
+     <!-- Nav Item - Charts -->
+     <li class="nav-item" (click)="setBoard('tableroUsuario')">
+      <a class="nav-link">
+        <i class="fas fa-user"></i>
+        <span>Usuarios</span></a
+      >
+    </li>
     <!-- Divider -->
     <hr class="sidebar-divider" />
 
@@ -302,7 +310,11 @@
         <div class="" [hidden]="!tableroEstadisticas">
           <app-estadisticas></app-estadisticas>
         </div>
+        <div class="" [hidden]="!tableroUsuario">
+          <app-usuarios></app-usuarios>
+        </div>
       </div>
+      
       <!-- /.container-fluid -->
     </div>
     <!-- End of Main Content -->
