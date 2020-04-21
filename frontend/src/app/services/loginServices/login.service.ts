@@ -10,6 +10,7 @@ import { auth } from 'firebase/app';
 })
 export class LoginService {
   public providerId: string = 'null';
+
   cliente: Cliente = {
     id: 0,
     nombre: '',

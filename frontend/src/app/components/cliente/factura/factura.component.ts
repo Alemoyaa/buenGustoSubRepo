@@ -1,7 +1,9 @@
+import { Pedido } from './../../../entidades/Pedido';
+import { Cliente } from './../../../entidades/Cliente';
 import { Factura } from './../../../entidades/Factura';
 import { FacturaService } from './../../../services/serviciosCliente/facturaServices/factura.service';
 import { ActivatedRoute } from '@angular/router';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import * as jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
 
@@ -11,15 +13,11 @@ import html2canvas from 'html2canvas';
   styleUrls: ['./factura.component.css'],
 })
 export class FacturaComponent implements OnInit {
-  factura: Factura = {
-    id: null,
-    fecha: null,
-    formaPago: null,
-    montoDescuento: null,
-    nroTarjeta: null,
-    numero: null,
-    total: null,
-  };
+  factura: Factura;
+
+  @Input() clienteUserFactura : Cliente;
+
+  @Input() pedidosUserFactura : Pedido;
 
   constructor(
     private rutaActiva: ActivatedRoute,
@@ -34,8 +32,8 @@ export class FacturaComponent implements OnInit {
     });
   }
 
-  getOne(id: number) {
-    this.servicio.getOne(id).subscribe((data) => {
+  async getOne(id: number) {
+    await this.servicio.getOne(id).subscribe((data) => {
       this.factura = data;
     });
   }

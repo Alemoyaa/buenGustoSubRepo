@@ -7,12 +7,13 @@
           <div class="row mb-3">
             <div class="col-lg-4">
               <div class="card mb-3">
-                <div class="card-body text-center shadow"><img class="rounded-circle mb-3 mt-4"
-                    src="{{cliente.foto}}" width="160" height="160">
+                <div class="card-body text-center shadow"><img class="rounded-circle mb-3 mt-4" src="{{cliente.foto}}"
+                    width="160" height="160">
                   <div class="mb-3">
                     <div class="col mt-3">
-                      <a class="btn btn-primary btn-sm" type="button" [routerLink]="['/pedido/',cliente.id]">Historial
-                        de pedidos</a>
+                      <a class="btn btn-primary btn-sm" type="button" data-toggle="modal"
+                        data-target=".bd-example-modal-xl">
+                        Historial de pedidos</a>
                     </div>
                   </div>
                 </div>
@@ -68,17 +69,20 @@
                     <div class="card-body">
                       <form>
                         <div class="form-group"><label for="address"><strong>Calle</strong></label>
-                          <input class="form-control" type="text" placeholder="Ingrese su calle" name="address" [(ngModel)]="cliente.domicilio.calle">
+                          <input class="form-control" type="text" placeholder="Ingrese su calle" name="address"
+                            [(ngModel)]="cliente.domicilio.calle">
                         </div>
                         <div class="form-row">
                           <div class="col">
                             <div class="form-group"><label for="city"><strong>Numeracion</strong></label>
-                              <input class="form-control" type="number" placeholder="Ingrese su numeracion" name="city" [(ngModel)]="cliente.domicilio.numero">
+                              <input class="form-control" type="number" placeholder="Ingrese su numeracion" name="city"
+                                [(ngModel)]="cliente.domicilio.numero">
                             </div>
                           </div>
                           <div class="col">
                             <div class="form-group"><label for="country"><strong>Localidad</strong></label>
-                              <input class="form-control" type="text" name="Ingrese su localidad" [(ngModel)]="cliente.domicilio.localidad">
+                              <input class="form-control" type="text" name="Ingrese su localidad"
+                                [(ngModel)]="cliente.domicilio.localidad">
                             </div>
                           </div>
                         </div>
@@ -98,3 +102,24 @@
   </div>
 </div>
 
+<div class="modal fade bd-example-modal-xl" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog modal-xl" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalCenterTitle">Historial de pedidos</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <app-pedidos [clienteUser]="cliente"></app-pedidos>
+        <div data-spy="scroll" data-target="#navbar-example2" data-offset="0">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>
