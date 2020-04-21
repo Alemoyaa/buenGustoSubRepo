@@ -13,11 +13,13 @@ export class DashboardGerenteComponent implements OnInit {
   tableroPizzaCrud = true;
   tableroStock = false;
   tableroEstadisticas = false;
-
+  tableroUsuarios = false;
+  
   clearBoards() {
     this.tableroPizzaCrud = false;
     this.tableroStock = false;
     this.tableroEstadisticas = false;
+    this.tableroUsuarios=false;
   }
 
   setBoard(board) {
@@ -30,6 +32,9 @@ export class DashboardGerenteComponent implements OnInit {
     }
     if (board == 'tableroEstadisticas') {
       this.tableroEstadisticas = true;
+    }
+    if (board == 'tableroUsuarios') {
+      this.tableroUsuarios = true;
     }
   }
 }
