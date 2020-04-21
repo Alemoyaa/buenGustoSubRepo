@@ -1,1 +1,101 @@
-<p>asdasdasdasdasdasdasdasdasd</p>
+<div class="container">
+
+    <div class="row mb-4 ml-2">
+      <button class="btn btn-success mr-3" data-toggle="modal" data-target="#ModalCrearPersona">Nuevo</button>      
+    </div>
+  
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Email</th>
+          <th scope="col">Nombre</th>
+          <th scope="col">Apellido</th>
+          <th scope="col">Telefono</th>
+          <th scope="col">Domicilio</th>
+          <th scope="col">Rol</th>
+          <th scope= "col">Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th scope="row">1</th>
+          <td>usuario1@gmail.com</td>
+          <td>UsuarioNombre</td>
+          <td>UsuarioApellido</td>
+          <td>4287754</td>
+          <td>calle numero localidad</td>
+          <td>cocinero</td>
+          <td>
+            <button class="btn btn-info mr-3" data-toggle="modal" data-target="#ModalEditarPersona">Editar</button>
+            <button class="btn btn-danger mr-3" data-toggle="modal" >Borrar</button>
+          </td>
+        </tr>
+        
+      </tbody>
+    </table>
+  
+  </div>
+  
+  <!-- Modal NUEVO -->
+  <div class="modal fade" id="ModalCrearPersona" tabindex="-1" role="form" aria-labelledby="ModalNuevoLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Nuevo</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <input type="text" placeholder="Nombre">
+          <br>
+          <input type="text" placeholder="Ingredientes">
+          <br>
+          <input type="text" placeholder="Precio">
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" data-dismiss="modal">Cancelar</button>
+          <button type="button" class="btn btn-success">Nuevo</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  
+  <!-- Modal EDITAR -->
+  <div class="modal fade" id="ModalEditarPersona" tabindex="-1" role="form" aria-labelledby="ModalEditarLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Editar</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <select id="pizzas" name="pizzas">
+            <option value="1">Mozzarella</option>
+            <option value="2">Especial</option>
+            <option value="3">Cuatro quesos</option>
+          </select>
+          <br>
+          <input type="text" placeholder="Nombre">
+          <br>
+          <input type="text" placeholder="Ingredientes">
+          <br>
+          <input type="text" placeholder="Precio">
+  
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-info">Editar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  
+
+  
