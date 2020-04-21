@@ -5,4 +5,5 @@ export class ArticuloManufacturado extends Common{
   denominacion: string;
   precioVenta: number;
   rubroGeneral: RubroGeneral;
+  _urlImagen: String;
 }

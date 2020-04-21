@@ -1,3 +1,4 @@
+import { CatalogoDetalleComponent } from './components/cliente/catalogo-detalle/catalogo-detalle.component';
 import { FacturaComponent } from './components/cliente/factura/factura.component';
 import { PedidosComponent } from './components/cliente/pedidos/pedidos.component';
 import { DashboardGerenteComponent } from './components/admin/gerente/dashboard-gerente/dashboard-gerente.component';
@@ -17,6 +18,7 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'catalogo', component: CatalogoComponent },
+  { path: 'catalogo-detalle/:id', component: CatalogoDetalleComponent },
   { path: 'navbar', component: NavbarComponent },
   { path: 'user-profile', component: UserProfileComponent },
   { path: 'carrito', component: CarritoComponent },

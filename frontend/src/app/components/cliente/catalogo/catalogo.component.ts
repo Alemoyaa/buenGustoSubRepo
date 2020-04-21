@@ -20,8 +20,8 @@ export class CatalogoComponent implements OnInit {
 
   async getAll(){
     await this.service.getAll().subscribe((data)=>{
-      //console.log(data);
       this.articulosManufacturados = data;
+      console.log(this.articulosManufacturados);
     });
   }
 }

@@ -6,7 +6,9 @@
           <h2 class="text-info ">Catalogo</h2>
       </div>
       <div class="content">
-        <div class="row">
+        <div class="row" >
+
+
           <div class="col-md-3">
             <div class="d-none d-md-block">
               <div class="filters">
@@ -101,174 +103,39 @@
             </div>
           </div>
 
-          <div class="col-md-9">
-            <div class="products">
-              <div class="row no-gutters">
-                <div class="col-12 col-md-6 col-lg-4">
-                  <div class="clean-product-item">
+          <div class="col-md-9" >
+            <div class="products" >
+              <div class="row no-gutters" >
 
+                <div class="col-12 col-md-6 col-lg-4 " *ngFor="let articulo of articulosManufacturados">
+                <article class="card card-product shadow-sm">
 
-                    <div class="image"><a href="../../../../assets/pizza/pizza1.jpg" target="_blank" data-lightbox="comidas"
-                     data-title="Pizza Calabresa" ><img class="img-fluid" src="../../../../assets/pizza/pizza1.jpg"></a>
+                  <img src="../../../../assets/pizza/pizza1.jpg" class="card-img-top p-1"  >
+
+                  <div class="card-body" >
+                    <h5 class="card-title text-primary">{{ articulo.denominacion }}</h5>
+                    <p class="card-text">
+                        <i class="fas fa-dollar-sign"></i>
+                        <span class="precio-producto" style="font-weight: bold;"> {{ articulo.precioVenta }}</span>
+                    </p>
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                      <a [routerLink]="['/catalogo-detalle/',articulo.id]" class="btn btn-sm btn-outline-primary">Ver Detalles</a>
+                        <p class="card-text text-muted">Coccion:  {{articulo.tiempoEstimadoCocina}} min</p>
                     </div>
 
-                    <h6>Pizza Calabresa</h6>
                     <div class="about">
                       <div class="rating"><img src="../../../../assets/star/star.svg"><img
                           src="../../../../assets/star/star.svg"><img src="../../../../assets/star/star.svg"><img
                           src="../../../../assets/star/star-half-empty.svg"><img
                           src="../../../../assets/star/star-empty.svg"></div>
-                      <div class="price">
-                        <h3>$100</h3>
-                      </div>
                     </div>
-                  </div>
+
+                </div>
+                </article>
                 </div>
 
 
-                <div class="col-12 col-md-6 col-lg-4">
-                  <div class="clean-product-item">
-                    <div class="image"><a href="../../../../assets/pizza/pizza2.jpg" target="_blank" data-lightbox="comidas" data-title="Pizza Calabresa">
-                      <img class="img-fluid" src="../../../../assets/pizza/pizza2.jpg"></a>
-                </div>
-                <h6>Pizza Calabresa</h6>
-                    <div class="about">
-                      <div class="rating"><img src="../../../../assets/star/star.svg"><img
-                          src="../../../../assets/star/star.svg"><img src="../../../../assets/star/star.svg"><img
-                          src="../../../../assets/star/star-half-empty.svg"><img
-                          src="../../../../assets/star/star-empty.svg"></div>
-                      <div class="price">
-                        <h3>$100</h3>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-12 col-md-6 col-lg-4">
-                  <div class="clean-product-item">
-                    <div class="image"><a href="../../../../assets/pizza/pizza3.jpg" target="_blank" data-lightbox="comidas" data-title="Pizza Calabresa">
-                      <img class="img-fluid" src="../../../../assets/pizza/pizza3.jpg"></a>
-                </div>
-                <h6>Pizza Calabresa</h6>
-                    <div class="about">
-                      <div class="rating"><img src="../../../../assets/star/star.svg"><img
-                          src="../../../../assets/star/star.svg"><img src="../../../../assets/star/star.svg"><img
-                          src="../../../../assets/star/star-half-empty.svg"><img
-                          src="../../../../assets/star/star-empty.svg"></div>
-                      <div class="price">
-                        <h3>$100</h3>
-                      </div>
-                    </div>
-                  </div>
-                </div>
 
-                <div class="col-12 col-md-6 col-lg-4">
-                  <div class="clean-product-item">
-                    <div class="image"><a href="../../../../assets/hamburguesa/hamburguesa1.jpg" target="_blank" data-lightbox="comidas" data-title="Hamburguesa">
-                      <img class="img-fluid" src="../../../../assets/hamburguesa/hamburguesa1.jpg"></a>
-                </div>
-                <h6>Hamburguesa</h6>
-                    <div class="about">
-                      <div class="rating"><img src="../../../../assets/star/star.svg"><img
-                          src="../../../../assets/star/star.svg"><img src="../../../../assets/star/star.svg"><img
-                          src="../../../../assets/star/star-half-empty.svg"><img
-                          src="../../../../assets/star/star-empty.svg"></div>
-                      <div class="price">
-                        <h3>$100</h3>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="col-12 col-md-6 col-lg-4">
-                  <div class="clean-product-item">
-                    <div class="image"><a href="../../../../assets/hamburguesa/hamburguesa2.jpg" target="_blank" data-lightbox="comidas" data-title="Hamburguesa">
-                      <img class="img-fluid" src="../../../../assets/hamburguesa/hamburguesa2.jpg"></a>
-                </div>
-                <h6>Hamburguesa</h6>
-                    <div class="about">
-                      <div class="rating"><img src="../../../../assets/star/star.svg"><img
-                          src="../../../../assets/star/star.svg"><img src="../../../../assets/star/star.svg"><img
-                          src="../../../../assets/star/star-half-empty.svg"><img
-                          src="../../../../assets/star/star-empty.svg"></div>
-                      <div class="price">
-                        <h3>$100</h3>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="col-12 col-md-6 col-lg-4">
-                  <div class="clean-product-item">
-                    <div class="image"><a href="../../../../assets/hamburguesa/hamburguesa3.jpg" target="_blank" data-lightbox="comidas" data-title="Hamburguesa">
-                      <img class="img-fluid" src="../../../../assets/hamburguesa/hamburguesa3.jpg"></a>
-                </div>
-                <h6>Hamburguesa</h6>
-                    <div class="about">
-                      <div class="rating"><img src="../../../../assets/star/star.svg"><img
-                          src="../../../../assets/star/star.svg"><img src="../../../../assets/star/star.svg"><img
-                          src="../../../../assets/star/star-half-empty.svg"><img
-                          src="../../../../assets/star/star-empty.svg"></div>
-                      <div class="price">
-                        <h3>$100</h3>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-
-                <div class="col-12 col-md-6 col-lg-4">
-                  <div class="clean-product-item">
-                    <div class="image"><a href="../../../../assets/panchos/pancho1.jpg" target="_blank" data-lightbox="comidas" data-title="Hot Dog">
-                      <img class="img-fluid" src="../../../../assets/panchos/pancho1.jpg"></a>
-                </div>
-                <h6>Hot Dog</h6>
-                    <div class="about">
-                      <div class="rating"><img src="../../../../assets/star/star.svg"><img
-                          src="../../../../assets/star/star.svg"><img src="../../../../assets/star/star.svg"><img
-                          src="../../../../assets/star/star-half-empty.svg"><img
-                          src="../../../../assets/star/star-empty.svg"></div>
-                      <div class="price">
-                        <h3>$100</h3>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-
-                <div class="col-12 col-md-6 col-lg-4">
-                  <div class="clean-product-item">
-                    <div class="image"><a href="../../../../assets/panchos/pancho2.jpg" target="_blank" data-lightbox="comidas" data-title="Hot Dog">
-                      <img class="img-fluid" src="../../../../assets/panchos/pancho2.jpg"></a>
-                </div>
-                <h6>Hot Dog</h6>
-                    <div class="about">
-                      <div class="rating"><img src="../../../../assets/star/star.svg"><img
-                          src="../../../../assets/star/star.svg"><img src="../../../../assets/star/star.svg"><img
-                          src="../../../../assets/star/star-half-empty.svg"><img
-                          src="../../../../assets/star/star-empty.svg"></div>
-                      <div class="price">
-                        <h3>$100</h3>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-12 col-md-6 col-lg-4">
-                  <div class="clean-product-item">
-                    <div class="image"><a href="../../../../assets/panchos/pancho3.jpg" target="_blank" data-lightbox="comidas" data-title="Hot Dog">
-                      <img class="img-fluid" src="../../../../assets/panchos/pancho3.jpg"></a>
-                </div>
-                <h6>Hot Dog</h6>
-                    <div class="about">
-                      <div class="rating"><img src="../../../../assets/star/star.svg"><img
-                          src="../../../../assets/star/star.svg"><img src="../../../../assets/star/star.svg"><img
-                          src="../../../../assets/star/star-half-empty.svg"><img
-                          src="../../../../assets/star/star-empty.svg"></div>
-                      <div class="price">
-                        <h3>$100</h3>
-                      </div>
-                    </div>
-                  </div>
-                </div>
               </div>
               <nav>
                 <ul class="pagination">
@@ -289,12 +156,3 @@
   </section>
 </div>
 
-
-
-<div *ngFor="let articulo of articulosManufacturados">
-  <h6>{{articulo.denominacion}}</h6>
-  <td>{{articulo.id}}</td>
-  <td>{{articulo.precioVenta}}</td>
-  <td>{{articulo.rubroGeneral.denominacion}}</td>
-  <br>
-</div>

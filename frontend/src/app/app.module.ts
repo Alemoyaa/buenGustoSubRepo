@@ -1,3 +1,4 @@
+import { CatalogoDetalleComponent } from './components/cliente/catalogo-detalle/catalogo-detalle.component';
 import { CommonService } from './services/serviciosCliente/commonServices/common.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -47,6 +48,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     CarritoComponent,
     FacturaComponent,
     PedidosComponent,
+    CatalogoDetalleComponent,
   ],
   imports: [
     BrowserModule,

@@ -8,6 +8,8 @@
   }
 }
 
+
+
 .fa{
 margin-left: 1050px;
 
@@ -47,14 +49,17 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* PRODUCTOS */
-.clean-product-item {
+  /* .clean-product-item {
   padding: 10px;
   border-right: none;
   border-bottom: 1px solid #e8e6e6;
   height: 100%;
+  } */
+
+.card-img-top{
+  width: 300px;
+  height: 350px;
 }
-
-
 
 body {
   margin: 0;
