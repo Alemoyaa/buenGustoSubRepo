@@ -1,53 +1,36 @@
 package com.utn.app.buenGusto.entities;
 
-import java.io.Serializable; 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.CascadeType;
-import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.PrePersist;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
-import javax.persistence.TemporalType; 
+import javax.persistence.TemporalType;
 
 @Entity
 @Table(name = "factura")
 public class FacturaEntity extends CommonEntity implements Serializable {
 
 	private static final long serialVersionUID = -8356649232468048872L;
-	
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id")
-	private long id;
-
-	public long getId() {
-		return id;
-	}
-
-	public void setId(long id) {
-		this.id = id;
-	}
 
 	private int número;
-	
+
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date fecha;
-	
+
 	private double montoDescuento;
 	private double total;
 	private String formaPago;
 	private String nroTarjeta;
-	
-	// --------Pedido---------- 
+
+	// --------Pedido----------
 	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "pedido_id") 
+	@JoinColumn(name = "pedido_id")
 	private PedidoEntity pedido;
 
 	@PrePersist
@@ -109,6 +92,6 @@ public class FacturaEntity extends CommonEntity implements Serializable {
 
 	public void setPedido(PedidoEntity pedido) {
 		this.pedido = pedido;
-	} 
-	
+	}
+
 }

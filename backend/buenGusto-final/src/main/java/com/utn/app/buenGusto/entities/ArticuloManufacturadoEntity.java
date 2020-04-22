@@ -1,12 +1,11 @@
 package com.utn.app.buenGusto.entities;
 
-import java.io.Serializable; 
+import java.io.Serializable;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -17,20 +16,16 @@ public class ArticuloManufacturadoEntity extends CommonEntity implements Seriali
 	private static final long serialVersionUID = -8356649232468048872L;
 
 	private int tiempoEstimadoCocina;
-	
+
 	private String _urlImagen;
-	
+
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "receta_id")
 	private RecetaEntity receta;
-	
+
 	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL) // trae atributos y sus correspondientes relaciones
 	@JoinColumn(name = "articulo_id")
 	private ArticuloEntity articulo;
-	
-	public ArticuloManufacturadoEntity() {
-		super();		
-	}
 
 	public int getTiempoEstimadoCocina() {
 		return tiempoEstimadoCocina;

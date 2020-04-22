@@ -14,7 +14,6 @@ public class ArticuloInsumoDTO extends CommonDTO {
 
 	private String _urlImagen;
 
-
 	public String getDenominacion() {
 		return denominacion;
 	}
@@ -71,7 +70,6 @@ public class ArticuloInsumoDTO extends CommonDTO {
 		this.esInsumo = esInsumo;
 	}
 
-	
 	public String get_urlImagen() {
 		return _urlImagen;
 	}

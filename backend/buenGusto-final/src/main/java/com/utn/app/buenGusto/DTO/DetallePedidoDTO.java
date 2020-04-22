@@ -1,12 +1,12 @@
 package com.utn.app.buenGusto.DTO;
 
 public class DetallePedidoDTO extends CommonDTO {
-	
+
 	private static final long serialVersionUID = 1L;
-	
-	private int cantidad; 
-	private double subtotal; 
-	
+
+	private int cantidad;
+	private double subtotal;
+
 	private ArticuloInsumoDTO articulo;
 
 	private ArticuloManufacturadoDTO articuloManufacturado;
@@ -62,7 +62,5 @@ public class DetallePedidoDTO extends CommonDTO {
 	public void setPedido(PedidoDTO pedido) {
 		this.pedido = pedido;
 	}
-  
-	
 
 }

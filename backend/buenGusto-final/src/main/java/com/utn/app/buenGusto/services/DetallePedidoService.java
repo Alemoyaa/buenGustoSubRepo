@@ -9,15 +9,14 @@ import com.utn.app.buenGusto.entities.DetallePedidoEntity;
 import com.utn.app.buenGusto.repositories.DetallePedidoRepository;
 
 @Service
-public class DetallePedidoService extends CommonService<DetallePedidoEntity, DetallePedidoDTO>{
-	
+public class DetallePedidoService extends CommonService<DetallePedidoEntity, DetallePedidoDTO> {
+
 	@Autowired
 	private DetallePedidoRepository repository;
-	
+
 	public DetallePedidoService(DetallePedidoRepository detallePRepository, ModelMapper modelMapper) {
 		super(detallePRepository, DetallePedidoDTO.class, DetallePedidoEntity.class, modelMapper);
-		this.repository=detallePRepository;
+		this.repository = detallePRepository;
 	}
-
 
 }

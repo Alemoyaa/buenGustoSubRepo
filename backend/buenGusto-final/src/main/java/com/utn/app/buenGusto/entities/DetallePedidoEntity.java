@@ -3,12 +3,8 @@ package com.utn.app.buenGusto.entities;
 import java.io.Serializable;
 
 import javax.persistence.CascadeType;
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
@@ -19,15 +15,15 @@ import javax.persistence.Table;
 public class DetallePedidoEntity extends CommonEntity implements Serializable {
 
 	private static final long serialVersionUID = -7168593642662662191L;
- 
-	private int cantidad; 
+
+	private int cantidad;
 	private double subtotal;
 
 	// ---------Pedido---------
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "pedido_id")
 	private PedidoEntity pedido;
-	
+
 	// ---------Articulo--------
 	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL) // trae atributos y sus correspondientes relaciones
 	@JoinColumn(name = "articulo_id")
@@ -47,7 +43,7 @@ public class DetallePedidoEntity extends CommonEntity implements Serializable {
 
 	public void setSubtotal(double subtotal) {
 		this.subtotal = subtotal;
-	} 	
+	}
 
 	public PedidoEntity getPedido() {
 		return pedido;
@@ -63,6 +59,6 @@ public class DetallePedidoEntity extends CommonEntity implements Serializable {
 
 	public void setArticulo(ArticuloEntity articulo) {
 		this.articulo = articulo;
-	}	
-  
+	}
+
 }

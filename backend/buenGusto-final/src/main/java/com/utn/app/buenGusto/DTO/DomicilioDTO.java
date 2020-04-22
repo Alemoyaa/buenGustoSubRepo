@@ -3,11 +3,11 @@ package com.utn.app.buenGusto.DTO;
 public class DomicilioDTO extends CommonDTO {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	private String calle;
 	private int numero;
 	private String localidad;
-	 
+
 	private ClienteDTO clienteDomicilio;
 
 	public String getCalle() {
@@ -40,6 +40,6 @@ public class DomicilioDTO extends CommonDTO {
 
 	public void setClienteDomicilio(ClienteDTO clienteDomicilio) {
 		this.clienteDomicilio = clienteDomicilio;
-	} 
-	
+	}
+
 }

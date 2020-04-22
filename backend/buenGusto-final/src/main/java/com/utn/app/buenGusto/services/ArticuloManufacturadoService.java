@@ -10,6 +10,7 @@ import com.utn.app.buenGusto.repositories.ArticuloManufacturadoRepository;
 
 @Service
 public class ArticuloManufacturadoService extends CommonService<ArticuloManufacturadoEntity, ArticuloManufacturadoDTO> {
+
 	@Autowired
 	private ArticuloManufacturadoRepository repository;
 
@@ -17,4 +18,4 @@ public class ArticuloManufacturadoService extends CommonService<ArticuloManufact
 		super(artMRepository, ArticuloManufacturadoDTO.class, ArticuloManufacturadoEntity.class, modelMapper);
 		this.repository = artMRepository;
 	}
-} 
+}

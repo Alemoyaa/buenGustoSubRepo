@@ -9,13 +9,13 @@ import com.utn.app.buenGusto.entities.PedidoEntity;
 import com.utn.app.buenGusto.repositories.PedidoRepository;
 
 @Service
-public class PedidoService extends CommonService<PedidoEntity, PedidoDTO>{
-	
+public class PedidoService extends CommonService<PedidoEntity, PedidoDTO> {
+
 	@Autowired
 	private PedidoRepository repository;
-	
+
 	public PedidoService(PedidoRepository prepository, ModelMapper modelMapper) {
-		super(prepository, PedidoDTO.class,PedidoEntity.class,modelMapper);
-		this.repository=prepository;
+		super(prepository, PedidoDTO.class, PedidoEntity.class, modelMapper);
+		this.repository = prepository;
 	}
 }

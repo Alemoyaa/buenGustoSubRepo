@@ -1,6 +1,5 @@
 package com.utn.app.buenGusto.entities;
 
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,17 +12,15 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "articulo")
-public abstract class ArticuloEntity extends CommonEntity{
+public abstract class ArticuloEntity extends CommonEntity {
 
 	private String denominacion;
 	private double precioventa;
 
-	@ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    @JoinTable(name="articulo_rubro",
-            joinColumns = @JoinColumn(name = "articulo_id"),
-            inverseJoinColumns = @JoinColumn(name = "rubro_id"))
-    private List<RubroGeneralEntity> rubros = new ArrayList<RubroGeneralEntity>();
-	
+	@ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
+	@JoinTable(name = "articulo_rubro", joinColumns = @JoinColumn(name = "articulo_id"), inverseJoinColumns = @JoinColumn(name = "rubro_id"))
+	private List<RubroGeneralEntity> rubros = new ArrayList<RubroGeneralEntity>();
+
 	public String getDenominacion() {
 		return denominacion;
 	}
@@ -47,5 +44,5 @@ public abstract class ArticuloEntity extends CommonEntity{
 	public void setRubros(List<RubroGeneralEntity> rubros) {
 		this.rubros = rubros;
 	}
-	
+
 }

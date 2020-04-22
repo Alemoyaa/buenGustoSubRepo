@@ -6,7 +6,6 @@ import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -23,14 +22,10 @@ public class ArticuloInsumoEntity extends CommonEntity implements Serializable {
 	private String unidadMedida;
 
 	private String _urlImagen;
-	
+
 	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL) // trae atributos y sus correspondientes relaciones
 	@JoinColumn(name = "articulo_id")
 	private ArticuloEntity articulo;
-	
-	public ArticuloInsumoEntity() {
-		super();
-	}
 
 	public String getDenominacion() {
 		return denominacion;

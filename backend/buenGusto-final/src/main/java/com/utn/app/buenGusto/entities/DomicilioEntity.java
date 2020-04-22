@@ -2,15 +2,8 @@ package com.utn.app.buenGusto.entities;
 
 import java.io.Serializable;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -19,15 +12,15 @@ import javax.persistence.Table;
 public class DomicilioEntity extends CommonEntity implements Serializable {
 
 	private static final long serialVersionUID = 5685412683798686451L;
-	 
+
 	private String calle;
 	private int numero;
 	private String localidad;
-	
+
 	@ManyToOne(targetEntity = ClienteEntity.class)
 	@JoinColumn(name = "domicilios")
 	private ClienteEntity clienteDomicilio;
-	 
+
 	public String getCalle() {
 		return calle;
 	}
@@ -59,6 +52,5 @@ public class DomicilioEntity extends CommonEntity implements Serializable {
 	public void setClienteDomicilio(ClienteEntity clienteDomicilio) {
 		this.clienteDomicilio = clienteDomicilio;
 	}
- 
-	
+
 }

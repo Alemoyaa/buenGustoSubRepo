@@ -7,8 +7,8 @@ import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 
 @MappedSuperclass
-public abstract class CommonEntity{
-		
+public abstract class CommonEntity {
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
@@ -21,5 +21,5 @@ public abstract class CommonEntity{
 	public void setId(long id) {
 		this.id = id;
 	}
-	
+
 }

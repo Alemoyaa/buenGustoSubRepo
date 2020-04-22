@@ -1,26 +1,26 @@
 package com.utn.app.buenGusto.entities;
 
-import java.io.Serializable; 
+import java.io.Serializable;
 import java.util.List;
 
-import javax.persistence.CascadeType; 
-import javax.persistence.Entity; 
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
 import javax.persistence.OneToMany;
-import javax.persistence.Table; 
+import javax.persistence.Table;
 
 @Entity
 @Table(name = "cliente")
 public class ClienteEntity extends CommonEntity implements Serializable {
 
-	private static final long serialVersionUID = -8356649232468048872L; 
- 
-	private String nombre;  
-	private String apellido;  
-	private long telefono;  
-	private String email; 
-	private String uidFirebase; 
+	private static final long serialVersionUID = -8356649232468048872L;
 
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "clienteDomicilio", orphanRemoval = true) 
+	private String nombre;
+	private String apellido;
+	private long telefono;
+	private String email;
+	private String uidFirebase;
+
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "clienteDomicilio", orphanRemoval = true)
 	private List<DomicilioEntity> domicilios;
 
 	public String getNombre() {
@@ -69,7 +69,6 @@ public class ClienteEntity extends CommonEntity implements Serializable {
 
 	public void setUidFirebase(String uidFirebase) {
 		this.uidFirebase = uidFirebase;
-	} 
+	}
 
-	
 }
