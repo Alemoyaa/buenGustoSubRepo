@@ -7,8 +7,7 @@
         <th scope="col">Numero</th>
         <th scope="col">Estado</th>
         <th scope="col">Hora estimada fin</th>
-        <th scope="col">Tipo Envio</th>
-        <th scope="col">Nombre Cliente</th>
+        <th scope="col">Tipo envio</th>
         <th scope="col">Factura</th>
       </tr>
     </thead>
@@ -20,7 +19,6 @@
         <td>{{pedido.estado}}</td>
         <td>{{pedido.horaEstimadaFin}}</td>
         <td>{{pedido.tipoEnvio}}</td>
-        <td>{{pedido.cliente.nombre}}</td>
         <td>
           <a [routerLink]="['/factura',pedido.factura.id]">Ver factura</a>
         </td>

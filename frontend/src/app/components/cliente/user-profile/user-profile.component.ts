@@ -11,7 +11,7 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class UserProfileComponent implements OnInit {
   cliente: Cliente = {
-    id: 0,
+    id: 1,
     uidFirebase: '',
     nombre: '',
     apellido: '',
@@ -33,10 +33,10 @@ export class UserProfileComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    //this.rutaActiva.params.subscribe(data => { Esto anda, falta router el cliente y sacarle la foto mersa
-    //if (data.id !== '0') {
-    //this.getOne(data.id);
-    //}
+    //this.rutaActiva.params.subscribe(data => {
+      //if (data.id !== '0') {
+        //this.getOne(data.id);
+      //}
     //});
     this.datosUser();
   }
@@ -51,25 +51,4 @@ export class UserProfileComponent implements OnInit {
       this.cliente = data;
     });
   }
-
-  /*
-  HTML DE FACTURA:
-
-  Typescript:
-  crearFacturaPDF(){
-    var data = document.getElementById('page-top');
-
-    html2canvas(data).then(canvas => {
-      // Configuracion necesaria para la foto
-      var imgWidth = 208;
-      var imgHeight = canvas.height * imgWidth / canvas.width;
-
-      const contentDataURL = canvas.toDataURL('image/png') //Creamos una imagen la cual despues convertimos
-      let pdf = new jsPDF('p', 'mm', 'a4'); // A4 va a ser el tamaño del PDF
-      var position = 0;
-      pdf.addImage(contentDataURL, 'PNG', 0, position, imgWidth, imgHeight)
-      pdf.save('factura.pdf'); // Generamos el PDF
-    });
-
-  }*/
 }

@@ -21,26 +21,20 @@ export class PedidosComponent implements OnInit {
     ) { }
 
   ngOnInit() {
-    console.log(this.clienteUser);
-    this.rutaActiva.params.subscribe(data => {
-      if (data.id !== '0') {
-        this.getOne(data.id);
-      }
+    this.getAll();
+  }
+
+  async getAll() {
+    await this.servicio.getAll().subscribe((data) => {
+      data.forEach(pedido => {
+        if(this.clienteUser.id === pedido.cliente.id){
+          this.pedidosCliente.push(pedido);
+          console.log(this.pedidosCliente);
+        }
+      })
     });
   }
 
-  /*getAll() {
-    this.servicio.getAll().subscribe((data) => {
-      this.pedidosCliente = data;
-      console.log(this.pedidosCliente);
-    });
-  }*/
-
-  getOne(id: number) {
-    this.servicio.getOne(id).subscribe((data) => {
-      this.pedidosCliente.push(data);
-    });
-  }
 
 
 }

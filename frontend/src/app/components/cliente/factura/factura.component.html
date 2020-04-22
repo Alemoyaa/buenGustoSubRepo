@@ -5,7 +5,7 @@
         <h1>El Buen Gusto</h1>
       </div>
       <div class="col-lg-6 justify-content-end d-flex p-5">
-        <p>Número de factura: </p>
+        <p>Número de factura: {{factura.numero}} </p>
       </div>
     </div>
     <div class="datos col-lg-12">
@@ -27,16 +27,10 @@
           </thead>
           <tbody>
             <tr>
-              <th scope="row">...</th>
+              <th>{{factura.numero}}</th>
               <td>...</td>
               <td>...</td>
-              <td>$...</td>
-            </tr>
-            <tr>
-              <th scope="row"></th>
-              <td></td>
-              <td>Total </td>
-              <td>$...</td>
+              <td>{{factura.total}}</td>
             </tr>
           </tbody>
         </table>
@@ -54,17 +48,3 @@
 <div class="printFactura mt-3 mb-3">
   <button class="btn btn-success" (click)="crearFacturaPDF()">Crear factura PDF</button>
 </div>
-
-<!-- <table class="table table-striped mt-3">
-    <tbody>
-      <tr>
-        <td hidden>{{factura.id}}</td>
-        <td>{{factura.fecha}}</td>
-        <td>{{factura.formaPago}}</td>
-        <td>{{factura.montoDescuento}}</td>
-        <td>{{factura.nroTarjeta}}</td>
-        <td>{{factura.numero}}</td>
-        <td>{{factura.total}}</td>
-      </tr>
-    </tbody>
-  </table> -->
