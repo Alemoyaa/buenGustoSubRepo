@@ -1,101 +1,133 @@
 <div class="container">
 
     <div class="row mb-4 ml-2">
-      <button class="btn btn-success mr-3" data-toggle="modal" data-target="#ModalCrearPersona">Nuevo</button>      
+        <button class="btn btn-success mr-3" data-toggle="modal" data-target="#ModalPersona">Nuevo</button>
     </div>
-  
-    <table class="table table-striped">
-      <thead>
-        <tr>
-          <th scope="col">#</th>
-          <th scope="col">Email</th>
-          <th scope="col">Nombre</th>
-          <th scope="col">Apellido</th>
-          <th scope="col">Telefono</th>
-          <th scope="col">Domicilio</th>
-          <th scope="col">Rol</th>
-          <th scope= "col">Acciones</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <th scope="row">1</th>
-          <td>usuario1@gmail.com</td>
-          <td>UsuarioNombre</td>
-          <td>UsuarioApellido</td>
-          <td>4287754</td>
-          <td>calle numero localidad</td>
-          <td>cocinero</td>
-          <td>
-            <button class="btn btn-info mr-3" data-toggle="modal" data-target="#ModalEditarPersona">Editar</button>
-            <button class="btn btn-danger mr-3" data-toggle="modal" >Borrar</button>
-          </td>
-        </tr>
-        
-      </tbody>
+
+    <table class="table table-striped text-center" >
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Email</th>
+                <th scope="col">Nombre</th>
+                <th scope="col">Apellido</th>
+                <th scope="col">Telefono</th>
+                <th scope="col">Domicilio</th>
+                <th scope="col">Rol</th>
+                <th scope="col">Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th scope="row"> <i class="fas fa-user"></i></th>
+                <td>usuario@gmail.com</td>
+                <td>UsuarioNombre</td>
+                <td>UsuarioApellido</td>
+                <td>4287754</td>
+                <td>calle numero localidad</td>
+                <td>cocinero</td>
+                <td>
+                    <button class="btn btn-info mr-3" data-toggle="modal"
+                        data-target="#ModalPersona">Editar</button>
+                    <button class="btn btn-danger mr-3" data-toggle="modal">Borrar</button>
+                </td>
+            </tr>
+
+        </tbody>
     </table>
-  
-  </div>
-  
-  <!-- Modal NUEVO -->
-  <div class="modal fade" id="ModalCrearPersona" tabindex="-1" role="form" aria-labelledby="ModalNuevoLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Nuevo</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <input type="text" placeholder="Nombre">
-          <br>
-          <input type="text" placeholder="Ingredientes">
-          <br>
-          <input type="text" placeholder="Precio">
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-primary" data-dismiss="modal">Cancelar</button>
-          <button type="button" class="btn btn-success">Nuevo</button>
-        </div>
-      </div>
-    </div>
-  </div>
-  
-  
-  <!-- Modal EDITAR -->
-  <div class="modal fade" id="ModalEditarPersona" tabindex="-1" role="form" aria-labelledby="ModalEditarLabel"
+
+</div>
+
+<!-- Modal NUEVO -->
+<!-- Modal EDITAR -->
+<div class="modal fade" id="ModalPersona" tabindex="-1" role="form" aria-labelledby="ModalEditarLabel"
     aria-hidden="true">
     <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Editar</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <select id="pizzas" name="pizzas">
-            <option value="1">Mozzarella</option>
-            <option value="2">Especial</option>
-            <option value="3">Cuatro quesos</option>
-          </select>
-          <br>
-          <input type="text" placeholder="Nombre">
-          <br>
-          <input type="text" placeholder="Ingredientes">
-          <br>
-          <input type="text" placeholder="Precio">
-  
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-info">Editar</button>
-        </div>
-      </div>
-    </div>
-  </div>
-  
-  
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Editar</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body text-lg-center">
+                <form action="">
+                    <div class="row">
+                        <div class="col-12">
+                            <h5 class="modal-title" id="exampleModalLabel">Datos Personales</h5>
+                        </div>
+                        
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label for="">Nombre</label>
+                                <input type="text" class="form-control" />
+                            </div>
+                        </div>  
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label for="">Apellido</label>
+                                <input type="text" class="form-control" />
+                            </div>
+                        </div>
+                        <div class="col-6">     
+                            <div class="form-group">
+                                <label for="">Email</label>
+                                <input type="text" class="form-control" />
+                            </div>
+                        </div> 
+                        <div class="col-6">     
+                            <div class="form-group">
+                                <label for="">Telefono</label>
+                                <input type="text" class="form-control" />
+                            </div>
+                        </div> 
+                        <div class="col-6">     
+                            <div class="form-group">
+                                <label for="">Telefono</label>
+                                <input type="text" class="form-control" />
+                            </div>
+                        </div> 
+                        <div class="col-6">     
+                            <div class="form-group">
+                                <label for="">Rol</label>
+                                <select class="form-control" id="rol" name="rol">
+                                    <option value="0">Cliente</option>
+                                    <option value="1">Cocinero</option>
+                                    <option value="2">Cajero</option>
+                                </select>
+                            </div>
+                        </div>
 
-  
+                        <div class="col-12">
+                            <h5 class="modal-title" id="exampleModalLabel">Datos de el domicilio</h5>
+                        </div>
+                        <div class="col-4">     
+                            <div class="form-group">
+                                <label for="">Calle</label>
+                                <input type="text" class="form-control" />
+                            </div>
+                        </div> 
+
+                        <div class="col-4">     
+                            <div class="form-group">
+                                <label for="">Numero</label>
+                                <input type="text" class="form-control" />
+                            </div>
+                        </div> 
+                        <div class="col-4">     
+                            <div class="form-group">
+                                <label for="">Localidad</label>
+                                <input type="text" class="form-control" />
+                            </div>
+                        </div> 
+
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-info">Editar</button>
+            </div>
+        </div>
+    </div>
+</div>
