@@ -1,17 +1,17 @@
 package com.utn.app.buenGusto.DTO;
 
+import com.utn.app.buenGusto.entities.ArticuloEntity;
+
 public class ArticuloManufacturadoDTO extends CommonDTO {
 
 	private static final long serialVersionUID = 1L;
 
-	private int tiempoEstimadoCocina;
 	private String denominacion;
 	private double precioVenta;
-
+	private int tiempoEstimadoCocina;
 	private String _urlImagen;
-
-	private RubroGeneralDTO rubroGeneral;
-
+	
+	
 	public int getTiempoEstimadoCocina() {
 		return tiempoEstimadoCocina;
 	}
@@ -34,14 +34,6 @@ public class ArticuloManufacturadoDTO extends CommonDTO {
 
 	public void setPrecioVenta(double precioVenta) {
 		this.precioVenta = precioVenta;
-	}
-
-	public RubroGeneralDTO getRubroGeneral() {
-		return rubroGeneral;
-	}
-
-	public void setRubroGeneral(RubroGeneralDTO rubroGeneral) {
-		this.rubroGeneral = rubroGeneral;
 	}
 
 	public String get_urlImagen() {

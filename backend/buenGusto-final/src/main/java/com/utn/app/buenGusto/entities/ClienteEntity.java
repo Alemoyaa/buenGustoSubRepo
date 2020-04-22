@@ -5,6 +5,8 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -22,6 +24,11 @@ public class ClienteEntity extends CommonEntity implements Serializable {
 
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "clienteDomicilio", orphanRemoval = true)
 	private List<DomicilioEntity> domicilios;
+	
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "rol_cliente")
+	private RolEntity rol;
+	
 
 	public String getNombre() {
 		return nombre;
@@ -71,4 +78,13 @@ public class ClienteEntity extends CommonEntity implements Serializable {
 		this.uidFirebase = uidFirebase;
 	}
 
+	public RolEntity getRol() {
+		return rol;
+	}
+
+	public void setRol(RolEntity rol) {
+		this.rol = rol;
+	}
+
+	
 }

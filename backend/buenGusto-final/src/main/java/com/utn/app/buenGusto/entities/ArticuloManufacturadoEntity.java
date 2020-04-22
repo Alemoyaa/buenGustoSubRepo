@@ -43,4 +43,22 @@ public class ArticuloManufacturadoEntity extends CommonEntity implements Seriali
 		this._urlImagen = _urlImagen;
 	}
 
+	public RecetaEntity getReceta() {
+		return receta;
+	}
+
+	public void setReceta(RecetaEntity receta) {
+		this.receta = receta;
+	}
+
+	public ArticuloEntity getArticulo() {
+		return articulo;
+	}
+
+	public void setArticulo(ArticuloEntity articulo) {
+		this.articulo = articulo;
+	}
+	
+	
+
 }

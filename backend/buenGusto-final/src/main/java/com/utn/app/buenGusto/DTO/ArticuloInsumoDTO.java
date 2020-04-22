@@ -10,7 +10,6 @@ public class ArticuloInsumoDTO extends CommonDTO {
 	private double stockActual;
 	private double stockMinimo;
 	private String unidadMedida;
-	private boolean esInsumo;
 
 	private String _urlImagen;
 
@@ -60,14 +59,6 @@ public class ArticuloInsumoDTO extends CommonDTO {
 
 	public void setUnidadMedida(String unidadMedida) {
 		this.unidadMedida = unidadMedida;
-	}
-
-	public boolean isEsInsumo() {
-		return esInsumo;
-	}
-
-	public void setEsInsumo(boolean esInsumo) {
-		this.esInsumo = esInsumo;
 	}
 
 	public String get_urlImagen() {
