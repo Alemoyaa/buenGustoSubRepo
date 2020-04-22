@@ -8,6 +8,7 @@ public class DomicilioDTO extends CommonDTO {
 	private int numero;
 	private String localidad;
 	 
+	private ClienteDTO clienteDomicilio;
 
 	public String getCalle() {
 		return calle;
@@ -31,6 +32,14 @@ public class DomicilioDTO extends CommonDTO {
 
 	public void setLocalidad(String localidad) {
 		this.localidad = localidad;
+	}
+
+	public ClienteDTO getClienteDomicilio() {
+		return clienteDomicilio;
+	}
+
+	public void setClienteDomicilio(ClienteDTO clienteDomicilio) {
+		this.clienteDomicilio = clienteDomicilio;
 	} 
 	
 }

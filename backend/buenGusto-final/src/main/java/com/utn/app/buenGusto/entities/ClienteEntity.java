@@ -1,15 +1,10 @@
 package com.utn.app.buenGusto.entities;
 
-import java.io.Serializable;
+import java.io.Serializable; 
 import java.util.List;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
+import javax.persistence.CascadeType; 
+import javax.persistence.Entity; 
 import javax.persistence.OneToMany;
 import javax.persistence.Table; 
 
@@ -17,20 +12,7 @@ import javax.persistence.Table;
 @Table(name = "cliente")
 public class ClienteEntity extends CommonEntity implements Serializable {
 
-	private static final long serialVersionUID = -8356649232468048872L;
-	
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id")
-	private long id;
-
-	public long getId() {
-		return id;
-	}
-
-	public void setId(long id) {
-		this.id = id;
-	}
+	private static final long serialVersionUID = -8356649232468048872L; 
  
 	private String nombre;  
 	private String apellido;  
@@ -38,8 +20,7 @@ public class ClienteEntity extends CommonEntity implements Serializable {
 	private String email; 
 	private String uidFirebase; 
 
-	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true) 
-	@JoinColumn(name = "domicilio_fk_cliente") 
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "clienteDomicilio", orphanRemoval = true) 
 	private List<DomicilioEntity> domicilios;
 
 	public String getNombre() {

@@ -1,5 +1,5 @@
 package com.utn.app.buenGusto.DTO;
-
+  
 public class ClienteDTO extends CommonDTO  {
 
 	private static final long serialVersionUID = 1L;
@@ -9,9 +9,7 @@ public class ClienteDTO extends CommonDTO  {
 	private long telefono;  
 	private String email; 
 	private String uidFirebase;
-	
-	private DomicilioDTO domicilio; 
-	   
+	 
 	public String getNombre() {
 		return nombre;
 	}
@@ -36,18 +34,10 @@ public class ClienteDTO extends CommonDTO  {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public DomicilioDTO getDomicilio() {
-		return domicilio;
-	}
-	public void setDomicilio(DomicilioDTO domicilio) {
-		this.domicilio = domicilio;
-	}
 	public String getUidFirebase() {
 		return uidFirebase;
 	}
 	public void setUidFirebase(String uidFirebase) {
 		this.uidFirebase = uidFirebase;
 	} 
-	
-	 
 }

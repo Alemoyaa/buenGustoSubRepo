@@ -17,24 +17,13 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-@Entity
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+@Entity 
 @Table(name = "pedido")
 public class PedidoEntity extends CommonEntity implements Serializable {
 
-	private static final long serialVersionUID = -1998183735641277350L;
-	
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id")
-	private long id;
-
-	public long getId() {
-		return id;
-	}
-
-	public void setId(long id) {
-		this.id = id;
-	}
+	private static final long serialVersionUID = -1998183735641277350L; 
  
 	private Date fecha; 
 	private int numero; 
@@ -47,7 +36,25 @@ public class PedidoEntity extends CommonEntity implements Serializable {
 	// --------Cliente--------
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "cliente_id")
+	@JsonIgnore
 	private ClienteEntity cliente;
+
+	
+	
+	public PedidoEntity() {
+		super();
+	}
+
+	public PedidoEntity(Date fecha, int numero, int estado, Date horaEstimadaFin, int tipoEnvio,
+			ClienteEntity cliente) {
+		super();
+		this.fecha = fecha;
+		this.numero = numero;
+		this.estado = estado;
+		this.horaEstimadaFin = horaEstimadaFin;
+		this.tipoEnvio = tipoEnvio;
+		this.cliente = cliente;
+	}
 
 	public Date getFecha() {
 		return fecha;
@@ -96,7 +103,5 @@ public class PedidoEntity extends CommonEntity implements Serializable {
 	public void setCliente(ClienteEntity cliente) {
 		this.cliente = cliente;
 	} 
-	
-
-	
+	 
 }
