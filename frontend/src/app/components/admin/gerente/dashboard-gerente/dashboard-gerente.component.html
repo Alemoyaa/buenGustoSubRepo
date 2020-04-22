@@ -301,16 +301,16 @@
       <!-- Begin Page Content -->
       <div class="container-fluid">
         <!-- COMPONENTES -->
-        <div class="" [hidden]="!tableroPizzaCrud">
+        <div class="" *ngIf="tableroPizzaCrud">
           <app-catalogo-crud></app-catalogo-crud>
         </div>
-        <div class="" [hidden]="!tableroStock">
+        <div class="" *ngIf="tableroStock">
           <app-stock></app-stock>
         </div>
-        <div class="" [hidden]="!tableroEstadisticas">
+        <div class="" *ngIf="tableroEstadisticas">
           <app-estadisticas></app-estadisticas>
         </div>
-        <div class="" [hidden]="!tableroUsuario">
+        <div class="" *ngIf="tableroUsuario">
           <app-usuarios></app-usuarios>
         </div>
       </div>
