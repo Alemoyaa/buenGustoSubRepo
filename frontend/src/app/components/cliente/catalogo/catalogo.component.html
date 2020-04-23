@@ -2,142 +2,58 @@
   <section class="clean-block clean-catalog dark">
     <div class="container">
       <div class="block-heading">
-        <a class="fa fa-shopping-cart fa-3x " href="/carrito" ></a>
-          <h2 class="text-info ">Catalogo</h2>
+        <a class="fa fa-shopping-cart fa-3x " href="/carrito"></a>
+        <h2 class="text-info ">Catalogo</h2>
       </div>
       <div class="content">
-        <div class="row" >
-
-
+        <div class="row">
           <div class="col-md-3">
             <div class="d-none d-md-block">
               <div class="filters">
                 <div class="filter-item">
-                  <div>
-                    <h3 class="text-info2">Categoria</h3>
-                  </div>
+                  <h3 class="text-info2">Categoria</h3>
+                  <select placeholder="articulo" (change)="onSelect($event)">
+                    <option *ngFor="let articulo of articulosManufacturados" [value]="articulo">
+                      {{articulo}}
+                    </option>
+                  </select>
                   <div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-1"><label
                       class="form-check-label" for="formCheck-1">
                       <h6>Pizza</h6>
                     </label></div>
-                  <div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-2"><label
-                      class="form-check-label" for="formCheck-2">
-                      <h6>Lomo</h6>
-                    </label></div>
-                  <div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-3"><label
-                      class="form-check-label" for="formCheck-3">
-                      <h6> Hamburguesa</h6>
-                    </label></div>
-                  <div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-4"><label
-                      class="form-check-label" for="formCheck-4">
-                      <h6>Pancho</h6>
-                    </label></div>
                 </div>
                 <div class="filter-item">
-                  <div>
-                    <h3 class="text-info2">Bebidas</h3>
-                  </div>
+                  <h3 class="text-info2">Bebidas</h3>
                   <div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-5"><label
                       class="form-check-label" for="formCheck-5">
                       <h6>Gaseosas</h6>
                     </label></div>
-                  <div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-6"><label
-                      class="form-check-label" for="formCheck-6">
-                      <h6>Agua</h6>
-                    </label></div>
-                  <div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-7"><label
-                      class="form-check-label" for="formCheck-7">
-                      <h6>Cerveza</h6>
-                    </label></div>
-                </div>
-                <div class="filter-item">
-                  <div>
-                    <h3 class="text-info2">Otra Categoria</h3>
-                  </div>
-                  <div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-8"><label
-                      class="form-check-label" for="formCheck-8">
-                      <h6>Otro Filtro</h6>
-                    </label></div>
-                  <div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-9"><label
-                      class="form-check-label" for="formCheck-9">
-                      <h6>Otro Filtro</h6>
-                    </label></div>
-
-                </div>
-              </div>
-            </div>
-            <div class="d-md-none"><a class="btn btn-link d-md-none filter-collapse" data-toggle="collapse"
-                aria-expanded="false" aria-controls="filters" href="#filters" role="button">Filters<i
-                  class="icon-arrow-down filter-caret"></i></a>
-              <div class="collapse" id="filters">
-                <div class="filters">
-                  <div class="filter-item">
-                    <h3>Categoria</h3>
-                    <div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-1"><label
-                        class="form-check-label" for="formCheck-1">Pizza</label></div>
-                    <div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-2"><label
-                        class="form-check-label" for="formCheck-2">Lomo</label></div>
-                    <div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-3"><label
-                        class="form-check-label" for="formCheck-3">Hamburguesa</label></div>
-                    <div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-4"><label
-                        class="form-check-label" for="formCheck-4">Pancho</label></div>
-                  </div>
-                  <div class="filter-item">
-                    <h3>Bebidas</h3>
-                    <div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-5"><label
-                        class="form-check-label" for="formCheck-5">Gaseosas</label></div>
-                    <div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-6"><label
-                        class="form-check-label" for="formCheck-6">Agua</label></div>
-                    <div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-7"><label
-                        class="form-check-label" for="formCheck-7">Cerveza</label></div>
-                  </div>
-                  <div class="filter-item">
-                    <h3>Otra Categoria</h3>
-                    <div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-8"><label
-                        class="form-check-label" for="formCheck-8">Otro Filtro</label></div>
-                    <div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-9"><label
-                        class="form-check-label" for="formCheck-9">Otro Filtro</label></div>
-                  </div>
                 </div>
               </div>
             </div>
           </div>
-
-          <div class="col-md-9" >
-            <div class="products" >
-              <div class="row no-gutters" >
-
+          <div class="col-md-9">
+            <div class="products">
+              <div class="row no-gutters">
                 <div class="col-12 col-md-6 col-lg-4 " *ngFor="let articulo of articulosManufacturados">
-                <article class="card card-product shadow-sm">
-
-                  <img src="../../../../assets/pizza/pizza1.jpg" class="card-img-top p-1"  >
-
-                  <div class="card-body" >
-                    <h5 class="card-title text-primary">{{ articulo.denominacion }}</h5>
-                    <p class="card-text">
+                  <article class="card card-product shadow-sm">
+                    <img src="../../../../assets/pizza/pizza1.jpg" class="card-img-top p-1">
+                    <div class="card-body">
+                      <h5 class="card-title text-primary">{{ articulo.denominacion }}</h5>
+                      <p class="card-text">
                         <i class="fas fa-dollar-sign"></i>
                         <span class="precio-producto" style="font-weight: bold;"> {{ articulo.precioVenta }}</span>
-                    </p>
-                    <div style="display: flex; justify-content: space-between; align-items: center;">
-                      <a [routerLink]="['/catalogo-detalle/',articulo.id]" class="btn btn-sm btn-outline-primary">Ver Detalles</a>
-                        <p class="card-text text-muted">Coccion:  {{articulo.tiempoEstimadoCocina}} min</p>
+                      </p>
+                      <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <a [routerLink]="['/catalogo-detalle/',articulo.id]" class="btn btn-sm btn-outline-primary">Ver
+                          Detalles</a>
+                        <p class="card-text text-muted">Coccion: {{articulo.tiempoEstimadoCocina}} min</p>
+                      </div>
                     </div>
-
-                    <div class="about">
-                      <div class="rating"><img src="../../../../assets/star/star.svg"><img
-                          src="../../../../assets/star/star.svg"><img src="../../../../assets/star/star.svg"><img
-                          src="../../../../assets/star/star-half-empty.svg"><img
-                          src="../../../../assets/star/star-empty.svg"></div>
-                    </div>
-
+                  </article>
                 </div>
-                </article>
-                </div>
-
-
-
               </div>
-              <nav>
+              <!-- <nav>
                 <ul class="pagination">
                   <li class="page-item disabled"><a class="page-link" href="#" aria-label="Previous"><span
                         aria-hidden="true">«</span></a></li>
@@ -145,9 +61,9 @@
                   <li class="page-item"><a class="page-link" href="#">2</a></li>
                   <li class="page-item"><a class="page-link" href="#">3</a></li>
                   <li class="page-item"><a class="page-link" href="#" aria-label="Next">
-                    <span aria-hidden="true">»</span></a></li>
+                      <span aria-hidden="true">»</span></a></li>
                 </ul>
-              </nav>
+              </nav> -->
             </div>
           </div>
         </div>
@@ -155,4 +71,3 @@
     </div>
   </section>
 </div>
-
