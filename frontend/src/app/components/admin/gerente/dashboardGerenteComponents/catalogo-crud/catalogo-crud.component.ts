@@ -6,7 +6,17 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./catalogo-crud.component.css'],
 })
 export class CatalogoCrudComponent implements OnInit {
+  esEditar: boolean = false;
+
   constructor() {}
 
   ngOnInit(): void {}
+
+  editar(){
+    this.esEditar = true;
+  }
+
+  cerrar(){
+    this.esEditar = false;
+  }
 }

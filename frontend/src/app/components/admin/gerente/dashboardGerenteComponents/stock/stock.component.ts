@@ -7,9 +7,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class StockComponent implements OnInit {
 
+  esEditar: boolean = false;
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  editar(){
+    this.esEditar = true;
+  }
+
+  cerrar(){
+    this.esEditar = false;
   }
 
 }

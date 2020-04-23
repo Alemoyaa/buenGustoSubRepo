@@ -11,7 +11,7 @@ import { FormGroup, FormBuilder } from '@angular/forms';
 export class UsuariosComponent implements OnInit {
   formularioPersona: FormGroup;
   cliente: Cliente[] = new Array<Cliente>();
-
+  
   constructor(private clienteService: ClienteService, private fb: FormBuilder) { }
 
   ngOnInit(): void {
@@ -23,9 +23,12 @@ export class UsuariosComponent implements OnInit {
 
   traerClientes() {
     return this.clienteService.getAll().subscribe(data => {
-      this.cliente = data;
+      
+      return this.cliente = data;
     });
   }
 
+
+ 
  
 }

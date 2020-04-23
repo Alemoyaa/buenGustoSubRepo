@@ -1,7 +1,9 @@
 <div class="container">
 
-    <div class="row mb-4 ml-2">
-        <button class="btn btn-success mr-3" data-toggle="modal" data-target="#ModalPersona">Nuevo</button>
+    <div class="row">
+        <div class="col-12 text-center">
+            <h1>Administracion de Usuarios</h1>
+        </div>
     </div>
 
     <table class="table table-striped text-center" >
@@ -18,18 +20,18 @@
             </tr>
         </thead>
         <tbody>
-            <tr>
+            <tr *ngFor="let c of cliente">
                 <th scope="row"> <i class="fas fa-user"></i></th>
-                <td>usuario@gmail.com</td>
-                <td>UsuarioNombre</td>
-                <td>UsuarioApellido</td>
-                <td>4287754</td>
+                <td>{{c.email}}</td>
+                <td>{{c.nombre}}</td>
+                <td>{{c.apellido}}</td>
+                <td>{{c.telefono}}</td>
                 <td>calle numero localidad</td>
                 <td>cocinero</td>
                 <td>
                     <button class="btn btn-info mr-3" data-toggle="modal"
-                        data-target="#ModalPersona">Editar</button>
-                    <button class="btn btn-danger mr-3" data-toggle="modal">Borrar</button>
+                        data-target="#ModalPersona"><i class="fas fa-pencil-alt"></i></button>
+                    <button class="btn btn-danger mr-3" data-toggle="modal"><i class="fas fa-trash"></i></button>
                 </td>
             </tr>
 
@@ -40,12 +42,13 @@
 
 <!-- Modal NUEVO -->
 <!-- Modal EDITAR -->
-<div class="modal fade" id="ModalPersona" tabindex="-1" role="form" aria-labelledby="ModalEditarLabel"
+<div class="modal fade" data-backdrop="static" id="ModalPersona" tabindex="-1" role="form" aria-labelledby="ModalEditarLabel"
     aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Editar</h5>
+                <h5  class="modal-title" id="exampleModalLabel">Editar</h5>
+                
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -60,31 +63,31 @@
                         <div class="col-6">
                             <div class="form-group">
                                 <label for="">Nombre</label>
-                                <input type="text" class="form-control" />
+                                <input disabled type="text" class="form-control" />
                             </div>
                         </div>  
                         <div class="col-6">
                             <div class="form-group">
                                 <label for="">Apellido</label>
-                                <input type="text" class="form-control" />
+                                <input disabled type="text" class="form-control" />
                             </div>
                         </div>
                         <div class="col-6">     
                             <div class="form-group">
                                 <label for="">Email</label>
-                                <input type="text" class="form-control" />
+                                <input disabled type="text" class="form-control" />
                             </div>
                         </div> 
                         <div class="col-6">     
                             <div class="form-group">
                                 <label for="">Telefono</label>
-                                <input type="text" class="form-control" />
+                                <input disabled type="text" class="form-control" />
                             </div>
                         </div> 
                         <div class="col-6">     
                             <div class="form-group">
                                 <label for="">Telefono</label>
-                                <input type="text" class="form-control" />
+                                <input disabled type="text" class="form-control" />
                             </div>
                         </div> 
                         <div class="col-6">     
@@ -104,20 +107,21 @@
                         <div class="col-4">     
                             <div class="form-group">
                                 <label for="">Calle</label>
-                                <input type="text" class="form-control" />
+                                <input disabled type="text" class="form-control" />
                             </div>
                         </div> 
 
                         <div class="col-4">     
                             <div class="form-group">
                                 <label for="">Numero</label>
-                                <input type="text" class="form-control" />
+                                <input disabled type="text" class="form-control" />
                             </div>
                         </div> 
+                        
                         <div class="col-4">     
                             <div class="form-group">
                                 <label for="">Localidad</label>
-                                <input type="text" class="form-control" />
+                                <input disabled type="text" class="form-control" />
                             </div>
                         </div> 
 

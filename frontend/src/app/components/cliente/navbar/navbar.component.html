@@ -26,6 +26,10 @@
         <li *ngIf="navbarUsuario" class="nav-item" role="presentation">
           <button class="nav-link btn btn-outline-light" (click)="cerrarSesion()">Cerrar Sesion</button>
         </li>
+        <li class="nav-item" role="presentation">
+          <a class="nav-link" [routerLink]="['/admin/gerente/dashboard']"><i class="fas fa-tools"></i></a>
+        </li>
+        
 
       </ul>
     </div>
