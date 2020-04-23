@@ -1,25 +1,68 @@
-<header class="header-component mb-5 animated fast fadeIn">
-  <h1>Producto <small class="text-muted">detalles</small></h1>
+<div class="container">
 
-  <button routerLink="/catalogo" class="btn btn-primary">
-      <i class="fa fa-arrow-left"> Atrás</i>
-  </button>
-</header>
+  <div class="card">
+    <div class="row">
+      <aside class="col-sm-5 border-right">
 
-<div class="row animated fadeIn fast">
-  <div class="col-lg-7">
-      <img src="../../../../assets/pizza/pizza4.jpg" class="card-img-top" >
+
+  <article class="gallery-wrap">
+
+  <div class=" img-big-wrap">
+    <div> <a href="#"><img src="{{detalle.articuloManufacturado._urlImagen}}"></a></div>
   </div>
-  <p>{{ detalle.articuloManufacturado.rubroGeneral}}</p>
+  </article> <!-- gallery-wrap .end// -->
+      </aside>
 
-  <div class="col-lg-5 producto-detalle">
-      <h5 class="nombre-producto">{{ detalle.articuloManufacturado.denominacion}}</h5>
-      <h5>
-          <i class="fas fa-dollar-sign"></i>
-          <span class="precio-producto"> {{ detalle.articuloManufacturado.precioVenta }}</span>
+      <aside class="col-sm-7">
+  <article class="card-body p-5">
+    <h3 class="title mb-3">{{detalle.articuloManufacturado.rubroGeneral.denominacion}}</h3>
 
-      </h5>
-      <p class="text-muted">{{ detalle.articuloManufacturado.tiempoEstimadoCocina }}</p>
+  <p class="price-detail-wrap">
+    <span class="price h3 text-warning">
+      <span class="currency">$</span><span class="num">{{detalle.articuloManufacturado.precioVenta}}</span>
+    </span>
+
+  </p> <!-- price-detail-wrap .// -->
+  <dl class="item-property">
+    <dt>Ingredientes</dt>
+    <dd><p>{{detalle.cantidad}}</p></dd>
+  </dl>
+  <dl class="param param-feature">
+    <dt>Tipo</dt>
+    <dd>{{detalle.articuloManufacturado.denominacion}}</dd>
+  </dl>  <!-- item-property-hor .// -->
+  <dl class="param param-feature">
+    <dt>Porciones</dt>
+    <dd>8</dd>
+  </dl>  <!-- item-property-hor .// -->
+  <dl class="param param-feature">
+    <dt>Otra descripcion</dt>
+    <dd>Otrsa</dd>
+  </dl>  <!-- item-property-hor .// -->
+
+  <hr>
+    <div class="row">
+      <div class="col-sm-5">
+        <dl class="param param-inline">
+          <dt>Cantidad: </dt>
+          <dd>
+            <select class="form-control form-control-sm" style="width:70px;">
+              <option> 1 </option>
+              <option> 2 </option>
+              <option> 3 </option>
+            </select>
+          </dd>
+        </dl>  <!-- item-property .// -->
+      </div> <!-- col.// -->
+    </div> <!-- row.// -->
+    <hr>
+    <a href="/carrito" class="btn btn-lg btn-primary text-uppercase"> Comprar </a>
+    <a href="#" class="btn btn-lg btn-outline-primary text-uppercase"> <i class="fas fa-shopping-cart"></i> Add to cart </a>
+  </article> <!-- card-body.// -->
+      </aside> <!-- col.// -->
+    </div> <!-- row.// -->
+  </div> <!-- card.// -->
+
 
   </div>
-</div>
+  <!--container.//-->
