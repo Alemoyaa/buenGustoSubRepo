@@ -1,5 +1,8 @@
 package com.utn.app.buenGusto.DTO;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 public class DomicilioDTO extends CommonDTO {
 
 	private static final long serialVersionUID = 1L;
@@ -8,6 +11,7 @@ public class DomicilioDTO extends CommonDTO {
 	private int numero;
 	private String localidad;
 
+	@JsonIgnoreProperties("domicilioEntities")
 	private ClienteDTO clienteDomicilio;
 
 	public String getCalle() {
