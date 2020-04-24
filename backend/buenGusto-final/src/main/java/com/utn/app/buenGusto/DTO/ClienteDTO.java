@@ -10,6 +10,8 @@ public class ClienteDTO extends CommonDTO {
 	private String email;
 	private String uidFirebase;
 
+	private RolDTO rol;
+
 	public String getNombre() {
 		return nombre;
 	}
@@ -49,4 +51,13 @@ public class ClienteDTO extends CommonDTO {
 	public void setUidFirebase(String uidFirebase) {
 		this.uidFirebase = uidFirebase;
 	}
+
+	public RolDTO getRol() {
+		return rol;
+	}
+
+	public void setRol(RolDTO rol) {
+		this.rol = rol;
+	}
+
 }
