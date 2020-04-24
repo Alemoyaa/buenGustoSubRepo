@@ -38,6 +38,7 @@ export class CommonService<Entity> {
     .pipe(catchError(this.handleError));
   }
 
+
   handleError(error) {
     let errorMessage = 'Error manejado';
     if (error.error instanceof ErrorEvent) {
