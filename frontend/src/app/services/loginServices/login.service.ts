@@ -19,11 +19,10 @@ export class LoginService {
     email: '',
     foto: '',
     uidFirebase: '',
-    domicilio: {
+    rol: {
       id: 0,
-      calle: '',
-      localidad: '',
-      numero: null,
+      nombreRol : '',
+      descripcion: ''
     },
   };
 

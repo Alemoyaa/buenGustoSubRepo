@@ -11,18 +11,17 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class UserProfileComponent implements OnInit {
   cliente: Cliente = {
-    id: 1,
-    uidFirebase: '',
+    id: 0,
     nombre: '',
     apellido: '',
     telefono: null,
     email: '',
     foto: '',
-    domicilio: {
+    uidFirebase: '',
+    rol: {
       id: 0,
-      calle: '',
-      localidad: '',
-      numero: null,
+      nombreRol : '',
+      descripcion: ''
     },
   };
 

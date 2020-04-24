@@ -11,19 +11,18 @@ import { Component, OnInit } from '@angular/core';
 export class NavbarComponent implements OnInit {
   constructor(private serviceLogin: LoginService) {}
 
-  cliente: Cliente = {
+cliente: Cliente = {
     id: 0,
-    uidFirebase: '',
     nombre: '',
     apellido: '',
     telefono: null,
     email: '',
     foto: '',
-    domicilio: {
+    uidFirebase: '',
+    rol: {
       id: 0,
-      calle: '',
-      localidad: '',
-      numero: null,
+      nombreRol : '',
+      descripcion: ''
     },
   };
 
