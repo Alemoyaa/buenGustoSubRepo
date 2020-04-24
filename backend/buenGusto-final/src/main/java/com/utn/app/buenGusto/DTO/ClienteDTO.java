@@ -1,5 +1,9 @@
 package com.utn.app.buenGusto.DTO;
 
+import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 public class ClienteDTO extends CommonDTO {
 
 	private static final long serialVersionUID = 1L;
@@ -11,6 +15,9 @@ public class ClienteDTO extends CommonDTO {
 	private String uidFirebase;
 
 	private RolDTO rol;
+
+	@JsonIgnoreProperties("clienteDomicilio")
+	private List<DomicilioDTO> domicilioEntities;
 
 	public String getNombre() {
 		return nombre;
@@ -58,6 +65,14 @@ public class ClienteDTO extends CommonDTO {
 
 	public void setRol(RolDTO rol) {
 		this.rol = rol;
+	}
+
+	public List<DomicilioDTO> getDomicilioEntities() {
+		return domicilioEntities;
+	}
+
+	public void setDomicilioEntities(List<DomicilioDTO> domicilioEntities) {
+		this.domicilioEntities = domicilioEntities;
 	}
 
 }

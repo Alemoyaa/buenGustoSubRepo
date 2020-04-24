@@ -18,7 +18,7 @@ public class DomicilioEntity extends CommonEntity implements Serializable {
 	private String localidad;
 
 	@ManyToOne(targetEntity = ClienteEntity.class)
-	@JoinColumn(name = "cliente_fk_domicilio")
+	@JoinColumn(name = "cliente_fk_domicilio", nullable = false)
 	private ClienteEntity clienteDomicilio;
 
 	public String getCalle() {
