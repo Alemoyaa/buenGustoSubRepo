@@ -33,6 +33,8 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { UsuariosComponent } from './components/admin/gerente/dashboardGerenteComponents/usuarios/usuarios.component';
 
 import {NgxPaginationModule} from 'ngx-pagination';
+import { DashboardCocineroComponent } from './components/cocinero/dashboard-cocinero/dashboard-cocinero.component';
+import { DashboardCajeroComponent } from './components/cajero/dashboard-cajero/dashboard-cajero.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -53,6 +55,8 @@ import {NgxPaginationModule} from 'ngx-pagination';
     PedidosComponent,
     CatalogoDetalleComponent,
     UsuariosComponent,
+    DashboardCocineroComponent,
+    DashboardCajeroComponent,
   ],
   imports: [
     BrowserModule,
