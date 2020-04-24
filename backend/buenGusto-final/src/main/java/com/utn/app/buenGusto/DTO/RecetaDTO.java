@@ -4,6 +4,8 @@ import java.util.Date;
 
 public class RecetaDTO extends CommonDTO {
 
+	private static final long serialVersionUID = 1L;
+
 	private String nombreReceta;
 	private Date fechaDeAlta;
 

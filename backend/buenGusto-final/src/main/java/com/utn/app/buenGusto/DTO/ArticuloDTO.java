@@ -3,8 +3,6 @@ package com.utn.app.buenGusto.DTO;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.utn.app.buenGusto.entities.RubroGeneralEntity;
-
 public class ArticuloDTO extends CommonDTO {
 
 	private static final long serialVersionUID = 1L;
@@ -12,8 +10,8 @@ public class ArticuloDTO extends CommonDTO {
 	private String denominacion;
 	private double precioventa;
 
-	private List<RubroGeneralEntity> rubros;
-	
+	private List<RubroGeneralDTO> rubros = new ArrayList<RubroGeneralDTO>();
+
 	public String getDenominacion() {
 		return denominacion;
 	}
@@ -28,6 +26,14 @@ public class ArticuloDTO extends CommonDTO {
 
 	public void setPrecioventa(double precioventa) {
 		this.precioventa = precioventa;
+	}
+
+	public List<RubroGeneralDTO> getRubros() {
+		return rubros;
+	}
+
+	public void setRubros(List<RubroGeneralDTO> rubros) {
+		this.rubros = rubros;
 	}
 
 }

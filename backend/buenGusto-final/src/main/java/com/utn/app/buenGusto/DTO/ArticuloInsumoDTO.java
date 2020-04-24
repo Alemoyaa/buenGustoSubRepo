@@ -6,12 +6,13 @@ public class ArticuloInsumoDTO extends CommonDTO {
 
 	private String denominacion;
 	private double precioCompra;
-	private double precioVenta;
 	private double stockActual;
 	private double stockMinimo;
 	private String unidadMedida;
 
 	private String _urlImagen;
+
+	private ArticuloDTO articulo;
 
 	public String getDenominacion() {
 		return denominacion;
@@ -27,14 +28,6 @@ public class ArticuloInsumoDTO extends CommonDTO {
 
 	public void setPrecioCompra(double precioCompra) {
 		this.precioCompra = precioCompra;
-	}
-
-	public double getPrecioVenta() {
-		return precioVenta;
-	}
-
-	public void setPrecioVenta(double precioVenta) {
-		this.precioVenta = precioVenta;
 	}
 
 	public double getStockActual() {
@@ -67,5 +60,13 @@ public class ArticuloInsumoDTO extends CommonDTO {
 
 	public void set_urlImagen(String _urlImagen) {
 		this._urlImagen = _urlImagen;
+	}
+
+	public ArticuloDTO getArticulo() {
+		return articulo;
+	}
+
+	public void setArticulo(ArticuloDTO articulo) {
+		this.articulo = articulo;
 	}
 }

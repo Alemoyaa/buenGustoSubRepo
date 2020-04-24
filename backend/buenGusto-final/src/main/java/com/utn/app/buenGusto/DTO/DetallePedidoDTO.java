@@ -7,13 +7,9 @@ public class DetallePedidoDTO extends CommonDTO {
 	private int cantidad;
 	private double subtotal;
 
-	private ArticuloInsumoDTO articulo;
-
-	private ArticuloManufacturadoDTO articuloManufacturado;
-
-	private FacturaDTO factura;
-
 	private PedidoDTO pedido;
+
+	private ArticuloDTO articulo;
 
 	public int getCantidad() {
 		return cantidad;
@@ -31,36 +27,20 @@ public class DetallePedidoDTO extends CommonDTO {
 		this.subtotal = subtotal;
 	}
 
-	public ArticuloInsumoDTO getArticulo() {
-		return articulo;
-	}
-
-	public void setArticulo(ArticuloInsumoDTO articulo) {
-		this.articulo = articulo;
-	}
-
-	public ArticuloManufacturadoDTO getArticuloManufacturado() {
-		return articuloManufacturado;
-	}
-
-	public void setArticuloManufacturado(ArticuloManufacturadoDTO articuloManufacturado) {
-		this.articuloManufacturado = articuloManufacturado;
-	}
-
-	public FacturaDTO getFactura() {
-		return factura;
-	}
-
-	public void setFactura(FacturaDTO factura) {
-		this.factura = factura;
-	}
-
 	public PedidoDTO getPedido() {
 		return pedido;
 	}
 
 	public void setPedido(PedidoDTO pedido) {
 		this.pedido = pedido;
+	}
+
+	public ArticuloDTO getArticulo() {
+		return articulo;
+	}
+
+	public void setArticulo(ArticuloDTO articulo) {
+		this.articulo = articulo;
 	}
 
 }
