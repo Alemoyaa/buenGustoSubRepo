@@ -6,23 +6,14 @@ public class PedidoDTO extends CommonDTO {
 
 	private static final long serialVersionUID = 1L;
 
-	private int fecha;
+	private Date fecha;
 	private int numero;
 	private int estado;
+
 	private Date horaEstimadaFin;
 	private int tipoEnvio;
 
-	private FacturaDTO factura;
-
 	private ClienteDTO cliente;
-
-	public int getFecha() {
-		return fecha;
-	}
-
-	public void setFecha(int fecha) {
-		this.fecha = fecha;
-	}
 
 	public int getNumero() {
 		return numero;
@@ -56,20 +47,20 @@ public class PedidoDTO extends CommonDTO {
 		this.tipoEnvio = tipoEnvio;
 	}
 
-	public FacturaDTO getFactura() {
-		return factura;
-	}
-
-	public void setFactura(FacturaDTO factura) {
-		this.factura = factura;
-	}
-
 	public ClienteDTO getCliente() {
 		return cliente;
 	}
 
 	public void setCliente(ClienteDTO cliente) {
 		this.cliente = cliente;
+	}
+
+	public Date getFecha() {
+		return fecha;
+	}
+
+	public void setFecha(Date fecha) {
+		this.fecha = fecha;
 	}
 
 }

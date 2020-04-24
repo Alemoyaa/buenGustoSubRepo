@@ -58,7 +58,5 @@ public class ArticuloManufacturadoEntity extends CommonEntity implements Seriali
 	public void setArticulo(ArticuloEntity articulo) {
 		this.articulo = articulo;
 	}
-	
-	
 
 }
