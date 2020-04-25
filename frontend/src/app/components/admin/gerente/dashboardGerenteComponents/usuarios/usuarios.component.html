@@ -19,16 +19,16 @@
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let c of cliente">
+            <tr *ngFor="let cliente of clientes">
                 <th scope="row"> <i class="fas fa-user"></i></th>
-                <td>{{c.email}}</td>
-                <td>{{c.nombre}}</td>
-                <td>{{c.apellido}}</td>
-                <td>{{c.telefono}}</td>
-                <td>{{c.rol.nombreRol}}</td>
+                <td>{{cliente.email}}</td>
+                <td>{{cliente.nombre}}</td>
+                <td>{{cliente.apellido}}</td>
+                <td>{{cliente.telefono}}</td>
+                <td>{{cliente.rol.nombreRol}}</td>
                 <td>
                     <button class="btn btn-info mr-3" data-toggle="modal"
-                        data-target="#ModalPersona" (click)="preCargarDatosFormulario(c)"><i class="fas fa-pencil-alt"></i></button>
+                        data-target="#ModalPersona" (click)="preCargarDatosFormulario(cliente)"><i class="fas fa-pencil-alt"></i></button>
                     <button class="btn btn-danger mr-3" data-toggle="modal"><i class="fas fa-trash"></i></button>
                 </td>
             </tr>
@@ -82,18 +82,13 @@
                                 <input  type="text" formControlName="telefono" class="form-control" />
                             </div>
                         </div> 
-                        <div class="col-6">     
-                            <div class="form-group">
-                                <label for="">Foto</label>
-                                <input  type="text" formControlName="foto" class="form-control" />
-                            </div>
-                        </div> 
+                        
                         <div class="col-6">     
                             <div class="form-group" formGroupName=rol>
                                 <label for="">Rol</label>
-                                <select  (change)="seleccionarRol($event.target.value)" formControlName="nombreRol" class="form-control" id="rol" name="rol">
+                                <select  (change)="seleccionarRol($event.target.value)" formControlName="id"  class="form-control" id="rol" name="rol">
                                     
-                                    <option *ngFor="let item of rol" [value]="item.id" >{{item.nombreRol}}</option>
+                                    <option *ngFor="let item of rol" [value]="item.id"   >{{item.nombreRol}}</option>
                                     
                                 </select>
                             </div>

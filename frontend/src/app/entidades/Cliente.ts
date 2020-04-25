@@ -9,4 +9,5 @@ export class Cliente extends Common {
   email: string;
   foto?: string;
   rol: Rol;
+  domicilioEntities: Domicilio[];
 }

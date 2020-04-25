@@ -17,9 +17,9 @@ import { Rol } from 'src/app/entidades/Rol';
 export class UsuariosComponent implements OnInit {
 
   formularioPersona: FormGroup;
-  cliente: Cliente[] = new Array<Cliente>();
+  clientes: Cliente[] = new Array<Cliente>();
   rol: Rol[] = new Array<Rol>();
-  rolSeleccionado: Rol = new Rol();
+  rolSeleccionado: Rol;
   idCliente: number;
 
   constructor(private fb: FormBuilder, private clienteService: ClienteService, private rolService: RolService) { }
@@ -29,17 +29,21 @@ export class UsuariosComponent implements OnInit {
     this.traerDatos();
     this.crearFormulario();
     this.traerRoles();
-    
-    
+
+
   }
 
 
   // traigo todos los clientes con sus respectivos roles
   traerDatos() {
     this.clienteService.getAll().subscribe(data => {
-      console.log('data :', data);
+      console.log('Traer Datos () :', data);
+      data.forEach(a => {
+        console.log(a.rol.nombreRol);
+
+      });
       // seteo la data del service a la variable de el .ts
-      return this.cliente = data;
+      return this.clientes = data;
     });
   }
 
@@ -47,14 +51,15 @@ export class UsuariosComponent implements OnInit {
     // creo el formulario todo por default vacio y le asigno que sea disabled para q no se puedan editar
     // solo se podra editar el rol de la persona
     this.formularioPersona = this.fb.group({
-      nombre: new FormControl({ value: '', disabled: true }),
-      apellido: new FormControl({ value: '', disabled: true }),
-      telefono: new FormControl({ value: '', disabled: true }),
-      email: new FormControl({ value: '', disabled: true }),
-      foto: new FormControl({ value: '', disabled: true }),
+      nombre: '',
+      apellido: '',
+      telefono: '',
+      email: '',
+
       rol: this.fb.group({
-        nombreRol: new FormControl('', Validators.required),
-        descripcion: new FormControl({ value: '', disabled: true })
+        id: 0,
+        nombreRol: '',
+        descripcion: '',
       })
     });
   }
@@ -64,42 +69,57 @@ export class UsuariosComponent implements OnInit {
   // pre cargo los datos en el formulario de el usuario seleccionnado para editar el rol
   preCargarDatosFormulario(cliente: Cliente) {
     this.formularioPersona = this.fb.group({
-      nombre: new FormControl({ value: cliente.nombre, disabled: true }),
-      apellido: new FormControl({ value: cliente.apellido, disabled: true }),
-      telefono: new FormControl({ value: cliente.telefono, disabled: true }),
-      email: new FormControl({ value: cliente.email, disabled: true }),
-      foto: '',
+      nombre: cliente.nombre,
+      apellido: cliente.apellido,
+      telefono: cliente.telefono,
+      email: cliente.email,
+
       rol: this.fb.group({
-        nombreRol: '',
-        descripcion: ''
+        id: cliente.rol.id,
+        nombreRol: cliente.rol.nombreRol,
+        descripcion: cliente.rol.descripcion
       }),
-      
+
     });
+
+
     this.idCliente = cliente.id;
   }
 
   // Traer todos los posibles roles para mostrarlos en el html
   traerRoles() {
     this.rolService.getAll().subscribe(roles => {
-       this.rol = roles;
-       console.log('roles', this.rol);
+      this.rol = roles;
+      console.log('Traer Roles() :', this.rol);
     });
   }
 
   // seleccionamos rol en html
   seleccionarRol(id: number) {
-    console.log('id', id);
+    console.log('seleccionar rol id parametro :', id);
 
-    this.rolService.getOne(id).subscribe( rol =>{
-      this.rolSeleccionado = rol;
-      console.log(this.rolSeleccionado);
-    });
+    if (id != null) {
+      this.rolService.getOne(id).subscribe(rol => {
+        this.rolSeleccionado = rol;
+
+        console.log(this.rolSeleccionado);
+      });
+
+
+    }
+
+
   }
 
 
+
   // post a la base de datos con el cliente y su rol
-  actualizarRol(){
-    this.clienteService.put(this.idCliente, this.formularioPersona.value);
+  actualizarRol() {
+    // this.clienteService.put(this.idCliente, this.formularioPersona.value);
+    console.log('id cliente actualziarRol() ', this.idCliente);
+    console.log('formulario value actualziarRol() ', this.formularioPersona.value);
+
+
   }
 
 }

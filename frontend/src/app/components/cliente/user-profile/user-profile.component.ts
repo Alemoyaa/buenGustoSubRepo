@@ -10,20 +10,21 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./user-profile.component.css'],
 })
 export class UserProfileComponent implements OnInit {
-  cliente: Cliente = {
-    id: 0,
-    nombre: '',
-    apellido: '',
-    telefono: null,
-    email: '',
-    foto: '',
-    uidFirebase: '',
-    rol: {
-      id: 0,
-      nombreRol : '',
-      descripcion: ''
-    },
-  };
+  cliente: Cliente = new Cliente() ;
+  // {
+  //   id: 0,
+  //   nombre: '',
+  //   apellido: '',
+  //   telefono: null,
+  //   email: '',
+  //   foto: '',
+  //   uidFirebase: '',
+  //   rol: {
+  //     id: 0,
+  //     nombreRol : '',
+  //     descripcion: ''
+  //   },
+  // };
 
   constructor(
     private service: UserProfileService,
