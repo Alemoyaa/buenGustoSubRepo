@@ -10,7 +10,7 @@ public class ArticuloDTO extends CommonDTO {
 	private String denominacion;
 	private double precioventa;
 
-	private List<RubroGeneralDTO> rubros = new ArrayList<RubroGeneralDTO>();
+	//private List<RubroGeneralDTO> rubros = new ArrayList<RubroGeneralDTO>();
 
 	public String getDenominacion() {
 		return denominacion;
@@ -28,12 +28,12 @@ public class ArticuloDTO extends CommonDTO {
 		this.precioventa = precioventa;
 	}
 
-	public List<RubroGeneralDTO> getRubros() {
+	/*public List<RubroGeneralDTO> getRubros() {
 		return rubros;
 	}
 
 	public void setRubros(List<RubroGeneralDTO> rubros) {
 		this.rubros = rubros;
-	}
+	}*/
 
 }

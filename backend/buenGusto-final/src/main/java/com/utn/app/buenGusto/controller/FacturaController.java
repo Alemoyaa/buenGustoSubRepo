@@ -10,11 +10,9 @@ import com.utn.app.buenGusto.services.FacturaService;
 @RestController
 @RequestMapping(path = "api/factura")
 public class FacturaController extends CommonController<FacturaDTO> {
-	private FacturaService service;
 
 	public FacturaController(CommonIService<FacturaDTO> service, FacturaService fservice) {
 		super(service);
-		this.service = fservice;
 	}
 
 }

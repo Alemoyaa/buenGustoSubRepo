@@ -11,12 +11,9 @@ import com.utn.app.buenGusto.services.CommonIService;
 @RequestMapping(path = "api/articulo_manufacturado")
 public class ArticuloManufacturadoController extends CommonController<ArticuloManufacturadoDTO> {
 
-	private ArticuloManufacturadoService servicio;
-
 	public ArticuloManufacturadoController(CommonIService<ArticuloManufacturadoDTO> service,
 			ArticuloManufacturadoService Aservicio) {
 		super(service);
-		this.servicio = Aservicio;
 	}
 
 }

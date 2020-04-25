@@ -9,13 +9,10 @@ import com.utn.app.buenGusto.services.DomicilioService;
 
 @RestController
 @RequestMapping(path = "api/domicilio")
-public class DomicilioController extends CommonController<DomicilioDTO>{
-	
-	private DomicilioService servicio;
-	
-	public DomicilioController( CommonIService<DomicilioDTO> servicio, DomicilioService dService) {
+public class DomicilioController extends CommonController<DomicilioDTO> {
+
+	public DomicilioController(CommonIService<DomicilioDTO> servicio, DomicilioService dService) {
 		super(servicio);
-		this.servicio=dService;
 	}
 
 }

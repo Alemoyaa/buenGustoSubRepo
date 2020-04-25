@@ -9,14 +9,10 @@ import com.utn.app.buenGusto.services.RubroGeneralService;
 
 @RestController
 @RequestMapping(path = "api/rubro_general")
-public class RubroGeneralController extends CommonController<RubroGeneralDTO>{
-	
-	private RubroGeneralService servicio;
+public class RubroGeneralController extends CommonController<RubroGeneralDTO> {
 
 	public RubroGeneralController(CommonIService<RubroGeneralDTO> service, RubroGeneralService rubServicio) {
 		super(service);
-		this.servicio=rubServicio;
 	}
-	
-	
+
 }

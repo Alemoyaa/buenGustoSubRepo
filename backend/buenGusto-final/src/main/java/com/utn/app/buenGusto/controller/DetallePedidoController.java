@@ -9,14 +9,10 @@ import com.utn.app.buenGusto.services.DetallePedidoService;
 
 @RestController
 @RequestMapping(path = "api/detalle_pedido")
-public class DetallePedidoController extends CommonController<DetallePedidoDTO>{
-	
-	private DetallePedidoService servicio;
+public class DetallePedidoController extends CommonController<DetallePedidoDTO> {
 
-	public DetallePedidoController(CommonIService<DetallePedidoDTO> service,DetallePedidoService dServicio) {
+	public DetallePedidoController(CommonIService<DetallePedidoDTO> service, DetallePedidoService dServicio) {
 		super(service);
-		this.servicio= dServicio;
 	}
-	
 
 }

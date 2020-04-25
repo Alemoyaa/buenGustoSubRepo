@@ -11,10 +11,7 @@ import com.utn.app.buenGusto.services.RecetaDetalleService;
 @RequestMapping(path = "api/receta_detalle")
 public class RecetaDetalleController extends CommonController<RecetaDetalleDTO> {
 
-	private RecetaDetalleService servicio;
-
 	public RecetaDetalleController(CommonIService<RecetaDetalleDTO> service, RecetaDetalleService pservice) {
 		super(service);
-		this.servicio=pservice;
 	}
 }
