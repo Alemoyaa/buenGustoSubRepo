@@ -1,5 +1,6 @@
 package com.utn.app.buenGusto.entities;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,8 +13,13 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "articulo")
-public abstract class ArticuloEntity extends CommonEntity {
+public class ArticuloEntity extends CommonEntity implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
 	private String denominacion;
 	private double precioventa;
 
