@@ -91,11 +91,10 @@
                         <div class="col-6">     
                             <div class="form-group" formGroupName=rol>
                                 <label for="">Rol</label>
-                                <select formControlName="nombreRol" class="form-control" id="rol" name="rol">
-                                    <option value="1">Cliente</option>
-                                    <option value="2">Cocinero</option>
-                                    <option value="3">Cajero</option>
-                                    <option value="4">Admin</option>
+                                <select  (change)="seleccionarRol($event.target.value)" formControlName="nombreRol" class="form-control" id="rol" name="rol">
+                                    
+                                    <option *ngFor="let item of rol" [value]="item.id" >{{item.nombreRol}}</option>
+                                    
                                 </select>
                             </div>
                         </div>
@@ -105,7 +104,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-info">Editar</button>
+                <button type="button" class="btn btn-info" (click)="actualizarRol()" >Editar</button>
             </div>
         </div>
     </div>
