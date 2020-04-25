@@ -10,7 +10,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CatalogoComponent implements OnInit {
 
-  pageActual: number =1;
+  pageActual: number =1;//paginador
   articulosManufacturados: ArticuloManufacturado[] = [];
   rubro = ['Todo', 'Pizza', 'Lomo'];
 

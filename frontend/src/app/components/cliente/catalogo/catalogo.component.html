@@ -35,7 +35,7 @@
           <div class="col-md-9">
             <div class="products">
               <div class="row no-gutters">
-                <div class="col-12 col-md-6 col-lg-4 " *ngFor="let articulo of articulosManufacturados">
+                <div class="col-12 col-md-6 col-lg-4 " *ngFor="let articulo of articulosManufacturados | paginate: {itemsPerPage: 9, currentPage: pageActual}">
                   <article class="card card-product shadow-sm">
                     <img src="../../../../assets/pizza/pizza1.jpg" class="card-img-top p-1">
                     <div class="card-body">

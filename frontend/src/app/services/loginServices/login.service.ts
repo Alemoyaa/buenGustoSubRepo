@@ -11,27 +11,28 @@ import { auth } from 'firebase/app';
 export class LoginService {
   public providerId: string = 'null';
 
-  cliente: Cliente = {
-    id: 0,
-    nombre: '',
-    apellido: '',
-    telefono: null,
-    email: '',
-    foto: '',
-    uidFirebase: '',
-    domicilio: {
-      id: 0,
-      calle: '',
-      localidad: '',
-      numero: null,
-    },
-  };
+  cliente: Cliente = new Cliente();
+  // = 
+  // {
+  //   id: 0,
+  //   nombre: '',
+  //   apellido: '',
+  //   telefono: null,
+  //   email: '',
+  //   foto: '',
+  //   uidFirebase: '',
+  //   rol: {
+  //     id: 0,
+  //     nombreRol : '',
+  //     descripcion: ''
+  //   },
+  // };
 
   constructor(
     private afsAuth: AngularFireAuth,
     private route: Router,
     private clienteService: ClienteService
-  ) {}
+  ) { }
 
   //me traigo los datos que me da google
   datosGoogle(cliente: Cliente) {
@@ -55,7 +56,7 @@ export class LoginService {
           console.log('data', data);
           let uidCliente = data.user.uid;
 
-          this.clienteService.getByUidFirebase(uidCliente).subscribe((data)=>{
+          this.clienteService.getByUidFirebase(uidCliente).subscribe((data) => {
             console.log(data);
           })
 

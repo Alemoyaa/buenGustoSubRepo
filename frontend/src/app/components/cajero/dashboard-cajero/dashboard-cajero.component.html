@@ -7,7 +7,7 @@
       <!-- <div class="sidebar-brand-icon rotate-n-15">
         <i class="fas fa-laugh-wink"></i>
       </div> -->
-      <div class="sidebar-brand-text mx-3">Dashboard<sup>gerente</sup></div>
+      <div class="sidebar-brand-text mx-3">Dashboard<sup>cajero</sup></div>
     </a>
 
     <!-- Divider -->
@@ -29,24 +29,24 @@
     </div>
 
     <!-- Nav Item - Charts -->
-    <li class="nav-item" (click)="setBoard('tableroPizzaCrud')">
+    <!-- <li class="nav-item" (click)="setBoard('tableroPizzaCrud')">
       <a class="nav-link">
         <i class="fas fa-fw fa-pizza-slice"></i>
         <span>Pizzas</span></a>
-    </li>
+    </li> -->
     <!-- Nav Item - Charts -->
-    <li class="nav-item" (click)="setBoard('tableroStock')">
+    <!-- <li class="nav-item" (click)="setBoard('tableroStock')">
       <a class="nav-link">
         <i class="fas fa-fw fa-clipboard"></i>
         <span>Stock</span></a>
-    </li>
+    </li> -->
 
     <!-- Nav Item - Charts -->
-    <li class="nav-item" (click)="setBoard('tableroUsuario')">
+    <!-- <li class="nav-item" (click)="setBoard('tableroUsuario')">
       <a class="nav-link">
         <i class="fas fa-user"></i>
         <span>Usuarios</span></a>
-    </li>
+    </li> -->
     <!-- Divider -->
     <hr class="sidebar-divider" />
 
@@ -56,11 +56,11 @@
     </div>
 
     <!-- Nav Item - Charts -->
-    <li class="nav-item" (click)="setBoard('tableroEstadisticas')">
+    <!-- <li class="nav-item" (click)="setBoard('tableroEstadisticas')">
       <a class="nav-link">
         <i class="fas fa-fw fa-chart-area"></i>
         <span>Estadisticas</span></a>
-    </li>
+    </li> -->
 
 
     <!-- Divider -->
@@ -264,7 +264,7 @@
       <!-- Begin Page Content -->
       <div class="container-fluid">
         <!-- COMPONENTES -->
-        <div class="" *ngIf="tableroPizzaCrud">
+        <!-- <div class="" *ngIf="tableroPizzaCrud">
           <app-catalogo-crud></app-catalogo-crud>
         </div>
         <div class="" *ngIf="tableroStock">
@@ -276,49 +276,49 @@
         <div class="" *ngIf="tableroUsuario">
           <app-usuarios></app-usuarios>
         </div>
+      </div> -->
+
+        <!-- /.container-fluid -->
       </div>
+      <!-- End of Main Content -->
 
-      <!-- /.container-fluid -->
+      <!-- Footer -->
+      <footer class="sticky-footer bg-white">
+        <div class="container my-auto">
+          <div class="copyright text-center my-auto">
+            <span>Fast Food &copy; 2019</span>
+          </div>
+        </div>
+      </footer>
+      <!-- End of Footer -->
     </div>
-    <!-- End of Main Content -->
+    <!-- End of Content Wrapper -->
+  </div>
+  <!-- End of Page Wrapper -->
 
-    <!-- Footer -->
-    <footer class="sticky-footer bg-white">
-      <div class="container my-auto">
-        <div class="copyright text-center my-auto">
-          <span>Fast Food &copy; 2019</span>
+  <!-- Scroll to Top Button-->
+  <a class="scroll-to-top rounded" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+  </a>
+
+  <!-- Logout Modal-->
+  <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Cerrar sesión</h5>
+          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <div class="modal-body">¿Quiere cerrar sesión? Seleccione salir.</div>
+        <div class="modal-footer">
+          <button class="btn btn-secondary" type="button" data-dismiss="modal">
+            Cancelar
+          </button>
+          <a class="btn btn-primary" href="login.html">Salir</a>
         </div>
       </div>
-    </footer>
-    <!-- End of Footer -->
-  </div>
-  <!-- End of Content Wrapper -->
-</div>
-<!-- End of Page Wrapper -->
-
-<!-- Scroll to Top Button-->
-<a class="scroll-to-top rounded" href="#page-top">
-  <i class="fas fa-angle-up"></i>
-</a>
-
-<!-- Logout Modal-->
-<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-  aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Cerrar sesión</h5>
-        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">×</span>
-        </button>
-      </div>
-      <div class="modal-body">¿Quiere cerrar sesión? Seleccione salir.</div>
-      <div class="modal-footer">
-        <button class="btn btn-secondary" type="button" data-dismiss="modal">
-          Cancelar
-        </button>
-        <a class="btn btn-primary" href="login.html">Salir</a>
-      </div>
     </div>
   </div>
-</div>

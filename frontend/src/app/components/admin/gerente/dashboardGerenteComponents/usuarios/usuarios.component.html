@@ -14,23 +14,21 @@
                 <th scope="col">Nombre</th>
                 <th scope="col">Apellido</th>
                 <th scope="col">Telefono</th>
-                <th scope="col">Domicilio</th>
                 <th scope="col">Rol</th>
                 <th scope="col">Acciones</th>
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let c of cliente">
+            <tr *ngFor="let cliente of clientes">
                 <th scope="row"> <i class="fas fa-user"></i></th>
-                <td>{{c.email}}</td>
-                <td>{{c.nombre}}</td>
-                <td>{{c.apellido}}</td>
-                <td>{{c.telefono}}</td>
-                <td>calle numero localidad</td>
-                <td>cocinero</td>
+                <td>{{cliente.email}}</td>
+                <td>{{cliente.nombre}}</td>
+                <td>{{cliente.apellido}}</td>
+                <td>{{cliente.telefono}}</td>
+                <td>{{cliente.rol.nombreRol}}</td>
                 <td>
                     <button class="btn btn-info mr-3" data-toggle="modal"
-                        data-target="#ModalPersona"><i class="fas fa-pencil-alt"></i></button>
+                        data-target="#ModalPersona" (click)="preCargarDatosFormulario(cliente)"><i class="fas fa-pencil-alt"></i></button>
                     <button class="btn btn-danger mr-3" data-toggle="modal"><i class="fas fa-trash"></i></button>
                 </td>
             </tr>
@@ -54,7 +52,7 @@
                 </button>
             </div>
             <div class="modal-body text-lg-center">
-                <form action="">
+                <form action="" [formGroup]=formularioPersona>
                     <div class="row">
                         <div class="col-12">
                             <h5 class="modal-title" id="exampleModalLabel">Datos Personales</h5>
@@ -63,74 +61,45 @@
                         <div class="col-6">
                             <div class="form-group">
                                 <label for="">Nombre</label>
-                                <input disabled type="text" class="form-control" />
+                                <input  type="text" formControlName="nombre" class="form-control" />
                             </div>
                         </div>  
                         <div class="col-6">
                             <div class="form-group">
                                 <label for="">Apellido</label>
-                                <input disabled type="text" class="form-control" />
+                                <input  type="text" formControlName="apellido" class="form-control" />
                             </div>
                         </div>
                         <div class="col-6">     
                             <div class="form-group">
                                 <label for="">Email</label>
-                                <input disabled type="text" class="form-control" />
+                                <input  type="text" formControlName="email" class="form-control" />
                             </div>
                         </div> 
                         <div class="col-6">     
                             <div class="form-group">
                                 <label for="">Telefono</label>
-                                <input disabled type="text" class="form-control" />
-                            </div>
-                        </div> 
-                        <div class="col-6">     
-                            <div class="form-group">
-                                <label for="">Telefono</label>
-                                <input disabled type="text" class="form-control" />
-                            </div>
-                        </div> 
-                        <div class="col-6">     
-                            <div class="form-group">
-                                <label for="">Rol</label>
-                                <select class="form-control" id="rol" name="rol">
-                                    <option value="0">Cliente</option>
-                                    <option value="1">Cocinero</option>
-                                    <option value="2">Cajero</option>
-                                </select>
-                            </div>
-                        </div>
-
-                        <div class="col-12">
-                            <h5 class="modal-title" id="exampleModalLabel">Datos de el domicilio</h5>
-                        </div>
-                        <div class="col-4">     
-                            <div class="form-group">
-                                <label for="">Calle</label>
-                                <input disabled type="text" class="form-control" />
-                            </div>
-                        </div> 
-
-                        <div class="col-4">     
-                            <div class="form-group">
-                                <label for="">Numero</label>
-                                <input disabled type="text" class="form-control" />
+                                <input  type="text" formControlName="telefono" class="form-control" />
                             </div>
                         </div> 
                         
-                        <div class="col-4">     
-                            <div class="form-group">
-                                <label for="">Localidad</label>
-                                <input disabled type="text" class="form-control" />
+                        <div class="col-6">     
+                            <div class="form-group" formGroupName=rol>
+                                <label for="">Rol</label>
+                                <select  (change)="seleccionarRol($event.target.value)" formControlName="id"  class="form-control" id="rol" name="rol">
+                                    
+                                    <option *ngFor="let item of rol" [value]="item.id"   >{{item.nombreRol}}</option>
+                                    
+                                </select>
                             </div>
-                        </div> 
+                        </div>
 
                     </div>
                 </form>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-info">Editar</button>
+                <button type="button" class="btn btn-info" (click)="actualizarRol()" >Editar</button>
             </div>
         </div>
     </div>
