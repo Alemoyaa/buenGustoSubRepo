@@ -8,13 +8,10 @@ import com.utn.app.buenGusto.services.RolService;
 
 @RestController
 @RequestMapping(path = "api/rol")
-public class RolController extends CommonController<RolDTO>{
-	
-	private RolService servicio;
+public class RolController extends CommonController<RolDTO> {
 
 	public RolController(CommonIService<RolDTO> service, RolService rubServicio) {
 		super(service);
-		this.servicio=rubServicio;
 	}
 
 }

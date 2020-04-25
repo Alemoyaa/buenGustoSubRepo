@@ -1,6 +1,5 @@
 package com.utn.app.buenGusto.DTO;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 public class DomicilioDTO extends CommonDTO {

@@ -16,16 +16,15 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.utn.app.buenGusto.services.CommonIService;
 
-@CrossOrigin(origins = "*",
-methods={RequestMethod.GET,RequestMethod.POST,
-		  RequestMethod.DELETE,RequestMethod.PUT})
+@CrossOrigin(origins = "*", methods = { RequestMethod.GET, RequestMethod.POST, RequestMethod.DELETE,
+		RequestMethod.PUT })
 @Transactional
 public class CommonController<DTO> {
 	@Autowired
 	protected CommonIService<DTO> service;
-	
+
 	public CommonController(CommonIService<DTO> service) {
-		this.service=service;
+		this.service = service;
 	}
 
 	@GetMapping("/count")
@@ -70,7 +69,7 @@ public class CommonController<DTO> {
 		} catch (Exception e) {
 
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-					.body("{\"Mi mensaje post\": \"" + e.getLocalizedMessage() + "\" "+ e.getClass()+" }");
+					.body("{\"Mi mensaje post\": \"" + e.getLocalizedMessage() + "\" " + e.getClass() + " }");
 
 		}
 
