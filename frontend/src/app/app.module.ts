@@ -32,9 +32,11 @@ import { PedidosComponent } from './components/cliente/pedidos/pedidos.component
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { UsuariosComponent } from './components/admin/gerente/dashboardGerenteComponents/usuarios/usuarios.component';
 
-import {NgxPaginationModule} from 'ngx-pagination';
-import { DashboardCocineroComponent } from './components/cocinero/dashboard-cocinero/dashboard-cocinero.component';
-import { DashboardCajeroComponent } from './components/cajero/dashboard-cajero/dashboard-cajero.component';
+import { NgxPaginationModule } from 'ngx-pagination';
+import { DashboardCocineroComponent } from './components/admin/cocinero/dashboard-cocinero/dashboard-cocinero.component';
+import { DashboardCajeroComponent } from './components/admin/cajero/dashboard-cajero/dashboard-cajero.component';
+import { PedidosCajeroComponent } from './components/admin/cajero/dashBoardCajeroComponents/pedidos-cajero/pedidos-cajero.component';
+import { FacturacionCajeroComponent } from './components/admin/cajero/dashBoardCajeroComponents/facturacion-cajero/facturacion-cajero.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -57,6 +59,8 @@ import { DashboardCajeroComponent } from './components/cajero/dashboard-cajero/d
     UsuariosComponent,
     DashboardCocineroComponent,
     DashboardCajeroComponent,
+    PedidosCajeroComponent,
+    FacturacionCajeroComponent,
   ],
   imports: [
     BrowserModule,
@@ -66,10 +70,10 @@ import { DashboardCajeroComponent } from './components/cajero/dashboard-cajero/d
     FormsModule,
     ReactiveFormsModule,
     FontAwesomeModule,
-    NgxPaginationModule
+    NgxPaginationModule,
   ],
   providers: [AngularFireAuth, CommonService],
   bootstrap: [AppComponent],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA]
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class AppModule {}

@@ -1,3 +1,5 @@
+import { DashboardCajeroComponent } from './components/admin/cajero/dashboard-cajero/dashboard-cajero.component';
+import { DashboardCocineroComponent } from './components/admin/cocinero/dashboard-cocinero/dashboard-cocinero.component';
 import { CatalogoDetalleComponent } from './components/cliente/catalogo-detalle/catalogo-detalle.component';
 import { FacturaComponent } from './components/cliente/factura/factura.component';
 import { PedidosComponent } from './components/cliente/pedidos/pedidos.component';
@@ -23,8 +25,10 @@ const routes: Routes = [
   { path: 'user-profile', component: UserProfileComponent },
   { path: 'carrito', component: CarritoComponent },
   { path: 'admin/gerente/dashboard', component: DashboardGerenteComponent },
-  { path: 'pedido/:id', component: PedidosComponent},
-  { path: 'factura/:id', component: FacturaComponent},
+  { path: 'admin/cocinero/dashboard', component: DashboardCocineroComponent },
+  { path: 'admin/cajero/dashboard', component: DashboardCajeroComponent },
+  { path: 'pedido/:id', component: PedidosComponent },
+  { path: 'factura/:id', component: FacturaComponent },
   { path: '**', component: NotfoundComponent },
 ];
 
