@@ -11,20 +11,7 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class UserProfileComponent implements OnInit {
   cliente: Cliente = new Cliente() ;
-  // {
-  //   id: 0,
-  //   nombre: '',
-  //   apellido: '',
-  //   telefono: null,
-  //   email: '',
-  //   foto: '',
-  //   uidFirebase: '',
-  //   rol: {
-  //     id: 0,
-  //     nombreRol : '',
-  //     descripcion: ''
-  //   },
-  // };
+
 
   constructor(
     private service: UserProfileService,
@@ -33,11 +20,11 @@ export class UserProfileComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    //this.rutaActiva.params.subscribe(data => {
-      //if (data.id !== '0') {
-        //this.getOne(data.id);
-      //}
-    //});
+    this.rutaActiva.params.subscribe(data => {
+      if (data.id !== '0') {
+        this.getOne(data.id);
+      }
+    });
     this.datosUser();
   }
 
