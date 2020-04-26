@@ -22,7 +22,7 @@ const routes: Routes = [
   { path: 'catalogo', component: CatalogoComponent },
   { path: 'catalogo-detalle/:id', component: CatalogoDetalleComponent },
   { path: 'navbar', component: NavbarComponent },
-  { path: 'user-profile', component: UserProfileComponent },
+  { path: 'user-profile/:id', component: UserProfileComponent },
   { path: 'carrito', component: CarritoComponent },
   { path: 'admin/gerente/dashboard', component: DashboardGerenteComponent },
   { path: 'admin/cocinero/dashboard', component: DashboardCocineroComponent },
