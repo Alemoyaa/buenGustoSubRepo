@@ -10,13 +10,7 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class CatalogoDetalleComponent implements OnInit {
 
-   detalle: ArticuloManufacturadoDetalle={
-     articuloInsumo:null,
-     articuloManufacturado: null,
-     id:0,
-     cantidad:0,
-     unidadMedida: ''
-   };
+   detalle: ArticuloManufacturadoDetalle = new ArticuloManufacturadoDetalle();
 
   constructor(public service: ArticuloManufacturadoDetalleService, private routActiv: ActivatedRoute ) {}
 

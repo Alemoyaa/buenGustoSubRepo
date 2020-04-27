@@ -1,13 +1,13 @@
+import { Articulo } from './Articulo';
 import { RubroArticulo } from './RubroArticulo';
 import { Common } from './Common';
 
 export class ArticuloInsumo extends Common{
   denominacion: string;
   precioCompra: number;
-  precioVenta: number;
   stockActual: number;
   stockMinimo: number;
   unidadMedida: string;
-  esInsumo: boolean;
-  rubroArticulo: RubroArticulo;
+  _urlImagen: string;
+  articulo: Articulo;
 }

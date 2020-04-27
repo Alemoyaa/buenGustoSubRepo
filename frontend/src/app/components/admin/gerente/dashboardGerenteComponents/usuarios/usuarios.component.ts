@@ -118,8 +118,19 @@ export class UsuariosComponent implements OnInit {
     // this.clienteService.put(this.idCliente, this.formularioPersona.value);
     console.log('id cliente actualziarRol() ', this.idCliente);
     console.log('formulario value actualziarRol() ', this.formularioPersona.value);
+  }
 
+// se pide confirmacion de la eliminacion de el usuario y se elimina segun el id recibido por parametro
+  eliminar(id: number) {
+    const opcion = confirm('¿Esta seguro que desea eliminar?');
+    if (opcion) {
+      this.clienteService.delete(id).subscribe(data => {
+        alert('Registro eliminado');
+        this.formularioPersona.reset();
+      });
+    } else {
 
+    }
   }
 
 }

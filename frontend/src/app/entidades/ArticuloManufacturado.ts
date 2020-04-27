@@ -1,9 +1,10 @@
 import { Common } from './Common';
-import { RubroGeneral } from './RubroGeneral';
+import { Articulo } from './Articulo';
+import { Receta } from './Receta';
 export class ArticuloManufacturado extends Common{
   tiempoEstimadoCocina: number;
-  denominacion: string;
-  precioVenta: number;
-  rubroGeneral: RubroGeneral;
   _urlImagen: String;
+  receta : Receta;
+  articulo: Articulo;
+  
 }
