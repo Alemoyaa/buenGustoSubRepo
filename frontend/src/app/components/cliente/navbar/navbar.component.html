@@ -1,37 +1,39 @@
-<nav class="navbar navbar-light navbar-expand-md sticky-top">
-  <div class="container"><img id="logo" src="../../../../assets/assetsHome/img/foodLogo.png">
+<div class="" *ngIf="!hideNavbar()">
+  <nav class="navbar navbar-light navbar-expand-md sticky-top">
+    <div class="container"><img id="logo" src="../../../../assets/assetsHome/img/foodLogo.png">
 
-    <h5>
-      <a class="navbar-brand text-success" id="logo-letra" [routerLink]="['/']">Fast<strong>Food</strong></a>
-    </h5>
+      <h5>
+        <a class="navbar-brand text-success" id="logo-letra" [routerLink]="['/']">Fast<strong>Food</strong></a>
+      </h5>
 
-    <div class="collapse navbar-collapse" id="navcol-1">
-      <ul class="nav navbar-nav ml-auto">
-        <li *ngIf="!navbarUsuario" class="nav-item" role="presentation">
-          <a class="nav-link" [routerLink]="['/login']">Iniciar</a>
-        </li>
-        <li *ngIf="!navbarUsuario" class="nav-item" role="presentation">
-          <a class="nav-link" [routerLink]="['/register']">Registrar</a>
-        </li>
-        <li class="nav-item" role="presentation">
-          <a class="nav-link btn btn-success" [routerLink]="['/catalogo']">Ofertas</a>
-        </li>
-        <li class="nav-item" role="presentation">
-          <a class="nav-link" [routerLink]="['/catalogo']">Catalogo</a>
-        </li>
-        <li *ngIf="navbarUsuario" class="nav-item" role="presentation">
-          <a class="nav-link" id="avatar" [routerLink]="['/user-profile']"><img class="border rounded-circle"
-              src="{{cliente.foto}}" /></a>
-        </li>
-        <li *ngIf="navbarUsuario" class="nav-item" role="presentation">
-          <button class="nav-link btn btn-outline-light" (click)="cerrarSesion()">Cerrar Sesion</button>
-        </li>
-        <li class="nav-item" role="presentation">
-          <a class="nav-link" [routerLink]="['/admin/gerente/dashboard']"><i class="fas fa-tools"></i></a>
-        </li>
-        
+      <div class="collapse navbar-collapse" id="navcol-1">
+        <ul class="nav navbar-nav ml-auto">
+          <li *ngIf="!navbarUsuario" class="nav-item" role="presentation">
+            <a class="nav-link" [routerLink]="['/login']">Iniciar</a>
+          </li>
+          <li *ngIf="!navbarUsuario" class="nav-item" role="presentation">
+            <a class="nav-link" [routerLink]="['/register']">Registrar</a>
+          </li>
+          <li class="nav-item" role="presentation">
+            <a class="nav-link btn btn-success" [routerLink]="['/catalogo']">Ofertas</a>
+          </li>
+          <li class="nav-item" role="presentation">
+            <a class="nav-link" [routerLink]="['/catalogo']">Catalogo</a>
+          </li>
+          <li *ngIf="navbarUsuario" class="nav-item" role="presentation">
+            <a class="nav-link" id="avatar" [routerLink]="['/user-profile']"><img class="border rounded-circle"
+                src="{{cliente.foto}}" /></a>
+          </li>
+          <li *ngIf="navbarUsuario" class="nav-item" role="presentation">
+            <button class="nav-link btn btn-outline-light" (click)="cerrarSesion()">Cerrar Sesion</button>
+          </li>
+          <li class="nav-item" role="presentation">
+            <a class="nav-link" [routerLink]="['/admin/gerente/dashboard']"><i class="fas fa-tools"></i></a>
+          </li>
 
-      </ul>
+
+        </ul>
+      </div>
     </div>
-  </div>
-</nav>
+  </nav>
+</div>

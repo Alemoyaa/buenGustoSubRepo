@@ -6,30 +6,36 @@ import { ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'app-catalogo-detalle',
   templateUrl: './catalogo-detalle.component.html',
-  styleUrls: ['./catalogo-detalle.component.css']
+  styleUrls: ['./catalogo-detalle.component.css'],
 })
 export class CatalogoDetalleComponent implements OnInit {
+  detalle: ArticuloManufacturadoDetalle = new ArticuloManufacturadoDetalle();
 
-   detalle: ArticuloManufacturadoDetalle = new ArticuloManufacturadoDetalle();
-
-  constructor(public service: ArticuloManufacturadoDetalleService, private routActiv: ActivatedRoute ) {}
+  constructor(
+    public service: ArticuloManufacturadoDetalleService,
+    private routActiv: ActivatedRoute
+  ) {}
 
   ngOnInit(): void {
-
-   this.routActiv.params.subscribe((data)=>{
-       this.getOne(data.id);
-       console.log(data+ " la data");
-       console.log(data.id);
-     });
-  }
-
-  async getOne(id: number){
-   await this.service.getOne(id).subscribe((data) =>{
-   this.detalle= data;
-   console.log(this.detalle);
+    this.routActiv.params.subscribe((data) => {
+      this.getOne(data.id);
+      console.log(data + ' la data');
+      console.log(data.id);
     });
   }
 
+  async getOne(id: number) {
+    await this.service.getOne(id).subscribe((data) => {
+      this.detalle = data;
+      console.log(this.detalle);
+    });
+  }
+
+  addToCart() {
+    let string = localStorage.getItem('carrito');
+    let json = JSON.parse(string);
+    json.push({ id: this.detalle.id });
+    localStorage.setItem('carrito', JSON.stringify(json));
+    console.log(localStorage.getItem('carrito'));
+  }
 }
-
-

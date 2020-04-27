@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { Cliente } from './../../../entidades/Cliente';
 import { LoginService } from './../../../services/loginServices/login.service';
 
@@ -9,30 +10,30 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./navbar.component.css'],
 })
 export class NavbarComponent implements OnInit {
-  constructor(private serviceLogin: LoginService) {}
+  constructor(private serviceLogin: LoginService, private route: Router) {}
 
-cliente: Cliente = new Cliente();
-// {
-//     id: 0,
-//     nombre: '',
-//     apellido: '',
-//     telefono: null,
-//     email: '',
-//     foto: '',
-//     uidFirebase: '',
-//     rol: {
-//       id: 0,
-//       nombreRol : '',
-//       descripcion: ''
-//     },
+  cliente: Cliente = new Cliente();
+  // {
+  //     id: 0,
+  //     nombre: '',
+  //     apellido: '',
+  //     telefono: null,
+  //     email: '',
+  //     foto: '',
+  //     uidFirebase: '',
+  //     rol: {
+  //       id: 0,
+  //       nombreRol : '',
+  //       descripcion: ''
+  //     },
 
-//   };
+  //   };
 
   navbarUsuario = true;
 
   ngOnInit(): void {
     this.existeUsuario();
-
+    this.setCarrito();
     this.serviceLogin.datosGoogle(this.cliente); //para mostrar la foto de perfil en el navbar
   }
 
@@ -48,5 +49,22 @@ cliente: Cliente = new Cliente();
 
   cerrarSesion() {
     this.serviceLogin.logout();
+  }
+
+  hideNavbar() {
+    if (this.route.url.includes('admin')) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+  setCarrito() {
+    if (localStorage.getItem('carrito')) {
+      console.log('Carrito existe');
+    } else {
+      let articulos = [];
+      let articulosJson = JSON.stringify(articulos);
+      localStorage.setItem('carrito', articulosJson);
+    }
   }
 }
