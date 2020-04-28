@@ -7,7 +7,7 @@ import com.utn.app.buenGusto.common.CommonController;
 import com.utn.app.buenGusto.common.CommonIService;
 
 @RestController
-@RequestMapping(path = "api/configuracion_genereal")
+@RequestMapping(path = "api/configuracion_general")
 public class ConfiguracionGeneralController extends CommonController<ConfiguracionGeneralDTO> {
 	public ConfiguracionGeneralController(CommonIService<ConfiguracionGeneralDTO> servicio,
 			ConfiguracionGeneralService cServicio) {
