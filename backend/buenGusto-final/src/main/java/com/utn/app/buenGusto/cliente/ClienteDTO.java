@@ -19,10 +19,10 @@ public class ClienteDTO extends CommonDTO {
 	private Date fechaBaja;
 	private String uidFirebase;
 
-	private RolDTO rol;
+	/*private RolDTO rol;
 
-	@JsonIgnoreProperties("clienteDomicilio")
-	private DomicilioDTO domicilio;
+	@JsonIgnoreProperties("clienteDomicilio") 
+	private DomicilioDTO domicilio; 
 
 	public String getNombre() {
 		return nombre;
@@ -62,27 +62,10 @@ public class ClienteDTO extends CommonDTO {
 
 	public void setUidFirebase(String uidFirebase) {
 		this.uidFirebase = uidFirebase;
-	}
+	} 
 
 	public String getFoto() {
-		return foto;
-	}
-
-	public void setFoto(String foto) {
-		this.foto = foto;
-	}
-
-	public Date getFechaBaja() {
-		return fechaBaja;
-	}
-
-	public void setFechaBaja(Date fechaBaja) {
-		this.fechaBaja = fechaBaja;
-	}
-
-	public RolDTO getRol() {
 		return rol;
-	}
 
 	public void setRol(RolDTO rol) {
 		this.rol = rol;
@@ -91,9 +74,9 @@ public class ClienteDTO extends CommonDTO {
 	public DomicilioDTO getDomicilio() {
 		return domicilio;
 	}
-
+ 
 	public void setDomicilio(DomicilioDTO domicilio) {
 		this.domicilio = domicilio;
-	}
+	} 
 
 }

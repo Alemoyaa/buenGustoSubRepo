@@ -1,5 +1,7 @@
 package com.utn.app.buenGusto.articuloInsumo;
 
+import java.sql.Date;
+
 import com.utn.app.buenGusto.articulo.ArticuloDTO;
 import com.utn.app.buenGusto.common.CommonDTO;
 
@@ -8,14 +10,14 @@ public class ArticuloInsumoDTO extends CommonDTO {
 	private static final long serialVersionUID = 1L;
 
 	private String denominacion;
-	private double precioCompra;
-	private double stockActual;
-	private double stockMinimo;
-	private String unidadMedida;
-
-	private String _urlImagen;
-
-	private ArticuloDTO articulo;
+	
+	private double precioDeVenta;
+	
+	private double costoDeVenta;
+	
+	private boolean requiereRefrigeracion;
+	
+	private Date fechaBaja;
 
 	public String getDenominacion() {
 		return denominacion;
@@ -25,51 +27,35 @@ public class ArticuloInsumoDTO extends CommonDTO {
 		this.denominacion = denominacion;
 	}
 
-	public double getPrecioCompra() {
-		return precioCompra;
+	public double getPrecioDeVenta() {
+		return precioDeVenta;
 	}
 
-	public void setPrecioCompra(double precioCompra) {
-		this.precioCompra = precioCompra;
+	public void setPrecioDeVenta(double precioDeVenta) {
+		this.precioDeVenta = precioDeVenta;
 	}
 
-	public double getStockActual() {
-		return stockActual;
+	public double getCostoDeVenta() {
+		return costoDeVenta;
 	}
 
-	public void setStockActual(double stockActual) {
-		this.stockActual = stockActual;
+	public void setCostoDeVenta(double costoDeVenta) {
+		this.costoDeVenta = costoDeVenta;
 	}
 
-	public double getStockMinimo() {
-		return stockMinimo;
+	public boolean isRequiereRefrigeracion() {
+		return requiereRefrigeracion;
 	}
 
-	public void setStockMinimo(double stockMinimo) {
-		this.stockMinimo = stockMinimo;
+	public void setRequiereRefrigeracion(boolean requiereRefrigeracion) {
+		this.requiereRefrigeracion = requiereRefrigeracion;
 	}
 
-	public String getUnidadMedida() {
-		return unidadMedida;
+	public Date getFechaBaja() {
+		return fechaBaja;
 	}
 
-	public void setUnidadMedida(String unidadMedida) {
-		this.unidadMedida = unidadMedida;
-	}
-
-	public String get_urlImagen() {
-		return _urlImagen;
-	}
-
-	public void set_urlImagen(String _urlImagen) {
-		this._urlImagen = _urlImagen;
-	}
-
-	public ArticuloDTO getArticulo() {
-		return articulo;
-	}
-
-	public void setArticulo(ArticuloDTO articulo) {
-		this.articulo = articulo;
+	public void setFechaBaja(Date fechaBaja) {
+		this.fechaBaja = fechaBaja;
 	}
 }

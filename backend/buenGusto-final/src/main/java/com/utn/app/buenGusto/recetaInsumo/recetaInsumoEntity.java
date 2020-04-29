@@ -1,15 +1,24 @@
-package com.utn.app.buenGusto.receta;
+package com.utn.app.buenGusto.recetaInsumo;
 
+import java.io.Serializable;
 import java.util.Date;
 
-import com.utn.app.buenGusto.common.CommonDTO;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
-public class RecetaDTO extends CommonDTO {
+import com.utn.app.buenGusto.common.CommonEntity;
+
+@Entity
+@Table(name = "receta_insumo")
+public class recetaInsumoEntity extends CommonEntity implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 
 	private String nombre; 
-	 
+
+	@Temporal(TemporalType.TIMESTAMP)
 	private Date fechaAlta;
 	
 	private Date fechaBaja;
@@ -38,5 +47,5 @@ public class RecetaDTO extends CommonDTO {
 	public void setFechaBaja(Date fechaBaja) {
 		this.fechaBaja = fechaBaja;
 	}
-
+	
 }

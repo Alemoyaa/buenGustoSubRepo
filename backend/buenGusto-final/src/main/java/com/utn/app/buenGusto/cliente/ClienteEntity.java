@@ -31,10 +31,10 @@ public class ClienteEntity extends CommonEntity implements Serializable {
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "rol_cliente")
 	private RolEntity rol;
-
+ 
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "domicilio_cliente")
-	private DomicilioEntity domicilio;
+	private DomicilioEntity domicilio; 
 
 	public String getNombre() {
 		return nombre;
@@ -75,7 +75,7 @@ public class ClienteEntity extends CommonEntity implements Serializable {
 	public void setUidFirebase(String uidFirebase) {
 		this.uidFirebase = uidFirebase;
 	}
-
+ 
 	public String getFoto() {
 		return foto;
 	}
@@ -91,8 +91,8 @@ public class ClienteEntity extends CommonEntity implements Serializable {
 	public void setFechaBaja(Date fechaBaja) {
 		this.fechaBaja = fechaBaja;
 	}
-
-	public RolEntity getRol() {
+ 
+	/*public RolEntity getRol() { 
 		return rol;
 	}
 
@@ -103,9 +103,9 @@ public class ClienteEntity extends CommonEntity implements Serializable {
 	public DomicilioEntity getDomicilio() {
 		return domicilio;
 	}
-
+ 
 	public void setDomicilio(DomicilioEntity domicilio) {
 		this.domicilio = domicilio;
-	}
+	} 
 
 }

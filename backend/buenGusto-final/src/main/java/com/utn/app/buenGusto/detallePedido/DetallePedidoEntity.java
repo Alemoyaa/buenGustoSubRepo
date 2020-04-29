@@ -17,15 +17,13 @@ public class DetallePedidoEntity extends CommonEntity implements Serializable {
 
 	private static final long serialVersionUID = -7168593642662662191L;
 
-	private int cantidad;
+	private int cantidad; 
 	private double subtotal;
 
 	// ---------Pedido---------
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "pedido_id")
-	private PedidoEntity pedido;
-
-
+	private PedidoEntity pedido; 
 
 	public int getCantidad() {
 		return cantidad;
@@ -41,6 +39,7 @@ public class DetallePedidoEntity extends CommonEntity implements Serializable {
 
 	public void setSubtotal(double subtotal) {
 		this.subtotal = subtotal;
+ 
 	}
 
 	public PedidoEntity getPedido() {
@@ -50,5 +49,5 @@ public class DetallePedidoEntity extends CommonEntity implements Serializable {
 	public void setPedido(PedidoEntity pedido) {
 		this.pedido = pedido;
 	}
- 
+  
 }

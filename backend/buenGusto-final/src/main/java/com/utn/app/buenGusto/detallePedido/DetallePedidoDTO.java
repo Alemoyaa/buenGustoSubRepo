@@ -8,9 +8,9 @@ public class DetallePedidoDTO extends CommonDTO {
 	private static final long serialVersionUID = 1L;
 
 	private int cantidad;
-	private double subtotal;
+	private double subtotal; 
 
-	private PedidoDTO pedido; 
+	private PedidoDTO pedido;  
 
 	public int getCantidad() {
 		return cantidad;
@@ -25,7 +25,7 @@ public class DetallePedidoDTO extends CommonDTO {
 	}
 
 	public void setSubtotal(double subtotal) {
-		this.subtotal = subtotal;
+		this.subtotal = subtotal; 
 	}
 
 	public PedidoDTO getPedido() {
@@ -33,7 +33,7 @@ public class DetallePedidoDTO extends CommonDTO {
 	}
 
 	public void setPedido(PedidoDTO pedido) {
-		this.pedido = pedido;
+		this.pedido = pedido; 
 	} 
 
 }
