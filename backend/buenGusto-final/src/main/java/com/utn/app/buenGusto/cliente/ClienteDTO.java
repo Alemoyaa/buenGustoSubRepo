@@ -1,6 +1,6 @@
 package com.utn.app.buenGusto.cliente;
 
-import java.util.List;
+import java.sql.Date;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.utn.app.buenGusto.common.CommonDTO;
@@ -15,12 +15,14 @@ public class ClienteDTO extends CommonDTO {
 	private String apellido;
 	private long telefono;
 	private String email;
+	private String foto;
+	private Date fechaBaja;
 	private String uidFirebase;
 
 	private RolDTO rol;
 
 	@JsonIgnoreProperties("clienteDomicilio")
-	private List<DomicilioDTO> domicilioEntities;
+	private DomicilioDTO domicilio;
 
 	public String getNombre() {
 		return nombre;
@@ -62,6 +64,22 @@ public class ClienteDTO extends CommonDTO {
 		this.uidFirebase = uidFirebase;
 	}
 
+	public String getFoto() {
+		return foto;
+	}
+
+	public void setFoto(String foto) {
+		this.foto = foto;
+	}
+
+	public Date getFechaBaja() {
+		return fechaBaja;
+	}
+
+	public void setFechaBaja(Date fechaBaja) {
+		this.fechaBaja = fechaBaja;
+	}
+
 	public RolDTO getRol() {
 		return rol;
 	}
@@ -70,12 +88,12 @@ public class ClienteDTO extends CommonDTO {
 		this.rol = rol;
 	}
 
-	public List<DomicilioDTO> getDomicilioEntities() {
-		return domicilioEntities;
+	public DomicilioDTO getDomicilio() {
+		return domicilio;
 	}
 
-	public void setDomicilioEntities(List<DomicilioDTO> domicilioEntities) {
-		this.domicilioEntities = domicilioEntities;
+	public void setDomicilio(DomicilioDTO domicilio) {
+		this.domicilio = domicilio;
 	}
 
 }

@@ -3,14 +3,11 @@ package com.utn.app.buenGusto.detallePedido;
 import java.io.Serializable;
 
 import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
+import javax.persistence.Entity; 
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne; 
 import javax.persistence.Table;
-
-import com.utn.app.buenGusto.articulo.ArticuloEntity;
+ 
 import com.utn.app.buenGusto.common.CommonEntity;
 import com.utn.app.buenGusto.pedido.PedidoEntity;
 
@@ -28,10 +25,7 @@ public class DetallePedidoEntity extends CommonEntity implements Serializable {
 	@JoinColumn(name = "pedido_id")
 	private PedidoEntity pedido;
 
-	// ---------Articulo--------
-	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL) // trae atributos y sus correspondientes relaciones
-	@JoinColumn(name = "articulo_id")
-	private ArticuloEntity articulo;
+
 
 	public int getCantidad() {
 		return cantidad;
@@ -56,13 +50,5 @@ public class DetallePedidoEntity extends CommonEntity implements Serializable {
 	public void setPedido(PedidoEntity pedido) {
 		this.pedido = pedido;
 	}
-
-	public ArticuloEntity getArticulo() {
-		return articulo;
-	}
-
-	public void setArticulo(ArticuloEntity articulo) {
-		this.articulo = articulo;
-	}
-
+ 
 }

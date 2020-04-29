@@ -3,8 +3,8 @@ package com.utn.app.buenGusto.domicilio;
 import java.io.Serializable;
 
 import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.FetchType;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.utn.app.buenGusto.cliente.ClienteEntity;
@@ -18,11 +18,11 @@ public class DomicilioEntity extends CommonEntity implements Serializable {
 
 	private String calle;
 	private int numero;
-	private String localidad;
+	private String ciudad;
+	private String provincia;
 
-	@ManyToOne(targetEntity = ClienteEntity.class)
-	@JoinColumn(name = "cliente_fk_domicilio", nullable = false)
-	private ClienteEntity clienteDomicilio;
+	@OneToOne(mappedBy = "domicilio", fetch = FetchType.LAZY)
+	private ClienteEntity cliente;
 
 	public String getCalle() {
 		return calle;
@@ -39,21 +39,29 @@ public class DomicilioEntity extends CommonEntity implements Serializable {
 	public void setNumero(int numero) {
 		this.numero = numero;
 	}
-
-	public String getLocalidad() {
-		return localidad;
+ 
+	public ClienteEntity getCliente() {
+		return cliente;
 	}
 
-	public void setLocalidad(String localidad) {
-		this.localidad = localidad;
+	public void setCliente(ClienteEntity cliente) {
+		this.cliente = cliente;
 	}
 
-	public ClienteEntity getClienteDomicilio() {
-		return clienteDomicilio;
+	public String getCiudad() {
+		return ciudad;
 	}
 
-	public void setClienteDomicilio(ClienteEntity clienteDomicilio) {
-		this.clienteDomicilio = clienteDomicilio;
+	public void setCiudad(String ciudad) {
+		this.ciudad = ciudad;
+	}
+
+	public String getProvincia() {
+		return provincia;
+	}
+
+	public void setProvincia(String provincia) {
+		this.provincia = provincia;
 	}
 
 }

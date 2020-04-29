@@ -1,8 +1,5 @@
 package com.utn.app.buenGusto.articulo;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.utn.app.buenGusto.common.CommonDTO;
 
 public class ArticuloDTO extends CommonDTO {

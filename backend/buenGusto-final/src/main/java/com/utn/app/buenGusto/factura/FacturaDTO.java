@@ -3,6 +3,7 @@ package com.utn.app.buenGusto.factura;
 import java.util.Date;
 
 import com.utn.app.buenGusto.common.CommonDTO;
+import com.utn.app.buenGusto.pedido.PedidoDTO;
 
 public class FacturaDTO extends CommonDTO {
 
@@ -14,6 +15,8 @@ public class FacturaDTO extends CommonDTO {
 	private double total;
 	private String formaPago;
 	private String nroTarjeta;
+	
+	private PedidoDTO pedido;
 
 	public int getNúmero() {
 		return número;
@@ -62,4 +65,14 @@ public class FacturaDTO extends CommonDTO {
 	public void setNroTarjeta(String nroTarjeta) {
 		this.nroTarjeta = nroTarjeta;
 	}
+
+	public PedidoDTO getPedido() {
+		return pedido;
+	}
+
+	public void setPedido(PedidoDTO pedido) {
+		this.pedido = pedido;
+	}
+	
+	
 }
