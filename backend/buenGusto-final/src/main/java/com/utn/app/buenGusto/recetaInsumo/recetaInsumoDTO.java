@@ -1,15 +1,15 @@
-package com.utn.app.buenGusto.receta;
-
+package com.utn.app.buenGusto.recetaInsumo;
+ 
 import java.util.Date;
 
 import com.utn.app.buenGusto.common.CommonDTO;
 
-public class RecetaDTO extends CommonDTO {
+public class recetaInsumoDTO extends CommonDTO{
 
 	private static final long serialVersionUID = 1L;
 
 	private String nombre; 
-	 
+ 
 	private Date fechaAlta;
 	
 	private Date fechaBaja;
@@ -38,5 +38,5 @@ public class RecetaDTO extends CommonDTO {
 	public void setFechaBaja(Date fechaBaja) {
 		this.fechaBaja = fechaBaja;
 	}
-
+	
 }

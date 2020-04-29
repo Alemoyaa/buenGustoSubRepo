@@ -1,6 +1,7 @@
 package com.utn.app.buenGusto.articuloManufacturado;
 
 import java.io.Serializable;
+import java.sql.Date;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -8,10 +9,8 @@ import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-
-import com.utn.app.buenGusto.articulo.ArticuloEntity;
-import com.utn.app.buenGusto.common.CommonEntity;
-import com.utn.app.buenGusto.receta.RecetaEntity;
+ 
+import com.utn.app.buenGusto.common.CommonEntity; 
 
 @Entity
 @Table(name = "articulo_manufacturado")
@@ -22,14 +21,14 @@ public class ArticuloManufacturadoEntity extends CommonEntity implements Seriali
 	private int tiempoEstimadoCocina;
 
 	private String _urlImagen;
+	
+	private String denominacion;
 
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "receta_id")
-	private RecetaEntity receta;
-
-	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL) // trae atributos y sus correspondientes relaciones
-	@JoinColumn(name = "articulo_id")
-	private ArticuloEntity articulo;
+	private double precioVenta;
+	
+	private double costoVenta;
+	
+	private Date fechaBaja;
 
 	public int getTiempoEstimadoCocina() {
 		return tiempoEstimadoCocina;
@@ -47,20 +46,36 @@ public class ArticuloManufacturadoEntity extends CommonEntity implements Seriali
 		this._urlImagen = _urlImagen;
 	}
 
-	public RecetaEntity getReceta() {
-		return receta;
+	public String getDenominacion() {
+		return denominacion;
 	}
 
-	public void setReceta(RecetaEntity receta) {
-		this.receta = receta;
+	public void setDenominacion(String denominacion) {
+		this.denominacion = denominacion;
 	}
 
-	public ArticuloEntity getArticulo() {
-		return articulo;
+	public double getPrecioVenta() {
+		return precioVenta;
 	}
 
-	public void setArticulo(ArticuloEntity articulo) {
-		this.articulo = articulo;
+	public void setPrecioVenta(double precioVenta) {
+		this.precioVenta = precioVenta;
 	}
 
+	public double getCostoVenta() {
+		return costoVenta;
+	}
+
+	public void setCostoVenta(double costoVenta) {
+		this.costoVenta = costoVenta;
+	}
+
+	public Date getFechaBaja() {
+		return fechaBaja;
+	}
+
+	public void setFechaBaja(Date fechaBaja) {
+		this.fechaBaja = fechaBaja;
+	}
+	 
 }

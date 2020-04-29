@@ -1,8 +1,8 @@
 package com.utn.app.buenGusto.articuloManufacturado;
+ 
+import java.sql.Date;
 
-import com.utn.app.buenGusto.articulo.ArticuloDTO;
-import com.utn.app.buenGusto.common.CommonDTO;
-import com.utn.app.buenGusto.receta.RecetaDTO;
+import com.utn.app.buenGusto.common.CommonDTO; 
 
 public class ArticuloManufacturadoDTO extends CommonDTO {
 
@@ -11,10 +11,14 @@ public class ArticuloManufacturadoDTO extends CommonDTO {
 	private int tiempoEstimadoCocina;
 
 	private String _urlImagen;
+	
+	private String denominacion;
 
-	private RecetaDTO receta;
-
-	private ArticuloDTO articulo;
+	private double precioVenta;
+	
+	private double costoVenta;
+	
+	private Date fechaBaja;
 
 	public int getTiempoEstimadoCocina() {
 		return tiempoEstimadoCocina;
@@ -32,20 +36,36 @@ public class ArticuloManufacturadoDTO extends CommonDTO {
 		this._urlImagen = _urlImagen;
 	}
 
-	public RecetaDTO getReceta() {
-		return receta;
+	public String getDenominacion() {
+		return denominacion;
 	}
 
-	public void setReceta(RecetaDTO receta) {
-		this.receta = receta;
+	public void setDenominacion(String denominacion) {
+		this.denominacion = denominacion;
 	}
 
-	public ArticuloDTO getArticulo() {
-		return articulo;
+	public double getPrecioVenta() {
+		return precioVenta;
 	}
 
-	public void setArticulo(ArticuloDTO articulo) {
-		this.articulo = articulo;
+	public void setPrecioVenta(double precioVenta) {
+		this.precioVenta = precioVenta;
 	}
 
+	public double getCostoVenta() {
+		return costoVenta;
+	}
+
+	public void setCostoVenta(double costoVenta) {
+		this.costoVenta = costoVenta;
+	}
+
+	public Date getFechaBaja() {
+		return fechaBaja;
+	}
+
+	public void setFechaBaja(Date fechaBaja) {
+		this.fechaBaja = fechaBaja;
+	}
+	 
 }

@@ -27,12 +27,12 @@ public class ClienteEntity extends CommonEntity implements Serializable {
 	private String email;
 	private String uidFirebase;
 
-	@ManyToOne(cascade = CascadeType.ALL)
+	/*@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "rol_cliente")
 	private RolEntity rol;
 
 	@OneToMany(mappedBy = "clienteDomicilio", cascade = CascadeType.ALL)
-	private List<DomicilioEntity> domicilioEntities = new ArrayList<DomicilioEntity>();
+	private List<DomicilioEntity> domicilioEntities = new ArrayList<DomicilioEntity>();*/
 
 	public String getNombre() {
 		return nombre;
@@ -74,7 +74,7 @@ public class ClienteEntity extends CommonEntity implements Serializable {
 		this.uidFirebase = uidFirebase;
 	}
 
-	public RolEntity getRol() {
+	/*public RolEntity getRol() {
 		return rol;
 	}
 
@@ -88,6 +88,6 @@ public class ClienteEntity extends CommonEntity implements Serializable {
 
 	public void setDomicilioEntities(List<DomicilioEntity> domicilioEntities) {
 		this.domicilioEntities = domicilioEntities;
-	}
+	}*/
 
 }

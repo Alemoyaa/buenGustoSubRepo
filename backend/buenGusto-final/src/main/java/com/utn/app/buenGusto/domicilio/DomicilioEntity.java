@@ -20,9 +20,9 @@ public class DomicilioEntity extends CommonEntity implements Serializable {
 	private int numero;
 	private String localidad;
 
-	@ManyToOne(targetEntity = ClienteEntity.class)
+	/*@ManyToOne(targetEntity = ClienteEntity.class)
 	@JoinColumn(name = "cliente_fk_domicilio", nullable = false)
-	private ClienteEntity clienteDomicilio;
+	private ClienteEntity clienteDomicilio;*/
 
 	public String getCalle() {
 		return calle;
@@ -48,12 +48,12 @@ public class DomicilioEntity extends CommonEntity implements Serializable {
 		this.localidad = localidad;
 	}
 
-	public ClienteEntity getClienteDomicilio() {
+	/*public ClienteEntity getClienteDomicilio() {
 		return clienteDomicilio;
 	}
 
 	public void setClienteDomicilio(ClienteEntity clienteDomicilio) {
 		this.clienteDomicilio = clienteDomicilio;
-	}
+	}*/
 
 }

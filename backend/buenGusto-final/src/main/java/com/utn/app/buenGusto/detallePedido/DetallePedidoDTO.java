@@ -10,10 +10,7 @@ public class DetallePedidoDTO extends CommonDTO {
 
 	private int cantidad;
 	private double subtotal;
-
-	private PedidoDTO pedido;
-
-	private ArticuloDTO articulo;
+ 
 
 	public int getCantidad() {
 		return cantidad;
@@ -29,22 +26,6 @@ public class DetallePedidoDTO extends CommonDTO {
 
 	public void setSubtotal(double subtotal) {
 		this.subtotal = subtotal;
-	}
-
-	public PedidoDTO getPedido() {
-		return pedido;
-	}
-
-	public void setPedido(PedidoDTO pedido) {
-		this.pedido = pedido;
-	}
-
-	public ArticuloDTO getArticulo() {
-		return articulo;
-	}
-
-	public void setArticulo(ArticuloDTO articulo) {
-		this.articulo = articulo;
-	}
+	} 
 
 }

@@ -17,10 +17,10 @@ public class ClienteDTO extends CommonDTO {
 	private String email;
 	private String uidFirebase;
 
-	private RolDTO rol;
+	/*private RolDTO rol;
 
 	@JsonIgnoreProperties("clienteDomicilio")
-	private List<DomicilioDTO> domicilioEntities;
+	private List<DomicilioDTO> domicilioEntities;*/
 
 	public String getNombre() {
 		return nombre;
@@ -62,7 +62,7 @@ public class ClienteDTO extends CommonDTO {
 		this.uidFirebase = uidFirebase;
 	}
 
-	public RolDTO getRol() {
+	/*public RolDTO getRol() {
 		return rol;
 	}
 
@@ -76,6 +76,6 @@ public class ClienteDTO extends CommonDTO {
 
 	public void setDomicilioEntities(List<DomicilioDTO> domicilioEntities) {
 		this.domicilioEntities = domicilioEntities;
-	}
+	}*/
 
 }

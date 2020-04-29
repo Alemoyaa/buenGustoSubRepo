@@ -12,6 +12,8 @@ import javax.persistence.Table;
 import com.utn.app.buenGusto.articuloInsumo.ArticuloInsumoEntity;
 import com.utn.app.buenGusto.common.CommonEntity;
 import com.utn.app.buenGusto.receta.RecetaEntity;
+import com.utn.app.buenGusto.recetaInsumo.recetaInsumoDTO;
+import com.utn.app.buenGusto.recetaInsumo.recetaInsumoEntity;
 
 @Entity
 @Table(name = "receta_detalle")
@@ -26,10 +28,12 @@ public class RecetaDetalleEntity extends CommonEntity implements Serializable {
 	@JoinColumn(name = "receta_id")
 	private RecetaEntity receta;
 
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "articulo_id")
+	//@OneToOne(cascade = CascadeType.ALL)
+	//@JoinColumn(name = "articulo_id")
 	private ArticuloInsumoEntity articuloinsumo;
 
+	private recetaInsumoEntity recetaInsumo;
+	
 	public RecetaEntity getReceta() {
 		return receta;
 	}
@@ -60,6 +64,14 @@ public class RecetaDetalleEntity extends CommonEntity implements Serializable {
 
 	public void setUnidadMedida(String unidadMedida) {
 		this.unidadMedida = unidadMedida;
+	}
+	
+	public recetaInsumoEntity getRecetaInsumo() {
+		return recetaInsumo;
+	}
+
+	public void setRecetaInsumo(recetaInsumoEntity recetaInsumo) {
+		this.recetaInsumo = recetaInsumo;
 	}
 
 }

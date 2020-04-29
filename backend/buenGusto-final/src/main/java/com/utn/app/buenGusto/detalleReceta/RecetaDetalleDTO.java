@@ -3,6 +3,7 @@ package com.utn.app.buenGusto.detalleReceta;
 import com.utn.app.buenGusto.articuloInsumo.ArticuloInsumoDTO;
 import com.utn.app.buenGusto.common.CommonDTO;
 import com.utn.app.buenGusto.receta.RecetaDTO;
+import com.utn.app.buenGusto.recetaInsumo.recetaInsumoDTO;
 
 public class RecetaDetalleDTO extends CommonDTO {
 
@@ -13,6 +14,7 @@ public class RecetaDetalleDTO extends CommonDTO {
 
 	private RecetaDTO receta;
 	private ArticuloInsumoDTO articuloinsumo;
+	private recetaInsumoDTO recetaInsumo;
 
 	public double getCantidad() {
 		return cantidad;
@@ -44,6 +46,14 @@ public class RecetaDetalleDTO extends CommonDTO {
 
 	public void setArticuloinsumo(ArticuloInsumoDTO articuloinsumo) {
 		this.articuloinsumo = articuloinsumo;
+	}
+
+	public recetaInsumoDTO getRecetaInsumo() {
+		return recetaInsumo;
+	}
+
+	public void setRecetaInsumo(recetaInsumoDTO recetaInsumo) {
+		this.recetaInsumo = recetaInsumo;
 	}
 
 }
