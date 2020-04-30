@@ -2,23 +2,28 @@ package com.utn.app.buenGusto.articuloManufacturado;
  
 import java.util.Date;
 
-import com.utn.app.buenGusto.common.CommonDTO; 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.utn.app.buenGusto.common.CommonDTO;
+import com.utn.app.buenGusto.receta.RecetaDTO;
+import com.utn.app.buenGusto.subCategoriaAM.subCategoriaAmDTO; 
 
 public class ArticuloManufacturadoDTO extends CommonDTO {
 
 	private static final long serialVersionUID = 1L;
 
 	private int tiempoEstimadoCocina;
-
 	private String _urlImagen;
-	
 	private String denominacion;
-
 	private double precioVenta;
-	
 	private double costoVenta;
-	
 	private Date fechaBaja;
+	
+	@JsonIgnoreProperties("articuloManufacturado")
+	private RecetaDTO recetaAM;
+	
+	private subCategoriaAmDTO subCategoriaAm;
+	
 
 	public int getTiempoEstimadoCocina() {
 		return tiempoEstimadoCocina;
@@ -67,5 +72,21 @@ public class ArticuloManufacturadoDTO extends CommonDTO {
 	public void setFechaBaja(Date fechaBaja) {
 		this.fechaBaja = fechaBaja;
 	}
-	 
+
+	public subCategoriaAmDTO getSubCategoriaAm() {
+		return subCategoriaAm;
+	}
+
+	public void setSubCategoriaAm(subCategoriaAmDTO subCategoriaAm) {
+		this.subCategoriaAm = subCategoriaAm;
+	}
+
+	public RecetaDTO getRecetaAM() {
+		return recetaAM;
+	}
+
+	public void setRecetaAM(RecetaDTO recetaAM) {
+		this.recetaAM = recetaAM;
+	}
+	   
 }

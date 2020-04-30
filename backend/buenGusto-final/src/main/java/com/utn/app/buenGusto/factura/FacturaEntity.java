@@ -30,8 +30,7 @@ public class FacturaEntity extends CommonEntity implements Serializable {
 	private double total;
 	private String formaPago;
 	private String nroTarjeta;
-
-	// --------Pedido----------
+ 
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "pedido_id")
 	private PedidoEntity pedido;

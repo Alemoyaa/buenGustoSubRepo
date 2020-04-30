@@ -12,10 +12,10 @@ public class RecetaDetalleDTO extends CommonDTO {
 	private double cantidad;
 	private String unidadMedida;
 
-	/*private RecetaDTO receta;
-	private ArticuloInsumoDTO articuloinsumo;
+	private RecetaDTO receta;
+	private ArticuloInsumoDTO articuloInsumo;
 	private recetaInsumoDTO recetaInsumo;
-*/
+	
 	public double getCantidad() {
 		return cantidad;
 	}
@@ -32,20 +32,20 @@ public class RecetaDetalleDTO extends CommonDTO {
 		this.unidadMedida = unidadMedida;
 	}
 
-	/*public RecetaDTO getReceta() {
+	public RecetaDTO getReceta() {
 		return receta;
 	}
 
 	public void setReceta(RecetaDTO receta) {
 		this.receta = receta;
 	}
-
+	
 	public ArticuloInsumoDTO getArticuloinsumo() {
-		return articuloinsumo;
+		return articuloInsumo;
 	}
 
 	public void setArticuloinsumo(ArticuloInsumoDTO articuloinsumo) {
-		this.articuloinsumo = articuloinsumo;
+		this.articuloInsumo = articuloinsumo;
 	}
 
 	public recetaInsumoDTO getRecetaInsumo() {
@@ -54,6 +54,6 @@ public class RecetaDetalleDTO extends CommonDTO {
 
 	public void setRecetaInsumo(recetaInsumoDTO recetaInsumo) {
 		this.recetaInsumo = recetaInsumo;
-	}*/
+	}
 
 }

@@ -2,9 +2,13 @@ package com.utn.app.buenGusto.stockArticulo;
 
 import java.io.Serializable;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.utn.app.buenGusto.articuloInsumo.ArticuloInsumoEntity;
 import com.utn.app.buenGusto.common.CommonEntity;
 
 @Entity
@@ -22,6 +26,18 @@ public class stockArticuloEntity extends CommonEntity implements Serializable{
 	private double stockMaximo;
 
 	private String unidadMedida;
+	
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "articulo_insumo_id")
+	private ArticuloInsumoEntity articuloInsumoStock;
+
+	public ArticuloInsumoEntity getArticuloInsumoStock() {
+		return articuloInsumoStock;
+	}
+
+	public void setArticuloInsumoStock(ArticuloInsumoEntity articuloInsumoStock) {
+		this.articuloInsumoStock = articuloInsumoStock;
+	}
 
 	public double getCostoActual() {
 		return costoActual;

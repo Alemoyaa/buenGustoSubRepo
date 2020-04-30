@@ -6,16 +6,14 @@ import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne; 
 import javax.persistence.PrePersist;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import com.utn.app.buenGusto.cliente.ClienteEntity;
-import com.utn.app.buenGusto.common.CommonEntity;
-import com.utn.app.buenGusto.factura.FacturaEntity;
+import com.utn.app.buenGusto.common.CommonEntity; 
 import com.utn.app.buenGusto.pedidoEstado.EstadoEntity;
 
 @Entity
@@ -34,8 +32,7 @@ public class PedidoEntity extends CommonEntity implements Serializable {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "estado_id")
 	private EstadoEntity estado;
-	
-	// --------Cliente--------
+	 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "cliente_id")
 	private ClienteEntity cliente; 

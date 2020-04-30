@@ -1,5 +1,7 @@
 package com.utn.app.buenGusto.stockArticulo;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.utn.app.buenGusto.articuloInsumo.ArticuloInsumoDTO;
 import com.utn.app.buenGusto.common.CommonDTO;
 
 public class stockArticuloDTO extends CommonDTO {
@@ -7,14 +9,13 @@ public class stockArticuloDTO extends CommonDTO {
 	private static final long serialVersionUID = 1L;
 
 	private double costoActual;
-
 	private double stockActual;
-
 	private double stockMinimo;
-
 	private double stockMaximo;
-
 	private String unidadMedida;
+	
+	@JsonIgnoreProperties("stockArticulo")
+	private ArticuloInsumoDTO articuloInsumoStock;
 
 	public double getCostoActual() {
 		return costoActual;
@@ -54,6 +55,14 @@ public class stockArticuloDTO extends CommonDTO {
 
 	public void setUnidadMedida(String unidadMedida) {
 		this.unidadMedida = unidadMedida;
+	}
+
+	public ArticuloInsumoDTO getArticuloInsumoStock() {
+		return articuloInsumoStock;
+	}
+
+	public void setArticuloInsumoStock(ArticuloInsumoDTO articuloInsumoStock) {
+		this.articuloInsumoStock = articuloInsumoStock;
 	}
 
 }

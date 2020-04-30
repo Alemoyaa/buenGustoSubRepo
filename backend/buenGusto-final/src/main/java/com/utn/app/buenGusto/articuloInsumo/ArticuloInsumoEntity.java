@@ -11,6 +11,8 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
  
 import com.utn.app.buenGusto.common.CommonEntity;
+import com.utn.app.buenGusto.recetaInsumo.recetaInsumoEntity;
+import com.utn.app.buenGusto.stockArticulo.stockArticuloEntity;
 
 @Entity
 @Table(name = "articulo_insumo")
@@ -18,15 +20,26 @@ public class ArticuloInsumoEntity extends CommonEntity implements Serializable {
 
 	private static final long serialVersionUID = -8356649232468048872L;
 
-private String denominacion;
-	
-	private double precioDeVenta;
-	
-	private double costoDeVenta;
-	
-	private boolean requiereRefrigeracion;
-	
+	private String denominacion; 
+	private double precioDeVenta; 
+	private double costoDeVenta; 
+	private boolean requiereRefrigeracion; 
 	private Date fechaBaja;
+	
+	@OneToOne(mappedBy = "articuloInsumoReceta", fetch = FetchType.LAZY)
+	private recetaInsumoEntity recetaInsumo;
+	
+	@OneToOne(mappedBy = "articuloInsumoStock")
+	private stockArticuloEntity stockArticulo;
+
+	
+	public stockArticuloEntity getStockArticulo() {
+		return stockArticulo;
+	}
+
+	public void setStockArticulo(stockArticuloEntity stockArticulo) {
+		this.stockArticulo = stockArticulo;
+	}
 
 	public String getDenominacion() {
 		return denominacion;
@@ -66,6 +79,14 @@ private String denominacion;
 
 	public void setFechaBaja(Date fechaBaja) {
 		this.fechaBaja = fechaBaja;
+	}
+
+	public recetaInsumoEntity getRecetaInsumo() {
+		return recetaInsumo;
+	}
+
+	public void setRecetaInsumo(recetaInsumoEntity recetaInsumo) {
+		this.recetaInsumo = recetaInsumo;
 	}
 
 }

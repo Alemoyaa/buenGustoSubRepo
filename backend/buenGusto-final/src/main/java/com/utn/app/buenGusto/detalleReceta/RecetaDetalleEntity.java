@@ -24,31 +24,33 @@ public class RecetaDetalleEntity extends CommonEntity implements Serializable {
 	private double cantidad;
 	private String unidadMedida;
 
-	/*@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "receta_id")
-	private RecetaEntity receta;
-
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "articulo_id")
-	private ArticuloInsumoEntity articuloinsumo;
-
-	private recetaInsumoEntity recetaInsumo;*/
+	private RecetaEntity receta; 
 	
-	/*public RecetaEntity getReceta() {
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "articulo_insumo_id")
+	private ArticuloInsumoEntity articuloInsumo;
+	
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "receta_insumo_id")
+	private recetaInsumoEntity recetaInsumo;
+	
+	public RecetaEntity getReceta() {
 		return receta;
 	}
 
 	public void setReceta(RecetaEntity receta) {
 		this.receta = receta;
 	}
-
+	
 	public ArticuloInsumoEntity getArticuloinsumo() {
-		return articuloinsumo;
+		return articuloInsumo;
 	}
 
 	public void setArticuloinsumo(ArticuloInsumoEntity articuloinsumo) {
-		this.articuloinsumo = articuloinsumo;
-	}*/
+		this.articuloInsumo = articuloinsumo;
+	}
 
 	public double getCantidad() {
 		return cantidad;
@@ -66,12 +68,12 @@ public class RecetaDetalleEntity extends CommonEntity implements Serializable {
 		this.unidadMedida = unidadMedida;
 	}
 	
-	/*public recetaInsumoEntity getRecetaInsumo() {
+	public recetaInsumoEntity getRecetaInsumo() {
 		return recetaInsumo;
 	}
 
 	public void setRecetaInsumo(recetaInsumoEntity recetaInsumo) {
 		this.recetaInsumo = recetaInsumo;
 	}
-*/
+
 }
