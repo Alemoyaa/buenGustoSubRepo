@@ -10,7 +10,7 @@ import com.utn.app.buenGusto.common.CommonIService;
 @RequestMapping(path = "api/articulo_insumo")
 public class ArticuloInsumoController extends CommonController<ArticuloInsumoDTO> {
 
-	public ArticuloInsumoController(CommonIService<ArticuloInsumoDTO> servicio, ArticuloInsumoService Aservicio) {
+	public ArticuloInsumoController(CommonIService<ArticuloInsumoDTO> servicio) {
 		super(servicio);
 	}
 

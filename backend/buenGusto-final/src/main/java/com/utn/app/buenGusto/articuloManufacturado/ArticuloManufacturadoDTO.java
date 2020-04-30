@@ -1,6 +1,6 @@
 package com.utn.app.buenGusto.articuloManufacturado;
  
-import java.sql.Date;
+import java.util.Date;
 
 import com.utn.app.buenGusto.common.CommonDTO; 
 

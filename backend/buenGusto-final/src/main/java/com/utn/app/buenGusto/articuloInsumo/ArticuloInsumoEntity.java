@@ -1,7 +1,7 @@
 package com.utn.app.buenGusto.articuloInsumo;
 
 import java.io.Serializable;
-import java.sql.Date;
+import java.util.Date;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -9,8 +9,7 @@ import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-
-import com.utn.app.buenGusto.articulo.ArticuloEntity;
+ 
 import com.utn.app.buenGusto.common.CommonEntity;
 
 @Entity

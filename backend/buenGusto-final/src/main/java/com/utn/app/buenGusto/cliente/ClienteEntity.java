@@ -92,7 +92,7 @@ public class ClienteEntity extends CommonEntity implements Serializable {
 		this.fechaBaja = fechaBaja;
 	}
  
-	/*public RolEntity getRol() { 
+	public RolEntity getRol() { 
 		return rol;
 	}
 

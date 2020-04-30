@@ -1,8 +1,7 @@
 package com.utn.app.buenGusto.articuloInsumo;
 
-import java.sql.Date;
-
-import com.utn.app.buenGusto.articulo.ArticuloDTO;
+import java.util.Date;
+ 
 import com.utn.app.buenGusto.common.CommonDTO;
 
 public class ArticuloInsumoDTO extends CommonDTO {
