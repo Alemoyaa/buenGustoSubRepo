@@ -30,7 +30,7 @@ public class loteStockEntity extends CommonEntity implements Serializable{
 
 	private Date fechaVencimiento;
 
-	@OneToOne(cascade = CascadeType.ALL)
+	@OneToOne(/*cascade = CascadeType.ALL*/)
 	@JoinColumn(name = "stock_articulo_id")
 	private stockArticuloEntity stockArticulo;
 

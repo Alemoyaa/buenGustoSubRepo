@@ -24,15 +24,15 @@ public class RecetaDetalleEntity extends CommonEntity implements Serializable {
 	private double cantidad;
 	private String unidadMedida;
 
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne(/*cascade = CascadeType.*/)
 	@JoinColumn(name = "receta_id")
 	private RecetaEntity receta; 
 	
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne(/*cascade = CascadeType.ALL*/)
 	@JoinColumn(name = "articulo_insumo_id")
 	private ArticuloInsumoEntity articuloInsumo;
 	
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne(/*cascade = CascadeType.ALL*/)
 	@JoinColumn(name = "receta_insumo_id")
 	private recetaInsumoEntity recetaInsumo;
 	

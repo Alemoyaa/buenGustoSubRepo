@@ -27,7 +27,7 @@ public class recetaInsumoEntity extends CommonEntity implements Serializable{
 	
 	private Date fechaBaja;
 
-	@OneToOne(cascade = CascadeType.ALL)
+	@OneToOne(/*cascade = CascadeType.ALL*/)
 	@JoinColumn(name = "articulo_insumo_id")
 	private ArticuloInsumoEntity articuloInsumoReceta;
 

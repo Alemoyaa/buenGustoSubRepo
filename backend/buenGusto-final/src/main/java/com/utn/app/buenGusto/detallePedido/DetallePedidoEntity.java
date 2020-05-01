@@ -22,16 +22,15 @@ public class DetallePedidoEntity extends CommonEntity implements Serializable {
 	private int cantidad; 
 	private double subtotal;
 
-	// ---------Pedido---------
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne(/*cascade = CascadeType.ALL*/)
 	@JoinColumn(name = "pedido_id")
 	private PedidoEntity pedido; 
 
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne(/*cascade = CascadeType.ALL*/)
 	@JoinColumn(name = "articulo_manufacturado_id")
 	private ArticuloManufacturadoEntity articuloManufacturado; 
 	
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne(/*cascade = CascadeType.ALL*/)
 	@JoinColumn(name = "articulo_insumo_id")
 	private ArticuloInsumoEntity articuloInsumo; 
 	

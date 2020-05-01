@@ -27,7 +27,7 @@ public class stockArticuloEntity extends CommonEntity implements Serializable{
 
 	private String unidadMedida;
 	
-	@OneToOne(cascade = CascadeType.ALL)
+	@OneToOne(/*cascade = CascadeType.ALL*/)
 	@JoinColumn(name = "articulo_insumo_id")
 	private ArticuloInsumoEntity articuloInsumoStock;
 

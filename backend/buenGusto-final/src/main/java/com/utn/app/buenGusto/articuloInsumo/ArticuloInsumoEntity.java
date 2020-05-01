@@ -29,7 +29,7 @@ public class ArticuloInsumoEntity extends CommonEntity implements Serializable {
 	@OneToOne(mappedBy = "articuloInsumoReceta", fetch = FetchType.LAZY)
 	private recetaInsumoEntity recetaInsumo;
 	
-	@OneToOne(mappedBy = "articuloInsumoStock")
+	@OneToOne(mappedBy = "articuloInsumoStock", fetch = FetchType.LAZY)
 	private stockArticuloEntity stockArticulo;
 
 	

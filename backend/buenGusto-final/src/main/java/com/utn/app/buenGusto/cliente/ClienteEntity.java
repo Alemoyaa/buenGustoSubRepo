@@ -28,7 +28,7 @@ public class ClienteEntity extends CommonEntity implements Serializable {
 	private Date fechaBaja;
 	private String uidFirebase;
 
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne()
 	@JoinColumn(name = "rol_cliente")
 	private RolEntity rol;
  
