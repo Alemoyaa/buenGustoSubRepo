@@ -1,3 +1,5 @@
+import { Router } from '@angular/router';
+import { LoginService } from './../../../../services/loginServices/login.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -6,7 +8,10 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./dashboard-cajero.component.css'],
 })
 export class DashboardCajeroComponent implements OnInit {
-  constructor() {}
+  constructor(private loginService: LoginService, private route: Router) {}
+
+  username;
+  photo;
 
   ngOnInit(): void {}
 
@@ -26,5 +31,19 @@ export class DashboardCajeroComponent implements OnInit {
     if (board === 'tableroFacturacion') {
       this.tableroFacturacion = true;
     }
+  }
+
+  getUser() {
+    this.loginService.isAuth().subscribe((user) => {
+      if (!user) {
+        this.route.navigate(['login']);
+      }
+      this.username = user.displayName;
+      this.photo = user.photoURL;
+    });
+  }
+
+  logout() {
+    this.loginService.logout();
   }
 }

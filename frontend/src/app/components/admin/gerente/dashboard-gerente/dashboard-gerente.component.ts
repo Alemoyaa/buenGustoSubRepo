@@ -1,3 +1,5 @@
+import { Router } from '@angular/router';
+import { LoginService } from './../../../../services/loginServices/login.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -6,9 +8,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./dashboard-gerente.component.css'],
 })
 export class DashboardGerenteComponent implements OnInit {
-  constructor() {}
+  constructor(private loginService: LoginService, private route: Router) {}
 
-  ngOnInit(): void {}
+  username;
+  photo;
+
+  ngOnInit(): void {
+    this.getUser();
+  }
 
   tableroPizzaCrud = true;
   tableroStock = false;
@@ -37,5 +44,19 @@ export class DashboardGerenteComponent implements OnInit {
     if (board === 'tableroUsuario') {
       this.tableroUsuario = true;
     }
+  }
+
+  getUser() {
+    this.loginService.isAuth().subscribe((user) => {
+      if (!user) {
+        this.route.navigate(['login']);
+      }
+      this.username = user.displayName;
+      this.photo = user.photoURL;
+    });
+  }
+
+  logout() {
+    this.loginService.logout();
   }
 }
