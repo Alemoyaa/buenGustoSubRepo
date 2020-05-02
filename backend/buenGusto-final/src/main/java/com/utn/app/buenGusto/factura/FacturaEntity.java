@@ -32,7 +32,7 @@ public class FacturaEntity extends CommonEntity implements Serializable {
 	private String nroTarjeta;
  
 	@OneToOne(cascade = CascadeType.REMOVE)
-	@JoinColumn(name = "pedido_id")
+	@JoinColumn(name = "pedido_id",nullable = true)
 	private PedidoEntity pedido;
 
 	@PrePersist

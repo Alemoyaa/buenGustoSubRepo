@@ -27,11 +27,11 @@ public class DetallePedidoEntity extends CommonEntity implements Serializable {
 	private PedidoEntity pedido; 
 
 	@ManyToOne(/*cascade = CascadeType.ALL*/)
-	@JoinColumn(name = "articulo_manufacturado_id")
+	@JoinColumn(name = "articulo_manufacturado_id",nullable = true)
 	private ArticuloManufacturadoEntity articuloManufacturado; 
 	
 	@ManyToOne(/*cascade = CascadeType.ALL*/)
-	@JoinColumn(name = "articulo_insumo_id")
+	@JoinColumn(name = "articulo_insumo_id",nullable = true)
 	private ArticuloInsumoEntity articuloInsumo; 
 	
 	public int getCantidad() {
