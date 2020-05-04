@@ -3,18 +3,22 @@ package com.utn.app.buenGusto.historicoEstado;
 import java.io.Serializable;
 import java.util.Date;
 
+import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 import com.utn.app.buenGusto.common.CommonEntity;
 import com.utn.app.buenGusto.pedido.PedidoEntity;
 import com.utn.app.buenGusto.pedidoEstado.EstadoEntity;
 
+@Entity
+@Table(name = "historico_estado")
 public class historicoEstadoEntity extends CommonEntity implements Serializable{
 
-	private static final long serialVersionUID = 5340386561748707775L;
-	
+	private static final long serialVersionUID = 1L;
+
 	private Date fecha_modificacion;
 	
 	private Date hora_modificacion;
