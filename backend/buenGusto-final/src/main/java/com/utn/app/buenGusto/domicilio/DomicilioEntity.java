@@ -18,8 +18,7 @@ public class DomicilioEntity extends CommonEntity implements Serializable {
 
 	private String calle;
 	private int numero;
-	private String ciudad;
-	private String provincia;
+	private String ciudad; 
 
 	@OneToOne(mappedBy = "domicilio", fetch = FetchType.LAZY)
 	private ClienteEntity cliente; 
@@ -54,14 +53,6 @@ public class DomicilioEntity extends CommonEntity implements Serializable {
 
 	public void setCiudad(String ciudad) {
 		this.ciudad = ciudad;
-	} 
-	
-	public String getProvincia() {
-		return provincia;
-	}
-
-	public void setProvincia(String provincia) {
-		this.provincia = provincia;
-	} 
+	}  
 
 }

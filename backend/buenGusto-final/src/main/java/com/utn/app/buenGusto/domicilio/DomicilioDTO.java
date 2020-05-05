@@ -10,8 +10,7 @@ public class DomicilioDTO extends CommonDTO {
 
 	private String calle;
 	private int numero;
-	private String ciudad;
-	private String provincia;
+	private String ciudad; 
  
 	@JsonIgnoreProperties("domicilio")
 	private ClienteDTO clienteDomicilio; 
@@ -46,14 +45,6 @@ public class DomicilioDTO extends CommonDTO {
  
 	public void setCiudad(String ciudad) {
 		this.ciudad = ciudad;
-	}
-
-	public String getProvincia() {
-		return provincia;
-	}  
-
-	public void setProvincia(String provincia) {
-		this.provincia = provincia;
-	}
+	} 
  
 }

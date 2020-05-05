@@ -19,9 +19,7 @@ public class historicoEstadoEntity extends CommonEntity implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 
-	private Date fecha_modificacion;
-	
-	private Date hora_modificacion;
+	private Date fecha_modificacion; 
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "pedido_id")
@@ -37,15 +35,7 @@ public class historicoEstadoEntity extends CommonEntity implements Serializable{
 
 	public void setFecha_modificacion(Date fecha_modificacion) {
 		this.fecha_modificacion = fecha_modificacion;
-	}
-
-	public Date getHora_modificacion() {
-		return hora_modificacion;
-	}
-
-	public void setHora_modificacion(Date hora_modificacion) {
-		this.hora_modificacion = hora_modificacion;
-	}
+	} 
 
 	public PedidoEntity getPedido() {
 		return pedido;

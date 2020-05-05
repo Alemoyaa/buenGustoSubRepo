@@ -10,9 +10,7 @@ public class historicoEstadoDTO extends CommonDTO{
  
 	private static final long serialVersionUID = 5340386561748707775L;
 	
-	private Date fecha_modificacion;
-	
-	private Date hora_modificacion;
+	private Date fecha_modificacion; 
 	
 	private PedidoDTO pedido;
 	
@@ -24,15 +22,7 @@ public class historicoEstadoDTO extends CommonDTO{
 
 	public void setFecha_modificacion(Date fecha_modificacion) {
 		this.fecha_modificacion = fecha_modificacion;
-	}
-
-	public Date getHora_modificacion() {
-		return hora_modificacion;
-	}
-
-	public void setHora_modificacion(Date hora_modificacion) {
-		this.hora_modificacion = hora_modificacion;
-	}
+	} 
 
 	public PedidoDTO getPedido() {
 		return pedido;

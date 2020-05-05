@@ -30,7 +30,8 @@ public class CommonController<DTO> {
 		try {
 			return ResponseEntity.status(HttpStatus.OK).body("{\"pages\": " + service.countPages(size) + "}");
 		} catch (Exception e) {
-			return null;
+			return ResponseEntity.status(HttpStatus.NOT_FOUND)
+					.body("{\"Hubo un problema \": \"" + e.getMessage() + "\"}");
 		}
 
 	}
@@ -43,7 +44,7 @@ public class CommonController<DTO> {
 			return ResponseEntity.status(HttpStatus.OK).body(service.findAll(page, size));
 		} catch (Exception e) {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND)
-					.body("{\"Mi mensaje get todos\": \"" + e.getMessage() + "\"}");
+					.body("{\"Hubo un problema en el metodo getAll \": \"" + e.getMessage() + "\"}");
 		}
 	}
 
@@ -55,7 +56,7 @@ public class CommonController<DTO> {
 			return ResponseEntity.status(HttpStatus.OK).body(service.findById(id));
 		} catch (Exception e) {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND)
-					.body("{\"Mi mensaje get uno\": \"" + e.getMessage() + "\"}");
+					.body("{\"Hubo un problema en el metodo getOne \": \"" + e.getMessage() + "\"}");
 		}
 	}
 
@@ -67,7 +68,7 @@ public class CommonController<DTO> {
 		} catch (Exception e) {
 
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-					.body("{\"Mi mensaje post\": \"" + e.getLocalizedMessage() + "\" " + e.getClass() + " }");
+					.body("{\"Hubo un problema en el metodo Post \": \"" + e.getLocalizedMessage() + "\"}");
 
 		}
 
@@ -83,8 +84,8 @@ public class CommonController<DTO> {
 
 		} catch (Exception e) {
 
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-					.body("{\"Mi mensaje put\": \"" + e.getMessage() + "\"}");
+			return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY)
+					.body("{\"Hubo un problema en el metodo Put \": \"" + e.getMessage() + "\"}");
 		}
 
 	}
@@ -100,7 +101,7 @@ public class CommonController<DTO> {
 		} catch (Exception e) {
 
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-					.body("{\"Mi mensaje put\": \"" + e.getMessage() + "\"}");
+					.body("{\"Hubo un problema en el metodo Delete \": \"" + e.getMessage() + "\"}");
 		}
 
 	}
