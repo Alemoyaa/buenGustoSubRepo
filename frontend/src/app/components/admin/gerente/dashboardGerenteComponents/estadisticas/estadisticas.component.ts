@@ -7,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./estadisticas.component.css'],
 })
 export class EstadisticasComponent implements OnInit {
-  constructor() {}
+  constructor() { }
 
   ngOnInit(): void {
     this.newChart('general', ['pizzas', 'coso'], [2, 2]);
