@@ -3,7 +3,6 @@ package com.utn.app.buenGusto.articuloManufacturado;
 import java.util.Date;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.utn.app.buenGusto.common.CommonDTO;
 import com.utn.app.buenGusto.receta.RecetaDTO;
 import com.utn.app.buenGusto.subCategoriaAM.subCategoriaAmDTO; 

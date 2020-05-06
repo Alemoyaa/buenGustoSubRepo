@@ -11,7 +11,7 @@ public class RecetaDetalleDTO extends CommonDTO {
 
 	private double cantidad;
 	private String unidadMedida;
-
+	private boolean tipoDetalleReceta;
 	private RecetaDTO receta;
 	private ArticuloInsumoDTO articuloInsumo;
 	private recetaInsumoDTO recetaInsumo;
@@ -54,6 +54,14 @@ public class RecetaDetalleDTO extends CommonDTO {
 
 	public void setRecetaInsumo(recetaInsumoDTO recetaInsumo) {
 		this.recetaInsumo = recetaInsumo;
+	}
+
+	public boolean isTipoDetalleReceta() {
+		return tipoDetalleReceta;
+	}
+
+	public void setTipoDetalleReceta(boolean tipoDetalleReceta) {
+		this.tipoDetalleReceta = tipoDetalleReceta;
 	}
 
 }

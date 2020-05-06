@@ -1,4 +1,4 @@
-package com.utn.app.buenGusto.pedidoEstado;
+package com.utn.app.buenGusto.estado;
 
 import org.modelmapper.ModelMapper; 
 import org.springframework.stereotype.Service;

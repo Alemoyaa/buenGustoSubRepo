@@ -10,15 +10,10 @@ public class loteStockDTO extends CommonDTO {
 	private static final long serialVersionUID = 1L;
 
 	private long numeroLote;
-
 	private long cantidadActual;
-
 	private long cantidadComprada;
-
 	private String unidadMedida;
-
 	private Date fechaCompra;
-
 	private Date fechaVencimiento;
 
 	private stockArticuloDTO stockArticulo;

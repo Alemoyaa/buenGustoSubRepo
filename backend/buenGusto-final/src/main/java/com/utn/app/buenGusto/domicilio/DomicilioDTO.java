@@ -1,8 +1,8 @@
 package com.utn.app.buenGusto.domicilio;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.utn.app.buenGusto.cliente.ClienteDTO;
 import com.utn.app.buenGusto.common.CommonDTO;
+import com.utn.app.buenGusto.usuario.UsuarioDTO;
 
 public class DomicilioDTO extends CommonDTO {
 
@@ -13,7 +13,7 @@ public class DomicilioDTO extends CommonDTO {
 	private String ciudad; 
  
 	@JsonIgnoreProperties("domicilio")
-	private ClienteDTO clienteDomicilio; 
+	private UsuarioDTO usuarioDomicilio; 
 
 	public String getCalle() {
 		return calle;
@@ -31,12 +31,12 @@ public class DomicilioDTO extends CommonDTO {
 		this.numero = numero;
 	} 
 
-	public ClienteDTO getClienteDomicilio() {
-		return clienteDomicilio;
+	public UsuarioDTO getUsuarioDomicilio() {
+		return usuarioDomicilio;
 	}
 
-	public void setClienteDomicilio(ClienteDTO clienteDomicilio) {
-		this.clienteDomicilio = clienteDomicilio;
+	public void setUsuarioDomicilio(UsuarioDTO usuarioDomicilio) {
+		this.usuarioDomicilio = usuarioDomicilio;
 	}
 
 	public String getCiudad() {

@@ -1,4 +1,4 @@
-package com.utn.app.buenGusto.pedidoEstado;
+package com.utn.app.buenGusto.estado;
 
 import java.io.Serializable;
 
@@ -13,14 +13,14 @@ public class EstadoEntity extends CommonEntity implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	private String Nombre;
+	private String NombreEstado;
 
 	public String getNombre() {
-		return Nombre;
+		return NombreEstado;
 	}
 
 	public void setNombre(String nombre) {
-		Nombre = nombre;
+		NombreEstado = nombre;
 	}
 
 }

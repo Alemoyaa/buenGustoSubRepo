@@ -12,7 +12,6 @@ import javax.persistence.Table;
 import com.utn.app.buenGusto.articuloInsumo.ArticuloInsumoEntity;
 import com.utn.app.buenGusto.common.CommonEntity;
 import com.utn.app.buenGusto.receta.RecetaEntity;
-import com.utn.app.buenGusto.recetaInsumo.recetaInsumoDTO;
 import com.utn.app.buenGusto.recetaInsumo.recetaInsumoEntity;
 
 @Entity
@@ -23,17 +22,19 @@ public class RecetaDetalleEntity extends CommonEntity implements Serializable {
 
 	private double cantidad;
 	private String unidadMedida;
+	private boolean tipoDetalleReceta; //False es para una RecetaInsumo, True para una Receta
 
-	@ManyToOne(/*cascade = CascadeType.*/)
-	@JoinColumn(name = "receta_id")
-	private RecetaEntity receta; 
-	
 	@ManyToOne(/*cascade = CascadeType.ALL*/)
 	@JoinColumn(name = "articulo_insumo_id")
 	private ArticuloInsumoEntity articuloInsumo;
 	
+	
+	@ManyToOne(/*cascade = CascadeType.*/)
+	@JoinColumn(name = "receta_id", nullable=true)
+	private RecetaEntity receta; 
+	
 	@ManyToOne(/*cascade = CascadeType.ALL*/)
-	@JoinColumn(name = "receta_insumo_id")
+	@JoinColumn(name = "receta_insumo_id", nullable=true)
 	private recetaInsumoEntity recetaInsumo;
 	
 	public RecetaEntity getReceta() {
@@ -74,6 +75,14 @@ public class RecetaDetalleEntity extends CommonEntity implements Serializable {
 
 	public void setRecetaInsumo(recetaInsumoEntity recetaInsumo) {
 		this.recetaInsumo = recetaInsumo;
+	}
+
+	public boolean isTipoDetalleReceta() {
+		return tipoDetalleReceta;
+	}
+
+	public void setTipoDetalleReceta(boolean tipoDetalleReceta) {
+		this.tipoDetalleReceta = tipoDetalleReceta;
 	}
 
 }

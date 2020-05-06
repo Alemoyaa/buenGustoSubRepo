@@ -10,8 +10,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.utn.app.buenGusto.common.CommonEntity;
+import com.utn.app.buenGusto.estado.EstadoEntity;
 import com.utn.app.buenGusto.pedido.PedidoEntity;
-import com.utn.app.buenGusto.pedidoEstado.EstadoEntity;
 
 @Entity
 @Table(name = "historico_estado")

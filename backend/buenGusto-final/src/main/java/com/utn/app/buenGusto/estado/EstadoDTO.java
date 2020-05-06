@@ -1,4 +1,4 @@
-package com.utn.app.buenGusto.pedidoEstado;
+package com.utn.app.buenGusto.estado;
 
 import com.utn.app.buenGusto.common.CommonDTO;
 
@@ -6,13 +6,13 @@ public class EstadoDTO extends CommonDTO {
 
 	private static final long serialVersionUID = 1L;
 
-	private String Nombre;
+	private String NombreEstado;
 
 	public String getNombre() {
-		return Nombre;
+		return NombreEstado;
 	}
 
 	public void setNombre(String nombre) {
-		Nombre = nombre;
+		NombreEstado = nombre;
 	}
 }

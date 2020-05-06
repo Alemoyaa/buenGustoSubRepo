@@ -1,8 +1,6 @@
 package com.utn.app.buenGusto.detallePedido;
 
 import java.io.Serializable;
-
-import javax.persistence.CascadeType;
 import javax.persistence.Entity; 
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne; 
@@ -26,6 +24,8 @@ public class DetallePedidoEntity extends CommonEntity implements Serializable {
 	@JoinColumn(name = "pedido_id")
 	private PedidoEntity pedido; 
 
+	private boolean insumoOManuf; //false es insumo, true es manufacturado
+	
 	@ManyToOne(/*cascade = CascadeType.ALL*/)
 	@JoinColumn(name = "articulo_manufacturado_id",nullable = true)
 	private ArticuloManufacturadoEntity articuloManufacturado; 
@@ -72,6 +72,14 @@ public class DetallePedidoEntity extends CommonEntity implements Serializable {
 
 	public void setArticuloInsumo(ArticuloInsumoEntity articuloInsumo) {
 		this.articuloInsumo = articuloInsumo;
+	}
+
+	public boolean isInsumoOManuf() {
+		return insumoOManuf;
+	}
+
+	public void setInsumoOManuf(boolean insumoOManuf) {
+		this.insumoOManuf = insumoOManuf;
 	}
 	
 }

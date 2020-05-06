@@ -12,9 +12,9 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-import com.utn.app.buenGusto.cliente.ClienteEntity;
-import com.utn.app.buenGusto.common.CommonEntity; 
-import com.utn.app.buenGusto.pedidoEstado.EstadoEntity;
+import com.utn.app.buenGusto.common.CommonEntity;
+import com.utn.app.buenGusto.estado.EstadoEntity;
+import com.utn.app.buenGusto.usuario.UsuarioEntity;
 
 @Entity
 @Table(name = "pedido")
@@ -27,7 +27,7 @@ public class PedidoEntity extends CommonEntity implements Serializable {
 
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date horaEstimadaFin;
-	private int tipoEnvio;
+	private boolean tipoEnvio;
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "estado_id")
@@ -35,7 +35,7 @@ public class PedidoEntity extends CommonEntity implements Serializable {
 	 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "cliente_id")
-	private ClienteEntity cliente; 
+	private UsuarioEntity cliente; 
 
 	@PrePersist
 	public void prePersist() {
@@ -66,19 +66,19 @@ public class PedidoEntity extends CommonEntity implements Serializable {
 		this.horaEstimadaFin = horaEstimadaFin;
 	}
 
-	public int getTipoEnvio() {
+	public boolean getTipoEnvio() {
 		return tipoEnvio;
 	}
 
-	public void setTipoEnvio(int tipoEnvio) {
+	public void setTipoEnvio(boolean tipoEnvio) {
 		this.tipoEnvio = tipoEnvio;
 	}
 
-	public ClienteEntity getCliente() {
+	public UsuarioEntity getCliente() {
 		return cliente;
 	}
 
-	public void setCliente(ClienteEntity cliente) {
+	public void setCliente(UsuarioEntity cliente) {
 		this.cliente = cliente;
 	}
 

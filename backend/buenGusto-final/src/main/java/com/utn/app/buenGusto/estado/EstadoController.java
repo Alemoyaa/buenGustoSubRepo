@@ -1,4 +1,4 @@
-package com.utn.app.buenGusto.pedidoEstado;
+package com.utn.app.buenGusto.estado;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;

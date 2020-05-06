@@ -1,9 +1,7 @@
-package com.utn.app.buenGusto.pedidoEstado;
+package com.utn.app.buenGusto.formaPago;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface EstadoRepository extends JpaRepository<EstadoEntity, Long>{
-
-}
+public interface FormaPagoRepository extends JpaRepository<FormaPagoEntity, Long>{}

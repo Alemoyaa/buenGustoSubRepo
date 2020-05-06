@@ -7,8 +7,8 @@ import javax.persistence.FetchType;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import com.utn.app.buenGusto.cliente.ClienteEntity;
 import com.utn.app.buenGusto.common.CommonEntity;
+import com.utn.app.buenGusto.usuario.UsuarioEntity;
 
 @Entity
 @Table(name = "domicilio")
@@ -21,7 +21,7 @@ public class DomicilioEntity extends CommonEntity implements Serializable {
 	private String ciudad; 
 
 	@OneToOne(mappedBy = "domicilio", fetch = FetchType.LAZY)
-	private ClienteEntity cliente; 
+	private UsuarioEntity cliente; 
 
 	public String getCalle() {
 		return calle;
@@ -39,11 +39,11 @@ public class DomicilioEntity extends CommonEntity implements Serializable {
 		this.numero = numero;
 	}
  
-	public ClienteEntity getCliente() {
+	public UsuarioEntity getCliente() {
 		return cliente;
 	}
 
-	public void setCliente(ClienteEntity cliente) {
+	public void setCliente(UsuarioEntity cliente) {
 		this.cliente = cliente;
 	}
 

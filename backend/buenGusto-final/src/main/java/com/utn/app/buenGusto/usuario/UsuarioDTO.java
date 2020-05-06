@@ -1,4 +1,4 @@
-package com.utn.app.buenGusto.cliente;
+package com.utn.app.buenGusto.usuario;
 
 import java.sql.Date;
 
@@ -7,7 +7,7 @@ import com.utn.app.buenGusto.common.CommonDTO;
 import com.utn.app.buenGusto.domicilio.DomicilioDTO;
 import com.utn.app.buenGusto.rol.RolDTO;
 
-public class ClienteDTO extends CommonDTO {
+public class UsuarioDTO extends CommonDTO {
 
 	private static final long serialVersionUID = 1L;
 
@@ -21,7 +21,7 @@ public class ClienteDTO extends CommonDTO {
 
 	private RolDTO rol;
 
-	@JsonIgnoreProperties("clienteDomicilio") 
+	@JsonIgnoreProperties("usuarioDomicilio") 
 	private DomicilioDTO domicilio; 
 
 	public String getNombre() {

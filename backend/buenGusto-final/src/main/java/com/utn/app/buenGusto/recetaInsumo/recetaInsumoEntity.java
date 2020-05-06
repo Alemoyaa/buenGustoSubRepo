@@ -2,8 +2,6 @@ package com.utn.app.buenGusto.recetaInsumo;
 
 import java.io.Serializable;
 import java.util.Date;
-
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
@@ -20,7 +18,7 @@ public class recetaInsumoEntity extends CommonEntity implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 
-	private String nombre; 
+	private String nombreReceta; 
 
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date fechaAlta;
@@ -32,11 +30,11 @@ public class recetaInsumoEntity extends CommonEntity implements Serializable{
 	private ArticuloInsumoEntity articuloInsumoReceta;
 
 	public String getNombre() {
-		return nombre;
+		return nombreReceta;
 	}
 
 	public void setNombre(String nombre) {
-		this.nombre = nombre;
+		this.nombreReceta = nombre;
 	}
 
 	public Date getFechaAlta() {

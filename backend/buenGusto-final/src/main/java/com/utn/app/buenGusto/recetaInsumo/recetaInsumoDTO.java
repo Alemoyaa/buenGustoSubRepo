@@ -10,21 +10,19 @@ public class recetaInsumoDTO extends CommonDTO{
 
 	private static final long serialVersionUID = 1L;
 
-	private String nombre; 
- 
+	private String nombreReceta; 
 	private Date fechaAlta;
-	
 	private Date fechaBaja;
  
 	@JsonIgnoreProperties("recetaInsumo")
 	private ArticuloInsumoDTO articuloInsumoReceta;
 
 	public String getNombre() {
-		return nombre;
+		return nombreReceta;
 	}
 
 	public void setNombre(String nombre) {
-		this.nombre = nombre;
+		this.nombreReceta = nombre;
 	}
 
 	public Date getFechaAlta() {

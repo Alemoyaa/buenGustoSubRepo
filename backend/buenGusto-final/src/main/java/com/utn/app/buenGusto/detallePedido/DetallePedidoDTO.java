@@ -11,8 +11,8 @@ public class DetallePedidoDTO extends CommonDTO {
 
 	private int cantidad;
 	private double subtotal; 
-
 	private PedidoDTO pedido;  
+	private boolean insumoOManuf;
 	private ArticuloManufacturadoDTO articuloManufacturado;
 	private ArticuloInsumoDTO articuloInsumo;
 
@@ -54,6 +54,14 @@ public class DetallePedidoDTO extends CommonDTO {
 
 	public void setArticuloInsumo(ArticuloInsumoDTO articuloInsumo) {
 		this.articuloInsumo = articuloInsumo;
+	}
+
+	public boolean isInsumoOManuf() {
+		return insumoOManuf;
+	}
+
+	public void setInsumoOManuf(boolean insumoOManuf) {
+		this.insumoOManuf = insumoOManuf;
 	} 
 	
 }

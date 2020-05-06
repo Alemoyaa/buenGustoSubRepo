@@ -5,7 +5,9 @@ import java.util.Date;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.PrePersist;
 import javax.persistence.Table;
@@ -13,6 +15,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import com.utn.app.buenGusto.common.CommonEntity;
+import com.utn.app.buenGusto.formaPago.FormaPagoEntity;
 import com.utn.app.buenGusto.pedido.PedidoEntity;
 
 @Entity
@@ -21,31 +24,32 @@ public class FacturaEntity extends CommonEntity implements Serializable {
 
 	private static final long serialVersionUID = -8356649232468048872L;
 
-	private int número;
+	private int nro_factura;
 
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date fecha;
-
-	private double montoDescuento;
+	
 	private double total;
-	private String formaPago;
-	private String nroTarjeta;
  
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JoinColumn(name = "formapago_id",nullable = false)
+	private FormaPagoEntity formapago;
+	
 	@OneToOne(cascade = CascadeType.REMOVE)
-	@JoinColumn(name = "pedido_id",nullable = true)
+	@JoinColumn(name = "pedido_id",nullable = false)
 	private PedidoEntity pedido;
-
+	
 	@PrePersist
 	public void prePersist() {
 		this.fecha = new Date();
 	}
 
-	public int getNúmero() {
-		return número;
+	public int getNro_factura() {
+		return nro_factura;
 	}
 
-	public void setNúmero(int número) {
-		this.número = número;
+	public void setNro_factura(int nro_factura) {
+		this.nro_factura = nro_factura;
 	}
 
 	public Date getFecha() {
@@ -56,14 +60,6 @@ public class FacturaEntity extends CommonEntity implements Serializable {
 		this.fecha = fecha;
 	}
 
-	public double getMontoDescuento() {
-		return montoDescuento;
-	}
-
-	public void setMontoDescuento(double montoDescuento) {
-		this.montoDescuento = montoDescuento;
-	}
-
 	public double getTotal() {
 		return total;
 	}
@@ -72,20 +68,12 @@ public class FacturaEntity extends CommonEntity implements Serializable {
 		this.total = total;
 	}
 
-	public String getFormaPago() {
-		return formaPago;
+	public FormaPagoEntity getFormapago() {
+		return formapago;
 	}
 
-	public void setFormaPago(String formaPago) {
-		this.formaPago = formaPago;
-	}
-
-	public String getNroTarjeta() {
-		return nroTarjeta;
-	}
-
-	public void setNroTarjeta(String nroTarjeta) {
-		this.nroTarjeta = nroTarjeta;
+	public void setFormapago(FormaPagoEntity formapago) {
+		this.formapago = formapago;
 	}
 
 	public PedidoEntity getPedido() {
@@ -96,4 +84,5 @@ public class FacturaEntity extends CommonEntity implements Serializable {
 		this.pedido = pedido;
 	}
 
+	
 }

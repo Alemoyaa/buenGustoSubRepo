@@ -2,9 +2,9 @@ package com.utn.app.buenGusto.pedido;
 
 import java.util.Date;
 
-import com.utn.app.buenGusto.cliente.ClienteDTO;
-import com.utn.app.buenGusto.common.CommonDTO; 
-import com.utn.app.buenGusto.pedidoEstado.EstadoDTO;
+import com.utn.app.buenGusto.common.CommonDTO;
+import com.utn.app.buenGusto.estado.EstadoDTO;
+import com.utn.app.buenGusto.usuario.UsuarioDTO;
 
 public class PedidoDTO extends CommonDTO {
 
@@ -13,11 +13,11 @@ public class PedidoDTO extends CommonDTO {
 	private Date fecha;
 	private int numero;  
 	private Date horaEstimadaFin;
-	private int tipoEnvio;
+	private boolean tipoEnvio;
 
 	private EstadoDTO estado;
 	
-	private ClienteDTO cliente;
+	private UsuarioDTO cliente;
 
 	public int getNumero() {
 		return numero;
@@ -35,19 +35,19 @@ public class PedidoDTO extends CommonDTO {
 		this.horaEstimadaFin = horaEstimadaFin;
 	}
 
-	public int getTipoEnvio() {
+	public boolean getTipoEnvio() {
 		return tipoEnvio;
 	}
 
-	public void setTipoEnvio(int tipoEnvio) {
+	public void setTipoEnvio(boolean tipoEnvio) {
 		this.tipoEnvio = tipoEnvio;
 	}
 
-	public ClienteDTO getCliente() {
+	public UsuarioDTO getCliente() {
 		return cliente;
 	}
 
-	public void setCliente(ClienteDTO cliente) {
+	public void setCliente(UsuarioDTO cliente) {
 		this.cliente = cliente;
 	} 
 

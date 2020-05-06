@@ -1,8 +1,6 @@
 package com.utn.app.buenGusto.stockArticulo;
 
 import java.io.Serializable;
-
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
@@ -18,13 +16,9 @@ public class stockArticuloEntity extends CommonEntity implements Serializable{
 	private static final long serialVersionUID = 1L;
 
 	private double costoActual;
-
 	private double stockActual;
-
 	private double stockMinimo;
-
 	private double stockMaximo;
-
 	private String unidadMedida;
 	
 	@OneToOne(/*cascade = CascadeType.ALL*/)

@@ -17,17 +17,12 @@ import com.utn.app.buenGusto.stockArticulo.stockArticuloEntity;
 public class loteStockEntity extends CommonEntity implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
-
+	
 	private long numeroLote;
-
 	private long cantidadActual;
-
 	private long cantidadComprada;
-
 	private String unidadMedida;
-
 	private Date fechaCompra;
-
 	private Date fechaVencimiento;
 
 	@OneToOne(/*cascade = CascadeType.ALL*/)

@@ -1,4 +1,4 @@
-package com.utn.app.buenGusto.cliente;
+package com.utn.app.buenGusto.usuario;
 
 import java.io.Serializable;
 import java.sql.Date;
@@ -15,8 +15,8 @@ import com.utn.app.buenGusto.domicilio.DomicilioEntity;
 import com.utn.app.buenGusto.rol.RolEntity;
 
 @Entity
-@Table(name = "cliente")
-public class ClienteEntity extends CommonEntity implements Serializable {
+@Table(name = "usuario")
+public class UsuarioEntity extends CommonEntity implements Serializable {
 
 	private static final long serialVersionUID = -8356649232468048872L;
 
@@ -29,11 +29,11 @@ public class ClienteEntity extends CommonEntity implements Serializable {
 	private String uidFirebase;
 
 	@ManyToOne()
-	@JoinColumn(name = "rol_cliente")
+	@JoinColumn(name = "rol_usuario")
 	private RolEntity rol;
  
 	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "domicilio_cliente")
+	@JoinColumn(name = "domicilio_usuario")
 	private DomicilioEntity domicilio; 
 
 	public String getNombre() {

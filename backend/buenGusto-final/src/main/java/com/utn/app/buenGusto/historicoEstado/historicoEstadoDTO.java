@@ -3,8 +3,8 @@ package com.utn.app.buenGusto.historicoEstado;
 import java.util.Date;
 
 import com.utn.app.buenGusto.common.CommonDTO;
+import com.utn.app.buenGusto.estado.EstadoDTO;
 import com.utn.app.buenGusto.pedido.PedidoDTO;
-import com.utn.app.buenGusto.pedidoEstado.EstadoDTO;
 
 public class historicoEstadoDTO extends CommonDTO{
  
