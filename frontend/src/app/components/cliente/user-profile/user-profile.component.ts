@@ -1,5 +1,5 @@
 import { LoginService } from './../../../services/loginServices/login.service';
-import { Cliente } from './../../../entidades/Cliente';
+import { Usuario } from '../../../entidades/Usuario';
 import { UserProfileService } from './../../../services/serviciosCliente/userProfileServices/user-profile.service';
 import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
@@ -10,14 +10,14 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./user-profile.component.css'],
 })
 export class UserProfileComponent implements OnInit {
-  cliente: Cliente = new Cliente() ;
+  cliente: Usuario = new Usuario();
 
 
   constructor(
     private service: UserProfileService,
     private rutaActiva: ActivatedRoute,
     private serviceLogin: LoginService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.rutaActiva.params.subscribe(data => {

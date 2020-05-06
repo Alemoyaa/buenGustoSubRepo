@@ -1,7 +1,7 @@
 import { ClienteService } from './../serviciosCliente/clienteServices/cliente.service';
 import { Router } from '@angular/router';
 import { AngularFireAuth } from '@angular/fire/auth';
-import { Cliente } from './../../entidades/Cliente';
+import { Usuario } from '../../entidades/Usuario';
 import { Injectable } from '@angular/core';
 import { map } from 'rxjs/operators';
 import { auth } from 'firebase/app';
@@ -11,7 +11,7 @@ import { auth } from 'firebase/app';
 export class LoginService {
   public providerId: string = 'null';
 
-  cliente: Cliente = new Cliente();
+  cliente: Usuario = new Usuario();
   // = 
   // {
   //   id: 0,
@@ -35,7 +35,7 @@ export class LoginService {
   ) { }
 
   //me traigo los datos que me da google
-  datosGoogle(cliente: Cliente) {
+  datosGoogle(cliente: Usuario) {
     this.isAuth().subscribe((user) => {
       if (user) {
         cliente.nombre = user.displayName;

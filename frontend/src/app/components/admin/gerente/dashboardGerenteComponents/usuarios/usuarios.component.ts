@@ -3,7 +3,7 @@ import { Domicilio } from './../../../../../entidades/Domicilio';
 import { DomicilioService } from './../../../../../services/serviciosCliente/domicilioServices/domicilio.service';
 import { Component, OnInit } from '@angular/core';
 
-import { Cliente } from 'src/app/entidades/Cliente';
+import { Usuario } from 'src/app/entidades/Usuario';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { ClienteService } from '../../../../../services/serviciosCliente/clienteServices/cliente.service';
 import { filter } from 'rxjs/operators';
@@ -17,7 +17,7 @@ import { Rol } from 'src/app/entidades/Rol';
 export class UsuariosComponent implements OnInit {
 
   formularioPersona: FormGroup;
-  clientes: Cliente[] = new Array<Cliente>();
+  clientes: Usuario[] = new Array<Usuario>();
   rol: Rol[] = new Array<Rol>();
   rolSeleccionado: Rol;
   idCliente: number;
@@ -67,7 +67,7 @@ export class UsuariosComponent implements OnInit {
 
 
   // pre cargo los datos en el formulario de el usuario seleccionnado para editar el rol
-  preCargarDatosFormulario(cliente: Cliente) {
+  preCargarDatosFormulario(cliente: Usuario) {
     this.formularioPersona = this.fb.group({
       nombre: cliente.nombre,
       apellido: cliente.apellido,
@@ -120,7 +120,7 @@ export class UsuariosComponent implements OnInit {
     console.log('formulario value actualziarRol() ', this.formularioPersona.value);
   }
 
-// se pide confirmacion de la eliminacion de el usuario y se elimina segun el id recibido por parametro
+  // se pide confirmacion de la eliminacion de el usuario y se elimina segun el id recibido por parametro
   eliminar(id: number) {
     const opcion = confirm('¿Esta seguro que desea eliminar?');
     if (opcion) {

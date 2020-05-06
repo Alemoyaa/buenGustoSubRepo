@@ -1,4 +1,4 @@
-import { Cliente } from './../../../entidades/Cliente';
+import { Usuario } from '../../../entidades/Usuario';
 import { PedidosServices } from './../../../services/serviciosCliente/pedidosServices/pedidos.service';
 import { ActivatedRoute } from '@angular/router';
 import { Pedido } from './../../../entidades/Pedido';
@@ -11,14 +11,14 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class PedidosComponent implements OnInit {
 
-  @Input() clienteUser : Cliente;
+  @Input() clienteUser: Usuario;
 
-  pedidosCliente : Pedido[] = [];
+  pedidosCliente: Pedido[] = [];
 
   constructor(
     private rutaActiva: ActivatedRoute,
     private servicio: PedidosServices
-    ) { }
+  ) { }
 
   ngOnInit() {
     this.getAll();
@@ -27,7 +27,7 @@ export class PedidosComponent implements OnInit {
   async getAll() {
     await this.servicio.getAll().subscribe((data) => {
       data.forEach(pedido => {
-        if(this.clienteUser.id === pedido.cliente.id){
+        if (this.clienteUser.id === pedido.cliente.id) {
           this.pedidosCliente.push(pedido);
           console.log(this.pedidosCliente);
         }

@@ -1,5 +1,5 @@
 import { Router } from '@angular/router';
-import { Cliente } from './../../../entidades/Cliente';
+import { Usuario } from '../../../entidades/Usuario';
 import { LoginService } from './../../../services/loginServices/login.service';
 
 import { Component, OnInit } from '@angular/core';
@@ -10,9 +10,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./navbar.component.css'],
 })
 export class NavbarComponent implements OnInit {
-  constructor(private serviceLogin: LoginService, private route: Router) {}
+  constructor(private serviceLogin: LoginService, private route: Router) { }
 
-  cliente: Cliente = new Cliente();
+  cliente: Usuario = new Usuario();
   // {
   //     id: 0,
   //     nombre: '',

@@ -35,9 +35,10 @@
           <div class="col-md-9">
             <div class="products">
               <div class="row no-gutters">
-                <div class="col-12 col-md-6 col-lg-4 " *ngFor="let articulo of articulosManufacturados | paginate: {itemsPerPage: 9, currentPage: pageActual}">
+                <div class="col-12 col-md-6 col-lg-4 "
+                  *ngFor="let articulo of articulosManufacturados | paginate: {itemsPerPage: 9, currentPage: pageActual}">
                   <article class="card card-product shadow-sm">
-                    <img src="../../../../assets/pizza/pizza1.jpg" class="card-img-top p-1">
+                    <img src="{{articulo._urlImagen }}" class="card-img-top p-1">
                     <div class="card-body">
                       <h5 class="card-title text-primary">{{ articulo.denominacion }}</h5>
                       <p class="card-text">
@@ -56,7 +57,7 @@
             </div>
             <nav class="pagination">
               <pagination-controls (pageChange)="pageActual = $event"></pagination-controls>
-          </nav>
+            </nav>
           </div>
         </div>
       </div>

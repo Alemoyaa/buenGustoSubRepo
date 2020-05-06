@@ -1,5 +1,5 @@
 import { Pedido } from './../../../entidades/Pedido';
-import { Cliente } from './../../../entidades/Cliente';
+import { Usuario } from '../../../entidades/Usuario';
 import { Factura } from './../../../entidades/Factura';
 import { FacturaService } from './../../../services/serviciosCliente/facturaServices/factura.service';
 import { ActivatedRoute } from '@angular/router';
@@ -15,14 +15,14 @@ import html2canvas from 'html2canvas';
 export class FacturaComponent implements OnInit {
   factura: Factura;
 
-  @Input() clienteUserFactura : Cliente;
+  @Input() clienteUserFactura: Usuario;
 
-  @Input() pedidosUserFactura : Pedido;
+  @Input() pedidosUserFactura: Pedido;
 
   constructor(
     private rutaActiva: ActivatedRoute,
     private servicio: FacturaService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.rutaActiva.params.subscribe((data) => {

@@ -10,7 +10,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CatalogoComponent implements OnInit {
 
-  pageActual: number =1;//paginador
+  pageActual: number = 1;//paginador
   articulosManufacturados: ArticuloManufacturado[] = [];
   rubro = ['Todo', 'Pizza', 'Lomo'];
 
@@ -24,18 +24,23 @@ export class CatalogoComponent implements OnInit {
     this.getAll();
   }
 
-  async getAll(){
-    await this.service.getAll().subscribe((data)=>{
+  async getAll() {
+    await this.service.getAll().subscribe((data) => {
+      data.forEach(articulo => {
+        if (articulo._urlImagen === null) { //Si en la bd no ahi imagen le seteamos la imagen de not available
+          articulo._urlImagen = "../../../../assets/image-not-available.png";
+        }
+      })
       this.articulosManufacturados = data;
       console.log(this.articulosManufacturados);
     });
   }
 
 
-  getFiltro(filtro: string){
-    this.service.getAll().subscribe((data)=>{
-      this.articulosManufacturados = data,{
-        query:{
+  getFiltro(filtro: string) {
+    this.service.getAll().subscribe((data) => {
+      this.articulosManufacturados = data, {
+        query: {
           orderByChild: 'rubroGeneral',
           equalTo: filtro
         }
@@ -45,14 +50,14 @@ export class CatalogoComponent implements OnInit {
     return this.articulosManufacturados;
   }
 
-  onSelect(event){
-    let query=null;
-    if(event.value== "Todos"){
-      query= this.getAll();
-    }else{
+  onSelect(event) {
+    let query = null;
+    if (event.value == "Todos") {
+      query = this.getAll();
+    } else {
       query = this.getFiltro(event.value);
-      query.subscribe(rubro =>{
-        this.articulosManufacturados= this.articulosManufacturados;
+      query.subscribe(rubro => {
+        this.articulosManufacturados = this.articulosManufacturados;
       })
     }
   }
