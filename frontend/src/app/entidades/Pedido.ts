@@ -1,13 +1,12 @@
-import { Factura } from './Factura';
-import { Cliente } from './Cliente';
+import { Estado } from './Estado';
+import { Usuario } from 'src/app/entidades/Usuario';
 import { Common } from './Common';
 
-export class Pedido extends Common{
+export class Pedido extends Common {
   fecha: Date;
   numero: number;
-  estado: number;
+  estadoActual: Estado;
   horaEstimadaFin: Date;
   tipoEnvio: number;
-  cliente: Cliente;
-  factura: Factura;
+  usuario: Usuario;
 }
