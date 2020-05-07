@@ -12,7 +12,7 @@ import com.utn.app.buenGusto.common.CommonEntity;
 import com.utn.app.buenGusto.factura.FacturaEntity;
 
 @Entity
-@Table(name = "factura")
+@Table(name = "detalle_pago")
 public class DetallePagoEntity extends CommonEntity implements Serializable {
 
 	private static final long serialVersionUID = -8356649232468048872L;

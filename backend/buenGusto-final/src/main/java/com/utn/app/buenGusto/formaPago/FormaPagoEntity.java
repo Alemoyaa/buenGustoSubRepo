@@ -7,7 +7,7 @@ import javax.persistence.Table;
 import com.utn.app.buenGusto.common.CommonEntity;
 
 @Entity
-@Table(name = "factura")
+@Table(name = "forma_pago")
 public class FormaPagoEntity extends CommonEntity implements Serializable {
 
 	private static final long serialVersionUID = -8356649232468048872L;

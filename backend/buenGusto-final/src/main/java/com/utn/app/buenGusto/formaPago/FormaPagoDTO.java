@@ -6,14 +6,15 @@ public class FormaPagoDTO extends CommonDTO {
 
 	private static final long serialVersionUID = 1L;
 
-	private String formaPago;
+	private String nombreForma;
 	private double montoDescuento;
 	
-	public String getFormaPago() {
-		return formaPago;
+	
+	public String getNombreForma() {
+		return nombreForma;
 	}
-	public void setFormaPago(String formaPago) {
-		this.formaPago = formaPago;
+	public void setNombreForma(String nombreForma) {
+		this.nombreForma = nombreForma;
 	}
 	public double getMontoDescuento() {
 		return montoDescuento;
