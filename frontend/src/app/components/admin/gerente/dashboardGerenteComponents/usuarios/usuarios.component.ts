@@ -1,6 +1,4 @@
 import { RolService } from './../../../../../services/serviciosCliente/rolServices/rol.service';
-import { Domicilio } from './../../../../../entidades/Domicilio';
-import { DomicilioService } from './../../../../../services/serviciosCliente/domicilioServices/domicilio.service';
 import { Component, OnInit } from '@angular/core';
 
 import { Usuario } from 'src/app/entidades/Usuario';

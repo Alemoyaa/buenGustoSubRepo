@@ -2,15 +2,15 @@
 
   <div class="card">
     <div class="row">
+
       <aside class="col-sm-5 border-right">
-
-
         <article class="gallery-wrap">
-
           <div class=" img-big-wrap">
-            <div> <a href="#"><img src="{{detalle.articuloManufacturado._urlImagen}}"></a></div>
+            <div>
+              <a href="#"><img src="{{this.serviceManuf.articulosManufacturados[this.id]._urlImagen}}"></a>
+            </div>
           </div>
-        </article> <!-- gallery-wrap .end// -->
+        </article>  <!-- gallery-wrap .end// -->
       </aside>
 
       <aside class="col-sm-7">
@@ -19,14 +19,14 @@
 
           <p class="price-detail-wrap">
             <span class="price h3 text-warning">
-              <span class="currency">$</span><span class="num"></span>
+              <span class="currency">$</span><span class="num">{{detalle.receta.articuloManufacturado.precioVenta}}</span>
             </span>
+          </p>
 
-          </p> <!-- price-detail-wrap .// -->
           <dl class="item-property">
             <dt>Ingredientes</dt>
             <dd>
-              <p>{{detalle.cantidad}}</p>
+              <p>{{detalle.articuloInsumo.denominacion}}</p>
             </dd>
           </dl>
           <dl class="param param-feature">
@@ -35,11 +35,11 @@
           </dl> <!-- item-property-hor .// -->
           <dl class="param param-feature">
             <dt>Porciones</dt>
-            <dd>8</dd>
+            <dd>{{detalle.cantidad}}</dd>
           </dl> <!-- item-property-hor .// -->
           <dl class="param param-feature">
             <dt>Otra descripcion</dt>
-            <dd>Otrsa</dd>
+            <dd>d</dd>
           </dl> <!-- item-property-hor .// -->
 
           <hr>
@@ -50,7 +50,4 @@
       </aside> <!-- col.// -->
     </div> <!-- row.// -->
   </div> <!-- card.// -->
-
-
 </div>
-<!--container.//-->

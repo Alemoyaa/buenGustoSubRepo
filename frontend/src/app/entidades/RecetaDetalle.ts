@@ -8,6 +8,6 @@ export class RecetaDetalle extends Common {
     unidadMedida: string;
     tipoDetalleReceta: string;
     receta: Receta;
-    ArticuloInsumo: ArticuloInsumo;
+    articuloInsumo: ArticuloInsumo;
     recetaInsumo: RecetaInsumo;
 }

@@ -13,14 +13,15 @@
                 <div class="filter-item">
                   <h3 class="text-info2">Categoria</h3>
                   <select placeholder="articulo" (change)="onSelect($event)">
-                    <option *ngFor="let articulo of articulosManufacturados" [value]="articulo">
+                    <option *ngFor="let articulo of this.service.articulosManufacturados" [value]="articulo">
                       {{articulo}}
                     </option>
                   </select>
                   <div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-1"><label
                       class="form-check-label" for="formCheck-1">
                       <h6>Pizza</h6>
-                    </label></div>
+                    </label>
+                  </div>
                 </div>
                 <div class="filter-item">
                   <h3 class="text-info2">Bebidas</h3>
@@ -36,7 +37,7 @@
             <div class="products">
               <div class="row no-gutters">
                 <div class="col-12 col-md-6 col-lg-4 "
-                  *ngFor="let articulo of articulosManufacturados | paginate: {itemsPerPage: 9, currentPage: pageActual}">
+                  *ngFor="let articulo of this.service.articulosManufacturados | paginate: {itemsPerPage: 9, currentPage: pageActual}">
                   <article class="card card-product shadow-sm">
                     <img src="{{articulo._urlImagen }}" class="card-img-top p-1">
                     <div class="card-body">
@@ -46,8 +47,12 @@
                         <span class="precio-producto" style="font-weight: bold;"> {{ articulo.precioVenta }}</span>
                       </p>
                       <div style="display: flex; justify-content: space-between; align-items: center;">
-                        <a [routerLink]="['/catalogo-detalle/',articulo.id]" class="btn btn-sm btn-outline-primary">Ver
-                          Detalles</a>
+                        <!--<a [routerLink]="['/catalogo-detalle/',articulo.id]" class="btn btn-sm btn-outline-primary">
+                          Ver detalles
+                        </a>-->
+                        <button type="button" class="btn btn-sm btn-outline-primary" data-toggle="modal" data-target="#articuloDetalle" (click)="verArticulo(articulo)">
+                          Ver detalles
+                        </button>
                         <p class="card-text text-muted">Coccion: {{articulo.tiempoEstimadoCocina}} min</p>
                       </div>
                     </div>
@@ -63,4 +68,72 @@
       </div>
     </div>
   </section>
+</div>
+
+
+<!--Modal MERSADA PARA SACAR EL CATALOGO DETALLE QUE ESTA AL PEDO-->
+<div class="modal fade" id="articuloDetalle" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalCenterTitle">Detalles sobre: {{this.articuloSeleccionado.denominacion}}</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+        <aside class="">
+          <article class="gallery-wrap">
+            <div class=" img-big-wrap">
+              <div>
+                <a href="#"><img src="{{this.articuloSeleccionado._urlImagen}}"></a>
+              </div>
+            </div>
+          </article>
+        </aside>
+
+        <aside class="col-sm-7">
+          <article class="card-body p-5">
+            <h3 class="title mb-3">{{this.articuloSeleccionado.denominacion}}</h3>
+
+            <p class="price-detail-wrap">
+              <span class="price h3 text-warning">
+                <span class="currency">$</span><span class="num">{{this.articuloSeleccionado.precioVenta}}</span>
+              </span>
+            </p>
+
+            <dl class="item-property">
+              <dt>Ingredientes</dt>
+              <dd>
+                <!--<p>{{detalle.recetaInsumo.nombre}}</p>-->
+              </dd>
+            </dl>
+            <dl class="param param-feature">
+              <dt>Tipo</dt>
+              <dd></dd>
+            </dl> <!-- item-property-hor .// -->
+            <dl class="param param-feature">
+              <dt>Porciones</dt>
+              <!--<dd>{{detalle.cantidad}}</dd>-->
+            </dl> <!-- item-property-hor .// -->
+            <dl class="param param-feature">
+              <dt>Otra descripcion</dt>
+              <dd>d</dd>
+            </dl> <!-- item-property-hor .// -->
+
+            <hr>
+
+            <!--<a href="#" class="btn btn-lg btn-outline-primary text-uppercase" (click)="addToCart()"> <i
+                class="fas fa-shopping-cart"></i> agregar al carrito </a>-->
+          </article>
+        </aside>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
 </div>

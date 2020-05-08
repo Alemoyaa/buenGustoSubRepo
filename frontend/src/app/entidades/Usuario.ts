@@ -10,5 +10,5 @@ export class Usuario extends Common {
   email: string;
   foto?: string;
   rol: Rol;
-  domicilio: Domicilio
+  domicilio: Domicilio;
 }

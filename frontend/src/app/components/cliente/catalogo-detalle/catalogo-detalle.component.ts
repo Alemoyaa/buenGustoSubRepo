@@ -1,6 +1,7 @@
-import { ArticuloManufacturadoDetalle } from './../../../entidades/ArticuloManufacturadoDetalle';
-import { ArticuloManufacturadoDetalleService } from './../../../services/serviciosCliente/articuloManufacturadoDetalleServices/articulo-manufacturado-detalle.service';
-import { Component, OnInit } from '@angular/core';
+import { ArticuloManufacturadoService } from './../../../services/serviciosCliente/articuloManufacturadoServices/articuloManufacturado.service';
+import { RecetaDetalle } from './../../../entidades/RecetaDetalle';
+import { RecetaDetalleService } from './../../../services/serviciosCliente/recetaDetalleServices/receta-detalle.service';
+import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
@@ -9,24 +10,26 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./catalogo-detalle.component.css'],
 })
 export class CatalogoDetalleComponent implements OnInit {
-  detalle: ArticuloManufacturadoDetalle = new ArticuloManufacturadoDetalle();
-
+  detalle: RecetaDetalle = new RecetaDetalle();
+  id: number;
   constructor(
-    public service: ArticuloManufacturadoDetalleService,
+    public serviceReceta: RecetaDetalleService,
+    public serviceManuf: ArticuloManufacturadoService,
     private routActiv: ActivatedRoute
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.routActiv.params.subscribe((data) => {
+      this.id = data.id;
       this.getOne(data.id);
-      console.log(data + ' la data');
-      console.log(data.id);
+      console.log(data);
     });
   }
 
   async getOne(id: number) {
-    await this.service.getOne(id).subscribe((data) => {
+    await this.serviceReceta.getOne(id).subscribe((data) => {
       this.detalle = data;
+      console.log("getOne")
       console.log(this.detalle);
     });
   }

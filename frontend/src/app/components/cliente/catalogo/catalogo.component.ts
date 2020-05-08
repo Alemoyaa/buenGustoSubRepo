@@ -1,6 +1,10 @@
+import { RecetaDetalle } from './../../../entidades/RecetaDetalle';
+import { RecetaDetalleService } from './../../../services/serviciosCliente/recetaDetalleServices/receta-detalle.service';
+import { ArticuloManufacturado } from './../../../entidades/ArticuloManufacturado';
+import { CategoriaAMService } from './../../../services/serviciosCliente/categoriaAM/categoria-am.service';
 import { ArticuloManufacturadoService } from '../../../services/serviciosCliente/articuloManufacturadoServices/articuloManufacturado.service';
-import { ArticuloManufacturado } from 'src/app/entidades/ArticuloManufacturado';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output } from '@angular/core';
+import { EventEmitter } from 'protractor';
 
 @Component({
   selector: 'app-catalogo',
@@ -10,13 +14,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CatalogoComponent implements OnInit {
 
+  detalle: RecetaDetalle = new RecetaDetalle();
+  articuloSeleccionado: ArticuloManufacturado = new ArticuloManufacturado();
+
   pageActual: number = 1;//paginador
-  articulosManufacturados: ArticuloManufacturado[] = [];
   rubro = ['Todo', 'Pizza', 'Lomo'];
 
+  //@Output() ArticuloSeleccionado = new EventEmitter();
 
-  constructor(public service: ArticuloManufacturadoService) {
-    ;
+
+  constructor(public service: ArticuloManufacturadoService,
+    public serviceReceta: RecetaDetalleService) {
+
   }
 
   ngOnInit(): void {
@@ -31,23 +40,22 @@ export class CatalogoComponent implements OnInit {
           articulo._urlImagen = "../../../../assets/image-not-available.png";
         }
       })
-      this.articulosManufacturados = data;
-      console.log(this.articulosManufacturados);
+      this.service.articulosManufacturados = data;
+      //console.log(this.service.articulosManufacturados);
     });
   }
 
-
   getFiltro(filtro: string) {
     this.service.getAll().subscribe((data) => {
-      this.articulosManufacturados = data, {
+      this.service.articulosManufacturados = data, {
         query: {
           orderByChild: 'rubroGeneral',
           equalTo: filtro
         }
       }
-      console.log(this.articulosManufacturados);
+      console.log(this.service.articulosManufacturados);
     });
-    return this.articulosManufacturados;
+    return this.service.articulosManufacturados;
   }
 
   onSelect(event) {
@@ -57,9 +65,20 @@ export class CatalogoComponent implements OnInit {
     } else {
       query = this.getFiltro(event.value);
       query.subscribe(rubro => {
-        this.articulosManufacturados = this.articulosManufacturados;
+        this.service.articulosManufacturados = this.service.articulosManufacturados;
       })
     }
   }
 
+  verArticulo(ArticuloMan: ArticuloManufacturado){ //Cuando le dan click para ver los detalles del producto
+    this.articuloSeleccionado = ArticuloMan;//Asignamos el articulo que selecciono a un articulo nuevo, para enviarlo al modal
+    this.getDetalleArticulo(this.articuloSeleccionado.id);//Traemos los detalles de la receta, de el articulo que selecciono
+  }
+
+  async getDetalleArticulo(id: number) {
+    await this.serviceReceta.getOne(id).subscribe((data) => {
+      this.detalle = data;
+      console.log(this.detalle);
+    });
+  }
 }

@@ -69,20 +69,20 @@
                     <div class="card-body">
                       <form>
                         <div class="form-group"><label for="address"><strong>Calle</strong></label>
-                          <input class="form-control" type="text" placeholder="Ingrese su calle"
-                           name="address" [(ngModel)]="cliente.domicilioEntities[0].calle" >
+                          <input class="form-control" type="text" placeholder="Ingrese su calle" name="address"
+                            [(ngModel)]="cliente.domicilio.calle">
                         </div>
                         <div class="form-row">
                           <div class="col">
                             <div class="form-group"><label for="city"><strong>Numeracion</strong></label>
-                              <input class="form-control" type="number" placeholder="Ingrese su numeracion"
-                               name="city" [(ngModel)]="cliente.domicilioEntities[0].numero">
+                              <input class="form-control" type="number" placeholder="Ingrese su numeracion" name="city"
+                                [(ngModel)]="cliente.domicilio.numero">
                             </div>
                           </div>
                           <div class="col">
                             <div class="form-group"><label for="country"><strong>Localidad</strong></label>
-                              <input class="form-control" type="text"
-                               name="Ingrese su localidad" [(ngModel)]="cliente.domicilioEntities[0].localidad">
+                              <input class="form-control" type="text" name="Ingrese su localidad"
+                                [(ngModel)]="cliente.domicilio.ciudad">
 
                             </div>
                           </div>
