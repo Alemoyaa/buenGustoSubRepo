@@ -1,139 +1,36 @@
 <div class="page catalog-page">
   <section class="clean-block clean-catalog dark">
     <div class="container">
-      <div class="block-heading">
-        <a class="fa fa-shopping-cart fa-3x " href="/carrito"></a>
-        <h2 class="text-info ">Catalogo</h2>
-      </div>
-      <div class="content">
-        <div class="row">
-          <div class="col-md-3">
-            <div class="d-none d-md-block">
-              <div class="filters">
-                <div class="filter-item">
-                  <h3 class="text-info2">Categoria</h3>
-                  <select placeholder="articulo" (change)="onSelect($event)">
-                    <option *ngFor="let articulo of this.service.articulosManufacturados" [value]="articulo">
-                      {{articulo}}
-                    </option>
-                  </select>
-                  <div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-1"><label
-                      class="form-check-label" for="formCheck-1">
-                      <h6>Pizza</h6>
-                    </label>
-                  </div>
-                </div>
-                <div class="filter-item">
-                  <h3 class="text-info2">Bebidas</h3>
-                  <div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-5"><label
-                      class="form-check-label" for="formCheck-5">
-                      <h6>Gaseosas</h6>
-                    </label></div>
-                </div>
-              </div>
+      <div class="content justify-content-center d-flex">
+        <div class="products col-lg-12 mt-4 ">
+          <div class="card text-white bg-danger mb-3 mr-4 category-card" style="max-width: 12rem;"
+            (click)="setBoard('catPizzas')">
+            <div class="card-body justify-content-around d-flex">
+              <h3 class="card-text">Pizzas</h3>
+              <i class="fas fa-pizza-slice fa-3x"></i>
             </div>
           </div>
-          <div class="col-md-9">
-            <div class="products">
-              <div class="row no-gutters">
-                <div class="col-12 col-md-6 col-lg-4 "
-                  *ngFor="let articulo of this.service.articulosManufacturados | paginate: {itemsPerPage: 9, currentPage: pageActual}">
-                  <article class="card card-product shadow-sm">
-                    <img src="{{articulo._urlImagen }}" class="card-img-top p-1">
-                    <div class="card-body">
-                      <h5 class="card-title text-primary">{{ articulo.denominacion }}</h5>
-                      <p class="card-text">
-                        <i class="fas fa-dollar-sign"></i>
-                        <span class="precio-producto" style="font-weight: bold;"> {{ articulo.precioVenta }}</span>
-                      </p>
-                      <div style="display: flex; justify-content: space-between; align-items: center;">
-                        <!--<a [routerLink]="['/catalogo-detalle/',articulo.id]" class="btn btn-sm btn-outline-primary">
-                          Ver detalles
-                        </a>-->
-                        <button type="button" class="btn btn-sm btn-outline-primary" data-toggle="modal" data-target="#articuloDetalle" (click)="verArticulo(articulo)">
-                          Ver detalles
-                        </button>
-                        <p class="card-text text-muted">Coccion: {{articulo.tiempoEstimadoCocina}} min</p>
-                      </div>
-                    </div>
-                  </article>
-                </div>
-              </div>
+          <div class="card text-white bg-dark mb-3 mr-4 category-card" style="max-width: 12rem;"
+            (click)="setBoard('catLomos')">
+            <div class="card-body justify-content-around d-flex">
+              <h3 class="card-text">Lomos</h3>
+              <i class="fas fa-bacon fa-3x"></i>
             </div>
-            <nav class="pagination">
-              <pagination-controls (pageChange)="pageActual = $event"></pagination-controls>
-            </nav>
+          </div>
+          <div class="card text-white bg-primary mb-3 mr-4 category-card" style="max-width: 12rem;"
+            (click)="setBoard('catBebidas')">
+            <div class="card-body justify-content-around d-flex">
+              <h3 class="card-text">Bebidas</h3>
+              <i class="fas fa-wine-bottle fa-3x"></i>
+            </div>
           </div>
         </div>
       </div>
+      <div class="category-viewer">
+        <div class="catPizzas" *ngIf="catPizzas">Pizzas</div>
+        <div class="catLomos" *ngIf="catLomos">Lomos</div>
+        <div class="catBebidas" *ngIf="catBebidas">Bebidas</div>
+      </div>
     </div>
   </section>
-</div>
-
-
-<!--Modal MERSADA PARA SACAR EL CATALOGO DETALLE QUE ESTA AL PEDO-->
-<div class="modal fade" id="articuloDetalle" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalCenterTitle">Detalles sobre: {{this.articuloSeleccionado.denominacion}}</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-
-        <aside class="">
-          <article class="gallery-wrap">
-            <div class=" img-big-wrap">
-              <div>
-                <a href="#"><img src="{{this.articuloSeleccionado._urlImagen}}"></a>
-              </div>
-            </div>
-          </article>
-        </aside>
-
-        <aside class="col-sm-7">
-          <article class="card-body p-5">
-            <h3 class="title mb-3">{{this.articuloSeleccionado.denominacion}}</h3>
-
-            <p class="price-detail-wrap">
-              <span class="price h3 text-warning">
-                <span class="currency">$</span><span class="num">{{this.articuloSeleccionado.precioVenta}}</span>
-              </span>
-            </p>
-
-            <dl class="item-property">
-              <dt>Ingredientes</dt>
-              <dd>
-                <!--<p>{{detalle.recetaInsumo.nombre}}</p>-->
-              </dd>
-            </dl>
-            <dl class="param param-feature">
-              <dt>Tipo</dt>
-              <dd></dd>
-            </dl> <!-- item-property-hor .// -->
-            <dl class="param param-feature">
-              <dt>Porciones</dt>
-              <!--<dd>{{detalle.cantidad}}</dd>-->
-            </dl> <!-- item-property-hor .// -->
-            <dl class="param param-feature">
-              <dt>Otra descripcion</dt>
-              <dd>d</dd>
-            </dl> <!-- item-property-hor .// -->
-
-            <hr>
-
-            <!--<a href="#" class="btn btn-lg btn-outline-primary text-uppercase" (click)="addToCart()"> <i
-                class="fas fa-shopping-cart"></i> agregar al carrito </a>-->
-          </article>
-        </aside>
-
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
-    </div>
-  </div>
 </div>

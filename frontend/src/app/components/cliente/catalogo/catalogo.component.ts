@@ -1,84 +1,76 @@
-import { RecetaDetalle } from './../../../entidades/RecetaDetalle';
-import { RecetaDetalleService } from './../../../services/serviciosCliente/recetaDetalleServices/receta-detalle.service';
-import { ArticuloManufacturado } from './../../../entidades/ArticuloManufacturado';
-import { CategoriaAMService } from './../../../services/serviciosCliente/categoriaAM/categoria-am.service';
 import { ArticuloManufacturadoService } from '../../../services/serviciosCliente/articuloManufacturadoServices/articuloManufacturado.service';
-import { Component, OnInit, Output } from '@angular/core';
-import { EventEmitter } from 'protractor';
+import { ArticuloManufacturado } from 'src/app/entidades/ArticuloManufacturado';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-catalogo',
   templateUrl: './catalogo.component.html',
   styleUrls: ['./catalogo.component.css'],
-
 })
 export class CatalogoComponent implements OnInit {
-
-  detalle: RecetaDetalle = new RecetaDetalle();
-  articuloSeleccionado: ArticuloManufacturado = new ArticuloManufacturado();
-
-  pageActual: number = 1;//paginador
+  pageActual: number = 1; //paginador
+  articulosManufacturados: ArticuloManufacturado[] = [];
   rubro = ['Todo', 'Pizza', 'Lomo'];
 
-  //@Output() ArticuloSeleccionado = new EventEmitter();
-
-
-  constructor(public service: ArticuloManufacturadoService,
-    public serviceReceta: RecetaDetalleService) {
-
-  }
+  constructor(public service: ArticuloManufacturadoService) {}
 
   ngOnInit(): void {
-
     this.getAll();
   }
 
   async getAll() {
     await this.service.getAll().subscribe((data) => {
-      data.forEach(articulo => {
-        if (articulo._urlImagen === null) { //Si en la bd no ahi imagen le seteamos la imagen de not available
-          articulo._urlImagen = "../../../../assets/image-not-available.png";
-        }
-      })
-      this.service.articulosManufacturados = data;
-      //console.log(this.service.articulosManufacturados);
+      this.articulosManufacturados = data;
+      console.log(this.articulosManufacturados);
     });
   }
 
   getFiltro(filtro: string) {
     this.service.getAll().subscribe((data) => {
-      this.service.articulosManufacturados = data, {
-        query: {
-          orderByChild: 'rubroGeneral',
-          equalTo: filtro
-        }
-      }
-      console.log(this.service.articulosManufacturados);
+      (this.articulosManufacturados = data),
+        {
+          query: {
+            orderByChild: 'rubroGeneral',
+            equalTo: filtro,
+          },
+        };
+      console.log(this.articulosManufacturados);
     });
-    return this.service.articulosManufacturados;
+    return this.articulosManufacturados;
   }
 
   onSelect(event) {
     let query = null;
-    if (event.value == "Todos") {
+    if (event.value == 'Todos') {
       query = this.getAll();
     } else {
       query = this.getFiltro(event.value);
-      query.subscribe(rubro => {
-        this.service.articulosManufacturados = this.service.articulosManufacturados;
-      })
+      query.subscribe((rubro) => {
+        this.articulosManufacturados = this.articulosManufacturados;
+      });
     }
   }
 
-  verArticulo(ArticuloMan: ArticuloManufacturado){ //Cuando le dan click para ver los detalles del producto
-    this.articuloSeleccionado = ArticuloMan;//Asignamos el articulo que selecciono a un articulo nuevo, para enviarlo al modal
-    this.getDetalleArticulo(this.articuloSeleccionado.id);//Traemos los detalles de la receta, de el articulo que selecciono
+  catPizzas = false;
+  catLomos = false;
+  catBebidas = false;
+
+  clearBoards() {
+    this.catPizzas = false;
+    this.catLomos = false;
+    this.catBebidas = false;
   }
 
-  async getDetalleArticulo(id: number) {
-    await this.serviceReceta.getOne(id).subscribe((data) => {
-      this.detalle = data;
-      console.log(this.detalle);
-    });
+  setBoard(board) {
+    this.clearBoards();
+    if (board === 'catPizzas') {
+      this.catPizzas = true;
+    }
+    if (board === 'catLomos') {
+      this.catLomos = true;
+    }
+    if (board === 'catBebidas') {
+      this.catBebidas = true;
+    }
   }
 }
