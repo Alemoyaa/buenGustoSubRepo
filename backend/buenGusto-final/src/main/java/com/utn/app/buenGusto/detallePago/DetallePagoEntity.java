@@ -3,20 +3,26 @@ package com.utn.app.buenGusto.detallePago;
 import java.io.Serializable;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import com.utn.app.buenGusto.common.CommonEntity;
 import com.utn.app.buenGusto.factura.FacturaEntity;
 
 @Entity
 @Table(name = "detalle_pago")
-public class DetallePagoEntity extends CommonEntity implements Serializable {
+public class DetallePagoEntity implements Serializable {
 
 	private static final long serialVersionUID = -8356649232468048872L;
-
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id")
+	private int id;
 	private String nombre_titular_tarjeta;
 	private int nro_tarjeta;
 	
@@ -47,5 +53,14 @@ public class DetallePagoEntity extends CommonEntity implements Serializable {
 	public void setFactura(FacturaEntity factura) {
 		this.factura = factura;
 	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+	
 	
 }

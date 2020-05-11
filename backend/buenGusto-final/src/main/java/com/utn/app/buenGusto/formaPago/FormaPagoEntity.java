@@ -1,17 +1,23 @@
 package com.utn.app.buenGusto.formaPago;
 
 import java.io.Serializable;
-import javax.persistence.Entity;
-import javax.persistence.Table;
 
-import com.utn.app.buenGusto.common.CommonEntity;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
 @Table(name = "forma_pago")
-public class FormaPagoEntity extends CommonEntity implements Serializable {
+public class FormaPagoEntity implements Serializable {
 
 	private static final long serialVersionUID = -8356649232468048872L;
-
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id")
+	private int id;
 	private String nombreForma;
 	private double montoDescuento;
 	
@@ -28,5 +34,12 @@ public class FormaPagoEntity extends CommonEntity implements Serializable {
 	public void setMontoDescuento(double montoDescuento) {
 		this.montoDescuento = montoDescuento;
 	}
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
+	
 	
 }

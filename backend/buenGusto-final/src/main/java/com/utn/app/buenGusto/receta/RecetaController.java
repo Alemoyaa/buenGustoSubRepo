@@ -1,16 +1,16 @@
 package com.utn.app.buenGusto.receta;
 
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-
 import com.utn.app.buenGusto.common.CommonController;
-import com.utn.app.buenGusto.common.CommonIService;
+
 
 @RestController
+@CrossOrigin(origins = "*",
+methods= {RequestMethod.GET,RequestMethod.POST,RequestMethod.DELETE,RequestMethod.PUT})
 @RequestMapping(path = "api/receta")
-public class RecetaController extends CommonController<RecetaDTO> {
+public class RecetaController extends CommonController<RecetaEntity, RecetaService> {
 
-	public RecetaController(CommonIService<RecetaDTO> service, RecetaService pservice) {
-		super(service);
-	}
 }

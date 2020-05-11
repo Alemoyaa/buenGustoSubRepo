@@ -1,25 +1,28 @@
 package com.utn.app.buenGusto.detalleReceta;
 
 import java.io.Serializable;
-
-import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.utn.app.buenGusto.articuloInsumo.ArticuloInsumoEntity;
-import com.utn.app.buenGusto.common.CommonEntity;
 import com.utn.app.buenGusto.receta.RecetaEntity;
-import com.utn.app.buenGusto.recetaInsumo.recetaInsumoEntity;
+import com.utn.app.buenGusto.recetaInsumo.RecetaInsumoEntity;
 
 @Entity
 @Table(name = "receta_detalle")
-public class RecetaDetalleEntity extends CommonEntity implements Serializable {
+public class RecetaDetalleEntity implements Serializable {
 
 	private static final long serialVersionUID = -8356649232468048872L;
-
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id")
+	private int id;
 	private double cantidad;
 	private String unidadMedida;
 	private boolean tipoDetalleReceta; //False es para una RecetaInsumo, True para una Receta
@@ -35,7 +38,7 @@ public class RecetaDetalleEntity extends CommonEntity implements Serializable {
 	
 	@ManyToOne(/*cascade = CascadeType.ALL*/)
 	@JoinColumn(name = "receta_insumo_id", nullable=true)
-	private recetaInsumoEntity recetaInsumo;
+	private RecetaInsumoEntity recetaInsumo;
 	
 	public RecetaEntity getReceta() {
 		return receta;
@@ -69,11 +72,11 @@ public class RecetaDetalleEntity extends CommonEntity implements Serializable {
 		this.unidadMedida = unidadMedida;
 	}
 	
-	public recetaInsumoEntity getRecetaInsumo() {
+	public RecetaInsumoEntity getRecetaInsumo() {
 		return recetaInsumo;
 	}
 
-	public void setRecetaInsumo(recetaInsumoEntity recetaInsumo) {
+	public void setRecetaInsumo(RecetaInsumoEntity recetaInsumo) {
 		this.recetaInsumo = recetaInsumo;
 	}
 
@@ -83,6 +86,22 @@ public class RecetaDetalleEntity extends CommonEntity implements Serializable {
 
 	public void setTipoDetalleReceta(boolean tipoDetalleReceta) {
 		this.tipoDetalleReceta = tipoDetalleReceta;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public ArticuloInsumoEntity getArticuloInsumo() {
+		return articuloInsumo;
+	}
+
+	public void setArticuloInsumo(ArticuloInsumoEntity articuloInsumo) {
+		this.articuloInsumo = articuloInsumo;
 	}
 
 }

@@ -1,126 +1,106 @@
 package com.utn.app.buenGusto.common;
 
-import java.lang.reflect.Type;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
-
-import org.modelmapper.ModelMapper;
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.transaction.annotation.Transactional;
 
-public class CommonService<ENTITY extends CommonEntity, DTO extends CommonDTO> implements CommonIService<DTO> {
-    private JpaRepository<ENTITY, Long> repository;
-    private Class<DTO> dtoClass;
-    private Class<ENTITY> entityClass;
-    private ModelMapper mMapper;
+public abstract class CommonService<E, R extends JpaRepository<E, Integer>> implements CommonIService<E> {
+	
+	@Autowired //injeccion de dependencia
+	protected R repository;	
+	
 
-    public CommonService(JpaRepository<ENTITY, Long> repository, Class<DTO> dtoClass, Class<ENTITY> entityClass,
-            ModelMapper mMapper) {
-        this.repository = repository;
-        this.dtoClass = dtoClass;
-        this.entityClass = entityClass;
-        this.mMapper = mMapper;
-    }
+	@Override
+	public E findById(int id) throws Exception {
+		try {
 
-    private DTO convertToDto(ENTITY entity) {
-        return mMapper.map(entity, (Type) dtoClass);
-    }
+			// se usa para atrapar un null
+			Optional<E> varOptional = repository.findById(id);
 
-    private ENTITY convertToEntity(DTO dto) {
-        return mMapper.map(dto, (Type) entityClass);
-    }
+			E entity = varOptional.get();
 
-    @Override
-    @Transactional
-    public DTO save(DTO dto) throws Exception {
-        try {
-            ENTITY entity = repository.save(convertToEntity(dto));
-            return convertToDto(entity);
-        } catch (Exception e) {
-            throw new Exception();
-        }
-    }
+			return entity;
 
-    @Override
-    @Transactional
-    public DTO update(long id, DTO dto) throws Exception {
-        Optional<ENTITY> entityOptional = repository.findById(id);
-        try {
-            ENTITY entity = entityOptional.get();
-            ENTITY entityParams = convertToEntity(dto);
-            try {
-                if (repository.existsById(id)) {
-                    entityParams.setId(id);
-                    entity = repository.save(entityParams);
-                    return convertToDto(entity);
-                } else {
-                    throw new Exception();
-                }
-            } catch (Exception e) {
-                throw new Exception();
-            }
-        } catch (Exception e) {
-            throw new Exception();
-        }
-    }
+		} catch (Exception e) {
 
-    @Override
-    public int countPages(int size) throws Exception {
-        try {
-            Pageable pageable = PageRequest.of(0, size);
-            return repository.findAll(pageable).getTotalPages();
+			throw new Exception(e.getMessage());
+		}
+		
+	}
 
-        } catch (Exception e) {
-            throw new Exception(e.getMessage());
-        }
-    }
+	@Override
+	public E save(E entityForm) throws Exception {
+		try {
 
-    @Override
-    public DTO findById(long id) throws Exception {
+			entityForm = repository.save(entityForm);
 
-        Optional<ENTITY> entityOptional = repository.findById(id);
-        try {
-            if (entityOptional.isPresent()) {
-                return convertToDto(entityOptional.get());
-            } else {
-                throw new Exception();
-            }
-        } catch (Exception e) {
-            throw new Exception();
-        }
+			return entityForm;
 
-    }
+		} catch (Exception e) {
 
-    @Override
-    public boolean delete(long id) throws Exception {
-        try {
-            if (repository.existsById(id)) {
-                repository.deleteById(id);
-                return true;
-            } else {
-                throw new Exception();
-            }
-        } catch (Exception e) {
-            throw new Exception();
-        }
-    }
+			throw new Exception(e.getMessage());
+		}
+	}
 
-    @Override
-    public List<DTO> findAll(int page, int size) throws Exception {
-        try {
-            Pageable pageable = PageRequest.of(page, size);
+	@Override
+	public E update(int id, E entityForm) throws Exception {
 
-            List<ENTITY> entities = repository.findAll(pageable).getContent();
+		try {
+			Optional<E> entityOptional = repository.findById(id);
 
-            return entities.stream().map(this::convertToDto).collect(Collectors.toList());
+			E entity = entityOptional.get();
 
-        } catch (Exception e) {
-            throw new Exception(e.getMessage());
-        }
-    }
+			entity = repository.save(entityForm);
+
+			return entity;
+
+		} catch (Exception e) {
+
+			throw new Exception(e.getMessage());
+
+		}
+
+	}
+
+	@Override
+	public int countPages(int size) throws Exception {
+		try {
+			Pageable pageable = PageRequest.of(0, size);
+			return repository.findAll(pageable).getTotalPages();			
+
+		} catch (Exception e) {
+			throw new Exception(e.getMessage());
+		}
+	}
+
+	@Override
+	public List<E> findAll(int page, int size) throws Exception {
+		
+		try {
+			Pageable pageable = PageRequest.of(page, size);
+			return repository.findAll(pageable).getContent();			
+
+		} catch (Exception e) {
+			throw new Exception(e.getMessage());
+		}
+		
+	}
+	
+	public boolean delete(int id) throws Exception{
+		try {
+			if(repository.existsById(id)) {
+				repository.deleteById(id);
+			}		
+			
+		} catch (Exception e) {
+			throw new Exception(e.getMessage());
+		}
+		
+		return !repository.existsById(id);
+	}
+
 
 }

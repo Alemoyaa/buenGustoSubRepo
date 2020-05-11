@@ -3,25 +3,30 @@ package com.utn.app.buenGusto.pedido;
 import java.io.Serializable;
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne; 
 import javax.persistence.PrePersist;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-
-import com.utn.app.buenGusto.common.CommonEntity;
 import com.utn.app.buenGusto.estado.EstadoEntity;
 import com.utn.app.buenGusto.usuario.UsuarioEntity;
 
 @Entity
 @Table(name = "pedido")
-public class PedidoEntity extends CommonEntity implements Serializable {
+public class PedidoEntity implements Serializable {
 
 	private static final long serialVersionUID = -1998183735641277350L;
-
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id")
+	private int id;
 	private Date fecha;
 	private int numero; 
 
@@ -88,6 +93,14 @@ public class PedidoEntity extends CommonEntity implements Serializable {
 
 	public void setEstado(EstadoEntity estado) {
 		this.estado = estado;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 
 }

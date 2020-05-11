@@ -2,16 +2,21 @@ package com.utn.app.buenGusto.rol;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.Table;
-
-import com.utn.app.buenGusto.common.CommonEntity;
 
 @Entity
 @Table(name = "rol")
-public class RolEntity extends CommonEntity implements Serializable {
+public class RolEntity implements Serializable {
 	private static final long serialVersionUID = 5685412683798686451L;
-
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id")
+	private int id;
 	private String nombreRol;
 	private String descripcion;
 
@@ -30,5 +35,15 @@ public class RolEntity extends CommonEntity implements Serializable {
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
 	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+	
+	
 
 }

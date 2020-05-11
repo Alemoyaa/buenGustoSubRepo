@@ -4,21 +4,27 @@ import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 
-import com.utn.app.buenGusto.common.CommonEntity;
 import com.utn.app.buenGusto.horarioLaboral.HorarioLaboralEntity;
 
 @Entity
 @Table(name = "configuracion_general")
-public class ConfiguracionGeneralEntity extends CommonEntity implements Serializable {
+public class ConfiguracionGeneralEntity implements Serializable {
 
 	private static final long serialVersionUID = -8356649232468048872L;
-
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id")
+	private int id;
 	@NotEmpty
 	private int cantidadCocineros;
 
@@ -51,6 +57,14 @@ public class ConfiguracionGeneralEntity extends CommonEntity implements Serializ
 
 	public void setHorarios(List<HorarioLaboralEntity> horarios) {
 		this.horarios = horarios;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 
 }

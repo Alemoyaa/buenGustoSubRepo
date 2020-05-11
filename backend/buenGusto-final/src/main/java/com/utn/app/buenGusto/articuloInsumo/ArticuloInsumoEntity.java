@@ -2,21 +2,31 @@ package com.utn.app.buenGusto.articuloInsumo;
 
 import java.io.Serializable;
 import java.util.Date;
+
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
  
-import com.utn.app.buenGusto.common.CommonEntity;
-import com.utn.app.buenGusto.recetaInsumo.recetaInsumoEntity;
-import com.utn.app.buenGusto.stockArticulo.stockArticuloEntity;
+import com.utn.app.buenGusto.recetaInsumo.RecetaInsumoEntity;
+import com.utn.app.buenGusto.stockArticulo.StockArticuloEntity;
+import com.utn.app.buenGusto.subCategoriaAI.SubCategoriaAIEntity;
 
 @Entity
 @Table(name = "articulo_insumo")
-public class ArticuloInsumoEntity extends CommonEntity implements Serializable {
+public class ArticuloInsumoEntity implements Serializable {
 
 	private static final long serialVersionUID = -8356649232468048872L;
-
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id")
+	private int id;
 	private String denominacion; 
 	private double precioDeVenta; 
 	private double costoDeVenta; 
@@ -24,20 +34,31 @@ public class ArticuloInsumoEntity extends CommonEntity implements Serializable {
 	private Date fechaBaja;
 	
 	@OneToOne(mappedBy = "articuloInsumoReceta", fetch = FetchType.LAZY)
-	private recetaInsumoEntity recetaInsumo;
+	private RecetaInsumoEntity recetaInsumo;
 	
 	@OneToOne(mappedBy = "articuloInsumoStock", fetch = FetchType.LAZY)
-	private stockArticuloEntity stockArticulo;
+	private StockArticuloEntity stockArticulo;
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "subcategoriaAI_id")
+	private SubCategoriaAIEntity subCategoriaAI;
 
 	
-	public stockArticuloEntity getStockArticulo() {
+	public StockArticuloEntity getStockArticulo() {
 		return stockArticulo;
 	}
 
-	public void setStockArticulo(stockArticuloEntity stockArticulo) {
+	public void setStockArticulo(StockArticuloEntity stockArticulo) {
 		this.stockArticulo = stockArticulo;
 	}
+	
+	public int getId() {
+		return id;
+	}
 
+	public void setId(int id) {
+		this.id = id;
+	}
 	public String getDenominacion() {
 		return denominacion;
 	}
@@ -78,12 +99,20 @@ public class ArticuloInsumoEntity extends CommonEntity implements Serializable {
 		this.fechaBaja = fechaBaja;
 	}
 
-	public recetaInsumoEntity getRecetaInsumo() {
+	public RecetaInsumoEntity getRecetaInsumo() {
 		return recetaInsumo;
 	}
 
-	public void setRecetaInsumo(recetaInsumoEntity recetaInsumo) {
+	public void setRecetaInsumo(RecetaInsumoEntity recetaInsumo) {
 		this.recetaInsumo = recetaInsumo;
+	}
+
+	public SubCategoriaAIEntity getSubCategoriaAI() {
+		return subCategoriaAI;
+	}
+
+	public void setSubCategoriaAI(SubCategoriaAIEntity subCategoriaAI) {
+		this.subCategoriaAI = subCategoriaAI;
 	}
 
 }

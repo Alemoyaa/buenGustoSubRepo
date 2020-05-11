@@ -2,24 +2,30 @@ package com.utn.app.buenGusto.usuario;
 
 import java.io.Serializable;
 import java.sql.Date;
-
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import com.utn.app.buenGusto.common.CommonEntity;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.utn.app.buenGusto.domicilio.DomicilioEntity;
 import com.utn.app.buenGusto.rol.RolEntity;
 
 @Entity
 @Table(name = "usuario")
-public class UsuarioEntity extends CommonEntity implements Serializable {
+public class UsuarioEntity implements Serializable {
 
 	private static final long serialVersionUID = -8356649232468048872L;
-
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id")
+	private int id;
 	private String nombre;
 	private String apellido;
 	private long telefono;
@@ -34,6 +40,7 @@ public class UsuarioEntity extends CommonEntity implements Serializable {
  
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "domicilio_usuario")
+	@JsonIgnoreProperties("usuarioDomicilio") 
 	private DomicilioEntity domicilio; 
 
 	public String getNombre() {
@@ -106,6 +113,14 @@ public class UsuarioEntity extends CommonEntity implements Serializable {
  
 	public void setDomicilio(DomicilioEntity domicilio) {
 		this.domicilio = domicilio;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	} 
 
 }

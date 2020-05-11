@@ -4,23 +4,29 @@ import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
  
-import com.utn.app.buenGusto.common.CommonEntity;
 import com.utn.app.buenGusto.receta.RecetaEntity;
-import com.utn.app.buenGusto.subCategoriaAM.subCategoriaAmEntity; 
+import com.utn.app.buenGusto.subCategoriaAM.SubCategoriaAMEntity; 
 
 @Entity
 @Table(name = "articulo_manufacturado")
-public class ArticuloManufacturadoEntity extends CommonEntity implements Serializable {
+public class ArticuloManufacturadoEntity implements Serializable {
 
 	private static final long serialVersionUID = -8356649232468048872L;
-
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id")
+	private int id;
 	private int tiempoEstimadoCocina; 
 	private String _urlImagen; 
 	private String denominacion; 
@@ -34,7 +40,7 @@ public class ArticuloManufacturadoEntity extends CommonEntity implements Seriali
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "subcategoriaAM_id")
-	private subCategoriaAmEntity subCategoriaAM;
+	private SubCategoriaAMEntity subCategoriaAM;
 
 	public int getTiempoEstimadoCocina() {
 		return tiempoEstimadoCocina;
@@ -84,11 +90,11 @@ public class ArticuloManufacturadoEntity extends CommonEntity implements Seriali
 		this.fechaBaja = fechaBaja;
 	}
 
-	public subCategoriaAmEntity getSubCategoriaAM() {
+	public SubCategoriaAMEntity getSubCategoriaAM() {
 		return subCategoriaAM;
 	}
 
-	public void setSubCategoriaAM(subCategoriaAmEntity subCategoriaAM) {
+	public void setSubCategoriaAM(SubCategoriaAMEntity subCategoriaAM) {
 		this.subCategoriaAM = subCategoriaAM;
 	}
 
@@ -99,6 +105,13 @@ public class ArticuloManufacturadoEntity extends CommonEntity implements Seriali
 	public void setRecetaAM(RecetaEntity recetaAM) {
 		this.recetaAM = recetaAM;
 	}
-	 
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
 	
 }
