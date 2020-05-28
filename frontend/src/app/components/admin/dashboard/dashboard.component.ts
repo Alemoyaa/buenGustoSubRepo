@@ -1,13 +1,13 @@
-import { Router } from '@angular/router';
-import { LoginService } from './../../../../services/loginServices/login.service';
 import { Component, OnInit } from '@angular/core';
+import { LoginService } from 'src/app/services/loginServices/login.service';
+import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-dashboard-gerente',
-  templateUrl: './dashboard-gerente.component.html',
-  styleUrls: ['./dashboard-gerente.component.css'],
+  selector: 'app-dashboard',
+  templateUrl: './dashboard.component.html',
+  styleUrls: ['./dashboard.component.css'],
 })
-export class DashboardGerenteComponent implements OnInit {
+export class DashboardComponent implements OnInit {
   constructor(private loginService: LoginService, private route: Router) {}
 
   username;
@@ -16,17 +16,30 @@ export class DashboardGerenteComponent implements OnInit {
   ngOnInit(): void {
     this.getUser();
   }
-
-  tableroPizzaCrud = true;
+  //Admin
+  tableroPizzaCrud = false;
   tableroStock = false;
   tableroEstadisticas = false;
   tableroUsuario = false;
+  //Cocinero
+  tableroOrdenes = false;
+  tablerosBajasManuales = false;
+  //Cajero
+  tableroPedidos = false;
+  tableroFacturacion = false;
 
   clearBoards() {
+    //Admin
     this.tableroPizzaCrud = false;
     this.tableroStock = false;
     this.tableroEstadisticas = false;
     this.tableroUsuario = false;
+    //Cocinero
+    this.tableroOrdenes = false;
+    this.tablerosBajasManuales = false;
+    //Cajero
+    this.tableroPedidos = false;
+    this.tableroFacturacion = false;
   }
 
   setBoard(board) {
@@ -40,9 +53,20 @@ export class DashboardGerenteComponent implements OnInit {
     if (board === 'tableroEstadisticas') {
       this.tableroEstadisticas = true;
     }
-
     if (board === 'tableroUsuario') {
       this.tableroUsuario = true;
+    }
+    if (board === 'tableroOrdenes') {
+      this.tableroPedidos = true;
+    }
+    if (board === 'tablerosBajasManuales') {
+      this.tableroFacturacion = true;
+    }
+    if (board === 'tableroPedidos') {
+      this.tableroPedidos = true;
+    }
+    if (board === 'tableroFacturacion') {
+      this.tableroFacturacion = true;
     }
   }
 

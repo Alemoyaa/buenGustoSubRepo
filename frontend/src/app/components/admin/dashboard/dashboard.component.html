@@ -1,0 +1,208 @@
+<div id="wrapper">
+  <ul
+    class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion"
+    id="accordionSidebar"
+  >
+    <a
+      class="sidebar-brand d-flex align-items-center justify-content-center"
+      href="index.html"
+    >
+      <div class="sidebar-brand-text mx-3">Dashboard<sup>admin</sup></div>
+    </a>
+
+    <hr class="sidebar-divider" />
+
+    <div class="sidebar-heading">
+      Administrar
+    </div>
+
+    <!-- Componentes admin -->
+
+    <li class="nav-item" (click)="setBoard('tableroPizzaCrud')">
+      <a class="nav-link">
+        <i class="fas fa-fw fa-pizza-slice"></i>
+        <span>Pizzas</span></a
+      >
+    </li>
+    <li class="nav-item" (click)="setBoard('tableroStock')">
+      <a class="nav-link">
+        <i class="fas fa-fw fa-clipboard"></i>
+        <span>Stock</span></a
+      >
+    </li>
+
+    <li class="nav-item" (click)="setBoard('tableroUsuario')">
+      <a class="nav-link">
+        <i class="fas fa-user"></i>
+        <span>Usuarios</span></a
+      >
+    </li>
+
+    <li class="nav-item" (click)="setBoard('tableroEstadisticas')">
+      <a class="nav-link">
+        <i class="fas fa-fw fa-chart-area"></i>
+        <span>Estadisticas</span></a
+      >
+    </li>
+    <!-- Componentes cocinero -->
+
+    <li class="nav-item" (click)="setBoard('tableroOrdenes')">
+      <a class="nav-link">
+        <i class="fas fa-fw fa-chart-area"></i>
+        <span>Ordenes</span></a
+      >
+    </li>
+
+    <li class="nav-item" (click)="setBoard('tablerosBajasManuales')">
+      <a class="nav-link">
+        <i class="fas fa-fw fa-chart-area"></i>
+        <span>Bajas manuales</span></a
+      >
+    </li>
+    <!-- Componentes cajero -->
+
+    <li class="nav-item" (click)="setBoard('tableroPedidos')">
+      <a class="nav-link">
+        <i class="fas fa-fw fa-chart-area"></i>
+        <span>Pedidos</span></a
+      >
+    </li>
+
+    <li class="nav-item" (click)="setBoard('tableroFacturacion')">
+      <a class="nav-link">
+        <i class="fas fa-fw fa-chart-area"></i>
+        <span>Facturación</span></a
+      >
+    </li>
+  </ul>
+
+  <div id="content-wrapper" class="d-flex flex-column">
+    <div id="content">
+      <nav
+        class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow"
+      >
+        <button
+          id="sidebarToggleTop"
+          class="btn btn-link d-md-none rounded-circle mr-3"
+        >
+          <i class="fa fa-bars"></i>
+        </button>
+
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item dropdown no-arrow">
+            <a
+              class="nav-link dropdown-toggle"
+              href="#"
+              id="userDropdown"
+              role="button"
+              data-toggle="dropdown"
+              aria-haspopup="true"
+              aria-expanded="false"
+            >
+              <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{
+                username
+              }}</span>
+              <img class="img-profile rounded-circle" src="{{ photo }}" />
+            </a>
+            <!-- Dropdown - User Information -->
+            <div
+              class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+              aria-labelledby="userDropdown"
+            >
+              <a class="dropdown-item" href="#">
+                <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                Perfil
+              </a>
+              <div class="dropdown-divider"></div>
+              <a
+                class="dropdown-item"
+                href="#"
+                data-toggle="modal"
+                data-target="#logoutModal"
+              >
+                <i
+                  class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"
+                ></i>
+                Salir
+              </a>
+            </div>
+          </li>
+        </ul>
+      </nav>
+
+      <div class="container-fluid">
+        <!-- COMPONENTES ADMIN-->
+        <div class="" *ngIf="tableroPizzaCrud">
+          <app-catalogo-crud></app-catalogo-crud>
+        </div>
+        <div class="" *ngIf="tableroStock">
+          <app-stock></app-stock>
+        </div>
+        <div class="" *ngIf="tableroEstadisticas">
+          <app-estadisticas></app-estadisticas>
+        </div>
+        <div class="" *ngIf="tableroUsuario">
+          <app-usuarios></app-usuarios>
+        </div>
+        <!-- COMPONENTES COCINERO  -->
+        <div class="" *ngIf="tableroPedidos">
+          <app-pedidos-cajero></app-pedidos-cajero>
+        </div>
+        <div class="" *ngIf="tableroFacturacion">
+          <!-- componente bajas stock -->
+        </div>
+        <!-- COMPONENTES CAJERO  -->
+        <div class="" *ngIf="tableroPedidos">
+          <app-pedidos-cajero></app-pedidos-cajero>
+        </div>
+        <div class="" *ngIf="tableroFacturacion">
+          <app-facturacion-cajero></app-facturacion-cajero>
+        </div>
+      </div>
+    </div>
+
+    <footer class="sticky-footer bg-white">
+      <div class="container my-auto">
+        <div class="copyright text-center my-auto">
+          <span>Fast Food &copy; 2019</span>
+        </div>
+      </div>
+    </footer>
+  </div>
+</div>
+
+<a class="scroll-to-top rounded" href="#page-top">
+  <i class="fas fa-angle-up"></i>
+</a>
+
+<div
+  class="modal fade"
+  id="logoutModal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Cerrar sesión</h5>
+        <button
+          class="close"
+          type="button"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">×</span>
+        </button>
+      </div>
+      <div class="modal-body">¿Quiere cerrar sesión? Seleccione salir.</div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" type="button" data-dismiss="modal">
+          Cancelar
+        </button>
+        <a class="btn btn-primary" (click)="logout()">Salir</a>
+      </div>
+    </div>
+  </div>
+</div>
