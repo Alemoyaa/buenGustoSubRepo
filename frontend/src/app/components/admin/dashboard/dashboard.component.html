@@ -19,27 +19,27 @@
     <!-- Componentes admin -->
 
     <li class="nav-item" >
-      <a class="nav-link" [routerLink]="['/dashboard/admin/gestionArticulos']">
+      <a class="nav-link" [routerLink]="['/dashboard/admin/gestionArticulos']" (click)="mostrarTrue()">
         <i class="fas fa-fw fa-pizza-slice"></i>
         <span>Pizzas</span></a
       >
     </li>
     <li class="nav-item" >
-      <a class="nav-link" [routerLink]="['/dashboard/admin/gestionStock']">
+      <a class="nav-link" [routerLink]="['/dashboard/admin/gestionStock']" (click)="mostrarTrue()">
         <i class="fas fa-fw fa-clipboard"></i>
         <span>Stock</span></a
       >
     </li>
 
     <li class="nav-item" >
-      <a class="nav-link" [routerLink]="['/dashboard/admin/gestionEmpleados']">
+      <a class="nav-link" [routerLink]="['/dashboard/admin/gestionEmpleados']" (click)="mostrarTrue()">
         <i class="fas fa-user"></i>
         <span>Usuarios</span></a
       >
     </li>
 
     <li class="nav-item" >
-      <a class="nav-link" [routerLink]="['/dashboard/admin/estadisticas']">
+      <a class="nav-link" [routerLink]="['/dashboard/admin/estadisticas']" (click)="mostrarTrue()">
         <i class="fas fa-fw fa-chart-area"></i>
         <span>Estadisticas</span></a
       >
@@ -50,14 +50,14 @@
     </div>
 
     <li class="nav-item" >
-      <a class="nav-link" [routerLink]="['/dashboard/admin/cocinero/gestorOrdenes']">
+      <a class="nav-link" [routerLink]="['/dashboard/admin/cocinero/gestorOrdenes']" (click)="mostrarTrue()">
         <i class="fas fa-fw fa-chart-area"></i>
         <span>Visualizacion de Ordenes</span></a
       >
     </li>
 
     <li class="nav-item" >
-      <a class="nav-link" [routerLink]="['/dashboard/admin/cocinero/bajasManualesDeStock']">
+      <a class="nav-link" [routerLink]="['/dashboard/admin/cocinero/bajasManualesDeStock']" (click)="mostrarTrue()">
         <i class="fas fa-fw fa-chart-area"></i>
         <span>Modificacion de ingredientes</span></a
       >
@@ -67,26 +67,26 @@
       Cajero
     </div>
     <li class="nav-item" >
-      <a class="nav-link" [routerLink]="['/dashboard/admin/cajero/nuevoCliente']">
+      <a class="nav-link" [routerLink]="['/dashboard/admin/cajero/nuevoCliente']" (click)="mostrarTrue()">
         <i class="fas fa-fw fa-chart-area"></i>
         <span>Nuevo Cliente</span></a
       >
     </li>
     <li class="nav-item" >
-      <a class="nav-link" [routerLink]="['/dashboard/admin/cajero/nuevoPedido']">
+      <a class="nav-link" [routerLink]="['/dashboard/admin/cajero/nuevoPedido']" (click)="mostrarTrue()">
         <i class="fas fa-fw fa-chart-area"></i>
         <span>Nuevo Pedido</span></a
       >
     </li>
     <li class="nav-item" >
-      <a class="nav-link" [routerLink]="['/dashboard/admin/cajero/administracionDePedidos']">
+      <a class="nav-link" [routerLink]="['/dashboard/admin/cajero/administracionDePedidos']" (click)="mostrarTrue()">
         <i class="fas fa-fw fa-chart-area"></i>
         <span>Visualizacion de pedidos</span></a
       >
     </li>
 
     <li class="nav-item" >
-      <a class="nav-link" [routerLink]="['/dashboard/admin/cajero/administracionFacturacion']">
+      <a class="nav-link" [routerLink]="['/dashboard/admin/cajero/administracionFacturacion']" (click)="mostrarTrue()">
         <i class="fas fa-fw fa-chart-area"></i>
         <span>Facturación</span></a
       >
@@ -147,9 +147,9 @@
         </ul>
       </nav>
 
-      <div class="container-fluid">
+      <div class="container" *ngIf="mostrar">
         <!-- COMPONENTES ADMIN-->
-         <app-navbar></app-navbar>
+          <router-outlet></router-outlet>
          
         
       </div>

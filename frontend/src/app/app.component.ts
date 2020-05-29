@@ -7,5 +7,11 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'frontend';
+  mostrar: boolean = false;
+
+
+  mostrarDashboard(event){
+    this.mostrar = event;
+  }
 }
 

@@ -2,7 +2,8 @@ import { Router } from '@angular/router';
 import { Usuario } from '../../../entidades/Usuario';
 import { LoginService } from './../../../services/loginServices/login.service';
 
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+
 
 @Component({
   selector: 'app-navbar',
@@ -11,7 +12,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavbarComponent implements OnInit {
   constructor(private serviceLogin: LoginService, private route: Router) { }
-
+  @Output()  irDashboard = new EventEmitter();
   cliente: Usuario = new Usuario();
   // {
   //     id: 0,
@@ -66,5 +67,10 @@ export class NavbarComponent implements OnInit {
       let articulosJson = JSON.stringify(articulos);
       localStorage.setItem('carrito', articulosJson);
     }
+  }
+
+  irAdmin(event){
+    this.irDashboard.emit(true);
+    
   }
 }

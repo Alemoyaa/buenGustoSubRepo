@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
 })
 export class DashboardComponent implements OnInit {
   constructor(private loginService: LoginService, private route: Router) {}
-
+  mostrar: boolean = false;
   username;
   photo;
 
@@ -84,4 +84,9 @@ export class DashboardComponent implements OnInit {
   logout() {
     this.loginService.logout();
   }
+
+  mostrarTrue(){
+    this.mostrar = true;
+  }
+
 }
