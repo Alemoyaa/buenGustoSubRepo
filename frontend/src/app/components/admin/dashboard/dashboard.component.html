@@ -13,63 +13,80 @@
     <hr class="sidebar-divider" />
 
     <div class="sidebar-heading">
-      Administrar
+      Administrador
     </div>
 
     <!-- Componentes admin -->
 
-    <li class="nav-item" (click)="setBoard('tableroPizzaCrud')">
-      <a class="nav-link">
+    <li class="nav-item" >
+      <a class="nav-link" [routerLink]="['/dashboard/admin/gestionArticulos']">
         <i class="fas fa-fw fa-pizza-slice"></i>
         <span>Pizzas</span></a
       >
     </li>
-    <li class="nav-item" (click)="setBoard('tableroStock')">
-      <a class="nav-link">
+    <li class="nav-item" >
+      <a class="nav-link" [routerLink]="['/dashboard/admin/gestionStock']">
         <i class="fas fa-fw fa-clipboard"></i>
         <span>Stock</span></a
       >
     </li>
 
-    <li class="nav-item" (click)="setBoard('tableroUsuario')">
-      <a class="nav-link">
+    <li class="nav-item" >
+      <a class="nav-link" [routerLink]="['/dashboard/admin/gestionEmpleados']">
         <i class="fas fa-user"></i>
         <span>Usuarios</span></a
       >
     </li>
 
-    <li class="nav-item" (click)="setBoard('tableroEstadisticas')">
-      <a class="nav-link">
+    <li class="nav-item" >
+      <a class="nav-link" [routerLink]="['/dashboard/admin/estadisticas']">
         <i class="fas fa-fw fa-chart-area"></i>
         <span>Estadisticas</span></a
       >
     </li>
     <!-- Componentes cocinero -->
+    <div class="sidebar-heading">
+      Cocinero
+    </div>
 
-    <li class="nav-item" (click)="setBoard('tableroOrdenes')">
-      <a class="nav-link">
+    <li class="nav-item" >
+      <a class="nav-link" [routerLink]="['/dashboard/admin/cocinero/gestorOrdenes']">
         <i class="fas fa-fw fa-chart-area"></i>
-        <span>Ordenes</span></a
+        <span>Visualizacion de Ordenes</span></a
       >
     </li>
 
-    <li class="nav-item" (click)="setBoard('tablerosBajasManuales')">
-      <a class="nav-link">
+    <li class="nav-item" >
+      <a class="nav-link" [routerLink]="['/dashboard/admin/cocinero/bajasManualesDeStock']">
         <i class="fas fa-fw fa-chart-area"></i>
-        <span>Bajas manuales</span></a
+        <span>Modificacion de ingredientes</span></a
       >
     </li>
     <!-- Componentes cajero -->
-
-    <li class="nav-item" (click)="setBoard('tableroPedidos')">
-      <a class="nav-link">
+    <div class="sidebar-heading">
+      Cajero
+    </div>
+    <li class="nav-item" >
+      <a class="nav-link" [routerLink]="['/dashboard/admin/cajero/nuevoCliente']">
         <i class="fas fa-fw fa-chart-area"></i>
-        <span>Pedidos</span></a
+        <span>Nuevo Cliente</span></a
+      >
+    </li>
+    <li class="nav-item" >
+      <a class="nav-link" [routerLink]="['/dashboard/admin/cajero/nuevoPedido']">
+        <i class="fas fa-fw fa-chart-area"></i>
+        <span>Nuevo Pedido</span></a
+      >
+    </li>
+    <li class="nav-item" >
+      <a class="nav-link" [routerLink]="['/dashboard/admin/cajero/administracionDePedidos']">
+        <i class="fas fa-fw fa-chart-area"></i>
+        <span>Visualizacion de pedidos</span></a
       >
     </li>
 
-    <li class="nav-item" (click)="setBoard('tableroFacturacion')">
-      <a class="nav-link">
+    <li class="nav-item" >
+      <a class="nav-link" [routerLink]="['/dashboard/admin/cajero/administracionFacturacion']">
         <i class="fas fa-fw fa-chart-area"></i>
         <span>Facturación</span></a
       >
@@ -132,32 +149,9 @@
 
       <div class="container-fluid">
         <!-- COMPONENTES ADMIN-->
-        <div class="" *ngIf="tableroPizzaCrud">
-          <app-catalogo-crud></app-catalogo-crud>
-        </div>
-        <div class="" *ngIf="tableroStock">
-          <app-stock></app-stock>
-        </div>
-        <div class="" *ngIf="tableroEstadisticas">
-          <app-estadisticas></app-estadisticas>
-        </div>
-        <div class="" *ngIf="tableroUsuario">
-          <app-usuarios></app-usuarios>
-        </div>
-        <!-- COMPONENTES COCINERO  -->
-        <div class="" *ngIf="tableroPedidos">
-          <app-pedidos-cajero></app-pedidos-cajero>
-        </div>
-        <div class="" *ngIf="tableroFacturacion">
-          <!-- componente bajas stock -->
-        </div>
-        <!-- COMPONENTES CAJERO  -->
-        <div class="" *ngIf="tableroPedidos">
-          <app-pedidos-cajero></app-pedidos-cajero>
-        </div>
-        <div class="" *ngIf="tableroFacturacion">
-          <app-facturacion-cajero></app-facturacion-cajero>
-        </div>
+         <app-navbar></app-navbar>
+         
+        
       </div>
     </div>
 

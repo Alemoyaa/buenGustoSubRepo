@@ -2,7 +2,6 @@ import { CatalogoDetalleComponent } from './components/cliente/catalogo-detalle/
 import { CommonService } from './services/serviciosCliente/commonServices/common.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './components/admin/login/login.component';
@@ -13,9 +12,6 @@ import { NotfoundComponent } from './components/cliente/notfound/notfound.compon
 import { UserProfileComponent } from './components/cliente/user-profile/user-profile.component';
 import { CatalogoComponent } from './components/cliente/catalogo/catalogo.component';
 import { FooterComponent } from './components/cliente/footer/footer.component';
-import { CatalogoCrudComponent } from './components/admin/dashboard/dashboard-components/catalogo-crud/catalogo-crud.component';
-import { StockComponent } from './components/admin/dashboard/dashboard-components/stock/stock.component';
-import { EstadisticasComponent } from './components/admin/dashboard/dashboard-components/estadisticas/estadisticas.component';
 import { CarritoComponent } from './components/cliente/carrito/carrito.component';
 
 // firebase
@@ -29,12 +25,23 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { FacturaComponent } from './components/cliente/factura/factura.component';
 import { PedidosComponent } from './components/cliente/pedidos/pedidos.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { UsuariosComponent } from './components/admin/dashboard/dashboard-components/usuarios/usuarios.component';
+import { UsuariosComponent } from './components/admin/dashboard/Admin/usuarios/usuarios.component';
 
 import { NgxPaginationModule } from 'ngx-pagination';
-import { PedidosCajeroComponent } from './components/admin/dashboard/dashboard-components/pedidos-cajero/pedidos-cajero.component';
-import { FacturacionCajeroComponent } from './components/admin/dashboard/dashboard-components/facturacion-cajero/facturacion-cajero.component';
+
+// componentes de empleados/admin
+import { PedidosCajeroComponent } from './components/admin/dashboard/Cajero/pedidos-cajero/pedidos-cajero.component';
+import { FacturacionCajeroComponent } from './components/admin/dashboard/Cajero/facturacion-cajero/facturacion-cajero.component';
 import { DashboardComponent } from './components/admin/dashboard/dashboard.component';
+import { NuevoClienteCajeroComponent } from './components/admin/dashboard/Cajero/nuevo-cliente-cajero/nuevo-cliente-cajero.component';
+import { NuevoPedidoCajeroComponent } from './components/admin/dashboard/Cajero/nuevo-pedido-cajero/nuevo-pedido-cajero.component';
+import { GestorOrdenesCocineroComponent } from './components/admin/dashboard/Cocinero/gestor-ordenes-cocinero/gestor-ordenes-cocinero.component';
+import { BajasStockCocineroComponent } from './components/admin/dashboard/Cocinero/bajas-stock-cocinero/bajas-stock-cocinero.component';
+import { CatalogoCrudComponent } from './components/admin/dashboard/Admin/catalogo-crud/catalogo-crud.component';
+import { StockComponent } from './components/admin/dashboard/Admin/stock/stock.component';
+import { EstadisticasComponent } from './components/admin/dashboard/Admin/estadisticas/estadisticas.component';
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -57,6 +64,10 @@ import { DashboardComponent } from './components/admin/dashboard/dashboard.compo
     PedidosCajeroComponent,
     FacturacionCajeroComponent,
     DashboardComponent,
+    NuevoClienteCajeroComponent,
+    NuevoPedidoCajeroComponent,
+    GestorOrdenesCocineroComponent,
+    BajasStockCocineroComponent,
   ],
   imports: [
     BrowserModule,
