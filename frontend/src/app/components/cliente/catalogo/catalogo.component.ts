@@ -10,67 +10,31 @@ import { Component, OnInit } from '@angular/core';
 export class CatalogoComponent implements OnInit {
   pageActual: number = 1; //paginador
   articulosManufacturados: ArticuloManufacturado[] = [];
-  rubro = ['Todo', 'Pizza', 'Lomo'];
+  pizzas: Array<ArticuloManufacturado> = [];
+  lomos: Array<ArticuloManufacturado> = [];
+  bebidas: Array<ArticuloManufacturado> = [];
 
-  constructor(public service: ArticuloManufacturadoService) {}
+  articuloManufacturado: ArticuloManufacturado = {
+    id: null,
+    denominacion: null,
+    precioVenta: null,
+    precioCompra: null,
+    _urlImagen: null,
+    fechaBaja: null,
+    tiempoEstimadoCocina: null,
+    subcategoriaAM: null,
+    receta: null,
+  };
+
+  constructor(public articulosService: ArticuloManufacturadoService) {}
 
   ngOnInit(): void {
-    this.getAll();
+    // this.getAll();
   }
 
-  async getAll() {
-    await this.service.getAll().subscribe((data) => {
+  getArticulos() {
+    this.articulosService.getAll().subscribe((data) => {
       this.articulosManufacturados = data;
-      console.log(this.articulosManufacturados);
     });
-  }
-
-  getFiltro(filtro: string) {
-    this.service.getAll().subscribe((data) => {
-      (this.articulosManufacturados = data),
-        {
-          query: {
-            orderByChild: 'rubroGeneral',
-            equalTo: filtro,
-          },
-        };
-      console.log(this.articulosManufacturados);
-    });
-    return this.articulosManufacturados;
-  }
-
-  onSelect(event) {
-    let query = null;
-    if (event.value == 'Todos') {
-      query = this.getAll();
-    } else {
-      query = this.getFiltro(event.value);
-      query.subscribe((rubro) => {
-        this.articulosManufacturados = this.articulosManufacturados;
-      });
-    }
-  }
-
-  catPizzas = false;
-  catLomos = false;
-  catBebidas = false;
-
-  clearBoards() {
-    this.catPizzas = false;
-    this.catLomos = false;
-    this.catBebidas = false;
-  }
-
-  setBoard(board) {
-    this.clearBoards();
-    if (board === 'catPizzas') {
-      this.catPizzas = true;
-    }
-    if (board === 'catLomos') {
-      this.catLomos = true;
-    }
-    if (board === 'catBebidas') {
-      this.catBebidas = true;
-    }
   }
 }

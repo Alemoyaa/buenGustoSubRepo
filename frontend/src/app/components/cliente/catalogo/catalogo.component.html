@@ -1,35 +1,199 @@
 <div class="page catalog-page">
   <section class="clean-block clean-catalog dark">
-    <div class="container">
-      <div class="content justify-content-center d-flex">
-        <div class="products col-lg-12 mt-4 ">
-          <div class="card text-white bg-danger mb-3 mr-4 category-card" style="max-width: 12rem;"
-            (click)="setBoard('catPizzas')">
-            <div class="card-body justify-content-around d-flex">
-              <h3 class="card-text">Pizzas</h3>
-              <i class="fas fa-pizza-slice fa-3x"></i>
+    <div class="container container-catalogo">
+      <h1 class="col-lg-12">Catálogo de platos</h1>
+
+      <div class="catalogo col-lg-12 mt-4 justify-content-center d-flex">
+        <div class="filtros col-lg-3">
+          <div class="filtro-header">
+            <h3>Categorías</h3>
+          </div>
+          <div class="filtro-cat">
+            <button type="button" class="btn btn-primary">Pizzas</button>
+            <button type="button" class="btn btn-primary">Lomos</button>
+            <button type="button" class="btn btn-primary">Bebidas</button>
+          </div>
+        </div>
+
+        <div class="container platos col-lg-9">
+          <h3>Platos recomendados</h3>
+          <div class="recomendados justify-content-start d-flex">
+            <div class="card plato" style="width: 18rem;">
+              <img
+                class="card-img-top card-img-recomendado"
+                src="../../../../assets/assetsCatalogo/assets/img/hamburguesa/Burger-.jpg"
+                alt="Card image cap"
+              />
+              <div class="card-body">
+                <p class="card-text">
+                  Burger recomendada
+                </p>
+              </div>
+            </div>
+            <div class="card plato" style="width: 18rem;">
+              <img
+                class="card-img-top card-img-recomendado"
+                src="../../../../assets/assetsCatalogo/assets/img/hamburguesa/Burger-.jpg"
+                alt="Card image cap"
+              />
+              <div class="card-body">
+                <p class="card-text">
+                  Pizza recomendada
+                </p>
+              </div>
+            </div>
+            <div class="card plato" style="width: 18rem;">
+              <img
+                class="card-img-top card-img-recomendado"
+                src="../../../../assets/assetsCatalogo/assets/img/hamburguesa/Burger-.jpg"
+                alt="Card image cap"
+              />
+              <div class="card-body">
+                <p class="card-text">
+                  Lomo recomendado
+                </p>
+              </div>
             </div>
           </div>
-          <div class="card text-white bg-dark mb-3 mr-4 category-card" style="max-width: 12rem;"
-            (click)="setBoard('catLomos')">
-            <div class="card-body justify-content-around d-flex">
-              <h3 class="card-text">Lomos</h3>
-              <i class="fas fa-bacon fa-3x"></i>
+          <h3>Promo pizzas</h3>
+          <div class="recomendados justify-content-start d-flex">
+            <div class="card plato" style="width: 18rem;">
+              <img
+                class="card-img-top card-img-recomendado"
+                src="../../../../assets/assetsCatalogo/assets/img/pizza/pizza1.jpg"
+                alt="Card image cap"
+              />
+              <div class="card-body">
+                <h4 class="card-text">
+                  Pizza 1
+                </h4>
+                <small>Tiempo estimado: 20m</small>
+                <br />
+                <b>$30</b>
+                <div class="stars">
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="far fa-star"></i>
+                </div>
+              </div>
+            </div>
+            <div class="card plato" style="width: 18rem;">
+              <img
+                class="card-img-top card-img-recomendado"
+                src="../../../../assets/assetsCatalogo/assets/img/pizza/pizza2.jpg"
+                alt="Card image cap"
+              />
+              <div class="card-body">
+                <h4 class="card-text">
+                  Pizza 2
+                </h4>
+                <small>Tiempo estimado: 20m</small>
+                <br />
+                <b>$30</b>
+                <div class="stars">
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="far fa-star"></i>
+                </div>
+              </div>
+            </div>
+            <div class="card plato" style="width: 18rem;">
+              <img
+                class="card-img-top card-img-recomendado"
+                src="../../../../assets/assetsCatalogo/assets/img/pizza/pizza3.jpg"
+                alt="Card image cap"
+              />
+              <div class="card-body">
+                <h4 class="card-text">
+                  Pizza 3
+                </h4>
+                <small>Tiempo estimado: 20m</small>
+                <br />
+                <b>$30</b>
+                <div class="stars">
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="far fa-star"></i>
+                </div>
+              </div>
             </div>
           </div>
-          <div class="card text-white bg-primary mb-3 mr-4 category-card" style="max-width: 12rem;"
-            (click)="setBoard('catBebidas')">
-            <div class="card-body justify-content-around d-flex">
-              <h3 class="card-text">Bebidas</h3>
-              <i class="fas fa-wine-bottle fa-3x"></i>
+          <h3>Promo lomos</h3>
+          <div class="seccion justify-content-start d-flex">
+            <div class="card plato" style="width: 18rem;">
+              <img
+                class="card-img-top card-img-recomendado"
+                src="../../../../assets/assetsCatalogo/assets/img/panchos/Hot_dog1.jpg"
+                alt="Card image cap"
+              />
+              <div class="card-body">
+                <h4 class="card-text">
+                  Lomo 1
+                </h4>
+                <small>Tiempo estimado: 20m</small>
+                <br />
+                <b>$30</b>
+                <div class="stars">
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="far fa-star"></i>
+                </div>
+              </div>
+            </div>
+            <div class="card plato" style="width: 18rem;">
+              <img
+                class="card-img-top card-img-recomendado"
+                src="../../../../assets/assetsCatalogo/assets/img/panchos/Hot_dog3.jpg"
+                alt="Card image cap"
+              />
+              <div class="card-body">
+                <h4 class="card-text">
+                  Lomo 2
+                </h4>
+                <small>Tiempo estimado: 20m</small>
+                <br />
+                <b>$30</b>
+                <div class="stars">
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="far fa-star"></i>
+                </div>
+              </div>
+            </div>
+            <div class="card plato" style="width: 18rem;">
+              <img
+                class="card-img-top card-img-recomendado"
+                src="../../../../assets/assetsCatalogo/assets/img/panchos/Hot_dog2.jpg"
+                alt="Card image cap"
+              />
+              <div class="card-body">
+                <h4 class="card-text">
+                  Lomo 3
+                </h4>
+                <small>Tiempo estimado: 20m</small>
+                <br />
+                <b>$30</b>
+                <div class="stars">
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="far fa-star"></i>
+                </div>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-      <div class="category-viewer">
-        <div class="catPizzas" *ngIf="catPizzas">Pizzas</div>
-        <div class="catLomos" *ngIf="catLomos">Lomos</div>
-        <div class="catBebidas" *ngIf="catBebidas">Bebidas</div>
       </div>
     </div>
   </section>

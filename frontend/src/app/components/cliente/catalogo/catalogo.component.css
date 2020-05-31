@@ -1,7 +1,55 @@
+@import url("https://fonts.googleapis.com/css2?family=Chelsea+Market&display=swap");
+
 .category-card {
   display: inline-block;
 }
 
-.products {
+.container-catalogo {
+  margin-top: 2em;
   text-align: center;
+  font-family: "Chelsea Market", cursive;
+  margin-bottom: 2em;
+}
+
+.container-catalogo h3 {
+  margin-top: 0.5em;
+}
+
+.recomendados {
+  margin-top: 1em;
+}
+
+.card-img-recomendado {
+  max-height: 120px;
+}
+
+.plato {
+  margin-left: 1em;
+}
+
+.platos {
+  background-color: rgb(204, 204, 204);
+  border-radius: 1.5em;
+  padding-bottom: 2em;
+}
+
+.filtros {
+  margin-right: 1em;
+  background-color: rgb(182, 255, 173);
+  border-radius: 1.5em;
+}
+
+.filtro-header {
+  margin-top: 1em;
+  margin-bottom: 2em;
+}
+
+.filtro-cat {
+  text-align: center;
+}
+
+.filtro-cat button {
+  display: block;
+  margin: auto;
+  margin-bottom: 2em;
 }
