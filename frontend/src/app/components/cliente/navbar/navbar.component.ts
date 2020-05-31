@@ -71,6 +71,5 @@ export class NavbarComponent implements OnInit {
 
   irAdmin(event){
     this.irDashboard.emit(true);
-    
   }
 }

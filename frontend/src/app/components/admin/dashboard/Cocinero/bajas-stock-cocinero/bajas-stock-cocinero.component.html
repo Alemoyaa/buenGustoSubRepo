@@ -1,1 +1,186 @@
-<p>bajas-stock-cocinero works!</p>
+<div class="text-center">
+    <h2>Modificacion manual de las recetas</h2>
+</div>
+<table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="row">Orden</th>
+        <th>Cliente</th>
+        <th>Plato</th>
+        <th>Receta</th>
+        <th>Modificar Receta</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- primer pedido -->
+      <tr>
+        <th scope="row">1</th>
+        <td>Cliente1</td>
+        <td>Plato 1</td>
+        <td>Ingrediente1 Cantidad <br> Ingrediente2 Cantidad<br> Ingrediente3 Cantidad<br> Ingrediente4 Cantidad<br> Ingrediente5 Cantidad<br> Ingrediente6 Cantidad</td>
+        <td>
+            <button class="btn btn-success" data-toggle="modal" data-target="#ModalModificacionReceta">Modificar Ingredientes</button>
+        </td>
+      </tr>
+
+      <!-- primer pedido -->
+      <tr>
+        <th scope="row">1</th>
+        <td>Cliente2</td>
+        <td>Plato 2</td>
+        <td>Ingrediente1 Cantidad <br> Ingrediente2 Cantidad<br> Ingrediente3 Cantidad<br> Ingrediente4 Cantidad</td>
+        <td>
+            <button class="btn btn-success">Modificar Ingredientes</button>
+        </td>
+      </tr>
+</tbody>
+</table>  
+
+
+
+
+<div class="modal fade" data-backdrop="static" id="ModalModificacionReceta" tabindex="-1" role="form" aria-labelledby="ModalEditarLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5  class="modal-title" id="exampleModalLabel">Modificar Receta</h5>
+        
+        <button  type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body text-lg-center">
+        <form action="">
+          <div class="row">
+            <div class="col-12">
+              <h5 class="modal-title" id="exampleModalLabel">Receta</h5>
+            </div>
+
+            <div class="col-4">
+              <div class="form-group">
+                <label for="">Ingrediente 1</label>
+                <input type="texto" class="form-control" />
+              </div>
+            </div>
+            
+            <div class="col-4">
+              <div class="form-group">
+                <label for="">Unidad de medida</label>
+                <select class="form-control" id="rol" name="rol">
+                  <option value="0">gramos</option>
+                  <option value="1">kilos</option>
+                  <option value="2">unidades</option>
+                  <option value="2">litros</option>
+
+                </select>
+              </div>
+            </div>
+
+            <div class="col-4">
+                <div class="form-group">
+                  <label for="">Cantidad</label>
+                  <input type="number" class="form-control" />
+                </div>
+            </div>
+            <!-- ingrediente 2 -->
+
+            <div class="col-4">
+                <div class="form-group">
+                  <label for="">Ingrediente 2</label>
+                  <input type="texto" class="form-control" />
+                </div>
+              </div>
+              
+              <div class="col-4">
+                <div class="form-group">
+                  <label for="">Unidad de medida</label>
+                  <select class="form-control" id="rol" name="rol">
+                    <option value="0">gramos</option>
+                    <option value="1">kilos</option>
+                    <option value="2">unidades</option>
+                    <option value="2">litros</option>
+  
+                  </select>
+                </div>
+              </div>
+  
+              <div class="col-4">
+                  <div class="form-group">
+                    <label for="">Cantidad</label>
+                    <input type="number" class="form-control" />
+                  </div>
+              </div>
+              <!-- ingrediente 3 -->
+              <div class="col-4">
+                <div class="form-group">
+                  <label for="">Ingrediente 3</label>
+                  <input type="texto" class="form-control" />
+                </div>
+              </div>
+              
+              <div class="col-4">
+                <div class="form-group">
+                  <label for="">Unidad de medida</label>
+                  <select class="form-control" id="rol" name="rol">
+                    <option value="0">gramos</option>
+                    <option value="1">kilos</option>
+                    <option value="2">unidades</option>
+                    <option value="2">litros</option>
+  
+                  </select>
+                </div>
+              </div>
+  
+              <div class="col-4">
+                  <div class="form-group">
+                    <label for="">Cantidad</label>
+                    <input type="number" class="form-control" />
+                  </div>
+              </div>
+              <!-- ingrediente 4 -->
+
+              <div class="col-4">
+                <div class="form-group">
+                  <label for="">Ingrediente 4</label>
+                  <input type="texto" class="form-control" />
+                </div>
+              </div>
+              
+              <div class="col-4">
+                <div class="form-group">
+                  <label for="">Unidad de medida</label>
+                  <select class="form-control" id="rol" name="rol">
+                    <option value="0">gramos</option>
+                    <option value="1">kilos</option>
+                    <option value="2">unidades</option>
+                    <option value="2">litros</option>
+  
+                  </select>
+                </div>
+              </div>
+  
+              <div class="col-4">
+                  <div class="form-group">
+                    <label for="">Cantidad</label>
+                    <input type="number" class="form-control" />
+                  </div>
+              </div>
+
+
+              <div>
+                <button class="btn btn-warning">agregar ingrediente</button>
+              </div>
+
+
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal" >Close</button>
+        <button   type="button" class="btn btn-info">Modificar</button>
+        
+      </div>
+    </div>
+  </div>
+</div>
