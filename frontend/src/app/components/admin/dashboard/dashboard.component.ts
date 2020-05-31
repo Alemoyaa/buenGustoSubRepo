@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { LoginService } from 'src/app/services/loginServices/login.service';
 import { Router } from '@angular/router';
 
@@ -12,64 +12,12 @@ export class DashboardComponent implements OnInit {
   mostrar: boolean = false;
   username;
   photo;
+  @Output()  irDashboard = new EventEmitter();
 
   ngOnInit(): void {
     this.getUser();
+    this.irDashboard.emit(true);
   }
-  // }
-  // //Admin
-  // tableroPizzaCrud = false;
-  // tableroStock = false;
-  // tableroEstadisticas = false;
-  // tableroUsuario = false;
-  // //Cocinero
-  // tableroOrdenes = false;
-  // tablerosBajasManuales = false;
-  // //Cajero
-  // tableroPedidos = false;
-  // tableroFacturacion = false;
-
-  // clearBoards() {
-  //   //Admin
-  //   this.tableroPizzaCrud = false;
-  //   this.tableroStock = false;
-  //   this.tableroEstadisticas = false;
-  //   this.tableroUsuario = false;
-  //   //Cocinero
-  //   this.tableroOrdenes = false;
-  //   this.tablerosBajasManuales = false;
-  //   //Cajero
-  //   this.tableroPedidos = false;
-  //   this.tableroFacturacion = false;
-  // }
-
-  // setBoard(board) {
-  //   this.clearBoards();
-  //   if (board === 'tableroPizzaCrud') {
-  //     this.tableroPizzaCrud = true;
-  //   }
-  //   if (board === 'tableroStock') {
-  //     this.tableroStock = true;
-  //   }
-  //   if (board === 'tableroEstadisticas') {
-  //     this.tableroEstadisticas = true;
-  //   }
-  //   if (board === 'tableroUsuario') {
-  //     this.tableroUsuario = true;
-  //   }
-  //   if (board === 'tableroOrdenes') {
-  //     this.tableroPedidos = true;
-  //   }
-  //   if (board === 'tablerosBajasManuales') {
-  //     this.tableroFacturacion = true;
-  //   }
-  //   if (board === 'tableroPedidos') {
-  //     this.tableroPedidos = true;
-  //   }
-  //   if (board === 'tableroFacturacion') {
-  //     this.tableroFacturacion = true;
-  //   }
-  // }
 
   getUser() {
     this.loginService.isAuth().subscribe((user) => {
@@ -85,8 +33,16 @@ export class DashboardComponent implements OnInit {
     this.loginService.logout();
   }
 
+  // sirve para mostrar una bienvenida al administrador
+  // o la ruta seleccionada en la dashboard
   mostrarTrue(){
     this.mostrar = true;
+  }
+
+  // recibimos el click de el usuario y se lo enviamos al componente padre para irnos devuelta a 
+  // la navbar
+  irAdmin(event){
+    this.irDashboard.emit(false);
   }
 
 }

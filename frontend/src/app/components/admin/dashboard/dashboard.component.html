@@ -5,7 +5,7 @@
   >
     <a
       class="sidebar-brand d-flex align-items-center justify-content-center"
-      href="index.html"
+      [routerLink]="['/']" (click)="irAdmin($event)"
     >
       <div class="sidebar-brand-text mx-3">Dashboard<sup>admin</sup></div>
     </a>
@@ -150,6 +150,23 @@
       <div class="container" *ngIf="mostrar">
         <!-- COMPONENTES ADMIN-->
           <router-outlet></router-outlet>
+      </div>
+      <div class="" *ngIf="!mostrar">
+        <!-- COMPONENTES ADMIN-->
+        <div class="text-center">
+          <div>
+            <h1>Bienvenido a el Panel de Administrador</h1>
+            <hr>
+            <h3>Aqui podra administrar todo el restaurante</h3>
+            <hr>
+            
+          </div>
+          <div class="imagen"> 
+            <img src="https://media-exp1.licdn.com/dms/image/C5612AQGQUI7AAw6hRA/article-cover_image-shrink_600_2000/0?e=1596067200&v=beta&t=jh8P5Yn5r-J3QqIU_ZRFNHhVCtIKcRxyV1iSWiM5ysY" alt="">
+          </div>
+          
+
+        </div>
          
         
       </div>

@@ -4,7 +4,7 @@
 </div>
 
 <div *ngIf="mostrar">
-    <app-dashboard></app-dashboard>
+    <app-dashboard (irDashboard)="mostrarDashboard($event)"></app-dashboard>
 </div>
 
 

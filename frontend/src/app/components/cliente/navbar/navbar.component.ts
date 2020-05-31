@@ -14,21 +14,7 @@ export class NavbarComponent implements OnInit {
   constructor(private serviceLogin: LoginService, private route: Router) { }
   @Output()  irDashboard = new EventEmitter();
   cliente: Usuario = new Usuario();
-  // {
-  //     id: 0,
-  //     nombre: '',
-  //     apellido: '',
-  //     telefono: null,
-  //     email: '',
-  //     foto: '',
-  //     uidFirebase: '',
-  //     rol: {
-  //       id: 0,
-  //       nombreRol : '',
-  //       descripcion: ''
-  //     },
-
-  //   };
+  
 
   navbarUsuario = true;
 
@@ -69,6 +55,7 @@ export class NavbarComponent implements OnInit {
     }
   }
 
+  // enviamos un true al componente padre app.component.ts para irnos a la dashboard de admin
   irAdmin(event){
     this.irDashboard.emit(true);
   }
