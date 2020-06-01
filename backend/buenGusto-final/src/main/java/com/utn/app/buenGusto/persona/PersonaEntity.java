@@ -22,11 +22,8 @@ import com.utn.app.buenGusto.usuario.UsuarioEntity;
 
 @Entity
 @Table(name = "persona")
-public class PersonaEntity implements Serializable {
-
-	/**
-	 * 
-	 */
+public abstract class PersonaEntity implements Serializable {
+ 
 	private static final long serialVersionUID = -1034118546506335502L;
 
 	@Id
