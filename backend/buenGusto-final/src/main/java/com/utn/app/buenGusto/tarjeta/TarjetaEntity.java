@@ -5,10 +5,11 @@ import java.io.Serializable;
 import javax.persistence.Entity; 
 import javax.persistence.Table;
 
-import com.utn.app.buenGusto.formaPago.FormaPagoEntity;
+import com.utn.app.buenGusto.formaPago.FormaPagoEntity; 
 
 @Entity
-@Table(name = "contado")
+@Table(name = "tarjeta")
+@javax.persistence.PrimaryKeyJoinColumn(name="forma_pago_tarjeta_id")
 public class TarjetaEntity extends FormaPagoEntity implements Serializable {
  
 	private static final long serialVersionUID = 823453454320078362L;

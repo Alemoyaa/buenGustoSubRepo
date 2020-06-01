@@ -11,6 +11,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
@@ -22,6 +24,7 @@ import com.utn.app.buenGusto.usuario.UsuarioEntity;
 
 @Entity
 @Table(name = "persona")
+@Inheritance(strategy = InheritanceType.JOINED)
 public abstract class PersonaEntity implements Serializable {
  
 	private static final long serialVersionUID = -1034118546506335502L;

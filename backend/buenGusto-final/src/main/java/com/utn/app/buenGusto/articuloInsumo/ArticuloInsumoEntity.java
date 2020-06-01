@@ -5,6 +5,7 @@ import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
 import com.utn.app.buenGusto.articulo.ArticuloEntity;
@@ -12,6 +13,7 @@ import com.utn.app.buenGusto.stockArticulo.StockArticuloEntity;
 
 @Entity
 @Table(name = "articulo_insumo")
+@PrimaryKeyJoinColumn(name = "articulo_insumo_Id")
 public  class ArticuloInsumoEntity extends ArticuloEntity implements Serializable {
 
 	private static final long serialVersionUID = -8356649232468048872L;

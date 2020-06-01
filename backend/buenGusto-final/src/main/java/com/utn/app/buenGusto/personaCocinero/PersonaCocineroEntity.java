@@ -1,12 +1,14 @@
 package com.utn.app.buenGusto.personaCocinero;
 
 import javax.persistence.Entity;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
 import com.utn.app.buenGusto.persona.PersonaEntity;
 
 @Entity
 @Table(name = "persona_cocinero")
+@PrimaryKeyJoinColumn(name="persona_cocinero_Id")
 public class PersonaCocineroEntity extends PersonaEntity {
 
 	private static final long serialVersionUID = 6521545865566567666L;

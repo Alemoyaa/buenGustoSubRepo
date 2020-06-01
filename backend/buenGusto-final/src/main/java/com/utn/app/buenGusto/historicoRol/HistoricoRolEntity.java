@@ -2,7 +2,10 @@ package com.utn.app.buenGusto.historicoRol;
 
 import java.io.Serializable;
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -11,6 +14,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.utn.app.buenGusto.rol.RolEntity;
@@ -36,9 +40,9 @@ public class HistoricoRolEntity implements Serializable {
 	@JoinColumn(name = "rol_id")
 	private RolEntity rol;
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "usuario_rol")
-	private UsuarioEntity usuario;
+	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+	@JoinColumn(name = "lista_historicoRol")
+	private List<UsuarioEntity> lista_historicoRol = new ArrayList<UsuarioEntity>();
 
 	public long getId() {
 		return id;
@@ -64,12 +68,12 @@ public class HistoricoRolEntity implements Serializable {
 		this.fecha_modificacion = fecha_modificacion;
 	}
 
-	public UsuarioEntity getUsuario() {
-		return usuario;
+	public List<UsuarioEntity> getLista_historicoRol() {
+		return lista_historicoRol;
 	}
 
-	public void setUsuario(UsuarioEntity usuario) {
-		this.usuario = usuario;
+	public void setLista_historicoRol(List<UsuarioEntity> lista_historicoRol) {
+		this.lista_historicoRol = lista_historicoRol;
 	}
 
 }
