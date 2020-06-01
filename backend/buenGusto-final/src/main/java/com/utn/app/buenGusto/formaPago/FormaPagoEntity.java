@@ -11,7 +11,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "forma_pago")
-public class FormaPagoEntity implements Serializable {
+public abstract class FormaPagoEntity implements Serializable {
 
 	private static final long serialVersionUID = -8356649232468048872L;
 	
