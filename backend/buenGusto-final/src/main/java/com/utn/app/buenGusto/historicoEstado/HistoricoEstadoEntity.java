@@ -12,7 +12,9 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import com.utn.app.buenGusto.estado.EstadoEntity;
+
+import com.utn.app.buenGusto.cabezaPedido.CabezaPedidoEntity;
+import com.utn.app.buenGusto.estadoPedido.EstadoPedidoEntity;
 import com.utn.app.buenGusto.pedido.PedidoEntity;
 
 @Entity
@@ -20,6 +22,7 @@ import com.utn.app.buenGusto.pedido.PedidoEntity;
 public class HistoricoEstadoEntity implements Serializable{
 
 	private static final long serialVersionUID = 1L;
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
@@ -28,11 +31,11 @@ public class HistoricoEstadoEntity implements Serializable{
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "pedido_id")
-	private PedidoEntity pedido;
+	private CabezaPedidoEntity pedido;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "estado_id")
-	private EstadoEntity estado;
+	private EstadoPedidoEntity estado;
 
 	public Date getFecha_modificacion() {
 		return fecha_modificacion;
@@ -41,20 +44,20 @@ public class HistoricoEstadoEntity implements Serializable{
 	public void setFecha_modificacion(Date fecha_modificacion) {
 		this.fecha_modificacion = fecha_modificacion;
 	} 
-
-	public PedidoEntity getPedido() {
+	
+	public CabezaPedidoEntity getPedido() {
 		return pedido;
 	}
 
-	public void setPedido(PedidoEntity pedido) {
+	public void setPedido(CabezaPedidoEntity pedido) {
 		this.pedido = pedido;
 	}
 
-	public EstadoEntity getEstado() {
+	public EstadoPedidoEntity getEstado() {
 		return estado;
 	}
 
-	public void setEstado(EstadoEntity estado) {
+	public void setEstado(EstadoPedidoEntity estado) {
 		this.estado = estado;
 	}
 

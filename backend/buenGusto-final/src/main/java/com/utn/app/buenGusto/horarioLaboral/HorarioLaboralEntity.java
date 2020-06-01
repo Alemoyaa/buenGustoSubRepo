@@ -15,42 +15,20 @@ import javax.validation.constraints.NotEmpty;
 public class HorarioLaboralEntity implements Serializable {
 
 	private static final long serialVersionUID = -8356649232468048862L;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
 	private int id;
-	@NotEmpty
-	private String nombreHorarioLaboral;
 
 	@NotEmpty
-	private int horarioInicio;
+	private String nombre_horario_laboral;
 
 	@NotEmpty
-	private int horarioFin;
+	private int horario_inicio;
 
-	public String getNombreHorarioLaboral() {
-		return nombreHorarioLaboral;
-	}
-
-	public void setNombreHorarioLaboral(String nombreHorarioLaboral) {
-		this.nombreHorarioLaboral = nombreHorarioLaboral;
-	}
-
-	public int getHorarioInicio() {
-		return horarioInicio;
-	}
-
-	public void setHorarioInicio(int horarioInicio) {
-		this.horarioInicio = horarioInicio;
-	}
-
-	public int getHorarioFin() {
-		return horarioFin;
-	}
-
-	public void setHorarioFin(int horarioFin) {
-		this.horarioFin = horarioFin;
-	}
+	@NotEmpty
+	private int horario_fin;
 
 	public int getId() {
 		return id;
@@ -58,6 +36,30 @@ public class HorarioLaboralEntity implements Serializable {
 
 	public void setId(int id) {
 		this.id = id;
+	}
+
+	public String getNombre_horario_laboral() {
+		return nombre_horario_laboral;
+	}
+
+	public void setNombre_horario_laboral(String nombre_horario_laboral) {
+		this.nombre_horario_laboral = nombre_horario_laboral;
+	}
+
+	public int getHorario_inicio() {
+		return horario_inicio;
+	}
+
+	public void setHorario_inicio(int horario_inicio) {
+		this.horario_inicio = horario_inicio;
+	}
+
+	public int getHorario_fin() {
+		return horario_fin;
+	}
+
+	public void setHorario_fin(int horario_fin) {
+		this.horario_fin = horario_fin;
 	}
 
 }

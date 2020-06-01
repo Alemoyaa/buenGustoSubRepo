@@ -12,13 +12,14 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "rol")
 public class RolEntity implements Serializable {
+	
 	private static final long serialVersionUID = 5685412683798686451L;
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
 	private int id;
-	private String nombreRol;
-	private String descripcion;
+	private String nombreRol; 
 
 	public String getNombreRol() {
 		return nombreRol;
@@ -26,15 +27,7 @@ public class RolEntity implements Serializable {
 
 	public void setNombreRol(String nombreRol) {
 		this.nombreRol = nombreRol;
-	}
-
-	public String getDescripcion() {
-		return descripcion;
-	}
-
-	public void setDescripcion(String descripcion) {
-		this.descripcion = descripcion;
-	}
+	} 
 
 	public int getId() {
 		return id;

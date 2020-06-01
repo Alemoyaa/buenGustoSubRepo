@@ -26,10 +26,7 @@ public class ConfiguracionGeneralEntity implements Serializable {
 	@Column(name = "id")
 	private int id;
 	@NotEmpty
-	private int cantidadCocineros;
-
-	@NotEmpty
-	private String emailEmpresa;
+	private int cantidadCocineros; 
 
 	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
 	@JoinColumn(name = "horario_fk_configuracion")
@@ -41,15 +38,7 @@ public class ConfiguracionGeneralEntity implements Serializable {
 
 	public void setCantidadCocineros(int cantidadCocineros) {
 		this.cantidadCocineros = cantidadCocineros;
-	}
-
-	public String getEmailEmpresa() {
-		return emailEmpresa;
-	}
-
-	public void setEmailEmpresa(String emailEmpresa) {
-		this.emailEmpresa = emailEmpresa;
-	}
+	} 
 
 	public List<HorarioLaboralEntity> getHorarios() {
 		return horarios;

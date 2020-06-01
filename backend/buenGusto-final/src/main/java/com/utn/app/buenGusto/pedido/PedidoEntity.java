@@ -15,7 +15,8 @@ import javax.persistence.PrePersist;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import com.utn.app.buenGusto.estado.EstadoEntity;
+
+import com.utn.app.buenGusto.estadoPedido.EstadoPedidoEntity;
 import com.utn.app.buenGusto.usuario.UsuarioEntity;
 
 @Entity
@@ -36,7 +37,7 @@ public class PedidoEntity implements Serializable {
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "estado_id")
-	private EstadoEntity estado;
+	private EstadoPedidoEntity estado;
 	 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "cliente_id")
@@ -87,11 +88,11 @@ public class PedidoEntity implements Serializable {
 		this.cliente = cliente;
 	}
 
-	public EstadoEntity getEstado() {
+	public EstadoPedidoEntity getEstado() {
 		return estado;
 	}
 
-	public void setEstado(EstadoEntity estado) {
+	public void setEstado(EstadoPedidoEntity estado) {
 		this.estado = estado;
 	}
 

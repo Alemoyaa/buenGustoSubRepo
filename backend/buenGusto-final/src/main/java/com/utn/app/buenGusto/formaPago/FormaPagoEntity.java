@@ -14,19 +14,20 @@ import javax.persistence.Table;
 public class FormaPagoEntity implements Serializable {
 
 	private static final long serialVersionUID = -8356649232468048872L;
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
-	private int id;
-	private String nombreForma;
-	private double montoDescuento;
+	private int id; 
 	
-	
-	public String getNombreForma() {
-		return nombreForma;
+	protected String denominacion;
+	protected double montoDescuento; 
+	 
+	public String getDenominacion() {
+		return denominacion;
 	}
-	public void setNombreForma(String nombreForma) {
-		this.nombreForma = nombreForma;
+	public void setDenominacion(String denominacion) {
+		this.denominacion = denominacion;
 	}
 	public double getMontoDescuento() {
 		return montoDescuento;
@@ -39,7 +40,5 @@ public class FormaPagoEntity implements Serializable {
 	}
 	public void setId(int id) {
 		this.id = id;
-	}
-	
-	
+	} 
 }

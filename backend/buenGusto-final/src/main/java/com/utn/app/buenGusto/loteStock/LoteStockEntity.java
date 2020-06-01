@@ -5,13 +5,16 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import com.utn.app.buenGusto.stockArticulo.StockArticuloEntity;
+import com.utn.app.buenGusto.unidadMedida.UnidadMedidaEntity;
 
 @Entity
 @Table(name = "lote_stock")
@@ -21,24 +24,28 @@ public class LoteStockEntity implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
-	private int id;
+	private long id;
 	private long numeroLote;
-	private long cantidadActual;
-	private long cantidadComprada;
-	private String unidadMedida;
+	private float cantidadActual; 
+	private float cantidadComprada;  
+	private double precio_de_compra; 
 	private Date fechaCompra;
 	private Date fechaVencimiento;
 
-	@OneToOne(/*cascade = CascadeType.ALL*/)
+	@ManyToOne(/*cascade = CascadeType.ALL*/ fetch = FetchType.LAZY)
 	@JoinColumn(name = "stock_articulo_id")
 	private StockArticuloEntity stockArticulo;
 
-	public StockArticuloEntity getStockArticulo() {
-		return stockArticulo;
+	@OneToOne(/*cascade = CascadeType.ALL*/)
+	@JoinColumn(name = "unidad_medida_id")
+	private UnidadMedidaEntity unidadMedidaID;
+
+	public long getId() {
+		return id;
 	}
 
-	public void setStockArticulo(StockArticuloEntity stockArticulo) {
-		this.stockArticulo = stockArticulo;
+	public void setId(long id) {
+		this.id = id;
 	}
 
 	public long getNumeroLote() {
@@ -49,28 +56,28 @@ public class LoteStockEntity implements Serializable{
 		this.numeroLote = numeroLote;
 	}
 
-	public long getCantidadActual() {
+	public float getCantidadActual() {
 		return cantidadActual;
 	}
 
-	public void setCantidadActual(long cantidadActual) {
+	public void setCantidadActual(float cantidadActual) {
 		this.cantidadActual = cantidadActual;
 	}
 
-	public long getCantidadComprada() {
+	public float getCantidadComprada() {
 		return cantidadComprada;
 	}
 
-	public void setCantidadComprada(long cantidadComprada) {
+	public void setCantidadComprada(float cantidadComprada) {
 		this.cantidadComprada = cantidadComprada;
 	}
 
-	public String getUnidadMedida() {
-		return unidadMedida;
+	public double getPrecio_de_compra() {
+		return precio_de_compra;
 	}
 
-	public void setUnidadMedida(String unidadMedida) {
-		this.unidadMedida = unidadMedida;
+	public void setPrecio_de_compra(double precio_de_compra) {
+		this.precio_de_compra = precio_de_compra;
 	}
 
 	public Date getFechaCompra() {
@@ -89,12 +96,20 @@ public class LoteStockEntity implements Serializable{
 		this.fechaVencimiento = fechaVencimiento;
 	}
 
-	public int getId() {
-		return id;
+	public StockArticuloEntity getStockArticulo() {
+		return stockArticulo;
 	}
 
-	public void setId(int id) {
-		this.id = id;
+	public void setStockArticulo(StockArticuloEntity stockArticulo) {
+		this.stockArticulo = stockArticulo;
 	}
 
+	public UnidadMedidaEntity getUnidadMedidaID() {
+		return unidadMedidaID;
+	}
+
+	public void setUnidadMedidaID(UnidadMedidaEntity unidadMedidaID) {
+		this.unidadMedidaID = unidadMedidaID;
+	}
+	 
 }
