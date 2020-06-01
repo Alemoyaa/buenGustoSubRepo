@@ -8,17 +8,18 @@ import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.utn.app.buenGusto.articulo.ArticuloEntity;
 import com.utn.app.buenGusto.detalleManufacturado.DetalleManufacturadoEntity;
 
 @Entity
 @Table(name = "articulo_manufacturado")
-public class ArticuloManufacturadoEntity implements Serializable {
+public class ArticuloManufacturadoEntity extends ArticuloEntity implements Serializable {
 
 	private static final long serialVersionUID = -8356649232468048872L;
 
 	private int tiempo_estimado_manuf;
 	private double costo_de_manuf;
-
+	 
 	@OneToMany(mappedBy = "articuloManufacturadoID"/* , cascade = CascadeType.ALL */)
 	private List<DetalleManufacturadoEntity> lista_detalleManufacturado;
 

@@ -7,11 +7,12 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.utn.app.buenGusto.articulo.ArticuloEntity;
 import com.utn.app.buenGusto.stockArticulo.StockArticuloEntity;
 
 @Entity
 @Table(name = "articulo_insumo")
-public class ArticuloInsumoEntity implements Serializable {
+public  class ArticuloInsumoEntity extends ArticuloEntity implements Serializable {
 
 	private static final long serialVersionUID = -8356649232468048872L;
 

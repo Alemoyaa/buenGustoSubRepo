@@ -16,7 +16,7 @@ import com.utn.app.buenGusto.categoria.CategoriaEntity;
 
 @Entity
 @Table(name = "articulo")
-public class ArticuloEntity implements Serializable{
+public abstract class ArticuloEntity implements Serializable{
 
 	private static final long serialVersionUID = 4801679657904614999L;
 
@@ -36,6 +36,5 @@ public class ArticuloEntity implements Serializable{
 	@OneToMany(fetch = FetchType.LAZY)
 	@JoinColumn(name = "categoria_articulo")
 	protected CategoriaEntity categoria;
-	
 	
 }
