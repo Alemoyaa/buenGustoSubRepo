@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'app-catalogo-crud',
@@ -8,9 +8,13 @@ import { Component, OnInit } from '@angular/core';
 export class CatalogoCrudComponent implements OnInit {
   esEditar: boolean = false;
 
+  
   constructor() {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+
+   
+  }
 
   editar(){
     this.esEditar = true;

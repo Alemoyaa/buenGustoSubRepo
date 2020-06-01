@@ -12,13 +12,15 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 })
 export class NavbarComponent implements OnInit {
   constructor(private serviceLogin: LoginService, private route: Router) { }
-  @Output()  irDashboard = new EventEmitter();
-  cliente: Usuario = new Usuario();
   
+  @Output()  irDashboard = new EventEmitter();
+
+  cliente: Usuario = new Usuario();
 
   navbarUsuario = true;
 
   ngOnInit(): void {
+    
     this.existeUsuario();
     this.setCarrito();
     this.serviceLogin.datosGoogle(this.cliente); //para mostrar la foto de perfil en el navbar
@@ -38,13 +40,13 @@ export class NavbarComponent implements OnInit {
     this.serviceLogin.logout();
   }
 
-  hideNavbar() {
-    if (this.route.url.includes('admin')) {
-      return true;
-    } else {
-      return false;
-    }
-  }
+  // hideNavbar() {
+  //   if (this.route.url.includes('admin')) {
+  //     return true;
+  //   } else {
+  //     return false;
+  //   }
+  // }
   setCarrito() {
     if (localStorage.getItem('carrito')) {
       console.log('Carrito existe');

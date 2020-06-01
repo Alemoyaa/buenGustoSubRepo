@@ -7,12 +7,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AppComponent implements OnInit {
 
-  title = 'frontend';
-  mostrar: boolean = false;
+
+  mostrar: boolean;
 
   ngOnInit(): void {
 
-    alert(this.mostrar);
+    
 
   }
 
@@ -20,7 +20,7 @@ export class AppComponent implements OnInit {
   //  y segun el resultadomuestra uno u otro
   mostrarDashboard(event) {
     this.mostrar = event;
-    alert(this.mostrar);
+    
   }
 }
 

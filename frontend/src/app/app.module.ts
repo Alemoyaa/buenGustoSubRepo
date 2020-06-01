@@ -1,7 +1,7 @@
 import { CatalogoDetalleComponent } from './components/cliente/catalogo-detalle/catalogo-detalle.component';
 import { CommonService } from './services/serviciosCliente/commonServices/common.service';
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { NgModule} from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './components/admin/login/login.component';
@@ -81,6 +81,6 @@ import { EstadisticasComponent } from './components/admin/dashboard/Admin/estadi
   ],
   providers: [AngularFireAuth, CommonService],
   bootstrap: [AppComponent],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA],
+  schemas: [],
 })
 export class AppModule {}
