@@ -4,4 +4,4 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface LoteStockRepository extends JpaRepository<LoteStockEntity, Integer>{}
+public interface LoteStockRepository extends JpaRepository<LoteStockEntity, Long>{}

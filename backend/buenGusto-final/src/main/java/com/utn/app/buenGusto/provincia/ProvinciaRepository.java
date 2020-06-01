@@ -1,8 +1,9 @@
-package com.utn.app.buenGusto.rol;
+package com.utn.app.buenGusto.provincia;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface RolRepository extends JpaRepository<RolEntity, Long>{}
+public interface ProvinciaRepository extends JpaRepository<ProvinciaEntity, Long>{
 
+}

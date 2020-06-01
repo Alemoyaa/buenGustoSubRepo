@@ -7,14 +7,14 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public abstract class CommonService<E, R extends JpaRepository<E, Integer>> implements CommonIService<E> {
+public abstract class CommonService<E, R extends JpaRepository<E, Long>> implements CommonIService<E> {
 	
 	@Autowired //injeccion de dependencia
 	protected R repository;	
 	
 
 	@Override
-	public E findById(int id) throws Exception {
+	public E findById(long id) throws Exception {
 		try {
 
 			// se usa para atrapar un null
@@ -46,7 +46,7 @@ public abstract class CommonService<E, R extends JpaRepository<E, Integer>> impl
 	}
 
 	@Override
-	public E update(int id, E entityForm) throws Exception {
+	public E update(long id, E entityForm) throws Exception {
 
 		try {
 			Optional<E> entityOptional = repository.findById(id);
@@ -89,7 +89,7 @@ public abstract class CommonService<E, R extends JpaRepository<E, Integer>> impl
 		
 	}
 	
-	public boolean delete(int id) throws Exception{
+	public boolean delete(long id) throws Exception{
 		try {
 			if(repository.existsById(id)) {
 				repository.deleteById(id);

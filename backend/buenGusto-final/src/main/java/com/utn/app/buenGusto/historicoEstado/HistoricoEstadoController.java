@@ -9,7 +9,6 @@ import com.utn.app.buenGusto.common.CommonController;
 @RestController
 @CrossOrigin(origins = "*",
 methods= {RequestMethod.GET,RequestMethod.POST,RequestMethod.DELETE,RequestMethod.PUT})
-
 @RequestMapping(path = "api/historico_estado")
 public class HistoricoEstadoController extends CommonController<HistoricoEstadoEntity, HistoricoEstadoService> {
 

@@ -9,7 +9,7 @@ import com.utn.app.buenGusto.common.CommonController;
 @RestController
 @CrossOrigin(origins = "*",
 methods= {RequestMethod.GET,RequestMethod.POST,RequestMethod.DELETE,RequestMethod.PUT})
-@RequestMapping(path = "api/formapago")
+@RequestMapping(path = "api/forma_pago")
 public class FormaPagoController extends CommonController<FormaPagoEntity, FormaPagoService> {
 
 }
