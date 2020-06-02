@@ -39,7 +39,7 @@ public class DomicilioEntity implements Serializable {
 	@JoinColumn(name = "localidad_id")
 	private LocalidadEntity localidad;
 
-	@JsonIgnoreProperties("persona")
+	//@JsonIgnoreProperties("persona")
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "persona")
 	private PersonaEntity persona;

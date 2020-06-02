@@ -23,6 +23,7 @@ import com.utn.app.buenGusto.provincia.ProvinciaEntity;
 
 @Entity
 @Table(name = "localidad")
+@JsonIgnoreProperties({"domicilios"})
 public class LocalidadEntity implements Serializable {
  
 	private static final long serialVersionUID = -3414135937301976153L;
@@ -33,8 +34,7 @@ public class LocalidadEntity implements Serializable {
 	private long id;
 
 	private String nombre;
- 
-	@JsonIgnore
+    
 	@OneToMany(mappedBy = "localidad", cascade = CascadeType.REMOVE)
 	private List<DomicilioEntity> domicilios = new ArrayList<DomicilioEntity>();
 	  
