@@ -22,8 +22,7 @@ import com.utn.app.buenGusto.localidad.LocalidadEntity;
 import com.utn.app.buenGusto.pais.PaisEntity;
 
 @Entity
-@Table(name = "provincia")
-@JsonIgnoreProperties({"localidades"})
+@Table(name = "provincia") 
 public class ProvinciaEntity implements Serializable {
  
 	private static final long serialVersionUID = -8959812908842109039L;
@@ -33,14 +32,11 @@ public class ProvinciaEntity implements Serializable {
 	@Column(name = "id")
 	private long id;
 
-	private String nombre;
-  
-	@OneToMany(mappedBy = "provincia", cascade = CascadeType.REMOVE)
-	private List<LocalidadEntity> localidades = new ArrayList<LocalidadEntity>();
+	private String nombre; 
  
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(cascade = CascadeType.MERGE)
 	@JoinColumn(name = "pais_id")
-	private PaisEntity pais;
+	private PaisEntity pais; 
 
 	public long getId() {
 		return id;
@@ -56,7 +52,7 @@ public class ProvinciaEntity implements Serializable {
 
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
-	}
+	}  
 
 	public PaisEntity getPais() {
 		return pais;
@@ -65,13 +61,7 @@ public class ProvinciaEntity implements Serializable {
 	public void setPais(PaisEntity pais) {
 		this.pais = pais;
 	}
-
-	public List<LocalidadEntity> getProvincias() {
-		return localidades;
-	}
-
-	public void setProvincias(List<LocalidadEntity> provincias) {
-		this.localidades = provincias;
-	}
+	
+	
 
 }

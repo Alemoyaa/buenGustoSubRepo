@@ -1,7 +1,8 @@
 package com.utn.app.buenGusto.domicilio;
 
-import java.io.Serializable;
+import java.io.Serializable; 
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -9,15 +10,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne; 
 import javax.persistence.Table;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.utn.app.buenGusto.localidad.LocalidadEntity;
-import com.utn.app.buenGusto.persona.PersonaEntity;
-import com.utn.app.buenGusto.usuario.UsuarioEntity;
+ 
+import com.utn.app.buenGusto.localidad.LocalidadEntity; 
 
 @Entity
 @Table(name = "domicilio")
@@ -34,16 +30,11 @@ public class DomicilioEntity implements Serializable {
 	private String departamento;
 	private int piso;
 	private String aclaracion;
- 
-	@ManyToOne(fetch = FetchType.LAZY)
+
+	@ManyToOne(cascade = CascadeType.MERGE)
 	@JoinColumn(name = "localidad_id")
 	private LocalidadEntity localidad;
-
-	//@JsonIgnoreProperties("persona")
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "persona")
-	private PersonaEntity persona;
-
+  
 	public String getCalle() {
 		return calle;
 	}
@@ -98,16 +89,6 @@ public class DomicilioEntity implements Serializable {
 
 	public void setLocalidad(LocalidadEntity localidad) {
 		this.localidad = localidad;
-	}
-
-	public PersonaEntity getPersona() {
-		return persona;
-	}
-
-	public void setPersona(PersonaEntity persona) {
-		this.persona = persona;
-	}
-
-	 
+	}  
 	
 }

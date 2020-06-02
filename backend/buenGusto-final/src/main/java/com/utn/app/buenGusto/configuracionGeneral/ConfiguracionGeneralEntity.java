@@ -28,7 +28,7 @@ public class ConfiguracionGeneralEntity implements Serializable {
 	@NotEmpty
 	private int cantidadCocineros; 
 
-	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToMany(cascade = CascadeType.ALL)
 	@JoinColumn(name = "horario_fk_configuracion")
 	private List<HorarioLaboralEntity> horarios;
 

@@ -8,18 +8,21 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.utn.app.buenGusto.domicilio.DomicilioEntity;
+import com.utn.app.buenGusto.horarioLaboral.HorarioLaboralEntity;
 import com.utn.app.buenGusto.usuario.UsuarioEntity;
 
 @Entity
@@ -44,9 +47,8 @@ public abstract class PersonaEntity implements Serializable {
 	@JoinColumn(name = "usuario_id")
 	private UsuarioEntity usuario;
 
-	@JsonIgnoreProperties("persona")
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "persona")
-	private List<DomicilioEntity> lista_domicilio = new ArrayList<DomicilioEntity>();
+	@OneToOne(fetch = FetchType.LAZY) 
+	private DomicilioEntity lista_domicilio; 
 
 	public long getId() {
 		return id;
@@ -104,12 +106,14 @@ public abstract class PersonaEntity implements Serializable {
 		this.usuario = usuario;
 	}
 
-	public List<DomicilioEntity> getLista_domicilio() {
+	public DomicilioEntity getLista_domicilio() {
 		return lista_domicilio;
 	}
 
-	public void setLista_domicilio(List<DomicilioEntity> lista_domicilio) {
+	public void setLista_domicilio(DomicilioEntity lista_domicilio) {
 		this.lista_domicilio = lista_domicilio;
 	}
+  
+	
 
 }
