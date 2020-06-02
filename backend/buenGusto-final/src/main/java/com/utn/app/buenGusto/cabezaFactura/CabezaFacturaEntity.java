@@ -15,13 +15,14 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.utn.app.buenGusto.datosEmpresa.DatosEmpresaEntity;
 import com.utn.app.buenGusto.detalleFactura.DetalleFacturaEntity;
 import com.utn.app.buenGusto.formaPago.FormaPagoEntity;
 
 @Entity
 @Table(name = "cabeza_factura")
 public class CabezaFacturaEntity implements Serializable {
-	
+
 	/**
 	 * 
 	 */
@@ -41,8 +42,12 @@ public class CabezaFacturaEntity implements Serializable {
 	private List<DetalleFacturaEntity> detalleFactura;
 
 	@OneToOne()
-	@JoinColumn(name = "formaPago_id")
+	@JoinColumn(name = "forma_pago_id")
 	private FormaPagoEntity formaPago;
+
+	@OneToOne()
+	@JoinColumn(name = "datos_empresa_id")
+	private DatosEmpresaEntity datosEmpresaID;
 
 	public long getId() {
 		return id;
@@ -98,6 +103,14 @@ public class CabezaFacturaEntity implements Serializable {
 
 	public void setFormaPago(FormaPagoEntity formaPago) {
 		this.formaPago = formaPago;
-	} 
-	
+	}
+
+	public DatosEmpresaEntity getDatosEmpresaID() {
+		return datosEmpresaID;
+	}
+
+	public void setDatosEmpresaID(DatosEmpresaEntity datosEmpresaID) {
+		this.datosEmpresaID = datosEmpresaID;
+	}
+
 }

@@ -7,10 +7,13 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "forma_pago")
+@Inheritance(strategy = InheritanceType.JOINED)
 public abstract class FormaPagoEntity implements Serializable {
 
 	private static final long serialVersionUID = -8356649232468048872L;

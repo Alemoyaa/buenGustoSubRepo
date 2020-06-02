@@ -16,32 +16,31 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.utn.app.buenGusto.localidad.LocalidadEntity;
 import com.utn.app.buenGusto.pais.PaisEntity;
 
 @Entity
 @Table(name = "provincia")
-public class ProvinciaEntity implements Serializable{
-	
-	/**
-	 * 
-	 */
+public class ProvinciaEntity implements Serializable {
+ 
 	private static final long serialVersionUID = -8959812908842109039L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id") 
+	@Column(name = "id")
 	private long id;
-	
-	private String nombre; 
-	
+
+	private String nombre;
+ 
+	@OneToMany(mappedBy = "provincia", cascade = CascadeType.REMOVE)
+	private List<LocalidadEntity> provincias = new ArrayList<LocalidadEntity>();
+ 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "pais_id")
-	private PaisEntity pais; 
-	
-	@OneToMany(mappedBy = "provincia", cascade = CascadeType.ALL)
-	private List<LocalidadEntity> provincias = new ArrayList<LocalidadEntity>(); 
-	
+	private PaisEntity pais;
+
 	public long getId() {
 		return id;
 	}
@@ -72,7 +71,6 @@ public class ProvinciaEntity implements Serializable{
 
 	public void setProvincias(List<LocalidadEntity> provincias) {
 		this.provincias = provincias;
-	} 
-	
-	
+	}
+
 }

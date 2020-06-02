@@ -13,6 +13,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.utn.app.buenGusto.localidad.LocalidadEntity;
 import com.utn.app.buenGusto.persona.PersonaEntity;
@@ -33,14 +34,14 @@ public class DomicilioEntity implements Serializable {
 	private String departamento;
 	private int piso;
 	private String aclaracion;
-
+ 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "localidad_id")
 	private LocalidadEntity localidad;
 
-	//@JsonIgnoreProperties("domicilio")
+	@JsonIgnoreProperties("persona")
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "lista_domicilio")
+	@JoinColumn(name = "persona")
 	private PersonaEntity persona;
 
 	public String getCalle() {

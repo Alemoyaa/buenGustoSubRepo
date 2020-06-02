@@ -18,38 +18,56 @@ import javax.persistence.Table;
 import com.utn.app.buenGusto.detallePedido.DetallePedidoEntity;
 import com.utn.app.buenGusto.estadoPedido.EstadoPedidoEntity;
 import com.utn.app.buenGusto.historicoEstado.HistoricoEstadoEntity;
+import com.utn.app.buenGusto.personaCajero.PersonaCajeroEntity;
+import com.utn.app.buenGusto.personaCliente.PersonaClienteEntity;
+import com.utn.app.buenGusto.personaCocinero.PersonaCocineroEntity;
+import com.utn.app.buenGusto.personaRepartidor.PersonaRepartidorEntity;
 
 @Entity
 @Table(name = "cabeza_pedido")
-public class CabezaPedidoEntity implements Serializable{
-	
-	/**
-	 * 
-	 */
+public class CabezaPedidoEntity implements Serializable {
+
 	private static final long serialVersionUID = 2109963082457857151L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
-	private long id; 
-	
-	private Date fechaRealizacion; 
-	
+	private long id;
+
+	private Date fechaRealizacion;
+
 	private Date hora_estimada_fin;
-	
+
 	private boolean tipo_Envio;
-	
+
 	private int numero;
-	
+
 	@OneToMany(mappedBy = "pedido", cascade = CascadeType.ALL)
 	private List<HistoricoEstadoEntity> lista_historicoEstado;
-	
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "estado_id")
-	private EstadoPedidoEntity EstadoPedido;
-	
+
 	@OneToMany(mappedBy = "cabezaPedido", cascade = CascadeType.ALL)
 	private List<DetallePedidoEntity> lista_detallePedido;
+
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "estado_id")
+	private EstadoPedidoEntity EstadoPedido; 
+
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "cliente_id")
+	private PersonaClienteEntity ClientePedido;
+
+	// Empleados
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "repartidor_id")
+	private PersonaRepartidorEntity RepartidorPedido;
+
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "cocinero_id")
+	private PersonaCocineroEntity CocineroPedido;
+
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "cajero_id")
+	private PersonaCajeroEntity CajeroPedido;
 
 	public long getId() {
 		return id;
@@ -114,17 +132,37 @@ public class CabezaPedidoEntity implements Serializable{
 	public void setLista_detallePedido(List<DetallePedidoEntity> lista_detallePedido) {
 		this.lista_detallePedido = lista_detallePedido;
 	}
-	
-	/*
-	  
-	  private ClienteEntity cliente;
-	  
-	  private CocineroEntity cocinero;
-	  
-	  private CajeroEntity cajero;
-	  
-	  private RepartidorEntity repartidor;
-	  
-	 */
-	 
+
+	public PersonaClienteEntity getCliente() {
+		return ClientePedido;
+	}
+
+	public void setCliente(PersonaClienteEntity cliente) {
+		ClientePedido = cliente;
+	}
+
+	public PersonaRepartidorEntity getRepartidor() {
+		return RepartidorPedido;
+	}
+
+	public void setRepartidor(PersonaRepartidorEntity repartidor) {
+		RepartidorPedido = repartidor;
+	}
+
+	public PersonaCocineroEntity getCocinero() {
+		return CocineroPedido;
+	}
+
+	public void setCocinero(PersonaCocineroEntity cocinero) {
+		CocineroPedido = cocinero;
+	}
+
+	public PersonaCajeroEntity getCajero() {
+		return CajeroPedido;
+	}
+
+	public void setCajero(PersonaCajeroEntity cajero) {
+		CajeroPedido = cajero;
+	}
+
 }

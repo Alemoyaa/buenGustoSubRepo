@@ -44,8 +44,8 @@ public abstract class PersonaEntity implements Serializable {
 	@JoinColumn(name = "usuario_id")
 	private UsuarioEntity usuario;
 
-	// @JsonIgnoreProperties("usuarioDomicilio")
-	@OneToMany(cascade = CascadeType.ALL)
+	@JsonIgnoreProperties("persona")
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "persona")
 	private List<DomicilioEntity> lista_domicilio = new ArrayList<DomicilioEntity>();
 
 	public long getId() {

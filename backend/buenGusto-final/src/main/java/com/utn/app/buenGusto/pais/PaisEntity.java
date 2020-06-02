@@ -13,15 +13,14 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.utn.app.buenGusto.provincia.ProvinciaEntity;
   
 @Entity
 @Table(name = "pais")
 public class PaisEntity implements Serializable{
-
-	/**
-	 * 
-	 */
+ 
 	private static final long serialVersionUID = 5134649836119405377L;
  
 	@Id
@@ -30,9 +29,8 @@ public class PaisEntity implements Serializable{
 	private long id;
 	
 	private String nombre;
-	
-	
-	@OneToMany(mappedBy = "pais", cascade = CascadeType.ALL)
+	 
+	@OneToMany(mappedBy = "pais", cascade = CascadeType.REMOVE)
 	private List<ProvinciaEntity> provincias = new ArrayList<ProvinciaEntity>(); 
 	
 

@@ -16,16 +16,15 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.utn.app.buenGusto.domicilio.DomicilioEntity;
 import com.utn.app.buenGusto.provincia.ProvinciaEntity;
 
 @Entity
 @Table(name = "localidad")
 public class LocalidadEntity implements Serializable {
-
-	/**
-	 * 
-	 */
+ 
 	private static final long serialVersionUID = -3414135937301976153L;
 
 	@Id
@@ -34,10 +33,11 @@ public class LocalidadEntity implements Serializable {
 	private long id;
 
 	private String nombre;
-
-	@OneToMany(mappedBy = "localidad", cascade = CascadeType.ALL)
+ 
+	@JsonIgnore
+	@OneToMany(mappedBy = "localidad", cascade = CascadeType.REMOVE)
 	private List<DomicilioEntity> domicilios = new ArrayList<DomicilioEntity>();
-	
+	  
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "provincia_id")
 	private ProvinciaEntity provincia;
