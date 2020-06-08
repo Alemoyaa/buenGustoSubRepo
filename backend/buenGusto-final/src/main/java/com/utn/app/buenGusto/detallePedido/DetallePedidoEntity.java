@@ -9,7 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne; 
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.utn.app.buenGusto.articuloInsumo.ArticuloInsumoEntity;
@@ -22,24 +22,24 @@ import com.utn.app.buenGusto.pedido.PedidoEntity;
 public class DetallePedidoEntity implements Serializable {
 
 	private static final long serialVersionUID = -7168593642662662191L;
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
-	
-	private int id;
-	private int cantidad; 
+	private long id;
+
+	private int cantidad;
 	private double subtotal;
-	
+
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "Cabeza_Pedido_id")
 	private CabezaPedidoEntity cabezaPedido;
 
-	public int getId() {
+	public long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 
@@ -66,5 +66,5 @@ public class DetallePedidoEntity implements Serializable {
 	public void setCabezaPedido(CabezaPedidoEntity cabezaPedido) {
 		this.cabezaPedido = cabezaPedido;
 	}
-  
+
 }

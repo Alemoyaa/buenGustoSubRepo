@@ -19,20 +19,20 @@ import com.utn.app.buenGusto.pedido.PedidoEntity;
 
 @Entity
 @Table(name = "historico_estado")
-public class HistoricoEstadoEntity implements Serializable{
+public class HistoricoEstadoEntity implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
-	private int id;
-	private Date fecha_modificacion; 
-	
+	private long id;
+	private Date fecha_modificacion;
+
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "pedido_id")
 	private CabezaPedidoEntity pedido;
-	
+
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "estado_id")
 	private EstadoPedidoEntity estado;
@@ -43,8 +43,8 @@ public class HistoricoEstadoEntity implements Serializable{
 
 	public void setFecha_modificacion(Date fecha_modificacion) {
 		this.fecha_modificacion = fecha_modificacion;
-	} 
-	
+	}
+
 	public CabezaPedidoEntity getPedido() {
 		return pedido;
 	}
@@ -61,12 +61,12 @@ public class HistoricoEstadoEntity implements Serializable{
 		this.estado = estado;
 	}
 
-	public int getId() {
+	public long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(long id) {
 		this.id = id;
 	}
-	
+
 }

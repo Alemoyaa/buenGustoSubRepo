@@ -22,9 +22,9 @@ import com.utn.app.buenGusto.domicilio.DomicilioEntity;
 import com.utn.app.buenGusto.provincia.ProvinciaEntity;
 
 @Entity
-@Table(name = "localidad") 
+@Table(name = "localidad")
 public class LocalidadEntity implements Serializable {
- 
+
 	private static final long serialVersionUID = -3414135937301976153L;
 
 	@Id
@@ -32,12 +32,12 @@ public class LocalidadEntity implements Serializable {
 	@Column(name = "id")
 	private long id;
 
-	private String nombre; 
+	private String nombre;
 
 	@ManyToOne(cascade = CascadeType.MERGE)
 	@JoinColumn(name = "provincia_id")
 	private ProvinciaEntity provincia;
-	   
+
 	public long getId() {
 		return id;
 	}
@@ -60,6 +60,6 @@ public class LocalidadEntity implements Serializable {
 
 	public void setProvincia(ProvinciaEntity provincia) {
 		this.provincia = provincia;
-	}  
-	
+	}
+
 }

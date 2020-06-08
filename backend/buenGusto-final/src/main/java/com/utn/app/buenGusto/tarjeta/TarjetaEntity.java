@@ -1,23 +1,23 @@
 package com.utn.app.buenGusto.tarjeta;
 
 import java.io.Serializable;
- 
-import javax.persistence.Entity; 
+
+import javax.persistence.Entity;
 import javax.persistence.Table;
 
-import com.utn.app.buenGusto.formaPago.FormaPagoEntity; 
+import com.utn.app.buenGusto.formaPago.FormaPagoEntity;
 
 @Entity
 @Table(name = "tarjeta")
-@javax.persistence.PrimaryKeyJoinColumn(name="forma_pago_tarjeta_id")
+@javax.persistence.PrimaryKeyJoinColumn(name = "forma_pago_tarjeta_id")
 public class TarjetaEntity extends FormaPagoEntity implements Serializable {
- 
+
 	private static final long serialVersionUID = 823453454320078362L;
-  
+
 	private String nombre_titular_tarjeta;
 
 	private int nro_tarjeta;
- 
+
 	public String getNombre_titular_tarjeta() {
 		return nombre_titular_tarjeta;
 	}

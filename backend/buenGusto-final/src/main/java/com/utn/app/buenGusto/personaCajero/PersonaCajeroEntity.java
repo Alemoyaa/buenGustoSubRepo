@@ -8,7 +8,7 @@ import com.utn.app.buenGusto.persona.PersonaEntity;
 
 @Entity
 @Table(name = "persona_cajero")
-@PrimaryKeyJoinColumn(name="persona_cajero_Id")
+@PrimaryKeyJoinColumn(name = "persona_cajero_Id")
 public class PersonaCajeroEntity extends PersonaEntity {
 
 	private static final long serialVersionUID = -4290276702074150143L;

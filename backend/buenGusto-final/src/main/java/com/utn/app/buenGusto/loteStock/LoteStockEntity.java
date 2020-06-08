@@ -18,25 +18,25 @@ import com.utn.app.buenGusto.unidadMedida.UnidadMedidaEntity;
 
 @Entity
 @Table(name = "lote_stock")
-public class LoteStockEntity implements Serializable{
-	
+public class LoteStockEntity implements Serializable {
+
 	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
 	private long id;
 	private long numeroLote;
-	private float cantidadActual; 
-	private float cantidadComprada;  
-	private double precio_de_compra; 
+	private float cantidadActual;
+	private float cantidadComprada;
+	private double precio_de_compra;
 	private Date fechaCompra;
 	private Date fechaVencimiento;
 
-	@ManyToOne(/*cascade = CascadeType.ALL*/ fetch = FetchType.LAZY)
+	@ManyToOne(/* cascade = CascadeType.ALL */ fetch = FetchType.LAZY)
 	@JoinColumn(name = "stock_articulo_id")
 	private StockArticuloEntity stockArticulo;
 
-	@OneToOne(/*cascade = CascadeType.ALL*/)
+	@OneToOne(/* cascade = CascadeType.ALL */)
 	@JoinColumn(name = "unidad_medida_id")
 	private UnidadMedidaEntity unidadMedidaID;
 
@@ -111,5 +111,5 @@ public class LoteStockEntity implements Serializable{
 	public void setUnidadMedidaID(UnidadMedidaEntity unidadMedidaID) {
 		this.unidadMedidaID = unidadMedidaID;
 	}
-	 
+
 }

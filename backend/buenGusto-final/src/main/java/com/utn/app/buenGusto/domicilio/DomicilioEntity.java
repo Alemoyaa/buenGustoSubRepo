@@ -1,6 +1,6 @@
 package com.utn.app.buenGusto.domicilio;
 
-import java.io.Serializable; 
+import java.io.Serializable;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -10,10 +10,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne; 
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
- 
-import com.utn.app.buenGusto.localidad.LocalidadEntity; 
+
+import com.utn.app.buenGusto.localidad.LocalidadEntity;
 
 @Entity
 @Table(name = "domicilio")
@@ -24,7 +24,8 @@ public class DomicilioEntity implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
-	private int id;
+	private long id;
+
 	private String calle;
 	private int numero;
 	private String departamento;
@@ -34,7 +35,7 @@ public class DomicilioEntity implements Serializable {
 	@ManyToOne(cascade = CascadeType.MERGE)
 	@JoinColumn(name = "localidad_id")
 	private LocalidadEntity localidad;
-  
+
 	public String getCalle() {
 		return calle;
 	}
@@ -49,13 +50,13 @@ public class DomicilioEntity implements Serializable {
 
 	public void setNumero(int numero) {
 		this.numero = numero;
-	} 
+	}
 
-	public int getId() {
+	public long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 
@@ -89,6 +90,6 @@ public class DomicilioEntity implements Serializable {
 
 	public void setLocalidad(LocalidadEntity localidad) {
 		this.localidad = localidad;
-	}  
-	
+	}
+
 }

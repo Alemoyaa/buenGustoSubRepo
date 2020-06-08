@@ -19,7 +19,7 @@ public class HorarioLaboralEntity implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
-	private int id;
+	private long id;
 
 	@NotEmpty
 	private String nombre_horario_laboral;
@@ -30,11 +30,11 @@ public class HorarioLaboralEntity implements Serializable {
 	@NotEmpty
 	private int horario_fin;
 
-	public int getId() {
+	public long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 

@@ -9,8 +9,8 @@ import javax.persistence.Table;
 import com.utn.app.buenGusto.persona.PersonaEntity;
 
 @Entity
-@Table(name  = "persona_repartidor")
-@PrimaryKeyJoinColumn(name="persona_repartidor_Id")
+@Table(name = "persona_repartidor")
+@PrimaryKeyJoinColumn(name = "persona_repartidor_Id")
 public class PersonaRepartidorEntity extends PersonaEntity {
 
 	private static final long serialVersionUID = 6942200577808159135L;

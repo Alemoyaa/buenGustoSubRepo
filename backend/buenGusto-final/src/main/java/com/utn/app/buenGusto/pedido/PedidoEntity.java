@@ -10,7 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne; 
+import javax.persistence.ManyToOne;
 import javax.persistence.PrePersist;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -27,9 +27,9 @@ public class PedidoEntity implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
-	private int id;
+	private long id;
 	private Date fecha;
-	private int numero; 
+	private int numero;
 
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date horaEstimadaFin;
@@ -38,10 +38,10 @@ public class PedidoEntity implements Serializable {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "estado_id")
 	private EstadoPedidoEntity estado;
-	 
+
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "cliente_id")
-	private UsuarioEntity cliente; 
+	private UsuarioEntity cliente;
 
 	@PrePersist
 	public void prePersist() {
@@ -62,7 +62,7 @@ public class PedidoEntity implements Serializable {
 
 	public void setNumero(int numero) {
 		this.numero = numero;
-	} 
+	}
 
 	public Date getHoraEstimadaFin() {
 		return horaEstimadaFin;
@@ -96,11 +96,11 @@ public class PedidoEntity implements Serializable {
 		this.estado = estado;
 	}
 
-	public int getId() {
+	public long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 

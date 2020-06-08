@@ -10,11 +10,11 @@ import com.utn.app.buenGusto.persona.PersonaEntity;
 
 @Entity
 @Table(name = "persona_cliente")
-@PrimaryKeyJoinColumn(name="persona_cliente_Id")
-public class PersonaClienteEntity extends PersonaEntity{
-	
+@PrimaryKeyJoinColumn(name = "persona_cliente_Id")
+public class PersonaClienteEntity extends PersonaEntity {
+
 	private static final long serialVersionUID = 912496469740328108L;
-	
+
 	private Date fechaAlta;
 
 	public Date getFechaAlta() {

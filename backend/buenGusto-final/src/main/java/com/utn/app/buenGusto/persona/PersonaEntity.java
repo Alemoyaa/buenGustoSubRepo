@@ -29,7 +29,7 @@ import com.utn.app.buenGusto.usuario.UsuarioEntity;
 @Table(name = "persona")
 @Inheritance(strategy = InheritanceType.JOINED)
 public abstract class PersonaEntity implements Serializable {
- 
+
 	private static final long serialVersionUID = -1034118546506335502L;
 
 	@Id
@@ -47,8 +47,8 @@ public abstract class PersonaEntity implements Serializable {
 	@JoinColumn(name = "usuario_id")
 	private UsuarioEntity usuario;
 
-	@OneToOne(fetch = FetchType.LAZY) 
-	private DomicilioEntity lista_domicilio; 
+	@OneToOne(fetch = FetchType.LAZY)
+	private DomicilioEntity lista_domicilio;
 
 	public long getId() {
 		return id;
@@ -113,7 +113,5 @@ public abstract class PersonaEntity implements Serializable {
 	public void setLista_domicilio(DomicilioEntity lista_domicilio) {
 		this.lista_domicilio = lista_domicilio;
 	}
-  
-	
 
 }

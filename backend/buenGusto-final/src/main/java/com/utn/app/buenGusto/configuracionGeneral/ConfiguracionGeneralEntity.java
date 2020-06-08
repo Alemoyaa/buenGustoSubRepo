@@ -18,13 +18,15 @@ import com.utn.app.buenGusto.horarioLaboral.HorarioLaboralEntity;
 
 @Entity
 @Table(name = "configuracion_general")
-public class ConfiguracionGeneralEntity implements Serializable {
+public class ConfiguracionGeneralEntity implements Serializable { 
+	 
+	private static final long serialVersionUID = -3884289039891364857L;
 
-	private static final long serialVersionUID = -8356649232468048872L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
-	private int id;
+	private long id;
+	
 	@NotEmpty
 	private int cantidadCocineros; 
 
@@ -48,11 +50,11 @@ public class ConfiguracionGeneralEntity implements Serializable {
 		this.horarios = horarios;
 	}
 
-	public int getId() {
+	public long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 

@@ -28,7 +28,7 @@ public class UsuarioEntity implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
-	private int id;
+	private long id;
 	private String email;
 	private String uid_firebase;
 
@@ -36,10 +36,13 @@ public class UsuarioEntity implements Serializable {
 	@JoinColumn(name = "rol_id")
 	private RolEntity rol;
 
-	/*@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true) 
-	@JoinColumn(name = "lista_historicoRol")
-	private List<HistoricoRolEntity> lista_historicoRol = new ArrayList<HistoricoRolEntity>();
-*/
+	/*
+	 * @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+	 * 
+	 * @JoinColumn(name = "lista_historicoRol") private List<HistoricoRolEntity>
+	 * lista_historicoRol = new ArrayList<HistoricoRolEntity>();
+	 */
+	
 	public String getEmail() {
 		return email;
 	}
@@ -56,11 +59,11 @@ public class UsuarioEntity implements Serializable {
 		this.rol = rol;
 	}
 
-	public int getId() {
+	public long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 
@@ -72,12 +75,12 @@ public class UsuarioEntity implements Serializable {
 		this.uid_firebase = uid_firebase;
 	}
 
-	/*public List<HistoricoRolEntity> getLista_historicoRol() {
-		return lista_historicoRol;
-	}
-
-	public void setLista_historicoRol(List<HistoricoRolEntity> lista_historicoRol) {
-		this.lista_historicoRol = lista_historicoRol;
-	}*/
+	/*
+	 * public List<HistoricoRolEntity> getLista_historicoRol() { return
+	 * lista_historicoRol; }
+	 * 
+	 * public void setLista_historicoRol(List<HistoricoRolEntity>
+	 * lista_historicoRol) { this.lista_historicoRol = lista_historicoRol; }
+	 */
 
 }
