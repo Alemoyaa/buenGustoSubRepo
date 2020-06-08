@@ -1,12 +1,7 @@
-<div *ngIf="!mostrar">
-    <app-navbar (irDashboard)="mostrarDashboard($event)"></app-navbar>
+<div>
+    <app-navbar></app-navbar>
     <router-outlet></router-outlet>
 </div>
-
-<div *ngIf="mostrar">
-    <app-dashboard (irDashboard)="mostrarDashboard($event)"></app-dashboard>
-</div>
-
 
 <!-- Footer -->
 <app-footer></app-footer>
