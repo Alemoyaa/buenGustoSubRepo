@@ -14,7 +14,6 @@ public class PersonaCocineroEntity extends PersonaEntity {
 	private static final long serialVersionUID = 6521545865566567666L;
 
 	private int cuit;
-
 	private double salarioMensual;
 
 	public int getCuit() {

@@ -10,20 +10,15 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.utn.app.buenGusto.articuloInsumo.ArticuloInsumoEntity;
-import com.utn.app.buenGusto.articuloManufacturado.ArticuloManufacturadoEntity;
 import com.utn.app.buenGusto.unidadMedida.UnidadMedidaEntity;
 
 @Entity
 @Table(name = "detalle_manufacturado")
 public class DetalleManufacturadoEntity implements Serializable {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -9170291124448277621L;
 
 	@Id
@@ -33,17 +28,13 @@ public class DetalleManufacturadoEntity implements Serializable {
 
 	private int cantidad;
 
-	@OneToOne(/* cascade = CascadeType.ALL */)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "unidad_medida_id")
 	private UnidadMedidaEntity unidadMedidaID;
 
-	@OneToOne(/* cascade = CascadeType.ALL */)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "articulo_insumo_id")
 	private ArticuloInsumoEntity articuloInsumoID;
-
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "articulo_manufacturado_id")
-	private ArticuloManufacturadoEntity articuloManufacturadoID;
 
 	public long getId() {
 		return id;
@@ -75,14 +66,6 @@ public class DetalleManufacturadoEntity implements Serializable {
 
 	public void setArticuloInsumoID(ArticuloInsumoEntity articuloInsumoID) {
 		this.articuloInsumoID = articuloInsumoID;
-	}
-
-	public ArticuloManufacturadoEntity getArticuloManufacturadoID() {
-		return articuloManufacturadoID;
-	}
-
-	public void setArticuloManufacturadoID(ArticuloManufacturadoEntity articuloManufacturadoID) {
-		this.articuloManufacturadoID = articuloManufacturadoID;
 	}
 
 }

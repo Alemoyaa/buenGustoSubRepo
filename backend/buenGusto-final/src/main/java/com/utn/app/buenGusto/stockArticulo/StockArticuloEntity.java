@@ -1,21 +1,20 @@
 package com.utn.app.buenGusto.stockArticulo;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
-
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.utn.app.buenGusto.articuloInsumo.ArticuloInsumoEntity;
 import com.utn.app.buenGusto.loteStock.LoteStockEntity;
 import com.utn.app.buenGusto.unidadMedida.UnidadMedidaEntity;
 
@@ -33,10 +32,11 @@ public class StockArticuloEntity implements Serializable {
 	private float stockMinimo;
 	private float stockMaximo;
 
-	@OneToMany(mappedBy = "stockArticulo", cascade = CascadeType.ALL)
-	private List<LoteStockEntity> lista_Lote_Stock;
-
-	@OneToOne(/* cascade = CascadeType.ALL */)
+	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+	@JoinColumn(name = "stock_articulo_id")
+	private List<LoteStockEntity> lista_Lote_Stock  = new ArrayList<LoteStockEntity>();
+	
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "unidad_medida_id")
 	private UnidadMedidaEntity unidadMedidaID;
 
@@ -95,5 +95,5 @@ public class StockArticuloEntity implements Serializable {
 	public void setUnidadMedidaID(UnidadMedidaEntity unidadMedidaID) {
 		this.unidadMedidaID = unidadMedidaID;
 	}
-
+	
 }

@@ -2,6 +2,7 @@ package com.utn.app.buenGusto.detallePedido;
 
 import java.io.Serializable;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -12,10 +13,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import com.utn.app.buenGusto.articuloInsumo.ArticuloInsumoEntity;
-import com.utn.app.buenGusto.articuloManufacturado.ArticuloManufacturadoEntity;
-import com.utn.app.buenGusto.cabezaPedido.CabezaPedidoEntity;
-import com.utn.app.buenGusto.pedido.PedidoEntity;
+import com.utn.app.buenGusto.articulo.ArticuloEntity;
 
 @Entity
 @Table(name = "detalle_pedido")
@@ -30,10 +28,10 @@ public class DetallePedidoEntity implements Serializable {
 
 	private int cantidad;
 	private double subtotal;
-
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "Cabeza_Pedido_id")
-	private CabezaPedidoEntity cabezaPedido;
+	
+	@ManyToOne(optional=false, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@JoinColumn(name = "articulo_id")
+	private ArticuloEntity Articulo;
 
 	public long getId() {
 		return id;
@@ -59,12 +57,12 @@ public class DetallePedidoEntity implements Serializable {
 		this.subtotal = subtotal;
 	}
 
-	public CabezaPedidoEntity getCabezaPedido() {
-		return cabezaPedido;
+	public ArticuloEntity getArticulo() {
+		return Articulo;
 	}
 
-	public void setCabezaPedido(CabezaPedidoEntity cabezaPedido) {
-		this.cabezaPedido = cabezaPedido;
-	}
+	public void setArticulo(ArticuloEntity articulo) {
+		Articulo = articulo;
+	} 
 
 }

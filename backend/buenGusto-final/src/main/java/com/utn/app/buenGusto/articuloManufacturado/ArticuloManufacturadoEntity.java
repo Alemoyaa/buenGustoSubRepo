@@ -1,10 +1,12 @@
 package com.utn.app.buenGusto.articuloManufacturado;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
@@ -21,9 +23,10 @@ public class ArticuloManufacturadoEntity extends ArticuloEntity implements Seria
 
 	private int tiempo_estimado_manuf;
 	private double costo_de_manuf;
-	 
-	@OneToMany(mappedBy = "articuloManufacturadoID"/* , cascade = CascadeType.ALL */)
-	private List<DetalleManufacturadoEntity> lista_detalleManufacturado;
+
+	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+	@JoinColumn(name = "articuloManufacturado_id")
+	private List<DetalleManufacturadoEntity> lista_detalleManufacturado = new ArrayList<DetalleManufacturadoEntity>();
 
 	public int getTiempo_estimado_manuf() {
 		return tiempo_estimado_manuf;

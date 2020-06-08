@@ -15,7 +15,6 @@ public class TarjetaEntity extends FormaPagoEntity implements Serializable {
 	private static final long serialVersionUID = 823453454320078362L;
 
 	private String nombre_titular_tarjeta;
-
 	private int nro_tarjeta;
 
 	public String getNombre_titular_tarjeta() {

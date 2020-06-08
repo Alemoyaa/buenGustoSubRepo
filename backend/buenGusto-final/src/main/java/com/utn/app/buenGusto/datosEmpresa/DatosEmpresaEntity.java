@@ -15,8 +15,8 @@ import com.utn.app.buenGusto.domicilio.DomicilioEntity;
 
 @Entity
 @Table(name = "datos_empresa")
-public class DatosEmpresaEntity implements Serializable{ 
-	
+public class DatosEmpresaEntity implements Serializable {
+
 	/**
 	 * 
 	 */
@@ -26,15 +26,15 @@ public class DatosEmpresaEntity implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
 	private long id;
-	
+
 	private String email;
 	private String propiedad;
 	private String razonSocial;
 	private int telefono;
-	
-	@OneToOne()
-	@JoinColumn(name  = "domicilio_id")
-	private DomicilioEntity domicilio;
+
+	@OneToOne(optional = false)
+	@JoinColumn(name = "domicilio_id", nullable = false)
+	private DomicilioEntity domicilio = new DomicilioEntity();
 
 	public long getId() {
 		return id;
@@ -83,7 +83,5 @@ public class DatosEmpresaEntity implements Serializable{
 	public void setDomicilio(DomicilioEntity domicilio) {
 		this.domicilio = domicilio;
 	}
-	
-	
-	
+
 }

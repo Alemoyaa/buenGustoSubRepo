@@ -5,14 +5,12 @@ import java.io.Serializable;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-
 import com.utn.app.buenGusto.localidad.LocalidadEntity;
 
 @Entity
@@ -36,6 +34,14 @@ public class DomicilioEntity implements Serializable {
 	@JoinColumn(name = "localidad_id")
 	private LocalidadEntity localidad;
 
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
+	}
+
 	public String getCalle() {
 		return calle;
 	}
@@ -50,14 +56,6 @@ public class DomicilioEntity implements Serializable {
 
 	public void setNumero(int numero) {
 		this.numero = numero;
-	}
-
-	public long getId() {
-		return id;
-	}
-
-	public void setId(long id) {
-		this.id = id;
 	}
 
 	public String getDepartamento() {

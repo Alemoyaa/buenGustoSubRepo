@@ -16,13 +16,9 @@ public class PersonaRepartidorEntity extends PersonaEntity {
 	private static final long serialVersionUID = 6942200577808159135L;
 
 	private String patenteVehiculo;
-
 	private String tipoVehiculo;
-
 	private String categoriaCarnet;
-
 	private Date fecha_emision_carnet;
-
 	private Date fecha_vencimiento_carnet;
 
 	public String getPatenteVehiculo() {

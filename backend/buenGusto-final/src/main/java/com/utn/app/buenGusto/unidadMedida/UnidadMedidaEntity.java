@@ -13,9 +13,7 @@ import javax.persistence.Table;
 @Table(name = "unidad_medida")
 public class UnidadMedidaEntity implements Serializable {
 
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = 2788154458972869742L;
 
 	@Id

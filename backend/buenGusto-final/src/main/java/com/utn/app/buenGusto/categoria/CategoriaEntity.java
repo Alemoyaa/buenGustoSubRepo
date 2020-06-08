@@ -1,9 +1,7 @@
 package com.utn.app.buenGusto.categoria;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -19,30 +17,26 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name = "categoria")
-public class CategoriaEntity implements Serializable{
- 
+public class CategoriaEntity implements Serializable {
+
 	private static final long serialVersionUID = 8910812748496309673L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
 	private long id;
-	
+
 	private boolean insumoOManuf;
 	private String nombreCategoria;
 
-	@JsonIgnoreProperties(value = {"hijos"})
+	@JsonIgnoreProperties(value = { "Categoriahijos" })
 	@ManyToOne(fetch = FetchType.LAZY)
-	private CategoriaEntity padre;
+	private CategoriaEntity Categoriapadre;
 
-	@JsonIgnoreProperties(value = {"padre"}, allowSetters = true)
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "padre", cascade = CascadeType.ALL) 
-	private List<CategoriaEntity> hijos;
+	@JsonIgnoreProperties(value = { "Categoriapadre" }, allowSetters = true)
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "Categoriapadre", cascade = CascadeType.ALL)
+	private List<CategoriaEntity> Categoriahijos;
 
-	public CategoriaEntity() {
-		this.hijos = new ArrayList<>();
-	}
-	
 	public long getId() {
 		return id;
 	}
@@ -67,20 +61,20 @@ public class CategoriaEntity implements Serializable{
 		this.nombreCategoria = nombreCategoria;
 	}
 
-	public CategoriaEntity getPadre() {
-		return padre;
+	public CategoriaEntity getCategoriapadre() {
+		return Categoriapadre;
 	}
 
-	public void setPadre(CategoriaEntity padre) {
-		this.padre = padre;
+	public void setCategoriapadre(CategoriaEntity categoriapadre) {
+		Categoriapadre = categoriapadre;
 	}
 
-	public List<CategoriaEntity> getHijos() {
-		return hijos;
+	public List<CategoriaEntity> getCategoriahijos() {
+		return Categoriahijos;
 	}
 
-	public void setHijos(List<CategoriaEntity> hijos) {
-		this.hijos = hijos;
+	public void setCategoriahijos(List<CategoriaEntity> categoriahijos) {
+		Categoriahijos = categoriahijos;
 	}
-	
+
 }

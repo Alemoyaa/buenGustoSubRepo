@@ -2,6 +2,7 @@ package com.utn.app.buenGusto.cabezaFactura;
 
 import java.io.Serializable;
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -11,10 +12,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
-
 import com.utn.app.buenGusto.datosEmpresa.DatosEmpresaEntity;
 import com.utn.app.buenGusto.detalleFactura.DetalleFacturaEntity;
 import com.utn.app.buenGusto.formaPago.FormaPagoEntity;
@@ -38,14 +38,15 @@ public class CabezaFacturaEntity implements Serializable {
 	private Date fecha;
 	private int nroFactura;
 
-	@OneToMany(mappedBy = "cabezaFactura", cascade = CascadeType.ALL)
-	private List<DetalleFacturaEntity> detalleFactura;
+	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+	@JoinColumn(name = "cabeza_factura_id")
+	private List<DetalleFacturaEntity> detalleFactura = new ArrayList<DetalleFacturaEntity>();
 
-	@OneToOne()
+	@ManyToOne(optional = false)
 	@JoinColumn(name = "forma_pago_id")
 	private FormaPagoEntity formaPago;
 
-	@OneToOne()
+	@ManyToOne(optional = false)
 	@JoinColumn(name = "datos_empresa_id")
 	private DatosEmpresaEntity datosEmpresaID;
 

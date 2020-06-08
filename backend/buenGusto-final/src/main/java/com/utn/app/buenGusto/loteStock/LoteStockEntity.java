@@ -2,7 +2,6 @@ package com.utn.app.buenGusto.loteStock;
 
 import java.io.Serializable;
 import java.util.Date;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -11,9 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import com.utn.app.buenGusto.stockArticulo.StockArticuloEntity;
 import com.utn.app.buenGusto.unidadMedida.UnidadMedidaEntity;
 
 @Entity
@@ -32,11 +29,7 @@ public class LoteStockEntity implements Serializable {
 	private Date fechaCompra;
 	private Date fechaVencimiento;
 
-	@ManyToOne(/* cascade = CascadeType.ALL */ fetch = FetchType.LAZY)
-	@JoinColumn(name = "stock_articulo_id")
-	private StockArticuloEntity stockArticulo;
-
-	@OneToOne(/* cascade = CascadeType.ALL */)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "unidad_medida_id")
 	private UnidadMedidaEntity unidadMedidaID;
 
@@ -94,14 +87,6 @@ public class LoteStockEntity implements Serializable {
 
 	public void setFechaVencimiento(Date fechaVencimiento) {
 		this.fechaVencimiento = fechaVencimiento;
-	}
-
-	public StockArticuloEntity getStockArticulo() {
-		return stockArticulo;
-	}
-
-	public void setStockArticulo(StockArticuloEntity stockArticulo) {
-		this.stockArticulo = stockArticulo;
 	}
 
 	public UnidadMedidaEntity getUnidadMedidaID() {
