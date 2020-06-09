@@ -32,7 +32,6 @@ import { NgxPaginationModule } from 'ngx-pagination';
 // componentes de empleados/admin
 import { PedidosCajeroComponent } from './components/admin/dashboard/Cajero/pedidos-cajero/pedidos-cajero.component';
 import { FacturacionCajeroComponent } from './components/admin/dashboard/Cajero/facturacion-cajero/facturacion-cajero.component';
-import { DashboardComponent } from './components/admin/dashboard/dashboard.component';
 import { NuevoClienteCajeroComponent } from './components/admin/dashboard/Cajero/nuevo-cliente-cajero/nuevo-cliente-cajero.component';
 import { NuevoPedidoCajeroComponent } from './components/admin/dashboard/Cajero/nuevo-pedido-cajero/nuevo-pedido-cajero.component';
 import { GestorOrdenesCocineroComponent } from './components/admin/dashboard/Cocinero/gestor-ordenes-cocinero/gestor-ordenes-cocinero.component';
@@ -63,7 +62,6 @@ import { EstadisticasComponent } from './components/admin/dashboard/Admin/estadi
     UsuariosComponent,
     PedidosCajeroComponent,
     FacturacionCajeroComponent,
-    DashboardComponent,
     NuevoClienteCajeroComponent,
     NuevoPedidoCajeroComponent,
     GestorOrdenesCocineroComponent,
