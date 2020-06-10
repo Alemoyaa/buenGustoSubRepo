@@ -43,28 +43,8 @@ public abstract class CommonService<E, R extends JpaRepository<E, Long>> impleme
 
 			throw new Exception(e.getMessage());
 		}
-	}
-
-	@Override
-	public E update(long id, E entityForm) throws Exception {
-
-		try {
-			Optional<E> entityOptional = repository.findById(id);
-
-			E entity = entityOptional.get();
-
-			entity = repository.save(entityForm);
-
-			return entity;
-
-		} catch (Exception e) {
-
-			throw new Exception(e.getMessage());
-
-		}
-
-	}
-
+	} 
+	
 	@Override
 	public int countPages(int size) throws Exception {
 		try {

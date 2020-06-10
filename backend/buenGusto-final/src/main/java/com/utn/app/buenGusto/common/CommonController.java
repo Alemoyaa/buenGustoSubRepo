@@ -72,13 +72,13 @@ public class CommonController<E, S extends CommonIService<E>> {
 
 	}
 
-	@PutMapping("/{id}")
+	@PutMapping("/")
 	@Transactional
-	public ResponseEntity<?> put(@PathVariable long id, @RequestBody E personaForm) {
+	public ResponseEntity<?> put(@RequestBody E personaForm) {
 
 		try {
 
-			return ResponseEntity.status(HttpStatus.OK).body(service.update(id, personaForm));
+			return ResponseEntity.status(HttpStatus.OK).body(service.save(personaForm));
 
 		} catch (Exception e) {
 
