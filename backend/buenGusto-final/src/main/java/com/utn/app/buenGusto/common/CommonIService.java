@@ -6,9 +6,7 @@ public interface CommonIService<E> {
 	
 	public E findById(long id) throws Exception;
 	
-	public E save(E entityForm) throws Exception;
-	
-	public E update(long id, E entityForm) throws Exception;
+	public E save(E entityForm) throws Exception; 
 	
 	public int countPages(int size) throws Exception;
 	
