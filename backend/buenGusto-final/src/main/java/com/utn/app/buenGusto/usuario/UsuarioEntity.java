@@ -1,63 +1,50 @@
 package com.utn.app.buenGusto.usuario;
 
 import java.io.Serializable;
-import java.sql.Date;
-
+import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
-
-import com.utn.app.buenGusto.common.CommonEntity;
-import com.utn.app.buenGusto.domicilio.DomicilioEntity;
+import com.utn.app.buenGusto.historicoRol.HistoricoRolEntity;
 import com.utn.app.buenGusto.rol.RolEntity;
 
 @Entity
 @Table(name = "usuario")
-public class UsuarioEntity extends CommonEntity implements Serializable {
+public class UsuarioEntity implements Serializable {
 
 	private static final long serialVersionUID = -8356649232468048872L;
-
-	private String nombre;
-	private String apellido;
-	private long telefono;
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id")
+	private long id;
+	
 	private String email;
-	private String foto;
-	private Date fechaBaja;
-	private String uidFirebase;
+	private String uid_firebase;
 
-	@ManyToOne()
-	@JoinColumn(name = "rol_usuario")
+	@ManyToOne(cascade = CascadeType.ALL, optional=false)
+	@JoinColumn(name = "rol_id")
 	private RolEntity rol;
- 
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "domicilio_usuario")
-	private DomicilioEntity domicilio; 
 
-	public String getNombre() {
-		return nombre;
+	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+	@JoinColumn(name = "usuario_id")
+	private List<HistoricoRolEntity> lista_historicoRol = new ArrayList<HistoricoRolEntity>();
+
+	public long getId() {
+		return id;
 	}
 
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
-
-	public String getApellido() {
-		return apellido;
-	}
-
-	public void setApellido(String apellido) {
-		this.apellido = apellido;
-	}
-
-	public long getTelefono() {
-		return telefono;
-	}
-
-	public void setTelefono(long telefono) {
-		this.telefono = telefono;
+	public void setId(long id) {
+		this.id = id;
 	}
 
 	public String getEmail() {
@@ -68,31 +55,15 @@ public class UsuarioEntity extends CommonEntity implements Serializable {
 		this.email = email;
 	}
 
-	public String getUidFirebase() {
-		return uidFirebase;
+	public String getUid_firebase() {
+		return uid_firebase;
 	}
 
-	public void setUidFirebase(String uidFirebase) {
-		this.uidFirebase = uidFirebase;
-	}
- 
-	public String getFoto() {
-		return foto;
+	public void setUid_firebase(String uid_firebase) {
+		this.uid_firebase = uid_firebase;
 	}
 
-	public void setFoto(String foto) {
-		this.foto = foto;
-	}
-
-	public Date getFechaBaja() {
-		return fechaBaja;
-	}
-
-	public void setFechaBaja(Date fechaBaja) {
-		this.fechaBaja = fechaBaja;
-	}
- 
-	public RolEntity getRol() { 
+	public RolEntity getRol() {
 		return rol;
 	}
 
@@ -100,12 +71,12 @@ public class UsuarioEntity extends CommonEntity implements Serializable {
 		this.rol = rol;
 	}
 
-	public DomicilioEntity getDomicilio() {
-		return domicilio;
+	public List<HistoricoRolEntity> getLista_historicoRol() {
+		return lista_historicoRol;
 	}
- 
-	public void setDomicilio(DomicilioEntity domicilio) {
-		this.domicilio = domicilio;
-	} 
+
+	public void setLista_historicoRol(List<HistoricoRolEntity> lista_historicoRol) {
+		this.lista_historicoRol = lista_historicoRol;
+	}
 
 }

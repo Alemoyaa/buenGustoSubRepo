@@ -1,22 +1,10 @@
 package com.utn.app.buenGusto.articuloManufacturado;
 
-
-import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import com.utn.app.buenGusto.common.CommonService;
 
 @Service
-public class ArticuloManufacturadoService extends CommonService<ArticuloManufacturadoEntity, ArticuloManufacturadoDTO> {
-	
-	@Autowired
-	private ArticuloManufacturadoRepository repository;
-
-	public ArticuloManufacturadoService(ArticuloManufacturadoRepository artMRepository, ModelMapper modelMapper) {
-		super(artMRepository, ArticuloManufacturadoDTO.class, ArticuloManufacturadoEntity.class, modelMapper);
-		this.repository = artMRepository;
-	}
+public class ArticuloManufacturadoService extends CommonService<ArticuloManufacturadoEntity, ArticuloManufacturadoRepository> {
 	
 	/*
 	public List<ArticuloManufacturadoDTO> findAllM() throws Exception{

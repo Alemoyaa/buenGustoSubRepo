@@ -1,32 +1,52 @@
 package com.utn.app.buenGusto.formaPago;
 
 import java.io.Serializable;
-import javax.persistence.Entity;
-import javax.persistence.Table;
 
-import com.utn.app.buenGusto.common.CommonEntity;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+import javax.persistence.Table;
 
 @Entity
 @Table(name = "forma_pago")
-public class FormaPagoEntity extends CommonEntity implements Serializable {
+@Inheritance(strategy = InheritanceType.JOINED)
+public abstract class FormaPagoEntity implements Serializable {
 
 	private static final long serialVersionUID = -8356649232468048872L;
 
-	private String nombreForma;
-	private double montoDescuento;
-	
-	
-	public String getNombreForma() {
-		return nombreForma;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id")
+	private long id;
+
+	protected String denominacion;
+	protected double montoDescuento;
+
+	public String getDenominacion() {
+		return denominacion;
 	}
-	public void setNombreForma(String nombreForma) {
-		this.nombreForma = nombreForma;
+
+	public void setDenominacion(String denominacion) {
+		this.denominacion = denominacion;
 	}
+
 	public double getMontoDescuento() {
 		return montoDescuento;
 	}
+
 	public void setMontoDescuento(double montoDescuento) {
 		this.montoDescuento = montoDescuento;
 	}
-	
+
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
+	}
 }

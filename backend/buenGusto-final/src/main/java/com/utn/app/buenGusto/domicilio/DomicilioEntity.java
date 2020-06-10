@@ -2,26 +2,45 @@ package com.utn.app.buenGusto.domicilio;
 
 import java.io.Serializable;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.OneToOne;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-
-import com.utn.app.buenGusto.common.CommonEntity;
-import com.utn.app.buenGusto.usuario.UsuarioEntity;
+import com.utn.app.buenGusto.localidad.LocalidadEntity;
 
 @Entity
 @Table(name = "domicilio")
-public class DomicilioEntity extends CommonEntity implements Serializable {
+public class DomicilioEntity implements Serializable {
 
 	private static final long serialVersionUID = 5685412683798686451L;
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id")
+	private long id;
+
 	private String calle;
 	private int numero;
-	private String ciudad; 
+	private String departamento;
+	private int piso;
+	private String aclaracion;
 
-	@OneToOne(mappedBy = "domicilio", fetch = FetchType.LAZY)
-	private UsuarioEntity cliente; 
+	@ManyToOne(cascade = CascadeType.MERGE)
+	@JoinColumn(name = "localidad_id")
+	private LocalidadEntity localidad;
+
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
+	}
 
 	public String getCalle() {
 		return calle;
@@ -38,21 +57,37 @@ public class DomicilioEntity extends CommonEntity implements Serializable {
 	public void setNumero(int numero) {
 		this.numero = numero;
 	}
- 
-	public UsuarioEntity getCliente() {
-		return cliente;
+
+	public String getDepartamento() {
+		return departamento;
 	}
 
-	public void setCliente(UsuarioEntity cliente) {
-		this.cliente = cliente;
+	public void setDepartamento(String departamento) {
+		this.departamento = departamento;
 	}
 
-	public String getCiudad() {
-		return ciudad;
+	public int getPiso() {
+		return piso;
 	}
 
-	public void setCiudad(String ciudad) {
-		this.ciudad = ciudad;
-	}  
+	public void setPiso(int piso) {
+		this.piso = piso;
+	}
+
+	public String getAclaracion() {
+		return aclaracion;
+	}
+
+	public void setAclaracion(String aclaracion) {
+		this.aclaracion = aclaracion;
+	}
+
+	public LocalidadEntity getLocalidad() {
+		return localidad;
+	}
+
+	public void setLocalidad(LocalidadEntity localidad) {
+		this.localidad = localidad;
+	}
 
 }
