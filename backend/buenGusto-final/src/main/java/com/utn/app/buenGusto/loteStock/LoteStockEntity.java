@@ -18,10 +18,12 @@ import com.utn.app.buenGusto.unidadMedida.UnidadMedidaEntity;
 public class LoteStockEntity implements Serializable {
 
 	private static final long serialVersionUID = 1L;
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
 	private long id;
+	
 	private long numeroLote;
 	private float cantidadActual;
 	private float cantidadComprada;
@@ -29,7 +31,7 @@ public class LoteStockEntity implements Serializable {
 	private Date fechaCompra;
 	private Date fechaVencimiento;
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(/*fetch = FetchType.LAZY*/)
 	@JoinColumn(name = "unidad_medida_id")
 	private UnidadMedidaEntity unidadMedidaID;
 

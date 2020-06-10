@@ -26,7 +26,7 @@ public class HistoricoRolEntity implements Serializable {
 
 	private Date fecha_modificacion;
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(/*fetch = FetchType.LAZY*/)
 	@JoinColumn(name = "rol_id")
 	private RolEntity rol;
 

@@ -29,13 +29,13 @@ public class CategoriaEntity implements Serializable {
 	private boolean insumoOManuf;
 	private String nombreCategoria;
 
-	@JsonIgnoreProperties(value = { "Categoriahijos" })
-	@ManyToOne(fetch = FetchType.LAZY)
-	private CategoriaEntity Categoriapadre;
+	@JsonIgnoreProperties(value = { "hijos" })
+	@ManyToOne(/*fetch = FetchType.LAZY*/)
+	private CategoriaEntity padre;
 
-	@JsonIgnoreProperties(value = { "Categoriapadre" }, allowSetters = true)
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "Categoriapadre", cascade = CascadeType.ALL)
-	private List<CategoriaEntity> Categoriahijos;
+	@JsonIgnoreProperties(value = { "padre" }, allowSetters = true)
+	@OneToMany(/*fetch = FetchType.LAZY, */mappedBy = "padre", cascade = CascadeType.ALL)
+	private List<CategoriaEntity> hijos;
 
 	public long getId() {
 		return id;
@@ -61,20 +61,20 @@ public class CategoriaEntity implements Serializable {
 		this.nombreCategoria = nombreCategoria;
 	}
 
-	public CategoriaEntity getCategoriapadre() {
-		return Categoriapadre;
+	public CategoriaEntity getPadre() {
+		return padre;
 	}
 
-	public void setCategoriapadre(CategoriaEntity categoriapadre) {
-		Categoriapadre = categoriapadre;
+	public void setPadre(CategoriaEntity padre) {
+		this.padre = padre;
 	}
 
-	public List<CategoriaEntity> getCategoriahijos() {
-		return Categoriahijos;
+	public List<CategoriaEntity> getHijos() {
+		return hijos;
 	}
 
-	public void setCategoriahijos(List<CategoriaEntity> categoriahijos) {
-		Categoriahijos = categoriahijos;
+	public void setHijos(List<CategoriaEntity> hijos) {
+		this.hijos = hijos;
 	}
 
 }

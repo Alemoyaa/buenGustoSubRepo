@@ -29,7 +29,7 @@ public class DetallePedidoEntity implements Serializable {
 	private int cantidad;
 	private double subtotal;
 	
-	@ManyToOne(optional=false, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@ManyToOne(optional=false/*, cascade = CascadeType.ALL, fetch = FetchType.LAZY*/)
 	@JoinColumn(name = "articulo_id")
 	private ArticuloEntity Articulo;
 

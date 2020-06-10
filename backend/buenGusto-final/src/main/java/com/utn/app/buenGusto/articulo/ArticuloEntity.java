@@ -34,7 +34,7 @@ public abstract class ArticuloEntity implements Serializable {
 	protected String denominacion;
 	protected String url_imagen;
 
-	@ManyToOne(optional = false, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@ManyToOne(optional = false/*, cascade = CascadeType.ALL, fetch = FetchType.LAZY*/)
 	@JoinColumn(name = "categoria_id")
 	protected CategoriaEntity categoria;
 

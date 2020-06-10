@@ -22,14 +22,16 @@ import com.utn.app.buenGusto.rol.RolEntity;
 public class UsuarioEntity implements Serializable {
 
 	private static final long serialVersionUID = -8356649232468048872L;
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
 	private long id;
+	
 	private String email;
 	private String uid_firebase;
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(/*fetch = FetchType.LAZY*/)
 	@JoinColumn(name = "rol_id")
 	private RolEntity rol;
 

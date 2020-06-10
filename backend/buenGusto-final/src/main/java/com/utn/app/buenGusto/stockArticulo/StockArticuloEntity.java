@@ -6,8 +6,7 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
+import javax.persistence.Entity; 
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -22,11 +21,13 @@ import com.utn.app.buenGusto.unidadMedida.UnidadMedidaEntity;
 @Table(name = "stock_articulo")
 public class StockArticuloEntity implements Serializable {
 
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = -8487725380504246694L;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
 	private long id;
+	
 	private double costoActual;
 	private float stockActual;
 	private float stockMinimo;
@@ -36,7 +37,7 @@ public class StockArticuloEntity implements Serializable {
 	@JoinColumn(name = "stock_articulo_id")
 	private List<LoteStockEntity> lista_Lote_Stock  = new ArrayList<LoteStockEntity>();
 	
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(/*fetch = FetchType.LAZY*/)
 	@JoinColumn(name = "unidad_medida_id")
 	private UnidadMedidaEntity unidadMedidaID;
 
