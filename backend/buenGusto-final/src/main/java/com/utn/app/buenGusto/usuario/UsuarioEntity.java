@@ -29,7 +29,7 @@ public class UsuarioEntity implements Serializable {
 	private String email;
 	private String uid_firebase;
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(cascade = CascadeType.ALL, optional=false)
 	@JoinColumn(name = "rol_id")
 	private RolEntity rol;
 

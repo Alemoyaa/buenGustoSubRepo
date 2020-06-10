@@ -30,11 +30,11 @@ public class CategoriaEntity implements Serializable {
 	private String nombreCategoria;
 
 	@JsonIgnoreProperties(value = { "Categoriahijos" })
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(cascade = CascadeType.ALL)
 	private CategoriaEntity Categoriapadre;
 
 	@JsonIgnoreProperties(value = { "Categoriapadre" }, allowSetters = true)
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "Categoriapadre", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "Categoriapadre", cascade = CascadeType.ALL)
 	private List<CategoriaEntity> Categoriahijos;
 
 	public long getId() {

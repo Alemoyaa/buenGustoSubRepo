@@ -2,6 +2,7 @@ package com.utn.app.buenGusto.detalleManufacturado;
 
 import java.io.Serializable;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -28,11 +29,11 @@ public class DetalleManufacturadoEntity implements Serializable {
 
 	private int cantidad;
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "unidad_medida_id")
 	private UnidadMedidaEntity unidadMedidaID;
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "articulo_insumo_id")
 	private ArticuloInsumoEntity articuloInsumoID;
 

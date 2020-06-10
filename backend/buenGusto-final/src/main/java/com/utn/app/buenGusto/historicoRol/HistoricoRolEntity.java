@@ -2,6 +2,8 @@ package com.utn.app.buenGusto.historicoRol;
 
 import java.io.Serializable;
 import java.sql.Date;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -11,6 +13,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.utn.app.buenGusto.rol.RolEntity;
 
 @Entity
@@ -26,7 +30,7 @@ public class HistoricoRolEntity implements Serializable {
 
 	private Date fecha_modificacion;
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(optional=false, cascade = CascadeType.ALL)
 	@JoinColumn(name = "rol_id")
 	private RolEntity rol;
 
