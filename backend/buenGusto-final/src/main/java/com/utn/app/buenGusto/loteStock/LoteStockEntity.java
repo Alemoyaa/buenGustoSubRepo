@@ -2,6 +2,8 @@ package com.utn.app.buenGusto.loteStock;
 
 import java.io.Serializable;
 import java.util.Date;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -31,7 +33,7 @@ public class LoteStockEntity implements Serializable {
 	private Date fechaCompra;
 	private Date fechaVencimiento;
 
-	@ManyToOne(/*fetch = FetchType.LAZY*/)
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "unidad_medida_id")
 	private UnidadMedidaEntity unidadMedidaID;
 

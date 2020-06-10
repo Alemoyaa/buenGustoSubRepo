@@ -37,7 +37,7 @@ public class StockArticuloEntity implements Serializable {
 	@JoinColumn(name = "stock_articulo_id")
 	private List<LoteStockEntity> lista_Lote_Stock  = new ArrayList<LoteStockEntity>();
 	
-	@ManyToOne(/*fetch = FetchType.LAZY*/)
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "unidad_medida_id")
 	private UnidadMedidaEntity unidadMedidaID;
 

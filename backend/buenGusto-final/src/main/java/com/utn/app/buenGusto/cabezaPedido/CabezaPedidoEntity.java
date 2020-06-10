@@ -50,7 +50,7 @@ public class CabezaPedidoEntity implements Serializable {
 	@JoinColumn(name = "cabeza_pedido_id")
 	private List<DetallePedidoEntity> lista_detallePedido = new ArrayList<DetallePedidoEntity>();
 
-	@ManyToOne(optional = false, cascade = CascadeType.ALL/*, fetch = FetchType.LAZY*/)
+	@ManyToOne(optional = false)
 	@JoinColumn(name = "estado_pedido_id")
 	private EstadoPedidoEntity EstadoPedido;
 

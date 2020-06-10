@@ -37,7 +37,7 @@ public abstract class PersonaEntity implements Serializable {
 	private Date fechaAlta;
 	private Date fechaBaja;
 
-	@OneToOne(optional=true)
+	@OneToOne(cascade = CascadeType.ALL, optional=true)
 	@JoinColumn(name = "usuario_id")
 	private UsuarioEntity usuario;
 

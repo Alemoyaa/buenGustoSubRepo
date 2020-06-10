@@ -3,6 +3,7 @@ package com.utn.app.buenGusto.historicoEstado;
 import java.io.Serializable;
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -26,7 +27,7 @@ public class HistoricoEstadoEntity implements Serializable {
 	private long id;
 	private Date fecha_modificacion;
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "estado_pedido_id")
 	private EstadoPedidoEntity estadoPedido;
 
