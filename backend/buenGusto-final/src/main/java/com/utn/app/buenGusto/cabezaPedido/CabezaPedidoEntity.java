@@ -23,11 +23,11 @@ import com.utn.app.buenGusto.historicoEstado.HistoricoEstadoEntity;
 import com.utn.app.buenGusto.personaCajero.PersonaCajeroEntity;
 import com.utn.app.buenGusto.personaCliente.PersonaClienteEntity;
 import com.utn.app.buenGusto.personaCocinero.PersonaCocineroEntity;
-import com.utn.app.buenGusto.personaRepartidor.PersonaRepartidorEntity;
+import com.utn.app.buenGusto.personaRepartidor.PersonaRepartidorEntity; 
 import com.utn.app.buenGusto.cabezaFactura.CabezaFacturaEntity;
 
 @Entity
-@Table(name = "cabeza_pedido")
+@Table(name = "cabeza_pedido") 
 public class CabezaPedidoEntity implements Serializable {
 
 	private static final long serialVersionUID = 2109963082457857151L;
@@ -58,8 +58,7 @@ public class CabezaPedidoEntity implements Serializable {
 	@ManyToOne(optional = false, cascade = CascadeType.ALL)
 	@JoinColumn(name = "cliente_id")
 	private PersonaClienteEntity ClientePedido;
-
-	// Empleados
+ 
 	@ManyToOne(optional = true, cascade = CascadeType.ALL)
 	@JoinColumn(name = "repartidor_id")
 	private PersonaRepartidorEntity RepartidorPedido;
