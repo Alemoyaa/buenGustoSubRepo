@@ -29,8 +29,8 @@ public class DomicilioEntity implements Serializable {
 
 	private String calle;
 	private int numero;
-	private String departamento;
 	private int piso;
+	private int nroDepartamento;
 	private String aclaracion;
 
 	@ManyToOne(cascade = CascadeType.MERGE)
@@ -61,14 +61,6 @@ public class DomicilioEntity implements Serializable {
 		this.numero = numero;
 	}
 
-	public String getDepartamento() {
-		return departamento;
-	}
-
-	public void setDepartamento(String departamento) {
-		this.departamento = departamento;
-	}
-
 	public int getPiso() {
 		return piso;
 	}
@@ -91,6 +83,14 @@ public class DomicilioEntity implements Serializable {
 
 	public void setLocalidad(LocalidadEntity localidad) {
 		this.localidad = localidad;
+	}
+
+	public int getNroDepartamento() {
+		return nroDepartamento;
+	}
+
+	public void setNroDepartamento(int nroDepartamento) {
+		this.nroDepartamento = nroDepartamento;
 	}
 
 }

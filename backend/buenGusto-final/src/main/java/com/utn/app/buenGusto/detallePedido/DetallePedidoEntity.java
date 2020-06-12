@@ -5,7 +5,6 @@ import java.io.Serializable;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -33,7 +32,7 @@ public class DetallePedidoEntity implements Serializable {
 	
 	@ManyToOne(optional=false, cascade = CascadeType.ALL)
 	@JoinColumn(name = "articulo_id")
-	private ArticuloEntity Articulo;
+	private ArticuloEntity articulo;
 
 	public long getId() {
 		return id;
@@ -60,11 +59,11 @@ public class DetallePedidoEntity implements Serializable {
 	}
 
 	public ArticuloEntity getArticulo() {
-		return Articulo;
+		return articulo;
 	}
 
 	public void setArticulo(ArticuloEntity articulo) {
-		Articulo = articulo;
+		this.articulo = articulo;
 	} 
 
 }

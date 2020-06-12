@@ -22,8 +22,7 @@ public class EstadoPedidoEntity implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
 	private long id;
-
-	private String NombreEstado;
+	private String nombreEstado;
 
 	public long getId() {
 		return id;
@@ -34,11 +33,11 @@ public class EstadoPedidoEntity implements Serializable {
 	}
 
 	public String getNombreEstado() {
-		return NombreEstado;
+		return nombreEstado;
 	}
 
 	public void setNombreEstado(String nombreEstado) {
-		NombreEstado = nombreEstado;
+		this.nombreEstado = nombreEstado;
 	}
 
 }
