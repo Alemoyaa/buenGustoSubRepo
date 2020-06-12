@@ -10,13 +10,13 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
-
+ 
 import com.utn.app.buenGusto.articulo.ArticuloEntity;
 import com.utn.app.buenGusto.detalleManufacturado.DetalleManufacturadoEntity;
 
 @Entity
 @Table(name = "articulo_manufacturado")
-@PrimaryKeyJoinColumn(name = "articulo_manufacturado_Id")
+@PrimaryKeyJoinColumn(name = "articulo_manufacturado_Id") 
 public class ArticuloManufacturadoEntity extends ArticuloEntity implements Serializable {
 
 	private static final long serialVersionUID = -8356649232468048872L;
@@ -25,7 +25,7 @@ public class ArticuloManufacturadoEntity extends ArticuloEntity implements Seria
 	private double costo_de_manuf;
 
 	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-	@JoinColumn(name = "articuloManufacturado_id")
+	@JoinColumn(name = "articuloManufacturado_id") 
 	private List<DetalleManufacturadoEntity> lista_detalleManufacturado = new ArrayList<DetalleManufacturadoEntity>();
 
 	public int getTiempo_estimado_manuf() {

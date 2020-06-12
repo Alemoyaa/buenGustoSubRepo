@@ -1,78 +1,42 @@
 package com.utn.app.buenGusto.cabezaPedido;
 
-import java.io.Serializable;
 import java.sql.Date;
 import java.util.ArrayList;
-import java.util.List;
+import java.util.List; 
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity; 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import com.utn.app.buenGusto.cabezaFactura.CabezaFacturaEntity;
 import com.utn.app.buenGusto.detallePedido.DetallePedidoEntity;
 import com.utn.app.buenGusto.estadoPedido.EstadoPedidoEntity;
 import com.utn.app.buenGusto.historicoEstado.HistoricoEstadoEntity;
 import com.utn.app.buenGusto.personaCajero.PersonaCajeroEntity;
 import com.utn.app.buenGusto.personaCliente.PersonaClienteEntity;
 import com.utn.app.buenGusto.personaCocinero.PersonaCocineroEntity;
-import com.utn.app.buenGusto.personaRepartidor.PersonaRepartidorEntity; 
-import com.utn.app.buenGusto.cabezaFactura.CabezaFacturaEntity;
+import com.utn.app.buenGusto.personaRepartidor.PersonaRepartidorEntity;
 
-@Entity
-@Table(name = "cabeza_pedido")  
-public class CabezaPedidoEntity implements Serializable {
-
-	private static final long serialVersionUID = 2109963082457857151L;
-
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id")
+public class CabezaPedidoEntityDTO {
+	 
 	private long id;
-
+	
 	private Date fechaRealizacion;
 	private Date hora_estimada_fin;
 	private boolean tipo_Envio;
 	private int numero;
 
-	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-	@JoinColumn(name = "historico_estado_id")
 	private List<HistoricoEstadoEntity> lista_historicoEstado = new ArrayList<HistoricoEstadoEntity>();
 
-	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-	@JoinColumn(name = "cabeza_pedido_id")
-	private List<DetallePedidoEntity> lista_detallePedido = new ArrayList<DetallePedidoEntity>();
+	//private List<DetallePedidoEntity> lista_detallePedido = new ArrayList<DetallePedidoEntity>();
 
-	@ManyToOne(optional = false)
-	@JoinColumn(name = "estado_pedido_id")
 	private EstadoPedidoEntity EstadoPedido;
 
 	// Cliente
-	@ManyToOne(optional = false, cascade = CascadeType.ALL)
-	@JoinColumn(name = "cliente_id")
 	private PersonaClienteEntity ClientePedido;
  
-	@ManyToOne(optional = true, cascade = CascadeType.ALL)
-	@JoinColumn(name = "repartidor_id")
 	private PersonaRepartidorEntity RepartidorPedido;
 
-	@ManyToOne(optional = true, cascade = CascadeType.ALL)
-	@JoinColumn(name = "cocinero_id")
 	private PersonaCocineroEntity CocineroPedido;
 
-	@ManyToOne(optional = false, cascade = CascadeType.ALL)
-	@JoinColumn(name = "cajero_id")
 	private PersonaCajeroEntity CajeroPedido;
 
-	// Factura
-	@OneToOne(optional = true, cascade = CascadeType.ALL)
-	@JoinColumn(name = "cabeza_factura_id")
 	private CabezaFacturaEntity CabezaFacturaEntity;
 
 	public long getId() {
@@ -123,13 +87,13 @@ public class CabezaPedidoEntity implements Serializable {
 		this.lista_historicoEstado = lista_historicoEstado;
 	}
 
-	public List<DetallePedidoEntity> getLista_detallePedido() {
+	/*public List<DetallePedidoEntity> getLista_detallePedido() {
 		return lista_detallePedido;
 	}
 
 	public void setLista_detallePedido(List<DetallePedidoEntity> lista_detallePedido) {
 		this.lista_detallePedido = lista_detallePedido;
-	}
+	}*/
 
 	public EstadoPedidoEntity getEstadoPedido() {
 		return EstadoPedido;
@@ -178,7 +142,5 @@ public class CabezaPedidoEntity implements Serializable {
 	public void setCabezaFacturaEntity(CabezaFacturaEntity cabezaFacturaEntity) {
 		CabezaFacturaEntity = cabezaFacturaEntity;
 	}
-  
+	
 }
-
-
