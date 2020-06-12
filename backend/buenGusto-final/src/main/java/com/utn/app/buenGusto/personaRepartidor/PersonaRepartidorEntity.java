@@ -6,11 +6,13 @@ import javax.persistence.Entity;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.utn.app.buenGusto.persona.PersonaEntity;
 
 @Entity
 @Table(name = "persona_repartidor")
 @PrimaryKeyJoinColumn(name = "persona_repartidor_Id")
+@JsonInclude(JsonInclude.Include.NON_EMPTY)
 public class PersonaRepartidorEntity extends PersonaEntity {
 
 	private static final long serialVersionUID = 6942200577808159135L;

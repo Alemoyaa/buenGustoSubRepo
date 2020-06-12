@@ -11,9 +11,12 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+
 @Entity
 @Table(name = "forma_pago")
 @Inheritance(strategy = InheritanceType.JOINED)
+@JsonInclude(JsonInclude.Include.NON_EMPTY)
 public abstract class FormaPagoEntity implements Serializable {
 
 	private static final long serialVersionUID = -8356649232468048872L;

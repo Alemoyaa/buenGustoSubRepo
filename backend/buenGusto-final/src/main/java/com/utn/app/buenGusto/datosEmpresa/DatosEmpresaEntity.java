@@ -11,10 +11,12 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.utn.app.buenGusto.domicilio.DomicilioEntity;
 
 @Entity
 @Table(name = "datos_empresa")
+@JsonInclude(JsonInclude.Include.NON_EMPTY)
 public class DatosEmpresaEntity implements Serializable {
 
 	/**

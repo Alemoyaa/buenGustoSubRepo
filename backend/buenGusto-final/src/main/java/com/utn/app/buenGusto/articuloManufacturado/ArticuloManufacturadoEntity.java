@@ -10,13 +10,15 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
- 
+
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.utn.app.buenGusto.articulo.ArticuloEntity;
 import com.utn.app.buenGusto.detalleManufacturado.DetalleManufacturadoEntity;
 
 @Entity
 @Table(name = "articulo_manufacturado")
 @PrimaryKeyJoinColumn(name = "articulo_manufacturado_Id") 
+@JsonInclude(JsonInclude.Include.NON_EMPTY)
 public class ArticuloManufacturadoEntity extends ArticuloEntity implements Serializable {
 
 	private static final long serialVersionUID = -8356649232468048872L;

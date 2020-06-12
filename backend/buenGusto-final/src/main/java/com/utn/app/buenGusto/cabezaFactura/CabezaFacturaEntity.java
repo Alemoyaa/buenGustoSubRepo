@@ -15,12 +15,15 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.utn.app.buenGusto.datosEmpresa.DatosEmpresaEntity;
 import com.utn.app.buenGusto.detalleFactura.DetalleFacturaEntity;
 import com.utn.app.buenGusto.formaPago.FormaPagoEntity;
 
 @Entity
 @Table(name = "cabeza_factura")
+@JsonInclude(JsonInclude.Include.NON_EMPTY)
 public class CabezaFacturaEntity implements Serializable {
 
 	/**

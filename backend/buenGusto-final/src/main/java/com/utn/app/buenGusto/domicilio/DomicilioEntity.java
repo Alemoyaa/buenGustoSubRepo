@@ -11,10 +11,13 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.utn.app.buenGusto.localidad.LocalidadEntity;
 
 @Entity
 @Table(name = "domicilio")
+@JsonInclude(JsonInclude.Include.NON_EMPTY)
 public class DomicilioEntity implements Serializable {
 
 	private static final long serialVersionUID = 5685412683798686451L;

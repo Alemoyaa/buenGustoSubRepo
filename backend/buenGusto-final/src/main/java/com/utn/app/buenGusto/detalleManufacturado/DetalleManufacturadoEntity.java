@@ -13,11 +13,13 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.utn.app.buenGusto.articuloInsumo.ArticuloInsumoEntity;
 import com.utn.app.buenGusto.unidadMedida.UnidadMedidaEntity;
 
 @Entity
 @Table(name = "detalle_manufacturado")
+@JsonInclude(JsonInclude.Include.NON_EMPTY)
 public class DetalleManufacturadoEntity implements Serializable {
 
 	private static final long serialVersionUID = -9170291124448277621L;

@@ -10,8 +10,11 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+
 @Entity
 @Table(name = "horario_laboral")
+@JsonInclude(JsonInclude.Include.NON_EMPTY)
 public class HorarioLaboralEntity implements Serializable {
 
 	private static final long serialVersionUID = -8356649232468048862L;

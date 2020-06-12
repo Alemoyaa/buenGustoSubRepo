@@ -15,11 +15,13 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.utn.app.buenGusto.categoria.CategoriaEntity;
 
 @Entity
 @Table(name = "articulo")
 @Inheritance(strategy = InheritanceType.JOINED)
+@JsonInclude(JsonInclude.Include.NON_EMPTY)
 public abstract class ArticuloEntity implements Serializable {
 
 	private static final long serialVersionUID = 4801679657904614999L;

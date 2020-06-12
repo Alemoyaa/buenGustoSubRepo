@@ -12,10 +12,12 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.utn.app.buenGusto.pais.PaisEntity;
 
 @Entity
 @Table(name = "provincia")
+@JsonInclude(JsonInclude.Include.NON_EMPTY)
 public class ProvinciaEntity implements Serializable {
 
 	private static final long serialVersionUID = -8959812908842109039L;

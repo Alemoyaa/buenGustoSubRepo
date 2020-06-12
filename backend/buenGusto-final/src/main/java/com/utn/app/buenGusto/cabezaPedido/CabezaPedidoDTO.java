@@ -2,8 +2,9 @@ package com.utn.app.buenGusto.cabezaPedido;
 
 import java.sql.Date;
 import java.util.ArrayList;
-import java.util.List; 
+import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.utn.app.buenGusto.cabezaFactura.CabezaFacturaEntity;
 import com.utn.app.buenGusto.detallePedido.DetallePedidoEntity;
 import com.utn.app.buenGusto.estadoPedido.EstadoPedidoEntity;
@@ -13,7 +14,8 @@ import com.utn.app.buenGusto.personaCliente.PersonaClienteEntity;
 import com.utn.app.buenGusto.personaCocinero.PersonaCocineroEntity;
 import com.utn.app.buenGusto.personaRepartidor.PersonaRepartidorEntity;
 
-public class CabezaPedidoEntityDTO {
+@JsonInclude(JsonInclude.Include.NON_EMPTY)
+public class CabezaPedidoDTO {
 	 
 	private long id;
 	

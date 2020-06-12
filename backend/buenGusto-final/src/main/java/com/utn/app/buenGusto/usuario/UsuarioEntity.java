@@ -14,11 +14,14 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.utn.app.buenGusto.historicoRol.HistoricoRolEntity;
 import com.utn.app.buenGusto.rol.RolEntity;
 
 @Entity
 @Table(name = "usuario")
+@JsonInclude(JsonInclude.Include.NON_EMPTY)
 public class UsuarioEntity implements Serializable {
 
 	private static final long serialVersionUID = -8356649232468048872L;

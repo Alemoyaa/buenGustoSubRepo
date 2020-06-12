@@ -14,10 +14,13 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
+
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.utn.app.buenGusto.horarioLaboral.HorarioLaboralEntity;
 
 @Entity
 @Table(name = "configuracion_general")
+@JsonInclude(JsonInclude.Include.NON_EMPTY)
 public class ConfiguracionGeneralEntity implements Serializable {
 
 	private static final long serialVersionUID = -3884289039891364857L;

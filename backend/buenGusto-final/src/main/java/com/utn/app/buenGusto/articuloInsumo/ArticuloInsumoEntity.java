@@ -8,12 +8,14 @@ import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.utn.app.buenGusto.articulo.ArticuloEntity;
 import com.utn.app.buenGusto.stockArticulo.StockArticuloEntity;
 
 @Entity
 @Table(name = "articulo_insumo")
 @PrimaryKeyJoinColumn(name = "articulo_insumo_Id")
+@JsonInclude(JsonInclude.Include.NON_EMPTY)
 public class ArticuloInsumoEntity extends ArticuloEntity implements Serializable {
 
 	private static final long serialVersionUID = -8356649232468048872L;

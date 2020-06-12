@@ -9,13 +9,13 @@ import com.utn.app.buenGusto.common.CommonService;
 @Service
 public class CabezaPedidoService extends CommonService<CabezaPedidoEntity, CabezaPedidoRepository>{
 	
-	public CabezaPedidoEntityDTO findByIdCortado(long id) throws Exception {
+	public CabezaPedidoDTO findByIdCortado(long id) throws Exception {
 		
 		try {
 
 			Optional<CabezaPedidoEntity> varOptional = repository.findById(id);
 			   
-			CabezaPedidoEntityDTO entity = new CabezaPedidoEntityDTO(); 
+			CabezaPedidoDTO entity = new CabezaPedidoDTO(); 
 			
 			entity.setId(varOptional.get().getId());
 			entity.setFechaRealizacion(varOptional.get().getFechaRealizacion());

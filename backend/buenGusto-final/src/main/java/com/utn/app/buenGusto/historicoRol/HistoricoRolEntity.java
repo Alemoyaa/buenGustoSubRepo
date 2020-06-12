@@ -15,10 +15,12 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.utn.app.buenGusto.rol.RolEntity;
 
 @Entity
 @Table(name = "historico_rol")
+@JsonInclude(JsonInclude.Include.NON_EMPTY)
 public class HistoricoRolEntity implements Serializable {
 
 	private static final long serialVersionUID = -9159897364231105108L;

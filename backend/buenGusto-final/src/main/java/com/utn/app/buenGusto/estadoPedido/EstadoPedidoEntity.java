@@ -9,8 +9,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+
 @Entity
 @Table(name = "estado_pedido")
+@JsonInclude(JsonInclude.Include.NON_EMPTY)
 public class EstadoPedidoEntity implements Serializable {
 
 	private static final long serialVersionUID = 1L;

@@ -16,12 +16,15 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.utn.app.buenGusto.domicilio.DomicilioEntity;
 import com.utn.app.buenGusto.usuario.UsuarioEntity;
 
 @Entity
 @Table(name = "persona")
 @Inheritance(strategy = InheritanceType.JOINED)
+@JsonInclude(JsonInclude.Include.NON_EMPTY)
 public abstract class PersonaEntity implements Serializable {
 
 	private static final long serialVersionUID = -1034118546506335502L;
@@ -92,7 +95,7 @@ public abstract class PersonaEntity implements Serializable {
 	public void setFechaBaja(Date fechaBaja) {
 		this.fechaBaja = fechaBaja;
 	}
-
+ 
 	public UsuarioEntity getUsuario() {
 		return usuario;
 	}
