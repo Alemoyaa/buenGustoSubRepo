@@ -29,8 +29,8 @@ public class DetallePedidoEntity implements Serializable {
 
 	private int cantidad;
 	private double subtotal;
-	
-	@ManyToOne(optional=false, cascade = CascadeType.ALL)
+
+	@ManyToOne(optional = false, cascade = CascadeType.ALL)
 	@JoinColumn(name = "articulo_id")
 	private ArticuloEntity articulo;
 
@@ -64,6 +64,6 @@ public class DetallePedidoEntity implements Serializable {
 
 	public void setArticulo(ArticuloEntity articulo) {
 		this.articulo = articulo;
-	} 
+	}
 
 }

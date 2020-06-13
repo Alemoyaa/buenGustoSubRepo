@@ -39,7 +39,7 @@ public class FacturaEntity implements Serializable {
 	private int nroFactura;
 	private double precioTotal;
 	private String tipoFactura;
-	
+
 	@OneToOne(optional = true, cascade = CascadeType.ALL)
 	@JoinColumn(name = "pedido_id")
 	private PedidoEntity pedidofacturado;

@@ -8,9 +8,9 @@ import org.springframework.web.bind.annotation.RestController;
 import com.utn.app.buenGusto.common.CommonController;
 
 @RestController
-@CrossOrigin(origins = "*",
-methods= {RequestMethod.GET,RequestMethod.POST,RequestMethod.DELETE,RequestMethod.PUT})
+@CrossOrigin(origins = "*", methods = { RequestMethod.GET, RequestMethod.POST, RequestMethod.DELETE,
+		RequestMethod.PUT })
 @RequestMapping(path = "api/unidad_medida")
-public class UnidadMedidaController extends CommonController<UnidadMedidaEntity, UnidadMedidaService>{
+public class UnidadMedidaController extends CommonController<UnidadMedidaEntity, UnidadMedidaService> {
 
 }

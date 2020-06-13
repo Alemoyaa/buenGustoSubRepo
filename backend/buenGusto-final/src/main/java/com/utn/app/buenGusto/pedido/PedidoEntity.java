@@ -15,13 +15,11 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.utn.app.buenGusto.cliente.ClienteEntity;
 import com.utn.app.buenGusto.detallePedido.DetallePedidoEntity;
 import com.utn.app.buenGusto.estadoPedido.EstadoPedidoEntity;
-import com.utn.app.buenGusto.factura.FacturaEntity;
 
 @Entity
 @Table(name = "pedido")
@@ -47,11 +45,10 @@ public class PedidoEntity implements Serializable {
 	@JoinColumn(name = "estado_pedido_id")
 	private EstadoPedidoEntity EstadoPedido;
 
-	// Cliente
 	@ManyToOne(optional = false, cascade = CascadeType.ALL)
 	@JoinColumn(name = "cliente_id")
 	private ClienteEntity ClientePedido;
-	
+
 	public long getId() {
 		return id;
 	}

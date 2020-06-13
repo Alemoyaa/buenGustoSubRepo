@@ -25,7 +25,7 @@ public class ArticuloInsumoEntity extends ArticuloEntity implements Serializable
 	private boolean requiere_refrigeracion;
 	private float stock_actual;
 	private float stock_minimo;
-	
+
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "unidad_medida_id")
 	private UnidadMedidaEntity unidadMedidaID;

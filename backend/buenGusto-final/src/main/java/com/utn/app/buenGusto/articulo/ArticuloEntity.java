@@ -33,7 +33,6 @@ public abstract class ArticuloEntity implements Serializable {
 	protected String url_imagen;
 	protected boolean es_catalogo;
 	protected String denominacion;
-	
 
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "categoria_id")

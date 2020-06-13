@@ -6,9 +6,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
+import javax.persistence.Id; 
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -19,9 +17,8 @@ import com.utn.app.buenGusto.usuario.UsuarioEntity;
 
 @Entity
 @Table(name = "cliente")
-@Inheritance(strategy = InheritanceType.JOINED)
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
-public abstract class ClienteEntity implements Serializable {
+public class ClienteEntity implements Serializable {
 
 	private static final long serialVersionUID = -1034118546506335502L;
 
@@ -33,8 +30,8 @@ public abstract class ClienteEntity implements Serializable {
 	private String nombre;
 	private String apellido;
 	private long telefono;
-	
-	@OneToOne(cascade = CascadeType.ALL, optional=true)
+
+	@OneToOne(cascade = CascadeType.ALL, optional = true)
 	@JoinColumn(name = "usuario_id")
 	private UsuarioEntity usuario;
 
@@ -73,7 +70,7 @@ public abstract class ClienteEntity implements Serializable {
 	public void setTelefono(long telefono) {
 		this.telefono = telefono;
 	}
- 
+
 	public UsuarioEntity getUsuario() {
 		return usuario;
 	}

@@ -2,9 +2,12 @@ package com.utn.app.buenGusto.pedido;
 
 import java.sql.Date;
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.utn.app.buenGusto.cliente.ClienteEntity;
+import com.utn.app.buenGusto.detallePedido.DetallePedidoEntity;
 import com.utn.app.buenGusto.estadoPedido.EstadoPedidoEntity;
 import com.utn.app.buenGusto.factura.FacturaEntity;
 
@@ -18,18 +21,12 @@ public class PedidoDTO {
 	private boolean tipo_Envio;
 	private int numero;
 
-	// private List<HistoricoEstadoEntity> lista_historicoEstado = new
-	// ArrayList<HistoricoEstadoEntity>();
-
-	// private List<DetallePedidoEntity> lista_detallePedido = new
-	// ArrayList<DetallePedidoEntity>();
-
-	private EstadoPedidoEntity estadoPedido;
-
-	// Cliente
-	private ClienteEntity clientePedido;
+	private List<DetallePedidoEntity> lista_detallePedido = new ArrayList<DetallePedidoEntity>();
 
 	private FacturaEntity facturaEntity;
+	private EstadoPedidoEntity estadoPedido;
+
+	private ClienteEntity clientePedido;
 
 	public long getId() {
 		return id;
@@ -95,12 +92,12 @@ public class PedidoDTO {
 		this.facturaEntity = facturaEntity;
 	}
 
-	/*
-	 * public List<DetallePedidoEntity> getLista_detallePedido() { return
-	 * lista_detallePedido; }
-	 * 
-	 * public void setLista_detallePedido(List<DetallePedidoEntity>
-	 * lista_detallePedido) { this.lista_detallePedido = lista_detallePedido; }
-	 */
+	public List<DetallePedidoEntity> getLista_detallePedido() {
+		return lista_detallePedido;
+	}
+
+	public void setLista_detallePedido(List<DetallePedidoEntity> lista_detallePedido) {
+		this.lista_detallePedido = lista_detallePedido;
+	}
 
 }
