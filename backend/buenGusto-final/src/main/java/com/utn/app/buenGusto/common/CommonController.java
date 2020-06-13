@@ -12,24 +12,24 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
-
 public class CommonController<E, S extends CommonIService<E>> {
 	@Autowired
 	protected S service;
-	
+
 	@GetMapping("/count")
 	@Transactional
-	public ResponseEntity<?> getCount(@RequestParam(value =  "size", defaultValue = "10") int size) {
+	public ResponseEntity<?> getCount(@RequestParam(value = "size", defaultValue = "10") int size) {
 		try {
-			return ResponseEntity.status(HttpStatus.OK).body("{\"pages\": "+service.countPages(size)+"}");
+			return ResponseEntity.status(HttpStatus.OK).body("{\"pages\": " + service.countPages(size) + "}");
 		} catch (Exception e) {
 			return null;
 		}
 	}
-	
+
 	@GetMapping("")
 	@Transactional
-	public ResponseEntity<?> getAll(@RequestParam(value = "page", defaultValue = "0") int page, @RequestParam(value =  "size", defaultValue = "10") int size){
+	public ResponseEntity<?> getAll(@RequestParam(value = "page", defaultValue = "0") int page,
+			@RequestParam(value = "size", defaultValue = "10") int size) {
 		try {
 			return ResponseEntity.status(HttpStatus.OK).body(service.findAll(page, size));
 		} catch (Exception e) {
@@ -82,12 +82,11 @@ public class CommonController<E, S extends CommonIService<E>> {
 
 		} catch (Exception e) {
 
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-					.body("{\"Error in Put\": \"" + e.getMessage() + "\"}");
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{\"Error in Put\": \"" + e.getMessage() + "\"}");
 		}
 
 	}
-	
+
 	@DeleteMapping("/{id}")
 	@Transactional
 	public ResponseEntity<?> delete(@PathVariable long id) {

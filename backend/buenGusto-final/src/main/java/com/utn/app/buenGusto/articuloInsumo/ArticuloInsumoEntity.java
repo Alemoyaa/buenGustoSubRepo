@@ -2,15 +2,16 @@ package com.utn.app.buenGusto.articuloInsumo;
 
 import java.io.Serializable;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.utn.app.buenGusto.articulo.ArticuloEntity;
-import com.utn.app.buenGusto.stockArticulo.StockArticuloEntity;
+import com.utn.app.buenGusto.unidadMedida.UnidadMedidaEntity;
 
 @Entity
 @Table(name = "articulo_insumo")
@@ -22,10 +23,12 @@ public class ArticuloInsumoEntity extends ArticuloEntity implements Serializable
 
 	private double costo_de_venta;
 	private boolean requiere_refrigeracion;
+	private float stock_actual;
+	private float stock_minimo;
 
-	@OneToOne(optional = false)
-	@JoinColumn(name = "stock_articulo_id")
-	private StockArticuloEntity stockArticulo;
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "unidad_medida_id")
+	private UnidadMedidaEntity unidadMedidaID;
 
 	public double getCosto_de_venta() {
 		return costo_de_venta;
@@ -43,12 +46,28 @@ public class ArticuloInsumoEntity extends ArticuloEntity implements Serializable
 		this.requiere_refrigeracion = requiere_refrigeracion;
 	}
 
-	public StockArticuloEntity getStockArticulo() {
-		return stockArticulo;
+	public float getStock_actual() {
+		return stock_actual;
 	}
 
-	public void setStockArticulo(StockArticuloEntity stockArticulo) {
-		this.stockArticulo = stockArticulo;
+	public void setStock_actual(float stock_actual) {
+		this.stock_actual = stock_actual;
+	}
+
+	public float getStock_minimo() {
+		return stock_minimo;
+	}
+
+	public void setStock_minimo(float stock_minimo) {
+		this.stock_minimo = stock_minimo;
+	}
+
+	public UnidadMedidaEntity getUnidadMedidaID() {
+		return unidadMedidaID;
+	}
+
+	public void setUnidadMedidaID(UnidadMedidaEntity unidadMedidaID) {
+		this.unidadMedidaID = unidadMedidaID;
 	}
 
 }

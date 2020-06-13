@@ -6,5 +6,4 @@ import com.utn.app.buenGusto.common.CommonService;
 @Service
 public class ArticuloInsumoService extends CommonService<ArticuloInsumoEntity, ArticuloInsumoRepository> {
 
-
 }

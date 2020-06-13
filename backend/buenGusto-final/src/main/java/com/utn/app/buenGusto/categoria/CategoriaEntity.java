@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
-import javax.persistence.Entity; 
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -13,7 +13,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonInclude; 
+import com.fasterxml.jackson.annotation.JsonInclude;
 
 @Entity
 @Table(name = "categoria")
@@ -31,11 +31,11 @@ public class CategoriaEntity implements Serializable {
 	private String nombreCategoria;
 
 	@JsonIgnoreProperties(value = { "hijos" })
-	@ManyToOne(/*fetch = FetchType.LAZY*/)
+	@ManyToOne(/* fetch = FetchType.LAZY */)
 	private CategoriaEntity padre;
 
 	@JsonIgnoreProperties(value = { "padre" }, allowSetters = true)
-	@OneToMany(/*fetch = FetchType.LAZY, */mappedBy = "padre", cascade = CascadeType.ALL)
+	@OneToMany(/* fetch = FetchType.LAZY, */mappedBy = "padre", cascade = CascadeType.ALL)
 	private List<CategoriaEntity> hijos;
 
 	public long getId() {

@@ -2,6 +2,7 @@ package com.utn.app.buenGusto.datosEmpresa;
 
 import java.io.Serializable;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -30,11 +31,11 @@ public class DatosEmpresaEntity implements Serializable {
 	private long id;
 
 	private String email;
-	private String propiedad;
+	private String propietario;
 	private String razonSocial;
 	private int telefono;
 
-	@OneToOne(optional = false)
+	@OneToOne(cascade = CascadeType.ALL, optional = false)
 	@JoinColumn(name = "domicilio_id", nullable = false)
 	private DomicilioEntity domicilio = new DomicilioEntity();
 
@@ -54,12 +55,12 @@ public class DatosEmpresaEntity implements Serializable {
 		this.email = email;
 	}
 
-	public String getPropiedad() {
-		return propiedad;
+	public String getPropietario() {
+		return propietario;
 	}
 
-	public void setPropiedad(String propiedad) {
-		this.propiedad = propiedad;
+	public void setPropietario(String propietario) {
+		this.propietario = propietario;
 	}
 
 	public String getRazonSocial() {

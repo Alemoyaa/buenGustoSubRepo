@@ -8,10 +8,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public abstract class CommonService<E, R extends JpaRepository<E, Long>> implements CommonIService<E> {
-	
-	@Autowired //injeccion de dependencia
-	protected R repository;	
-	
+
+	@Autowired // injeccion de dependencia
+	protected R repository;
 
 	@Override
 	public E findById(long id) throws Exception {
@@ -28,7 +27,7 @@ public abstract class CommonService<E, R extends JpaRepository<E, Long>> impleme
 
 			throw new Exception(e.getMessage());
 		}
-		
+
 	}
 
 	@Override
@@ -43,13 +42,13 @@ public abstract class CommonService<E, R extends JpaRepository<E, Long>> impleme
 
 			throw new Exception(e.getMessage());
 		}
-	} 
-	
+	}
+
 	@Override
 	public int countPages(int size) throws Exception {
 		try {
 			Pageable pageable = PageRequest.of(0, size);
-			return repository.findAll(pageable).getTotalPages();			
+			return repository.findAll(pageable).getTotalPages();
 
 		} catch (Exception e) {
 			throw new Exception(e.getMessage());
@@ -58,29 +57,28 @@ public abstract class CommonService<E, R extends JpaRepository<E, Long>> impleme
 
 	@Override
 	public List<E> findAll(int page, int size) throws Exception {
-		
+
 		try {
 			Pageable pageable = PageRequest.of(page, size);
-			return repository.findAll(pageable).getContent();			
+			return repository.findAll(pageable).getContent();
 
 		} catch (Exception e) {
 			throw new Exception(e.getMessage());
 		}
-		
+
 	}
-	
-	public boolean delete(long id) throws Exception{
+
+	public boolean delete(long id) throws Exception {
 		try {
-			if(repository.existsById(id)) {
+			if (repository.existsById(id)) {
 				repository.deleteById(id);
-			}		
-			
+			}
+
 		} catch (Exception e) {
 			throw new Exception(e.getMessage());
 		}
-		
+
 		return !repository.existsById(id);
 	}
-
 
 }

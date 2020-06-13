@@ -5,7 +5,6 @@ import java.io.Serializable;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -30,11 +29,10 @@ public abstract class ArticuloEntity implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
 	protected long id;
-
-	protected boolean es_catalogo;
 	protected double precio_de_venta;
-	protected String denominacion;
 	protected String url_imagen;
+	protected boolean es_catalogo;
+	protected String denominacion;
 
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "categoria_id")
@@ -56,14 +54,6 @@ public abstract class ArticuloEntity implements Serializable {
 		this.es_catalogo = es_catalogo;
 	}
 
-	public double getPrecio_de_venta() {
-		return precio_de_venta;
-	}
-
-	public void setPrecio_de_venta(double precio_de_venta) {
-		this.precio_de_venta = precio_de_venta;
-	}
-
 	public String getDenominacion() {
 		return denominacion;
 	}
@@ -72,20 +62,28 @@ public abstract class ArticuloEntity implements Serializable {
 		this.denominacion = denominacion;
 	}
 
-	public String getUrl_imagen() {
-		return url_imagen;
-	}
-
-	public void setUrl_imagen(String url_imagen) {
-		this.url_imagen = url_imagen;
-	}
-
 	public CategoriaEntity getCategoria() {
 		return categoria;
 	}
 
 	public void setCategoria(CategoriaEntity categoria) {
 		this.categoria = categoria;
+	}
+
+	public double getPrecio_de_venta() {
+		return precio_de_venta;
+	}
+
+	public void setPrecio_de_venta(double precio_de_venta) {
+		this.precio_de_venta = precio_de_venta;
+	}
+
+	public String getUrl_imagen() {
+		return url_imagen;
+	}
+
+	public void setUrl_imagen(String url_imagen) {
+		this.url_imagen = url_imagen;
 	}
 
 }
