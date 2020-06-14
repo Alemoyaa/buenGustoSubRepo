@@ -1,7 +1,10 @@
 import { Common } from './Common';
 
 export class Domicilio extends Common {
-  calle: string;
+  aclaracion: string;
+  calle: number;
+  localidadID: number;
+  nroDepartamento: number;
   numero: number;
-  ciudad: string;
+  piso: number;
 }

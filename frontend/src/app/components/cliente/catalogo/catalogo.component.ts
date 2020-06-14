@@ -1,5 +1,5 @@
-import { ArticuloManufacturadoService } from '../../../services/serviciosCliente/articuloManufacturadoServices/articuloManufacturado.service';
-import { ArticuloManufacturado } from 'src/app/entidades/ArticuloManufacturado';
+import { ArticuloServices } from '../../../services/serviciosCliente/articuloServices/articuloServices';
+import { Articulo } from 'src/app/entidades/Articulo';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -9,32 +9,27 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CatalogoComponent implements OnInit {
   pageActual: number = 1; //paginador
-  articulosManufacturados: ArticuloManufacturado[] = [];
-  pizzas: Array<ArticuloManufacturado> = [];
-  lomos: Array<ArticuloManufacturado> = [];
-  bebidas: Array<ArticuloManufacturado> = [];
+  articulos: Array<Articulo> = [];
 
-  articuloManufacturado: ArticuloManufacturado = {
+  articulo: Articulo = {
     id: null,
+    categoria: null,
     denominacion: null,
-    precioVenta: null,
-    precioCompra: null,
-    _urlImagen: null,
-    fechaBaja: null,
-    tiempoEstimadoCocina: null,
-    subcategoriaAM: null,
-    receta: null,
+    es_catalogo: null,
+    precio_de_venta: null,
+    _url_Imagen: null,
   };
 
-  constructor(public articulosService: ArticuloManufacturadoService) {}
+  constructor(public articulosService: ArticuloServices) {}
 
-  ngOnInit(): void {
-    // this.getAll();
+  async ngOnInit() {
+    await this.getArticulos();
+    console.log(this.articulos);
   }
 
   getArticulos() {
     this.articulosService.getAll().subscribe((data) => {
-      this.articulosManufacturados = data;
+      this.articulos = data;
     });
   }
 }

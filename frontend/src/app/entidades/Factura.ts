@@ -1,11 +1,12 @@
-import { FormaPago } from './FormaPago';
-import { Pedido } from './Pedido';
 import { Common } from './Common';
 
 export class Factura extends Common {
-  numero: number;
+  datosEmpresaID: number;
   fecha: Date;
-  total: number;
-  formaPago: FormaPago;
-  pedido: Pedido;
+  formaPago: string;
+  lista_detalleFactura: any;
+  nroFactura: number;
+  pedidoID: number;
+  precioTotal: number;
+  tipoFactura: string;
 }
