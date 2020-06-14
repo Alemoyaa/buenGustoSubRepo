@@ -1,7 +1,7 @@
 import { RolService } from '../../../../../services/serviciosCliente/rolServices/rol.service';
 import { Component, OnInit } from '@angular/core';
 
-import { Usuario } from 'src/app/entidades/Usuario';
+import { Cliente } from 'src/app/entidades/Cliente';
 import {
   FormGroup,
   FormBuilder,
@@ -19,10 +19,10 @@ import { Rol } from 'src/app/entidades/Rol';
 })
 export class UsuariosComponent implements OnInit {
   formularioPersona: FormGroup;
-  clientes: Usuario[] = new Array<Usuario>();
+  usuarios: Cliente[] = new Array<Cliente>();
   rol: Rol[] = new Array<Rol>();
   rolSeleccionado: Rol;
-  idCliente: number;
+  idUsuario: number;
 
   constructor(
     private fb: FormBuilder,
@@ -41,10 +41,10 @@ export class UsuariosComponent implements OnInit {
     this.clienteService.getAll().subscribe((data) => {
       console.log('Traer Datos () :', data);
       data.forEach((a) => {
-        console.log(a.rol.nombreRol);
+        console.log(a.usuarioID);
       });
       // seteo la data del service a la variable de el .ts
-      return (this.clientes = data);
+      return (this.usuarios = data);
     });
   }
 
@@ -66,22 +66,21 @@ export class UsuariosComponent implements OnInit {
   }
 
   // pre cargo los datos en el formulario de el usuario seleccionnado para editar el rol
-  preCargarDatosFormulario(cliente: Usuario) {
-    this.formularioPersona = this.fb.group({
-      nombre: cliente.nombre,
-      apellido: cliente.apellido,
-      telefono: cliente.telefono,
-      email: cliente.email,
+  // preCargarDatosFormulario(cliente: Cliente) {
+  //   this.formularioPersona = this.fb.group({
+  //     nombre: cliente.nombre,
+  //     apellido: cliente.apellido,
+  //     telefono: cliente.telefono,
 
-      rol: this.fb.group({
-        id: cliente.rol.id,
-        nombreRol: cliente.rol.nombreRol,
-        descripcion: cliente.rol.descripcion,
-      }),
-    });
+  //     rol: this.fb.group({
+  //       id: cliente.rol.id,
+  //       nombreRol: cliente.rol.nombreRol,
+  //       descripcion: cliente.rol.descripcion,
+  //     }),
+  //   });
 
-    this.idCliente = cliente.id;
-  }
+  //   this.idUsuario = cliente.id;
+  // }
 
   // Traer todos los posibles roles para mostrarlos en el html
   traerRoles() {
@@ -107,7 +106,7 @@ export class UsuariosComponent implements OnInit {
   // post a la base de datos con el cliente y su rol
   actualizarRol() {
     // this.clienteService.put(this.idCliente, this.formularioPersona.value);
-    console.log('id cliente actualziarRol() ', this.idCliente);
+    console.log('id cliente actualziarRol() ', this.idUsuario);
     console.log(
       'formulario value actualziarRol() ',
       this.formularioPersona.value

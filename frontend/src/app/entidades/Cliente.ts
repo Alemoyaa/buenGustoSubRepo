@@ -5,5 +5,5 @@ export class Cliente extends Common {
   domicilioID: boolean;
   nombre: string;
   telefono: number;
-  usarioID: number;
+  usuarioID: number;
 }

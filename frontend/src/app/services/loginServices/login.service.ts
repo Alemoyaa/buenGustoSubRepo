@@ -12,7 +12,7 @@ export class LoginService {
   public providerId: string = 'null';
 
   cliente: Usuario = new Usuario();
-  // = 
+  // =
   // {
   //   id: 0,
   //   nombre: '',
@@ -32,17 +32,14 @@ export class LoginService {
     private afsAuth: AngularFireAuth,
     private route: Router,
     private clienteService: ClienteService
-  ) { }
+  ) {}
 
   //me traigo los datos que me da google
   datosGoogle(cliente: Usuario) {
     this.isAuth().subscribe((user) => {
       if (user) {
-        cliente.nombre = user.displayName;
-        cliente.apellido = user.displayName;
+        cliente.uid_firebase = user.uid;
         cliente.email = user.email;
-        cliente.foto = user.photoURL;
-        cliente.uidFirebase = user.uid;
         //this.providerId = user.providerData[0].providerId; //hacer ngIf para que solo se guarde con google
       }
     });
@@ -58,7 +55,7 @@ export class LoginService {
 
           this.clienteService.getByUidFirebase(uidCliente).subscribe((data) => {
             console.log(data);
-          })
+          });
 
           this.route.navigate(['user-profile']);
         },

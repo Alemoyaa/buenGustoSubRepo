@@ -13,7 +13,7 @@ export class CatalogoComponent implements OnInit {
 
   articulo: Articulo = {
     id: null,
-    categoria: null,
+    categoriaId: null,
     denominacion: null,
     es_catalogo: null,
     precio_de_venta: null,
