@@ -7,30 +7,22 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
-import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.utn.app.buenGusto.cliente.ClienteEntity;
+import com.utn.app.buenGusto.common.CommonEntity;
 import com.utn.app.buenGusto.detallePedido.DetallePedidoEntity;
 import com.utn.app.buenGusto.estadoPedido.EstadoPedidoEntity;
 
 @Entity
 @Table(name = "pedido")
-public class PedidoEntity implements Serializable {
+public class PedidoEntity extends CommonEntity implements Serializable {
 
 	private static final long serialVersionUID = 2109963082457857151L;
-
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id")
-	private long id;
 
 	private Date fechaRealizacion;
 	private Timestamp hora_estimada_fin;
@@ -48,14 +40,6 @@ public class PedidoEntity implements Serializable {
 	@ManyToOne(optional = false, cascade = CascadeType.ALL)
 	@JoinColumn(name = "cliente_id")
 	private ClienteEntity ClientePedido;
-
-	public long getId() {
-		return id;
-	}
-
-	public void setId(long id) {
-		this.id = id;
-	}
 
 	public Date getFechaRealizacion() {
 		return fechaRealizacion;

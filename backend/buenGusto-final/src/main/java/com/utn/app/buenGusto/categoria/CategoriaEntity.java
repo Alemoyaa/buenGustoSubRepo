@@ -3,29 +3,21 @@ package com.utn.app.buenGusto.categoria;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.CascadeType;
-import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.utn.app.buenGusto.common.CommonEntity;
 
 @Entity
 @Table(name = "categoria")
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
-public class CategoriaEntity implements Serializable {
+public class CategoriaEntity extends CommonEntity implements Serializable {
 
 	private static final long serialVersionUID = 8910812748496309673L;
-
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id")
-	private long id;
 
 	private boolean insumoOManuf;
 	private String nombreCategoria;
@@ -37,14 +29,6 @@ public class CategoriaEntity implements Serializable {
 	@JsonIgnoreProperties(value = { "padre" }, allowSetters = true)
 	@OneToMany(/* fetch = FetchType.LAZY, */mappedBy = "padre", cascade = CascadeType.ALL)
 	private List<CategoriaEntity> hijos;
-
-	public long getId() {
-		return id;
-	}
-
-	public void setId(long id) {
-		this.id = id;
-	}
 
 	public boolean isInsumoOManuf() {
 		return insumoOManuf;

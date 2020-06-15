@@ -2,30 +2,22 @@ package com.utn.app.buenGusto.cliente;
 
 import java.io.Serializable;
 import javax.persistence.CascadeType;
-import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id; 
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.utn.app.buenGusto.common.CommonEntity;
 import com.utn.app.buenGusto.domicilio.DomicilioEntity;
 import com.utn.app.buenGusto.usuario.UsuarioEntity;
 
 @Entity
 @Table(name = "cliente")
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
-public class ClienteEntity implements Serializable {
+public class ClienteEntity extends CommonEntity implements Serializable {
 
 	private static final long serialVersionUID = -1034118546506335502L;
-
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id")
-	private long id;
 
 	private String nombre;
 	private String apellido;
@@ -38,14 +30,6 @@ public class ClienteEntity implements Serializable {
 	@OneToOne(cascade = CascadeType.ALL, optional = false)
 	@JoinColumn(name = "domicilio_id", nullable = false)
 	private DomicilioEntity domicilio = new DomicilioEntity();
-
-	public long getId() {
-		return id;
-	}
-
-	public void setId(long id) {
-		this.id = id;
-	}
 
 	public String getNombre() {
 		return nombre;

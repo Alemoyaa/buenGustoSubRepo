@@ -3,11 +3,7 @@ package com.utn.app.buenGusto.articulo;
 import java.io.Serializable;
 
 import javax.persistence.CascadeType;
-import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
@@ -16,19 +12,15 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.utn.app.buenGusto.categoria.CategoriaEntity;
+import com.utn.app.buenGusto.common.CommonEntity;
 
 @Entity
 @Table(name = "articulo")
 @Inheritance(strategy = InheritanceType.JOINED)
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
-public abstract class ArticuloEntity implements Serializable {
+public abstract class ArticuloEntity extends CommonEntity implements Serializable {
 
 	private static final long serialVersionUID = 4801679657904614999L;
-
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id")
-	protected long id;
 	protected double precio_de_venta;
 	protected String url_imagen;
 	protected boolean es_catalogo;
@@ -37,14 +29,6 @@ public abstract class ArticuloEntity implements Serializable {
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "categoria_id")
 	protected CategoriaEntity categoria;
-
-	public long getId() {
-		return id;
-	}
-
-	public void setId(long id) {
-		this.id = id;
-	}
 
 	public boolean isEs_catalogo() {
 		return es_catalogo;

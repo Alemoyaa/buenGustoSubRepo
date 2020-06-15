@@ -41,18 +41,12 @@ public class CommonController<E, S extends CommonIService<E>> {
 	@GetMapping("/{id}")
 	@Transactional
 	public ResponseEntity<?> getOne(@PathVariable long id) {
-
 		try {
-
 			return ResponseEntity.status(HttpStatus.OK).body(service.findById(id));
-
 		} catch (Exception e) {
-
 			return ResponseEntity.status(HttpStatus.NOT_FOUND)
 					.body("{\"Error in getOne \": \"" + e.getMessage() + "\"}");
-
 		}
-
 	}
 
 	@PostMapping("/")
@@ -72,35 +66,24 @@ public class CommonController<E, S extends CommonIService<E>> {
 
 	}
 
-	@PutMapping("/")
+	@PutMapping("/{id}")
 	@Transactional
-	public ResponseEntity<?> put(@RequestBody E personaForm) {
-
+	public ResponseEntity<?> put(@PathVariable long id, @RequestBody E entity) {
 		try {
-
-			return ResponseEntity.status(HttpStatus.OK).body(service.save(personaForm));
-
+			return ResponseEntity.status(HttpStatus.OK).body(service.update(id, entity));
 		} catch (Exception e) {
-
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{\"Error in Put\": \"" + e.getMessage() + "\"}");
 		}
-
 	}
 
 	@DeleteMapping("/{id}")
 	@Transactional
 	public ResponseEntity<?> delete(@PathVariable long id) {
-
 		try {
-
 			return ResponseEntity.status(HttpStatus.OK).body(service.delete(id));
-
 		} catch (Exception e) {
-
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST)
 					.body("{\"Error in Delete \": \"" + e.getMessage() + "\"}");
 		}
-
 	}
-
 }

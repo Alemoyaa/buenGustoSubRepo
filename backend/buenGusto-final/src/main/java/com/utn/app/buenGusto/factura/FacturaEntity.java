@@ -4,13 +4,8 @@ import java.io.Serializable;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.persistence.CascadeType;
-import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
@@ -18,6 +13,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.utn.app.buenGusto.common.CommonEntity;
 import com.utn.app.buenGusto.datosEmpresa.DatosEmpresaEntity;
 import com.utn.app.buenGusto.detalleFactura.DetalleFacturaEntity;
 import com.utn.app.buenGusto.pedido.PedidoEntity;
@@ -25,14 +21,9 @@ import com.utn.app.buenGusto.pedido.PedidoEntity;
 @Entity
 @Table(name = "factura")
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
-public class FacturaEntity implements Serializable {
+public class FacturaEntity extends CommonEntity implements Serializable {
 
 	private static final long serialVersionUID = -824096367323433145L;
-
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id")
-	private long id;
 
 	private Date fecha;
 	private String formaPago;
@@ -51,14 +42,6 @@ public class FacturaEntity implements Serializable {
 	@ManyToOne(optional = false)
 	@JoinColumn(name = "datos_empresa_id")
 	private DatosEmpresaEntity datosEmpresaID;
-
-	public long getId() {
-		return id;
-	}
-
-	public void setId(long id) {
-		this.id = id;
-	}
 
 	public String getTipoFactura() {
 		return tipoFactura;
