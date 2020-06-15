@@ -3,32 +3,21 @@ package com.utn.app.buenGusto.datosEmpresa;
 import java.io.Serializable;
 
 import javax.persistence.CascadeType;
-import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.utn.app.buenGusto.common.CommonEntity;
 import com.utn.app.buenGusto.domicilio.DomicilioEntity;
 
 @Entity
 @Table(name = "datos_empresa")
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
-public class DatosEmpresaEntity implements Serializable {
+public class DatosEmpresaEntity extends CommonEntity implements Serializable {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -6278247120228652128L;
-
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id")
-	private long id;
 
 	private String email;
 	private String propietario;
@@ -38,14 +27,6 @@ public class DatosEmpresaEntity implements Serializable {
 	@OneToOne(cascade = CascadeType.ALL, optional = false)
 	@JoinColumn(name = "domicilio_id", nullable = false)
 	private DomicilioEntity domicilio = new DomicilioEntity();
-
-	public long getId() {
-		return id;
-	}
-
-	public void setId(long id) {
-		this.id = id;
-	}
 
 	public String getEmail() {
 		return email;

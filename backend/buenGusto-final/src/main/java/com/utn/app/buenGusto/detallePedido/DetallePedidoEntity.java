@@ -14,11 +14,12 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.utn.app.buenGusto.articulo.ArticuloEntity;
+import com.utn.app.buenGusto.common.CommonEntity;
 
 @Entity
 @Table(name = "detalle_pedido")
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
-public class DetallePedidoEntity implements Serializable {
+public class DetallePedidoEntity extends CommonEntity implements Serializable {
 
 	private static final long serialVersionUID = -7168593642662662191L;
 
@@ -33,14 +34,6 @@ public class DetallePedidoEntity implements Serializable {
 	@ManyToOne(optional = false, cascade = CascadeType.ALL)
 	@JoinColumn(name = "articulo_id")
 	private ArticuloEntity articulo;
-
-	public long getId() {
-		return id;
-	}
-
-	public void setId(long id) {
-		this.id = id;
-	}
 
 	public int getCantidad() {
 		return cantidad;

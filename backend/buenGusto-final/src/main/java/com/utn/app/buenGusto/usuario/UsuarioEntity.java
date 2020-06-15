@@ -2,29 +2,21 @@ package com.utn.app.buenGusto.usuario;
 
 import java.io.Serializable;
 import javax.persistence.CascadeType;
-import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.utn.app.buenGusto.common.CommonEntity;
 import com.utn.app.buenGusto.rol.RolEntity;
 
 @Entity
 @Table(name = "usuario")
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
-public class UsuarioEntity implements Serializable {
+public class UsuarioEntity extends CommonEntity implements Serializable {
 
 	private static final long serialVersionUID = -8356649232468048872L;
-
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id")
-	private long id;
 
 	private String email;
 	private String uid_firebase;
@@ -32,14 +24,6 @@ public class UsuarioEntity implements Serializable {
 	@ManyToOne(cascade = CascadeType.ALL, optional = false)
 	@JoinColumn(name = "rol_id")
 	private RolEntity rol;
-
-	public long getId() {
-		return id;
-	}
-
-	public void setId(long id) {
-		this.id = id;
-	}
 
 	public String getEmail() {
 		return email;
