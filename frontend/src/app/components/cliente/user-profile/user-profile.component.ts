@@ -1,6 +1,6 @@
 import { LoginService } from './../../../services/loginServices/login.service';
 import { Usuario } from '../../../entidades/Usuario';
-import { UserProfileService } from './../../../services/serviciosCliente/userProfileServices/user-profile.service';
+import { UsuarioServices } from './../../../services/serviciosCliente/UsuarioServices/usuario.services';
 import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
@@ -10,17 +10,21 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./user-profile.component.css'],
 })
 export class UserProfileComponent implements OnInit {
-  cliente: Usuario = new Usuario();
-
+  cliente: Usuario = {
+    id: null,
+    email: null,
+    rolID: null,
+    uid_firebase: null,
+  };
 
   constructor(
-    private service: UserProfileService,
+    private service: UsuarioServices,
     private rutaActiva: ActivatedRoute,
     private serviceLogin: LoginService
-  ) { }
+  ) {}
 
   ngOnInit(): void {
-    this.rutaActiva.params.subscribe(data => {
+    this.rutaActiva.params.subscribe((data) => {
       if (data.id !== '0') {
         this.getOne(data.id);
       }

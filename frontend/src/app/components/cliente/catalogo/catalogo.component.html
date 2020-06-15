@@ -16,7 +16,7 @@
         </div>
 
         <div class="container platos col-lg-9">
-          <h3>Platos recomendados</h3>
+          <!-- <h3>Platos recomendados</h3>
           <div class="recomendados justify-content-start d-flex">
             <div class="card plato" style="width: 18rem;">
               <img
@@ -54,192 +54,90 @@
                 </p>
               </div>
             </div>
+          </div> -->
+
+          <h3>Pizzas</h3>
+
+          <div class="row articulo">
+            <ng-container
+              *ngFor="let articulo of articulos"
+              class="articulo-container"
+            >
+              <div class="card-container col-lg-4">
+                <div
+                  class="card articulo"
+                  *ngIf="articulo.es_catalogo && articulo.categoria.id === 3"
+                >
+                  <img
+                    class="card-img-top card-img-recomendado"
+                    src="../../../../assets/assetsCatalogo/assets/img/pizza/pizza3.jpg"
+                  />
+                  <div class="card-body">
+                    <h4 class="card-text">
+                      {{ articulo.denominacion }}
+                    </h4>
+                    <p>Categoria: {{ articulo.categoria.nombreCategoria }}</p>
+                    <small>Tiempo estimado: 20m</small>
+                    <br />
+                    <b>{{ articulo.precio_de_venta }}</b>
+                    <div class="stars">
+                      <i class="fas fa-star"></i>
+                      <i class="fas fa-star"></i>
+                      <i class="fas fa-star"></i>
+                      <i class="fas fa-star"></i>
+                      <i class="far fa-star"></i>
+                    </div>
+                    <button
+                      type="button"
+                      class="btn btn-primary"
+                      data-toggle="modal"
+                      data-target="#catalogoDetalleModal"
+                    >
+                      Agregar al carrito
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </ng-container>
           </div>
-          <h3>Promo pizzas</h3>
-          <div class="recomendados justify-content-start d-flex">
-            <div class="card plato" style="width: 18rem;">
-              <img
-                class="card-img-top card-img-recomendado"
-                src="../../../../assets/assetsCatalogo/assets/img/pizza/pizza1.jpg"
-                alt="Card image cap"
-              />
-              <div class="card-body">
-                <h4 class="card-text">
-                  Pizza 1
-                </h4>
-                <small>Tiempo estimado: 20m</small>
-                <br />
-                <b>$30</b>
-                <div class="stars">
-                  <i class="fas fa-star"></i>
-                  <i class="fas fa-star"></i>
-                  <i class="fas fa-star"></i>
-                  <i class="fas fa-star"></i>
-                  <i class="far fa-star"></i>
-                </div>
-                <button
-                  type="button"
-                  class="btn btn-primary"
-                  data-toggle="modal"
-                  data-target="#catalogoDetalleModal"
+
+          <h3>Hamburguesas</h3>
+
+          <div class="row articulo">
+            <ng-container
+              *ngFor="let articulo of articulos"
+              class="articulo-container"
+            >
+              <div class="card-container col-lg-4">
+                <div
+                  class="card articulo"
+                  *ngIf="articulo.es_catalogo && articulo.categoria.id === 2"
                 >
-                  Agregar al carrito
-                </button>
-              </div>
-            </div>
-            <div class="card plato" style="width: 18rem;">
-              <img
-                class="card-img-top card-img-recomendado"
-                src="../../../../assets/assetsCatalogo/assets/img/pizza/pizza2.jpg"
-                alt="Card image cap"
-              />
-              <div class="card-body">
-                <h4 class="card-text">
-                  Pizza 2
-                </h4>
-                <small>Tiempo estimado: 20m</small>
-                <br />
-                <b>$30</b>
-                <div class="stars">
-                  <i class="fas fa-star"></i>
-                  <i class="fas fa-star"></i>
-                  <i class="fas fa-star"></i>
-                  <i class="fas fa-star"></i>
-                  <i class="far fa-star"></i>
+                  <img
+                    class="card-img-top card-img-recomendado"
+                    src="../../../../assets/assetsCatalogo/assets/img/pizza/pizza3.jpg"
+                  />
+                  <div class="card-body">
+                    <h4 class="card-text">
+                      {{ articulo.denominacion }}
+                    </h4>
+                    <p>Categoria: {{ articulo.categoria.nombreCategoria }}</p>
+                    <small>Tiempo estimado: 20m</small>
+                    <br />
+                    <b>${{ articulo.precio_de_venta }}</b>
+                    <br />
+                    <button
+                      type="button"
+                      class="btn btn-primary"
+                      data-toggle="modal"
+                      data-target="#catalogoDetalleModal"
+                    >
+                      Agregar al carrito
+                    </button>
+                  </div>
                 </div>
-                <button
-                  type="button"
-                  class="btn btn-primary"
-                  data-toggle="modal"
-                  data-target="#catalogoDetalleModal"
-                >
-                  Agregar al carrito
-                </button>
               </div>
-            </div>
-            <div class="card plato" style="width: 18rem;">
-              <img
-                class="card-img-top card-img-recomendado"
-                src="../../../../assets/assetsCatalogo/assets/img/pizza/pizza3.jpg"
-                alt="Card image cap"
-              />
-              <div class="card-body">
-                <h4 class="card-text">
-                  Pizza 3
-                </h4>
-                <small>Tiempo estimado: 20m</small>
-                <br />
-                <b>$30</b>
-                <div class="stars">
-                  <i class="fas fa-star"></i>
-                  <i class="fas fa-star"></i>
-                  <i class="fas fa-star"></i>
-                  <i class="fas fa-star"></i>
-                  <i class="far fa-star"></i>
-                </div>
-                <button
-                  type="button"
-                  class="btn btn-primary"
-                  data-toggle="modal"
-                  data-target="#catalogoDetalleModal"
-                >
-                  Agregar al carrito
-                </button>
-              </div>
-            </div>
-          </div>
-          <h3>Promo lomos</h3>
-          <div class="seccion justify-content-start d-flex">
-            <div class="card plato" style="width: 18rem;">
-              <img
-                class="card-img-top card-img-recomendado"
-                src="../../../../assets/assetsCatalogo/assets/img/panchos/Hot_dog1.jpg"
-                alt="Card image cap"
-              />
-              <div class="card-body">
-                <h4 class="card-text">
-                  Lomo 1
-                </h4>
-                <small>Tiempo estimado: 20m</small>
-                <br />
-                <b>$30</b>
-                <div class="stars">
-                  <i class="fas fa-star"></i>
-                  <i class="fas fa-star"></i>
-                  <i class="fas fa-star"></i>
-                  <i class="fas fa-star"></i>
-                  <i class="far fa-star"></i>
-                </div>
-                <button
-                  type="button"
-                  class="btn btn-primary"
-                  data-toggle="modal"
-                  data-target="#catalogoDetalleModal"
-                >
-                  Agregar al carrito
-                </button>
-              </div>
-            </div>
-            <div class="card plato" style="width: 18rem;">
-              <img
-                class="card-img-top card-img-recomendado"
-                src="../../../../assets/assetsCatalogo/assets/img/panchos/Hot_dog3.jpg"
-                alt="Card image cap"
-              />
-              <div class="card-body">
-                <h4 class="card-text">
-                  Lomo 2
-                </h4>
-                <small>Tiempo estimado: 20m</small>
-                <br />
-                <b>$30</b>
-                <div class="stars">
-                  <i class="fas fa-star"></i>
-                  <i class="fas fa-star"></i>
-                  <i class="fas fa-star"></i>
-                  <i class="fas fa-star"></i>
-                  <i class="far fa-star"></i>
-                </div>
-                <button
-                  type="button"
-                  class="btn btn-primary"
-                  data-toggle="modal"
-                  data-target="#catalogoDetalleModal"
-                >
-                  Agregar al carrito
-                </button>
-              </div>
-            </div>
-            <div class="card plato" style="width: 18rem;">
-              <img
-                class="card-img-top card-img-recomendado"
-                src="../../../../assets/assetsCatalogo/assets/img/panchos/Hot_dog2.jpg"
-                alt="Card image cap"
-              />
-              <div class="card-body">
-                <h4 class="card-text">
-                  Lomo 3
-                </h4>
-                <small>Tiempo estimado: 20m</small>
-                <br />
-                <b>$30</b>
-                <div class="stars">
-                  <i class="fas fa-star"></i>
-                  <i class="fas fa-star"></i>
-                  <i class="fas fa-star"></i>
-                  <i class="fas fa-star"></i>
-                  <i class="far fa-star"></i>
-                </div>
-                <button
-                  type="button"
-                  class="btn btn-primary"
-                  data-toggle="modal"
-                  data-target="#catalogoDetalleModal"
-                >
-                  Agregar al carrito
-                </button>
-              </div>
-            </div>
+            </ng-container>
           </div>
         </div>
       </div>

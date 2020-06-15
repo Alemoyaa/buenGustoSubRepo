@@ -24,13 +24,6 @@
   box-shadow: 4px 4px 10px rgb(59, 59, 59);
 }
 
-.platos {
-  box-shadow: 4px 4px 10px rgb(59, 59, 59);
-  background-color: rgb(255, 255, 255);
-  border-radius: 1.5em;
-  padding-bottom: 2em;
-}
-
 .filtros {
   box-shadow: 4px 4px 10px rgb(59, 59, 59);
 
@@ -52,4 +45,8 @@
   display: block;
   margin: auto;
   margin-bottom: 2em;
+}
+
+.articulo-container {
+  text-align: center;
 }
