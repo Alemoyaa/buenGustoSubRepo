@@ -1,6 +1,6 @@
 import { Common } from './Common';
-import {Articulo} from './Articulo';
-import {UnidadMedida} from './UnidadMedida';
+import { Articulo } from './Articulo';
+import { UnidadMedida } from './UnidadMedida';
 
 export class ArticuloInsumo extends Articulo {
   costo_de_venta: number;

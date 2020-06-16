@@ -13,23 +13,27 @@ import { Domicilio } from '../../../entidades/Domicilio';
 export class UserProfileComponent implements OnInit {
   cliente: Cliente = {
     id: null,
-    nombre: null,
-    apellido: null,
-    domicilioID: {
+    nombre: '',
+    apellido: '',
+    domicilio: {
       id: null,
       aclaracion: null,
       calle: null,
-      localidadID: null,
+      localidad: {
+        id: null,
+        nombre: '',
+        provincia: null,
+      },
       nroDepartamento: null,
       numero: null,
       piso: null,
     },
     telefono: null,
-    usuarioID: {
+    usuario: {
+      id: 0,
       email: null,
       uid_firebase: null,
-      id: 0,
-      rolID: null,
+      rol: null,
     },
   };
 
@@ -37,9 +41,7 @@ export class UserProfileComponent implements OnInit {
     private service: ClienteService,
     private rutaActiva: ActivatedRoute,
     private serviceLogin: LoginService
-  ) {}
-
-  ngOnInit(): void {
+  ) {
     this.rutaActiva.params.subscribe((data) => {
       if (data.id !== '0') {
         this.getOne(data.id);
@@ -48,14 +50,16 @@ export class UserProfileComponent implements OnInit {
     this.datosUser();
   }
 
+  ngOnInit(): void {}
+
   datosUser() {
-    return this.serviceLogin.datosGoogle(this.cliente.usuarioID); //me traigo los datos de google desde el service
+    return this.serviceLogin.datosGoogle(this.cliente.usuario); //me traigo los datos de google desde el service
   }
 
   async getOne(id: number) {
     await this.service.getOne(id).subscribe((data) => {
-      console.log(data);
       this.cliente = data;
+      console.log(this.cliente);
     });
   }
 }

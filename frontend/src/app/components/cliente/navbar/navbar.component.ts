@@ -4,23 +4,23 @@ import { LoginService } from './../../../services/loginServices/login.service';
 
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 
-
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.css'],
 })
 export class NavbarComponent implements OnInit {
-  constructor(private serviceLogin: LoginService, private route: Router) { }
-  
-  @Output()  irDashboard = new EventEmitter();
+  constructor(private serviceLogin: LoginService, private route: Router) {}
+
+  @Output() irDashboard = new EventEmitter();
+
+  id: string;
 
   cliente: Usuario = new Usuario();
 
   navbarUsuario = true;
 
   ngOnInit(): void {
-    
     this.existeUsuario();
     this.setCarrito();
     this.serviceLogin.datosGoogle(this.cliente); //para mostrar la foto de perfil en el navbar
@@ -58,7 +58,7 @@ export class NavbarComponent implements OnInit {
   }
 
   // enviamos un true al componente padre app.component.ts para irnos a la dashboard de admin
-  irAdmin(event){
+  irAdmin(event) {
     this.irDashboard.emit(true);
   }
 }

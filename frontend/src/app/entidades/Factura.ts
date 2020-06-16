@@ -1,7 +1,7 @@
 import { Common } from './Common';
-import {DatosEmpresa} from './DatosEmpresa';
-import {Pedido} from './Pedido';
-import {DetalleFactura} from './DetalleFactura';
+import { DatosEmpresa } from './DatosEmpresa';
+import { Pedido } from './Pedido';
+import { DetalleFactura } from './DetalleFactura';
 
 export class Factura extends Common {
   fecha: Date;
@@ -9,7 +9,7 @@ export class Factura extends Common {
   tipoFactura: string;
   nroFactura: number;
   precioTotal: number;
-  pedidoID: Pedido;
-  lista_detalleFactura: DetalleFactura[];
+  pedidofacturado: Pedido;
+  detalleFactura: DetalleFactura[];
   datosEmpresaID: DatosEmpresa;
 }

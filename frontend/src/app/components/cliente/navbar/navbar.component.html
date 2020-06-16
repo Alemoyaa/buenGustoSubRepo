@@ -29,13 +29,13 @@
           <li class="nav-item" role="presentation">
             <a class="nav-link" [routerLink]="['/catalogo']">Catalogo</a>
           </li>
+          <li class="nav-item" role="presentation">
+            <a class="nav-link" [routerLink]="['/user-profile']">Perfil</a>
+          </li>
           <li *ngIf="navbarUsuario" class="nav-item" role="presentation">
-            <button
-              class="nav-link btn btn-outline-light"
-              (click)="cerrarSesion()"
-            >
+            <a class="nav-link btn btn-outline-light" (click)="cerrarSesion()">
               Cerrar Sesion
-            </button>
+            </a>
           </li>
 
           <!-- comienzo de panel de administrador -->

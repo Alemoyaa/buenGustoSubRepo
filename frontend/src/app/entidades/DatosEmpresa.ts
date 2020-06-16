@@ -1,8 +1,8 @@
 import { Common } from './Common';
-import {Domicilio} from './Domicilio';
+import { Domicilio } from './Domicilio';
 
 export class DatosEmpresa extends Common {
-  domicilioID: Domicilio;
+  domicilio: Domicilio;
   email: string;
   propietario: string;
   razonSocial: string;

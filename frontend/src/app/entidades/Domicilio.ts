@@ -1,5 +1,5 @@
 import { Common } from './Common';
-import {Localidad} from './Localidad';
+import { Localidad } from './Localidad';
 
 export class Domicilio extends Common {
   aclaracion: string;
@@ -7,5 +7,5 @@ export class Domicilio extends Common {
   nroDepartamento: number;
   numero: number;
   piso: number;
-  localidadID: Localidad;
+  localidad: Localidad;
 }

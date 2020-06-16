@@ -1,8 +1,8 @@
 import { Common } from './Common';
-import {Articulo} from './Articulo';
+import { Articulo } from './Articulo';
 
 export class DetallePedido extends Common {
-  articuloID: Articulo;
+  articulo: Articulo;
   cantidad: number;
   subtotal: number;
 }

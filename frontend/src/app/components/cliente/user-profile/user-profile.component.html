@@ -13,9 +13,19 @@
                       class="btn btn-primary btn-sm"
                       type="button"
                       data-toggle="modal"
-                      data-target=".bd-example-modal-xl"
+                      data-target=".bd-pedido-modal-xl"
                     >
                       Historial de pedidos</a
+                    >
+                  </div>
+                  <div class="col mt-3">
+                    <a
+                      class="btn btn-primary btn-sm"
+                      type="button"
+                      data-toggle="modal"
+                      data-target=".bd-factura-modal-xl"
+                    >
+                      Historial de facturas</a
                     >
                   </div>
                 </div>
@@ -65,18 +75,6 @@
                         <div class="form-row">
                           <div class="col">
                             <div class="form-group">
-                              <label for="email"><strong>Email</strong></label>
-                              <input
-                                class="form-control"
-                                type="email"
-                                placeholder="Ingrese su Email"
-                                name="email"
-                                [(ngModel)]="cliente.usuarioID.email"
-                              />
-                            </div>
-                          </div>
-                          <div class="col">
-                            <div class="form-group">
                               <label for="telefono"
                                 ><strong>Telefono</strong></label
                               >
@@ -86,6 +84,18 @@
                                 placeholder="Ingrese su telefono"
                                 name="telefono"
                                 [(ngModel)]="cliente.telefono"
+                              />
+                            </div>
+                          </div>
+                          <div class="col">
+                            <div class="form-group">
+                              <label for="email"><strong>Email</strong></label>
+                              <input
+                                class="form-control"
+                                type="email"
+                                placeholder="Ingrese su Email"
+                                name="email"
+                                [(ngModel)]="cliente.usuario.email"
                               />
                             </div>
                           </div>
@@ -113,7 +123,7 @@
                             type="text"
                             placeholder="Ingrese su calle"
                             name="address"
-                            [(ngModel)]="cliente.domicilioID.calle"
+                            [(ngModel)]="cliente.domicilio.calle"
                           />
                         </div>
                         <div class="form-row">
@@ -127,7 +137,7 @@
                                 type="number"
                                 placeholder="Ingrese su numeracion"
                                 name="city"
-                                [(ngModel)]="cliente.domicilioID.numero"
+                                [(ngModel)]="cliente.domicilio.numero"
                               />
                             </div>
                           </div>
@@ -140,7 +150,7 @@
                                 class="form-control"
                                 type="text"
                                 name="Ingrese su localidad"
-                                [(ngModel)]="cliente.domicilioID.localidadID"
+                                [(ngModel)]="cliente.domicilio.localidad.nombre"
                               />
                             </div>
                           </div>
@@ -164,7 +174,7 @@
 </div>
 
 <div
-  class="modal fade bd-example-modal-xl"
+  class="modal fade bd-pedido-modal-xl"
   tabindex="-1"
   role="dialog"
   aria-labelledby="myExtraLargeModalLabel"
@@ -187,6 +197,45 @@
       </div>
       <div class="modal-body">
         <app-pedidos [clienteUser]="cliente"></app-pedidos>
+        <div
+          data-spy="scroll"
+          data-target="#navbar-example2"
+          data-offset="0"
+        ></div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">
+          Cerrar
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div
+  class="modal fade bd-factura-modal-xl"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="myExtraLargeModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-xl" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalCenterTitle">
+          Historial de facturas
+        </h5>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <app-factura [clienteUser]="cliente"></app-factura>
         <div
           data-spy="scroll"
           data-target="#navbar-example2"

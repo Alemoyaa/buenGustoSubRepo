@@ -41,7 +41,7 @@ export class UsuariosComponent implements OnInit {
     this.clienteService.getAll().subscribe((data) => {
       console.log('Traer Datos () :', data);
       data.forEach((a) => {
-        console.log(a.usuarioID);
+        console.log(a.usuario);
       });
       // seteo la data del service a la variable de el .ts
       return (this.usuarios = data);
@@ -73,8 +73,8 @@ export class UsuariosComponent implements OnInit {
       telefono: cliente.telefono,
 
       rol: this.fb.group({
-        id: cliente.usuarioID.rolID.id,
-        nombreRol: cliente.usuarioID.rolID.nombreRol,
+        id: cliente.usuario.rol.id,
+        nombreRol: cliente.usuario.rol.nombreRol,
         //descripcion: cliente.usuarioID.rolID.descripcion, No hay mas descripcion de rol
       }),
     });

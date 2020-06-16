@@ -1,16 +1,21 @@
 <div class="container">
-
   <div class="card">
     <div class="row">
-
       <aside class="col-sm-5 border-right">
         <article class="gallery-wrap">
-          <div class=" img-big-wrap">
+          <div class="img-big-wrap">
             <div>
-              <a href="#"><img src="{{this.serviceManuf.articulosManufacturados[this.id]._url_Imagen}}"></a>
+              <a href="#"
+                ><img
+                  src="{{
+                    this.serviceManuf.articulosManufacturados[this.id]
+                      .url_Imagen
+                  }}"
+              /></a>
             </div>
           </div>
-        </article>  <!-- gallery-wrap .end// -->
+        </article>
+        <!-- gallery-wrap .end// -->
       </aside>
 
       <aside class="col-sm-7">
@@ -19,35 +24,51 @@
 
           <p class="price-detail-wrap">
             <span class="price h3 text-warning">
-              <span class="currency">$</span><span class="num">{{this.serviceManuf.articulosManufacturados[this.id].precio_de_venta}}</span>
+              <span class="currency">$</span
+              ><span class="num">{{
+                this.serviceManuf.articulosManufacturados[this.id]
+                  .precio_de_venta
+              }}</span>
             </span>
           </p>
 
           <dl class="item-property">
             <dt>Ingredientes</dt>
             <dd>
-              <p>{{detalle.articuloInsumoID.denominacion}}</p>
+              <p>{{ detalle.articuloInsumoID.denominacion }}</p>
             </dd>
           </dl>
           <dl class="param param-feature">
             <dt>Tipo</dt>
             <dd></dd>
-          </dl> <!-- item-property-hor .// -->
+          </dl>
+          <!-- item-property-hor .// -->
           <dl class="param param-feature">
             <dt>Porciones</dt>
-            <dd>{{detalle.cantidad}}</dd>
-          </dl> <!-- item-property-hor .// -->
+            <dd>{{ detalle.cantidad }}</dd>
+          </dl>
+          <!-- item-property-hor .// -->
           <dl class="param param-feature">
             <dt>Otra descripcion</dt>
             <dd>d</dd>
-          </dl> <!-- item-property-hor .// -->
+          </dl>
+          <!-- item-property-hor .// -->
 
-          <hr>
+          <hr />
 
-          <a href="#" class="btn btn-lg btn-outline-primary text-uppercase" (click)="addToCart()"> <i
-              class="fas fa-shopping-cart"></i> agregar al carrito </a>
-        </article> <!-- card-body.// -->
-      </aside> <!-- col.// -->
-    </div> <!-- row.// -->
-  </div> <!-- card.// -->
+          <a
+            href="#"
+            class="btn btn-lg btn-outline-primary text-uppercase"
+            (click)="addToCart()"
+          >
+            <i class="fas fa-shopping-cart"></i> agregar al carrito
+          </a>
+        </article>
+        <!-- card-body.// -->
+      </aside>
+      <!-- col.// -->
+    </div>
+    <!-- row.// -->
+  </div>
+  <!-- card.// -->
 </div>

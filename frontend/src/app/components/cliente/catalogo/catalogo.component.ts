@@ -13,11 +13,11 @@ export class CatalogoComponent implements OnInit {
 
   articulo: Articulo = {
     id: null,
-    categoriaId: null,
+    categoria: null,
     denominacion: null,
     es_catalogo: null,
     precio_de_venta: null,
-    _url_Imagen: null,
+    url_Imagen: null,
   };
 
   constructor(public articulosService: ArticuloServices) {}
