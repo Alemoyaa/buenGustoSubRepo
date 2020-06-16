@@ -13,14 +13,14 @@
     </thead>
     <tbody>
       <tr *ngFor="let pedido of pedidosCliente">
-        <td hidden>{{pedido.id}}</td>
-        <td>{{pedido.fecha}}</td>
-        <td>{{pedido.numero}}</td>
-        <td>{{pedido.estado}}</td>
-        <td>{{pedido.horaEstimadaFin}}</td>
-        <td>{{pedido.tipoEnvio}}</td>
+        <td hidden>{{ pedido.id }}</td>
+        <td>{{ pedido.fechaRealizacion }}</td>
+        <td>{{ pedido.numero }}</td>
+        <td>{{ pedido.estadoPedido }}</td>
+        <td>{{ pedido.hora_estimada_fin }}</td>
+        <td>{{ pedido.tipo_envio }}</td>
         <td>
-          <a [routerLink]="['/factura',pedido.factura.id]">Ver factura</a>
+          <a [routerLink]="['/factura', pedido.factura.id]">Ver factura</a>
         </td>
       </tr>
     </tbody>

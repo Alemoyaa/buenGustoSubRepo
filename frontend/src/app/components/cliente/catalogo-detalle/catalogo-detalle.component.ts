@@ -10,8 +10,10 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./catalogo-detalle.component.css'],
 })
 export class CatalogoDetalleComponent implements OnInit {
+
   detalle: DetalleManufacturado = new DetalleManufacturado();
   id: number;
+
   constructor(
     public serviceDetalleManuf: DetalleManufacturadoService,
     public serviceManuf: ArticuloManufacturadoService,

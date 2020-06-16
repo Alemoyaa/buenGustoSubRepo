@@ -1,8 +1,9 @@
+import { ClienteService } from './../../../services/serviciosCliente/clienteServices/cliente.service';
 import { LoginService } from './../../../services/loginServices/login.service';
-import { Usuario } from '../../../entidades/Usuario';
-import { UsuarioServices } from './../../../services/serviciosCliente/UsuarioServices/usuario.services';
 import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Cliente } from '../../../entidades/Cliente';
+import { Domicilio } from '../../../entidades/Domicilio';
 
 @Component({
   selector: 'app-user-profile',
@@ -10,15 +11,30 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./user-profile.component.css'],
 })
 export class UserProfileComponent implements OnInit {
-  cliente: Usuario = {
+  cliente: Cliente = {
     id: null,
-    email: null,
-    rolID: null,
-    uid_firebase: null,
+    nombre: null,
+    apellido: null,
+    domicilioID: {
+      id: null,
+      aclaracion: null,
+      calle: null,
+      localidadID: null,
+      nroDepartamento: null,
+      numero: null,
+      piso: null,
+    },
+    telefono: null,
+    usuarioID: {
+      email: null,
+      uid_firebase: null,
+      id: 0,
+      rolID: null,
+    },
   };
 
   constructor(
-    private service: UsuarioServices,
+    private service: ClienteService,
     private rutaActiva: ActivatedRoute,
     private serviceLogin: LoginService
   ) {}
@@ -33,7 +49,7 @@ export class UserProfileComponent implements OnInit {
   }
 
   datosUser() {
-    return this.serviceLogin.datosGoogle(this.cliente); //me traigo los datos de google desde el service
+    return this.serviceLogin.datosGoogle(this.cliente.usuarioID); //me traigo los datos de google desde el service
   }
 
   async getOne(id: number) {

@@ -5,13 +5,14 @@ import { Usuario } from '../../entidades/Usuario';
 import { Injectable } from '@angular/core';
 import { map } from 'rxjs/operators';
 import { auth } from 'firebase/app';
+import { Cliente } from '../../entidades/Cliente';
 @Injectable({
   providedIn: 'root',
 })
 export class LoginService {
   public providerId: string = 'null';
 
-  cliente: Usuario = new Usuario();
+  cliente: Cliente = new Cliente();
   // =
   // {
   //   id: 0,

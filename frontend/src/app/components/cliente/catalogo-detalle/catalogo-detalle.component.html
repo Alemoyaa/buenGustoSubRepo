@@ -7,7 +7,7 @@
         <article class="gallery-wrap">
           <div class=" img-big-wrap">
             <div>
-              <a href="#"><img src="{{this.serviceManuf.articulosManufacturados[this.id]._urlImagen}}"></a>
+              <a href="#"><img src="{{this.serviceManuf.articulosManufacturados[this.id]._url_Imagen}}"></a>
             </div>
           </div>
         </article>  <!-- gallery-wrap .end// -->
@@ -19,14 +19,14 @@
 
           <p class="price-detail-wrap">
             <span class="price h3 text-warning">
-              <span class="currency">$</span><span class="num">{{detalle.receta.articuloManufacturado.precioVenta}}</span>
+              <span class="currency">$</span><span class="num">{{this.serviceManuf.articulosManufacturados[this.id].precio_de_venta}}</span>
             </span>
           </p>
 
           <dl class="item-property">
             <dt>Ingredientes</dt>
             <dd>
-              <p>{{detalle.articuloInsumo.denominacion}}</p>
+              <p>{{detalle.articuloInsumoID.denominacion}}</p>
             </dd>
           </dl>
           <dl class="param param-feature">

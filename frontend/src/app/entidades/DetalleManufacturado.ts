@@ -1,7 +1,9 @@
 import { Common } from './Common';
+import {ArticuloInsumo} from './ArticuloInsumo';
+import {UnidadMedida} from './UnidadMedida';
 
 export class DetalleManufacturado extends Common {
-  articuloInsumoID: number;
   cantidad: number;
-  unidadMedidaID: number;
+  articuloInsumoID: ArticuloInsumo;
+  unidadMedidaID: UnidadMedida;
 }

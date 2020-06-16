@@ -1,9 +1,11 @@
 import { Common } from './Common';
+import {Usuario} from './Usuario';
+import {Domicilio} from './Domicilio';
 
 export class Cliente extends Common {
-  apellido: string;
-  domicilioID: boolean;
   nombre: string;
+  apellido: string;
+  domicilioID: Domicilio;
   telefono: number;
-  usuarioID: number;
+  usuarioID: Usuario;
 }
