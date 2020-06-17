@@ -39,6 +39,8 @@ import { BajasStockCocineroComponent } from './components/admin/dashboard/Cocine
 import { CatalogoCrudComponent } from './components/admin/dashboard/Admin/catalogo-crud/catalogo-crud.component';
 import { StockComponent } from './components/admin/dashboard/Admin/stock/stock.component';
 import { EstadisticasComponent } from './components/admin/dashboard/Admin/estadisticas/estadisticas.component';
+import { FacturaDetalleComponent } from './components/cliente/factura-detalle/factura-detalle.component';
+import { PedidosDetalleComponent } from './components/cliente/pedidos-detalle/pedidos-detalle.component';
 
 
 @NgModule({
@@ -66,6 +68,8 @@ import { EstadisticasComponent } from './components/admin/dashboard/Admin/estadi
     NuevoPedidoCajeroComponent,
     GestorOrdenesCocineroComponent,
     BajasStockCocineroComponent,
+    FacturaDetalleComponent,
+    PedidosDetalleComponent,
   ],
   imports: [
     BrowserModule,

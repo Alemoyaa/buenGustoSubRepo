@@ -12,4 +12,5 @@ import com.utn.app.buenGusto.common.CommonController;
 @RequestMapping(path = "api/usuario")
 public class UsuarioController extends CommonController<UsuarioEntity, UsuarioService> {
 
+	
 }

@@ -1,3 +1,5 @@
+import { PedidosDetalleComponent } from './components/cliente/pedidos-detalle/pedidos-detalle.component';
+import { FacturaDetalleComponent } from './components/cliente/factura-detalle/factura-detalle.component';
 import { EstadisticasComponent } from './components/admin/dashboard/Admin/estadisticas/estadisticas.component';
 import { StockComponent } from './components/admin/dashboard/Admin/stock/stock.component';
 import { CatalogoDetalleComponent } from './components/cliente/catalogo-detalle/catalogo-detalle.component';
@@ -19,7 +21,7 @@ import { NuevoPedidoCajeroComponent } from './components/admin/dashboard/Cajero/
 import { PedidosCajeroComponent } from './components/admin/dashboard/Cajero/pedidos-cajero/pedidos-cajero.component';
 import { FacturacionCajeroComponent } from './components/admin/dashboard/Cajero/facturacion-cajero/facturacion-cajero.component';
 import { BajasStockCocineroComponent } from './components/admin/dashboard/Cocinero/bajas-stock-cocinero/bajas-stock-cocinero.component';
-import {GestorOrdenesCocineroComponent} from './components/admin/dashboard/Cocinero/gestor-ordenes-cocinero/gestor-ordenes-cocinero.component';
+import { GestorOrdenesCocineroComponent } from './components/admin/dashboard/Cocinero/gestor-ordenes-cocinero/gestor-ordenes-cocinero.component';
 
 const routes: Routes = [
   // Vistas usuario
@@ -30,25 +32,45 @@ const routes: Routes = [
   { path: 'catalogo-detalle/:id', component: CatalogoDetalleComponent },
   { path: 'user-profile/:id', component: UserProfileComponent },
   { path: 'carrito', component: CarritoComponent },
-  { path: 'pedido/:id', component: PedidosComponent },
-  { path: 'factura/:id', component: FacturaComponent },
+  { path: 'pedido/:id', component: PedidosDetalleComponent },
+  { path: 'factura/:id', component: FacturaDetalleComponent },
   //  vistas de administrador / cajero / cocinero : Faltan hacer los Guards
-      // El administrador deberiaa poder ver todas (lasa de admin, cajero y cocinero)
+  // El administrador deberiaa poder ver todas (lasa de admin, cajero y cocinero)
   // { path: 'dashboard', component: DashboardComponent },
   { path: 'dashboard/admin/gestionEmpleados', component: UsuariosComponent },
   { path: 'dashboard/admin/gestionStock', component: StockComponent },
-  { path: 'dashboard/admin/gestionArticulos', component: CatalogoCrudComponent },
+  {
+    path: 'dashboard/admin/gestionArticulos',
+    component: CatalogoCrudComponent,
+  },
   { path: 'dashboard/admin/estadisticas', component: EstadisticasComponent },
-    // vistas cajero
-  { path: 'dashboard/admin/cajero/nuevoCliente', component: NuevoClienteCajeroComponent },
-  { path: 'dashboard/admin/cajero/nuevoPedido', component: NuevoPedidoCajeroComponent },
-  { path: 'dashboard/admin/cajero/administracionDePedidos', component: PedidosCajeroComponent },
-  { path: 'dashboard/admin/cajero/administracionFacturacion', component: FacturacionCajeroComponent },
-    // vistas cocinero
-  { path: 'dashboard/admin/cocinero/gestorOrdenes', component: GestorOrdenesCocineroComponent },
-  { path: 'dashboard/admin/cocinero/bajasManualesDeStock', component: BajasStockCocineroComponent },
+  // vistas cajero
+  {
+    path: 'dashboard/admin/cajero/nuevoCliente',
+    component: NuevoClienteCajeroComponent,
+  },
+  {
+    path: 'dashboard/admin/cajero/nuevoPedido',
+    component: NuevoPedidoCajeroComponent,
+  },
+  {
+    path: 'dashboard/admin/cajero/administracionDePedidos',
+    component: PedidosCajeroComponent,
+  },
+  {
+    path: 'dashboard/admin/cajero/administracionFacturacion',
+    component: FacturacionCajeroComponent,
+  },
+  // vistas cocinero
+  {
+    path: 'dashboard/admin/cocinero/gestorOrdenes',
+    component: GestorOrdenesCocineroComponent,
+  },
+  {
+    path: 'dashboard/admin/cocinero/bajasManualesDeStock',
+    component: BajasStockCocineroComponent,
+  },
   { path: '**', component: NotfoundComponent },
-
 ];
 
 @NgModule({

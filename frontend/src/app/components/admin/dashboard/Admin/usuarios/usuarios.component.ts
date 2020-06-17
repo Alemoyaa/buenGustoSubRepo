@@ -41,7 +41,11 @@ export class UsuariosComponent implements OnInit {
     this.clienteService.getAll().subscribe((data) => {
       console.log('Traer Datos () :', data);
       data.forEach((a) => {
+<<<<<<< HEAD
         console.log(a.usuarioID);
+=======
+        console.log(a.usuario);
+>>>>>>> 33f5f392619b64d668a737f0ec9b98c472d5dff4
       });
       // seteo la data del service a la variable de el .ts
       return (this.usuarios = data);
@@ -60,27 +64,27 @@ export class UsuariosComponent implements OnInit {
       rol: this.fb.group({
         id: 0,
         nombreRol: '',
-        descripcion: '',
+        //descripcion: '',
       }),
     });
   }
 
-  // pre cargo los datos en el formulario de el usuario seleccionnado para editar el rol
-  // preCargarDatosFormulario(cliente: Cliente) {
-  //   this.formularioPersona = this.fb.group({
-  //     nombre: cliente.nombre,
-  //     apellido: cliente.apellido,
-  //     telefono: cliente.telefono,
+  //pre cargo los datos en el formulario de el usuario seleccionnado para editar el rol
+  preCargarDatosFormulario(cliente: Cliente) {
+    this.formularioPersona = this.fb.group({
+      nombre: cliente.nombre,
+      apellido: cliente.apellido,
+      telefono: cliente.telefono,
 
-  //     rol: this.fb.group({
-  //       id: cliente.rol.id,
-  //       nombreRol: cliente.rol.nombreRol,
-  //       descripcion: cliente.rol.descripcion,
-  //     }),
-  //   });
+      rol: this.fb.group({
+        id: cliente.usuario.rol.id,
+        nombreRol: cliente.usuario.rol.nombreRol,
+        //descripcion: cliente.usuarioID.rolID.descripcion, No hay mas descripcion de rol
+      }),
+    });
 
-  //   this.idUsuario = cliente.id;
-  // }
+    this.idUsuario = cliente.id;
+  }
 
   // Traer todos los posibles roles para mostrarlos en el html
   traerRoles() {

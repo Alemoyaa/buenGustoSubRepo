@@ -8,19 +8,24 @@
         <th scope="col">Estado</th>
         <th scope="col">Hora estimada fin</th>
         <th scope="col">Tipo envio</th>
-        <th scope="col">Factura</th>
+        <th scope="col">Detalle</th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let pedido of pedidosCliente">
-        <td hidden>{{pedido.id}}</td>
-        <td>{{pedido.fecha}}</td>
-        <td>{{pedido.numero}}</td>
-        <td>{{pedido.estado}}</td>
-        <td>{{pedido.horaEstimadaFin}}</td>
-        <td>{{pedido.tipoEnvio}}</td>
+        <td hidden>{{ pedido.id }}</td>
+        <td>{{ pedido.fechaRealizacion }}</td>
+        <td>{{ pedido.numero }}</td>
+        <td>{{ pedido.estadoPedido.nombreEstado }}</td>
+        <td>{{ pedido.hora_estimada_fin }}</td>
+        <td *ngIf="pedido.tipo_Envio; else SinEnvio">Delivery</td>
+        <ng-template #SinEnvio>
+          <td>Local</td>
+        </ng-template>
         <td>
-          <a [routerLink]="['/factura',pedido.factura.id]">Ver factura</a>
+          <a [routerLink]="['/pedido', pedido.id]" data-dismiss="modal"
+            >Ver pedido</a
+          >
         </td>
       </tr>
     </tbody>

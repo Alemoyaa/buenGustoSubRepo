@@ -26,7 +26,7 @@ export class PedidosComponent implements OnInit {
   async getAll() {
     await this.servicio.getAll().subscribe((data) => {
       data.forEach((pedido) => {
-        if (this.clienteUser.id === pedido.clienteID) {
+        if (this.clienteUser.id === pedido.clientePedido.id) {
           this.pedidosCliente.push(pedido);
           console.log(this.pedidosCliente);
         }

@@ -1,9 +1,11 @@
 import { Common } from './Common';
+import { Categoria } from './Categoria';
 
-export class Articulo extends Common {
-  categoriaId: any;
+export abstract class Articulo extends Common {
+  precio_de_venta: number;
+  url_Imagen?: string;
+  es_catalogo: boolean;
   denominacion: string;
-  es_catalogo: number;
-  precio_de_venta: boolean;
-  _url_Imagen?: string;
+
+  categoria: Categoria;
 }

@@ -1,3 +1,4 @@
+import { UsuarioServices } from './../serviciosCliente/usuarioServices/usuario.services';
 import { ClienteService } from './../serviciosCliente/clienteServices/cliente.service';
 import { Router } from '@angular/router';
 import { AngularFireAuth } from '@angular/fire/auth';
@@ -5,13 +6,14 @@ import { Usuario } from '../../entidades/Usuario';
 import { Injectable } from '@angular/core';
 import { map } from 'rxjs/operators';
 import { auth } from 'firebase/app';
+import { Cliente } from '../../entidades/Cliente';
 @Injectable({
   providedIn: 'root',
 })
 export class LoginService {
   public providerId: string = 'null';
 
-  cliente: Usuario = new Usuario();
+  usuario: Cliente = new Cliente();
   // =
   // {
   //   id: 0,
@@ -31,33 +33,31 @@ export class LoginService {
   constructor(
     private afsAuth: AngularFireAuth,
     private route: Router,
-    private clienteService: ClienteService
+    private cServicio: ClienteService
   ) {}
 
   //me traigo los datos que me da google
-  datosGoogle(cliente: Usuario) {
+  datosGoogle(usuario: Usuario) {
     this.isAuth().subscribe((user) => {
       if (user) {
-        cliente.uid_firebase = user.uid;
-        cliente.email = user.email;
+        usuario.uid_firebase = user.uid;
+        usuario.email = user.email;
         //this.providerId = user.providerData[0].providerId; //hacer ngIf para que solo se guarde con google
       }
     });
   }
 
   async loginGoogle() {
-    let idDelCliente = 0;
     return new Promise((resolve, reject) => {
       this.afsAuth.signInWithPopup(new auth.GoogleAuthProvider()).then(
         (data) => {
           console.log('data', data);
           let uidCliente = data.user.uid;
 
-          this.clienteService.getByUidFirebase(uidCliente).subscribe((data) => {
-            console.log(data);
+          this.cServicio.getByUidFirebase(uidCliente).subscribe((data) => {
+            this.usuario = data;
+            this.route.navigate(['user-profile/' + data.usuario.uid_firebase]);
           });
-
-          this.route.navigate(['user-profile']);
         },
         (error) => reject(error)
       );

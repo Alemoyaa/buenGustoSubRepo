@@ -1,7 +1,8 @@
 import { Common } from './Common';
 
 export class Categoria extends Common {
-  categoriaPadreID: string;
+  padre: Categoria;
+  hijos: Categoria[];
   insumoOManuf: boolean;
   nombreCategoria: string;
 }

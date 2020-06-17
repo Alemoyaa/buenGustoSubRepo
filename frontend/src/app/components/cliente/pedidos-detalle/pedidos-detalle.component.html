@@ -1,0 +1,37 @@
+<div class="container">
+  <h2>
+    Detalle de pedido
+  </h2>
+  <div class="table-responsive">
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th scope="col">Nombre articulo</th>
+          <th scope="col">Cantidad</th>
+          <th scope="col">Categoria</th>
+          <th scope="col">Precio de unidad</th>
+          <th scope="col">Subtotal</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of pedidoDetalle.lista_detallePedido">
+          <td>
+            {{ item.articulo.denominacion }}
+          </td>
+          <td>
+            {{ item.cantidad }}
+          </td>
+          <td>
+            {{ item.articulo.categoria.nombreCategoria }}
+          </td>
+          <td>
+            {{ item.articulo.precio_de_venta }}
+          </td>
+          <td>
+            {{ item.subtotal }}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

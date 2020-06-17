@@ -1,3 +1,4 @@
+import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Usuario } from '../../../entidades/Usuario';
 import { Injectable } from '@angular/core';

@@ -1,11 +1,14 @@
 import { Common } from './Common';
+import { DetallePedido } from './DetallePedido';
+import { EstadoPedido } from './EstadoPedido';
+import { Cliente } from './Cliente';
 
 export class Pedido extends Common {
-  clienteID: number;
-  estadoPedido: number;
   fechaRealizacion: Date;
   hora_estimada_fin: any;
-  lista_detallePedido: any;
   numero: number;
-  tipo_envio: boolean;
+  tipo_Envio: boolean;
+  lista_detallePedido: DetallePedido[];
+  estadoPedido: EstadoPedido;
+  clientePedido: Cliente;
 }
