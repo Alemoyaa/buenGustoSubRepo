@@ -1,3 +1,4 @@
+import { UsuarioServices } from './../../../services/serviciosCliente/usuarioServices/usuario.services';
 import { ClienteService } from './../../../services/serviciosCliente/clienteServices/cliente.service';
 import { LoginService } from './../../../services/loginServices/login.service';
 import { Component, OnInit, Input } from '@angular/core';
@@ -43,8 +44,8 @@ export class UserProfileComponent implements OnInit {
     private serviceLogin: LoginService
   ) {
     this.rutaActiva.params.subscribe((data) => {
-      if (data.id !== '0') {
-        this.getOne(data.id);
+      if (data.id !== null) {
+        this.getOneByUid(data.id);
       }
     });
     this.datosUser();
@@ -56,8 +57,8 @@ export class UserProfileComponent implements OnInit {
     return this.serviceLogin.datosGoogle(this.cliente.usuario); //me traigo los datos de google desde el service
   }
 
-  async getOne(id: number) {
-    await this.service.getOne(id).subscribe((data) => {
+  async getOneByUid(uid: string) {
+    await this.service.getByUidFirebase(uid).subscribe((data) => {
       this.cliente = data;
       console.log(this.cliente);
     });

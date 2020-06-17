@@ -1,218 +1,191 @@
-
 <div class="fondo">
-<div class="container mt-5">
-  <div class="row">
-    <div class="col-12 text-center">
-      <h1>Administracion de Platos</h1>
+  <div class="container mt-5">
+    <div class="row">
+      <div class="col-12 text-center">
+        <h1>Administracion de Platos</h1>
+      </div>
     </div>
+
+    <div class="row mb-4 ml-2">
+      <button
+        class="btn btn-success mr-3"
+        data-toggle="modal"
+        data-target="#ModalProductos"
+      >
+        Crear nuevo plato
+      </button>
+    </div>
+
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col"></th>
+          <th scope="col">Pizza</th>
+          <th scope="col">Ingredientes</th>
+          <th scope="col">Precio</th>
+          <th scope="col">Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><i class="fas fa-fw fa-pizza-slice"></i></td>
+          <td>Mozzarella</td>
+          <td>Salsa Aceitunas Orégano Mozzarella</td>
+          <td>$300</td>
+          <td>
+            <button
+              class="btn btn-info mr-3"
+              data-toggle="modal"
+              data-target="#ModalProductos"
+              (click)="editar()"
+            >
+              <i class="fas fa-pencil-alt"></i>
+            </button>
+            <button class="btn btn-danger mr-3" data-toggle="modal">
+              <i class="fas fa-trash"></i>
+            </button>
+          </td>
+        </tr>
+        <tr>
+          <td><i class="fas fa-fw fa-pizza-slice"></i></td>
+          <td>Especial</td>
+          <td>Ingredientes especiales</td>
+          <td>$250</td>
+          <td>
+            <button
+              class="btn btn-info mr-3"
+              data-toggle="modal"
+              data-target="#ModalProductos"
+              (click)="editar()"
+            >
+              <i class="fas fa-pencil-alt"></i>
+            </button>
+            <button class="btn btn-danger mr-3" data-toggle="modal">
+              <i class="fas fa-trash"></i>
+            </button>
+          </td>
+        </tr>
+        <tr>
+          <td><i class="fas fa-fw fa-pizza-slice"></i></td>
+          <td>Cuatro quesos</td>
+          <td>Queso queso queso queso</td>
+          <td>$320</td>
+          <td>
+            <button
+              class="btn btn-info mr-3"
+              data-toggle="modal"
+              data-target="#ModalProductos"
+              (click)="editar()"
+            >
+              <i class="fas fa-pencil-alt"></i>
+            </button>
+            <button class="btn btn-danger mr-3" data-toggle="modal">
+              <i class="fas fa-trash"></i>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 
-  <div class="row mb-4 ml-2">
+  <!-- Modal EDITAR -->
 
-    <button class="btn btn-success mr-3" data-toggle="modal" data-target="#ModalProductos">Crear nuevo plato</button>
+  <div
+    class="modal fade"
+    data-backdrop="static"
+    id="ModalProductos"
+    tabindex="-1"
+    role="form"
+    aria-labelledby="ModalEditarLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 *ngIf="!esEditar" class="modal-title" id="exampleModalLabel">
+            Crear nuevo plato
+          </h5>
+          <h5 *ngIf="esEditar" class="modal-title" id="exampleModalLabel">
+            Editar plato
+          </h5>
+          <button
+            (click)="cerrar()"
+            type="button"
+            class="close"
+            data-dismiss="modal"
+            aria-label="Close"
+          >
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body text-lg-center">
+          <form action="">
+            <div class="row">
+              <div class="col-12">
+                <h5 class="modal-title" id="exampleModalLabel">Articulo</h5>
+              </div>
 
-  </div>
-
-  <table class="table table-striped">
-    <thead>
-      <tr>
-        <th scope="col"></th>
-        <th scope="col">Pizza</th>
-        <th scope="col">Ingredientes</th>
-        <th scope="col">Precio</th>
-        <th scope="col">Acciones</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><i class="fas fa-fw fa-pizza-slice"></i></td>
-        <td>Mozzarella</td>
-        <td>Salsa
-          Aceitunas
-          Orégano
-          Mozzarella
-        </td>
-        <td>$300</td>
-        <td>
-          <button class="btn btn-info mr-3" data-toggle="modal" data-target="#ModalProductos" (click)="editar()" ><i
-              class="fas fa-pencil-alt"></i></button>
-          <button class="btn btn-danger mr-3" data-toggle="modal" ><i class="fas fa-trash"></i></button>
-        </td>
-      </tr>
-      <tr>
-        <td><i class="fas fa-fw fa-pizza-slice"></i></td>
-        <td>Especial</td>
-        <td>Ingredientes especiales</td>
-        <td>$250</td>
-        <td>
-          <button class="btn btn-info mr-3" data-toggle="modal" data-target="#ModalProductos" (click)="editar()"><i
-              class="fas fa-pencil-alt"></i></button>
-          <button class="btn btn-danger mr-3" data-toggle="modal"><i class="fas fa-trash"></i></button>
-        </td>
-      </tr>
-      <tr>
-        <td><i class="fas fa-fw fa-pizza-slice"></i></td>
-        <td>Cuatro quesos</td>
-        <td>Queso queso queso queso</td>
-        <td>$320</td>
-        <td>
-          <button class="btn btn-info mr-3" data-toggle="modal" data-target="#ModalProductos" (click)="editar()"><i
-              class="fas fa-pencil-alt"></i></button>
-          <button class="btn btn-danger mr-3" data-toggle="modal"><i class="fas fa-trash"></i></button>
-        </td>
-      </tr>
-      <tr>
-        <td><i class="fas fa-fw fa-pizza-slice"></i></td>
-        <td>Mozzarella</td>
-        <td>Salsa
-          Aceitunas
-          Orégano
-          Mozzarella
-        </td>
-        <td>$300</td>
-        <td>
-          <button class="btn btn-info mr-3" data-toggle="modal" data-target="#ModalProductos" (click)="editar()" ><i
-              class="fas fa-pencil-alt"></i></button>
-          <button class="btn btn-danger mr-3" data-toggle="modal" ><i class="fas fa-trash"></i></button>
-        </td>
-      </tr>
-      <tr>
-        <td><i class="fas fa-fw fa-pizza-slice"></i></td>
-        <td>Especial</td>
-        <td>Ingredientes especiales</td>
-        <td>$250</td>
-        <td>
-          <button class="btn btn-info mr-3" data-toggle="modal" data-target="#ModalProductos" (click)="editar()"><i
-              class="fas fa-pencil-alt"></i></button>
-          <button class="btn btn-danger mr-3" data-toggle="modal"><i class="fas fa-trash"></i></button>
-        </td>
-      </tr>
-      <tr>
-        <td><i class="fas fa-fw fa-pizza-slice"></i></td>
-        <td>Cuatro quesos</td>
-        <td>Queso queso queso queso</td>
-        <td>$320</td>
-        <td>
-          <button class="btn btn-info mr-3" data-toggle="modal" data-target="#ModalProductos" (click)="editar()"><i
-              class="fas fa-pencil-alt"></i></button>
-          <button class="btn btn-danger mr-3" data-toggle="modal"><i class="fas fa-trash"></i></button>
-        </td>
-      </tr>
-      <tr>
-        <td><i class="fas fa-fw fa-pizza-slice"></i></td>
-        <td>Mozzarella</td>
-        <td>Salsa
-          Aceitunas
-          Orégano
-          Mozzarella
-        </td>
-        <td>$300</td>
-        <td>
-          <button class="btn btn-info mr-3" data-toggle="modal" data-target="#ModalProductos" (click)="editar()" ><i
-              class="fas fa-pencil-alt"></i></button>
-          <button class="btn btn-danger mr-3" data-toggle="modal" ><i class="fas fa-trash"></i></button>
-        </td>
-      </tr>
-      <tr>
-        <td><i class="fas fa-fw fa-pizza-slice"></i></td>
-        <td>Especial</td>
-        <td>Ingredientes especiales</td>
-        <td>$250</td>
-        <td>
-          <button class="btn btn-info mr-3" data-toggle="modal" data-target="#ModalProductos" (click)="editar()"><i
-              class="fas fa-pencil-alt"></i></button>
-          <button class="btn btn-danger mr-3" data-toggle="modal"><i class="fas fa-trash"></i></button>
-        </td>
-      </tr>
-      <tr>
-        <td><i class="fas fa-fw fa-pizza-slice"></i></td>
-        <td>Cuatro quesos</td>
-        <td>Queso queso queso queso</td>
-        <td>$320</td>
-        <td>
-          <button class="btn btn-info mr-3" data-toggle="modal" data-target="#ModalProductos" (click)="editar()"><i
-              class="fas fa-pencil-alt"></i></button>
-          <button class="btn btn-danger mr-3" data-toggle="modal"><i class="fas fa-trash"></i></button>
-        </td>
-      </tr>
-    </tbody>
-  </table>
-
-</div>
-<!-- 
-<!-- Modal NUEVO -->
-<!-- Modal EDITAR -->
-
-<div class="modal fade" data-backdrop="static" id="ModalProductos" tabindex="-1" role="form" aria-labelledby="ModalEditarLabel"
-  aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 *ngIf="!esEditar" class="modal-title" id="exampleModalLabel">Crear nuevo plato</h5>
-        <h5 *ngIf="esEditar" class="modal-title" id="exampleModalLabel">Editar plato</h5>
-        <button (click)="cerrar()" type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body text-lg-center">
-        <form action="">
-          <div class="row">
-            <div class="col-12">
-              <h5 class="modal-title" id="exampleModalLabel">Articulo</h5>
-            </div>
-
-            <div class="col-4">
-              <div class="form-group">
-                <label for="">Denominacion</label>
-                <input type="text" class="form-control" />
+              <div class="col-4">
+                <div class="form-group">
+                  <label for="">Denominacion</label>
+                  <input type="text" class="form-control" />
+                </div>
+              </div>
+              <div class="col-4">
+                <div class="form-group">
+                  <label for="">Precio Compra</label>
+                  <input type="text" class="form-control" />
+                </div>
+              </div>
+              <div class="col-4">
+                <div class="form-group">
+                  <label for="">Precio venta</label>
+                  <input type="text" class="form-control" />
+                </div>
+              </div>
+              <div class="col-4">
+                <div class="form-group">
+                  <label for="">Stock Inicial</label>
+                  <input type="text" class="form-control" />
+                </div>
+              </div>
+              <div class="col-4">
+                <div class="form-group">
+                  <label for="">Stock Minimo</label>
+                  <input type="text" class="form-control" />
+                </div>
+              </div>
+              <div class="col-4">
+                <div class="form-group">
+                  <label for="">Unidad de medida</label>
+                  <select class="form-control" id="rol" name="rol">
+                    <option value="0">gramos</option>
+                    <option value="1">kilos</option>
+                    <option value="2">unidades</option>
+                    <option value="2">litros</option>
+                  </select>
+                </div>
               </div>
             </div>
-            <div class="col-4">
-              <div class="form-group">
-                <label for="">Precio Compra</label>
-                <input type="text" class="form-control" />
-              </div>
-            </div>
-            <div class="col-4">
-              <div class="form-group">
-                <label for="">Precio venta</label>
-                <input type="text" class="form-control" />
-              </div>
-            </div>
-            <div class="col-4">
-              <div class="form-group">
-                <label for="">Stock Inicial</label>
-                <input type="text" class="form-control" />
-              </div>
-            </div>
-            <div class="col-4">
-              <div class="form-group">
-                <label for="">Stock Minimo</label>
-                <input type="text" class="form-control" />
-              </div>
-            </div>
-            <div class="col-4">
-              <div class="form-group">
-                <label for="">Unidad de medida</label>
-                <select class="form-control" id="rol" name="rol">
-                  <option value="0">gramos</option>
-                  <option value="1">kilos</option>
-                  <option value="2">unidades</option>
-                  <option value="2">litros</option>
-
-                </select>
-              </div>
-            </div>
-
-          </div>
-        </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="cerrar()">Close</button>
-        <button  *ngIf="esEditar" type="button" class="btn btn-info">Editar plato</button>
-        <button  *ngIf="!esEditar" type="button" class="btn btn-info">Crear nuevo plato</button>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="btn btn-primary"
+            data-dismiss="modal"
+            (click)="cerrar()"
+          >
+            Close
+          </button>
+          <button *ngIf="esEditar" type="button" class="btn btn-info">
+            Editar plato
+          </button>
+          <button *ngIf="!esEditar" type="button" class="btn btn-info">
+            Crear nuevo plato
+          </button>
+        </div>
       </div>
     </div>
   </div>
-</div>
 </div>

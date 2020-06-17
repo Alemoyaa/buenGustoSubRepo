@@ -8,7 +8,7 @@
   <table class="table table-striped text-center">
     <thead>
       <tr>
-        <th scope="col">#</th>
+        <th scope="col"></th>
         <th scope="col">Email</th>
         <th scope="col">Nombre</th>
         <th scope="col">Apellido</th>
@@ -20,11 +20,11 @@
     <tbody>
       <tr *ngFor="let cliente of usuarios">
         <th scope="row"><i class="fas fa-user"></i></th>
-        <td>{{ cliente.usuarioID.email }}</td>
+        <td>{{ cliente.usuario.email }}</td>
         <td>{{ cliente.nombre }}</td>
         <td>{{ cliente.apellido }}</td>
         <td>{{ cliente.telefono }}</td>
-        <td>{{ cliente.usuarioID.rolID.nombreRol }}</td>
+        <td>{{ cliente.usuario.rol.nombreRol }}</td>
         <td>
           <button
             class="btn btn-info mr-3"

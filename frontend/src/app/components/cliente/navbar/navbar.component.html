@@ -2,8 +2,9 @@
 <div class="">
   <nav class="navbar navbar-light navbar-expand-md sticky-top">
     <div class="container">
-      <img id="logo" src="../../../../assets/assetsHome/img/foodLogo.png" />
-
+      <a [routerLink]="['/']">
+        <img id="logo" src="../../../../assets/assetsHome/img/foodLogo.png" />
+      </a>
       <h5>
         <a
           class="navbar-brand text-success"
@@ -29,8 +30,10 @@
           <li class="nav-item" role="presentation">
             <a class="nav-link" [routerLink]="['/catalogo']">Catalogo</a>
           </li>
-          <li class="nav-item" role="presentation">
-            <a class="nav-link" [routerLink]="['/user-profile']">Perfil</a>
+          <li *ngIf="navbarUsuario" class="nav-item" role="presentation">
+            <a class="nav-link" [routerLink]="['/user-profile/', uid]"
+              >Perfil</a
+            >
           </li>
           <li *ngIf="navbarUsuario" class="nav-item" role="presentation">
             <a class="nav-link btn btn-outline-light" (click)="cerrarSesion()">

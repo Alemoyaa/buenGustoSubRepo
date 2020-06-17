@@ -14,7 +14,7 @@ export class NavbarComponent implements OnInit {
 
   @Output() irDashboard = new EventEmitter();
 
-  id: string;
+  uid: string;
 
   cliente: Usuario = new Usuario();
 
@@ -30,6 +30,7 @@ export class NavbarComponent implements OnInit {
     this.serviceLogin.isAuth().subscribe((user) => {
       if (user) {
         this.navbarUsuario = true;
+        this.uid = user.uid;
       } else {
         this.navbarUsuario = false;
       }
