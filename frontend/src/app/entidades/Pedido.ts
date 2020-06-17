@@ -1,12 +1,14 @@
-import { Estado } from './Estado';
-import { Usuario } from 'src/app/entidades/Usuario';
 import { Common } from './Common';
+import { DetallePedido } from './DetallePedido';
+import { EstadoPedido } from './EstadoPedido';
+import { Cliente } from './Cliente';
 
 export class Pedido extends Common {
-  fecha: Date;
+  fechaRealizacion: Date;
+  hora_estimada_fin: any;
   numero: number;
-  estadoActual: Estado;
-  horaEstimadaFin: Date;
-  tipoEnvio: number;
-  usuario: Usuario;
+  tipo_Envio: boolean;
+  lista_detallePedido: DetallePedido[];
+  estadoPedido: EstadoPedido;
+  clientePedido: Cliente;
 }

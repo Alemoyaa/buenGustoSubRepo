@@ -1,13 +1,8 @@
-import { SubcategoriaAM } from './SubcategoriaAm';
-import { Common } from './Common';
-import { Receta } from './Receta';
-export class ArticuloManufacturado extends Common {
-  denominacion: string;
-  precioVenta: number;
-  precioCompra: number;
-  _urlImagen?: string;
-  fechaBaja: Date;
-  tiempoEstimadoCocina: Date;
-  subcategoriaAM: SubcategoriaAM;
-  receta: Receta;
+import {Articulo} from './Articulo';
+import {DetalleManufacturado} from './DetalleManufacturado';
+
+export class ArticuloManufacturado extends Articulo {
+  costo_de_manuf: number;
+  lista_detalleManufacturado: DetalleManufacturado[];
+  tiempo_estimado_manuf: number;
 }

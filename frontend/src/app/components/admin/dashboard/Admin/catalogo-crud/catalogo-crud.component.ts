@@ -8,19 +8,15 @@ import { Component, OnInit, Input } from '@angular/core';
 export class CatalogoCrudComponent implements OnInit {
   esEditar: boolean = false;
 
-  
   constructor() {}
 
-  ngOnInit(): void {
+  ngOnInit(): void {}
 
-   
-  }
-
-  editar(){
+  editar() {
     this.esEditar = true;
   }
 
-  cerrar(){
+  cerrar() {
     this.esEditar = false;
   }
 }

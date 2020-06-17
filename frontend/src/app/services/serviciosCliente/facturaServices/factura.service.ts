@@ -4,11 +4,12 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
-export class FacturaService extends CommonService<Factura>{
-
+export class FacturaService extends CommonService<Factura> {
   _url = 'http://localhost:8080/api/factura/';
 
-  constructor(http: HttpClient) { super(http) }
+  constructor(http: HttpClient) {
+    super(http);
+  }
 }

@@ -1,14 +1,11 @@
-import { StockArticulo } from './StockArticulo';
-import { SubcategoriaAI } from './SubcategoriaAI';
 import { Common } from './Common';
+import { Articulo } from './Articulo';
+import { UnidadMedida } from './UnidadMedida';
 
-export class ArticuloInsumo extends Common {
-  denominacion: string;
-  precioVenta: number;
-  precioCompra: number;
-  requiereRefrigeracion: boolean;
-  fechaBaja: Date;
-  _urlImagen?: string;
-  subcategoriaAI: SubcategoriaAI;
-  stockArticulo: StockArticulo;
+export class ArticuloInsumo extends Articulo {
+  costo_de_venta: number;
+  require_refrigeracion: boolean;
+  stock_actual: number;
+  stock_minimo: number;
+  unidadMedidaID: UnidadMedida;
 }
