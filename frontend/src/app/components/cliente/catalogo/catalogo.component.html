@@ -91,9 +91,9 @@
                       type="button"
                       class="btn btn-primary"
                       data-toggle="modal"
-                      data-target="#catalogoDetalleModal"
+                      (click)="goToDetail(articulo.id)"
                     >
-                      Agregar al carrito
+                      Ver más
                     </button>
                   </div>
                 </div>
@@ -115,7 +115,9 @@
                 >
                   <img
                     class="card-img-top card-img-recomendado"
-                    src="../../../../assets/assetsCatalogo/assets/img/pizza/pizza3.jpg"
+                    src="../../../../assets/articulos/ {{
+                      articulo.url_Imagen
+                    }}"
                   />
                   <div class="card-body">
                     <h4 class="card-text">
@@ -130,9 +132,9 @@
                       type="button"
                       class="btn btn-primary"
                       data-toggle="modal"
-                      data-target="#catalogoDetalleModal"
+                      (click)="goToDetail(articulo.id)"
                     >
-                      Agregar al carrito
+                      Ver más
                     </button>
                   </div>
                 </div>

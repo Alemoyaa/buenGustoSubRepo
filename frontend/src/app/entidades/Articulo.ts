@@ -6,6 +6,5 @@ export abstract class Articulo extends Common {
   url_Imagen?: string;
   es_catalogo: boolean;
   denominacion: string;
-
   categoria: Categoria;
 }

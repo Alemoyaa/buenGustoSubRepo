@@ -1,6 +1,7 @@
 import { ArticuloServices } from '../../../services/serviciosCliente/articuloServices/articuloServices';
 import { Articulo } from 'src/app/entidades/Articulo';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-catalogo',
@@ -20,7 +21,10 @@ export class CatalogoComponent implements OnInit {
     url_Imagen: null,
   };
 
-  constructor(public articulosService: ArticuloServices) {}
+  constructor(
+    public articulosService: ArticuloServices,
+    private router: Router
+  ) {}
 
   async ngOnInit() {
     await this.getArticulos();
@@ -31,5 +35,9 @@ export class CatalogoComponent implements OnInit {
     this.articulosService.getAll().subscribe((data) => {
       this.articulos = data;
     });
+  }
+
+  goToDetail(id) {
+    this.router.navigate(['catalogo-detalle/', id]);
   }
 }

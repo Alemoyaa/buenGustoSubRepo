@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Articulo } from 'src/app/entidades/Articulo';
 
 @Component({
   selector: 'app-carrito',
@@ -8,11 +9,11 @@ import { Component, OnInit } from '@angular/core';
 export class CarritoComponent implements OnInit {
   constructor() {}
 
-  ngOnInit(): void {
-    this.getArticulos;
+  ngOnInit() {
+    this.getArticulos();
   }
 
-  articulos = [];
+  articulos: Array<Articulo> = [];
 
   getArticulos() {
     let articulosStorage = localStorage.getItem('carrito');
@@ -20,6 +21,6 @@ export class CarritoComponent implements OnInit {
     articulosJson.forEach((element) => {
       this.articulos.push(element);
     });
-    console.log(this.articulos);
+    console.log('e', this.articulos);
   }
 }

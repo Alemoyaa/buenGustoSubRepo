@@ -2,7 +2,9 @@ import { ArticuloManufacturadoService } from './../../../services/serviciosClien
 import { DetalleManufacturado } from './../../../entidades/DetalleManufacturado';
 import { DetalleManufacturadoService } from './../../../services/serviciosCliente/detalleManufacturadoServices/detalle-manufacturado.service';
 import { Component, OnInit, Input } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ArticuloServices } from 'src/app/services/serviciosCliente/articuloServices/articuloServices';
+import { Articulo } from 'src/app/entidades/Articulo';
 
 @Component({
   selector: 'app-catalogo-detalle',
@@ -10,17 +12,17 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./catalogo-detalle.component.css'],
 })
 export class CatalogoDetalleComponent implements OnInit {
-  detalle: DetalleManufacturado = new DetalleManufacturado();
+  articulo: Articulo;
   id: number;
 
   constructor(
-    public serviceDetalleManuf: DetalleManufacturadoService,
-    public serviceManuf: ArticuloManufacturadoService,
-    private routActiv: ActivatedRoute
+    private articuloService: ArticuloServices,
+    private routerActive: ActivatedRoute,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
-    this.routActiv.params.subscribe((data) => {
+    this.routerActive.params.subscribe((data) => {
       this.id = data.id;
       this.getOne(data.id);
       console.log(data);
@@ -28,18 +30,23 @@ export class CatalogoDetalleComponent implements OnInit {
   }
 
   async getOne(id: number) {
-    await this.serviceDetalleManuf.getOne(id).subscribe((data) => {
-      this.detalle = data;
-      console.log('getOne');
-      console.log(this.detalle);
+    await this.articuloService.getOne(id).subscribe((data) => {
+      console.log(data);
+      this.articulo = data;
     });
   }
 
-  addToCart() {
+  addToCart(articulo) {
     let string = localStorage.getItem('carrito');
     let json = JSON.parse(string);
-    json.push({ id: this.detalle.id });
+    json.push({
+      id: articulo.id,
+      denominacion: articulo.denominacion,
+      precio_de_venta: articulo.precio_de_venta,
+      url_Imagen: articulo.url_Imagen,
+    });
     localStorage.setItem('carrito', JSON.stringify(json));
     console.log(localStorage.getItem('carrito'));
+    this.router.navigate(['carrito']);
   }
 }
