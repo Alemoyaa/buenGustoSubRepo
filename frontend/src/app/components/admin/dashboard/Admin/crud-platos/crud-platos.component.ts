@@ -2,10 +2,10 @@ import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'app-catalogo-crud',
-  templateUrl: './catalogo-crud.component.html',
-  styleUrls: ['./catalogo-crud.component.css'],
+  templateUrl: './crud-platos.component.html',
+  styleUrls: ['./crud-platos.component.css'],
 })
-export class CatalogoCrudComponent implements OnInit {
+export class CrudPlatosComponent implements OnInit {
   esEditar: boolean = false;
 
   constructor() {}

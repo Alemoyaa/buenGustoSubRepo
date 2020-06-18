@@ -41,11 +41,7 @@ export class UsuariosComponent implements OnInit {
     this.clienteService.getAll().subscribe((data) => {
       console.log('Traer Datos () :', data);
       data.forEach((a) => {
-<<<<<<< HEAD
-        console.log(a.usuarioID);
-=======
         console.log(a.usuario);
->>>>>>> 33f5f392619b64d668a737f0ec9b98c472d5dff4
       });
       // seteo la data del service a la variable de el .ts
       return (this.usuarios = data);

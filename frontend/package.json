@@ -37,6 +37,7 @@
     "ngx-pagination": "^5.0.0",
     "popper.js": "^1.16.1",
     "rxjs": "~6.5.4",
+    "sweetalert": "^2.1.2",
     "tslib": "^1.10.0",
     "zone.js": "~0.10.2"
   },
