@@ -16,8 +16,6 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { UsuariosComponent } from './components/admin/dashboard/Admin/usuarios/usuarios.component';
 import { CrudPlatosComponent } from './components/admin/dashboard/Admin/crud-platos/crud-platos.component';
-import { NuevoClienteCajeroComponent } from './components/admin/dashboard/Cajero/nuevo-cliente-cajero/nuevo-cliente-cajero.component';
-import { NuevoPedidoCajeroComponent } from './components/admin/dashboard/Cajero/nuevo-pedido-cajero/nuevo-pedido-cajero.component';
 import { PedidosCajeroComponent } from './components/admin/dashboard/Cajero/pedidos-cajero/pedidos-cajero.component';
 import { FacturacionCajeroComponent } from './components/admin/dashboard/Cajero/facturacion-cajero/facturacion-cajero.component';
 import { BajasStockCocineroComponent } from './components/admin/dashboard/Cocinero/bajas-stock-cocinero/bajas-stock-cocinero.component';
@@ -45,14 +43,6 @@ const routes: Routes = [
   },
   { path: 'dashboard/admin/estadisticas', component: EstadisticasComponent },
   // vistas cajero
-  {
-    path: 'dashboard/admin/cajero/nuevoCliente',
-    component: NuevoClienteCajeroComponent,
-  },
-  {
-    path: 'dashboard/admin/cajero/nuevoPedido',
-    component: NuevoPedidoCajeroComponent,
-  },
   {
     path: 'dashboard/admin/cajero/administracionDePedidos',
     component: PedidosCajeroComponent,

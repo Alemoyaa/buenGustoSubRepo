@@ -1,5 +1,8 @@
+import { ArticuloInsumo } from 'src/app/entidades/ArticuloInsumo';
+import { ArticuloInsumoService } from './../../../../../services/serviciosCliente/articuloInsumoServices/articuloInsumo.service';
 import { Chart } from 'node_modules/chart.js';
 import { Component, OnInit } from '@angular/core';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-estadisticas',
@@ -7,12 +10,47 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./estadisticas.component.css'],
 })
 export class EstadisticasComponent implements OnInit {
-  constructor() { }
+  articulosBajoStock: ArticuloInsumo[] = [];
+
+  constructor(private serviceArtInsumo: ArticuloInsumoService) {}
 
   ngOnInit(): void {
+    this.getArticulosBajoStock();
     this.newChart('general', ['pizzas', 'coso'], [2, 2]);
     this.newChart('pizzas', ['4q', 'mozza'], [3, 4]);
     this.newChart('bebidas', ['coca', 'sprite'], [3, 4]);
+  }
+
+  getArticulosBajoStock() {
+    this.esperarAlert();
+    this.serviceArtInsumo.getAll().subscribe((listaArticulosInsumo) => {
+      listaArticulosInsumo.forEach((articuloInsumo) => {
+        if (articuloInsumo.stock_actual <= articuloInsumo.stock_minimo) {
+          this.articulosBajoStock.push(articuloInsumo);
+        }
+      });
+      Swal.close();
+      console.log(this.articulosBajoStock);
+    });
+  }
+
+  esperarAlert() {
+    let timerInterval;
+
+    Swal.fire({
+      title: 'Por favor espere',
+      html: 'Recuperando los datos...',
+      timer: 1500,
+      timerProgressBar: true,
+      onBeforeOpen: () => {
+        Swal.showLoading();
+      },
+      onClose: () => {
+        clearInterval(timerInterval);
+      },
+    }).then((result) => {
+      console.log(result);
+    });
   }
 
   newChart(nombre, labels, data) {
