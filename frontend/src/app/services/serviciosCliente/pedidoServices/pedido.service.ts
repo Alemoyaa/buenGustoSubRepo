@@ -1,3 +1,5 @@
+import { catchError } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Pedido } from '../../../entidades/Pedido';
 import { CommonService } from '../commonServices/common.service';
@@ -11,5 +13,11 @@ export class PedidoServices extends CommonService<Pedido> {
 
   constructor(http: HttpClient) {
     super(http);
+  }
+
+  getPedidosEntreDosFechas(desde: Date, hasta: Date): Observable<Pedido[]> {
+    return this.http
+      .get<Pedido[]>(this._url + desde + '/' + hasta)
+      .pipe(catchError(this.handleError));
   }
 }

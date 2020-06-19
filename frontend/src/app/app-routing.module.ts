@@ -36,7 +36,10 @@ const routes: Routes = [
   // El administrador deberiaa poder ver todas (lasa de admin, cajero y cocinero)
   // { path: 'dashboard', component: DashboardComponent },
   { path: 'dashboard/admin/gestionEmpleados', component: UsuariosComponent },
-  { path: 'dashboard/admin/gestionStock', component: StockComponent },
+  {
+    path: 'dashboard/admin/gestionStock',
+    component: StockComponent,
+  },
   {
     path: 'dashboard/admin/gestionArticulos',
     component: CrudPlatosComponent,

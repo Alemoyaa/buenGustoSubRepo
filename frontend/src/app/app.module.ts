@@ -39,6 +39,7 @@ import { StockComponent } from './components/admin/dashboard/Admin/stock/stock.c
 import { EstadisticasComponent } from './components/admin/dashboard/Admin/estadisticas/estadisticas.component';
 import { FacturaDetalleComponent } from './components/cliente/factura-detalle/factura-detalle.component';
 import { PedidosDetalleComponent } from './components/cliente/pedidos-detalle/pedidos-detalle.component';
+import { ArtStockMinimoComponent } from './components/admin/dashboard/Admin/estadisticas/art-stock-minimo/art-stock-minimo.component';
 
 
 @NgModule({
@@ -66,6 +67,7 @@ import { PedidosDetalleComponent } from './components/cliente/pedidos-detalle/pe
     BajasStockCocineroComponent,
     FacturaDetalleComponent,
     PedidosDetalleComponent,
+    ArtStockMinimoComponent,
   ],
   imports: [
     BrowserModule,

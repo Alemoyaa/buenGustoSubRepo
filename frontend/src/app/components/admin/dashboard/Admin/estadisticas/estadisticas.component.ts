@@ -1,8 +1,11 @@
+import { Pedido } from './../../../../../entidades/Pedido';
+import { PedidoServices } from './../../../../../services/serviciosCliente/pedidoServices/pedido.service';
 import { ArticuloInsumo } from 'src/app/entidades/ArticuloInsumo';
 import { ArticuloInsumoService } from './../../../../../services/serviciosCliente/articuloInsumoServices/articuloInsumo.service';
 import { Chart } from 'node_modules/chart.js';
 import { Component, OnInit } from '@angular/core';
 import Swal from 'sweetalert2';
+import { Form, FormGroup, NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-estadisticas',
@@ -10,48 +13,84 @@ import Swal from 'sweetalert2';
   styleUrls: ['./estadisticas.component.css'],
 })
 export class EstadisticasComponent implements OnInit {
-  articulosBajoStock: ArticuloInsumo[] = [];
+  fechaAhora: Date = new Date();
+  DateHasta: Date;
+  DateDesde: Date;
 
-  constructor(private serviceArtInsumo: ArticuloInsumoService) {}
+  pedidosRecuperadosDesdeHasta: Pedido[] = [];
+
+  constructor(private servicePedido: PedidoServices) {
+    // this.getArticulosBajoStock();
+  }
 
   ngOnInit(): void {
-    this.getArticulosBajoStock();
-    this.newChart('general', ['pizzas', 'coso'], [2, 2]);
-    this.newChart('pizzas', ['4q', 'mozza'], [3, 4]);
-    this.newChart('bebidas', ['coca', 'sprite'], [3, 4]);
+    // this.newChart('general', ['pizzas', 'coso'], [2, 2]);
+    // this.newChart('pizzas', ['4q', 'mozza'], [3, 4]);
+    // this.newChart('bebidas', ['coca', 'sprite'], [3, 4]);
   }
 
-  getArticulosBajoStock() {
-    this.esperarAlert();
-    this.serviceArtInsumo.getAll().subscribe((listaArticulosInsumo) => {
-      listaArticulosInsumo.forEach((articuloInsumo) => {
-        if (articuloInsumo.stock_actual <= articuloInsumo.stock_minimo) {
-          this.articulosBajoStock.push(articuloInsumo);
-        }
+  onSubmit(form: NgForm) {
+    if (form.controls['desdeday'].value >= form.controls['hastaday'].value) {
+      Swal.fire({
+        icon: 'error',
+        title: 'La fecha son incorrectas',
+        html: 'Por favor revise el orden de las fechas ingresadas',
       });
-      Swal.close();
-      console.log(this.articulosBajoStock);
-    });
+    } else {
+      this.servicePedido
+        .getPedidosEntreDosFechas(this.DateDesde, this.DateHasta)
+        .subscribe(
+          (res) => {
+            console.log(res);
+            this.pedidosRecuperadosDesdeHasta = res;
+          },
+          (err) => {
+            console.log(err);
+          }
+        );
+    }
   }
 
-  esperarAlert() {
-    let timerInterval;
+  // getArticulosBajoStock() {
+  //   this.esperarAlert();
+  //   this.serviceArtInsumo.getAll().subscribe(
+  //     (listaArticulosInsumo) => {
+  //       listaArticulosInsumo.forEach((articuloInsumo) => {
+  //         if (articuloInsumo.stock_actual <= articuloInsumo.stock_minimo) {
+  //           this.articulosBajoStock.push(articuloInsumo);
+  //         }
+  //       });
+  //       Swal.fire({
+  //         icon: 'success',
+  //         title: 'Datos cargados',
+  //         showConfirmButton: false,
+  //         timer: 1200,
+  //       });
+  //       console.log(this.articulosBajoStock);
+  //     },
+  //     (err) => {
+  //       Swal.fire({
+  //         icon: 'error',
+  //         title: 'Ocurrio un error al cargar el componente',
+  //         html: 'Vuelva a intentarlo mas tarde',
+  //       });
+  //       console.error(err);
+  //     }
+  //   );
+  // }
 
-    Swal.fire({
-      title: 'Por favor espere',
-      html: 'Recuperando los datos...',
-      timer: 1500,
-      timerProgressBar: true,
-      onBeforeOpen: () => {
-        Swal.showLoading();
-      },
-      onClose: () => {
-        clearInterval(timerInterval);
-      },
-    }).then((result) => {
-      console.log(result);
-    });
-  }
+  // esperarAlert() {
+  //   Swal.fire({
+  //     title: 'Por favor espere',
+  //     html: 'Recuperando los datos...',
+  //     // timer: 1500,
+  //     onBeforeOpen: () => {
+  //       Swal.showLoading();
+  //     },
+  //   }).then((result) => {
+  //     console.log(result);
+  //   });
+  // }
 
   newChart(nombre, labels, data) {
     var ctx = document.getElementById(nombre);

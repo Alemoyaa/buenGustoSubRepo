@@ -1,22 +1,60 @@
-<div class="container mt-5">
+<div class="container mt-3">
+  <h2>Estadisticas</h2>
 
-  <div class="col-lg-12">
-    <h3>Productos</h3>
-    <canvas id="general"></canvas>
-  </div>
+  <form (ngSubmit)="onSubmit(form)" #form="ngForm">
+    <div class="row">
+      <div class="form-group col">
+        <label>Desde</label>
+        <input
+          type="date"
+          name="desdeday"
+          min="2020-01-01"
+          max="{{ this.fechaAhora.toJSON() | date: 'yyyy-MM-dd' }}"
+          class="form-control"
+          [(ngModel)]="DateDesde"
+        />
+      </div>
+      <div class="form-group col">
+        <label>Hasta</label>
+        <input
+          type="date"
+          name="hastaday"
+          min="2020-01-01"
+          max="{{ this.fechaAhora.toJSON() | date: 'yyyy-MM-dd' }}"
+          class="form-control"
+          [(ngModel)]="DateHasta"
+        />
+      </div>
+      <div class="form-group">
+        <label class="text-center">Realizar consulta</label>
 
-  <div class="col-lg-12 d-flex justify-content-between">
-
-    <div class="col-lg-5">
-      <h3>Pizzas</h3>
-      <canvas id="pizzas"></canvas>
+        <button
+          type="submit"
+          class="btn btn-success form-control"
+          *ngIf="DateHasta != null && DateDesde != null"
+        >
+          Aceptar
+        </button>
+      </div>
     </div>
+  </form>
 
+  <h2>Articulos con bajo stock</h2>
+  <app-art-stock-minimo></app-art-stock-minimo>
+  <!-- <div class="col-lg-12 d-flex justify-content-between">
+    <div class="card col-lg-5">
+      <canvas id="pizzas"></canvas>
+      <div class="card-body">
+        <h3>Pizzas</h3>
+      </div>
+    </div>
+    <div class="col-auto">
+      <h3>Productos</h3>
+      <canvas id="general"></canvas>
+    </div>
     <div class="col-lg-5">
       <h3>Bebidas</h3>
       <canvas id="bebidas"></canvas>
     </div>
-
-  </div>
-
+  </div> -->
 </div>
