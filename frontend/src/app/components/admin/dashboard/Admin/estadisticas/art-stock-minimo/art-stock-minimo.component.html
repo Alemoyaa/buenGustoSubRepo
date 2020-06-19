@@ -1,4 +1,4 @@
-<table class="table table-hover">
+<table class="table table-hover mt-3" *ngIf="mostrar; else elseTemplate">
   <thead>
     <tr>
       <th scope="col">Denominacion</th>
@@ -14,3 +14,7 @@
     </tr>
   </tbody>
 </table>
+
+<ng-template #elseTemplate>
+  <h6 class="lead">No existen articulos con stock en minimo</h6>
+</ng-template>

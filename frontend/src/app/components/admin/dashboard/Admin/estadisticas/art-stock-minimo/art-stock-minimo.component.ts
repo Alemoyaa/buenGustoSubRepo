@@ -11,6 +11,8 @@ import Swal from 'sweetalert2';
 export class ArtStockMinimoComponent implements OnInit {
   articulosBajoStock: ArticuloInsumo[] = [];
 
+  mostrar: boolean = false;
+
   constructor(private serviceArtInsumo: ArticuloInsumoService) {
     this.getArticulosBajoStock();
   }
@@ -24,6 +26,7 @@ export class ArtStockMinimoComponent implements OnInit {
         listaArticulosInsumo.forEach((articuloInsumo) => {
           if (articuloInsumo.stock_actual <= articuloInsumo.stock_minimo) {
             this.articulosBajoStock.push(articuloInsumo);
+            this.mostrar = true;
           }
         });
         Swal.fire({

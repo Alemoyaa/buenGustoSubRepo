@@ -1,11 +1,9 @@
 import { Pedido } from './../../../../../entidades/Pedido';
 import { PedidoServices } from './../../../../../services/serviciosCliente/pedidoServices/pedido.service';
-import { ArticuloInsumo } from 'src/app/entidades/ArticuloInsumo';
-import { ArticuloInsumoService } from './../../../../../services/serviciosCliente/articuloInsumoServices/articuloInsumo.service';
 import { Chart } from 'node_modules/chart.js';
 import { Component, OnInit } from '@angular/core';
 import Swal from 'sweetalert2';
-import { Form, FormGroup, NgForm } from '@angular/forms';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-estadisticas',
@@ -19,15 +17,9 @@ export class EstadisticasComponent implements OnInit {
 
   pedidosRecuperadosDesdeHasta: Pedido[] = [];
 
-  constructor(private servicePedido: PedidoServices) {
-    // this.getArticulosBajoStock();
-  }
+  constructor(private servicePedido: PedidoServices) {}
 
-  ngOnInit(): void {
-    // this.newChart('general', ['pizzas', 'coso'], [2, 2]);
-    // this.newChart('pizzas', ['4q', 'mozza'], [3, 4]);
-    // this.newChart('bebidas', ['coca', 'sprite'], [3, 4]);
-  }
+  ngOnInit(): void {}
 
   onSubmit(form: NgForm) {
     if (form.controls['desdeday'].value >= form.controls['hastaday'].value) {
@@ -41,8 +33,8 @@ export class EstadisticasComponent implements OnInit {
         .getPedidosEntreDosFechas(this.DateDesde, this.DateHasta)
         .subscribe(
           (res) => {
-            console.log(res);
             this.pedidosRecuperadosDesdeHasta = res;
+            this.getCantidades(this.pedidosRecuperadosDesdeHasta);
           },
           (err) => {
             console.log(err);
@@ -51,46 +43,44 @@ export class EstadisticasComponent implements OnInit {
     }
   }
 
-  // getArticulosBajoStock() {
-  //   this.esperarAlert();
-  //   this.serviceArtInsumo.getAll().subscribe(
-  //     (listaArticulosInsumo) => {
-  //       listaArticulosInsumo.forEach((articuloInsumo) => {
-  //         if (articuloInsumo.stock_actual <= articuloInsumo.stock_minimo) {
-  //           this.articulosBajoStock.push(articuloInsumo);
-  //         }
-  //       });
-  //       Swal.fire({
-  //         icon: 'success',
-  //         title: 'Datos cargados',
-  //         showConfirmButton: false,
-  //         timer: 1200,
-  //       });
-  //       console.log(this.articulosBajoStock);
-  //     },
-  //     (err) => {
-  //       Swal.fire({
-  //         icon: 'error',
-  //         title: 'Ocurrio un error al cargar el componente',
-  //         html: 'Vuelva a intentarlo mas tarde',
-  //       });
-  //       console.error(err);
-  //     }
-  //   );
-  // }
+  getCantidades(listaDePedidos: Pedido[]) {
+    let elementosSinRepetir: Array<string> = [];
+    let cantidadElementos: Array<number> = [];
 
-  // esperarAlert() {
-  //   Swal.fire({
-  //     title: 'Por favor espere',
-  //     html: 'Recuperando los datos...',
-  //     // timer: 1500,
-  //     onBeforeOpen: () => {
-  //       Swal.showLoading();
-  //     },
-  //   }).then((result) => {
-  //     console.log(result);
-  //   });
-  // }
+    listaDePedidos.forEach((pedidoItem) => {
+      pedidoItem.lista_detallePedido.forEach((articuloDetallePedido) => {
+        if (
+          !elementosSinRepetir.includes(
+            articuloDetallePedido.articulo.denominacion
+          )
+        ) {
+          elementosSinRepetir.push(
+            articuloDetallePedido.articulo.denominacion as string
+          );
+        }
+      });
+    });
+
+    for (let x = 0; x < elementosSinRepetir.length; x++) {
+      let cantidad = 0;
+
+      listaDePedidos.forEach((pedido) => {
+        for (let i = 0; i < pedido.lista_detallePedido.length; i++) {
+          if (
+            (pedido.lista_detallePedido[i].articulo.denominacion as string) ===
+            elementosSinRepetir[x]
+          ) {
+            cantidad += pedido.lista_detallePedido[i].cantidad;
+          }
+        }
+      });
+
+      cantidadElementos.push(cantidad);
+      cantidad = 0;
+    }
+
+    this.newChart('canvaFecha', elementosSinRepetir, cantidadElementos);
+  }
 
   newChart(nombre, labels, data) {
     var ctx = document.getElementById(nombre);
