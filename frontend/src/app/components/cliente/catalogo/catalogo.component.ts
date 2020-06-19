@@ -18,7 +18,7 @@ export class CatalogoComponent implements OnInit {
     denominacion: null,
     es_catalogo: null,
     precio_de_venta: null,
-    url_Imagen: null,
+    url_imagen: null,
   };
 
   constructor(

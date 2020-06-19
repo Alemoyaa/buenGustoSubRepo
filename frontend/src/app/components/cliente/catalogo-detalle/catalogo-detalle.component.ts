@@ -43,7 +43,7 @@ export class CatalogoDetalleComponent implements OnInit {
       id: articulo.id,
       denominacion: articulo.denominacion,
       precio_de_venta: articulo.precio_de_venta,
-      url_Imagen: articulo.url_Imagen,
+      url_imagen: articulo.url_imagen,
     });
     localStorage.setItem('carrito', JSON.stringify(json));
     console.log(localStorage.getItem('carrito'));
