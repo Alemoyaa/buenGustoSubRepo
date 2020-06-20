@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.utn.app.buenGusto.articuloInsumo.ArticuloInsumoEntity;
@@ -29,6 +30,13 @@ public class DetalleManufacturadoEntity extends CommonEntity implements Serializ
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "articulo_insumo_id")
 	private ArticuloInsumoEntity articuloInsumoID;
+
+	@Transient
+	private double subCosto;
+
+	public DetalleManufacturadoEntity() {
+		super();
+	}
 
 	public int getCantidad() {
 		return cantidad;
@@ -53,5 +61,33 @@ public class DetalleManufacturadoEntity extends CommonEntity implements Serializ
 	public void setArticuloInsumoID(ArticuloInsumoEntity articuloInsumoID) {
 		this.articuloInsumoID = articuloInsumoID;
 	}
+
+	public double getSubCosto() {
+		return subCosto;
+	}
+
+	//Revisar si se puede borrar
+	public void setSubCosto(double subCosto) {
+		this.subCosto = subCosto;
+	}
+
+	private void setSubCosto() {
+		double result = 0.0d;
+		String aux = this.unidadMedidaID.getAbreviatura();
+		switch (aux) {
+		case "g":
+			result = this.articuloInsumoID.getCosto_de_venta() * (this.cantidad / 1000);
+			break;
+		case "ml":
+			result = this.articuloInsumoID.getCosto_de_venta() * (this.cantidad / 1000);
+			break;
+		default:
+			result = this.articuloInsumoID.getCosto_de_venta() * this.cantidad;
+			break;
+		}
+		this.subCosto = result;
+	}
+
+	
 
 }
