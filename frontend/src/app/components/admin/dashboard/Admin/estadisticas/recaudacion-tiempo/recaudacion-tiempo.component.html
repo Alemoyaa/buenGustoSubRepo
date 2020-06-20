@@ -1,6 +1,6 @@
 <form (ngSubmit)="onSubmit(form)" #form="ngForm">
   <div class="row">
-    <div class="form-group col">
+    <div class="form-group col mt-2">
       <label>Desde</label>
       <input
         type="date"
@@ -11,7 +11,7 @@
         [(ngModel)]="DateDesde"
       />
     </div>
-    <div class="form-group col">
+    <div class="form-group col mt-2">
       <label>Hasta</label>
       <input
         type="date"
@@ -22,7 +22,7 @@
         [(ngModel)]="DateHasta"
       />
     </div>
-    <div class="form-group">
+    <div class="form-group mt-2 mr-3">
       <label class="text-center">Realizar consulta</label>
 
       <button
@@ -40,3 +40,19 @@
     </div>
   </div>
 </form>
+
+<div class="jumbotron jumbotron-fluid">
+  <div class="container">
+    <h1 class="display-4">
+      Ventas totales: {{ recaudacionTotal }}
+      <br />
+    </h1>
+    <h2 *ngIf="DateDesde && DateHasta">
+      Monto de la fecha: {{ DateDesde }} hasta {{ DateHasta }}
+    </h2>
+    <p class="lead">
+      El monto anterior refleja el valor total de las ventas sin tener en cuenta
+      los costos.
+    </p>
+  </div>
+</div>

@@ -1,3 +1,4 @@
+import { Pedido } from './../../../../../../entidades/Pedido';
 import { PedidoServices } from './../../../../../../services/serviciosCliente/pedidoServices/pedido.service';
 import { Chart } from 'node_modules/chart.js';
 import { Component, OnInit } from '@angular/core';
@@ -13,6 +14,8 @@ export class RecaudacionTiempoComponent implements OnInit {
   fechaAhora: Date = new Date();
   DateHasta: Date;
   DateDesde: Date;
+
+  recaudacionTotal: number;
 
   constructor(private servicePedido: PedidoServices) {}
 
@@ -30,13 +33,29 @@ export class RecaudacionTiempoComponent implements OnInit {
         .getPedidosEntreDosFechas(this.DateDesde, this.DateHasta)
         .subscribe(
           (res) => {
-            console.log;
+            this.calcularRecaudacion(res);
           },
           (err) => {
             console.log(err);
           }
         );
     }
+  }
+
+  calcularRecaudacion(listaDePedidos: Pedido[]) {
+    this.recaudacionTotal = 0;
+    let precioDetallePedido = 0;
+
+    listaDePedidos.forEach((pedidoItem) => {
+      pedidoItem.lista_detallePedido.forEach((detallePedidoItem) => {
+        precioDetallePedido +=
+          detallePedidoItem.articulo.precio_de_venta *
+          detallePedidoItem.cantidad;
+      });
+      this.recaudacionTotal += precioDetallePedido;
+      console.log('Precio temp' + this.recaudacionTotal);
+    });
+    console.log('Total precio venta' + this.recaudacionTotal);
   }
 
   newChart(nombre, labels, data) {
