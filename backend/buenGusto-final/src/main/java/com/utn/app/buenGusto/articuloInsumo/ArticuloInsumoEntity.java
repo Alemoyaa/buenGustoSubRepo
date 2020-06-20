@@ -8,6 +8,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.utn.app.buenGusto.articulo.ArticuloEntity;
@@ -20,8 +21,9 @@ import com.utn.app.buenGusto.unidadMedida.UnidadMedidaEntity;
 public class ArticuloInsumoEntity extends ArticuloEntity implements Serializable {
 
 	private static final long serialVersionUID = -8356649232468048872L;
-
-	private double costo_de_venta;
+	
+	//suponemos que el precio_de_compra es por Kg o por L o por Unidad del Insumo
+	private double precio_de_compra;
 	private boolean requiere_refrigeracion;
 	private float stock_actual;
 	private float stock_minimo;
@@ -30,14 +32,6 @@ public class ArticuloInsumoEntity extends ArticuloEntity implements Serializable
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "unidad_medida_id")
 	private UnidadMedidaEntity unidadMedidaID;
-
-	public double getCosto_de_venta() {
-		return costo_de_venta;
-	}
-
-	public void setCosto_de_venta(double costo_de_venta) {
-		this.costo_de_venta = costo_de_venta;   
-    }
 
 	public boolean isRequiere_refrigeracion() {
 		return requiere_refrigeracion;
@@ -77,6 +71,14 @@ public class ArticuloInsumoEntity extends ArticuloEntity implements Serializable
 
 	public void setUnidadMedidaID(UnidadMedidaEntity unidadMedidaID) {
 		this.unidadMedidaID = unidadMedidaID;
+	}
+
+	public double getPrecio_de_compra() {
+		return precio_de_compra;
+	}
+
+	public void setPrecio_de_compra(double precio_de_compra) {
+		this.precio_de_compra = precio_de_compra;
 	}
 
 }

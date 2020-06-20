@@ -8,7 +8,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
-
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.utn.app.buenGusto.articuloInsumo.ArticuloInsumoEntity;
 import com.utn.app.buenGusto.common.CommonEntity;
@@ -71,21 +70,10 @@ public class DetalleManufacturadoEntity extends CommonEntity implements Serializ
 		this.subCosto = subCosto;
 	}
 
-	private void setSubCosto() {
+	private double calcularSubCosto() {
 		double result = 0.0d;
-		String aux = this.unidadMedidaID.getAbreviatura();
-		switch (aux) {
-		case "g":
-			result = this.articuloInsumoID.getCosto_de_venta() * (this.cantidad / 1000);
-			break;
-		case "ml":
-			result = this.articuloInsumoID.getCosto_de_venta() * (this.cantidad / 1000);
-			break;
-		default:
-			result = this.articuloInsumoID.getCosto_de_venta() * this.cantidad;
-			break;
-		}
-		this.subCosto = result;
+		result = this.articuloInsumoID.getPrecio_de_compra() * (this.cantidad * this.unidadMedidaID.getEquivalencia_KgOL());
+		return result;
 	}
 
 	
