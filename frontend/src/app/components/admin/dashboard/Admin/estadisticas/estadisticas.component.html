@@ -1,69 +1,210 @@
 <div class="container mt-3">
   <h2>Estadisticas</h2>
-  <p class="lead">
+
+  <p class="lead mt-2">
     Ranking comidas más pedidas en un periodo de tiempo determinado
   </p>
-  <form (ngSubmit)="onSubmit(form)" #form="ngForm">
-    <div class="row">
-      <div class="form-group col">
-        <label>Desde</label>
-        <input
-          type="date"
-          name="desdeday"
-          min="2020-01-01"
-          max="{{ this.fechaAhora.toJSON() | date: 'yyyy-MM-dd' }}"
-          class="form-control"
-          [(ngModel)]="DateDesde"
-        />
-      </div>
-      <div class="form-group col">
-        <label>Hasta</label>
-        <input
-          type="date"
-          name="hastaday"
-          min="2020-01-01"
-          max="{{ this.fechaAhora.toJSON() | date: 'yyyy-MM-dd' }}"
-          class="form-control"
-          [(ngModel)]="DateHasta"
-        />
-      </div>
-      <div class="form-group">
-        <label class="text-center">Realizar consulta</label>
 
-        <button
-          type="submit"
-          class="btn btn-success form-control"
-          *ngIf="DateHasta != null && DateDesde != null; else elseTemplate"
-        >
-          Aceptar
-        </button>
-        <ng-template #elseTemplate>
-          <button class="btn btn-secondary form-control" disabled>
-            Aceptar
+  <button
+    type="button"
+    class="btn btn-primary"
+    data-toggle="modal"
+    data-target="#RankingComida"
+  >
+    Ranking de comidas
+  </button>
+
+  <div
+    class="modal fade bd-example-modal-xl"
+    tabindex="-1"
+    role="dialog"
+    aria-labelledby="myExtraLargeModalLabel"
+    aria-hidden="true"
+    id="RankingComida"
+  >
+    <div class="modal-dialog modal-xl" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3 class="modal-title">Ranking de comidas</h3>
+          <button
+            type="button"
+            class="close"
+            data-dismiss="modal"
+            aria-label="Close"
+          >
+            <span aria-hidden="true">&times;</span>
           </button>
-        </ng-template>
+        </div>
+        <form (ngSubmit)="onSubmit(form)" #form="ngForm" class="p-4">
+          <div class="row">
+            <div class="form-group col">
+              <label>Desde</label>
+              <input
+                type="date"
+                name="desdeday"
+                min="2020-01-01"
+                max="{{ this.fechaAhora.toJSON() | date: 'yyyy-MM-dd' }}"
+                class="form-control"
+                [(ngModel)]="DateDesde"
+              />
+            </div>
+            <div class="form-group col">
+              <label>Hasta</label>
+              <input
+                type="date"
+                name="hastaday"
+                min="2020-01-01"
+                max="{{ this.fechaAhora.toJSON() | date: 'yyyy-MM-dd' }}"
+                class="form-control"
+                [(ngModel)]="DateHasta"
+              />
+            </div>
+            <div class="form-group">
+              <label class="text-center">Realizar consulta</label>
+
+              <button
+                type="submit"
+                class="btn btn-success form-control"
+                *ngIf="
+                  DateHasta != null && DateDesde != null;
+                  else elseTemplate
+                "
+              >
+                Aceptar
+              </button>
+              <ng-template #elseTemplate>
+                <button class="btn btn-secondary form-control" disabled>
+                  Aceptar
+                </button>
+              </ng-template>
+            </div>
+          </div>
+        </form>
+
+        <div class="card" *ngIf="DateDesde && DateHasta">
+          <canvas id="canvaFecha"></canvas>
+          <div class="card-body">
+            <h4>Desde: {{ DateDesde }} Hasta: {{ DateHasta }}</h4>
+          </div>
+        </div>
       </div>
-    </div>
-  </form>
-
-  <p>
-     Ingresos (recaudaciones) por períodos de tiempo. Diario / Mensual
-  </p>
-  <p>
-     Cantidad de pedidos agrupados por cliente en un determinado periodo de
-    tiempo.
-  </p>
-  <p>
-     Cuando la tabla de stock, no tiene articulos queda vacia
-  </p>
-
-  <div class="card" *ngIf="DateDesde && DateHasta">
-    <canvas id="canvaFecha"></canvas>
-    <div class="card-body">
-      <h4>Desde: {{ DateDesde }} Hasta: {{ DateHasta }}</h4>
     </div>
   </div>
 
-  <h2 class="mt-2">Articulos con bajo stock</h2>
-  <app-art-stock-minimo></app-art-stock-minimo>
+  <p class="lead mt-2">
+    Ingresos (recaudaciones) por períodos de tiempo. Diario / Mensual
+  </p>
+
+  <button
+    type="button"
+    class="btn btn-primary"
+    data-toggle="modal"
+    data-target="#recaudacionesPorTiempo"
+  >
+    Recaudaciones por periodo de tiempo
+  </button>
+
+  <div
+    class="modal fade bd-example-modal-xl"
+    tabindex="-1"
+    role="dialog"
+    aria-labelledby="myExtraLargeModalLabel"
+    aria-hidden="true"
+    id="recaudacionesPorTiempo"
+  >
+    <div class="modal-dialog modal-xl" role="document">
+      <div class="modal-content p-4">
+        <div class="modal-header">
+          <h3 class="modal-title">Recaudaciones por periodo de tiempo</h3>
+          <button
+            type="button"
+            class="close"
+            data-dismiss="modal"
+            aria-label="Close"
+          >
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <app-recaudacion-tiempo></app-recaudacion-tiempo>
+      </div>
+    </div>
+  </div>
+
+  <p class="lead mt-2">
+    Cantidad de pedidos agrupados por cliente en un determinado periodo de
+    tiempo.
+  </p>
+
+  <button
+    type="button"
+    class="btn btn-primary"
+    data-toggle="modal"
+    data-target="#pedidosClientePorTiempo"
+  >
+    Pedidos por cliente por periodo de tiempo
+  </button>
+
+  <div
+    class="modal fade bd-example-modal-xl"
+    tabindex="-1"
+    role="dialog"
+    aria-labelledby="myExtraLargeModalLabel"
+    aria-hidden="true"
+    id="pedidosClientePorTiempo"
+  >
+    <div class="modal-dialog modal-xl" role="document">
+      <div class="modal-content p-4">
+        <div class="modal-header">
+          <h3 class="modal-title">Pedidos por cliente por periodo de tiempo</h3>
+          <button
+            type="button"
+            class="close"
+            data-dismiss="modal"
+            aria-label="Close"
+          >
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <app-recaudacion-tiempo></app-recaudacion-tiempo>
+      </div>
+    </div>
+  </div>
+
+  <p class="lead mt-2">Articulos con bajo stock</p>
+
+  <button
+    type="button"
+    class="btn btn-primary"
+    data-toggle="modal"
+    data-target="#ArticulosBajoStock"
+  >
+    Articulos con stock minimo
+  </button>
+
+  <div
+    class="modal fade bd-example-modal-xl"
+    tabindex="-1"
+    role="dialog"
+    aria-labelledby="myExtraLargeModalLabel"
+    aria-hidden="true"
+    id="ArticulosBajoStock"
+  >
+    <div class="modal-dialog modal-xl" role="document">
+      <div class="modal-content p-4">
+        <div class="modal-header">
+          <h3 class="modal-title">Articulos con bajo stock</h3>
+          <button
+            type="button"
+            class="close"
+            data-dismiss="modal"
+            aria-label="Close"
+          >
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <app-art-stock-minimo></app-art-stock-minimo>
+      </div>
+    </div>
+  </div>
 </div>
+<br /><br /><br />

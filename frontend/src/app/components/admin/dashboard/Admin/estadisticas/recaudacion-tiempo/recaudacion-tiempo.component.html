@@ -1,0 +1,42 @@
+<form (ngSubmit)="onSubmit(form)" #form="ngForm">
+  <div class="row">
+    <div class="form-group col">
+      <label>Desde</label>
+      <input
+        type="date"
+        name="desdeday"
+        min="2020-01-01"
+        max="{{ this.fechaAhora.toJSON() | date: 'yyyy-MM-dd' }}"
+        class="form-control"
+        [(ngModel)]="DateDesde"
+      />
+    </div>
+    <div class="form-group col">
+      <label>Hasta</label>
+      <input
+        type="date"
+        name="hastaday"
+        min="2020-01-01"
+        max="{{ this.fechaAhora.toJSON() | date: 'yyyy-MM-dd' }}"
+        class="form-control"
+        [(ngModel)]="DateHasta"
+      />
+    </div>
+    <div class="form-group">
+      <label class="text-center">Realizar consulta</label>
+
+      <button
+        type="submit"
+        class="btn btn-success form-control"
+        *ngIf="DateHasta != null && DateDesde != null; else elseTemplate"
+      >
+        Aceptar
+      </button>
+      <ng-template #elseTemplate>
+        <button class="btn btn-secondary form-control" disabled>
+          Aceptar
+        </button>
+      </ng-template>
+    </div>
+  </div>
+</form>

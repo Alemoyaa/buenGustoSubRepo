@@ -40,6 +40,8 @@ import { EstadisticasComponent } from './components/admin/dashboard/Admin/estadi
 import { FacturaDetalleComponent } from './components/cliente/factura-detalle/factura-detalle.component';
 import { PedidosDetalleComponent } from './components/cliente/pedidos-detalle/pedidos-detalle.component';
 import { ArtStockMinimoComponent } from './components/admin/dashboard/Admin/estadisticas/art-stock-minimo/art-stock-minimo.component';
+import { RecaudacionTiempoComponent } from './components/admin/dashboard/Admin/estadisticas/recaudacion-tiempo/recaudacion-tiempo.component';
+import { PedidosPorClienteComponent } from './components/admin/dashboard/Admin/estadisticas/pedidos-por-cliente/pedidos-por-cliente.component';
 
 
 @NgModule({
@@ -68,6 +70,8 @@ import { ArtStockMinimoComponent } from './components/admin/dashboard/Admin/esta
     FacturaDetalleComponent,
     PedidosDetalleComponent,
     ArtStockMinimoComponent,
+    RecaudacionTiempoComponent,
+    PedidosPorClienteComponent,
   ],
   imports: [
     BrowserModule,
