@@ -1,5 +1,7 @@
 package com.utn.app.buenGusto.pedido;
 
+import java.sql.Date;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
@@ -24,6 +26,18 @@ public class PedidoController extends CommonController<PedidoEntity, PedidoServi
 
 		try {
 			return ResponseEntity.status(HttpStatus.OK).body(service.findByIdCortado(id));
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND)
+					.body("{\"Error in getDetalle \": \"" + e.getMessage() + "\"}"); 
+		}
+	}
+	
+	@GetMapping("/{desde}/{hasta}")
+	@Transactional
+	public ResponseEntity<?> getPedidosEntreDosFechas(@PathVariable Date desde,@PathVariable Date hasta) {
+
+		try {
+			return ResponseEntity.status(HttpStatus.OK).body(service.findPedidoEntreDosFechas(desde,hasta));
 		} catch (Exception e) {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND)
 					.body("{\"Error in getDetalle \": \"" + e.getMessage() + "\"}"); 

@@ -26,4 +26,14 @@ public class ClienteController extends CommonController<ClienteEntity, ClienteSe
 					.body("{\"Error in getOneUidFirebase \": \"" + e.getMessage() + "\"}");
 		}
 	}
+	
+	@GetMapping("/{nombre}/{apellido}") 
+	public ResponseEntity<?> getByNombre(@PathVariable String nombre, @PathVariable String apellido ) {
+		try {
+			return ResponseEntity.status(HttpStatus.OK).body(service.findByNombre(nombre, apellido));
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND)
+					.body("{\"Error in getOneUidFirebase \": \"" + e.getMessage() + "\"}");
+		}
+	} 
 }

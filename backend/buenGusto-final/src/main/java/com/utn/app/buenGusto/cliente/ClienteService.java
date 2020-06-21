@@ -1,4 +1,6 @@
 package com.utn.app.buenGusto.cliente; 
+ 
+import java.util.List;
 
 import org.springframework.stereotype.Service;
 
@@ -10,6 +12,22 @@ public class ClienteService extends CommonService<ClienteEntity, ClienteReposito
 	public ClienteEntity findByUidFirebase(String uid) throws Exception {
 
 		ClienteEntity entityOptional = repository.findByUidFirebase(uid);
+		
+		try {
+			if (entityOptional != null) {
+				return entityOptional;
+			} else {
+				throw new Exception();
+			}
+		} catch (Exception e) {
+			throw new Exception();
+		}
+
+	}
+	 
+	public List<ClienteEntity> findByNombre(String nombre, String apellido) throws Exception {
+
+		List<ClienteEntity> entityOptional = repository.findByName(nombre, apellido);
 		
 		try {
 			if (entityOptional != null) {
