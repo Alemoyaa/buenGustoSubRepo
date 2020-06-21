@@ -1,3 +1,4 @@
+import { AlertsService } from './../../../../../services/alertServices/alerts.service';
 import { RolService } from '../../../../../services/serviciosCliente/rolServices/rol.service';
 import { Component, OnInit } from '@angular/core';
 
@@ -27,13 +28,16 @@ export class UsuariosComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private clienteService: ClienteService,
-    private rolService: RolService
+    private rolService: RolService,
+    private alerts : AlertsService
   ) {}
 
   ngOnInit(): void {
     this.traerDatos();
     this.crearFormulario();
     this.traerRoles();
+
+    this.alerts.mensajeSuccess('titulo', 'MENSAJE');
   }
 
   // traigo todos los clientes con sus respectivos roles
