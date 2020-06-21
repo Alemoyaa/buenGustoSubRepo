@@ -12,6 +12,7 @@ import {
 import { ClienteService } from '../../../../../services/serviciosCliente/clienteServices/cliente.service';
 import { filter } from 'rxjs/operators';
 import { Rol } from 'src/app/entidades/Rol';
+import { Domicilio } from 'src/app/entidades/Domicilio';
 
 @Component({
   selector: 'app-usuarios',
@@ -24,20 +25,21 @@ export class UsuariosComponent implements OnInit {
   rol: Rol[] = new Array<Rol>();
   rolSeleccionado: Rol;
   idUsuario: number;
+  domicilio: Domicilio = new Domicilio();
 
   constructor(
     private fb: FormBuilder,
     private clienteService: ClienteService,
     private rolService: RolService,
-    private alerts : AlertsService
-  ) {}
+    private alerts: AlertsService
+  ) { }
 
   ngOnInit(): void {
     this.traerDatos();
     this.crearFormulario();
     this.traerRoles();
 
-    this.alerts.mensajeSuccess('titulo', 'MENSAJE');
+    this.alerts.mensajeSuccess('Bienvenido a la seccion Usuario', 'Aqui usted podra asignar el rol a cada usuario registrado en la pagina');
   }
 
   // traigo todos los clientes con sus respectivos roles
@@ -59,31 +61,83 @@ export class UsuariosComponent implements OnInit {
       nombre: '',
       apellido: '',
       telefono: '',
-      email: '',
 
-      rol: this.fb.group({
+      domicilio: this.fb.group({
         id: 0,
-        nombreRol: '',
-        //descripcion: '',
+        calle: '',
+        nroDepartamento: 0,
+        numero: 0,
+        piso: 0,
+        aclaracion: '',
+        localidad: this.fb.group({
+          id: 0,
+          nombre: '',
+          provincia: this.fb.group({
+            id: 0,
+            nombre: '',
+            pais: this.fb.group({
+              id: 0,
+              nombre: ''
+            })
+          })
+        })
+      }),
+      usuario: this.fb.group({
+        id: 0,
+        email: '',
+        rol: this.fb.group({
+          id: 0,
+          nombreRol: ''
+        })
       }),
     });
   }
 
-  //pre cargo los datos en el formulario de el usuario seleccionnado para editar el rol
+  mostrarDomicilio(cliente:Cliente){
+    this.domicilio = cliente.domicilio;
+    console.log(this.domicilio);
+  }
+
+  // pre cargo los datos en el formulario de el usuario seleccionnado para editar el rol
   preCargarDatosFormulario(cliente: Cliente) {
-    this.formularioPersona = this.fb.group({
-      nombre: cliente.nombre,
-      apellido: cliente.apellido,
-      telefono: cliente.telefono,
 
-      rol: this.fb.group({
-        id: cliente.usuario.rol.id,
-        nombreRol: cliente.usuario.rol.nombreRol,
-        //descripcion: cliente.usuarioID.rolID.descripcion, No hay mas descripcion de rol
-      }),
-    });
+   
+    // this.formularioPersona.setValue({
+    //   nombre: cliente.nombre,
+    //   apellido: cliente.apellido,
+    //   telefono: cliente.telefono,
+      
+    //   domicilio: this.fb.group({
+    //     id: cliente.domicilio.id,
+    //     calle: cliente.domicilio.calle,
+    //     nroDepartamento: cliente.domicilio.nroDepartamento,
+    //     numero: cliente.domicilio.numero,
+    //     piso: cliente.domicilio.piso,
+    //     aclaracion: cliente.domicilio.aclaracion,
+    //     localidad: this.fb.group({
+    //       id: cliente.domicilio.localidad.id,
+    //       nombre: cliente.domicilio.localidad.nombre,
+    //       provincia: this.fb.group({
+    //         id: cliente.domicilio.localidad.provincia.id,
+    //         nombre: cliente.domicilio.localidad.provincia.nombre,
+    //         pais: this.fb.group({
+    //           id: cliente.domicilio.localidad.provincia.pais.id,
+    //           nombre: cliente.domicilio.localidad.provincia.pais.nombre
+    //         })
+    //       })
+    //     })
+    //   }),
+    //   usuario: this.fb.group({
+    //     id: 0,
+    //     email: '',
+    //     rol: this.fb.group({
+    //       id: 0,
+    //       nombreRol: ''
+    //     })
+    //     //descripcion: '',
+    //   }),
 
-    this.idUsuario = cliente.id;
+    // });
   }
 
   // Traer todos los posibles roles para mostrarlos en el html

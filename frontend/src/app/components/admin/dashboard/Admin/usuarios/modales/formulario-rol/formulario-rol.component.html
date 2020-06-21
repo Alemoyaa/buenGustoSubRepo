@@ -1,0 +1,104 @@
+<div
+  class="modal fade"
+  data-backdrop="static"
+  id="ModalPersona"
+  tabindex="-1"
+  role="form"
+  aria-labelledby="ModalEditarLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel"><i class="fas fa-pencil-alt"> Editar Rol de usuario</i></h5>
+
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body text-lg-center">
+        <!-- [formGroup]="formularioPersona" -->
+        <form action="" >
+          <div class="row">
+            <div class="col-12">
+              <h5 class="modal-title" id="exampleModalLabel">
+                Datos Personales
+              </h5>
+            </div>
+
+            <div class="col-6">
+              <div class="form-group">
+                <label for="">Nombre</label>
+                <input
+                  type="text"
+                  formControlName="nombre"
+                  class="form-control"
+                />
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="form-group">
+                <label for="">Apellido</label>
+                <input
+                  type="text"
+                  formControlName="apellido"
+                  class="form-control"
+                />
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="form-group">
+                <label for="">Email</label>
+                <input
+                  type="text"
+                  formControlName="email"
+                  class="form-control"
+                />
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="form-group">
+                <label for="">Telefono</label>
+                <input
+                  type="text"
+                  formControlName="telefono"
+                  class="form-control"
+                />
+              </div>
+            </div>
+
+            <!-- <div class="col-6">
+              <div class="form-group" formGroupName="rol">
+                <label for="">Rol</label>
+                <select
+                  (change)="seleccionarRol($event.target.value)"
+                  formControlName="id"
+                  class="form-control"
+                  id="rol"
+                  name="rol"
+                >
+                  <option *ngFor="let item of rol" [value]="item.id">{{
+                    item.nombreRol
+                  }}</option>
+                </select>
+              </div>
+            </div> -->
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">
+          Close
+        </button>
+        <button type="button" class="btn btn-info" >
+          Editar
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

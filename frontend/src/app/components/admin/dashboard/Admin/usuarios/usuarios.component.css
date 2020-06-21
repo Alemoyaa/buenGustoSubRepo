@@ -1,0 +1,10 @@
+#fondo {
+    font-family: -apple-system, BlinkMacSystemFont, Raleway, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
+    "Segoe UI Symbol";
+    width: 100%;
+    height: 100%;
+background-image: url('../../../../../../assets/assetsCatalogo/assets/img/panchos/Hot_dog3.jpg');
+background-size: cover;
+background-position: center;
+}
