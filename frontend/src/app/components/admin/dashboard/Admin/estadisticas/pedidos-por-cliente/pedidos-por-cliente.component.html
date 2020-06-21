@@ -1,1 +1,149 @@
-<p>pedidos-por-cliente works!</p>
+<div class="container">
+  <form class="form-inline mt-4">
+    <input
+      class="form-control mr-sm-2"
+      type="search"
+      placeholder="Nombre"
+      aria-label="Search"
+      [(ngModel)]="filtroBuscador"
+      [ngModelOptions]="{ standalone: true }"
+    />
+  </form>
+
+  <br />
+  <div>
+    <table class="table table-hover">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col" hidden>id</th>
+          <th scope="col">Nombre</th>
+          <th scope="col">Apellido</th>
+          <th scope="col">Numero de telefono</th>
+          <th scope="col">Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr
+          *ngFor="
+            let item of filtrar
+              | paginate: { itemsPerPage: 5, currentPage: pageActual }
+          "
+        >
+          <td hidden>{{ item.id }}</td>
+          <td>{{ item.nombre }}</td>
+          <td>{{ item.apellido }}</td>
+          <td>{{ item.telefono }}</td>
+          <td>
+            <button class="btn btn-success" (click)="recuperarID(item)">
+              Ver pedidos
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <pagination-controls (pageChange)="pageActual = $event"></pagination-controls>
+
+  <div class="modal-dialog modal-xl" role="document" *ngIf="idCliente">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title">Pedidos en tiempo determinado</h3>
+      </div>
+      <form (ngSubmit)="onSubmit(form)" #form="ngForm" class="p-4">
+        <div class="row">
+          <div class="form-group col">
+            <label>Desde</label>
+            <input
+              type="date"
+              name="desdeday"
+              min="2020-01-01"
+              max="{{ this.fechaAhora.toJSON() | date: 'yyyy-MM-dd' }}"
+              class="form-control"
+              [(ngModel)]="DateDesde"
+            />
+          </div>
+          <div class="form-group col">
+            <label>Hasta</label>
+            <input
+              type="date"
+              name="hastaday"
+              min="2020-01-01"
+              max="{{ this.fechaAhora.toJSON() | date: 'yyyy-MM-dd' }}"
+              class="form-control"
+              [(ngModel)]="DateHasta"
+            />
+          </div>
+          <div class="form-group">
+            <label class="text-center">Realizar consulta</label>
+
+            <button
+              type="submit"
+              class="btn btn-success form-control"
+              *ngIf="DateHasta != null && DateDesde != null; else elseTemplate"
+            >
+              Aceptar
+            </button>
+            <ng-template #elseTemplate>
+              <button class="btn btn-secondary form-control" disabled>
+                Aceptar
+              </button>
+            </ng-template>
+          </div>
+        </div>
+      </form>
+
+      <table
+        class="table table-hover"
+        *ngIf="pedidosRecuperadosDesdeHasta; else templatePedidos"
+      >
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">Fecha</th>
+            <th scope="col">Articulo de pedido</th>
+            <th scope="col">Tipo envio</th>
+            <th scope="col">Numero de pedido</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let pedido of this.pedidosRecuperadosDesdeHasta">
+            <td>{{ pedido.fechaRealizacion }}</td>
+
+            <td>
+              <button
+                aria-expanded="false"
+                data-toggle="dropdown"
+                class="btn btn-info dropdown-toggle"
+                type="button"
+              >
+                Detalle Pedido<span class="caret"></span>
+              </button>
+
+              <ul role="menu" class="dropdown-menu">
+                <li
+                  class="list-group-item"
+                  *ngFor="let item of pedido.lista_detallePedido; index as i"
+                >
+                  {{ pedido.lista_detallePedido[i].articulo.denominacion }} -
+                  {{ pedido.lista_detallePedido[i].cantidad }}
+                </li>
+              </ul>
+            </td>
+
+            <td *ngIf="pedido.tipo_Envio; else elseTemplate">
+              Envio
+            </td>
+            <ng-template #elseTemplate>
+              En local
+            </ng-template>
+
+            <td>{{ pedido.numero }}</td>
+          </tr>
+        </tbody>
+      </table>
+      <ng-template #templatePedidos>
+        <h2>Ojo pá que aca no hay nada. no es por este sitio</h2>
+      </ng-template>
+    </div>
+  </div>
+</div>

@@ -61,23 +61,22 @@ export class EstadisticasComponent implements OnInit {
       });
     });
 
-    for (let x = 0; x < elementosSinRepetir.length; x++) {
+    elementosSinRepetir.forEach((elemento) => {
       let cantidad = 0;
 
       listaDePedidos.forEach((pedido) => {
-        for (let i = 0; i < pedido.lista_detallePedido.length; i++) {
+        pedido.lista_detallePedido.forEach((ItemDetallePedido) => {
           if (
-            (pedido.lista_detallePedido[i].articulo.denominacion as string) ===
-            elementosSinRepetir[x]
+            (ItemDetallePedido.articulo.denominacion as string) === elemento
           ) {
-            cantidad += pedido.lista_detallePedido[i].cantidad;
+            cantidad += ItemDetallePedido.cantidad;
           }
-        }
+        });
       });
 
       cantidadElementos.push(cantidad);
       cantidad = 0;
-    }
+    });
 
     this.newChart('canvaFecha', elementosSinRepetir, cantidadElementos);
   }

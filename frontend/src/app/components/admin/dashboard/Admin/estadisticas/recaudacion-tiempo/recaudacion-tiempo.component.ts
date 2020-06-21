@@ -53,9 +53,7 @@ export class RecaudacionTiempoComponent implements OnInit {
           detallePedidoItem.cantidad;
       });
       this.recaudacionTotal += precioDetallePedido;
-      console.log('Precio temp' + this.recaudacionTotal);
     });
-    console.log('Total precio venta' + this.recaudacionTotal);
   }
 
   newChart(nombre, labels, data) {

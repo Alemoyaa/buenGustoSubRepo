@@ -130,46 +130,6 @@
     </div>
   </div>
 
-  <p class="lead mt-2">
-    Cantidad de pedidos agrupados por cliente en un determinado periodo de
-    tiempo.
-  </p>
-
-  <button
-    type="button"
-    class="btn btn-primary"
-    data-toggle="modal"
-    data-target="#pedidosClientePorTiempo"
-  >
-    Pedidos por cliente por periodo de tiempo
-  </button>
-
-  <div
-    class="modal fade bd-example-modal-xl"
-    tabindex="-1"
-    role="dialog"
-    aria-labelledby="myExtraLargeModalLabel"
-    aria-hidden="true"
-    id="pedidosClientePorTiempo"
-  >
-    <div class="modal-dialog modal-xl" role="document">
-      <div class="modal-content p-4">
-        <div class="modal-header">
-          <h3 class="modal-title">Pedidos por cliente por periodo de tiempo</h3>
-          <button
-            type="button"
-            class="close"
-            data-dismiss="modal"
-            aria-label="Close"
-          >
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <app-recaudacion-tiempo></app-recaudacion-tiempo>
-      </div>
-    </div>
-  </div>
-
   <p class="lead mt-2">Articulos con bajo stock</p>
 
   <button
@@ -206,5 +166,18 @@
       </div>
     </div>
   </div>
+
+  <p class="lead mt-2">
+    Cantidad de pedidos agrupados por cliente en un determinado periodo de
+    tiempo.
+  </p>
+
+  <button
+    type="button"
+    class="btn btn-primary"
+    [routerLink]="['/dashboard/admin/estadisticas/cliente']"
+  >
+    Pedidos por cliente por periodo de tiempo
+  </button>
 </div>
 <br /><br /><br />
