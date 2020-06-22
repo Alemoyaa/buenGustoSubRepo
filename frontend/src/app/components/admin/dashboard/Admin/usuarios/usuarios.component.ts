@@ -79,14 +79,14 @@ export class UsuariosComponent implements OnInit {
   // }
 
   // se pide confirmacion de la eliminacion de el usuario y se elimina segun el id recibido por parametro
-  // eliminar(id: number) {
-  //   const opcion = confirm('¿Esta seguro que desea eliminar?');
-  //   if (opcion) {
-  //     this.clienteService.delete(id).subscribe((data) => {
-  //       alert('Registro eliminado');
-  //       this.formularioPersona.reset();
-  //     });
-  //   } else {
-  //   }
-  // }
+  eliminar(id: number) {
+    const opcion = confirm('¿Esta seguro que desea eliminar?');
+    if (opcion) {
+      this.clienteService.delete(id).subscribe((data) => {
+        alert('Registro eliminado');
+
+      });
+    } else {
+    }
+  }
 }

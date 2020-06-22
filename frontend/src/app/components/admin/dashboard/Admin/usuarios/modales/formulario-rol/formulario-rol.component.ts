@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Host } from '@angular/core';
 import { Cliente } from 'src/app/entidades/Cliente';
 import {
   FormGroup,
@@ -10,6 +10,7 @@ import { ClienteService } from 'src/app/services/serviciosCliente/clienteService
 import { RolService } from 'src/app/services/serviciosCliente/rolServices/rol.service';
 import { AlertsService } from 'src/app/services/alertServices/alerts.service';
 import { Rol } from 'src/app/entidades/Rol';
+import { UsuariosComponent } from '../../usuarios.component';
 
 
 @Component({
@@ -25,7 +26,7 @@ export class FormularioRolComponent implements OnInit {
 
   @Input() set clienteSeleccionado(cliente) {
     this.crearFormulario();
-    if (cliente) {
+    if (cliente.usuario) {
       this.cliente = cliente;
       this.formularioPersona.setValue({
         id: cliente.id,
@@ -77,7 +78,8 @@ export class FormularioRolComponent implements OnInit {
     private fb: FormBuilder,
     private clienteService: ClienteService,
     private rolService: RolService,
-    private alerts: AlertsService) { }
+    private alerts: AlertsService,
+    @Host() private tabla: UsuariosComponent) { }
 
   ngOnInit(): void {
     this.crearFormulario();
@@ -125,24 +127,62 @@ export class FormularioRolComponent implements OnInit {
       }),
     });
   }
-
+  // post a la base de datos con el cliente y su rol
+  // actualizarRol() {
+  // this.clienteService.put(this.idCliente, this.formularioPersona.value);
+  //   console.log('id cliente actualziarRol() ', this.idUsuario);
+  //   console.log(
+  //     'formulario value actualziarRol() ',
+  //     this.formularioPersona.value
+  //   );
+  // }
   actualizar() {
     console.log(this.formularioPersona.value);
+    this.clienteService.put(this.cliente.id, this.formularioPersona.value).subscribe(
+      res => {
+        this.alerts.mensajeSuccess('Actualizacion de Rol realizado', 
+        `El rol del usuario ${this.cliente.nombre} se actualizo correctamente, recuerde que puede modificarlo cuando usted lo desee`);
+        this.tabla.usuarios.filter(item => {
+          if (item.id === this.cliente.id) {
+            const idexOfFactura = this.tabla.usuarios.indexOf(item);
+            this.tabla.usuarios.splice(idexOfFactura, 1, res);
+          }
+        });
+      },
+      err => {
+        this.alerts.mensajeError('No se ah podido actualizar el Rol del usuario', 'ah ocurrido un error y no se ah podido realizar la actualizacio, porfavor verifique que esten todos los datos correctos');
+      }
+    );
+    console.log('id cliente actualziarRol() ');
+    console.log(
+      'formulario value actualziarRol() ',
+      this.formularioPersona.value
+    );
 
   }
 
   seleccionarRol(id: number) {
     console.log('seleccionar rol id parametro :', id);
-
+    // accedo al control usuario
+    const control = <FormGroup>this.formularioPersona.controls['usuario'];
+    // dentro de usuarios se encuentra rol
+    const controlrol = control.controls['rol'];
+    // verifico q no me envie un null
     if (id != null) {
+      // traigo el rol utilizando el id que me envian por formulario
       this.rolService.getOne(id).subscribe((rol) => {
         this.rolSeleccionado = rol;
-
+        // seteo el formulario con el rol id y el nombre del rol traido
+        controlrol.setValue({
+          id: rol.id,
+          nombreRol: rol.nombreRol
+        });
         console.log(this.rolSeleccionado);
       });
     }
   }
 
+  // traigo los roles para mostrarlos en el formulario
   traerRoles() {
     this.rolService.getAll().subscribe((roles) => {
       this.rol = roles;
