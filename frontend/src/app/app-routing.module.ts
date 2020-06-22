@@ -1,3 +1,4 @@
+import { TablaPlatosComponent } from './components/admin/dashboard/Admin/crud-platos/tabla-platos/tabla-platos.component';
 import { PedidosPorClienteComponent } from './components/admin/dashboard/Admin/estadisticas/pedidos-por-cliente/pedidos-por-cliente.component';
 import { PedidosDetalleComponent } from './components/cliente/pedidos-detalle/pedidos-detalle.component';
 import { FacturaDetalleComponent } from './components/cliente/factura-detalle/factura-detalle.component';
@@ -16,7 +17,6 @@ import { HomeComponent } from './components/cliente/home/home.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { UsuariosComponent } from './components/admin/dashboard/Admin/usuarios/usuarios.component';
-import { CrudPlatosComponent } from './components/admin/dashboard/Admin/crud-platos/crud-platos.component';
 import { PedidosCajeroComponent } from './components/admin/dashboard/Cajero/pedidos-cajero/pedidos-cajero.component';
 import { FacturacionCajeroComponent } from './components/admin/dashboard/Cajero/facturacion-cajero/facturacion-cajero.component';
 import { BajasStockCocineroComponent } from './components/admin/dashboard/Cocinero/bajas-stock-cocinero/bajas-stock-cocinero.component';
@@ -43,7 +43,7 @@ const routes: Routes = [
   },
   {
     path: 'dashboard/admin/gestionArticulos',
-    component: CrudPlatosComponent,
+    component: TablaPlatosComponent,
   }, //Estadisticas
   { path: 'dashboard/admin/estadisticas', component: EstadisticasComponent },
   {

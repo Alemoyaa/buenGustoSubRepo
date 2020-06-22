@@ -1,7 +1,7 @@
 import { CatalogoDetalleComponent } from './components/cliente/catalogo-detalle/catalogo-detalle.component';
 import { CommonService } from './services/serviciosCliente/commonServices/common.service';
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule} from '@angular/core';
+import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './components/admin/login/login.component';
@@ -34,7 +34,6 @@ import { PedidosCajeroComponent } from './components/admin/dashboard/Cajero/pedi
 import { FacturacionCajeroComponent } from './components/admin/dashboard/Cajero/facturacion-cajero/facturacion-cajero.component';
 import { GestorOrdenesCocineroComponent } from './components/admin/dashboard/Cocinero/gestor-ordenes-cocinero/gestor-ordenes-cocinero.component';
 import { BajasStockCocineroComponent } from './components/admin/dashboard/Cocinero/bajas-stock-cocinero/bajas-stock-cocinero.component';
-import { CrudPlatosComponent } from './components/admin/dashboard/Admin/crud-platos/crud-platos.component';
 import { StockComponent } from './components/admin/dashboard/Admin/stock/stock.component';
 import { EstadisticasComponent } from './components/admin/dashboard/Admin/estadisticas/estadisticas.component';
 import { FacturaDetalleComponent } from './components/cliente/factura-detalle/factura-detalle.component';
@@ -45,6 +44,8 @@ import { PedidosPorClienteComponent } from './components/admin/dashboard/Admin/e
 import { MostrarDomicilioComponent } from './components/admin/dashboard/Admin/usuarios/modales/mostrar-domicilio/mostrar-domicilio.component';
 import { FormularioRolComponent } from './components/admin/dashboard/Admin/usuarios/modales/formulario-rol/formulario-rol.component';
 
+import { FormPlatosComponent } from './components/admin/dashboard/Admin/crud-platos/form-platos/form-platos.component';
+import { TablaPlatosComponent } from './components/admin/dashboard/Admin/crud-platos/tabla-platos/tabla-platos.component';
 
 @NgModule({
   declarations: [
@@ -57,7 +58,6 @@ import { FormularioRolComponent } from './components/admin/dashboard/Admin/usuar
     UserProfileComponent,
     CatalogoComponent,
     FooterComponent,
-    CrudPlatosComponent,
     StockComponent,
     EstadisticasComponent,
     CarritoComponent,
@@ -76,6 +76,8 @@ import { FormularioRolComponent } from './components/admin/dashboard/Admin/usuar
     PedidosPorClienteComponent,
     MostrarDomicilioComponent,
     FormularioRolComponent,
+    FormPlatosComponent,
+    TablaPlatosComponent,
   ],
   imports: [
     BrowserModule,

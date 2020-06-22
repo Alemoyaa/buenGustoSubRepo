@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CrudPlatosComponent } from './crud-platos.component';
+import { TablaPlatosComponent } from './tabla-platos.component';
 
-describe('CatalogoCrudComponent', () => {
-  let component: CrudPlatosComponent;
-  let fixture: ComponentFixture<CrudPlatosComponent>;
+describe('TablaPlatosComponent', () => {
+  let component: TablaPlatosComponent;
+  let fixture: ComponentFixture<TablaPlatosComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CrudPlatosComponent ]
+      declarations: [ TablaPlatosComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(CrudPlatosComponent);
+    fixture = TestBed.createComponent(TablaPlatosComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

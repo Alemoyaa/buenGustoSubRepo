@@ -20,62 +20,58 @@
       <thead>
         <tr>
           <th scope="col"></th>
-          <th scope="col">Pizza</th>
+          <th scope="col">Categoria</th>
+          <th scope="col">Denominacion</th>
           <th scope="col">Ingredientes</th>
           <th scope="col">Precio</th>
+          <th scope="col">Costo</th>
           <th scope="col">Acciones</th>
         </tr>
       </thead>
       <tbody>
-        <tr>
+        <tr
+          *ngFor="
+            let articulo of articuloManufacturado
+              | paginate: { itemsPerPage: 5, currentPage: pageActual }
+          "
+        >
           <td><i class="fas fa-fw fa-pizza-slice"></i></td>
-          <td>Mozzarella</td>
-          <td>Salsa Aceitunas Orégano Mozzarella</td>
-          <td>$300</td>
           <td>
-            <button
-              class="btn btn-info mr-3"
-              data-toggle="modal"
-              data-target="#ModalProductos"
-              (click)="editar()"
-            >
-              <i class="fas fa-pencil-alt"></i>
-            </button>
-            <button class="btn btn-danger mr-3" data-toggle="modal">
-              <i class="fas fa-trash"></i>
-            </button>
+            {{ articulo.categoria.padre.nombreCategoria }} -
+            {{ articulo.categoria.nombreCategoria }}
           </td>
-        </tr>
-        <tr>
-          <td><i class="fas fa-fw fa-pizza-slice"></i></td>
-          <td>Especial</td>
-          <td>Ingredientes especiales</td>
-          <td>$250</td>
+          <td>{{ articulo.denominacion }}</td>
           <td>
             <button
-              class="btn btn-info mr-3"
-              data-toggle="modal"
-              data-target="#ModalProductos"
-              (click)="editar()"
+              aria-expanded="false"
+              data-toggle="dropdown"
+              class="btn btn-info dropdown-toggle"
+              type="button"
             >
-              <i class="fas fa-pencil-alt"></i>
+              Detalle ingredientes<span class="caret"></span>
             </button>
-            <button class="btn btn-danger mr-3" data-toggle="modal">
-              <i class="fas fa-trash"></i>
-            </button>
+
+            <ul role="menu" class="dropdown-menu">
+              <li
+                class="list-group-item"
+                *ngFor="
+                  let item of articulo.lista_detalleManufacturado;
+                  index as i
+                "
+              >
+                {{ item.articuloInsumoID.denominacion }} - {{ item.cantidad }} -
+                {{ item.unidadMedidaID.abreviatura }}
+              </li>
+            </ul>
           </td>
-        </tr>
-        <tr>
-          <td><i class="fas fa-fw fa-pizza-slice"></i></td>
-          <td>Cuatro quesos</td>
-          <td>Queso queso queso queso</td>
-          <td>$320</td>
+          <td>${{ articulo.precio_de_venta }}</td>
+          <td>${{ articulo.costo_de_manuf }}</td>
           <td>
             <button
               class="btn btn-info mr-3"
               data-toggle="modal"
               data-target="#ModalProductos"
-              (click)="editar()"
+              (click)="editar(articulo)"
             >
               <i class="fas fa-pencil-alt"></i>
             </button>
@@ -86,6 +82,9 @@
         </tr>
       </tbody>
     </table>
+    <pagination-controls
+      (pageChange)="pageActual = $event"
+    ></pagination-controls>
   </div>
 
   <!-- Modal EDITAR -->
@@ -128,19 +127,31 @@
               <div class="col-4">
                 <div class="form-group">
                   <label for="">Denominacion</label>
-                  <input type="text" class="form-control" />
+                  <input
+                    type="text"
+                    class="form-control"
+                    [(ngModel)]="this.articuloActualizar.denominacion"
+                  />
                 </div>
               </div>
               <div class="col-4">
                 <div class="form-group">
                   <label for="">Precio Compra</label>
-                  <input type="text" class="form-control" />
+                  <input
+                    type="text"
+                    class="form-control"
+                    [(ngModel)]="this.articuloActualizar.costo_de_manuf"
+                  />
                 </div>
               </div>
               <div class="col-4">
                 <div class="form-group">
                   <label for="">Precio venta</label>
-                  <input type="text" class="form-control" />
+                  <input
+                    type="text"
+                    class="form-control"
+                    [(ngModel)]="this.articuloActualizar.precio_de_venta"
+                  />
                 </div>
               </div>
               <div class="col-4">
