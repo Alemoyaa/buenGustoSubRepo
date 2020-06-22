@@ -23,11 +23,11 @@ export class UsuariosComponent implements OnInit {
  
   usuarios: Cliente[] = new Array<Cliente>();
 
-  
+  pageActual: number = 1;
 
   domicilio: Domicilio = new Domicilio();
   cliente: Cliente = new Cliente();
-
+  filtroBuscador: any = '';
   constructor(
    
     private clienteService: ClienteService,
@@ -40,6 +40,13 @@ export class UsuariosComponent implements OnInit {
    
 
     this.alerts.mensajeSuccess('Bienvenido a la seccion Usuario', 'Aqui usted podra asignar el rol a cada usuario registrado en la pagina');
+  }
+
+  get filtrar(): Cliente[] {
+    var matcher = new RegExp(this.filtroBuscador, 'i');
+    return this.usuarios.filter(function (cliente) {
+      return matcher.test([cliente.nombre, cliente.apellido, cliente.usuario.rol.nombreRol].join());
+    });
   }
 
   // traigo todos los clientes con sus respectivos roles

@@ -8,3 +8,8 @@ background-image: url('../../../../../../assets/assetsCatalogo/assets/img/pancho
 background-size: cover;
 background-position: center;
 }
+
+#paginador{
+   background-color:  rgb(165, 165, 165);
+   font-size:  20px;
+}

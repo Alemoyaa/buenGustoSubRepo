@@ -2,7 +2,19 @@
   <div class="row">
     <div class="col-12 text-center">
       <h1 class="display-3">Administracion de Usuarios</h1>
+      <form class="form-inline mt-4 ml-2 mb-4">
+        <label style="font-size: 25px;" ><strong><i class="fas fa-search"> Buscar : </i></strong></label>
+        <input 
+          class="form-control mr-sm-2 ml-2"
+          type="search"
+          placeholder="Nombre/Apellido o Rol"
+          aria-label="Search"
+          [(ngModel)]="filtroBuscador"
+          [ngModelOptions]="{ standalone: true }"
+        />
+      </form>
     </div>
+    
   </div>
 
   <table class="table table-striped text-center"  style="color: white">
@@ -19,7 +31,7 @@
       </tr>
     </thead>
     <tbody style="font-size: 25px;">
-      <tr *ngFor="let cliente of usuarios">
+      <tr *ngFor="let cliente of filtrar | paginate: {itemsPerPage: 6, currentPage: pageActual}">
         <th scope="row"><i class="fas fa-user"></i></th>
         <td>{{ cliente.usuario.email}}</td>
         <td>{{ cliente.nombre }} {{ cliente.apellido }}</td>
@@ -41,18 +53,22 @@
           >
             <i class="fas fa-pencil-alt"> Editar Rol</i>
           </button>
-          <button
+          <!-- <button
             class="btn btn-danger mr-3"
             data-toggle="modal"
             (click)="eliminar(cliente.id)"
           >
             <i class="fas fa-trash"> Deshabilitar Usuario</i>
           </button>
-          
+           -->
         </td>
       </tr>
     </tbody>
   </table>
+  <div id="paginador">
+    <pagination-controls  (pageChange)="pageActual = $event" ></pagination-controls>
+  </div>
+  
 </div>
 
 <app-mostrar-domicilio [domicilioSeleccionado]="domicilio" ></app-mostrar-domicilio>

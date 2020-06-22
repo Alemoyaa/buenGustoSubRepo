@@ -13,6 +13,7 @@ import { Rol } from 'src/app/entidades/Rol';
 import { UsuariosComponent } from '../../usuarios.component';
 
 
+
 @Component({
   selector: 'app-formulario-rol',
   templateUrl: './formulario-rol.component.html',
@@ -24,6 +25,7 @@ export class FormularioRolComponent implements OnInit {
   rol: Rol[] = new Array<Rol>();
   rolSeleccionado: Rol;
 
+  // traigo los datos del componente padre y seteo el formulario con sus datos
   @Input() set clienteSeleccionado(cliente) {
     this.crearFormulario();
     if (cliente.usuario) {
@@ -82,60 +84,54 @@ export class FormularioRolComponent implements OnInit {
     @Host() private tabla: UsuariosComponent) { }
 
   ngOnInit(): void {
+    // creo el formulario  y traigo los roles para mostrarlos en el
     this.crearFormulario();
     this.traerRoles();
 
   }
 
-
+  // creao el formulario con new formControls para 
+  // poder setearle la propiedad disable y que el usuario no pueda modificar los datos
   crearFormulario() {
     // creo el formulario todo por default vacio y le asigno que sea disabled para q no se puedan editar
     // solo se podra editar el rol de la persona
-    this.formularioPersona = this.fb.group({
-      id: 0,
-      nombre: '',
-      apellido: '',
-      telefono: '',
+    this.formularioPersona = new FormGroup({
+      id: new FormControl({value: 0 , disabled: false}),
+      nombre: new FormControl({value: '' , disabled: false}),
+      apellido:  new FormControl({value: '' , disabled: false}),
+      telefono: new FormControl({value: 0 , disabled: false}),
 
-      domicilio: this.fb.group({
-        id: 0,
-        calle: '',
-        nroDepartamento: 0,
-        numero: 0,
-        piso: 0,
-        aclaracion: '',
-        localidad: this.fb.group({
-          id: 0,
-          nombre: '',
-          provincia: this.fb.group({
-            id: 0,
-            nombre: '',
-            pais: this.fb.group({
-              id: 0,
-              nombre: ''
+      domicilio: new FormGroup({
+        id: new FormControl({value: 0 , disabled: false}),
+        calle: new FormControl({value: '' , disabled: false}),
+        nroDepartamento: new FormControl({value: 0 , disabled: false}),
+        numero: new FormControl({value: 0 , disabled: false}),
+        piso: new FormControl({value: 0 , disabled: false}),
+        aclaracion: new FormControl({value: '' , disabled: false}),
+        localidad: new FormGroup({
+          id: new FormControl({value: 0 , disabled: false}),
+          nombre: new FormControl({value: '' , disabled: false}),
+          provincia: new FormGroup({
+            id: new FormControl({value: 0 , disabled: false}),
+            nombre: new FormControl({value: '' , disabled: false}),
+            pais: new FormGroup({
+              id: new FormControl({value: 0 , disabled: false}),
+              nombre: new FormControl({value: '' , disabled: false}),
             })
           })
         })
       }),
-      usuario: this.fb.group({
-        id: 0,
-        email: '',
-        rol: this.fb.group({
-          id: 0,
-          nombreRol: ''
+      usuario: new FormGroup({
+        id: new FormControl({value: 0 , disabled: false}),
+        email: new FormControl({value: '' , disabled: false}),
+        rol: new FormGroup({
+          id: new FormControl({value: 0 }),
+          nombreRol: new FormControl({value: ''}),
         })
       }),
     });
   }
-  // post a la base de datos con el cliente y su rol
-  // actualizarRol() {
-  // this.clienteService.put(this.idCliente, this.formularioPersona.value);
-  //   console.log('id cliente actualziarRol() ', this.idUsuario);
-  //   console.log(
-  //     'formulario value actualziarRol() ',
-  //     this.formularioPersona.value
-  //   );
-  // }
+
   actualizar() {
     console.log(this.formularioPersona.value);
     this.clienteService.put(this.cliente.id, this.formularioPersona.value).subscribe(
@@ -153,16 +149,13 @@ export class FormularioRolComponent implements OnInit {
         this.alerts.mensajeError('No se ah podido actualizar el Rol del usuario', 'ah ocurrido un error y no se ah podido realizar la actualizacio, porfavor verifique que esten todos los datos correctos');
       }
     );
-    console.log('id cliente actualziarRol() ');
-    console.log(
-      'formulario value actualziarRol() ',
-      this.formularioPersona.value
-    );
+  
 
   }
 
+  //  selecciono el rol en el formulario, traigo el rol seleccionado y lo seteo a mi usuario
   seleccionarRol(id: number) {
-    console.log('seleccionar rol id parametro :', id);
+   
     // accedo al control usuario
     const control = <FormGroup>this.formularioPersona.controls['usuario'];
     // dentro de usuarios se encuentra rol
@@ -177,7 +170,7 @@ export class FormularioRolComponent implements OnInit {
           id: rol.id,
           nombreRol: rol.nombreRol
         });
-        console.log(this.rolSeleccionado);
+      
       });
     }
   }
@@ -186,8 +179,11 @@ export class FormularioRolComponent implements OnInit {
   traerRoles() {
     this.rolService.getAll().subscribe((roles) => {
       this.rol = roles;
-      console.log('Traer Roles() :', this.rol);
+      
     });
   }
+
+
+
 
 }
