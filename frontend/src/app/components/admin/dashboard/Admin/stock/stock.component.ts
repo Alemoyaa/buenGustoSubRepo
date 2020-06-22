@@ -1,4 +1,4 @@
-import Swal  from 'sweetalert2';
+import Swal from 'sweetalert2';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { ArticuloInsumoService } from './../../../../../services/serviciosCliente/articuloInsumoServices/articuloInsumo.service';
 import { ArticuloInsumo } from 'src/app/entidades/ArticuloInsumo';
@@ -59,10 +59,19 @@ export class StockComponent implements OnInit {
   }
 
   getAllArticulos() {
-    this.artInsumoService.getAll().subscribe(res => {
-      this.articulosInsumos = res;
-      console.log(this.articulosInsumos);
-    });
+    this.artInsumoService.getAll().subscribe(
+      (res) => {
+        this.articulosInsumos = res;
+        console.log(this.articulosInsumos);
+      }, (err) => {
+        Swal.fire({
+          icon: 'error',
+          title: 'Ocurrio un problema',
+          html: 'Por favor vuelva a intentarlo mas tarde',
+        });
+        console.log(err);
+      }
+    );
   }
 
   //Post
@@ -75,23 +84,22 @@ export class StockComponent implements OnInit {
         this.formStock.reset();
         console.log(this.articulosInsumos);
         console.log(this.articulo);
-      });
+        Swal.fire(
+          'success',
+          'Articulo agregado ',
+          'success'
+        )
+      }, (err) => {
+        Swal.fire({
+          icon: 'error',
+          title: 'Ocurrio un problema',
+          html: 'Por favor vuelva a intentarlo mas tarde',
+        });
+        console.log(err);
+      }
+
+    );
   }
-
-  //Formulario
-
-
-  // delete(id: number){
-  //   const desicion= confirm("Desea eliminar ?");
-  //   if(desicion){
-  //     this.artInsumoService.delete(id).subscribe((data)=>{
-  //       console.log(data);
-  //       alert("Registro eliminado");
-  //       this.getAllArticulos();
-  //     });
-  //   }
-  // }
-
 
   delete(articulo: ArticuloInsumo) {
     Swal.fire({
@@ -105,28 +113,45 @@ export class StockComponent implements OnInit {
     }).then((result) => {
       if (result.value) {
         this.artInsumoService.delete(articulo.id).subscribe(
-          res => {
+          (res) => {
             console.log(articulo.id);
             const indexArticulo = this.articulosInsumos.indexOf(articulo);
-          this.articulosInsumos.splice(indexArticulo, 1);
+            this.articulosInsumos.splice(indexArticulo, 1);
+
+            Swal.fire(
+              'Deleted!',
+              'El Usuario fue eliminado con éxito',
+              'success'
+            )
+          }, (err) => {
+            Swal.fire({
+              icon: 'error',
+              title: 'Ocurrio un problema',
+              html: 'Por favor vuelva a intentarlo mas tarde',
+            });
+            console.log(err);
           }
         );
-        Swal.fire(
-          'Deleted!',
-          'El Usuario fue eliminado con éxito',
-          'success'
-        )
       }
     })
   }
 
-  update(){
-    this.artInsumoService.put(this.id, this.formStock.value).subscribe((data)=>{
-      console.log(this.id)
-      this.getAllArticulos();
-      this.esEditar= false;
-      this.formStock.reset(); //Que me limpie los campos
-    });
+  update() {
+    this.artInsumoService.put(this.id, this.formStock.value).subscribe(
+      (data) => {
+        console.log(this.id)
+        this.getAllArticulos();
+        this.esEditar = false;
+        this.formStock.reset(); //Que me limpie los campos
+      }, (err) => {
+        Swal.fire({
+          icon: 'error',
+          title: 'Ocurrio un problema',
+          html: 'Por favor vuelva a intentarlo mas tarde',
+        });
+        console.log(err);
+      }
+    );
   }
 
 
@@ -146,8 +171,8 @@ export class StockComponent implements OnInit {
       denominacion: articulo.denominacion,
       categoria: articulo.categoria
     });
-    this.id= articulo.id;
-  console.log(this.id)
+    this.id = articulo.id;
+    console.log(this.id)
   }
 
   cerrar() {

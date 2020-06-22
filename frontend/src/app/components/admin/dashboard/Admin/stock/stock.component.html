@@ -44,12 +44,12 @@
         <td>{{i.categoria.nombreCategoria}}</td>
         <td>{{i.unidadMedidaID.denominacion}}</td>
         <td>
-          <button class="btn btn-info mr-3" data-toggle="modal" data-target="#ModalStock"
-           (click)="editar(i)"><i
+          <button class="btn btn-info mr-3" data-toggle="modal" data-target="#ModalStock" (click)="editar(i)"><i
               class="fas fa-pencil-alt"></i></button>
         </td>
         <td>
-          <button class="btn btn-danger mr-3" data-toggle="modal" (click)="delete(i)"><i class="fas fa-trash"></i></button>
+          <button class="btn btn-danger mr-3" data-toggle="modal" (click)="delete(i)"><i
+              class="fas fa-trash"></i></button>
         </td>
       </tr>
 
@@ -67,7 +67,7 @@
       <div class="modal-header">
         <h5 *ngIf="!esEditar" class="modal-title" id="modalAgregar"><strong>Agregar nuevo articulo</strong></h5>
         <h5 *ngIf="esEditar" class="modal-title" id="modalEditar">Editar</h5>
-        <button  type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
@@ -81,64 +81,78 @@
             <div class="col-6">
               <div class="form-group">
                 <label for="denominacion">Denominacion</label>
-                <input type="text" class="form-control" name="denominacion" id="denominacion" formControlName="denominacion"/>
+                <input type="text" class="form-control" name="denominacion" id="denominacion"
+                  formControlName="denominacion" />
               </div>
             </div>
+
+
             <div class="col-2">
               <div class="form-group">
-                <label for="">Es catalogo?</label>
-                <input type="text" class="form-control" name="es_catalogo" id="es_catalogo" formControlName="es_catalogo"/>
+                <label for="es_catalogo">Es catalogo?</label>
+                <input type="text" class="form-control" name="es_catalogo" id="es_catalogo"
+                  formControlName="es_catalogo" />
               </div>
             </div>
+
+
             <div class="col-2">
               <div class="form-group">
                 <label for="">Costo Venta</label>
-                <input type="number" class="form-control" name="costo_de_venta" id="costo_de_venta" formControlName="costo_de_venta"/>
+                <input type="number" class="form-control" name="costo_de_venta" id="costo_de_venta"
+                  formControlName="costo_de_venta" />
               </div>
             </div>
 
             <div class="col-2">
               <div class="form-group">
                 <label for="">precio de venta</label>
-                <input type="text" class="form-control" name="precio_de_venta" id="precio_de_venta" formControlName="precio_de_venta"/>
+                <input type="text" class="form-control" name="precio_de_venta" id="precio_de_venta"
+                  formControlName="precio_de_venta" />
               </div>
             </div>
 
             <div class="col-2">
               <div class="form-group">
                 <label for="">refrigeracion</label>
-                <input type="text" class="form-control" name="requiere_refrigeracion" id="requiere_refrigeracion" formControlName="requiere_refrigeracion"/>
+                <input type="text" class="form-control" name="requiere_refrigeracion" id="requiere_refrigeracion"
+                  formControlName="requiere_refrigeracion" />
               </div>
             </div>
             <div class="col-2">
               <div class="form-group">
                 <label for="">stock actual</label>
-                <input type="number" class="form-control" name="stock_actual" id="stock_actual" formControlName="stock_actual"/>
+                <input type="number" class="form-control" name="stock_actual" id="stock_actual"
+                  formControlName="stock_actual" />
               </div>
               <div class="form-group">
                 <label for="">stock minimo</label>
-                <input type="number" class="form-control" name="stock_minimo" id="stock_minimo" formControlName="stock_minimo"/>
+                <input type="number" class="form-control" name="stock_minimo" id="stock_minimo"
+                  formControlName="stock_minimo" />
               </div>
 
               <div class="form-group">
                 <label for="">Url Imagen</label>
-                <input type="text" class="form-control" name="url_imagen" id="url_imagen" formControlName="url_imagen"/>
+                <input type="text" class="form-control" name="url_imagen" id="url_imagen"
+                  formControlName="url_imagen" />
               </div>
             </div>
 
-            <div class="col-6" >
+            <div class="col-6">
               <div class="form-group">
                 <label for="">Unidad de medida</label>
                 <select class="form-control" id="denominacion" name="denominacion" formControlName="denominacion">
                   <option value="i"></option>
-                  <!-- <option value="1">kilogramos</option>
+                   <option value="1">kilogramos</option>
                   <option value="2">litros</option>
-                  <option value="3">unidad</option> -->
+                  <option value="3">unidad</option>
                 </select>
               </div>
+
+              <div formGroupName="categoria">
               <div class="form-group">
                 <label for="">Categoria</label>
-                <select class="form-control" id="nombreCategoria" name="nombreCategoria" formControlName="nombreCategoria">
+                <select class="form-control" id="" name="" >
                   <option value="0">Hamburguesa</option>
                   <option value="1">Pizza</option>
                   <option value="2">Empanadas</option>
@@ -146,18 +160,20 @@
                 </select>
               </div>
             </div>
+
+
+            </div>
           </div>
         </form>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-primary" data-dismiss="modal"
-         (click)="cerrar()">Close</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="cerrar()">Close</button>
 
-        <button *ngIf="esEditar" [disabled]="formStock.invalid" type="button"
-         class="btn btn-info" (click)="update()">Editar articulo</button>
+        <button *ngIf="esEditar" [disabled]="formStock.invalid" type="button" class="btn btn-info"
+          (click)="update()">Editar articulo</button>
 
-        <button *ngIf="!esEditar" [disabled]="formStock.invalid" type="button"
-         class="btn btn-info" (click)="agregar()">Crear nuevo articulo</button>
+        <button *ngIf="!esEditar" [disabled]="formStock.invalid" type="button" class="btn btn-info"
+          (click)="agregar()">Crear nuevo articulo</button>
       </div>
     </div>
   </div>
