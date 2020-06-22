@@ -1,4 +1,4 @@
-<div class="container-fluid-sm " id="fondo" style="color: white" >
+<div class="container-fluid-sm " id="menu" id="fondo" style="color: white" >
   <div class="row">
     <div class="col-12 text-center">
       <h1 class="display-3">Administracion de Usuarios</h1>
@@ -41,13 +41,13 @@
           >
             <i class="fas fa-pencil-alt"> Editar Rol</i>
           </button>
-          <button
+          <!-- <button
             class="btn btn-danger mr-3"
             data-toggle="modal"
             (click)="eliminar(cliente.id)"
           >
             <i class="fas fa-trash"> Deshabilitar Usuario</i>
-          </button>
+          </button> -->
           
         </td>
       </tr>
@@ -57,4 +57,4 @@
 
 <app-mostrar-domicilio [domicilioSeleccionado]="domicilio" ></app-mostrar-domicilio>
 
-<app-formulario-rol></app-formulario-rol>
+<app-formulario-rol [clienteSeleccionado]="cliente"></app-formulario-rol>
