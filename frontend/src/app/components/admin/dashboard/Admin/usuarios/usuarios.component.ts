@@ -45,7 +45,7 @@ export class UsuariosComponent implements OnInit {
   get filtrar(): Cliente[] {
     var matcher = new RegExp(this.filtroBuscador, 'i');
     return this.usuarios.filter(function (cliente) {
-      return matcher.test([cliente.nombre, cliente.apellido].join());
+      return matcher.test([cliente.nombre, cliente.apellido, cliente.usuario.rol.nombreRol].join());
     });
   }
 

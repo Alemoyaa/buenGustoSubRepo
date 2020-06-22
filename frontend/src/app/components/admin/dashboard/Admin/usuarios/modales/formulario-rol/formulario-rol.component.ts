@@ -11,7 +11,7 @@ import { RolService } from 'src/app/services/serviciosCliente/rolServices/rol.se
 import { AlertsService } from 'src/app/services/alertServices/alerts.service';
 import { Rol } from 'src/app/entidades/Rol';
 import { UsuariosComponent } from '../../usuarios.component';
-import { disableDebugTools } from '@angular/platform-browser';
+
 
 
 @Component({
@@ -96,37 +96,37 @@ export class FormularioRolComponent implements OnInit {
     // creo el formulario todo por default vacio y le asigno que sea disabled para q no se puedan editar
     // solo se podra editar el rol de la persona
     this.formularioPersona = new FormGroup({
-      id: new FormControl({value: 0 , disabled: true}),
-      nombre: new FormControl({value: '' , disabled: true}),
-      apellido:  new FormControl({value: '' , disabled: true}),
-      telefono: new FormControl({value: 0 , disabled: true}),
+      id: new FormControl({value: 0 , disabled: false}),
+      nombre: new FormControl({value: '' , disabled: false}),
+      apellido:  new FormControl({value: '' , disabled: false}),
+      telefono: new FormControl({value: 0 , disabled: false}),
 
       domicilio: new FormGroup({
-        id: new FormControl({value: 0 , disabled: true}),
-        calle: new FormControl({value: '' , disabled: true}),
-        nroDepartamento: new FormControl({value: 0 , disabled: true}),
-        numero: new FormControl({value: 0 , disabled: true}),
-        piso: new FormControl({value: 0 , disabled: true}),
-        aclaracion: new FormControl({value: '' , disabled: true}),
+        id: new FormControl({value: 0 , disabled: false}),
+        calle: new FormControl({value: '' , disabled: false}),
+        nroDepartamento: new FormControl({value: 0 , disabled: false}),
+        numero: new FormControl({value: 0 , disabled: false}),
+        piso: new FormControl({value: 0 , disabled: false}),
+        aclaracion: new FormControl({value: '' , disabled: false}),
         localidad: new FormGroup({
-          id: new FormControl({value: 0 , disabled: true}),
-          nombre: new FormControl({value: '' , disabled: true}),
+          id: new FormControl({value: 0 , disabled: false}),
+          nombre: new FormControl({value: '' , disabled: false}),
           provincia: new FormGroup({
-            id: new FormControl({value: 0 , disabled: true}),
-            nombre: new FormControl({value: '' , disabled: true}),
+            id: new FormControl({value: 0 , disabled: false}),
+            nombre: new FormControl({value: '' , disabled: false}),
             pais: new FormGroup({
-              id: new FormControl({value: 0 , disabled: true}),
-              nombre: new FormControl({value: '' , disabled: true}),
+              id: new FormControl({value: 0 , disabled: false}),
+              nombre: new FormControl({value: '' , disabled: false}),
             })
           })
         })
       }),
       usuario: new FormGroup({
-        id: new FormControl({value: 0 , disabled: true}),
-        email: new FormControl({value: '' , disabled: true}),
+        id: new FormControl({value: 0 , disabled: false}),
+        email: new FormControl({value: '' , disabled: false}),
         rol: new FormGroup({
-          id: new FormControl({value: 0 , disabled: true}),
-          nombreRol: new FormControl({value: '' , disabled: true}),
+          id: new FormControl({value: 0 }),
+          nombreRol: new FormControl({value: ''}),
         })
       }),
     });
@@ -149,17 +149,13 @@ export class FormularioRolComponent implements OnInit {
         this.alerts.mensajeError('No se ah podido actualizar el Rol del usuario', 'ah ocurrido un error y no se ah podido realizar la actualizacio, porfavor verifique que esten todos los datos correctos');
       }
     );
-    console.log('id cliente actualziarRol() ');
-    console.log(
-      'formulario value actualziarRol() ',
-      this.formularioPersona.value
-    );
+  
 
   }
 
   //  selecciono el rol en el formulario, traigo el rol seleccionado y lo seteo a mi usuario
   seleccionarRol(id: number) {
-    console.log('seleccionar rol id parametro :', id);
+   
     // accedo al control usuario
     const control = <FormGroup>this.formularioPersona.controls['usuario'];
     // dentro de usuarios se encuentra rol
@@ -174,7 +170,7 @@ export class FormularioRolComponent implements OnInit {
           id: rol.id,
           nombreRol: rol.nombreRol
         });
-        console.log(this.rolSeleccionado);
+      
       });
     }
   }
@@ -183,8 +179,11 @@ export class FormularioRolComponent implements OnInit {
   traerRoles() {
     this.rolService.getAll().subscribe((roles) => {
       this.rol = roles;
-      console.log('Traer Roles() :', this.rol);
+      
     });
   }
+
+
+
 
 }
