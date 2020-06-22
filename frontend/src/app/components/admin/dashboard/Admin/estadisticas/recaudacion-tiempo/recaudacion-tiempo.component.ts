@@ -16,6 +16,7 @@ export class RecaudacionTiempoComponent implements OnInit {
   DateDesde: Date;
 
   recaudacionTotal: number;
+  mostrar: boolean = true;
 
   constructor(private servicePedido: PedidoServices) {}
 
@@ -36,6 +37,12 @@ export class RecaudacionTiempoComponent implements OnInit {
             this.calcularRecaudacion(res);
           },
           (err) => {
+            Swal.fire({
+              icon: 'error',
+              title: 'Ocurrio un problema',
+              html: 'Por favor vuelva a intentarlo mas tarde',
+            });
+            this.mostrar = false;
             console.log(err);
           }
         );

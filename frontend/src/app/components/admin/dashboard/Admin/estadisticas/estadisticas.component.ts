@@ -37,6 +37,11 @@ export class EstadisticasComponent implements OnInit {
             this.getCantidades(this.pedidosRecuperadosDesdeHasta);
           },
           (err) => {
+            Swal.fire({
+              icon: 'error',
+              title: 'Ocurrio un problema',
+              html: 'Por favor vuelva a intentarlo mas tarde',
+            });
             console.log(err);
           }
         );

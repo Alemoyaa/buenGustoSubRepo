@@ -41,7 +41,7 @@
   </div>
 </form>
 
-<div class="jumbotron jumbotron-fluid">
+<div class="jumbotron jumbotron-fluid" *ngIf="mostrar; else elseRecaudacion">
   <div class="container">
     <h1 class="display-4">
       Ventas totales: {{ recaudacionTotal }}
@@ -56,3 +56,13 @@
     </p>
   </div>
 </div>
+
+<ng-template #elseRecaudacion>
+  <div class="jumbotron jumbotron-fluid">
+    <div class="container">
+      <h1 class="display-4">
+        Ocurrio un problema. Vuelva a intentarlo mas tarde
+      </h1>
+    </div>
+  </div>
+</ng-template>

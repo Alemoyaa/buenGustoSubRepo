@@ -48,6 +48,11 @@ export class PedidosPorClienteComponent implements OnInit {
         console.log(res);
       },
       (err) => {
+        Swal.fire({
+          icon: 'error',
+          title: 'Ocurrio un problema',
+          html: 'Por favor vuelva a intentarlo mas tarde',
+        });
         console.log(err);
       }
     );
@@ -88,15 +93,16 @@ export class PedidosPorClienteComponent implements OnInit {
           (err) => {
             Swal.fire({
               icon: 'error',
-              title: 'Cuidado',
-              html: 'En la fecha seleccionada no se hicieron pedidos' + err,
+              title: 'Error',
+              html: 'Vuelva a intentarlo mas tarde',
             });
+            console.error(err);
           },
           () => {
             if (this.pedidosRecuperadosDesdeHasta.length === 0) {
               Swal.fire({
-                icon: 'error',
-                title: 'Cuidado',
+                icon: 'info',
+                title: 'No hay pedidos',
                 html: 'En la fecha seleccionada no se hicieron pedidos',
               });
             } else {
