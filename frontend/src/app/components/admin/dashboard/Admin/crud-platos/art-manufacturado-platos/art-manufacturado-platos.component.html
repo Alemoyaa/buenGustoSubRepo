@@ -1,0 +1,93 @@
+<div class="fondo">
+  <div class="container mt-5">
+    <div class="row">
+      <div class="col-12 text-center">
+        <h1>Administracion de Platos</h1>
+      </div>
+    </div>
+
+    <div class="row mb-4 ml-2">
+      <button
+        class="btn btn-success mr-3"
+        data-toggle="modal"
+        data-target="#ModalProductos"
+      >
+        Crear nuevo plato
+      </button>
+    </div>
+
+    <table class="table table-striped">
+      <thead>
+      <tr>
+        <th scope="col"></th>
+        <th scope="col">Categoria</th>
+        <th scope="col">Denominacion</th>
+        <th scope="col">Ingredientes</th>
+        <th scope="col">Precio</th>
+        <th scope="col">Costo</th>
+        <th scope="col">Acciones</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr
+        *ngFor="
+            let articulo of articuloManufacturado
+              | paginate: { itemsPerPage: 5, currentPage: pageActual }
+          "
+      >
+        <td><i class="fas fa-fw fa-pizza-slice"></i></td>
+        <td>
+          {{ articulo.categoria.padre.nombreCategoria }} -
+          {{ articulo.categoria.nombreCategoria }}
+        </td>
+        <td>{{ articulo.denominacion }}</td>
+        <td>
+          <button
+            aria-expanded="false"
+            data-toggle="dropdown"
+            class="btn btn-info dropdown-toggle"
+            type="button"
+          >
+            Detalle ingredientes<span class="caret"></span>
+          </button>
+
+          <ul role="menu" class="dropdown-menu">
+            <li
+              class="list-group-item"
+              *ngFor="
+                  let item of articulo.lista_detalleManufacturado;
+                  index as i
+                "
+            >
+              {{ item.articuloInsumoID.denominacion }} - {{ item.cantidad }} -
+              {{ item.unidadMedidaID.abreviatura }}
+            </li>
+          </ul>
+        </td>
+        <td>${{ articulo.precio_de_venta }}</td>
+        <td>${{ articulo.costo_de_manuf }}</td>
+        <td>
+          <button
+            class="btn btn-info mr-3"
+            data-toggle="modal"
+            data-target="#ModalProductos"
+            (click)="preCargarDatosFormulario(articulo)"
+          >
+            <i class="fas fa-pencil-alt">Editar</i>
+          </button>
+          <button
+            class="btn btn-danger mr-3"
+            data-toggle="modal"
+            (click)="eliminar(articulo.id)"
+          >
+            <i class="fas fa-trash">Eliminar</i>
+          </button>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+    <pagination-controls
+      (pageChange)="pageActual = $event"
+    ></pagination-controls>
+  </div>
+</div>

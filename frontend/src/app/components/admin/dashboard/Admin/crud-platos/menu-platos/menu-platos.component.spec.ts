@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { FormPlatosComponent } from './form-platos.component';
+import { MenuPlatosComponent } from './menu-platos.component';
 
-describe('FormPlatosComponent', () => {
-  let component: FormPlatosComponent;
-  let fixture: ComponentFixture<FormPlatosComponent>;
+describe('MenuPlatosComponent', () => {
+  let component: MenuPlatosComponent;
+  let fixture: ComponentFixture<MenuPlatosComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ FormPlatosComponent ]
+      declarations: [ MenuPlatosComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(FormPlatosComponent);
+    fixture = TestBed.createComponent(MenuPlatosComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -1,15 +1,15 @@
-import { Articulo } from 'src/app/entidades/Articulo';
-import { AlertsService } from './../../../../../../services/alertServices/alerts.service';
-import { ArticuloManufacturadoService } from './../../../../../../services/serviciosCliente/articuloManufacturadoServices/articuloManufacturado.service';
-import { ArticuloManufacturado } from './../../../../../../entidades/ArticuloManufacturado';
 import { Component, OnInit } from '@angular/core';
+import {ArticuloManufacturado} from '../../../../../../entidades/ArticuloManufacturado';
+import {ArticuloManufacturadoService} from '../../../../../../services/serviciosCliente/articuloManufacturadoServices/articuloManufacturado.service';
+import {AlertsService} from '../../../../../../services/alertServices/alerts.service';
 
 @Component({
-  selector: 'app-tabla-platos',
-  templateUrl: './tabla-platos.component.html',
-  styleUrls: ['./tabla-platos.component.css'],
+  selector: 'app-art-manufacturado-platos',
+  templateUrl: './art-manufacturado-platos.component.html',
+  styleUrls: ['./art-manufacturado-platos.component.css']
 })
-export class TablaPlatosComponent implements OnInit {
+export class ArtManufacturadoPlatosComponent implements OnInit {
+
   esEditar: boolean = false;
   articuloManufacturado: ArticuloManufacturado[] = [];
 
@@ -43,13 +43,24 @@ export class TablaPlatosComponent implements OnInit {
     );
   }
 
-  editar(articulo: ArticuloManufacturado) {
+  preCargarDatosFormulario(articulo: ArticuloManufacturado) {
     this.articuloActualizar = articulo;
     this.esEditar = true;
+  }
+
+  eliminar(id: number) {
+    const opcion = confirm('¿Esta seguro que desea eliminar?');
+    if (opcion) {
+      this.serviceArtManufac.delete(id).subscribe((data) => {
+        alert('Registro eliminado');
+      });
+    } else {
+    }
   }
 
   cerrar() {
     this.articuloActualizar = null;
     this.esEditar = false;
   }
+
 }
