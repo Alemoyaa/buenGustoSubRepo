@@ -42,6 +42,8 @@ import { PedidosDetalleComponent } from './components/cliente/pedidos-detalle/pe
 import { ArtStockMinimoComponent } from './components/admin/dashboard/Admin/estadisticas/art-stock-minimo/art-stock-minimo.component';
 import { RecaudacionTiempoComponent } from './components/admin/dashboard/Admin/estadisticas/recaudacion-tiempo/recaudacion-tiempo.component';
 import { PedidosPorClienteComponent } from './components/admin/dashboard/Admin/estadisticas/pedidos-por-cliente/pedidos-por-cliente.component';
+import { MostrarDomicilioComponent } from './components/admin/dashboard/Admin/usuarios/modales/mostrar-domicilio/mostrar-domicilio.component';
+import { FormularioRolComponent } from './components/admin/dashboard/Admin/usuarios/modales/formulario-rol/formulario-rol.component';
 
 
 @NgModule({
@@ -72,6 +74,8 @@ import { PedidosPorClienteComponent } from './components/admin/dashboard/Admin/e
     ArtStockMinimoComponent,
     RecaudacionTiempoComponent,
     PedidosPorClienteComponent,
+    MostrarDomicilioComponent,
+    FormularioRolComponent,
   ],
   imports: [
     BrowserModule,
