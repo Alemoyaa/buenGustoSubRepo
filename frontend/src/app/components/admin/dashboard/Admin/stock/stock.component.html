@@ -1,37 +1,45 @@
-<div class="container mt-5">
+<div class="container mt-5" id="body">
   <div class="row">
     <div class="col-12 text-center">
-      <h1>Administracion de Stock</h1>
+      <h1 class="display-3">Administracion de Stock</h1>
     </div>
   </div>
+
   <div class="row mb-4 ml-2">
-    <button class="btn btn-success mr-3 fa fa-plus" data-toggle="modal" data-target="#ModalStock">Nuevo
+    <button class="btn btn-success mr-3  " data-toggle="modal" data-target="#ModalStock">+ Nuevo
       articulo</button>
+      <!-- Buscador -->
+    <div class="buscador">
+      <form>
+        <input class="form-control mr-sm-2" type="search" placeholder="Articulo..." aria-label="Search"
+          [(ngModel)]="filtroBuscador" [ngModelOptions]="{ standalone: true }" />
+      </form>
+    </div>
   </div>
 
   <table class="table table-striped text-center">
     <thead>
       <tr>
-        <th scope="col">#</th>
+        <th hidden>#</th>
         <th scope="col">Denominacion</th>
-        <th scope="col">es_catalogo</th>
+        <th scope="col">Categoria</th>
+        <th scope="col">Catalogo ?</th>
         <th scope="col">Costo</th>
         <th scope="col">Precio Venta</th>
         <th scope="col">require_refrigeracion</th>
         <th scope="col">Stock Actual</th>
         <th scope="col">Stock Minimo</th>
         <th scope="col">Imagen</th>
-        <th scope="col">Categoria</th>
         <th scope="col">Unidad de medida</th>
         <th scope="col">Acciones</th>
       </tr>
     </thead>
     <tbody>
       <!-- trackBy Mejora el rendimiento -->
-      <tr
-        *ngFor="let i of articulosInsumos | paginate: {itemsPerPage: 4, currentPage: pageActual} ; trackBy: trackByFn">
-        <th scope="row">{{i.id}}</th>
+      <tr *ngFor="let i of filtrar | paginate: {itemsPerPage: 4, currentPage: pageActual} ; trackBy: trackByFn">
+        <th hidden>{{i.id}}</th>
         <td>{{i.denominacion}}</td>
+        <td>{{i.categoria.nombreCategoria}}</td>
         <td>{{i.es_catalogo}}</td>
         <td>{{i.costo_de_venta}}</td>
         <td>{{i.precio_de_venta}}</td>
@@ -41,7 +49,6 @@
         <td>
           <img src={{i.url_imagen}} class="img-thumbnail img-fluid">
         </td>
-        <td>{{i.categoria.nombreCategoria}}</td>
         <td>{{i.unidadMedidaID.denominacion}}</td>
         <td>
           <button class="btn btn-info mr-3" data-toggle="modal" data-target="#ModalStock" (click)="editar(i)"><i
@@ -62,11 +69,11 @@
 <!-- Modal EDITAR -->
 <div class="modal fade" data-backdrop="static" id="ModalStock" tabindex="-1" role="form"
   aria-labelledby="ModalStockLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg" role="document">
+  <div class="modal-dialog modal-lg" role="document" id="body">
     <div class="modal-content">
       <div class="modal-header">
         <h5 *ngIf="!esEditar" class="modal-title" id="modalAgregar"><strong>Agregar nuevo articulo</strong></h5>
-        <h5 *ngIf="esEditar" class="modal-title" id="modalEditar">Editar</h5>
+        <h5 *ngIf="esEditar" class="modal-title" id="modalEditar"> <strong>Editar</strong></h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -76,6 +83,8 @@
           <div class="row">
             <div class="col-12">
               <h5 class="modal-title" id="exampleModalLabel">Ingrese los datos del articulo</h5>
+              <br />
+              <br />
             </div>
 
             <div class="col-6">
@@ -149,17 +158,29 @@
                 </select>
               </div>
 
+
               <div formGroupName="categoria">
                 <div class="form-group">
                   <label for="">Categoria</label>
                   <select class="form-control" id="" name="">
-                    <option value="0">Hamburguesa</option>
-                    <option value="1">Pizza</option>
-                    <option value="2">Empanadas</option>
-                    <option value="3">Otra Categoria</option>
+                    <option *ngFor="let padre of categoriasPadre" value="0">{{ padre.nombreCategoria }}</option>
                   </select>
                 </div>
               </div>
+
+              <!-- <div formGroupName="categoriaHijo">
+                  <div class="form-group">
+                    <label for="">Subcategoría </label>
+                    <select
+                      class="form-control"
+                      id=""
+                      name=""
+                      *ngFor="let categoria of categorias"
+                    >
+                      <option value="0">{{ categoria.nombreCategoria }}</option>
+                    </select>
+                  </div>
+                </div> -->
 
 
             </div>

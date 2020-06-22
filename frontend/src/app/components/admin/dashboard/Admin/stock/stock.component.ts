@@ -1,18 +1,34 @@
 import Swal from 'sweetalert2';
-import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
+import {
+  FormGroup,
+  FormBuilder,
+  FormControl,
+  Validators,
+} from '@angular/forms';
 import { ArticuloInsumoService } from './../../../../../services/serviciosCliente/articuloInsumoServices/articuloInsumo.service';
 import { ArticuloInsumo } from 'src/app/entidades/ArticuloInsumo';
 import { Component, OnInit } from '@angular/core';
+import { CategoriaService } from 'src/app/services/serviciosCliente/categoriaServices/categoria.service';
+import { Categoria } from 'src/app/entidades/Categoria';
 
 @Component({
   selector: 'app-stock',
   templateUrl: './stock.component.html',
-  styleUrls: ['./stock.component.css']
+  styleUrls: ['./stock.component.css'],
 })
 export class StockComponent implements OnInit {
-  pageActual: number = 1;//paginacion
+  pageActual: number = 1; //paginacion
 
-  public articulosInsumos: ArticuloInsumo[];
+  public articulosInsumos: ArticuloInsumo[] = [];
+
+
+  public unidadesMedida: Array<any> = [];
+  public categorias: Array<Categoria> = [];
+  public categoriasHijo: Array<Categoria> = [];
+  public categoriasPadre: Array<Categoria> = [];
+  public categoriasPadreHijo: Array<any> = [];
+
+  filtroBuscador: any = '';
   id: number;
   public formStock: FormGroup;
 
@@ -27,18 +43,20 @@ export class StockComponent implements OnInit {
     url_imagen: '',
     es_catalogo: null,
     denominacion: '',
-    categoria: null
-  }
+    categoria: null,
+  };
 
   public articuloInsumoActual: ArticuloInsumo; //Para editar
 
-
   esEditar: boolean = false;
-  constructor(private artInsumoService: ArticuloInsumoService) { }
+  constructor(
+    private artInsumoService: ArticuloInsumoService,
+    private categoriaService: CategoriaService
+  ) { }
 
-  ngOnInit(): void {
-    this.getAllArticulos();
-    this.crearFormulario();
+  async ngOnInit() {
+    await this.getAllArticulos();
+    await this.crearFormulario();
   }
 
   /* Método que construye nuestro formulario */
@@ -58,12 +76,22 @@ export class StockComponent implements OnInit {
     });
   }
 
+//buscador
+  get filtrar(): ArticuloInsumo[] {
+    var matcher = new RegExp(this.filtroBuscador, 'i');
+    return this.articulosInsumos.filter(function (articulo) {
+      return matcher.test([articulo.denominacion , articulo.categoria].join());
+
+    });
+  }
+
   getAllArticulos() {
     this.artInsumoService.getAll().subscribe(
       (res) => {
         this.articulosInsumos = res;
         console.log(this.articulosInsumos);
-      }, (err) => {
+      },
+      (err) => {
         Swal.fire({
           icon: 'error',
           title: 'Ocurrio un problema',
@@ -72,6 +100,44 @@ export class StockComponent implements OnInit {
         console.log(err);
       }
     );
+    this.categoriaService.getAll().subscribe(async (categorias) => {
+      this.categorias = categorias;
+      console.log('Categorias todas:,', this.categorias);
+      await this.getCategorias();
+    });
+  }
+
+  // getUnidades() {
+  //   this.articulosInsumos.forEach((element) => {
+  //     if (!this.unidadesMedida.includes(element.unidadMedidaID)) {
+  //       this.unidadesMedida.push(element);
+  //     }
+  //   });
+  // }
+
+  async getCategorias() {
+    this.categorias.forEach((e) => {
+      if (e.hijos) {
+        console.log('Esta es una categoria padre', e);
+        this.categoriasPadre.push(e);
+      } else {
+        console.log('Esta es una categoria hijo', e);
+        this.categoriasHijo.push(e);
+      }
+    });
+    await this.getCategoriasPadreHijo();
+  }
+  getCategoriasPadreHijo() {
+    for (let i = 0; i < this.categoriasPadre.length; i++) {
+      let hijos: Array<Categoria> = [];
+      this.categoriasHijo.forEach((element) => {
+        if (element.padre.id === this.categoriasPadre[i].id) {
+          hijos.push(element);
+        }
+      });
+      this.categoriasPadreHijo.push(hijos);
+    }
+    console.log(this.categoriasPadreHijo);
   }
 
   //Post
@@ -84,12 +150,9 @@ export class StockComponent implements OnInit {
         this.formStock.reset();
         console.log(this.articulosInsumos);
         console.log(this.articulo);
-        Swal.fire(
-          'success',
-          'Articulo agregado ',
-          'success'
-        )
-      }, (err) => {
+        Swal.fire('success', 'Articulo agregado ', 'success');
+      },
+      (err) => {
         Swal.fire({
           icon: 'error',
           title: 'Ocurrio un problema',
@@ -97,19 +160,18 @@ export class StockComponent implements OnInit {
         });
         console.log(err);
       }
-
     );
   }
 
   delete(articulo: ArticuloInsumo) {
     Swal.fire({
       title: 'Estas seguro?',
-      text: " No podrás revertir esto!",
+      text: ' No podrás revertir esto!',
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
-      confirmButtonText: 'Si, eliminar Usuario!'
+      confirmButtonText: 'Si, eliminar articulo!',
     }).then((result) => {
       if (result.value) {
         this.artInsumoService.delete(articulo.id).subscribe(
@@ -118,12 +180,9 @@ export class StockComponent implements OnInit {
             const indexArticulo = this.articulosInsumos.indexOf(articulo);
             this.articulosInsumos.splice(indexArticulo, 1);
 
-            Swal.fire(
-              'Deleted!',
-              'El Usuario fue eliminado con éxito',
-              'success'
-            )
-          }, (err) => {
+            Swal.fire('Deleted!', 'Articulo eliminado con éxito', 'success');
+          },
+          (err) => {
             Swal.fire({
               icon: 'error',
               title: 'Ocurrio un problema',
@@ -133,17 +192,18 @@ export class StockComponent implements OnInit {
           }
         );
       }
-    })
+    });
   }
 
   update() {
     this.artInsumoService.put(this.id, this.formStock.value).subscribe(
       (data) => {
-        console.log(this.id)
+        console.log(this.id);
         this.getAllArticulos();
         this.esEditar = false;
         this.formStock.reset(); //Que me limpie los campos
-      }, (err) => {
+      },
+      (err) => {
         Swal.fire({
           icon: 'error',
           title: 'Ocurrio un problema',
@@ -156,7 +216,7 @@ export class StockComponent implements OnInit {
 
   //form editar
   editar(articulo: ArticuloInsumo) {
-    console.log(articulo)
+    console.log(articulo);
     this.esEditar = true;
     this.formStock.setValue({
       costo_de_venta: articulo.costo_de_venta,
@@ -169,10 +229,10 @@ export class StockComponent implements OnInit {
       url_imagen: articulo.url_imagen,
       es_catalogo: articulo.es_catalogo,
       denominacion: articulo.denominacion,
-      categoria: articulo.categoria
+      categoria: articulo.categoria,
     });
     this.id = articulo.id;
-    console.log(this.id)
+    console.log(this.id);
   }
 
   cerrar() {
@@ -183,5 +243,4 @@ export class StockComponent implements OnInit {
   trackByFn(index: number, i: ArticuloInsumo): number {
     return i.id;
   }
-
 }
