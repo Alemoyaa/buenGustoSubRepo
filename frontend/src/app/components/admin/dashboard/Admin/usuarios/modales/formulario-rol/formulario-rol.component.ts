@@ -91,51 +91,43 @@ export class FormularioRolComponent implements OnInit {
   crearFormulario() {
     // creo el formulario todo por default vacio y le asigno que sea disabled para q no se puedan editar
     // solo se podra editar el rol de la persona
-    this.formularioPersona = this.fb.group({
-      id: 0,
-      nombre: '',
-      apellido: '',
-      telefono: '',
+    this.formularioPersona = new FormGroup({
+      id: new FormControl({value: 0 , disabled: true}),
+      nombre: new FormControl({value: '' , disabled: true}),
+      apellido:  new FormControl({value: '' , disabled: true}),
+      telefono: new FormControl({value: 0 , disabled: true}),
 
-      domicilio: this.fb.group({
-        id: 0,
-        calle: '',
-        nroDepartamento: 0,
-        numero: 0,
-        piso: 0,
-        aclaracion: '',
-        localidad: this.fb.group({
-          id: 0,
-          nombre: '',
-          provincia: this.fb.group({
-            id: 0,
-            nombre: '',
-            pais: this.fb.group({
-              id: 0,
-              nombre: ''
+      domicilio: new FormGroup({
+        id: new FormControl({value: 0 , disabled: true}),
+        calle: new FormControl({value: '' , disabled: true}),
+        nroDepartamento: new FormControl({value: 0 , disabled: true}),
+        numero: new FormControl({value: 0 , disabled: true}),
+        piso: new FormControl({value: 0 , disabled: true}),
+        aclaracion: new FormControl({value: '' , disabled: true}),
+        localidad: new FormGroup({
+          id: new FormControl({value: 0 , disabled: true}),
+          nombre: new FormControl({value: '' , disabled: true}),
+          provincia: new FormGroup({
+            id: new FormControl({value: 0 , disabled: true}),
+            nombre: new FormControl({value: '' , disabled: true}),
+            pais: new FormGroup({
+              id: new FormControl({value: 0 , disabled: true}),
+              nombre: new FormControl({value: '' , disabled: true}),
             })
           })
         })
       }),
-      usuario: this.fb.group({
-        id: 0,
-        email: '',
-        rol: this.fb.group({
-          id: 0,
-          nombreRol: ''
+      usuario: new FormGroup({
+        id: new FormControl({value: 0 , disabled: true}),
+        email: new FormControl({value: '' , disabled: true}),
+        rol: new FormGroup({
+          id: new FormControl({value: 0 , disabled: true}),
+          nombreRol: new FormControl({value: '' , disabled: true}),
         })
       }),
     });
   }
-  // post a la base de datos con el cliente y su rol
-  // actualizarRol() {
-  // this.clienteService.put(this.idCliente, this.formularioPersona.value);
-  //   console.log('id cliente actualziarRol() ', this.idUsuario);
-  //   console.log(
-  //     'formulario value actualziarRol() ',
-  //     this.formularioPersona.value
-  //   );
-  // }
+
   actualizar() {
     console.log(this.formularioPersona.value);
     this.clienteService.put(this.cliente.id, this.formularioPersona.value).subscribe(
