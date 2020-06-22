@@ -4,7 +4,7 @@ import { UnidadMedida } from './UnidadMedida';
 
 export class ArticuloInsumo extends Articulo {
   costo_de_venta: number;
-  require_refrigeracion: boolean;
+  requiere_refrigeracion: boolean;
   stock_actual: number;
   stock_minimo: number;
   unidadMedidaID: UnidadMedida;
