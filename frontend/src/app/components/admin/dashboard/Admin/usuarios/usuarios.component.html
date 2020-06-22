@@ -19,7 +19,7 @@
       </tr>
     </thead>
     <tbody style="font-size: 25px;">
-      <tr *ngFor="let cliente of usuarios">
+      <tr *ngFor="let cliente of usuarios | paginate: {itemsPerPage: 5, currentPage: pageActual}">
         <th scope="row"><i class="fas fa-user"></i></th>
         <td>{{ cliente.usuario.email}}</td>
         <td>{{ cliente.nombre }} {{ cliente.apellido }}</td>
@@ -53,6 +53,10 @@
       </tr>
     </tbody>
   </table>
+  <div id="paginador">
+    <pagination-controls  (pageChange)="pageActual = $event" ></pagination-controls>
+  </div>
+  
 </div>
 
 <app-mostrar-domicilio [domicilioSeleccionado]="domicilio" ></app-mostrar-domicilio>

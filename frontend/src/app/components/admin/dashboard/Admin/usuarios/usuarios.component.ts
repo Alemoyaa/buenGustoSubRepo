@@ -23,7 +23,7 @@ export class UsuariosComponent implements OnInit {
  
   usuarios: Cliente[] = new Array<Cliente>();
 
-  
+  pageActual: number = 1;
 
   domicilio: Domicilio = new Domicilio();
   cliente: Cliente = new Cliente();
