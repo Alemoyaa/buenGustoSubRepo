@@ -2,7 +2,19 @@
   <div class="row">
     <div class="col-12 text-center">
       <h1 class="display-3">Administracion de Usuarios</h1>
+      <form class="form-inline mt-4">
+        <label for=""><strong>Buscar : </strong></label>
+        <input 
+          class="form-control mr-sm-2 ml-2"
+          type="search"
+          placeholder="Buscar por nombre"
+          aria-label="Search"
+          [(ngModel)]="filtroBuscador"
+          [ngModelOptions]="{ standalone: true }"
+        />
+      </form>
     </div>
+    
   </div>
 
   <table class="table table-striped text-center"  style="color: white">
@@ -19,7 +31,7 @@
       </tr>
     </thead>
     <tbody style="font-size: 25px;">
-      <tr *ngFor="let cliente of usuarios | paginate: {itemsPerPage: 5, currentPage: pageActual}">
+      <tr *ngFor="let cliente of filtrar | paginate: {itemsPerPage: 8, currentPage: pageActual}">
         <th scope="row"><i class="fas fa-user"></i></th>
         <td>{{ cliente.usuario.email}}</td>
         <td>{{ cliente.nombre }} {{ cliente.apellido }}</td>
