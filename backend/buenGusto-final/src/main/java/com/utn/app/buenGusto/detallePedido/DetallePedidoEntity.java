@@ -39,17 +39,20 @@ public class DetallePedidoEntity extends CommonEntity implements Serializable {
 
 	public void setCantidad(int cantidad) {
 		this.cantidad = cantidad;
-		this.calcularSubtotal();
 	}
 
-	public double getSubtotal() {
-		return subtotal;
+	public double getSubtotal() throws Exception {
+		double result = 0.0d;
+		if(this.articulo == null) {
+			return result;
+		}else {
+			result = this.articulo.getPrecio_de_venta_actual() * this.cantidad;
+		}
+		return result;
 	}
 
-	//Revisar si sigue haciendo falta o lo borramos
 	public void setSubtotal(double subtotal) {
-		//this.subtotal = subtotal;
-		this.subtotal = this.articulo.getPrecio_de_venta()*this.cantidad;
+		this.subtotal = subtotal;
 	}
 
 	public ArticuloEntity getArticulo() {
@@ -58,11 +61,7 @@ public class DetallePedidoEntity extends CommonEntity implements Serializable {
 
 	public void setArticulo(ArticuloEntity articulo) {
 		this.articulo = articulo;
-		this.calcularSubtotal();
 	}
 	
-	public void calcularSubtotal() {
-		this.subtotal = this.articulo.getPrecio_de_venta()*this.cantidad;
-	}
-
+	
 }

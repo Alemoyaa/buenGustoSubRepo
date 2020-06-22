@@ -10,6 +10,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.utn.app.buenGusto.common.CommonEntity;
 import com.utn.app.buenGusto.rol.RolEntity;
@@ -24,6 +25,7 @@ public class HistoricoRolEntity extends CommonEntity implements Serializable {
 
 	private Date fecha_modificacion;
 	
+	@JsonIgnoreProperties("historicoRol")
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "usuario_id")
 	private UsuarioEntity usuario;

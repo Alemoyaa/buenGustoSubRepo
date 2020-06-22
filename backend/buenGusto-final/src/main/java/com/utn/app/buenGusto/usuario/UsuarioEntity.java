@@ -9,6 +9,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.utn.app.buenGusto.common.CommonEntity;
 import com.utn.app.buenGusto.historicoRol.HistoricoRolEntity;
@@ -24,6 +25,7 @@ public class UsuarioEntity extends CommonEntity implements Serializable {
 	private String email;
 	private String uid_firebase;
 	
+	@JsonIgnoreProperties("usuario")
 	@OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
 	private List<HistoricoRolEntity> historicoRol = new ArrayList<HistoricoRolEntity>();
 	
@@ -54,9 +56,13 @@ public class UsuarioEntity extends CommonEntity implements Serializable {
 		this.historicoRol = historicoRol;
 	}
 
-	public RolEntity getRolActual() {
-		int cant = this.historicoRol.size()-1;
-		return this.historicoRol.get(cant).getRol();
+	public RolEntity getRolActual() throws Exception {
+		if(this.historicoRol == null) {
+			throw new Exception ("No tiene rol asociado");
+		}else {
+			return this.historicoRol.get(0).getRol();
+		}
+		
 	}
 
 	public void setRolActual(RolEntity rolActual) {

@@ -26,7 +26,7 @@ public class ArticuloManufacturadoEntity extends ArticuloEntity implements Seria
 	private int tiempo_estimado_manuf;
 	
 	@Transient
-	private double costo_de_manuf = 0.0d;
+	private double costo_de_manuf;
 
 	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
 	@JoinColumn(name = "articuloManufacturado_id")
@@ -41,20 +41,20 @@ public class ArticuloManufacturadoEntity extends ArticuloEntity implements Seria
 	}
 
 	public double getCosto_de_manuf() {
-		return costo_de_manuf;
+		double result = 0.0d;
+		if(this.lista_detalleManufacturado == null) {
+			for (DetalleManufacturadoEntity p:this.lista_detalleManufacturado) {
+				result = result + p.getSubCosto();
+			}
+			return result;
+		}
+		else {
+			return result;
+		}
 	}
 
-	//Revisar si sigue haciendo falta este metodo
 	public void setCosto_de_manuf(double costo_de_manuf) {
 		this.costo_de_manuf = costo_de_manuf;
-	}
-
-	public double calcularCosto_de_manuf() {
-		double result = 0.0d;
-		for (DetalleManufacturadoEntity p:this.lista_detalleManufacturado) {
-			result = result + p.getSubCosto();
-		}
-		return result;
 	}
 	
 	public List<DetalleManufacturadoEntity> getLista_detalleManufacturado() {
@@ -63,7 +63,6 @@ public class ArticuloManufacturadoEntity extends ArticuloEntity implements Seria
 
 	public void setLista_detalleManufacturado(List<DetalleManufacturadoEntity> lista_detalleManufacturado) {
 		this.lista_detalleManufacturado = lista_detalleManufacturado;
-		this.costo_de_manuf = this.calcularCosto_de_manuf();
 	}
 
 }

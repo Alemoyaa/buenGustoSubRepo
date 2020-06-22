@@ -33,7 +33,7 @@ public abstract class ArticuloEntity extends CommonEntity implements Serializabl
 	protected String denominacion;
 	
 	@Transient
-	protected double precio_de_venta;
+	protected double precio_de_venta_actual;
 
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "categoria_id")
@@ -79,13 +79,16 @@ public abstract class ArticuloEntity extends CommonEntity implements Serializabl
 		this.url_imagen = url_imagen;
 	}
 
-	public double getPrecio_de_venta() {
-		return precio_de_venta;
+	public double getPrecio_de_venta_actual() throws Exception {
+		if(this.historicoPrecioVenta == null) {
+			throw new Exception ("No tiene ningun historial de precio de venta asociado");
+		}else {
+			return this.historicoPrecioVenta.get(0).getPrecio_de_venta();
+		}
 	}
 
-	public void setPrecio_de_venta(double precio_de_venta) {
-		this.precio_de_venta = precio_de_venta;
-		this.agregarPrecioVentaNuevo(precio_de_venta);
+	public void setPrecio_de_venta_actual(double precio_de_venta_actual) {
+		this.precio_de_venta_actual = precio_de_venta_actual;
 	}
 
 	public List<HistoricoPrecioVentaEntity> getHistoricoPrecioVenta() {
@@ -99,11 +102,16 @@ public abstract class ArticuloEntity extends CommonEntity implements Serializabl
 	//Revisar
 	public void agregarPrecioVentaNuevo(double precio_de_venta) {
 		HistoricoPrecioVentaEntity hp = new HistoricoPrecioVentaEntity();
-		long aux = this.historicoPrecioVenta.get(this.historicoPrecioVenta.size()-1).getId();
+		long aux = this.historicoPrecioVenta.get(0).getId();
 		hp.setId(aux + 1l);
 		hp.setArticulo(this);
 		hp.setFecha_modificacion(new Date());
 		hp.setPrecio_de_venta(precio_de_venta);
 		this.historicoPrecioVenta.add(hp);
+	}
+	
+	//TODO
+	public double verPrecioVentaporFecha(Date fecha) {
+		return 0d;
 	}
 }

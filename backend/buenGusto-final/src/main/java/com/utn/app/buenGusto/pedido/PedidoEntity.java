@@ -45,15 +45,6 @@ public class PedidoEntity extends CommonEntity implements Serializable {
 	@JoinColumn(name = "cliente_id")
 	private ClienteEntity ClientePedido;
 
-	public PedidoEntity() {
-		super();
-		if(this.lista_detallePedido.isEmpty()) {
-			this.totalPedido = 0.0d;
-		}else {
-			this.calcularTotalPedido();
-		}
-	}
-
 	public Date getFechaRealizacion() {
 		return fechaRealizacion;
 	}
@@ -84,7 +75,6 @@ public class PedidoEntity extends CommonEntity implements Serializable {
 
 	public void setLista_detallePedido(List<DetallePedidoEntity> lista_detallePedido) {
 		this.lista_detallePedido = lista_detallePedido;
-		this.calcularTotalPedido();
 	}
 
 	public EstadoPedidoEntity getEstadoPedido() {
@@ -112,18 +102,22 @@ public class PedidoEntity extends CommonEntity implements Serializable {
 	}
 
 	public double getTotalPedido() {
-		return totalPedido;
+		double result = 0.0d;
+		if(this.lista_detallePedido.isEmpty()) {
+			return result;
+		}else {
+			for (DetallePedidoEntity p:this.lista_detallePedido) {
+				try {
+					result = result + p.getSubtotal();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+			return result;
+		}
 	}
 
 	public void setTotalPedido(double totalPedido) {
 		this.totalPedido = totalPedido;
 	}
-	
-	public void calcularTotalPedido() {
-		this.totalPedido = 0.0d;
-		for (DetallePedidoEntity p:this.lista_detallePedido) {
-			this.totalPedido = this.totalPedido + p.getSubtotal();
-		}
-	}
-
 }

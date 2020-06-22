@@ -62,20 +62,17 @@ public class DetalleManufacturadoEntity extends CommonEntity implements Serializ
 	}
 
 	public double getSubCosto() {
-		return subCosto;
-	}
-
-	//Revisar si se puede borrar
-	public void setSubCosto(double subCosto) {
-		this.subCosto = subCosto;
-	}
-
-	private double calcularSubCosto() {
 		double result = 0.0d;
-		result = this.articuloInsumoID.getPrecio_de_compra() * (this.cantidad * this.unidadMedidaID.getEquivalencia_KgOL());
+		if(this.articuloInsumoID == null || this.unidadMedidaID == null) {
+			return result;
+		}else {
+			result = this.articuloInsumoID.getPrecio_de_compra() * (this.cantidad * this.unidadMedidaID.getEquivalencia_KgOL());
+		}
 		return result;
 	}
 
-	
+	public void setSubCosto(double subCosto) {
+		this.subCosto = subCosto;
+	}
 
 }

@@ -2,20 +2,17 @@ package com.utn.app.buenGusto.factura;
 
 import java.io.Serializable;
 import java.sql.Date;
-import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-
+import javax.persistence.Transient;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.utn.app.buenGusto.common.CommonEntity;
 import com.utn.app.buenGusto.datosEmpresa.DatosEmpresaEntity;
-import com.utn.app.buenGusto.detalleFactura.DetalleFacturaEntity;
 import com.utn.app.buenGusto.detallePedido.DetallePedidoEntity;
 import com.utn.app.buenGusto.pedido.PedidoEntity;
 
@@ -35,9 +32,11 @@ public class FacturaEntity extends CommonEntity implements Serializable {
 	@JoinColumn(name = "pedido_id")
 	private PedidoEntity pedidofacturado;
 
-	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-	@JoinColumn(name = "factura_id")
-	private List<DetallePedidoEntity> detalleFactura = new ArrayList<DetallePedidoEntity>();
+	@Transient
+	private List<DetallePedidoEntity> detalleFactura;
+	
+	@Transient
+	private double totalFactura;
 
 	@ManyToOne(optional = false)
 	@JoinColumn(name = "datos_empresa_id")
@@ -73,7 +72,6 @@ public class FacturaEntity extends CommonEntity implements Serializable {
 	}
 
 	public void setDetalleFactura(List<DetallePedidoEntity> detalleFactura) {
-		//this.detalleFactura = detalleFactura;
 		this.detalleFactura = this.pedidofacturado.getLista_detallePedido();
 	}
 
@@ -101,4 +99,13 @@ public class FacturaEntity extends CommonEntity implements Serializable {
 		this.pedidofacturado = pedidofacturado;
 	}
 
+	public double getTotalFactura() {
+		return totalFactura;
+	}
+
+	public void setTotalFactura(double totalFactura) {
+		this.totalFactura = this.pedidofacturado.getTotalPedido();
+	}
+
+	
 }
