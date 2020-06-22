@@ -67,7 +67,7 @@ export class StockComponent implements OnInit {
         Swal.fire({
           icon: 'error',
           title: 'Ocurrio un problema',
-          html: 'Por favor vuelva a intentarlo mas tarde',
+          html: 'No hay articulos para mostrar',
         });
         console.log(err);
       }
@@ -154,7 +154,7 @@ export class StockComponent implements OnInit {
     );
   }
 
-
+  //form editar
   editar(articulo: ArticuloInsumo) {
     console.log(articulo)
     this.esEditar = true;
