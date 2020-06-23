@@ -1,0 +1,28 @@
+<div class="container">
+  <select
+    class="custom-select custom-select-lg mt-3"
+    [(ngModel)]="valorSelected"
+  >
+    <option value="0" selected>Elija un menu</option>
+    <option value="1">Platos</option>
+    <option value="2">Categoría</option>
+    <option value="3">Unidad de medida</option>
+  </select>
+
+  <div [ngSwitch]="valorSelected">
+    <div *ngSwitchCase="1">
+      <app-art-manufacturado-platos></app-art-manufacturado-platos>
+    </div>
+    <div *ngSwitchCase="2">
+      <app-categoria-platos></app-categoria-platos>
+    </div>
+    <div *ngSwitchCase="3">
+      <app-unidad-medida-platos></app-unidad-medida-platos>
+    </div>
+    <div *ngSwitchDefault>
+      <h1 class="display-4 mt-5 mb-5">Elija un componente en el menu superior</h1>
+      <br/>
+      <br/>
+    </div>
+  </div>
+</div>

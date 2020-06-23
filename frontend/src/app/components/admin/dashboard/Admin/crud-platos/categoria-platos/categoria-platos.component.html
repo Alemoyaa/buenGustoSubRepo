@@ -1,0 +1,208 @@
+<div class="fondo">
+  <div class="container mt-5">
+    <div class="row">
+      <div class="col-12 text-center">
+        <h1>Administracion de Categoria</h1>
+      </div>
+    </div>
+
+    <div class="row mb-4 ml-2">
+      <button
+        class="btn btn-success mr-3"
+        data-target="#ModalCategoria"
+        data-toggle="modal"
+      >
+        Crear nuevo categoria
+      </button>
+    </div>
+
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col">Denominacion</th>
+          <th scope="col">Categoria padre</th>
+          <th scope="col">Categoria hijas</th>
+          <th scope="col">Insumo o Manufacturado</th>
+          <th scope="col">Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr
+          *ngFor="
+            let categoria of listaCategorias
+              | paginate: { itemsPerPage: 5, currentPage: pageActual }
+          "
+        >
+          <td>
+            {{ categoria.nombreCategoria }}
+          </td>
+          <td *ngIf="categoria.padre; else elsePadretabla">{{ categoria.padre.nombreCategoria }}</td>
+          <ng-template #elsePadretabla><td>No posee</td></ng-template>
+          <td *ngIf="categoria.hijos; else elseHijoTabla">
+            <button
+              aria-expanded="false"
+              class="btn btn-info dropdown-toggle"
+              data-toggle="dropdown"
+              type="button"
+            >
+              Categorias hijas<span class="caret"></span>
+            </button>
+
+            <ul class="dropdown-menu" role="menu">
+              <li
+                *ngFor="
+                  let item of categoria.hijos;
+                  index as i
+                "
+                class="list-group-item"
+              >
+                {{ item.nombreCategoria }} - {{ item.insumoOManuf }}
+              </li>
+            </ul>
+          </td>
+          <ng-template #elseHijoTabla>
+            <td>No posee hijos</td>
+          </ng-template>
+          <td>{{categoria.insumoOManuf}}</td>
+          <td>
+            <button
+              (click)="editar(categoria)"
+              class="btn btn-info mr-3"
+              data-target="#ModalCategoria"
+              data-toggle="modal"
+            >
+              <i class="fas fa-pencil-alt">Editar</i>
+            </button>
+            <button
+              (click)="eliminar(categoria)"
+              class="btn btn-danger mr-3"
+              data-toggle="modal"
+            >
+              <i class="fas fa-trash">Eliminar</i>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <pagination-controls
+      (pageChange)="pageActual = $event"
+    ></pagination-controls>
+  </div>
+</div>
+
+
+<div
+  class="modal fade"
+  data-backdrop="static"
+  id="ModalCategoria"
+  tabindex="-1"
+  role="form"
+  aria-labelledby="ModalStockLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-lg" role="document" id="body">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 *ngIf="!esEditar" class="modal-title" id="modalAgregar">
+          <strong>Agregar nueva unidad</strong>
+        </h5>
+        <h5 *ngIf="esEditar" class="modal-title" id="modalEditar">
+          <strong>Editar</strong>
+        </h5>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+      <div class="modal-body text-lg-center">
+        <form name="formStock" [formGroup]="formularioCategoria">
+          <div class="row">
+            <div class="col-12">
+              <h5 class="modal-title" id="exampleModalLabel">
+                Ingrese los datos de la categoria
+              </h5>
+            </div>
+
+            <br />
+            <br />
+
+            <div class="col-6">
+              <div class="form-group">
+                <label for="nombreCategoria">Denominacion</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  name="nombreCategoria"
+                  id="nombreCategoria"
+                  formControlName="nombreCategoria"
+                />
+              </div>
+              <div class="form-group">
+                <div class="custom-control custom-radio custom-control-inline">
+                  <input type="radio" id="insumo"  class="custom-control-input"
+                         formControlName="insumoOManuf">
+                  <label class="custom-control-label" for="insumo">Insumo</label>
+                </div>
+                <div class="custom-control custom-radio custom-control-inline">
+                  <input type="radio" id="manufacturado"  class="custom-control-input"
+                         formControlName="insumoOManuf">
+                  <label class="custom-control-label" for="manufacturado">Manufacturado</label>
+                </div>
+
+              </div>
+
+                <div class="form-group">
+                  <label for="padre">Categoria padre</label>
+                  <select class="form-control"
+                          id="padre" name="padre"
+                          formControlName="padre">
+                    <option value="0"><b>Sin Categoria Padre</b></option>
+                    <option *ngFor="let padre of listaCategorias">{{
+                      padre.nombreCategoria
+                    }}</option>
+                  </select>
+                </div>
+
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="btn btn-primary"
+          data-dismiss="modal"
+          (click)="cerrar()"
+        >
+          Close
+        </button>
+
+        <button
+          *ngIf="esEditar"
+          [disabled]="formularioCategoria.invalid"
+          type="button"
+          class="btn btn-info"
+          (click)="actualizar()"
+        >
+          Editar categoria
+        </button>
+
+        <button
+          *ngIf="!esEditar"
+          [disabled]="formularioCategoria.invalid"
+          type="button"
+          class="btn btn-info"
+          (click)="crear()"
+        >
+          Crear nueva categoria
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
