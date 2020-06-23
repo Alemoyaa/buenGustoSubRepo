@@ -1,12 +1,10 @@
-import { TablaPlatosComponent } from './components/admin/dashboard/Admin/crud-platos/tabla-platos/tabla-platos.component';
+import { MenuPlatosComponent } from './components/admin/dashboard/Admin/crud-platos/menu-platos/menu-platos.component';
 import { PedidosPorClienteComponent } from './components/admin/dashboard/Admin/estadisticas/pedidos-por-cliente/pedidos-por-cliente.component';
 import { PedidosDetalleComponent } from './components/cliente/pedidos-detalle/pedidos-detalle.component';
 import { FacturaDetalleComponent } from './components/cliente/factura-detalle/factura-detalle.component';
 import { EstadisticasComponent } from './components/admin/dashboard/Admin/estadisticas/estadisticas.component';
 import { StockComponent } from './components/admin/dashboard/Admin/stock/stock.component';
 import { CatalogoDetalleComponent } from './components/cliente/catalogo-detalle/catalogo-detalle.component';
-import { FacturaComponent } from './components/cliente/factura/factura.component';
-import { PedidosComponent } from './components/cliente/pedidos/pedidos.component';
 import { CarritoComponent } from './components/cliente/carrito/carrito.component';
 import { UserProfileComponent } from './components/cliente/user-profile/user-profile.component';
 import { RegisterComponent } from './components/admin/register/register.component';
@@ -43,7 +41,7 @@ const routes: Routes = [
   },
   {
     path: 'dashboard/admin/gestionArticulos',
-    component: TablaPlatosComponent,
+    component: MenuPlatosComponent,
   }, //Estadisticas
   { path: 'dashboard/admin/estadisticas', component: EstadisticasComponent },
   {
