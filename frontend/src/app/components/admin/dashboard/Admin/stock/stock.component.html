@@ -8,9 +8,11 @@
   <div class="row mb-4 ml-2">
     <button class="btn btn-success mr-3  " data-toggle="modal" data-target="#ModalStock">+ Nuevo
       articulo</button>
-      <!-- Buscador -->
+    <!-- Buscador -->
     <div class="buscador">
       <form>
+        <p style="font-size: 25px;"> Buscar : </p>
+
         <input class="form-control mr-sm-2" type="search" placeholder="Articulo..." aria-label="Search"
           [(ngModel)]="filtroBuscador" [ngModelOptions]="{ standalone: true }" />
       </form>
@@ -151,10 +153,7 @@
               <div class="form-group">
                 <label for="">Unidad de medida</label>
                 <select class="form-control" id="denominacion" name="denominacion" formControlName="denominacion">
-                  <option value="i"></option>
-                  <option value="1">kilogramos</option>
-                  <option value="2">litros</option>
-                  <option value="3">unidad</option>
+                  <option *ngFor="let unidad of unidadesMedida" value="i">{{unidad.denominacion}}</option>
                 </select>
               </div>
 
@@ -167,21 +166,6 @@
                   </select>
                 </div>
               </div>
-
-              <!-- <div formGroupName="categoriaHijo">
-                  <div class="form-group">
-                    <label for="">Subcategoría </label>
-                    <select
-                      class="form-control"
-                      id=""
-                      name=""
-                      *ngFor="let categoria of categorias"
-                    >
-                      <option value="0">{{ categoria.nombreCategoria }}</option>
-                    </select>
-                  </div>
-                </div> -->
-
 
             </div>
           </div>

@@ -52,4 +52,5 @@ export class CommonService<Entity> {
     console.log(errorMessage);
     return throwError(errorMessage);
   }
+
 }

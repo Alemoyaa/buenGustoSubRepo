@@ -1,3 +1,5 @@
+import { catchError } from 'rxjs/operators';
+import { throwError } from 'rxjs';
 import Swal from 'sweetalert2';
 import {
   FormGroup,
@@ -10,6 +12,8 @@ import { ArticuloInsumo } from 'src/app/entidades/ArticuloInsumo';
 import { Component, OnInit } from '@angular/core';
 import { CategoriaService } from 'src/app/services/serviciosCliente/categoriaServices/categoria.service';
 import { Categoria } from 'src/app/entidades/Categoria';
+import { UnidadMedidaService } from 'src/app/services/serviciosCliente/unidadMedidaServices/unidad_medida.services';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-stock',
@@ -51,7 +55,8 @@ export class StockComponent implements OnInit {
   esEditar: boolean = false;
   constructor(
     private artInsumoService: ArticuloInsumoService,
-    private categoriaService: CategoriaService
+    private categoriaService: CategoriaService,
+    private unidadMedidaService: UnidadMedidaService
   ) { }
 
   async ngOnInit() {
@@ -76,11 +81,11 @@ export class StockComponent implements OnInit {
     });
   }
 
-//buscador
+  //buscador
   get filtrar(): ArticuloInsumo[] {
     var matcher = new RegExp(this.filtroBuscador, 'i');
     return this.articulosInsumos.filter(function (articulo) {
-      return matcher.test([articulo.denominacion , articulo.categoria].join());
+      return matcher.test([articulo.denominacion, articulo.categoria].join());
 
     });
   }
@@ -91,29 +96,59 @@ export class StockComponent implements OnInit {
         this.articulosInsumos = res;
         console.log(this.articulosInsumos);
       },
-      (err) => {
+      (error) => {
         Swal.fire({
           icon: 'error',
           title: 'Ocurrio un problema',
-          html: 'No hay articulos para mostrar',
+          html: 'Por favor vuelva a intentarlo mas tarde',
         });
-        console.log(err);
+        console.warn("error =>  ", error);
       }
     );
-    this.categoriaService.getAll().subscribe(async (categorias) => {
-      this.categorias = categorias;
-      console.log('Categorias todas:,', this.categorias);
-      await this.getCategorias();
-    });
+    this.getAllCategorias();
+    this.getUnidades();
   }
 
-  // getUnidades() {
-  //   this.articulosInsumos.forEach((element) => {
-  //     if (!this.unidadesMedida.includes(element.unidadMedidaID)) {
-  //       this.unidadesMedida.push(element);
-  //     }
-  //   });
-  // }
+
+  getAllCategorias() {
+    this.categoriaService.getAll().subscribe(
+      async (categorias) => {
+        this.categorias = categorias;
+        console.log('Categorias todas:,', this.categorias);
+        await this.getCategorias();
+      },
+      (error) => {
+        Swal.fire({
+          icon: 'error',
+          title: 'Ocurrio un problema',
+          html: 'Por favor vuelva a intentarlo mas tarde',
+        });
+        console.warn("error =>  ", error);
+      }
+    );
+  }
+
+
+
+  //Me trae las unidades de medida
+  async getUnidades() {
+    await this.unidadMedidaService.getAll().subscribe(
+      (unidad) => {
+        this.unidadesMedida = unidad;
+        console.log('Unidades: ', this.unidadesMedida);
+      }, (error) => {
+        Swal.fire({
+          icon: 'error',
+          title: 'Ocurrio un problema',
+          html: 'Por favor vuelva a intentarlo mas tarde',
+        });
+        console.warn("error =>  ", error);
+      }
+    );
+  }
+
+
+
 
   async getCategorias() {
     this.categorias.forEach((e) => {
@@ -121,24 +156,13 @@ export class StockComponent implements OnInit {
         console.log('Esta es una categoria padre', e);
         this.categoriasPadre.push(e);
       } else {
-        console.log('Esta es una categoria hijo', e);
+        //console.log('Esta es una categoria hijo', e);
         this.categoriasHijo.push(e);
       }
     });
-    await this.getCategoriasPadreHijo();
+    // await this.getCategoriasPadreHijo();
   }
-  getCategoriasPadreHijo() {
-    for (let i = 0; i < this.categoriasPadre.length; i++) {
-      let hijos: Array<Categoria> = [];
-      this.categoriasHijo.forEach((element) => {
-        if (element.padre.id === this.categoriasPadre[i].id) {
-          hijos.push(element);
-        }
-      });
-      this.categoriasPadreHijo.push(hijos);
-    }
-    console.log(this.categoriasPadreHijo);
-  }
+
 
   //Post
   agregar() {
@@ -152,13 +176,13 @@ export class StockComponent implements OnInit {
         console.log(this.articulo);
         Swal.fire('success', 'Articulo agregado ', 'success');
       },
-      (err) => {
+      (error) => {
         Swal.fire({
           icon: 'error',
           title: 'Ocurrio un problema',
           html: 'Por favor vuelva a intentarlo mas tarde',
         });
-        console.log(err);
+        console.warn("error =>  ", error);
       }
     );
   }
@@ -182,13 +206,13 @@ export class StockComponent implements OnInit {
 
             Swal.fire('Deleted!', 'Articulo eliminado con éxito', 'success');
           },
-          (err) => {
+          (error) => {
             Swal.fire({
               icon: 'error',
               title: 'Ocurrio un problema',
               html: 'Por favor vuelva a intentarlo mas tarde',
             });
-            console.log(err);
+            console.warn("error =>  ", error);
           }
         );
       }
@@ -203,13 +227,13 @@ export class StockComponent implements OnInit {
         this.esEditar = false;
         this.formStock.reset(); //Que me limpie los campos
       },
-      (err) => {
+      (error) => {
         Swal.fire({
           icon: 'error',
           title: 'Ocurrio un problema',
           html: 'Por favor vuelva a intentarlo mas tarde',
         });
-        console.log(err);
+        console.warn("error =>  ", error);
       }
     );
   }
@@ -243,4 +267,27 @@ export class StockComponent implements OnInit {
   trackByFn(index: number, i: ArticuloInsumo): number {
     return i.id;
   }
-}
+
+  esperarAlert() {
+    Swal.fire({
+      title: 'Por favor espere',
+      html: 'Recuperando los datos...',
+      // timer: 1500,
+      onBeforeOpen: () => {
+        Swal.showLoading();
+      },
+    }).then((result) => {
+      console.log(result);
+    });
+  }
+
+//   manejarError (error: HttpErrorResponse){
+//     Swal.fire({
+//       icon: 'error',
+//       title: 'Ocurrio un problema',
+//       html: 'Por favor vuelva a intentarlo mas tarde',
+//     });
+//     console.warn("error =>  ", error);
+//     return throwError('Error atrapado');
+//   }
+// }
