@@ -1,4 +1,4 @@
-import { TablaPlatosComponent } from './components/admin/dashboard/Admin/crud-platos/tabla-platos/tabla-platos.component';
+import { MenuPlatosComponent } from './components/admin/dashboard/Admin/crud-platos/menu-platos/menu-platos.component';
 import { PedidosPorClienteComponent } from './components/admin/dashboard/Admin/estadisticas/pedidos-por-cliente/pedidos-por-cliente.component';
 import { PedidosDetalleComponent } from './components/cliente/pedidos-detalle/pedidos-detalle.component';
 import { FacturaDetalleComponent } from './components/cliente/factura-detalle/factura-detalle.component';
@@ -43,7 +43,7 @@ const routes: Routes = [
   },
   {
     path: 'dashboard/admin/gestionArticulos',
-    component: TablaPlatosComponent,
+    component: MenuPlatosComponent,
   }, //Estadisticas
   { path: 'dashboard/admin/estadisticas', component: EstadisticasComponent },
   {
