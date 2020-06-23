@@ -17,4 +17,8 @@ export class ClienteService extends CommonService<Cliente> {
   getByUidFirebase(uid: string): Observable<Cliente> {
     return this.http.get<Cliente>(this._url + 'firebase/' + uid);
   }
+
+  getByEmail(email: string): Observable<Cliente> {
+    return this.http.get<Cliente>(this._url + 'api/cliente/email/' + email);
+  }
 }

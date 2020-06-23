@@ -67,50 +67,68 @@ export class LoginService {
   }
 
   loginEmailPassword(email: string, password: string) {
-    return new Promise((resolve, reject) => {
-      this.afsAuth
-        .signInWithEmailAndPassword(email, password)
-        .then((res) => {
-          if (res.user.emailVerified !== true) {
-            this.logout();
-            alert('Verifica tu mail');
+    if (this.checkEmailExists(email)) {
+      return new Promise((resolve, reject) => {
+        this.afsAuth
+          .signInWithEmailAndPassword(email, password)
+          .then((res) => {
+            if (res.user.emailVerified !== true) {
+              this.logout();
+              alert('Verifica tu mail');
+              window.location.reload();
+            } else {
+              this.route.navigate(['user-profile']);
+            }
+          })
+          .catch((err) => {
+            console.log(err);
+            alert('Datos incorrectos');
             window.location.reload();
-          } else {
-            this.route.navigate(['user-profile']);
-          }
-        })
-        .catch((err) => {
-          console.log(err);
-          alert('Datos incorrectos');
-          window.location.reload();
-        });
+          });
+      });
+    } else {
+      this.route.navigate(['register']);
+    }
+  }
+
+  checkEmailExists(email): any {
+    this.cServicio.getByEmail(email).subscribe((data) => {
+      if (data) {
+        return true;
+      } else {
+        return false;
+      }
     });
   }
 
   register(email: string, password: string) {
-    return new Promise((resolve, reject) => {
-      this.afsAuth
-        .createUserWithEmailAndPassword(email, password)
-        .then((data) =>
-          data.user
-            .sendEmailVerification()
-            .then(this.postUser)
-            .then(function () {
-              alert(
-                'Se envió un mail de verificación a tu dirección de correo'
-              );
-            })
-            .then(() => {
-              this.afsAuth.signOut();
-            })
-            .catch(function (error) {
-              console.log(error);
-            })
-            .finally(() => {
-              this.route.navigate(['login']);
-            })
-        );
-    });
+    if (this.checkEmailExists(email)) {
+      this.route.navigate(['login']);
+    } else {
+      return new Promise((resolve, reject) => {
+        this.afsAuth
+          .createUserWithEmailAndPassword(email, password)
+          .then((data) =>
+            data.user
+              .sendEmailVerification()
+              .then(this.postUser)
+              .then(function () {
+                alert(
+                  'Se envió un mail de verificación a tu dirección de correo'
+                );
+              })
+              .then(() => {
+                this.afsAuth.signOut();
+              })
+              .catch(function (error) {
+                console.log(error);
+              })
+              .finally(() => {
+                this.route.navigate(['login']);
+              })
+          );
+      });
+    }
   }
 
   async postUser() {
