@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
+import Swal from 'sweetalert2';
 
 @Injectable({
   providedIn: 'root',
@@ -39,17 +40,31 @@ export class CommonService<Entity> {
     return this.http.delete(this._url + id).pipe(catchError(this.handleError));
   }
 
-  handleError(error) {
-    let errorMessage = 'Error manejado';
-    if (error.error instanceof ErrorEvent) {
-      //error de cliente
-      errorMessage = `Error: ${error.error.mensage}`;
+  public handleError(err) {
+    let errorMessage: string;
+    if (err.error instanceof ErrorEvent) {
+      //Error del lado del cliente
+      errorMessage = `An error occurred: ${err.error.message}`;
     } else {
-      //error de server
-      errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}\nError de Servidor`;
+      //error de backend
+      errorMessage = `Backend returned: ${err.error.message}`;
     }
 
-    console.log(errorMessage);
+    Swal.fire({
+      icon: 'error',
+      title: 'Ups ...',
+      text: '¡Algo salió mal!',
+      showCloseButton: true,
+      confirmButtonText: '¿Por qué tengo este problema?',
+    }).then((result) => {
+      if (result.value) {
+        Swal.fire(
+          `Code: ${err.status} (${err.error.error})`,
+          errorMessage,
+          'warning'
+        );
+      }
+    });
     return throwError(errorMessage);
   }
 

@@ -95,14 +95,6 @@ export class StockComponent implements OnInit {
       (res) => {
         this.articulosInsumos = res;
         console.log(this.articulosInsumos);
-      },
-      (error) => {
-        Swal.fire({
-          icon: 'error',
-          title: 'Ocurrio un problema',
-          html: 'Por favor vuelva a intentarlo mas tarde',
-        });
-        console.warn("error =>  ", error);
       }
     );
     this.getAllCategorias();
@@ -118,11 +110,7 @@ export class StockComponent implements OnInit {
         await this.getCategorias();
       },
       (error) => {
-        Swal.fire({
-          icon: 'error',
-          title: 'Ocurrio un problema',
-          html: 'Por favor vuelva a intentarlo mas tarde',
-        });
+
         console.warn("error =>  ", error);
       }
     );
@@ -136,12 +124,8 @@ export class StockComponent implements OnInit {
       (unidad) => {
         this.unidadesMedida = unidad;
         console.log('Unidades: ', this.unidadesMedida);
-      }, (error) => {
-        Swal.fire({
-          icon: 'error',
-          title: 'Ocurrio un problema',
-          html: 'Por favor vuelva a intentarlo mas tarde',
-        });
+      },(error) => {
+
         console.warn("error =>  ", error);
       }
     );
@@ -177,11 +161,7 @@ export class StockComponent implements OnInit {
         Swal.fire('success', 'Articulo agregado ', 'success');
       },
       (error) => {
-        Swal.fire({
-          icon: 'error',
-          title: 'Ocurrio un problema',
-          html: 'Por favor vuelva a intentarlo mas tarde',
-        });
+
         console.warn("error =>  ", error);
       }
     );
@@ -207,11 +187,7 @@ export class StockComponent implements OnInit {
             Swal.fire('Deleted!', 'Articulo eliminado con éxito', 'success');
           },
           (error) => {
-            Swal.fire({
-              icon: 'error',
-              title: 'Ocurrio un problema',
-              html: 'Por favor vuelva a intentarlo mas tarde',
-            });
+
             console.warn("error =>  ", error);
           }
         );
@@ -228,11 +204,7 @@ export class StockComponent implements OnInit {
         this.formStock.reset(); //Que me limpie los campos
       },
       (error) => {
-        Swal.fire({
-          icon: 'error',
-          title: 'Ocurrio un problema',
-          html: 'Por favor vuelva a intentarlo mas tarde',
-        });
+
         console.warn("error =>  ", error);
       }
     );
@@ -290,4 +262,4 @@ export class StockComponent implements OnInit {
 //     console.warn("error =>  ", error);
 //     return throwError('Error atrapado');
 //   }
-// }
+ }
