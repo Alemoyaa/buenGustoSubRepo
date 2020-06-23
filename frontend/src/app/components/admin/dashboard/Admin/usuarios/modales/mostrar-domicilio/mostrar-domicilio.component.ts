@@ -1,5 +1,5 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { Domicilio } from 'src/app/entidades/Domicilio';
+import {Component, Input, OnInit} from '@angular/core';
+import {Domicilio} from 'src/app/entidades/Domicilio';
 
 @Component({
   selector: 'app-mostrar-domicilio',
@@ -9,18 +9,19 @@ import { Domicilio } from 'src/app/entidades/Domicilio';
 export class MostrarDomicilioComponent implements OnInit {
   domicilioAMostrar: Domicilio;
 
-  @Input() set domicilioSeleccionado(domicilio){
-      // si existe domicilio 
-    if (domicilio){
+  @Input() set domicilioSeleccionado(domicilio) {
+    // si existe domicilio
+    if (domicilio) {
       this.domicilioAMostrar = domicilio;
     }
   }
-  constructor() { 
-    
+
+  constructor() {
+
   }
 
   ngOnInit(): void {
-    console.log(this.domicilioAMostrar );
+    console.log(this.domicilioAMostrar);
   }
 
 }
