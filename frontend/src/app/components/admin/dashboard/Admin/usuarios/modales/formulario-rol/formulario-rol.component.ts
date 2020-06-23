@@ -12,11 +12,10 @@ import { AlertsService } from 'src/app/services/alertServices/alerts.service';
 import { Rol } from 'src/app/entidades/Rol';
 import { UsuariosComponent } from '../../usuarios.component';
 
-
 @Component({
   selector: 'app-formulario-rol',
   templateUrl: './formulario-rol.component.html',
-  styleUrls: ['./formulario-rol.component.css']
+  styleUrls: ['./formulario-rol.component.css'],
 })
 export class FormularioRolComponent implements OnInit {
   cliente: Cliente;
@@ -39,9 +38,8 @@ export class FormularioRolComponent implements OnInit {
           email: cliente.usuario.email,
           rol: {
             id: cliente.usuario.rol.id,
-            nombreRol: cliente.usuario.rol.nombreRol
-          }
-
+            nombreRol: cliente.usuario.rol.nombreRol,
+          },
         },
 
         domicilio: {
@@ -59,34 +57,27 @@ export class FormularioRolComponent implements OnInit {
               nombre: cliente.domicilio.localidad.provincia.nombre,
               pais: {
                 id: cliente.domicilio.localidad.provincia.pais.id,
-                nombre: cliente.domicilio.localidad.provincia.pais.nombre
-              }
-            }
-          }
+                nombre: cliente.domicilio.localidad.provincia.pais.nombre,
+              },
+            },
+          },
         },
-
-
       });
     }
-
-
-
-
-
   }
+
   constructor(
     private fb: FormBuilder,
     private clienteService: ClienteService,
     private rolService: RolService,
     private alerts: AlertsService,
-    @Host() private tabla: UsuariosComponent) { }
+    @Host() private tabla: UsuariosComponent
+  ) {}
 
   ngOnInit(): void {
     this.crearFormulario();
     this.traerRoles();
-
   }
-
 
   crearFormulario() {
     // creo el formulario todo por default vacio y le asigno que sea disabled para q no se puedan editar
@@ -112,18 +103,18 @@ export class FormularioRolComponent implements OnInit {
             nombre: '',
             pais: this.fb.group({
               id: 0,
-              nombre: ''
-            })
-          })
-        })
+              nombre: '',
+            }),
+          }),
+        }),
       }),
       usuario: this.fb.group({
         id: 0,
         email: '',
         rol: this.fb.group({
           id: 0,
-          nombreRol: ''
-        })
+          nombreRol: '',
+        }),
       }),
     });
   }
@@ -138,27 +129,33 @@ export class FormularioRolComponent implements OnInit {
   // }
   actualizar() {
     console.log(this.formularioPersona.value);
-    this.clienteService.put(this.cliente.id, this.formularioPersona.value).subscribe(
-      res => {
-        this.alerts.mensajeSuccess('Actualizacion de Rol realizado', 
-        `El rol del usuario ${this.cliente.nombre} se actualizo correctamente, recuerde que puede modificarlo cuando usted lo desee`);
-        this.tabla.usuarios.filter(item => {
-          if (item.id === this.cliente.id) {
-            const idexOfFactura = this.tabla.usuarios.indexOf(item);
-            this.tabla.usuarios.splice(idexOfFactura, 1, res);
-          }
-        });
-      },
-      err => {
-        this.alerts.mensajeError('No se ah podido actualizar el Rol del usuario', 'ah ocurrido un error y no se ah podido realizar la actualizacio, porfavor verifique que esten todos los datos correctos');
-      }
-    );
+    this.clienteService
+      .put(this.cliente.id, this.formularioPersona.value)
+      .subscribe(
+        (res) => {
+          this.alerts.mensajeSuccess(
+            'Actualizacion de Rol realizado',
+            `El rol del usuario ${this.cliente.nombre} se actualizo correctamente, recuerde que puede modificarlo cuando usted lo desee`
+          );
+          this.tabla.usuarios.filter((item) => {
+            if (item.id === this.cliente.id) {
+              const idexOfFactura = this.tabla.usuarios.indexOf(item);
+              this.tabla.usuarios.splice(idexOfFactura, 1, res);
+            }
+          });
+        },
+        (err) => {
+          this.alerts.mensajeError(
+            'No se ah podido actualizar el Rol del usuario',
+            'ah ocurrido un error y no se ah podido realizar la actualizacio, porfavor verifique que esten todos los datos correctos'
+          );
+        }
+      );
     console.log('id cliente actualziarRol() ');
     console.log(
       'formulario value actualziarRol() ',
       this.formularioPersona.value
     );
-
   }
 
   seleccionarRol(id: number) {
@@ -175,7 +172,7 @@ export class FormularioRolComponent implements OnInit {
         // seteo el formulario con el rol id y el nombre del rol traido
         controlrol.setValue({
           id: rol.id,
-          nombreRol: rol.nombreRol
+          nombreRol: rol.nombreRol,
         });
         console.log(this.rolSeleccionado);
       });
@@ -189,5 +186,4 @@ export class FormularioRolComponent implements OnInit {
       console.log('Traer Roles() :', this.rol);
     });
   }
-
 }

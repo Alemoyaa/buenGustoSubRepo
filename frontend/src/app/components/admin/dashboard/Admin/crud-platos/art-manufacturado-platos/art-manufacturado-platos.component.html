@@ -5,12 +5,11 @@
         <h1>Administracion de Platos</h1>
       </div>
     </div>
-
     <div class="row mb-4 ml-2">
       <button
         class="btn btn-success mr-3"
-        data-toggle="modal"
         data-target="#ModalProductos"
+        data-toggle="modal"
       >
         Crear nuevo plato
       </button>
@@ -18,76 +17,224 @@
 
     <table class="table table-striped">
       <thead>
-      <tr>
-        <th scope="col"></th>
-        <th scope="col">Categoria</th>
-        <th scope="col">Denominacion</th>
-        <th scope="col">Ingredientes</th>
-        <th scope="col">Precio</th>
-        <th scope="col">Costo</th>
-        <th scope="col">Acciones</th>
-      </tr>
+        <tr>
+          <th scope="col">Categoria</th>
+          <th scope="col">Denominacion</th>
+          <th scope="col">Ingredientes</th>
+          <th scope="col">Precio</th>
+          <th scope="col">Costo</th>
+          <th scope="col">Acciones</th>
+        </tr>
       </thead>
       <tbody>
-      <tr
-        *ngFor="
+        <tr
+          *ngFor="
             let articulo of articuloManufacturado
               | paginate: { itemsPerPage: 5, currentPage: pageActual }
           "
-      >
-        <td><i class="fas fa-fw fa-pizza-slice"></i></td>
-        <td>
-          {{ articulo.categoria.padre.nombreCategoria }} -
-          {{ articulo.categoria.nombreCategoria }}
-        </td>
-        <td>{{ articulo.denominacion }}</td>
-        <td>
-          <button
-            aria-expanded="false"
-            data-toggle="dropdown"
-            class="btn btn-info dropdown-toggle"
-            type="button"
-          >
-            Detalle ingredientes<span class="caret"></span>
-          </button>
-
-          <ul role="menu" class="dropdown-menu">
-            <li
-              class="list-group-item"
-              *ngFor="
-                  let item of articulo.lista_detalleManufacturado;
-                  index as i
-                "
+        >
+          <td *ngIf="articulo.categoria.padre; else elseCategoriaPadre">
+            {{ articulo.categoria.padre.nombreCategoria }} -
+            {{ articulo.categoria.nombreCategoria }}
+          </td>
+          <ng-template #elseCategoriaPadre>
+            <td>
+              {{ articulo.categoria.nombreCategoria }}
+            </td>
+          </ng-template>
+          <td>{{ articulo.denominacion }}</td>
+          <td>
+            <button
+              aria-expanded="false"
+              class="btn btn-info dropdown-toggle"
+              data-toggle="dropdown"
+              type="button"
             >
-              {{ item.articuloInsumoID.denominacion }} - {{ item.cantidad }} -
-              {{ item.unidadMedidaID.abreviatura }}
-            </li>
-          </ul>
-        </td>
-        <td>${{ articulo.precio_de_venta }}</td>
-        <td>${{ articulo.costo_de_manuf }}</td>
-        <td>
-          <button
-            class="btn btn-info mr-3"
-            data-toggle="modal"
-            data-target="#ModalProductos"
-            (click)="preCargarDatosFormulario(articulo)"
-          >
-            <i class="fas fa-pencil-alt">Editar</i>
-          </button>
-          <button
-            class="btn btn-danger mr-3"
-            data-toggle="modal"
-            (click)="eliminar(articulo.id)"
-          >
-            <i class="fas fa-trash">Eliminar</i>
-          </button>
-        </td>
-      </tr>
+              Detalle ingredientes<span class="caret"></span>
+            </button>
+
+            <ul class="dropdown-menu" role="menu">
+              <li
+                *ngFor="
+                  let item of articulo.lista_detalleManufacturado
+                "
+                class="list-group-item"
+              >
+                {{ item.articuloInsumoID.denominacion }} - {{ item.cantidad }} -
+                {{ item.unidadMedidaID.abreviatura }}
+              </li>
+            </ul>
+          </td>
+          <td>${{ articulo.precio_de_venta }}</td>
+          <td>${{ articulo.costo_de_manuf }}</td>
+          <td>
+            <button
+              (click)="editar(articulo)"
+              class="btn btn-info mr-3"
+              data-target="#ModalProductos"
+              data-toggle="modal"
+            >
+              <i class="fas fa-pencil-alt">Editar</i>
+            </button>
+            <button
+              (click)="eliminar(articulo)"
+              class="btn btn-danger mr-3"
+              data-toggle="modal"
+            >
+              <i class="fas fa-trash">Eliminar</i>
+            </button>
+          </td>
+        </tr>
       </tbody>
     </table>
     <pagination-controls
       (pageChange)="pageActual = $event"
     ></pagination-controls>
+  </div>
+</div>
+
+<div
+  class="modal fade"
+  data-backdrop="static"
+  id="ModalProductos"
+  tabindex="-1"
+  role="form"
+  aria-labelledby="ModalStockLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-lg" role="document" id="body">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 *ngIf="!esEditar" class="modal-title" id="modalAgregar">
+          <strong>Agregar nuevo articulo</strong>
+        </h5>
+        <h5 *ngIf="esEditar" class="modal-title" id="modalEditar">
+          <strong>Editar</strong>
+        </h5>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body text-lg-center">
+        <form name="formStock" [formGroup]="formularioArticulo">
+          <div class="row">
+            <div class="col-12">
+              <h5 class="modal-title" id="exampleModalLabel">
+                Ingrese los datos del articulo
+              </h5>
+              <br />
+              <br />
+            </div>
+
+            <div class="col-6">
+              <div class="form-group">
+                <label for="denominacion">Denominacion</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  name="denominacion"
+                  id=""
+                  formControlName="denominacion"
+                />
+              </div>
+
+              <div class="form-group">
+                <label for="es_catalogo">Es catalogo?</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  name="es_catalogo"
+                  id="es_catalogo"
+                  formControlName="es_catalogo"
+                />
+              </div>
+
+              <div class="form-group">
+                <label for="">precio de venta</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  name="precio_de_venta"
+                  id="precio_de_venta"
+                  formControlName="precio_de_venta"
+                />
+              </div>
+
+              <div class="form-group">
+                <label for="">Url Imagen</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  name="url_imagen"
+                  id="url_imagen"
+                  formControlName="url_imagen"
+                />
+              </div>
+
+              <div class="form-group">
+                <label for="">Unidad de medida</label>
+                <select
+                  class="form-control"
+                  id="denominacion"
+                  name="denominacion"
+                  formControlName="denominacion"
+                >
+                  <option value="i"></option>
+                  <option value="1">kilogramos</option>
+                  <option value="2">litros</option>
+                  <option value="3">unidad</option>
+                </select>
+
+              </div>
+              <!-- <div formGroupName="categoria">
+                <div class="form-group">
+                  <label for="">Categoria</label>
+                  <select class="form-control" id="" name="">
+                    <option *ngFor="let padre of categoriasPadre" value="0">{{
+                      padre.nombreCategoria
+                    }}</option>
+                  </select>
+                </div>
+              </div> -->
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="btn btn-primary"
+          data-dismiss="modal"
+          (click)="cerrar()"
+        >
+          Close
+        </button>
+
+        <button
+          *ngIf="esEditar"
+          [disabled]="formularioArticulo.invalid"
+          type="button"
+          class="btn btn-info"
+          (click)="actualizar()"
+        >
+          Editar articulo
+        </button>
+
+        <button
+          *ngIf="!esEditar"
+          [disabled]="formularioArticulo.invalid"
+          type="button"
+          class="btn btn-info"
+          (click)="crear()"
+        >
+          Crear nuevo articulo
+        </button>
+      </div>
+    </div>
   </div>
 </div>
