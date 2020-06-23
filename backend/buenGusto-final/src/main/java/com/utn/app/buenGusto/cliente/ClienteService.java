@@ -40,4 +40,20 @@ public class ClienteService extends CommonService<ClienteEntity, ClienteReposito
 		}
 
 	}
+	
+	public ClienteEntity findByEmail(String email) throws Exception {
+
+		ClienteEntity entityOptional = repository.findByEmail(email);
+		
+		try {
+			if (entityOptional != null) {
+				return entityOptional;
+			} else {
+				throw new Exception();
+			}
+		} catch (Exception e) {
+			throw new Exception();
+		}
+
+	}
 }
