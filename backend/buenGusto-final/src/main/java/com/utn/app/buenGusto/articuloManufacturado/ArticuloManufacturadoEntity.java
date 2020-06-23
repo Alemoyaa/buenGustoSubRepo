@@ -10,7 +10,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
-
+import javax.persistence.Transient;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.utn.app.buenGusto.articulo.ArticuloEntity;
 import com.utn.app.buenGusto.detalleManufacturado.DetalleManufacturadoEntity;
@@ -24,6 +24,8 @@ public class ArticuloManufacturadoEntity extends ArticuloEntity implements Seria
 	private static final long serialVersionUID = -8356649232468048872L;
 
 	private int tiempo_estimado_manuf;
+	
+	@Transient
 	private double costo_de_manuf;
 
 	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
@@ -39,13 +41,22 @@ public class ArticuloManufacturadoEntity extends ArticuloEntity implements Seria
 	}
 
 	public double getCosto_de_manuf() {
-		return costo_de_manuf;
+		double result = 0.0d;
+		if(this.lista_detalleManufacturado == null) {
+			for (DetalleManufacturadoEntity p:this.lista_detalleManufacturado) {
+				result = result + p.getSubCosto();
+			}
+			return result;
+		}
+		else {
+			return result;
+		}
 	}
 
 	public void setCosto_de_manuf(double costo_de_manuf) {
 		this.costo_de_manuf = costo_de_manuf;
 	}
-
+	
 	public List<DetalleManufacturadoEntity> getLista_detalleManufacturado() {
 		return lista_detalleManufacturado;
 	}

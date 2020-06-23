@@ -3,14 +3,11 @@ package com.utn.app.buenGusto.detallePedido;
 import java.io.Serializable;
 
 import javax.persistence.CascadeType;
-import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.utn.app.buenGusto.articulo.ArticuloEntity;
@@ -23,17 +20,18 @@ public class DetallePedidoEntity extends CommonEntity implements Serializable {
 
 	private static final long serialVersionUID = -7168593642662662191L;
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id")
-	private long id;
-
 	private int cantidad;
-	private double subtotal;
+	
+	@Transient
+	private double subtotal = 0.0d;
 
 	@ManyToOne(optional = false, cascade = CascadeType.ALL)
 	@JoinColumn(name = "articulo_id")
 	private ArticuloEntity articulo;
+
+	public DetallePedidoEntity() {
+		super();
+	}
 
 	public int getCantidad() {
 		return cantidad;
@@ -43,8 +41,14 @@ public class DetallePedidoEntity extends CommonEntity implements Serializable {
 		this.cantidad = cantidad;
 	}
 
-	public double getSubtotal() {
-		return subtotal;
+	public double getSubtotal() throws Exception {
+		double result = 0.0d;
+		if(this.articulo == null) {
+			return result;
+		}else {
+			result = this.articulo.getPrecio_de_venta_actual() * this.cantidad;
+		}
+		return result;
 	}
 
 	public void setSubtotal(double subtotal) {
@@ -58,5 +62,6 @@ public class DetallePedidoEntity extends CommonEntity implements Serializable {
 	public void setArticulo(ArticuloEntity articulo) {
 		this.articulo = articulo;
 	}
-
+	
+	
 }

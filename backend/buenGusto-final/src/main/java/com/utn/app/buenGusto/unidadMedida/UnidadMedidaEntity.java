@@ -14,6 +14,8 @@ public class UnidadMedidaEntity extends CommonEntity implements Serializable {
 
 	private String abreviatura;
 	private String denominacion;
+	private boolean paraRecetas;
+	private double equivalencia_KgOL;
 
 	public String getAbreviatura() {
 		return abreviatura;
@@ -31,4 +33,19 @@ public class UnidadMedidaEntity extends CommonEntity implements Serializable {
 		this.denominacion = denominacion;
 	}
 
+	public boolean isParaRecetas() {
+		return paraRecetas;
+	}
+
+	public void setParaRecetas(boolean paraRecetas) {
+		this.paraRecetas = paraRecetas;
+	}
+
+	public double getEquivalencia_KgOL() {
+		return equivalencia_KgOL;
+	}
+
+	public void setEquivalencia_KgOL(double equivalencia_KgOL) {
+		this.equivalencia_KgOL = equivalencia_KgOL;
+	}
 }
