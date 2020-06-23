@@ -53,6 +53,9 @@ export class LoginService {
     return new Promise((resolve, reject) => {
       this.afsAuth.signInWithPopup(new auth.GoogleAuthProvider()).then(
         (data) => {
+          if (!this.checkEmailExists(data.user.email)) {
+            this.postUser();
+          }
           console.log('data', data);
           let uidCliente = data.user.uid;
 
