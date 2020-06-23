@@ -32,13 +32,13 @@
                 Datos Personales
               </h5>
             </div>
-            <input type="hidden" class="hidden"   disabled formControlName="id">
+            <input type="hidden" class="hidden" disabled    formControlName="id">
             <div class="col-6">
               <div class="form-group">
                 <label for="">Nombre</label>
                 <input
                   type="text"
-                  disabled
+                  disabled 
                   formControlName="nombre"
                   class="form-control"
                 />
@@ -76,7 +76,7 @@
                   Datos de la Cuenta
                 </h5>
               </div>
-              <input type="hidden" class="hidden"   disabled formControlName="id">
+              <input type="hidden" class="hidden" disabled  formControlName="id">
               <div class="col-6">
                 <div class="form-group">
                   <label for="">Email</label>
@@ -91,7 +91,7 @@
               <div class="col-6" formGroupName="rol">
 
                 <div >
-                  <input type="hidden" class="hidden"   disabled formControlName="id">
+                  <input type="hidden" class="hidden"  formControlName="id">
                   <div class="form-group">
                     <label for="">Rol</label>
                     <select
@@ -120,7 +120,7 @@
                   Datos del Domicilio
                 </h5>
               </div>
-              <input type="hidden" class="hidden"   disabled formControlName="id">
+              <input type="hidden" class="hidden" disabled   formControlName="id">
               <div class="col-3">
                 <div class="form-group">
                   <label for="">Calle</label>
@@ -180,7 +180,7 @@
 
             <div formGroupName="localidad">
               <div class="row">
-              <input type="hidden" class="hidden"   disabled formControlName="id">
+              <input type="hidden" class="hidden" disabled    formControlName="id">
               <div class="col-12">
                 <div class="form-group">
                   <label for="">Localidad</label>
@@ -196,7 +196,7 @@
 
             <div formGroupName="provincia">
               <div class="row">
-                <input type="hidden" class="hidden"   disabled formControlName="id">
+                <input type="hidden" class="hidden" disabled   formControlName="id">
                 <div class="col-12">
                   <div class="form-group">
                     <label for="">Provincia</label>
@@ -214,7 +214,7 @@
               
           <div formGroupName="pais">
             <div class="row">
-              <input type="hidden" class="hidden"   disabled formControlName="id">
+              <input type="hidden" class="hidden" disabled   formControlName="id">
               <div class="col-12">
                 <div class="form-group">
                   <label for="">Pais</label>
@@ -246,11 +246,13 @@
         </form>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-primary" data-dismiss="modal">
-          Cerrar
+       
+        <button type="button" class="btn btn-warning"  (click)="actualizar()" data-dismiss="modal">
+          <i class="fas fa-pencil-alt"> Actualizar Rol  </i>
         </button>
-        <button type="button" class="btn btn-info"  (click)="actualizar()" data-dismiss="modal">
-          Actualizar
+
+        <button type="button" class="btn btn-primary" data-dismiss="modal">
+          <i class="fas fa-window-close"> Cerrar</i>
         </button>
       </div>
     </div>

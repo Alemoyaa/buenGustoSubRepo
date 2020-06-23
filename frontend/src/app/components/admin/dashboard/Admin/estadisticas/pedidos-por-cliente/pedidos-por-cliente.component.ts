@@ -18,7 +18,7 @@ export class PedidosPorClienteComponent implements OnInit {
   DateHasta: Date;
   DateDesde: Date;
 
-  idCliente: number;
+  idCliente: number; 
 
   pedidosRecuperadosDesdeHasta: Pedido[] = [];
   pageActual: number = 1;

@@ -30,6 +30,8 @@ export class LoginService {
   //   },
   // };
 
+  clientePost: Cliente;
+
   constructor(
     private afsAuth: AngularFireAuth,
     private route: Router,
@@ -92,6 +94,7 @@ export class LoginService {
         .then((data) =>
           data.user
             .sendEmailVerification()
+            .then(this.postUser)
             .then(function () {
               alert(
                 'Se envió un mail de verificación a tu dirección de correo'
@@ -107,6 +110,19 @@ export class LoginService {
               this.route.navigate(['login']);
             })
         );
+    });
+  }
+
+  async postUser() {
+    await this.isAuth().subscribe((data) => {
+      this.clientePost.nombre = data.displayName;
+      this.clientePost.usuario.email = data.email;
+      this.clientePost.usuario.uid_firebase = data.uid;
+      this.clientePost.usuario.rol.id = 5;
+      this.clientePost.usuario.rol.nombreRol = 'Cliente';
+    });
+    await this.cServicio.post(this.clientePost).subscribe((post) => {
+      console.log('Cliente posteado');
     });
   }
 
