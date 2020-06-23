@@ -1,25 +1,30 @@
-<header class="header-component mb-5 animated fast fadeIn">
-  <h1>Producto <small class="text-muted">detalles</small></h1>
-
-  <button routerLink="/catalogo" class="btn btn-primary">
-      <i class="fa fa-arrow-left"> Atrás</i>
+<div class="container">
+  <button type="button" class="btn btn-primary margin-top">
+    <b>Volver al catálogo</b>
   </button>
-</header>
+  <div class="card articulo-detalle" style="width: 30rem;">
+    <img
+      src="{{ articulo.url_imagen }}"
+      class="card-img-top"
+      alt="Foto de {{ articulo.denominacion }}"
+    />
+    <div class="card-body">
+      <h3 class="card-title">{{ articulo.denominacion }}</h3>
 
-<div class="row animated fadeIn fast">
-  <div class="col-lg-7">
-      <img src="../../../../assets/pizza/pizza4.jpg" class="card-img-top" >
-  </div>
-  <p>{{ detalle.articuloManufacturado.rubroGeneral}}</p>
-
-  <div class="col-lg-5 producto-detalle">
-      <h5 class="nombre-producto">{{ detalle.articuloManufacturado.denominacion}}</h5>
-      <h5>
-          <i class="fas fa-dollar-sign"></i>
-          <span class="precio-producto"> {{ detalle.articuloManufacturado.precioVenta }}</span>
-
-      </h5>
-      <p class="text-muted">{{ detalle.articuloManufacturado.tiempoEstimadoCocina }}</p>
-
+      <div class="row">
+        <div class="col-lg-4 col-md-4 col-sm-4 left-align">
+          <h4>${{ articulo.precio_de_venta }}</h4>
+        </div>
+        <div class="col-lg-8 col-md-8 col-sm-8 right-align">
+          <button
+            type="button"
+            class="btn btn-warning"
+            (click)="addToCart(articulo)"
+          >
+            <b>Agregar al carrito</b>
+          </button>
+        </div>
+      </div>
+    </div>
   </div>
 </div>

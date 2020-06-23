@@ -1,74 +1,124 @@
 <div class="page shopping-cart-page">
   <section class="clean-block clean-cart dark">
-      <div class="container">
-          <div class="block-heading">
-              <h2 class="text-info">Factura</h2>
-          </div>
-          <div class="content">
-              <div class="row no-gutters">
-                  <div class="col-md-12 col-lg-8">
-                      <div class="items">
-                          <div class="product">
-                              <div class="row justify-content-center align-items-center">
-                                  <div class="col-md-3">
-                                      <div class="product-image"><img class="img-fluid d-block mx-auto image" src="../../../../assets/pizza/pizza1.jpg"></div>
-                                  </div>
-                                  <div class="col-md-5 product-info"><a class="product-name" href="#">Pizza Calabresa</a>
-                                      <div class="product-specs">
-                                          <div><span>Descripcion:&nbsp;</span><span class="value">descripcion</span></div>
-                                          <div><span>Descripcion:&nbsp;</span><span class="value">descripcion</span></div>
-                                          <div><span>Descripcion:&nbsp;</span><span class="value">descripcion</span></div>
-                                      </div>
-                                  </div>
-                                  <div class="col-6 col-md-2 quantity"><label class="d-none d-md-block" for="quantity">Cantidad</label><input type="number" id="number" class="form-control quantity-input" value="1"></div>
-                                  <div class="col-6 col-md-2 price"><span>$350</span></div>
-                              </div>
-                          </div>
-                          <div class="product">
-                              <div class="row justify-content-center align-items-center">
-                                  <div class="col-md-3">
-                                      <div class="product-image"><img class="img-fluid d-block mx-auto image" src="../../../../assets/hamburguesa/hamburguesa1.jpg"></div>
-                                  </div>
-                                  <div class="col-md-5 product-info"><a class="product-name" href="#">Hamburguesa</a>
-                                      <div class="product-specs">
-                                          <div><span>Descripcion:&nbsp;</span><span class="value">descripcion</span></div>
-                                          <div><span>Descripcion:&nbsp;</span><span class="value">descripcion</span></div>
-                                          <div><span>Descripcion:&nbsp;</span><span class="value">descripcion</span></div>
-                                      </div>
-                                  </div>
-                                  <div class="col-6 col-md-2 quantity"><label class="d-none d-md-block" for="quantity">Cantidad<br></label><input type="number" id="number" class="form-control quantity-input" value="1"></div>
-                                  <div class="col-6 col-md-2 price"><span>$220</span></div>
-                              </div>
-                          </div>
-                          <div class="product">
-                              <div class="row justify-content-center align-items-center">
-                                  <div class="col-md-3">
-                                      <div class="product-image"><img class="img-fluid d-block mx-auto image" src="../../../../assets/panchos/pancho1.jpg"></div>
-                                  </div>
-                                  <div class="col-md-5 product-info"><a class="product-name" href="#">Hot Dog</a>
-                                      <div class="product-specs">
-                                          <div><span>Descripcion:&nbsp;</span><span class="value">descripcion</span></div>
-                                          <div><span>Descripcion:&nbsp;</span><span class="value">descripcion</span></div>
-                                          <div><span>Descripcion:&nbsp;</span><span class="value">descripcion</span></div>
-                                      </div>
-                                  </div>
-                                  <div class="col-6 col-md-2 quantity"><label class="d-none d-md-block" for="quantity">Cantidad<br></label><input type="number" id="number" class="form-control quantity-input" value="1"></div>
-                                  <div class="col-6 col-md-2 price"><span>$120</span></div>
-                              </div>
-                          </div>
-                      </div>
-                  </div>
-                  <div class="col-md-12 col-lg-4">
-                      <div class="summary">
-                          <h3>Resumen</h3>
-                          <h4><span class="text">Subtotal</span><span class="price">$360</span></h4>
-                          <h4><span class="text">Descuento</span><span class="price">$0</span></h4>
-                          <h4><span class="text">Envio</span><span class="price">$0</span></h4>
-                          <h4><span class="text">Total</span><span class="price">$360</span></h4>
-                          <button class="btn btn-primary btn-block btn-lg" type="button">Comprar</button></div>
-                  </div>
+    <div class="articulos col-lg-12">
+      <h1 *ngIf="articulos.length === 0">
+        El carrito esta vacío papi que haces acá
+      </h1>
+      <div class="container" *ngFor="let articulo of articulos">
+        <div class="row">
+          <div class="product justify-content-center align-items-center d-flex">
+            <div class="product-image">
+              <img
+                width="100px"
+                class="img-fluid d-block mx-auto image"
+                src="{{ articulo.url_imagen }}"
+              />
+            </div>
+            <div class="product-info">
+              <h5 class="product-name" href="#">{{ articulo.denominacion }}</h5>
+              <div class="product-specs">
+                <div>
+                  <span>$&nbsp;</span
+                  ><span class="value"> {{ articulo.precio_de_venta }} </span>
+                </div>
               </div>
+              <div class="">
+                <button
+                  type="button"
+                  class="btn btn-success"
+                  data-toggle="modal"
+                  (click)="
+                    addArticulo(
+                      articulo.id,
+                      articulo.denominacion,
+                      articulo.url_imagen,
+                      articulo.precio_de_venta
+                    )
+                  "
+                >
+                  <svg
+                    class="bi bi-plus-circle-fill"
+                    width="1em"
+                    height="1em"
+                    viewBox="0 0 16 16"
+                    fill="currentColor"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      fill-rule="evenodd"
+                      d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4a.5.5 0 0 0-1 0v3.5H4a.5.5 0 0 0 0 1h3.5V12a.5.5 0 0 0 1 0V8.5H12a.5.5 0 0 0 0-1H8.5V4z"
+                    />
+                  </svg>
+                </button>
+                <button
+                  type="button"
+                  class="btn btn-danger"
+                  data-toggle="modal"
+                  (click)="deleteArticulo(articulo.id)"
+                >
+                  <svg
+                    class="bi bi-dash-circle-fill"
+                    width="1em"
+                    height="1em"
+                    viewBox="0 0 16 16"
+                    fill="currentColor"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      fill-rule="evenodd"
+                      d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM4 7.5a.5.5 0 0 0 0 1h8a.5.5 0 0 0 0-1H4z"
+                    />
+                  </svg>
+                </button>
+              </div>
+            </div>
           </div>
+        </div>
       </div>
+      <div class="center justify-content-center d-flex">
+        <button
+          *ngIf="!(articulos.length === 0)"
+          type="button"
+          class="btn btn-success"
+          data-toggle="modal"
+        >
+          Pagar
+        </button>
+      </div>
+    </div>
   </section>
-
+  <!-- Modal -->
+  <div
+    class="modal fade"
+    id="paymentModal"
+    tabindex="-1"
+    role="dialog"
+    aria-labelledby="paymentModal"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="paymentModal">Paypal</h5>
+          <button
+            type="button"
+            class="close"
+            data-dismiss="modal"
+            aria-label="Close"
+          >
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          ...
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">
+            Cerrar
+          </button>
+          <button type="button" class="btn btn-primary">Comprar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

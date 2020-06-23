@@ -1,11 +1,11 @@
-import { Domicilio } from './Domicilio';
 import { Common } from './Common';
+import { Usuario } from './Usuario';
+import { Domicilio } from './Domicilio';
+
 export class Cliente extends Common {
-  uidFirebase: string;
   nombre: string;
   apellido: string;
   telefono: number;
-  email: string;
   domicilio: Domicilio;
-  foto?: string;
+  usuario: Usuario;
 }

@@ -1,8 +1,10 @@
+import { UsuarioServices } from './../../../services/serviciosCliente/usuarioServices/usuario.services';
+import { ClienteService } from './../../../services/serviciosCliente/clienteServices/cliente.service';
 import { LoginService } from './../../../services/loginServices/login.service';
-import { Cliente } from './../../../entidades/Cliente';
-import { UserProfileService } from './../../../services/serviciosCliente/userProfileServices/user-profile.service';
 import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Cliente } from '../../../entidades/Cliente';
+import { Domicilio } from '../../../entidades/Domicilio';
 
 @Component({
   selector: 'app-user-profile',
@@ -11,44 +13,54 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class UserProfileComponent implements OnInit {
   cliente: Cliente = {
-    id: 1,
-    uidFirebase: '',
+    id: null,
     nombre: '',
     apellido: '',
-    telefono: null,
-    email: '',
-    foto: '',
     domicilio: {
-      id: 0,
-      calle: '',
-      localidad: '',
+      id: null,
+      aclaracion: null,
+      calle: null,
+      localidad: {
+        id: null,
+        nombre: '',
+        provincia: null,
+      },
+      nroDepartamento: null,
       numero: null,
+      piso: null,
+    },
+    telefono: null,
+    usuario: {
+      id: 0,
+      email: null,
+      uid_firebase: null,
+      rol: null,
     },
   };
 
   constructor(
-    private service: UserProfileService,
+    private service: ClienteService,
     private rutaActiva: ActivatedRoute,
     private serviceLogin: LoginService
-  ) {}
-
-  ngOnInit(): void {
-    //this.rutaActiva.params.subscribe(data => {
-      //if (data.id !== '0') {
-        //this.getOne(data.id);
-      //}
-    //});
+  ) {
+    this.rutaActiva.params.subscribe((data) => {
+      if (data.id !== null) {
+        this.getOneByUid(data.id);
+      }
+    });
     this.datosUser();
   }
 
+  ngOnInit(): void {}
+
   datosUser() {
-    return this.serviceLogin.datosGoogle(this.cliente); //me traigo los datos de google desde el service
+    return this.serviceLogin.datosGoogle(this.cliente.usuario); //me traigo los datos de google desde el service
   }
 
-  async getOne(id: number) {
-    await this.service.getOne(id).subscribe((data) => {
-      console.log(data);
+  async getOneByUid(uid: string) {
+    await this.service.getByUidFirebase(uid).subscribe((data) => {
       this.cliente = data;
+      console.log(this.cliente);
     });
   }
 }

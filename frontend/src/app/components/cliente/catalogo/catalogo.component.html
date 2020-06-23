@@ -1,154 +1,143 @@
 <div class="page catalog-page">
   <section class="clean-block clean-catalog dark">
-    <div class="container">
-      <div class="block-heading">
-        <a class="fa fa-shopping-cart fa-3x " href="/carrito" ></a>
-          <h2 class="text-info ">Catalogo</h2>
-      </div>
-      <div class="content">
-        <div class="row" >
+    <div class="container container-catalogo">
+      <h1 class="col-lg-12">Catálogo de platos</h1>
 
+      <div class="catalogo col-lg-12 mt-4 justify-content-center d-flex">
+        <div class="filtros col-lg-3">
+          <div class="filtro-header">
+            <h3>Categorías</h3>
+          </div>
+          <div class="filtro-cat">
+            <button type="button" class="btn btn-primary">Pizzas</button>
+            <button type="button" class="btn btn-primary">Lomos</button>
+            <button type="button" class="btn btn-primary">Bebidas</button>
+          </div>
+        </div>
 
-          <div class="col-md-3">
-            <div class="d-none d-md-block">
-              <div class="filters">
-                <div class="filter-item">
-                  <div>
-                    <h3 class="text-info2">Categoria</h3>
-                  </div>
-                  <div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-1"><label
-                      class="form-check-label" for="formCheck-1">
-                      <h6>Pizza</h6>
-                    </label></div>
-                  <div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-2"><label
-                      class="form-check-label" for="formCheck-2">
-                      <h6>Lomo</h6>
-                    </label></div>
-                  <div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-3"><label
-                      class="form-check-label" for="formCheck-3">
-                      <h6> Hamburguesa</h6>
-                    </label></div>
-                  <div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-4"><label
-                      class="form-check-label" for="formCheck-4">
-                      <h6>Pancho</h6>
-                    </label></div>
-                </div>
-                <div class="filter-item">
-                  <div>
-                    <h3 class="text-info2">Bebidas</h3>
-                  </div>
-                  <div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-5"><label
-                      class="form-check-label" for="formCheck-5">
-                      <h6>Gaseosas</h6>
-                    </label></div>
-                  <div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-6"><label
-                      class="form-check-label" for="formCheck-6">
-                      <h6>Agua</h6>
-                    </label></div>
-                  <div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-7"><label
-                      class="form-check-label" for="formCheck-7">
-                      <h6>Cerveza</h6>
-                    </label></div>
-                </div>
-                <div class="filter-item">
-                  <div>
-                    <h3 class="text-info2">Otra Categoria</h3>
-                  </div>
-                  <div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-8"><label
-                      class="form-check-label" for="formCheck-8">
-                      <h6>Otro Filtro</h6>
-                    </label></div>
-                  <div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-9"><label
-                      class="form-check-label" for="formCheck-9">
-                      <h6>Otro Filtro</h6>
-                    </label></div>
-
-                </div>
+        <div class="container platos col-lg-9">
+          <!-- <h3>Platos recomendados</h3>
+          <div class="recomendados justify-content-start d-flex">
+            <div class="card plato" style="width: 18rem;">
+              <img
+                class="card-img-top card-img-recomendado"
+                src="../../../../assets/assetsCatalogo/assets/img/hamburguesa/Burger-.jpg"
+                alt="Card image cap"
+              />
+              <div class="card-body">
+                <p class="card-text">
+                  Burger recomendada
+                </p>
               </div>
             </div>
-            <div class="d-md-none"><a class="btn btn-link d-md-none filter-collapse" data-toggle="collapse"
-                aria-expanded="false" aria-controls="filters" href="#filters" role="button">Filters<i
-                  class="icon-arrow-down filter-caret"></i></a>
-              <div class="collapse" id="filters">
-                <div class="filters">
-                  <div class="filter-item">
-                    <h3>Categoria</h3>
-                    <div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-1"><label
-                        class="form-check-label" for="formCheck-1">Pizza</label></div>
-                    <div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-2"><label
-                        class="form-check-label" for="formCheck-2">Lomo</label></div>
-                    <div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-3"><label
-                        class="form-check-label" for="formCheck-3">Hamburguesa</label></div>
-                    <div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-4"><label
-                        class="form-check-label" for="formCheck-4">Pancho</label></div>
-                  </div>
-                  <div class="filter-item">
-                    <h3>Bebidas</h3>
-                    <div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-5"><label
-                        class="form-check-label" for="formCheck-5">Gaseosas</label></div>
-                    <div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-6"><label
-                        class="form-check-label" for="formCheck-6">Agua</label></div>
-                    <div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-7"><label
-                        class="form-check-label" for="formCheck-7">Cerveza</label></div>
-                  </div>
-                  <div class="filter-item">
-                    <h3>Otra Categoria</h3>
-                    <div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-8"><label
-                        class="form-check-label" for="formCheck-8">Otro Filtro</label></div>
-                    <div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-9"><label
-                        class="form-check-label" for="formCheck-9">Otro Filtro</label></div>
+            <div class="card plato" style="width: 18rem;">
+              <img
+                class="card-img-top card-img-recomendado"
+                src="../../../../assets/assetsCatalogo/assets/img/hamburguesa/Burger-.jpg"
+                alt="Card image cap"
+              />
+              <div class="card-body">
+                <p class="card-text">
+                  Pizza recomendada
+                </p>
+              </div>
+            </div>
+            <div class="card plato" style="width: 18rem;">
+              <img
+                class="card-img-top card-img-recomendado"
+                src="../../../../assets/assetsCatalogo/assets/img/hamburguesa/Burger-.jpg"
+                alt="Card image cap"
+              />
+              <div class="card-body">
+                <p class="card-text">
+                  Lomo recomendado
+                </p>
+              </div>
+            </div>
+          </div> -->
+
+          <h3>Pizzas</h3>
+
+          <div class="row articulo">
+            <ng-container
+              *ngFor="let articulo of articulos"
+              class="articulo-container"
+            >
+              <div class="card-container col-lg-4">
+                <div
+                  class="card articulo"
+                  *ngIf="articulo.es_catalogo && articulo.categoria.id === 3"
+                >
+                  <img
+                    class="card-img-top card-img-recomendado"
+                    src="../../../../assets/assetsCatalogo/assets/img/pizza/pizza3.jpg"
+                  />
+                  <div class="card-body">
+                    <h4 class="card-text">
+                      {{ articulo.denominacion }}
+                    </h4>
+                    <p>Categoria: {{ articulo.categoria.nombreCategoria }}</p>
+                    <small>Tiempo estimado: 20m</small>
+                    <br />
+                    <b>{{ articulo.precio_de_venta }}</b>
+                    <div class="stars">
+                      <i class="fas fa-star"></i>
+                      <i class="fas fa-star"></i>
+                      <i class="fas fa-star"></i>
+                      <i class="fas fa-star"></i>
+                      <i class="far fa-star"></i>
+                    </div>
+                    <button
+                      type="button"
+                      class="btn btn-primary"
+                      data-toggle="modal"
+                      (click)="goToDetail(articulo.id)"
+                    >
+                      Ver más
+                    </button>
                   </div>
                 </div>
               </div>
-            </div>
+            </ng-container>
           </div>
 
-          <div class="col-md-9" >
-            <div class="products" >
-              <div class="row no-gutters" >
+          <h3>Hamburguesas</h3>
 
-                <div class="col-12 col-md-6 col-lg-4 " *ngFor="let articulo of articulosManufacturados">
-                <article class="card card-product shadow-sm">
-
-                  <img src="../../../../assets/pizza/pizza1.jpg" class="card-img-top p-1"  >
-
-                  <div class="card-body" >
-                    <h5 class="card-title text-primary">{{ articulo.denominacion }}</h5>
-                    <p class="card-text">
-                        <i class="fas fa-dollar-sign"></i>
-                        <span class="precio-producto" style="font-weight: bold;"> {{ articulo.precioVenta }}</span>
-                    </p>
-                    <div style="display: flex; justify-content: space-between; align-items: center;">
-                      <a [routerLink]="['/catalogo-detalle/',articulo.id]" class="btn btn-sm btn-outline-primary">Ver Detalles</a>
-                        <p class="card-text text-muted">Coccion:  {{articulo.tiempoEstimadoCocina}} min</p>
-                    </div>
-
-                    <div class="about">
-                      <div class="rating"><img src="../../../../assets/star/star.svg"><img
-                          src="../../../../assets/star/star.svg"><img src="../../../../assets/star/star.svg"><img
-                          src="../../../../assets/star/star-half-empty.svg"><img
-                          src="../../../../assets/star/star-empty.svg"></div>
-                    </div>
-
+          <div class="row articulo">
+            <ng-container
+              *ngFor="let articulo of articulos"
+              class="articulo-container"
+            >
+              <div class="card-container col-lg-4">
+                <div
+                  class="card articulo"
+                  *ngIf="articulo.es_catalogo && articulo.categoria.id === 2"
+                >
+                  <img
+                    class="card-img-top card-img-recomendado"
+                    src="{{ articulo.url_imagen }}"
+                  />
+                  <div class="card-body">
+                    <h4 class="card-text">
+                      {{ articulo.denominacion }}
+                    </h4>
+                    <p>Categoria: {{ articulo.categoria.nombreCategoria }}</p>
+                    <small>Tiempo estimado: 20m</small>
+                    <br />
+                    <b>${{ articulo.precio_de_venta }}</b>
+                    <br />
+                    <button
+                      type="button"
+                      class="btn btn-primary"
+                      data-toggle="modal"
+                      (click)="goToDetail(articulo.id)"
+                    >
+                      Ver más
+                    </button>
+                  </div>
                 </div>
-                </article>
-                </div>
-
-
-
               </div>
-              <nav>
-                <ul class="pagination">
-                  <li class="page-item disabled"><a class="page-link" href="#" aria-label="Previous"><span
-                        aria-hidden="true">«</span></a></li>
-                  <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                  <li class="page-item"><a class="page-link" href="#">2</a></li>
-                  <li class="page-item"><a class="page-link" href="#">3</a></li>
-                  <li class="page-item"><a class="page-link" href="#" aria-label="Next">
-                    <span aria-hidden="true">»</span></a></li>
-                </ul>
-              </nav>
-            </div>
+            </ng-container>
           </div>
         </div>
       </div>
@@ -156,3 +145,48 @@
   </section>
 </div>
 
+<div class="modal-detalle">
+  <!-- Modal -->
+  <div
+    class="modal fade"
+    id="catalogoDetalleModal"
+    tabindex="-1"
+    role="dialog"
+    aria-labelledby="catalogoDetalleModal"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="catalogoDetalleModal">Producto</h5>
+          <button
+            type="button"
+            class="close"
+            data-dismiss="modal"
+            aria-label="Close"
+          >
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <img
+            class="card-img-top card-img-recomendado"
+            src="../../../../assets/assetsCatalogo/assets/img/panchos/Hot_dog3.jpg"
+            alt="Card image cap"
+          />
+          <small>Tiempo estimado: 20m</small>
+          <br />
+          <b>$30</b>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">
+            Close
+          </button>
+          <button type="button" class="btn btn-primary">
+            <i class="fas fa-cart-plus"></i>Agregar al carrito
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

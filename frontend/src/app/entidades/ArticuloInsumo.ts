@@ -1,13 +1,11 @@
-import { RubroArticulo } from './RubroArticulo';
 import { Common } from './Common';
+import { Articulo } from './Articulo';
+import { UnidadMedida } from './UnidadMedida';
 
-export class ArticuloInsumo extends Common{
-  denominacion: string;
-  precioCompra: number;
-  precioVenta: number;
-  stockActual: number;
-  stockMinimo: number;
-  unidadMedida: string;
-  esInsumo: boolean;
-  rubroArticulo: RubroArticulo;
+export class ArticuloInsumo extends Articulo {
+  costo_de_venta: number;
+  requiere_refrigeracion: boolean;
+  stock_actual: number;
+  stock_minimo: number;
+  unidadMedidaID: UnidadMedida;
 }

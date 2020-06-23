@@ -1,7 +1,8 @@
-import { Cliente } from './../../../entidades/Cliente';
+import { Router } from '@angular/router';
+import { Usuario } from '../../../entidades/Usuario';
 import { LoginService } from './../../../services/loginServices/login.service';
 
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-navbar',
@@ -9,29 +10,19 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./navbar.component.css'],
 })
 export class NavbarComponent implements OnInit {
-  constructor(private serviceLogin: LoginService) {}
+  constructor(private serviceLogin: LoginService, private route: Router) {}
 
-  cliente: Cliente = {
-    id: 0,
-    uidFirebase: '',
-    nombre: '',
-    apellido: '',
-    telefono: null,
-    email: '',
-    foto: '',
-    domicilio: {
-      id: 0,
-      calle: '',
-      localidad: '',
-      numero: null,
-    },
-  };
+  @Output() irDashboard = new EventEmitter();
+
+  uid: string;
+
+  cliente: Usuario = new Usuario();
 
   navbarUsuario = true;
 
   ngOnInit(): void {
     this.existeUsuario();
-
+    this.setCarrito();
     this.serviceLogin.datosGoogle(this.cliente); //para mostrar la foto de perfil en el navbar
   }
 
@@ -39,6 +30,7 @@ export class NavbarComponent implements OnInit {
     this.serviceLogin.isAuth().subscribe((user) => {
       if (user) {
         this.navbarUsuario = true;
+        this.uid = user.uid;
       } else {
         this.navbarUsuario = false;
       }
@@ -47,5 +39,27 @@ export class NavbarComponent implements OnInit {
 
   cerrarSesion() {
     this.serviceLogin.logout();
+  }
+
+  // hideNavbar() {
+  //   if (this.route.url.includes('admin')) {
+  //     return true;
+  //   } else {
+  //     return false;
+  //   }
+  // }
+  setCarrito() {
+    if (localStorage.getItem('carrito')) {
+      console.log('Carrito existe');
+    } else {
+      let articulos = [];
+      let articulosJson = JSON.stringify(articulos);
+      localStorage.setItem('carrito', articulosJson);
+    }
+  }
+
+  // enviamos un true al componente padre app.component.ts para irnos a la dashboard de admin
+  irAdmin(event) {
+    this.irDashboard.emit(true);
   }
 }

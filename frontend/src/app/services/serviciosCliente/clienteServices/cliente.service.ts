@@ -5,16 +5,20 @@ import { Injectable } from '@angular/core';
 import { Cliente } from 'src/app/entidades/Cliente';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
-export class ClienteService extends CommonService<Cliente>{
-
+export class ClienteService extends CommonService<Cliente> {
   _url = 'http://localhost:8080/api/cliente/';
 
-  constructor(http: HttpClient) { super(http) }
+  constructor(http: HttpClient) {
+    super(http);
+  }
 
-  getByUidFirebase(uid:string) : Observable<Cliente>{
+  getByUidFirebase(uid: string): Observable<Cliente> {
     return this.http.get<Cliente>(this._url + 'firebase/' + uid);
   }
 
+  getByEmail(email: string): Observable<Cliente> {
+    return this.http.get<Cliente>(this._url + 'api/cliente/email/' + email);
+  }
 }

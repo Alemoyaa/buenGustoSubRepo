@@ -1,14 +1,8 @@
-import { ArticuloInsumo } from './ArticuloInsumo';
-import { Factura } from './Factura';
-import { Pedido } from './Pedido';
 import { Common } from './Common';
-import { ArticuloManufacturado } from './ArticuloManufacturado';
+import { Articulo } from './Articulo';
 
-export class DetallePedido extends Common{
+export class DetallePedido extends Common {
+  articulo: Articulo;
   cantidad: number;
   subtotal: number;
-  pedido: Pedido;
-  factura: Factura;
-  articuloManufacturado: ArticuloManufacturado;
-  articuloInsumo: ArticuloInsumo;
 }

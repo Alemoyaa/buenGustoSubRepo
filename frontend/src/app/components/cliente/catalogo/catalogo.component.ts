@@ -1,27 +1,43 @@
-import { ArticuloManufacturadoService } from '../../../services/serviciosCliente/articuloManufacturadoServices/articuloManufacturado.service';
-import { ArticuloManufacturado } from 'src/app/entidades/ArticuloManufacturado';
-
+import { ArticuloServices } from '../../../services/serviciosCliente/articuloServices/articuloServices';
+import { Articulo } from 'src/app/entidades/Articulo';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-catalogo',
   templateUrl: './catalogo.component.html',
-  styleUrls: ['./catalogo.component.css']
+  styleUrls: ['./catalogo.component.css'],
 })
 export class CatalogoComponent implements OnInit {
+  pageActual: number = 1; //paginador
+  articulos: Array<Articulo> = [];
 
-  articulosManufacturados: ArticuloManufacturado[] = [];
+  articulo: Articulo = {
+    id: null,
+    categoria: null,
+    denominacion: null,
+    es_catalogo: null,
+    precio_de_venta: null,
+    url_imagen: null,
+  };
 
-  constructor(public service: ArticuloManufacturadoService) { }
+  constructor(
+    public articulosService: ArticuloServices,
+    private router: Router
+  ) {}
 
-  ngOnInit(): void {
-    this.getAll();
+  async ngOnInit() {
+    await this.getArticulos();
+    console.log(this.articulos);
   }
 
-  async getAll(){
-    await this.service.getAll().subscribe((data)=>{
-      this.articulosManufacturados = data;
-      console.log(this.articulosManufacturados);
+  getArticulos() {
+    this.articulosService.getAll().subscribe((data) => {
+      this.articulos = data;
     });
+  }
+
+  goToDetail(id) {
+    this.router.navigate(['catalogo-detalle/', id]);
   }
 }
