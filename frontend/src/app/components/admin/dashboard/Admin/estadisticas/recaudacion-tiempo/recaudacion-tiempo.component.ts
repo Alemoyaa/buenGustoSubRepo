@@ -1,21 +1,22 @@
-import { Pedido } from './../../../../../entidades/Pedido';
-import { PedidoServices } from './../../../../../services/serviciosCliente/pedidoServices/pedido.service';
+import { Pedido } from './../../../../../../entidades/Pedido';
+import { PedidoServices } from './../../../../../../services/serviciosCliente/pedidoServices/pedido.service';
 import { Chart } from 'node_modules/chart.js';
 import { Component, OnInit } from '@angular/core';
 import Swal from 'sweetalert2';
 import { NgForm } from '@angular/forms';
 
 @Component({
-  selector: 'app-estadisticas',
-  templateUrl: './estadisticas.component.html',
-  styleUrls: ['./estadisticas.component.css'],
+  selector: 'app-recaudacion-tiempo',
+  templateUrl: './recaudacion-tiempo.component.html',
+  styleUrls: ['./recaudacion-tiempo.component.css'],
 })
-export class EstadisticasComponent implements OnInit {
+export class RecaudacionTiempoComponent implements OnInit {
   fechaAhora: Date = new Date();
   DateHasta: Date;
   DateDesde: Date;
 
-  pedidosRecuperadosDesdeHasta: Pedido[] = [];
+  recaudacionTotal: number;
+  mostrar: boolean = true;
 
   constructor(private servicePedido: PedidoServices) {}
 
@@ -33,8 +34,7 @@ export class EstadisticasComponent implements OnInit {
         .getPedidosEntreDosFechas(this.DateDesde, this.DateHasta)
         .subscribe(
           (res) => {
-            this.pedidosRecuperadosDesdeHasta = res;
-            this.getCantidades(this.pedidosRecuperadosDesdeHasta);
+            this.calcularRecaudacion(res);
           },
           (err) => {
             Swal.fire({
@@ -42,48 +42,25 @@ export class EstadisticasComponent implements OnInit {
               title: 'Ocurrio un problema',
               html: 'Por favor vuelva a intentarlo mas tarde',
             });
+            this.mostrar = false;
             console.log(err);
           }
         );
     }
   }
 
-  getCantidades(listaDePedidos: Pedido[]) {
-    let elementosSinRepetir: Array<string> = [];
-    let cantidadElementos: Array<number> = [];
+  calcularRecaudacion(listaDePedidos: Pedido[]) {
+    this.recaudacionTotal = 0;
+    let precioDetallePedido = 0;
 
     listaDePedidos.forEach((pedidoItem) => {
-      pedidoItem.lista_detallePedido.forEach((articuloDetallePedido) => {
-        if (
-          !elementosSinRepetir.includes(
-            articuloDetallePedido.articulo.denominacion
-          )
-        ) {
-          elementosSinRepetir.push(
-            articuloDetallePedido.articulo.denominacion as string
-          );
-        }
+      pedidoItem.lista_detallePedido.forEach((detallePedidoItem) => {
+        precioDetallePedido +=
+          detallePedidoItem.articulo.precio_de_venta *
+          detallePedidoItem.cantidad;
       });
+      this.recaudacionTotal += precioDetallePedido;
     });
-
-    elementosSinRepetir.forEach((elemento) => {
-      let cantidad = 0;
-
-      listaDePedidos.forEach((pedido) => {
-        pedido.lista_detallePedido.forEach((ItemDetallePedido) => {
-          if (
-            (ItemDetallePedido.articulo.denominacion as string) === elemento
-          ) {
-            cantidad += ItemDetallePedido.cantidad;
-          }
-        });
-      });
-
-      cantidadElementos.push(cantidad);
-      cantidad = 0;
-    });
-
-    this.newChart('canvaFecha', elementosSinRepetir, cantidadElementos);
   }
 
   newChart(nombre, labels, data) {

@@ -1,0 +1,68 @@
+<form (ngSubmit)="onSubmit(form)" #form="ngForm">
+  <div class="row">
+    <div class="form-group col mt-2">
+      <label>Desde</label>
+      <input
+        type="date"
+        name="desdeday"
+        min="2020-01-01"
+        max="{{ this.fechaAhora.toJSON() | date: 'yyyy-MM-dd' }}"
+        class="form-control"
+        [(ngModel)]="DateDesde"
+      />
+    </div>
+    <div class="form-group col mt-2">
+      <label>Hasta</label>
+      <input
+        type="date"
+        name="hastaday"
+        min="2020-01-01"
+        max="{{ this.fechaAhora.toJSON() | date: 'yyyy-MM-dd' }}"
+        class="form-control"
+        [(ngModel)]="DateHasta"
+      />
+    </div>
+    <div class="form-group mt-2 mr-3">
+      <label class="text-center">Realizar consulta</label>
+
+      <button
+        type="submit"
+        class="btn btn-success form-control"
+        *ngIf="DateHasta != null && DateDesde != null; else elseTemplate"
+      >
+        Aceptar
+      </button>
+      <ng-template #elseTemplate>
+        <button class="btn btn-secondary form-control" disabled>
+          Aceptar
+        </button>
+      </ng-template>
+    </div>
+  </div>
+</form>
+
+<div class="jumbotron jumbotron-fluid" *ngIf="mostrar; else elseRecaudacion">
+  <div class="container">
+    <h1 class="display-4">
+      Ventas totales: {{ recaudacionTotal }}
+      <br />
+    </h1>
+    <h2 *ngIf="DateDesde && DateHasta">
+      Monto de la fecha: {{ DateDesde }} hasta {{ DateHasta }}
+    </h2>
+    <p class="lead">
+      El monto anterior refleja el valor total de las ventas sin tener en cuenta
+      los costos.
+    </p>
+  </div>
+</div>
+
+<ng-template #elseRecaudacion>
+  <div class="jumbotron jumbotron-fluid">
+    <div class="container">
+      <h1 class="display-4">
+        Ocurrio un problema. Vuelva a intentarlo mas tarde
+      </h1>
+    </div>
+  </div>
+</ng-template>

@@ -1,3 +1,4 @@
+import { PedidosPorClienteComponent } from './components/admin/dashboard/Admin/estadisticas/pedidos-por-cliente/pedidos-por-cliente.component';
 import { PedidosDetalleComponent } from './components/cliente/pedidos-detalle/pedidos-detalle.component';
 import { FacturaDetalleComponent } from './components/cliente/factura-detalle/factura-detalle.component';
 import { EstadisticasComponent } from './components/admin/dashboard/Admin/estadisticas/estadisticas.component';
@@ -36,12 +37,19 @@ const routes: Routes = [
   // El administrador deberiaa poder ver todas (lasa de admin, cajero y cocinero)
   // { path: 'dashboard', component: DashboardComponent },
   { path: 'dashboard/admin/gestionEmpleados', component: UsuariosComponent },
-  { path: 'dashboard/admin/gestionStock', component: StockComponent },
+  {
+    path: 'dashboard/admin/gestionStock',
+    component: StockComponent,
+  },
   {
     path: 'dashboard/admin/gestionArticulos',
     component: CrudPlatosComponent,
-  },
+  }, //Estadisticas
   { path: 'dashboard/admin/estadisticas', component: EstadisticasComponent },
+  {
+    path: 'dashboard/admin/estadisticas/cliente',
+    component: PedidosPorClienteComponent,
+  },
   // vistas cajero
   {
     path: 'dashboard/admin/cajero/administracionDePedidos',

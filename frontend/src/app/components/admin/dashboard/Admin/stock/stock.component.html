@@ -1,122 +1,201 @@
-
-
-<div class="container mt-5">
-    <div class="row">
-        <div class="col-12 text-center">
-          <h1>Administracion de Stock</h1>
-        </div>
+<div class="container mt-5" id="body">
+  <div class="row">
+    <div class="col-12 text-center">
+      <h1 class="display-3">Administracion de Stock</h1>
     </div>
-    <div class="row mb-4 ml-2">
-        <button class="btn btn-success mr-3" data-toggle="modal" data-target="#ModalStock">Crear nuevo articulo</button>
+  </div>
+
+  <div class="row mb-4 ml-2">
+    <button class="btn btn-success mr-3  " data-toggle="modal" data-target="#ModalStock">+ Nuevo
+      articulo</button>
+      <!-- Buscador -->
+    <div class="buscador">
+      <form>
+        <input class="form-control mr-sm-2" type="search" placeholder="Articulo..." aria-label="Search"
+          [(ngModel)]="filtroBuscador" [ngModelOptions]="{ standalone: true }" />
+      </form>
     </div>
+  </div>
 
-    <table class="table table-striped text-center">
-        <thead>
-            <tr>
-                <th scope="col"></th>
-                <th scope="col">Denominacion</th>
-                <th scope="col">Precio Compra</th>
-                <th scope="col">Precio Venta</th>
-                <th scope="col">Stock Actual</th>
-                <th scope="col">Stock Minimo</th>
-                <th scope="col">Unidad de medida</th>
-                <th scope="col">Acciones</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td><i class="fas fa-fw fa-clipboard"></i></td>
-                <td>DenominacionEjemplo</td>
-                <td>150</td>
-                <td>300</td>
-                <td>80</td>
-                <td>10</td>
-                <td>kg</td>
-                <td>
-                    <button class="btn btn-info mr-3" data-toggle="modal"
-                        data-target="#ModalStock" (click)="editar()"><i class="fas fa-pencil-alt"></i></button>
-                    <button class="btn btn-danger mr-3" data-toggle="modal"><i class="fas fa-trash"></i></button>
-                </td>
-            </tr>
+  <table class="table table-striped text-center">
+    <thead>
+      <tr>
+        <th hidden>#</th>
+        <th scope="col">Denominacion</th>
+        <th scope="col">Categoria</th>
+        <th scope="col">Catalogo ?</th>
+        <th scope="col">Costo</th>
+        <th scope="col">Precio Venta</th>
+        <th scope="col">require_refrigeracion</th>
+        <th scope="col">Stock Actual</th>
+        <th scope="col">Stock Minimo</th>
+        <th scope="col">Imagen</th>
+        <th scope="col">Unidad de medida</th>
+        <th scope="col">Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- trackBy Mejora el rendimiento -->
+      <tr *ngFor="let i of filtrar | paginate: {itemsPerPage: 4, currentPage: pageActual} ; trackBy: trackByFn">
+        <th hidden>{{i.id}}</th>
+        <td>{{i.denominacion}}</td>
+        <td>{{i.categoria.nombreCategoria}}</td>
+        <td>{{i.es_catalogo}}</td>
+        <td>{{i.costo_de_venta}}</td>
+        <td>{{i.precio_de_venta}}</td>
+        <td>{{i.requiere_refrigeracion}}</td>
+        <td>{{i.stock_actual}}</td>
+        <td>{{i.stock_minimo}}</td>
+        <td>
+          <img src={{i.url_imagen}} class="img-thumbnail img-fluid">
+        </td>
+        <td>{{i.unidadMedidaID.denominacion}}</td>
+        <td>
+          <button class="btn btn-info mr-3" data-toggle="modal" data-target="#ModalStock" (click)="editar(i)"><i
+              class="fas fa-pencil-alt"></i></button>
+        </td>
+        <td>
+          <button class="btn btn-danger mr-3" data-toggle="modal" (click)="delete(i)"><i
+              class="fas fa-trash"></i></button>
+        </td>
+      </tr>
 
-        </tbody>
-    </table>
-
+    </tbody>
+  </table>
+  <pagination-controls (pageChange)="pageActual = $event"></pagination-controls>
 </div>
 
 <!-- Modal NUEVO -->
 <!-- Modal EDITAR -->
-<div class="modal fade" data-backdrop="static" id="ModalStock" tabindex="-1" role="form" aria-labelledby="ModalStockLabel"
-    aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 *ngIf="!esEditar" class="modal-title" id="exampleModalLabel">Agregar</h5>
-                <h5 *ngIf="esEditar" class="modal-title" id="exampleModalLabel">Editar</h5>
-                <button (click)="cerrar()" type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
+<div class="modal fade" data-backdrop="static" id="ModalStock" tabindex="-1" role="form"
+  aria-labelledby="ModalStockLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document" id="body">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 *ngIf="!esEditar" class="modal-title" id="modalAgregar"><strong>Agregar nuevo articulo</strong></h5>
+        <h5 *ngIf="esEditar" class="modal-title" id="modalEditar"> <strong>Editar</strong></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body text-lg-center">
+        <form name="formStock" [formGroup]="formStock">
+          <div class="row">
+            <div class="col-12">
+              <h5 class="modal-title" id="exampleModalLabel">Ingrese los datos del articulo</h5>
+              <br />
+              <br />
             </div>
-            <div class="modal-body text-lg-center">
-                <form action="">
-                    <div class="row">
-                        <div class="col-12">
-                            <h5 class="modal-title" id="exampleModalLabel">Ingrese los datos del articulo</h5>
-                        </div>
-                        
-                        <div class="col-6">
-                            <div class="form-group">
-                                <label for="">Denominacion</label>
-                                <input type="text" class="form-control" />
-                            </div>
-                        </div>  
-                        <div class="col-6">
-                            <div class="form-group">
-                                <label for="">Precio Compra</label>
-                                <input type="text" class="form-control" />
-                            </div>
-                        </div>
-                        <div class="col-6">     
-                            <div class="form-group">
-                                <label for="">Precio Venta</label>
-                                <input type="text" class="form-control" />
-                            </div>
-                        </div> 
-                        <div class="col-6">     
-                            <div class="form-group">
-                                <label for="">Stock inicial</label>
-                                <input type="text" class="form-control" />
-                            </div>
-                        </div> 
-                        <div class="col-6">     
-                            <div class="form-group">
-                                <label for="">Stock Minimo</label>
-                                <input type="text" class="form-control" />
-                            </div>
-                        </div> 
-                        <div class="col-6">     
-                            <div class="form-group">
-                                <label for="">Unidad de medida</label>
-                                <select class="form-control" id="unidadMedida" name="unidadMedida">
-                                    <option value="0">gramos</option>
-                                    <option value="1">kilogramos</option>
-                                    <option value="2">litros</option>
-                                    <option value="3">unidad</option>
-                                </select>
-                            </div>
-                        </div>
 
-                    
+            <div class="col-6">
+              <div class="form-group">
+                <label for="denominacion">Denominacion</label>
+                <input type="text" class="form-control" name="denominacion" id="denominacion"
+                  formControlName="denominacion" />
+              </div>
+            </div>
 
-                    </div>
-                </form>
+
+            <div class="col-2">
+              <div class="form-group">
+                <label for="es_catalogo">Es catalogo?</label>
+                <input type="text" class="form-control" name="es_catalogo" id="es_catalogo"
+                  formControlName="es_catalogo" />
+              </div>
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="cerrar()">Close</button>
-                <button *ngIf="esEditar" type="button" class="btn btn-info">Editar articulo</button>
-                <button *ngIf="!esEditar" type="button" class="btn btn-info">Crear nuevo articulo</button>
+
+
+            <div class="col-2">
+              <div class="form-group">
+                <label for="">Costo Venta</label>
+                <input type="number" class="form-control" name="costo_de_venta" id="costo_de_venta"
+                  formControlName="costo_de_venta" />
+              </div>
             </div>
-        </div>
+
+            <div class="col-2">
+              <div class="form-group">
+                <label for="">precio de venta</label>
+                <input type="text" class="form-control" name="precio_de_venta" id="precio_de_venta"
+                  formControlName="precio_de_venta" />
+              </div>
+            </div>
+
+            <div class="col-2">
+              <div class="form-group">
+                <label for="">refrigeracion</label>
+                <input type="text" class="form-control" name="requiere_refrigeracion" id="requiere_refrigeracion"
+                  formControlName="requiere_refrigeracion" />
+              </div>
+            </div>
+            <div class="col-2">
+              <div class="form-group">
+                <label for="">stock actual</label>
+                <input type="number" class="form-control" name="stock_actual" id="stock_actual"
+                  formControlName="stock_actual" />
+              </div>
+              <div class="form-group">
+                <label for="">stock minimo</label>
+                <input type="number" class="form-control" name="stock_minimo" id="stock_minimo"
+                  formControlName="stock_minimo" />
+              </div>
+
+              <div class="form-group">
+                <label for="">Url Imagen</label>
+                <input type="text" class="form-control" name="url_imagen" id="url_imagen"
+                  formControlName="url_imagen" />
+              </div>
+            </div>
+
+            <div class="col-6">
+              <div class="form-group">
+                <label for="">Unidad de medida</label>
+                <select class="form-control" id="denominacion" name="denominacion" formControlName="denominacion">
+                  <option value="i"></option>
+                  <option value="1">kilogramos</option>
+                  <option value="2">litros</option>
+                  <option value="3">unidad</option>
+                </select>
+              </div>
+
+
+              <div formGroupName="categoria">
+                <div class="form-group">
+                  <label for="">Categoria</label>
+                  <select class="form-control" id="" name="">
+                    <option *ngFor="let padre of categoriasPadre" value="0">{{ padre.nombreCategoria }}</option>
+                  </select>
+                </div>
+              </div>
+
+              <!-- <div formGroupName="categoriaHijo">
+                  <div class="form-group">
+                    <label for="">Subcategoría </label>
+                    <select
+                      class="form-control"
+                      id=""
+                      name=""
+                      *ngFor="let categoria of categorias"
+                    >
+                      <option value="0">{{ categoria.nombreCategoria }}</option>
+                    </select>
+                  </div>
+                </div> -->
+
+
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="cerrar()">Close</button>
+
+        <button *ngIf="esEditar" [disabled]="formStock.invalid" type="button" class="btn btn-info"
+          (click)="update()">Editar articulo</button>
+
+        <button *ngIf="!esEditar" [disabled]="formStock.invalid" type="button" class="btn btn-info"
+          (click)="agregar()">Crear nuevo articulo</button>
+      </div>
     </div>
+  </div>
 </div>
-

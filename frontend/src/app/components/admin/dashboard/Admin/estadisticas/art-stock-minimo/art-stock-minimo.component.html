@@ -1,0 +1,20 @@
+<table class="table table-hover mt-3" *ngIf="mostrar; else elseTemplate">
+  <thead>
+    <tr>
+      <th scope="col">Denominacion</th>
+      <th scope="col">Stock Actual</th>
+      <th scope="col">Stock Minimo</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of articulosBajoStock">
+      <th>{{ item.denominacion }}</th>
+      <td>{{ item.stock_actual }}</td>
+      <td>{{ item.stock_minimo }}</td>
+    </tr>
+  </tbody>
+</table>
+
+<ng-template #elseTemplate>
+  <h6 class="lead">No existen articulos con stock en minimo</h6>
+</ng-template>

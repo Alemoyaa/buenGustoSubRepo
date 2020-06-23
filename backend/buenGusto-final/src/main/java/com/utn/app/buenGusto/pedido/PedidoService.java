@@ -1,5 +1,7 @@
 package com.utn.app.buenGusto.pedido;
 
+import java.sql.Date;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.stereotype.Service;
@@ -35,6 +37,19 @@ public class PedidoService extends CommonService<PedidoEntity, PedidoRepository>
 			throw new Exception(e.getMessage());
 		}
 
+	}
+	
+	public List<PedidoEntity> findPedidoEntreDosFechas(Date desde, Date hasta) throws Exception {
+		try {
+			List<PedidoEntity> varOptional = repository.findPedidoFechaDeterminada(desde, hasta);
+			if(!varOptional.isEmpty())
+				return varOptional;
+			else
+				return null;
+		} catch (Exception e) {
+
+			throw new Exception(e.getMessage());
+		}
 	}
 
 }

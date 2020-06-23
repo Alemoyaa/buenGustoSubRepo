@@ -1,155 +1,76 @@
-<div class="container mt-5">
+<div class="container-fluid-sm " id="menu" id="fondo" style="color: white" >
   <div class="row">
     <div class="col-12 text-center">
-      <h1>Administracion de Usuarios</h1>
+      <h1 class="display-3">Administracion de Usuarios</h1>
+      <form class="form-inline mt-4 ml-2 mb-4">
+        <label style="font-size: 25px;" ><strong><i class="fas fa-search"> Buscar : </i></strong></label>
+        <input 
+          class="form-control mr-sm-2 ml-2"
+          type="search"
+          placeholder="Nombre/Apellido o Rol"
+          aria-label="Search"
+          [(ngModel)]="filtroBuscador"
+          [ngModelOptions]="{ standalone: true }"
+        />
+      </form>
     </div>
+    
   </div>
 
-  <table class="table table-striped text-center">
+  <table class="table table-striped text-center"  style="color: white">
     <thead>
       <tr>
         <th scope="col"></th>
         <th scope="col">Email</th>
-        <th scope="col">Nombre</th>
-        <th scope="col">Apellido</th>
+        <th scope="col">Nombre Completo</th>
         <th scope="col">Telefono</th>
         <th scope="col">Rol</th>
-        <th scope="col">Acciones</th>
+        <th scope="col">Datos del domicilio</th>
+        <th scope="col">Acciones </th>
+        
       </tr>
     </thead>
-    <tbody>
-      <tr *ngFor="let cliente of usuarios">
+    <tbody style="font-size: 25px;">
+      <tr *ngFor="let cliente of filtrar | paginate: {itemsPerPage: 6, currentPage: pageActual}">
         <th scope="row"><i class="fas fa-user"></i></th>
-        <td>{{ cliente.usuario.email }}</td>
-        <td>{{ cliente.nombre }}</td>
-        <td>{{ cliente.apellido }}</td>
+        <td>{{ cliente.usuario.email}}</td>
+        <td>{{ cliente.nombre }} {{ cliente.apellido }}</td>
         <td>{{ cliente.telefono }}</td>
         <td>{{ cliente.usuario.rol.nombreRol }}</td>
         <td>
-          <!-- <button
-            class="btn btn-info mr-3"
+          <button class="btn btn-dark" data-toggle="modal"
+          data-target="#domicilio" (click)="mostrarDomicilio(cliente)" > 
+          <i class="fas fa-home"> Ver Domicilio</i>
+         
+          </button>
+        </td>
+        <td>
+          <button
+            class="btn btn-warning mr-3"
             data-toggle="modal"
             data-target="#ModalPersona"
             (click)="preCargarDatosFormulario(cliente)"
           >
-            <i class="fas fa-pencil-alt"></i>
+            <i class="fas fa-pencil-alt"> Editar Rol</i>
           </button>
-          <button
+          <!-- <button
             class="btn btn-danger mr-3"
             data-toggle="modal"
             (click)="eliminar(cliente.id)"
           >
-            <i class="fas fa-trash"></i>
-          </button> -->
-          <button>Editar Rol</button>
+            <i class="fas fa-trash"> Deshabilitar Usuario</i>
+          </button>
+           -->
         </td>
       </tr>
     </tbody>
   </table>
-</div>
-
-<!-- Modal NUEVO -->
-<!-- Modal EDITAR -->
-<div
-  class="modal fade"
-  data-backdrop="static"
-  id="ModalPersona"
-  tabindex="-1"
-  role="form"
-  aria-labelledby="ModalEditarLabel"
-  aria-hidden="true"
->
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Editar</h5>
-
-        <button
-          type="button"
-          class="close"
-          data-dismiss="modal"
-          aria-label="Close"
-        >
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body text-lg-center">
-        <form action="" [formGroup]="formularioPersona">
-          <div class="row">
-            <div class="col-12">
-              <h5 class="modal-title" id="exampleModalLabel">
-                Datos Personales
-              </h5>
-            </div>
-
-            <div class="col-6">
-              <div class="form-group">
-                <label for="">Nombre</label>
-                <input
-                  type="text"
-                  formControlName="nombre"
-                  class="form-control"
-                />
-              </div>
-            </div>
-            <div class="col-6">
-              <div class="form-group">
-                <label for="">Apellido</label>
-                <input
-                  type="text"
-                  formControlName="apellido"
-                  class="form-control"
-                />
-              </div>
-            </div>
-            <div class="col-6">
-              <div class="form-group">
-                <label for="">Email</label>
-                <input
-                  type="text"
-                  formControlName="email"
-                  class="form-control"
-                />
-              </div>
-            </div>
-            <div class="col-6">
-              <div class="form-group">
-                <label for="">Telefono</label>
-                <input
-                  type="text"
-                  formControlName="telefono"
-                  class="form-control"
-                />
-              </div>
-            </div>
-
-            <div class="col-6">
-              <div class="form-group" formGroupName="rol">
-                <label for="">Rol</label>
-                <select
-                  (change)="seleccionarRol($event.target.value)"
-                  formControlName="id"
-                  class="form-control"
-                  id="rol"
-                  name="rol"
-                >
-                  <option *ngFor="let item of rol" [value]="item.id">{{
-                    item.nombreRol
-                  }}</option>
-                </select>
-              </div>
-            </div>
-          </div>
-        </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-primary" data-dismiss="modal">
-          Close
-        </button>
-        <button type="button" class="btn btn-info" (click)="actualizarRol()">
-          Editar
-        </button>
-      </div>
-    </div>
+  <div id="paginador">
+    <pagination-controls  (pageChange)="pageActual = $event" ></pagination-controls>
   </div>
+  
 </div>
+
+<app-mostrar-domicilio [domicilioSeleccionado]="domicilio" ></app-mostrar-domicilio>
+
+<app-formulario-rol [clienteSeleccionado]="cliente"></app-formulario-rol>
