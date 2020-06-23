@@ -7,7 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.persistence.Transient;
+
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.utn.app.buenGusto.articuloInsumo.ArticuloInsumoEntity;
 import com.utn.app.buenGusto.common.CommonEntity;
@@ -29,13 +29,6 @@ public class DetalleManufacturadoEntity extends CommonEntity implements Serializ
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "articulo_insumo_id")
 	private ArticuloInsumoEntity articuloInsumoID;
-
-	@Transient
-	private double subCosto;
-
-	public DetalleManufacturadoEntity() {
-		super();
-	}
 
 	public int getCantidad() {
 		return cantidad;
@@ -59,20 +52,6 @@ public class DetalleManufacturadoEntity extends CommonEntity implements Serializ
 
 	public void setArticuloInsumoID(ArticuloInsumoEntity articuloInsumoID) {
 		this.articuloInsumoID = articuloInsumoID;
-	}
-
-	public double getSubCosto() {
-		double result = 0.0d;
-		if(this.articuloInsumoID == null || this.unidadMedidaID == null) {
-			return result;
-		}else {
-			result = this.articuloInsumoID.getPrecio_de_compra() * (this.cantidad * this.unidadMedidaID.getEquivalencia_KgOL());
-		}
-		return result;
-	}
-
-	public void setSubCosto(double subCosto) {
-		this.subCosto = subCosto;
 	}
 
 }

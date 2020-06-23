@@ -2,18 +2,20 @@ package com.utn.app.buenGusto.factura;
 
 import java.io.Serializable;
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.persistence.Transient;
+
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.utn.app.buenGusto.common.CommonEntity;
 import com.utn.app.buenGusto.datosEmpresa.DatosEmpresaEntity;
-import com.utn.app.buenGusto.detallePedido.DetallePedidoEntity;
+import com.utn.app.buenGusto.detalleFactura.DetalleFacturaEntity;
 import com.utn.app.buenGusto.pedido.PedidoEntity;
 
 @Entity
@@ -26,17 +28,16 @@ public class FacturaEntity extends CommonEntity implements Serializable {
 	private Date fecha;
 	private String formaPago;
 	private int nroFactura;
+	private double precioTotal;
 	private String tipoFactura;
 
 	@OneToOne(optional = true, cascade = CascadeType.ALL)
 	@JoinColumn(name = "pedido_id")
 	private PedidoEntity pedidofacturado;
 
-	@Transient
-	private List<DetallePedidoEntity> detalleFactura;
-	
-	@Transient
-	private double totalFactura;
+	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+	@JoinColumn(name = "factura_id")
+	private List<DetalleFacturaEntity> detalleFactura = new ArrayList<DetalleFacturaEntity>();
 
 	@ManyToOne(optional = false)
 	@JoinColumn(name = "datos_empresa_id")
@@ -48,6 +49,14 @@ public class FacturaEntity extends CommonEntity implements Serializable {
 
 	public void setTipoFactura(String tipoFactura) {
 		this.tipoFactura = tipoFactura;
+	}
+
+	public double getPrecioTotal() {
+		return precioTotal;
+	}
+
+	public void setPrecioTotal(double precioTotal) {
+		this.precioTotal = precioTotal;
 	}
 
 	public Date getFecha() {
@@ -66,13 +75,12 @@ public class FacturaEntity extends CommonEntity implements Serializable {
 		this.nroFactura = nroFactura;
 	}
 
-
-	public List<DetallePedidoEntity> getDetalleFactura() {
+	public List<DetalleFacturaEntity> getDetalleFactura() {
 		return detalleFactura;
 	}
 
-	public void setDetalleFactura(List<DetallePedidoEntity> detalleFactura) {
-		this.detalleFactura = this.pedidofacturado.getLista_detallePedido();
+	public void setDetalleFactura(List<DetalleFacturaEntity> detalleFactura) {
+		this.detalleFactura = detalleFactura;
 	}
 
 	public DatosEmpresaEntity getDatosEmpresaID() {
@@ -99,13 +107,4 @@ public class FacturaEntity extends CommonEntity implements Serializable {
 		this.pedidofacturado = pedidofacturado;
 	}
 
-	public double getTotalFactura() {
-		return totalFactura;
-	}
-
-	public void setTotalFactura(double totalFactura) {
-		this.totalFactura = this.pedidofacturado.getTotalPedido();
-	}
-
-	
 }

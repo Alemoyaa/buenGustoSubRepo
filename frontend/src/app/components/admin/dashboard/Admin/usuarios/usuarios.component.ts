@@ -20,7 +20,7 @@ import { Domicilio } from 'src/app/entidades/Domicilio';
   styleUrls: ['./usuarios.component.css'],
 })
 export class UsuariosComponent implements OnInit {
-
+ 
   usuarios: Cliente[] = new Array<Cliente>();
 
   pageActual: number = 1;
@@ -29,22 +29,22 @@ export class UsuariosComponent implements OnInit {
   cliente: Cliente = new Cliente();
   filtroBuscador: any = '';
   constructor(
-
+   
     private clienteService: ClienteService,
-
+  
     private alerts: AlertsService
   ) { }
 
   ngOnInit(): void {
     this.traerDatos();
-
+   
 
     this.alerts.mensajeSuccess('Bienvenido a la seccion Usuario', 'Aqui usted podra asignar el rol a cada usuario registrado en la pagina');
   }
 
   get filtrar(): Cliente[] {
-    const matcher = new RegExp(this.filtroBuscador, 'i');
-    return this.usuarios.filter((cliente) => {
+    var matcher = new RegExp(this.filtroBuscador, 'i');
+    return this.usuarios.filter(function (cliente) {
       return matcher.test([cliente.nombre, cliente.apellido, cliente.usuario.rol.nombreRol].join());
     });
   }
@@ -61,7 +61,7 @@ export class UsuariosComponent implements OnInit {
     });
   }
 
-
+ 
   mostrarDomicilio(cliente:Cliente){
     this.domicilio = cliente.domicilio;
     console.log(this.domicilio);

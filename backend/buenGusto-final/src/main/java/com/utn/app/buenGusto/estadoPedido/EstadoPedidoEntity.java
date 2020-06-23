@@ -14,6 +14,7 @@ public class EstadoPedidoEntity extends CommonEntity implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
+
 	private String nombreEstado;
 
 	public String getNombreEstado() {

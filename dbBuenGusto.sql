@@ -24,6 +24,7 @@ CREATE TABLE `articulo` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `denominacion` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `es_catalogo` bit(1) NOT NULL,
+  `precio_de_venta` double NOT NULL,
   `url_imagen` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `categoria_id` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`id`),
@@ -33,17 +34,16 @@ CREATE TABLE `articulo` (
 
 /*Data for the table `articulo` */
 
-insert  into `articulo`(`id`,`denominacion`,`es_catalogo`,`url_imagen`,`categoria_id`) values (1,'Hamburguesa Chica','','https://www.hogar.mapfre.es/media/2018/09/hamburguesa-sencilla.jpg',7),(2,'Coca Cola 2L','','https://supercom.es/792-large_default/coca-cola-2l.jpg',13),(3,'Papas Fritas Chica','','https://www.juliana-delivery.com.ar/uploads/products/detail_products_6406.png',17),(4,'Harina 000','\0',NULL,22),(5,'Tomates Perita','\0',NULL,26),(6,'Salsa Preparada','\0',NULL,23),(7,'Queso Cremoso','\0',NULL,21),(8,'Papas','\0',NULL,26),(9,'Aceite de Cocina','\0',NULL,20),(10,'Lechuga','\0',NULL,26),(11,'Pan de Hamburguesa','\0',NULL,27),(12,'Medallon de Carne','\0',NULL,25),(13,'Huevos de gallina','\0',NULL,24);
+insert  into `articulo`(`id`,`denominacion`,`es_catalogo`,`precio_de_venta`,`url_imagen`,`categoria_id`) values (1,'Hamburguesa Chica','',250,'https://www.hogar.mapfre.es/media/2018/09/hamburguesa-sencilla.jpg',7),(2,'Coca Cola 2L','',140,'https://supercom.es/792-large_default/coca-cola-2l.jpg',13),(3,'Papas Fritas Chica','',60,'https://www.juliana-delivery.com.ar/uploads/products/detail_products_6406.png',17),(4,'Harina 000','\0',0,NULL,22),(5,'Tomates Perita','\0',0,NULL,26),(6,'Salsa Preparada','\0',0,NULL,23),(7,'Queso Cremoso','\0',0,NULL,21),(8,'Papas','\0',0,NULL,26),(9,'Aceite de Cocina','\0',0,NULL,20),(10,'Lechuga','\0',0,NULL,26),(11,'Pan de Hamburguesa','\0',0,NULL,27),(12,'Medallon de Carne','\0',0,NULL,25),(13,'Huevos de gallina','\0',0,NULL,24);
 
 /*Table structure for table `articulo_insumo` */
 
 DROP TABLE IF EXISTS `articulo_insumo`;
 
 CREATE TABLE `articulo_insumo` (
-  `precio_de_compra` double NOT NULL,
+  `costo_de_venta` double NOT NULL,
   `requiere_refrigeracion` bit(1) NOT NULL,
   `stock_actual` float NOT NULL,
-  `stock_maximo` float NOT NULL,
   `stock_minimo` float NOT NULL,
   `articulo_insumo_id` bigint(20) NOT NULL,
   `unidad_medida_id` bigint(20) DEFAULT NULL,
@@ -55,13 +55,14 @@ CREATE TABLE `articulo_insumo` (
 
 /*Data for the table `articulo_insumo` */
 
-insert  into `articulo_insumo`(`precio_de_compra`,`requiere_refrigeracion`,`stock_actual`,`stock_maximo`,`stock_minimo`,`articulo_insumo_id`,`unidad_medida_id`) values (60,'',10,15,4,2,1),(40,'\0',8,11,3,4,2),(28,'\0',5,8,2,5,2),(14,'',10,12,3,6,4),(140,'',18,20,3,7,2),(14,'\0',4,6,2,8,2),(80,'\0',4,6,2,9,4),(18,'\0',5,7,1,10,2),(8,'\0',50,60,14,11,1),(26,'',20,24,6,12,1),(8,'\0',60,70,15,13,1);
+insert  into `articulo_insumo`(`costo_de_venta`,`requiere_refrigeracion`,`stock_actual`,`stock_minimo`,`articulo_insumo_id`,`unidad_medida_id`) values (87,'',10,4,2,1),(40,'\0',8,3,4,2),(28,'\0',5,2,5,2),(14,'',10,3,6,4),(140,'',18,3,7,2),(14,'\0',4,2,8,2),(80,'\0',4,2,9,4),(18,'\0',5,1,10,2),(8,'\0',50,14,11,1),(26,'',20,6,12,1),(8,'\0',60,15,13,1);
 
 /*Table structure for table `articulo_manufacturado` */
 
 DROP TABLE IF EXISTS `articulo_manufacturado`;
 
 CREATE TABLE `articulo_manufacturado` (
+  `costo_de_manuf` double NOT NULL,
   `tiempo_estimado_manuf` int(11) NOT NULL,
   `articulo_manufacturado_id` bigint(20) NOT NULL,
   PRIMARY KEY (`articulo_manufacturado_id`),
@@ -70,7 +71,7 @@ CREATE TABLE `articulo_manufacturado` (
 
 /*Data for the table `articulo_manufacturado` */
 
-insert  into `articulo_manufacturado`(`tiempo_estimado_manuf`,`articulo_manufacturado_id`) values (17,1),(22,3);
+insert  into `articulo_manufacturado`(`costo_de_manuf`,`tiempo_estimado_manuf`,`articulo_manufacturado_id`) values (140,17,1),(25,22,3);
 
 /*Table structure for table `categoria` */
 
@@ -110,7 +111,7 @@ CREATE TABLE `cliente` (
 
 /*Data for the table `cliente` */
 
-insert  into `cliente`(`id`,`apellido`,`nombre`,`telefono`,`domicilio_id`,`usuario_id`) values (2,'Ramos','Matias',261626273,1,2);
+insert  into `cliente`(`id`,`apellido`,`nombre`,`telefono`,`domicilio_id`,`usuario_id`) values (2,'Ramos','Matias',261623423,1,6);
 
 /*Table structure for table `configuracion_general` */
 
@@ -119,13 +120,12 @@ DROP TABLE IF EXISTS `configuracion_general`;
 CREATE TABLE `configuracion_general` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `cantidad_cocineros` int(11) NOT NULL,
-  `email` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 /*Data for the table `configuracion_general` */
 
-insert  into `configuracion_general`(`id`,`cantidad_cocineros`,`email`) values (1,3,'empresa@sada.com');
+insert  into `configuracion_general`(`id`,`cantidad_cocineros`) values (1,2),(2,3);
 
 /*Table structure for table `datos_empresa` */
 
@@ -133,10 +133,11 @@ DROP TABLE IF EXISTS `datos_empresa`;
 
 CREATE TABLE `datos_empresa` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `propietario` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `email` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `razon_social` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `telefono` int(11) NOT NULL,
   `domicilio_id` bigint(20) NOT NULL,
+  `propietario` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `UK_ieltcaqr5mieyfeb0bhn12wwe` (`domicilio_id`),
   CONSTRAINT `FK777dt8g718k2gjkebi7iyckb7` FOREIGN KEY (`domicilio_id`) REFERENCES `domicilio` (`id`)
@@ -144,7 +145,26 @@ CREATE TABLE `datos_empresa` (
 
 /*Data for the table `datos_empresa` */
 
-insert  into `datos_empresa`(`id`,`propietario`,`razon_social`,`telefono`,`domicilio_id`) values (3,'Macri','Burguesia S.A',26125232,2);
+insert  into `datos_empresa`(`id`,`email`,`razon_social`,`telefono`,`domicilio_id`,`propietario`) values (3,'empresa@email.com','Burguesia S.A',26125232,2,'Macri');
+
+/*Table structure for table `detalle_factura` */
+
+DROP TABLE IF EXISTS `detalle_factura`;
+
+CREATE TABLE `detalle_factura` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `cantidad` int(11) NOT NULL,
+  `nombre_articulo` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `precio_unitario` double NOT NULL,
+  `factura_id` bigint(20) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `FKucgyfvfujw8g2tt3c6fdkxai` (`factura_id`),
+  CONSTRAINT `FKucgyfvfujw8g2tt3c6fdkxai` FOREIGN KEY (`factura_id`) REFERENCES `factura` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+/*Data for the table `detalle_factura` */
+
+insert  into `detalle_factura`(`id`,`cantidad`,`nombre_articulo`,`precio_unitario`,`factura_id`) values (1,2,'Hamburguesa Chica',250,1),(2,2,'Hamburguesa Chica',250,3),(3,1,'Coca Cola 2L',140,3),(4,1,'Papas Fritas Chica',60,3);
 
 /*Table structure for table `detalle_manufacturado` */
 
@@ -176,6 +196,7 @@ DROP TABLE IF EXISTS `detalle_pedido`;
 CREATE TABLE `detalle_pedido` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `cantidad` int(11) NOT NULL,
+  `subtotal` double NOT NULL,
   `articulo_id` bigint(20) NOT NULL,
   `pedido_id` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`id`),
@@ -183,11 +204,11 @@ CREATE TABLE `detalle_pedido` (
   KEY `FKgqvba9e7dildyw45u0usdj1k2` (`pedido_id`),
   CONSTRAINT `FKblwfjfeyou4u7hae0gcngweeu` FOREIGN KEY (`articulo_id`) REFERENCES `articulo` (`id`),
   CONSTRAINT `FKgqvba9e7dildyw45u0usdj1k2` FOREIGN KEY (`pedido_id`) REFERENCES `pedido` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 /*Data for the table `detalle_pedido` */
 
-insert  into `detalle_pedido`(`id`,`cantidad`,`articulo_id`,`pedido_id`) values (1,2,1,2),(2,1,2,2),(3,1,3,2);
+insert  into `detalle_pedido`(`id`,`cantidad`,`subtotal`,`articulo_id`,`pedido_id`) values (1,2,500,1,2),(2,2,500,1,3),(3,1,140,2,3),(5,1,60,3,3);
 
 /*Table structure for table `domicilio` */
 
@@ -233,6 +254,7 @@ CREATE TABLE `factura` (
   `fecha` date DEFAULT NULL,
   `forma_pago` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `nro_factura` int(11) NOT NULL,
+  `precio_total` double NOT NULL,
   `tipo_factura` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `datos_empresa_id` bigint(20) NOT NULL,
   `pedido_id` bigint(20) DEFAULT NULL,
@@ -241,68 +263,11 @@ CREATE TABLE `factura` (
   KEY `FKn6q9mbkc0n4g1uux57clh2bq0` (`pedido_id`),
   CONSTRAINT `FK3t40tewmitdf9kg1n2fq3yfeq` FOREIGN KEY (`datos_empresa_id`) REFERENCES `datos_empresa` (`id`),
   CONSTRAINT `FKn6q9mbkc0n4g1uux57clh2bq0` FOREIGN KEY (`pedido_id`) REFERENCES `pedido` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 /*Data for the table `factura` */
 
-insert  into `factura`(`id`,`fecha`,`forma_pago`,`nro_factura`,`tipo_factura`,`datos_empresa_id`,`pedido_id`) values (1,'2020-06-22','Contado',22,'A',3,2);
-
-/*Table structure for table `historico_precio_venta` */
-
-DROP TABLE IF EXISTS `historico_precio_venta`;
-
-CREATE TABLE `historico_precio_venta` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `fecha_modificacion` datetime DEFAULT NULL,
-  `precio_de_venta` double NOT NULL,
-  `articulo_id` bigint(20) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `FKjj4bx96iy397sk48h2m9vwy4g` (`articulo_id`),
-  CONSTRAINT `FKjj4bx96iy397sk48h2m9vwy4g` FOREIGN KEY (`articulo_id`) REFERENCES `articulo` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
-/*Data for the table `historico_precio_venta` */
-
-insert  into `historico_precio_venta`(`id`,`fecha_modificacion`,`precio_de_venta`,`articulo_id`) values (1,'2020-06-22 18:39:32',250,1),(2,'2020-06-22 18:40:01',140,2),(3,'2020-06-22 18:40:16',60,3);
-
-/*Table structure for table `historico_rol` */
-
-DROP TABLE IF EXISTS `historico_rol`;
-
-CREATE TABLE `historico_rol` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `fecha_modificacion` datetime DEFAULT NULL,
-  `rol_id` bigint(20) NOT NULL,
-  `usuario_id` bigint(20) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `FKadmhbu0la86dfoycvngbwdka4` (`rol_id`),
-  KEY `FKrgb13ryoqwbw3bafkdykxye6g` (`usuario_id`),
-  CONSTRAINT `FKadmhbu0la86dfoycvngbwdka4` FOREIGN KEY (`rol_id`) REFERENCES `rol` (`id`),
-  CONSTRAINT `FKrgb13ryoqwbw3bafkdykxye6g` FOREIGN KEY (`usuario_id`) REFERENCES `usuario` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
-/*Data for the table `historico_rol` */
-
-insert  into `historico_rol`(`id`,`fecha_modificacion`,`rol_id`,`usuario_id`) values (1,'2020-06-22 16:12:17',2,1),(2,'2020-06-23 16:12:28',1,1),(3,'2020-06-22 17:20:34',2,2);
-
-/*Table structure for table `horario_laboral` */
-
-DROP TABLE IF EXISTS `horario_laboral`;
-
-CREATE TABLE `horario_laboral` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `horario_fin` time DEFAULT NULL,
-  `horario_inicio` time DEFAULT NULL,
-  `nombre_dia` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `configuracion_general_id` bigint(20) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `FKoxbk5968v3rqdtc9xd2s9ox8l` (`configuracion_general_id`),
-  CONSTRAINT `FKoxbk5968v3rqdtc9xd2s9ox8l` FOREIGN KEY (`configuracion_general_id`) REFERENCES `configuracion_general` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
-/*Data for the table `horario_laboral` */
-
-insert  into `horario_laboral`(`id`,`horario_fin`,`horario_inicio`,`nombre_dia`,`configuracion_general_id`) values (1,'00:23:59','00:20:00','Todos',1),(7,'00:11:00','00:15:00','Sabados',1),(8,'00:11:00','00:15:00','Domingos',1);
+insert  into `factura`(`id`,`fecha`,`forma_pago`,`nro_factura`,`precio_total`,`tipo_factura`,`datos_empresa_id`,`pedido_id`) values (1,'2020-06-12','Contado',2233,500,'A',3,2),(3,'2020-06-13','Tarjeta de Credito',2234,700,'C',3,3);
 
 /*Table structure for table `localidad` */
 
@@ -352,11 +317,11 @@ CREATE TABLE `pedido` (
   KEY `FKpapbin6tgk2j5es15ajwxfmv2` (`estado_pedido_id`),
   CONSTRAINT `FK30s8j2ktpay6of18lbyqn3632` FOREIGN KEY (`cliente_id`) REFERENCES `cliente` (`id`),
   CONSTRAINT `FKpapbin6tgk2j5es15ajwxfmv2` FOREIGN KEY (`estado_pedido_id`) REFERENCES `estado_pedido` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 /*Data for the table `pedido` */
 
-insert  into `pedido`(`id`,`fecha_realizacion`,`hora_estimada_fin`,`numero`,`tipo_envio`,`cliente_id`,`estado_pedido_id`) values (2,'2020-06-22','2020-06-22 18:31:46',22,'\0',2,4);
+insert  into `pedido`(`id`,`fecha_realizacion`,`hora_estimada_fin`,`numero`,`tipo_envio`,`cliente_id`,`estado_pedido_id`) values (2,'2020-06-12','2020-06-12 19:13:11',22,'\0',2,6),(3,'2020-06-13','2020-06-12 22:22:59',23,'',2,4);
 
 /*Table structure for table `provincia` */
 
@@ -397,14 +362,12 @@ CREATE TABLE `unidad_medida` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `abreviatura` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `denominacion` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `para_recetas` bit(1) NOT NULL,
-  `equivalencia_kgol` double NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 /*Data for the table `unidad_medida` */
 
-insert  into `unidad_medida`(`id`,`abreviatura`,`denominacion`,`para_recetas`,`equivalencia_kgol`) values (1,'u','Unidad','\0',1),(2,'Kg','Kilogramos','\0',1),(3,'g','Gramos','\0',1),(4,'L','Litros','\0',1),(5,'ml','Mililitros','\0',1),(6,'pizca','Pizca','',0.004),(7,'tapita','tapita','',0.007),(8,'cucharada','Cucharada','',0.012),(9,'taza','Taza','',0.15);
+insert  into `unidad_medida`(`id`,`abreviatura`,`denominacion`) values (1,'u','Unidad'),(2,'Kg','Kilogramos'),(3,'g','Gramos'),(4,'L','Litros'),(5,'ml','Mililitros');
 
 /*Table structure for table `usuario` */
 
@@ -414,12 +377,15 @@ CREATE TABLE `usuario` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `email` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `uid_firebase` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `rol_id` bigint(20) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `FKshkwj12wg6vkm6iuwhvcfpct8` (`rol_id`),
+  CONSTRAINT `FKshkwj12wg6vkm6iuwhvcfpct8` FOREIGN KEY (`rol_id`) REFERENCES `rol` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 /*Data for the table `usuario` */
 
-insert  into `usuario`(`id`,`email`,`uid_firebase`) values (1,'luis_asd@sdas','223'),(2,'mati@sfas.com','22342');
+insert  into `usuario`(`id`,`email`,`uid_firebase`,`rol_id`) values (2,'luis_assad@asad.com',NULL,1),(3,'murua99@ssfa.com',NULL,4),(4,'moya@gasf.com',NULL,2),(5,'moyaaaa@fsafa.com',NULL,3),(6,'ramos@sfacom',NULL,5);
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;

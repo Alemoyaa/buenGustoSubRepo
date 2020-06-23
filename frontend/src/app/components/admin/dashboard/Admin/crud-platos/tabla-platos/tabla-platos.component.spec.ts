@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { UnidadMedidaPlatosComponent } from './unidad-medida-platos.component';
+import { TablaPlatosComponent } from './tabla-platos.component';
 
-describe('UnidadMedidaPlatosComponent', () => {
-  let component: UnidadMedidaPlatosComponent;
-  let fixture: ComponentFixture<UnidadMedidaPlatosComponent>;
+describe('TablaPlatosComponent', () => {
+  let component: TablaPlatosComponent;
+  let fixture: ComponentFixture<TablaPlatosComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ UnidadMedidaPlatosComponent ]
+      declarations: [ TablaPlatosComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(UnidadMedidaPlatosComponent);
+    fixture = TestBed.createComponent(TablaPlatosComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -44,10 +44,8 @@ import { PedidosPorClienteComponent } from './components/admin/dashboard/Admin/e
 import { MostrarDomicilioComponent } from './components/admin/dashboard/Admin/usuarios/modales/mostrar-domicilio/mostrar-domicilio.component';
 import { FormularioRolComponent } from './components/admin/dashboard/Admin/usuarios/modales/formulario-rol/formulario-rol.component';
 
-import { MenuPlatosComponent } from './components/admin/dashboard/Admin/crud-platos/menu-platos/menu-platos.component';
-import { UnidadMedidaPlatosComponent } from './components/admin/dashboard/Admin/crud-platos/unidad-medida-platos/unidad-medida-platos.component';
-import { CategoriaPlatosComponent } from './components/admin/dashboard/Admin/crud-platos/categoria-platos/categoria-platos.component';
-import { ArtManufacturadoPlatosComponent } from './components/admin/dashboard/Admin/crud-platos/art-manufacturado-platos/art-manufacturado-platos.component';
+import { FormPlatosComponent } from './components/admin/dashboard/Admin/crud-platos/form-platos/form-platos.component';
+import { TablaPlatosComponent } from './components/admin/dashboard/Admin/crud-platos/tabla-platos/tabla-platos.component';
 
 @NgModule({
   declarations: [
@@ -78,10 +76,8 @@ import { ArtManufacturadoPlatosComponent } from './components/admin/dashboard/Ad
     PedidosPorClienteComponent,
     MostrarDomicilioComponent,
     FormularioRolComponent,
-    MenuPlatosComponent,
-    UnidadMedidaPlatosComponent,
-    CategoriaPlatosComponent,
-    ArtManufacturadoPlatosComponent,
+    FormPlatosComponent,
+    TablaPlatosComponent,
   ],
   imports: [
     BrowserModule,

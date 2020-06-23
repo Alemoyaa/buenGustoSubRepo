@@ -12,10 +12,12 @@ import { AlertsService } from 'src/app/services/alertServices/alerts.service';
 import { Rol } from 'src/app/entidades/Rol';
 import { UsuariosComponent } from '../../usuarios.component';
 
+
+
 @Component({
   selector: 'app-formulario-rol',
   templateUrl: './formulario-rol.component.html',
-  styleUrls: ['./formulario-rol.component.css'],
+  styleUrls: ['./formulario-rol.component.css']
 })
 export class FormularioRolComponent implements OnInit {
   cliente: Cliente;
@@ -39,8 +41,9 @@ export class FormularioRolComponent implements OnInit {
           email: cliente.usuario.email,
           rol: {
             id: cliente.usuario.rol.id,
-            nombreRol: cliente.usuario.rol.nombreRol,
-          },
+            nombreRol: cliente.usuario.rol.nombreRol
+          }
+
         },
 
         domicilio: {
@@ -58,99 +61,101 @@ export class FormularioRolComponent implements OnInit {
               nombre: cliente.domicilio.localidad.provincia.nombre,
               pais: {
                 id: cliente.domicilio.localidad.provincia.pais.id,
-                nombre: cliente.domicilio.localidad.provincia.pais.nombre,
-              },
-            },
-          },
+                nombre: cliente.domicilio.localidad.provincia.pais.nombre
+              }
+            }
+          }
         },
+
+
       });
     }
-  }
 
+
+
+
+
+  }
   constructor(
     private fb: FormBuilder,
     private clienteService: ClienteService,
     private rolService: RolService,
     private alerts: AlertsService,
-    @Host() private tabla: UsuariosComponent
-  ) {}
+    @Host() private tabla: UsuariosComponent) { }
 
   ngOnInit(): void {
     // creo el formulario  y traigo los roles para mostrarlos en el
     this.crearFormulario();
     this.traerRoles();
+
   }
 
-  // creao el formulario con new formControls para
+  // creao el formulario con new formControls para 
   // poder setearle la propiedad disable y que el usuario no pueda modificar los datos
   crearFormulario() {
     // creo el formulario todo por default vacio y le asigno que sea disabled para q no se puedan editar
     // solo se podra editar el rol de la persona
     this.formularioPersona = new FormGroup({
-      id: new FormControl({ value: 0, disabled: false }),
-      nombre: new FormControl({ value: '', disabled: false }),
-      apellido: new FormControl({ value: '', disabled: false }),
-      telefono: new FormControl({ value: 0, disabled: false }),
+      id: new FormControl({value: 0 , disabled: false}),
+      nombre: new FormControl({value: '' , disabled: false}),
+      apellido:  new FormControl({value: '' , disabled: false}),
+      telefono: new FormControl({value: 0 , disabled: false}),
 
       domicilio: new FormGroup({
-        id: new FormControl({ value: 0, disabled: false }),
-        calle: new FormControl({ value: '', disabled: false }),
-        nroDepartamento: new FormControl({ value: 0, disabled: false }),
-        numero: new FormControl({ value: 0, disabled: false }),
-        piso: new FormControl({ value: 0, disabled: false }),
-        aclaracion: new FormControl({ value: '', disabled: false }),
+        id: new FormControl({value: 0 , disabled: false}),
+        calle: new FormControl({value: '' , disabled: false}),
+        nroDepartamento: new FormControl({value: 0 , disabled: false}),
+        numero: new FormControl({value: 0 , disabled: false}),
+        piso: new FormControl({value: 0 , disabled: false}),
+        aclaracion: new FormControl({value: '' , disabled: false}),
         localidad: new FormGroup({
-          id: new FormControl({ value: 0, disabled: false }),
-          nombre: new FormControl({ value: '', disabled: false }),
+          id: new FormControl({value: 0 , disabled: false}),
+          nombre: new FormControl({value: '' , disabled: false}),
           provincia: new FormGroup({
-            id: new FormControl({ value: 0, disabled: false }),
-            nombre: new FormControl({ value: '', disabled: false }),
+            id: new FormControl({value: 0 , disabled: false}),
+            nombre: new FormControl({value: '' , disabled: false}),
             pais: new FormGroup({
-              id: new FormControl({ value: 0, disabled: false }),
-              nombre: new FormControl({ value: '', disabled: false }),
-            }),
-          }),
-        }),
+              id: new FormControl({value: 0 , disabled: false}),
+              nombre: new FormControl({value: '' , disabled: false}),
+            })
+          })
+        })
       }),
       usuario: new FormGroup({
-        id: new FormControl({ value: 0, disabled: false }),
-        email: new FormControl({ value: '', disabled: false }),
+        id: new FormControl({value: 0 , disabled: false}),
+        email: new FormControl({value: '' , disabled: false}),
         rol: new FormGroup({
-          id: new FormControl({ value: 0 }),
-          nombreRol: new FormControl({ value: '' }),
-        }),
+          id: new FormControl({value: 0 }),
+          nombreRol: new FormControl({value: ''}),
+        })
       }),
     });
   }
 
   actualizar() {
     console.log(this.formularioPersona.value);
-    this.clienteService
-      .put(this.cliente.id, this.formularioPersona.value)
-      .subscribe(
-        (res) => {
-          this.alerts.mensajeSuccess(
-            'Actualizacion de Rol realizado',
-            `El rol del usuario ${this.cliente.nombre} se actualizo correctamente, recuerde que puede modificarlo cuando usted lo desee`
-          );
-          this.tabla.usuarios.filter((item) => {
-            if (item.id === this.cliente.id) {
-              const idexOfFactura = this.tabla.usuarios.indexOf(item);
-              this.tabla.usuarios.splice(idexOfFactura, 1, res);
-            }
-          });
-        },
-        (err) => {
-          this.alerts.mensajeError(
-            'No se ah podido actualizar el Rol del usuario',
-            'ah ocurrido un error y no se ah podido realizar la actualizacio, porfavor verifique que esten todos los datos correctos'
-          );
-        }
-      );
+    this.clienteService.put(this.cliente.id, this.formularioPersona.value).subscribe(
+      res => {
+        this.alerts.mensajeSuccess('Actualizacion de Rol realizado', 
+        `El rol del usuario ${this.cliente.nombre} se actualizo correctamente, recuerde que puede modificarlo cuando usted lo desee`);
+        this.tabla.usuarios.filter(item => {
+          if (item.id === this.cliente.id) {
+            const idexOfFactura = this.tabla.usuarios.indexOf(item);
+            this.tabla.usuarios.splice(idexOfFactura, 1, res);
+          }
+        });
+      },
+      err => {
+        this.alerts.mensajeError('No se ah podido actualizar el Rol del usuario', 'ah ocurrido un error y no se ah podido realizar la actualizacio, porfavor verifique que esten todos los datos correctos');
+      }
+    );
+  
+
   }
 
   //  selecciono el rol en el formulario, traigo el rol seleccionado y lo seteo a mi usuario
   seleccionarRol(id: number) {
+   
     // accedo al control usuario
     const control = <FormGroup>this.formularioPersona.controls['usuario'];
     // dentro de usuarios se encuentra rol
@@ -163,8 +168,9 @@ export class FormularioRolComponent implements OnInit {
         // seteo el formulario con el rol id y el nombre del rol traido
         controlrol.setValue({
           id: rol.id,
-          nombreRol: rol.nombreRol,
+          nombreRol: rol.nombreRol
         });
+      
       });
     }
   }
@@ -173,6 +179,11 @@ export class FormularioRolComponent implements OnInit {
   traerRoles() {
     this.rolService.getAll().subscribe((roles) => {
       this.rol = roles;
+      
     });
   }
+
+
+
+
 }

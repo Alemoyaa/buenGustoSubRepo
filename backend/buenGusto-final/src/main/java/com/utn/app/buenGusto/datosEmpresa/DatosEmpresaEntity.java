@@ -19,6 +19,7 @@ public class DatosEmpresaEntity extends CommonEntity implements Serializable {
 
 	private static final long serialVersionUID = -6278247120228652128L;
 
+	private String email;
 	private String propietario;
 	private String razonSocial;
 	private int telefono;
@@ -26,6 +27,14 @@ public class DatosEmpresaEntity extends CommonEntity implements Serializable {
 	@OneToOne(cascade = CascadeType.ALL, optional = false)
 	@JoinColumn(name = "domicilio_id", nullable = false)
 	private DomicilioEntity domicilio = new DomicilioEntity();
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
 
 	public String getPropietario() {
 		return propietario;
