@@ -4,6 +4,20 @@
     "Segoe UI Symbol";
 }
 
+@media (max-width: 1300px) {
+  #body {
+    padding: 20px;
+  }
+}
+
+
+@media (max-width: 1200px) {
+  #body  {
+    width: 800px;
+    padding: 20px;
+  }
+}
+
 h1,
 h2,
 h3,

@@ -1,6 +1,6 @@
 <div class="container mt-5" id="body">
   <div class="row">
-    <div class="col-12 text-center">
+    <div class="col-12 text-center jumbotron" style="margin-bottom: 20px;">
       <h1 class="display-3">Administracion de Stock</h1>
     </div>
   </div>
@@ -151,26 +151,21 @@
 
 
 
-              <div formGroupName="unidadMedidaID">
-                <div class="form-group">
-                  <label for="">Unidad de medida</label>
-                  <select
-                    (change)="seleccionarUnidad($event.target.value)"
-                    formControlName="id"
-                    class="form-control"
-                    id="rol"
-                    name="rol"
-                  >
-                    <option *ngFor="let unidad of unidadesMedida" [value]="unidad.id">
-                      <!-- <input type="hidden" class="hidden"  formControlName="id"> -->
-                      {{unidad.denominacion}}
-                    </option>
-                  </select>
-                </div>
+            <div formGroupName="unidadMedidaID">
+              <div class="form-group">
+                <label for="">Unidad de medida</label>
+                <select (change)="seleccionarUnidad($event.target.value)" formControlName="id" class="form-control"
+                  id="rol" name="rol">
+                  <option *ngFor="let unidad of unidadesMedida" [value]="unidad.id">
+                    <!-- <input type="hidden" class="hidden"  formControlName="id"> -->
+                    {{unidad.denominacion}}
+                  </option>
+                </select>
               </div>
+            </div>
 
 
-              <!-- <div formGroupName="categoria">
+            <!-- <div formGroupName="categoria">
                 <div class="form-group">
                   <label for="">Categoria</label>
                   <select class="form-control" id="" name="" formControlName="padre.nombreCategoria">
@@ -180,24 +175,19 @@
               </div> -->
 
 
-              <div >
-                <div class="form-group">
-                  <label for="">Categoria</label>
-                  <select
-                    (change)="seleccionarPadre($event.target.value)"
-                    formControlName="categoria"
-                    class="form-control"
-                    id="rol"
-                    name="rol"
-                  >
-                    <option *ngFor="let padre of categoriasPadre" [value]="padre.id">
-                      {{ padre.nombreCategoria }}
-                    </option>
-                  </select>
-                </div>
+            <div>
+              <div class="form-group">
+                <label for="">Categoria</label>
+                <select (change)="seleccionarPadre($event.target.value)" formControlName="categoria"
+                  class="form-control" id="rol" name="rol">
+                  <option *ngFor="let padre of categoriasPadre" [value]="padre.id">
+                    {{ padre.nombreCategoria }}
+                  </option>
+                </select>
               </div>
-
             </div>
+
+          </div>
 
         </form>
       </div>

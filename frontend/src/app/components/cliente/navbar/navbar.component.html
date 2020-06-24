@@ -1,39 +1,36 @@
 <!-- <div class="" *ngIf="!hideNavbar()"> -->
-<div class="">
-  <nav class="navbar navbar-light navbar-expand-md sticky-top">
-    <div class="container">
-      <a [routerLink]="['/']">
-        <img id="logo" src="../../../../assets/assetsHome/img/foodLogo.png" />
-      </a>
-      <h5>
-        <a
-          class="navbar-brand text-success"
-          id="logo-letra"
-          [routerLink]="['/']"
-          >Buen<strong>Gusto</strong></a
-        >
-      </h5>
 
-      <div class="collapse navbar-collapse" id="navcol-1">
-        <ul class="nav navbar-nav ml-auto">
-          <li *ngIf="!navbarUsuario" class="nav-item" role="presentation">
+<nav class="navbar navbar-light navbar-expand-sm sticky-top">
+  <div class="container">
+
+    <a [routerLink]="['/']">
+      <img id="logo" src="../../../../assets/assetsHome/img/foodLogo.png" />
+    </a>
+    <h5>
+      <a class="navbar-brand text-success" id="logo-letra" [routerLink]="['/']">Buen<strong>Gusto</strong></a>
+    </h5>
+
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent"
+      aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarToggleExternalContent">
+        <div class="navbar-nav ml-auto">
+
+          <a *ngIf="!navbarUsuario" class="nav-item" role="presentation">
             <a class="nav-link" [routerLink]="['/login']">Iniciar</a>
-          </li>
+          </a>
+
           <li *ngIf="!navbarUsuario" class="nav-item" role="presentation">
             <a class="nav-link" [routerLink]="['/register']">Registrar</a>
           </li>
-          <li class="nav-item" role="presentation">
-            <a class="nav-link btn btn-success" [routerLink]="['/catalogo']"
-              >Ofertas</a
-            >
-          </li>
+
           <li class="nav-item" role="presentation">
             <a class="nav-link" [routerLink]="['/catalogo']">Catalogo</a>
           </li>
           <li *ngIf="navbarUsuario" class="nav-item" role="presentation">
-            <a class="nav-link" [routerLink]="['/user-profile/', uid]"
-              >Perfil</a
-            >
+            <a class="nav-link" [routerLink]="['/user-profile/', uid]">Perfil</a>
           </li>
           <li *ngIf="navbarUsuario" class="nav-item" role="presentation">
             <a class="nav-link btn btn-outline-light" (click)="cerrarSesion()">
@@ -43,15 +40,8 @@
 
           <!-- comienzo de panel de administrador -->
           <li class="nav-item dropdown">
-            <a
-              class="nav-link dropdown-toggle"
-              href="#"
-              id="navbarDropdown"
-              role="button"
-              data-toggle="dropdown"
-              aria-haspopup="true"
-              aria-expanded="false"
-            >
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+              aria-haspopup="true" aria-expanded="false">
               <i class="fas fa-tools"> Panel de Administrador</i>
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -64,32 +54,20 @@
 
                 <div class="dropdown-divider"></div>
 
-                <a
-                  class="dropdown-item"
-                  [routerLink]="['/dashboard/admin/gestionArticulos']"
-                >
+                <a class="dropdown-item" [routerLink]="['/dashboard/admin/gestionArticulos']">
                   <i class="fas fa-fw fa-pizza-slice"> Platos</i>
                 </a>
 
                 <!-- fin platos -->
-                <a
-                  class="dropdown-item"
-                  [routerLink]="['/dashboard/admin/gestionStock']"
-                >
+                <a class="dropdown-item" [routerLink]="['/dashboard/admin/gestionStock']">
                   <i class="fas fa-fw fa-clipboard"> Stock</i>
                 </a>
                 <!-- fin stock -->
-                <a
-                  class="dropdown-item"
-                  [routerLink]="['/dashboard/admin/gestionEmpleados']"
-                >
+                <a class="dropdown-item" [routerLink]="['/dashboard/admin/gestionEmpleados']">
                   <i class="fas fa-user"> Usuarios</i>
                 </a>
                 <!-- fin Usuarios -->
-                <a
-                  class="dropdown-item"
-                  [routerLink]="['/dashboard/admin/estadisticas']"
-                >
+                <a class="dropdown-item" [routerLink]="['/dashboard/admin/estadisticas']">
                   <i class="fas fa-fw fa-chart-area"> Estadisticas</i>
                 </a>
               </div>
@@ -101,20 +79,14 @@
                 </div>
 
                 <div class="dropdown-divider"></div>
-                <a
-                  class="dropdown-item"
-                  [routerLink]="[
+                <a class="dropdown-item" [routerLink]="[
                     '/dashboard/admin/cajero/administracionDePedidos'
-                  ]"
-                >
+                  ]">
                   <i class="fas fa-list"> Administracion de Pedidos</i>
                 </a>
-                <a
-                  class="dropdown-item"
-                  [routerLink]="[
+                <a class="dropdown-item" [routerLink]="[
                     '/dashboard/admin/cajero/administracionFacturacion'
-                  ]"
-                >
+                  ]">
                   <i class="fas fa-money"> Facturacion</i>
                 </a>
               </div>
@@ -127,25 +99,18 @@
 
                 <div class="dropdown-divider"></div>
 
-                <a
-                  class="dropdown-item"
-                  [routerLink]="['/dashboard/admin/cocinero/gestorOrdenes']"
-                >
+                <a class="dropdown-item" [routerLink]="['/dashboard/admin/cocinero/gestorOrdenes']">
                   <i class="fas fa-list"> Visualizacion de Pedidos</i>
                 </a>
-                <a
-                  class="dropdown-item"
-                  [routerLink]="[
+                <a class="dropdown-item" [routerLink]="[
                     '/dashboard/admin/cocinero/bajasManualesDeStock'
-                  ]"
-                >
+                  ]">
                   <i class="fas fa-cutlery"> Modificacion de Plato</i>
                 </a>
               </div>
             </div>
           </li>
-        </ul>
+        </div>
       </div>
-    </div>
-  </nav>
-</div>
+  </div>
+</nav>
