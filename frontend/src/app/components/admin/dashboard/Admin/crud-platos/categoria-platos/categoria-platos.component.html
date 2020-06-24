@@ -36,7 +36,9 @@
           <td>
             {{ categoria.nombreCategoria }}
           </td>
-          <td *ngIf="categoria.padre; else elsePadretabla">{{ categoria.padre.nombreCategoria }}</td>
+          <td *ngIf="categoria.padre; else elsePadretabla">
+            {{ categoria.padre.nombreCategoria }}
+          </td>
           <ng-template #elsePadretabla><td>No posee</td></ng-template>
           <td *ngIf="categoria.hijos; else elseHijoTabla">
             <button
@@ -45,15 +47,12 @@
               data-toggle="dropdown"
               type="button"
             >
-              Categorias hijas<span class="caret"></span>
+              Categorias hijas
             </button>
 
             <ul class="dropdown-menu" role="menu">
               <li
-                *ngFor="
-                  let item of categoria.hijos;
-                  index as i
-                "
+                *ngFor="let item of categoria.hijos; index as i"
                 class="list-group-item"
               >
                 {{ item.nombreCategoria }} - {{ item.insumoOManuf }}
@@ -63,7 +62,7 @@
           <ng-template #elseHijoTabla>
             <td>No posee hijos</td>
           </ng-template>
-          <td>{{categoria.insumoOManuf}}</td>
+          <td>{{ categoria.insumoOManuf }}</td>
           <td>
             <button
               (click)="editar(categoria)"
@@ -89,7 +88,6 @@
     ></pagination-controls>
   </div>
 </div>
-
 
 <div
   class="modal fade"
@@ -132,42 +130,52 @@
             <br />
 
             <div class="col-6">
+
               <div class="form-group">
-                <label for="nombreCategoria">Denominacion</label>
+                <label class="col-form-label">Denominacion</label>
                 <input
                   type="text"
                   class="form-control"
-                  name="nombreCategoria"
-                  id="nombreCategoria"
                   formControlName="nombreCategoria"
                 />
               </div>
+
               <div class="form-group">
-                <div class="custom-control custom-radio custom-control-inline">
-                  <input type="radio" id="insumo"  class="custom-control-input"
-                         formControlName="insumoOManuf">
-                  <label class="custom-control-label" for="insumo">Insumo</label>
-                </div>
-                <div class="custom-control custom-radio custom-control-inline">
-                  <input type="radio" id="manufacturado"  class="custom-control-input"
-                         formControlName="insumoOManuf">
-                  <label class="custom-control-label" for="manufacturado">Manufacturado</label>
+                <div class="form-check form-check-inline">
+                  <input
+                    type="radio"
+                    class="form-check-input"
+                    formControlName="insumoOManuf"
+                    value="false"
+                  />
+                  <label class="form-check-label">Insumo</label>
                 </div>
 
+                <div class="form-check form-check-inline">
+                  <input
+                    type="radio"
+                    class="form-check-input"
+                    formControlName="insumoOManuf"
+                    value="true"
+                  />
+                  <label class="form-check-label">Manufacturado</label>
+                </div>
               </div>
 
-                <div class="form-group">
-                  <label for="padre">Categoria padre</label>
-                  <select class="form-control"
-                          id="padre" name="padre"
-                          formControlName="padre">
-                    <option value="0"><b>Sin Categoria Padre</b></option>
-                    <option *ngFor="let padre of listaCategorias">{{
-                      padre.nombreCategoria
-                    }}</option>
-                  </select>
-                </div>
-
+              <div class="form-group">
+                <label for="padre">Categoria padre</label>
+                <select
+                  class="form-control"
+                  id="padre"
+                  name="padre"
+                  formControlName="padre"
+                >
+                  <option value="0"><b>Sin Categoria Padre</b></option>
+                  <option *ngFor="let padre of listaCategorias" value="padre.id">{{
+                    padre.nombreCategoria
+                  }}</option>
+                </select>
+              </div>
             </div>
           </div>
         </form>
@@ -205,4 +213,3 @@
     </div>
   </div>
 </div>
-

@@ -1,9 +1,8 @@
-import {CategoriaService} from './../../../../../../services/serviciosCliente/categoriaServices/categoria.service';
-import {Categoria} from './../../../../../../entidades/Categoria';
-import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormControl, FormGroup} from '@angular/forms';
-import {UnidadMedida} from '../../../../../../entidades/UnidadMedida';
-import {AlertsService} from '../../../../../../services/alertServices/alerts.service';
+import { AlertsService } from 'src/app/services/alertServices/alerts.service';
+import { CategoriaService } from './../../../../../../services/serviciosCliente/categoriaServices/categoria.service';
+import { Categoria } from './../../../../../../entidades/Categoria';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-categoria-platos',
@@ -31,8 +30,8 @@ export class CategoriaPlatosComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private sweet: AlertsService,
-    private serviceCate: CategoriaService) {
-  }
+    private serviceCate: CategoriaService
+  ) {}
 
   ngOnInit(): void {
     this.getAllCategoria();
@@ -58,29 +57,42 @@ export class CategoriaPlatosComponent implements OnInit {
   }
 
   crearFormulario() {
-    this.formularioCategoria = new FormGroup({
+    this.formularioCategoria = this.fb.group({
+      id: [],
+      nombreCategoria: [''],
+      insumoOManuf: [],
+      padre: this.fb.group({
+        id: [],
+        nombreCategoria: [''],
+        insumoOManuf: [],
+      }),
+    });
+    /*this.formularioCategoria = new FormGroup({
       id: new FormControl(null),
       nombreCategoria: new FormControl(null),
       insumoOManuf: new FormControl(false),
       padre: new FormControl(null)
-    });
+    });*/
   }
 
   eliminar(categoriaAct: Categoria) {
     const opcion = confirm('¿Esta seguro que desea eliminar?');
     if (opcion) {
-      this.serviceCate.delete(categoriaAct.id).subscribe((data) => {
-        alert('Registro eliminado');
-        const indexArticulo = this.listaCategorias.indexOf(categoriaAct);
-        this.listaCategorias.splice(indexArticulo, 1);
-        this.sweet.mensajeSuccess('Eliminacion exitosa', '');
-      }, (err) => {
-        console.log(err);
-        this.sweet.mensajeError(
-          'Error',
-          'Hubo un problema al eliminar el articulo'
-        );
-      });
+      this.serviceCate.delete(categoriaAct.id).subscribe(
+        (data) => {
+          alert('Registro eliminado');
+          const indexArticulo = this.listaCategorias.indexOf(categoriaAct);
+          this.listaCategorias.splice(indexArticulo, 1);
+          this.sweet.mensajeSuccess('Eliminacion exitosa', '');
+        },
+        (err) => {
+          console.log(err);
+          this.sweet.mensajeError(
+            'Error',
+            'Hubo un problema al eliminar el articulo'
+          );
+        }
+      );
     }
   }
 
@@ -95,13 +107,15 @@ export class CategoriaPlatosComponent implements OnInit {
         this.getAllCategoria();
         this.esEditar = false;
         this.formularioCategoria.reset();
-      }, error => {
+      },
+      (error) => {
         this.sweet.mensajeError(
           'No se ah podido actualizar el Rol del usuario',
           'ah ocurrido un error y no se ah podido realizar la actualizacio, porfavor verifique que esten todos los datos correctos'
         );
         console.error(error);
-      });
+      }
+    );
   }
 
   editar(categoria: Categoria) {
@@ -110,8 +124,10 @@ export class CategoriaPlatosComponent implements OnInit {
       id: categoria.id,
       nombreCategoria: categoria.nombreCategoria,
       insumoOManuf: categoria.insumoOManuf,
-      padre : categoria.padre
+      padre: categoria.padre
     });
+    console.log( JSON.stringify(categoria) +"CAtegoria")
+    console.log(JSON.stringify(this.formularioCategoria.value)+"Formuilario");
     this.id = categoria.id;
   }
 
@@ -124,7 +140,10 @@ export class CategoriaPlatosComponent implements OnInit {
         this.sweet.mensajeSuccess('Articulo agregado', 'success');
       },
       (err) => {
-        this.sweet.mensajeError('Ocurrio un problema', 'Por favor vuelva a intentarlo mas tarde');
+        this.sweet.mensajeError(
+          'Ocurrio un problema',
+          'Por favor vuelva a intentarlo mas tarde'
+        );
         console.log(err);
       }
     );
@@ -134,5 +153,4 @@ export class CategoriaPlatosComponent implements OnInit {
     this.crearFormulario();
     this.esEditar = false;
   }
-
 }
