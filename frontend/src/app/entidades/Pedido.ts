@@ -5,7 +5,7 @@ import { Cliente } from './Cliente';
 
 export class Pedido extends Common {
   fechaRealizacion: Date;
-  hora_estimada_fin: any;
+  hora_estimada_fin: Date;
   numero: number;
   tipo_Envio: boolean;
   lista_detallePedido: DetallePedido[];

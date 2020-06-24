@@ -42,7 +42,8 @@
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
               aria-haspopup="true" aria-expanded="false">
-              <i class="fas fa-tools"> Panel de Administrador</i>
+              Panel de Administrador
+              <i class="fas fa-tools"> </i>
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
               <!-- to do:   Condicion si es admin mostrar, si no es admin no mostrar el div seleccionado -->
@@ -68,7 +69,9 @@
                 </a>
                 <!-- fin Usuarios -->
                 <a class="dropdown-item" [routerLink]="['/dashboard/admin/estadisticas']">
-                  <i class="fas fa-fw fa-chart-area"> Estadisticas</i>
+                  <span class="oi oi-graph">Estadisticas</span>
+
+                  <!-- <i class="fas fa-fw fa-chart-area"> </i> -->
                 </a>
               </div>
               <!-- to do: si es admin o cajero mostrar este div, sino no -->

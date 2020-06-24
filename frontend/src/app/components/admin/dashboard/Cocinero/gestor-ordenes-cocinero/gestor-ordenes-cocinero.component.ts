@@ -14,16 +14,18 @@ export class GestorOrdenesCocineroComponent implements OnInit {
 
   public pedidos: Pedido[] = []
   public pedidoOne: Pedido;
-  public estados: EstadoPedido [] = []
+  public estados: EstadoPedido[] = []
   public estadoSeleccionado: any;
+
+  public pageActual = 1; //Paginador
 
   public pedido: Pedido = {
     id: null,
     fechaRealizacion: new Date(),
-    hora_estimada_fin: null,
+    hora_estimada_fin: new Date(),
     numero: null,
     tipo_Envio: null,
-    lista_detallePedido:  [{
+    lista_detallePedido: [{
       id: null,
       articulo: null,
       cantidad: null,
@@ -67,19 +69,20 @@ export class GestorOrdenesCocineroComponent implements OnInit {
   }
 
 
-//Traer estados de pedido
-  getAllEstados(){
+  //Traer estados de pedido
+  getAllEstados() {
     this.estadoService.getAll().subscribe(
       (res) => {
-        this.estados= res;
+        this.estados = res;
         console.log(this.estados);
-    },
-    (error) => {
-      console.warn("error =>  ", error);
-    }
+      },
+      (error) => {
+        console.warn("error =>  ", error);
+      }
     );
   }
 
+  //para setearle al pedido un estado
   seleccionarEstado(id: number) {
     console.log(id);
 
