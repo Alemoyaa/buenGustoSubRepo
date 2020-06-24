@@ -103,6 +103,9 @@ export class StockComponent implements OnInit {
       (res) => {
         this.articulosInsumos = res;
         console.log(this.articulosInsumos);
+      },
+      (error) => {
+        console.warn("error =>  ", error);
       }
     );
     this.getAllCategorias();
@@ -132,7 +135,7 @@ export class StockComponent implements OnInit {
       (unidad) => {
         this.unidadesMedida = unidad;
         console.log('Unidades: ', this.unidadesMedida);
-      },(error) => {
+      }, (error) => {
 
         console.warn("error =>  ", error);
       }
@@ -140,7 +143,7 @@ export class StockComponent implements OnInit {
   }
 
 
-  seleccionarUnidad(id: number){
+  seleccionarUnidad(id: number) {
     console.log(id);
     //  selecciono el rol en el formulario, traigo el rol seleccionado y lo seteo a mi usuario
     const control = <FormGroup>this.formStock.controls['unidadMedidaID'];
@@ -180,7 +183,7 @@ export class StockComponent implements OnInit {
     // await this.getCategoriasPadreHijo();
   }
 
-  seleccionarPadre(id: number){
+  seleccionarPadre(id: number) {
     console.log(id);
     //  selecciono el rol en el formulario, traigo el rol seleccionado y lo seteo a mi usuario
     const control = <FormGroup>this.formStock.controls['categoria'];
@@ -307,13 +310,13 @@ export class StockComponent implements OnInit {
     });
   }
 
-//   manejarError (error: HttpErrorResponse){
-//     Swal.fire({
-//       icon: 'error',
-//       title: 'Ocurrio un problema',
-//       html: 'Por favor vuelva a intentarlo mas tarde',
-//     });
-//     console.warn("error =>  ", error);
-//     return throwError('Error atrapado');
-//   }
- }
+  //   manejarError (error: HttpErrorResponse){
+  //     Swal.fire({
+  //       icon: 'error',
+  //       title: 'Ocurrio un problema',
+  //       html: 'Por favor vuelva a intentarlo mas tarde',
+  //     });
+  //     console.warn("error =>  ", error);
+  //     return throwError('Error atrapado');
+  //   }
+}
