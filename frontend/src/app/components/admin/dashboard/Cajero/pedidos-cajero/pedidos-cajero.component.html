@@ -1,4 +1,4 @@
-<div class="container mt-5">
+<div class="container mt-5" *ngIf="pedidos">
 <h3>Estado de pedidos</h3>
 <table class="table table-striped">
   <thead>
@@ -9,18 +9,18 @@
       <td>Tipo de envío</td>
       <td>Fecha</td>
       <td>Estado</td>
-    </tr>
+    </tr> 
   </thead>
-  <tbody>
-    <tr>
+  <tbody *ngIf="filtrar" >
+    <tr *ngFor="let item of filtrar">
       <th scope="row">1</th>
-      <td>Cliente</td>
+      <td>{{item.estadoPedido.nombreEstado}}</td>
       <td>Tiempo estimado</td>
       <td>Tipo de envío</td>
       <td>Fecha</td>
       <td>
         <select name="estado">
-          <option value="enproceso">En proceso</option>
+          <option value="enproceso"></option>
           <option value="pendiente" selected>Pendiente</option>
           <option value="listo">Listo</option>
         </select>
