@@ -2,7 +2,7 @@
   <div class="col-12 text-center jumbotron" style="margin-bottom: 20px;">
     <h1 class="display-4">Estado de Pedidos</h1>
     <div class="buscador">
-      <i class="fa fa-user " style="font-size:35px;"></i>
+      <i class="fa fa-cutlery " style="font-size:35px;"></i>
       <p>Cocinero</p>
     </div>
   </div>
@@ -30,12 +30,12 @@
           </button>
         </td>
         <td>
-          <select name="estado">
-            <option value="pendiente" selected>Pendiente</option>
-            <option value="enproceso">En proceso</option>
-            <option value="demorado">Demorado</option>
-            <option value="listo">Listo</option>
-          </select>
+          <select class="custom-select" name="estado">
+          <option *ngFor="let estado of estados" [value]="estado.id">
+            {{estado.nombreEstado}}
+          </option>
+        </select>
+
         </td>
         <td>COLOR AZUL</td>
       </tr>

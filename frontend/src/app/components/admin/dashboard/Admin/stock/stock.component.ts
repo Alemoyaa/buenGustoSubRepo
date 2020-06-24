@@ -145,16 +145,16 @@ export class StockComponent implements OnInit {
 
   seleccionarUnidad(id: number) {
     console.log(id);
-    //  selecciono el rol en el formulario, traigo el rol seleccionado y lo seteo a mi usuario
+    //  selecciono la unidad en el formulario, traigo la unidad seleccionado y lo seteo a mi usuario
     const control = <FormGroup>this.formStock.controls['unidadMedidaID'];
     // verifico q no me envie un null
     if (id != null) {
-      // traigo el rol utilizando el id que me envian por formulario
+      // traigo la unidad utilizanda el id que me envian por formulario
       this.unidadMedidaService.getOne(id).subscribe((unidad) => {
 
         this.unidadSeleccionada = unidad;
         console.log(unidad)
-        // seteo el formulario con el rol id y el nombre del rol traido
+        // seteo el formulario con la unidad id y el nombre de la unidad traida
         this.formStock.controls.unidadMedidaID.setValue({
           id: unidad.id,
           denominacion: unidad.denominacion,
