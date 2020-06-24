@@ -25,6 +25,9 @@ export class StockComponent implements OnInit {
 
   public articulosInsumos: ArticuloInsumo[] = [];
 
+  categoriaSeleccionada: any;
+
+  unidadSeleccionada: any;
 
   public unidadesMedida: Array<any> = [];
   public categorias: Array<Categoria> = [];
@@ -71,8 +74,13 @@ export class StockComponent implements OnInit {
       requiere_refrigeracion: new FormControl(null),
       stock_actual: new FormControl(null),
       stock_minimo: new FormControl(null),
-      unidadMedidaID: new FormControl(null),
-      id: new FormControl(null),
+
+      unidadMedidaID: new FormGroup({
+        id: new FormControl(0),
+        denominacion: new FormControl(''),
+        abreviatura: new FormControl(''),
+      }),
+      id: new FormControl(0),
       precio_de_venta: new FormControl(null),
       url_imagen: new FormControl(''),
       es_catalogo: new FormControl(null),
@@ -132,6 +140,31 @@ export class StockComponent implements OnInit {
   }
 
 
+  seleccionarUnidad(id: number){
+    console.log(id);
+    //  selecciono el rol en el formulario, traigo el rol seleccionado y lo seteo a mi usuario
+    const control = <FormGroup>this.formStock.controls['unidadMedidaID'];
+    // verifico q no me envie un null
+    if (id != null) {
+      // traigo el rol utilizando el id que me envian por formulario
+      this.unidadMedidaService.getOne(id).subscribe((unidad) => {
+
+        this.unidadSeleccionada = unidad;
+        console.log(unidad)
+        // seteo el formulario con el rol id y el nombre del rol traido
+        this.formStock.controls.unidadMedidaID.setValue({
+          id: unidad.id,
+          denominacion: unidad.denominacion,
+          abreviatura: unidad.abreviatura
+        });
+
+      });
+    }
+    console.log(this.formStock.value)
+
+  }
+
+
 
 
   async getCategorias() {
@@ -147,6 +180,27 @@ export class StockComponent implements OnInit {
     // await this.getCategoriasPadreHijo();
   }
 
+  seleccionarPadre(id: number){
+    console.log(id);
+    //  selecciono el rol en el formulario, traigo el rol seleccionado y lo seteo a mi usuario
+    const control = <FormGroup>this.formStock.controls['categoria'];
+    // verifico q no me envie un null
+    if (id != null) {
+      // traigo el rol utilizando el id que me envian por formulario
+      this.categoriaService.getOne(id).subscribe((padre) => {
+
+        this.categoriaSeleccionada = padre;
+        // seteo el formulario con el rol id y el nombre del rol traido
+        this.formStock.controls.categoria.setValue({
+          id: this.categoriaSeleccionada.id,
+          nombreCategoria: this.categoriaSeleccionada.nombreCategoria
+        });
+
+      });
+    }
+    console.log(this.formStock.value)
+
+  }
 
   //Post
   agregar() {

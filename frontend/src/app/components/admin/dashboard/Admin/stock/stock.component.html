@@ -149,26 +149,56 @@
               </div>
             </div>
 
-            <div class="col-6">
-              <div class="form-group">
-                <label for="">Unidad de medida</label>
-                <select class="form-control" id="denominacion" name="denominacion" formControlName="denominacion">
-                  <option *ngFor="let unidad of unidadesMedida" value="i">{{unidad.denominacion}}</option>
-                </select>
+
+
+              <div formGroupName="unidadMedidaID">
+                <div class="form-group">
+                  <label for="">Unidad de medida</label>
+                  <select
+                    (change)="seleccionarUnidad($event.target.value)"
+                    formControlName="id"
+                    class="form-control"
+                    id="rol"
+                    name="rol"
+                  >
+                    <option *ngFor="let unidad of unidadesMedida" [value]="unidad.id">
+                      <!-- <input type="hidden" class="hidden"  formControlName="id"> -->
+                      {{unidad.denominacion}}
+                    </option>
+                  </select>
+                </div>
               </div>
 
 
-              <div formGroupName="categoria">
+              <!-- <div formGroupName="categoria">
                 <div class="form-group">
                   <label for="">Categoria</label>
-                  <select class="form-control" id="" name="">
+                  <select class="form-control" id="" name="" formControlName="padre.nombreCategoria">
                     <option *ngFor="let padre of categoriasPadre" value="0">{{ padre.nombreCategoria }}</option>
+                  </select>
+                </div>
+              </div> -->
+
+
+              <div >
+                <div class="form-group">
+                  <label for="">Categoria</label>
+                  <select
+                    (change)="seleccionarPadre($event.target.value)"
+                    formControlName="categoria"
+                    class="form-control"
+                    id="rol"
+                    name="rol"
+                  >
+                    <option *ngFor="let padre of categoriasPadre" [value]="padre.id">
+                      {{ padre.nombreCategoria }}
+                    </option>
                   </select>
                 </div>
               </div>
 
             </div>
-          </div>
+
         </form>
       </div>
       <div class="modal-footer">
