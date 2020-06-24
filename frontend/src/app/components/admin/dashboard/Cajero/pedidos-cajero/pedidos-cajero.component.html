@@ -1,31 +1,51 @@
-<div class="container mt-5" *ngIf="pedidos">
-<h3>Estado de pedidos</h3>
-<table class="table table-striped">
+<div class="container mt-5 text-center" *ngIf="pedidos" >
+<h1 class="display-3">Estado de Pedidos</h1>
+<table class="table table-striped" >
   <thead>
     <tr>
       <th scope="row">Orden</th>
-      <td>Cliente</td>
-      <td>Tiempo estimado</td>
-      <td>Tipo de envío</td>
-      <td>Fecha</td>
-      <td>Estado</td>
+      <th scope="row">Cliente</th>
+      <th scope="row">Tiempo estimado</th>
+      <th scope="row">Tipo de envío</th>
+      <th scope="row">Fecha</th>
+      <th scope="row">Estado</th>
+
+      <th scope="row">Aceptar/Rechazar Pedido</th>
     </tr> 
   </thead>
+
+  <!-- fechaRealizacion: Date;
+  hora_estimada_fin: any;
+  numero: number; 
+  tipo_Envio: boolean;
+  lista_detallePedido: DetallePedido[];
+  estadoPedido: EstadoPedido;
+  clientePedido: Cliente; -->
   <tbody *ngIf="filtrar" >
-    <tr *ngFor="let item of filtrar">
+    <tr *ngFor="let pedido of filtrar">
       <th scope="row">1</th>
-      <td>{{item.estadoPedido.nombreEstado}}</td>
-      <td>Tiempo estimado</td>
-      <td>Tipo de envío</td>
-      <td>Fecha</td>
+      <td>{{pedido.clientePedido.nombre}}</td>
+      <td>{{pedido.hora_estimada_fin | date}}</td>
       <td>
-        <select name="estado">
-          <option value="enproceso"></option>
-          <option value="pendiente" selected>Pendiente</option>
-          <option value="listo">Listo</option>
-        </select>
+        <p *ngIf="pedido.tipo_Envio == true"> Retira en Local</p>
+        <p *ngIf="pedido.tipo_Envio == false"> Delivery</p>
+      </td> 
+      <td>{{pedido.fechaRealizacion | date}}</td>
+      <td>{{pedido.estadoPedido.nombreEstado}}</td>
+      <td>
+        <form [formGroup]="formularioEstado">
+          <select class="form-control" name="estado"  formControlName="id" (change)="seleccionarEstado($event.target.value, pedido)">
+            <option  value="2">Cancelar</option>
+            <option  value="3">Confirmar</option>
+          </select>
+        </form>
       </td>
     </tr>
   </tbody>
 </table>
+
+
 </div>
+
+
+
