@@ -19,6 +19,7 @@ export class GestorOrdenesCocineroComponent implements OnInit {
   pedidoSeleccionado: Pedido;
   public estados: EstadoPedido[] = []
   public estadoSeleccionado: any;
+  horaSeleccionada: Pedido;
 
   formularioEstado: FormGroup;
   public pageActual = 1; //Paginador
@@ -60,11 +61,16 @@ export class GestorOrdenesCocineroComponent implements OnInit {
     });
   }
 
+  //Me trae los pedidos confirmados por el cajero
   getAllPedidos() {
     this.esperarAlert();
     this.pedidoService.getAll().subscribe(
       (res) => {
-        this.pedidos = res;
+        res.filter((pedido) => {
+          if (pedido.estadoPedido.nombreEstado === 'Confirmado'){
+            return this.pedidos.push(pedido);
+          }
+        })
         console.log(this.pedidos);
         Swal.fire({
           icon: 'success',
@@ -85,8 +91,13 @@ export class GestorOrdenesCocineroComponent implements OnInit {
   }
 
   //FUNCION QUE ME RETRASE EL PEDIDO 1O MINUTOS
-  // retrasoPedido(pedido){
-  //   this.pedido.hora_estimada_fin
+  // retrasoPedido(id: number, hora: Date){
+  //   hora = new Date();
+  //   hora.setMinutes(10);
+  //   this.pedidoService.getOne(id).subscribe(
+  //     (res) =>{
+
+  //   })
   // }
 
 
