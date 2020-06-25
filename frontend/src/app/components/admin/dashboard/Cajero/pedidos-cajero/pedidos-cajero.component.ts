@@ -41,16 +41,12 @@ export class PedidosCajeroComponent implements OnInit {
     this.crearFormulario();
     // this.alerts.mensajeSuccess('Bienvenido al tablero de Pedidos del modulo Cajero', 'Aqui usted podra aceptar y enviar a cocina o rechazar pedidos entrantes');
   }
- 
+
 
   get filtrar(): Pedido[] {
-
     const matcher = new RegExp(this.filtroBuscador, 'i');
     return this.pedidos.filter((pedido) => {
-
       return matcher.test([pedido.clientePedido.nombre, pedido.clientePedido.apellido].join());
-
-
     });
   }
 
