@@ -2,27 +2,56 @@
   <button type="button" class="btn btn-primary margin-top">
     <b>Volver al catálogo</b>
   </button>
-  <div class="card articulo-detalle" style="width: 30rem;">
-    <img
-      src="{{ articulo.url_imagen }}"
-      class="card-img-top"
-      alt="Foto de {{ articulo.denominacion }}"
-    />
-    <div class="card-body">
-      <h3 class="card-title">{{ articulo.denominacion }}</h3>
+</div>
 
-      <div class="row">
-        <div class="col-lg-4 col-md-4 col-sm-4 left-align">
-          <h4>${{ articulo.precio_de_venta }}</h4>
+<div class="container justify-content-center d-flex">
+  <div class="container col-lg-6 col-md-12 col-sm-12">
+    <div class="card articulo-detalle" style="width: 30rem;">
+      <img
+        src="{{ articulo.url_imagen }}"
+        class="card-img-top"
+        alt="Foto de {{ articulo.denominacion }}"
+      />
+      <div class="card-body">
+        <h3 class="card-title">{{ articulo.denominacion }}</h3>
+
+        <div class="row">
+          <div class="col-lg-4 col-md-4 col-sm-4 left-align">
+            <h4>${{ articulo.precio_de_venta }}</h4>
+          </div>
+          <div class="col-lg-8 col-md-8 col-sm-8 right-align">
+            <button
+              type="button"
+              class="btn btn-warning"
+              (click)="addToCart(articulo)"
+            >
+              <b>Agregar al carrito</b>
+            </button>
+          </div>
         </div>
-        <div class="col-lg-8 col-md-8 col-sm-8 right-align">
-          <button
-            type="button"
-            class="btn btn-warning"
-            (click)="addToCart(articulo)"
-          >
-            <b>Agregar al carrito</b>
-          </button>
+      </div>
+    </div>
+  </div>
+  <div class="container col-lg-6 col-md-12 col-sm-12">
+    <div class="card articulo-detalle" style="width: 30rem;">
+      <img
+        src="https://cdn.tuhogar.com/wp-content/uploads/2018/10/ingredientes-pan-de-muerto-Axion-780x435.jpg
+        "
+        class="card-img-top"
+      />
+      <div class="card-body">
+        <h3 class="card-title">Ingredientes</h3>
+
+        <div
+          class="row"
+          *ngFor="let ingrediente of articuloManuf.lista_detalleManufacturado"
+        >
+          <div class="col-lg-8 col-md-8 col-sm-8 left-align">
+            <h5>{{ ingrediente.articuloInsumoID.denominacion }}</h5>
+          </div>
+          <div class="col-lg-3 col-md-3 col-sm-3 right-align">
+            <h5>x{{ ingrediente.cantidad }}</h5>
+          </div>
         </div>
       </div>
     </div>

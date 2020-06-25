@@ -5,6 +5,9 @@ import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ArticuloServices } from 'src/app/services/serviciosCliente/articuloServices/articuloServices';
 import { Articulo } from 'src/app/entidades/Articulo';
+import { ArticuloInsumo } from 'src/app/entidades/ArticuloInsumo';
+import { ArticuloInsumoService } from 'src/app/services/serviciosCliente/articuloInsumoServices/articuloInsumo.service';
+import { ArticuloManufacturado } from 'src/app/entidades/ArticuloManufacturado';
 
 @Component({
   selector: 'app-catalogo-detalle',
@@ -13,12 +16,21 @@ import { Articulo } from 'src/app/entidades/Articulo';
 })
 export class CatalogoDetalleComponent implements OnInit {
   articulo: Articulo;
+  articuloManuf: ArticuloManufacturado;
   id: number;
+
+  detalle: DetalleManufacturado = {
+    articuloInsumoID: null,
+    cantidad: null,
+    id: null,
+    unidadMedidaID: null,
+  };
 
   constructor(
     private articuloService: ArticuloServices,
     private routerActive: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private articuloManufService: ArticuloManufacturadoService
   ) {}
 
   ngOnInit(): void {
@@ -34,6 +46,7 @@ export class CatalogoDetalleComponent implements OnInit {
       console.log(data);
       this.articulo = data;
     });
+    this.getManuf(id);
   }
 
   addToCart(articulo) {
@@ -48,5 +61,12 @@ export class CatalogoDetalleComponent implements OnInit {
     localStorage.setItem('carrito', JSON.stringify(json));
     console.log(localStorage.getItem('carrito'));
     this.router.navigate(['carrito']);
+  }
+
+  getManuf(id) {
+    this.articuloManufService.getOne(id).subscribe((data) => {
+      this.articuloManuf = data;
+      console.log('manuf', data);
+    });
   }
 }
