@@ -1,6 +1,6 @@
 <div class="container " >
   <div class="row">
-    <div class="col-12 text-center" >
+    <!-- <div class="col-12 text-center" >
       <h1 class="display-3">Administracion de Usuarios</h1>
       <form class="form-inline mt-4 ml-2 mb-4">
         <label style="font-size: 25px;" ><strong><i class="fas fa-search"> Buscar : </i></strong></label>
@@ -15,6 +15,26 @@
       </form>
     </div>
     
+  </div> -->
+  <div class="col-12 text-center jumbotron" style="margin-bottom: 20px;">
+    <h1 class="display-4">Administracion de Usuarios</h1>
+    <div class="buscador">
+      <i class="fa fa-user " style="font-size:35px;"></i>
+      <p>Admin</p>
+    </div>
+  </div>
+
+  <div class="row mb-4 ml-2">
+    
+    <!-- Buscador -->
+    <div class="buscador">
+      <form>
+        <p style="font-size: 25px;"> Buscar : </p>
+
+        <input class="form-control mr-sm-2" type="search" placeholder="Nombre/Apellido o Rol" aria-label="Search"
+          [(ngModel)]="filtroBuscador" [ngModelOptions]="{ standalone: true }" />
+      </form>
+    </div>
   </div>
 
   <table class="table table-striped text-center" >
@@ -40,8 +60,8 @@
         <td>
           <button class="btn btn-dark" data-toggle="modal"
           data-target="#domicilio" (click)="mostrarDomicilio(cliente)" > 
-          <i class="fas fa-home"> Ver Domicilio</i>
-         
+          <i class="fas fa-home"> </i>
+         <p>Ver Domicilio</p>
           </button>
         </td>
         <td>
@@ -51,7 +71,8 @@
             data-target="#ModalPersona"
             (click)="preCargarDatosFormulario(cliente)"
           >
-            <i class="fas fa-pencil-alt"> Editar Rol</i>
+            <i class="fas fa-pencil-alt"></i>
+            <p> Editar Rol</p>
           </button>
           <!-- <button
             class="btn btn-danger mr-3"
@@ -74,3 +95,5 @@
 <app-mostrar-domicilio [domicilioSeleccionado]="domicilio" ></app-mostrar-domicilio>
 
 <app-formulario-rol [clienteSeleccionado]="cliente"></app-formulario-rol>
+
+
