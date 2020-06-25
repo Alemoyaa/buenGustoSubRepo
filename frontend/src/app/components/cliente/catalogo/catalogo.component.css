@@ -50,3 +50,7 @@
 .articulo-container {
   text-align: center;
 }
+
+.float-right {
+  float: right;
+}

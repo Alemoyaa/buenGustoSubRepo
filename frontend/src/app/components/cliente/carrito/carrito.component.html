@@ -1,9 +1,9 @@
 <div class="page shopping-cart-page">
   <section class="clean-block clean-cart dark">
     <div class="articulos col-lg-12">
-      <h1 *ngIf="articulos.length === 0">
-        El carrito esta vacío papi que haces acá
-      </h1>
+      <h3 *ngIf="articulos.length === 0">
+        El carrito está vacío
+      </h3>
       <div class="container" *ngFor="let articulo of articulos">
         <div class="row">
           <div class="product justify-content-center align-items-center d-flex">
@@ -196,42 +196,68 @@
           </div>
           <br />
           <h3>Total: {{ total }}</h3>
-          <br />
-          <div class="botonesEnvio" *ngIf="tipoEnvio === 'null'">
-            <button
-              type="button"
-              class="btn btn-primary btn-lg btn-block"
-              (click)="setEnvio('0')"
-            >
-              Envío a domicilio
-            </button>
-            <button
-              type="button"
-              class="btn btn-primary btn-lg btn-block"
-              (click)="setEnvio('1')"
-            >
-              Retiro en el local
-              <br />
-              <small>Descuento 10%</small>
-            </button>
+          <div class="form-check">
+            <input
+              class="form-check-input"
+              type="radio"
+              name="envio"
+              id="envio1"
+              value="envioOption2"
+              checked
+            />
+            <label class="form-check-label" for="exampleRadios1">
+              Delivery
+            </label>
           </div>
-          <div class="botonesEnvio" *ngIf="tipoEnvio != 'null'">
-            <button
-              type="button"
-              class="btn btn-primary btn-lg btn-block"
-              (click)="setEnvio('2')"
-            >
-              Pago en efectivo
-              <br />
-              <small>Descuento 10%</small>
-            </button>
-            <button
-              type="button"
-              class="btn btn-primary btn-lg btn-block"
-              (click)="setEnvio('1')"
-            >
-              Paypal
-            </button>
+          <div class="form-check">
+            <input
+              class="form-check-input"
+              type="radio"
+              name="envio"
+              id="envio2"
+              value="envioOption2"
+            />
+            <label class="form-check-label" for="exampleRadios2">
+              Retiro en local <small>10% de descuento</small>
+            </label>
+          </div>
+          <hr />
+          <div class="form-check">
+            <input
+              class="form-check-input"
+              type="radio"
+              name="pago"
+              id="pago1"
+              value="pagoOption1"
+              checked
+              (click)="setPago('0')"
+            />
+            <label class="form-check-label" for="exampleRadios1">
+              Efectivo
+            </label>
+          </div>
+          <div class="form-check">
+            <input
+              class="form-check-input"
+              type="radio"
+              name="pago"
+              id="pago2"
+              value="pagoOption2"
+              (click)="setPago('1')"
+            />
+            <label class="form-check-label" for="exampleRadios2">
+              Otro medio de pago
+            </label>
+          </div>
+          <hr />
+          <div class="metodoDePago" *ngIf="otroMedioDePago">
+            <label for="cars">Elegir método de pago</label>
+
+            <select name="pago" id="medioPago">
+              <option value="debito">Débito</option>
+              <option value="credito">Crédito</option>
+              <option value="paypal">Paypal</option>
+            </select>
           </div>
         </div>
         <div class="modal-footer">

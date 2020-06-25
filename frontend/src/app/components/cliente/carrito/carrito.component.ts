@@ -35,6 +35,7 @@ export class CarritoComponent implements OnInit {
 
   articulos: Array<Articulo> = [];
   total = 0;
+  otroMedioDePago = false;
 
   deleteArticulo(id) {
     let articulosStorage = localStorage.getItem('carrito');
@@ -90,30 +91,29 @@ export class CarritoComponent implements OnInit {
     });
   }
 
-  setEnvio(tipoEnvio) {
-    if (tipoEnvio === '1') {
-      this.tipoEnvio = '1';
-    }
-    if (tipoEnvio === '0') {
-      this.tipoEnvio = '0';
-    }
-  }
-
   async setPedido() {
     await this.loginService.isAuth().subscribe((data) => {
-      this.clienteService.getByUidFirebase(data.uid).subscribe((user) => {
-        this.pedido.clientePedido = user;
-        this.pedido.hora_estimada_fin = new Date();
-        this.pedido.fechaRealizacion = new Date();
-        if (this.tipoEnvio === '1') {
-          this.pedido.tipo_Envio = true;
-        } else {
-          this.pedido.tipo_Envio = false;
-        }
-      });
+      // this.clienteService.getByUidFirebase(data.uid).subscribe((user) => {
+      //   this.pedido.clientePedido = user;
+      //   this.pedido.hora_estimada_fin = new Date();
+      //   this.pedido.fechaRealizacion = new Date();
+      //   if (this.tipoEnvio === '1') {
+      //     this.pedido.tipo_Envio = true;
+      //   } else {
+      //     this.pedido.tipo_Envio = false;
+      //   }
+      // });
     });
     this.pedidoService.post(this.pedido).subscribe((posted) => {
       console.log('posted');
     });
+  }
+
+  setPago(pago) {
+    if (pago === '0') {
+      this.otroMedioDePago = false;
+    } else {
+      this.otroMedioDePago = true;
+    }
   }
 }
