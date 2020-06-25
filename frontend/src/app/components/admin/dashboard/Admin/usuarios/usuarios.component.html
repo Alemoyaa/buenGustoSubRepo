@@ -1,6 +1,6 @@
-<div class="container-fluid-sm " id="menu" id="fondo" style="color: white" >
+<div class="container " >
   <div class="row">
-    <div class="col-12 text-center">
+    <div class="col-12 text-center" >
       <h1 class="display-3">Administracion de Usuarios</h1>
       <form class="form-inline mt-4 ml-2 mb-4">
         <label style="font-size: 25px;" ><strong><i class="fas fa-search"> Buscar : </i></strong></label>
@@ -17,7 +17,7 @@
     
   </div>
 
-  <table class="table table-striped text-center"  style="color: white">
+  <table class="table table-striped text-center" >
     <thead>
       <tr>
         <th scope="col"></th>
@@ -30,7 +30,7 @@
         
       </tr>
     </thead>
-    <tbody style="font-size: 25px;">
+    <tbody >
       <tr *ngFor="let cliente of filtrar | paginate: {itemsPerPage: 6, currentPage: pageActual}">
         <th scope="row"><i class="fas fa-user"></i></th>
         <td>{{ cliente.usuario.email}}</td>
