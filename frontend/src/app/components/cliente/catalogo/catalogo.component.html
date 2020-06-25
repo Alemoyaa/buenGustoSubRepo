@@ -16,61 +16,16 @@
         </div>
 
         <div class="container platos col-lg-9">
-          <!-- <h3>Platos recomendados</h3>
-          <div class="recomendados justify-content-start d-flex">
-            <div class="card plato" style="width: 18rem;">
-              <img
-                class="card-img-top card-img-recomendado"
-                src="../../../../assets/assetsCatalogo/assets/img/hamburguesa/Burger-.jpg"
-                alt="Card image cap"
-              />
-              <div class="card-body">
-                <p class="card-text">
-                  Burger recomendada
-                </p>
-              </div>
-            </div>
-            <div class="card plato" style="width: 18rem;">
-              <img
-                class="card-img-top card-img-recomendado"
-                src="../../../../assets/assetsCatalogo/assets/img/hamburguesa/Burger-.jpg"
-                alt="Card image cap"
-              />
-              <div class="card-body">
-                <p class="card-text">
-                  Pizza recomendada
-                </p>
-              </div>
-            </div>
-            <div class="card plato" style="width: 18rem;">
-              <img
-                class="card-img-top card-img-recomendado"
-                src="../../../../assets/assetsCatalogo/assets/img/hamburguesa/Burger-.jpg"
-                alt="Card image cap"
-              />
-              <div class="card-body">
-                <p class="card-text">
-                  Lomo recomendado
-                </p>
-              </div>
-            </div>
-          </div> -->
-
-          <h3>Pizzas</h3>
-
           <div class="row articulo">
             <ng-container
               *ngFor="let articulo of articulos"
               class="articulo-container"
             >
               <div class="card-container col-lg-4">
-                <div
-                  class="card articulo"
-                  *ngIf="articulo.es_catalogo && articulo.categoria.id === 3"
-                >
+                <div class="card articulo" *ngIf="articulo.es_catalogo">
                   <img
                     class="card-img-top card-img-recomendado"
-                    src="../../../../assets/assetsCatalogo/assets/img/pizza/pizza3.jpg"
+                    src="{{ articulo.url_imagen }}"
                   />
                   <div class="card-body">
                     <h4 class="card-text">
@@ -79,7 +34,7 @@
                     <p>Categoria: {{ articulo.categoria.nombreCategoria }}</p>
                     <small>Tiempo estimado: 20m</small>
                     <br />
-                    <b>{{ articulo.precio_de_venta }}</b>
+                    <b>${{ articulo.precio_de_venta }}</b>
                     <div class="stars">
                       <i class="fas fa-star"></i>
                       <i class="fas fa-star"></i>
@@ -143,50 +98,4 @@
       </div>
     </div>
   </section>
-</div>
-
-<div class="modal-detalle">
-  <!-- Modal -->
-  <div
-    class="modal fade"
-    id="catalogoDetalleModal"
-    tabindex="-1"
-    role="dialog"
-    aria-labelledby="catalogoDetalleModal"
-    aria-hidden="true"
-  >
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="catalogoDetalleModal">Producto</h5>
-          <button
-            type="button"
-            class="close"
-            data-dismiss="modal"
-            aria-label="Close"
-          >
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <img
-            class="card-img-top card-img-recomendado"
-            src="../../../../assets/assetsCatalogo/assets/img/panchos/Hot_dog3.jpg"
-            alt="Card image cap"
-          />
-          <small>Tiempo estimado: 20m</small>
-          <br />
-          <b>$30</b>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">
-            Close
-          </button>
-          <button type="button" class="btn btn-primary">
-            <i class="fas fa-cart-plus"></i>Agregar al carrito
-          </button>
-        </div>
-      </div>
-    </div>
-  </div>
 </div>

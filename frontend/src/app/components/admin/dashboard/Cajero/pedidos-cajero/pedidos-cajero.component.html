@@ -1,31 +1,71 @@
-<div class="container mt-5">
-<h3>Estado de pedidos</h3>
-<table class="table table-striped">
+<div class="container mt-5 text-center" *ngIf="pedidos" >
+  <div class="col-12 text-center jumbotron" style="margin-bottom: 20px;">
+    <h1 class="display-4">Estado de Pedidos</h1>
+    <div class="buscador"> 
+      <i class="fas fa-cash-register" style="font-size:35px;"></i>
+      <p>Cajero</p>
+    </div> 
+  </div>
+
+  <div class="row mb-4 ml-2">
+   
+    <!-- Buscador -->
+    <div class="buscador">
+      <form>
+        <p style="font-size: 25px;"> Buscar : </p>
+
+        <input class="form-control mr-sm-2" type="search" placeholder="Nombre/Apellido" aria-label="Search"
+          [(ngModel)]="filtroBuscador" [ngModelOptions]="{ standalone: true }" />
+      </form>
+    </div>
+  </div>
+  
+
+<table class="table table-striped text-center" >
   <thead>
     <tr>
       <th scope="row">Orden</th>
-      <td>Cliente</td>
-      <td>Tiempo estimado</td>
-      <td>Tipo de envío</td>
-      <td>Fecha</td>
-      <td>Estado</td>
-    </tr>
+      <th scope="row">Cliente</th>
+      <th scope="row">Tiempo estimado</th>
+      <th scope="row">Tipo de envío</th>
+      <th scope="row">Fecha</th>
+      <th scope="row">Estado</th>
+
+      <th scope="row">Aceptar/Rechazar Pedido</th>
+    </tr> 
   </thead>
-  <tbody>
-    <tr>
+ 
+  
+  <tbody *ngIf="filtrar" >
+    <tr *ngFor="let pedido of filtrar | paginate: {itemsPerPage: 5, currentPage: pageActual}">
       <th scope="row">1</th>
-      <td>Cliente</td>
-      <td>Tiempo estimado</td>
-      <td>Tipo de envío</td>
-      <td>Fecha</td>
+      <td>{{pedido.clientePedido.nombre}}</td>
+      <td>{{pedido.hora_estimada_fin | date}}</td>
       <td>
-        <select name="estado">
-          <option value="enproceso">En proceso</option>
-          <option value="pendiente" selected>Pendiente</option>
-          <option value="listo">Listo</option>
-        </select>
+        <p *ngIf="pedido.tipo_Envio == false"> Retira en Local</p>
+        <p *ngIf="pedido.tipo_Envio == true"> Delivery</p>
+      </td> 
+      <td>{{pedido.fechaRealizacion | date}}</td>
+      <td>{{pedido.estadoPedido.nombreEstado}}</td>
+      <td>
+        <form [formGroup]="formularioEstado">
+          <select class="form-control" name="estado"  formControlName="id" (change)="seleccionarEstado($event.target.value, pedido)">
+            <option  value="2">Cancelar</option>
+            <option  value="3">Confirmar</option>
+          </select>
+        </form>
       </td>
     </tr>
   </tbody>
+ 
 </table>
+
+  <pagination-controls  (pageChange)="pageActual = $event" ></pagination-controls>
+
+ 
 </div>
+
+
+
+
+

@@ -12,14 +12,7 @@ export class CatalogoComponent implements OnInit {
   pageActual: number = 1; //paginador
   articulos: Array<Articulo> = [];
 
-  articulo: Articulo = {
-    id: null,
-    categoria: null,
-    denominacion: null,
-    es_catalogo: null,
-    precio_de_venta: null,
-    url_imagen: null,
-  };
+  articulo: Articulo;
 
   constructor(
     public articulosService: ArticuloServices,
@@ -28,12 +21,13 @@ export class CatalogoComponent implements OnInit {
 
   async ngOnInit() {
     await this.getArticulos();
-    console.log(this.articulos);
   }
 
-  getArticulos() {
-    this.articulosService.getAll().subscribe((data) => {
+  async getArticulos() {
+    await this.articulosService.getAll().subscribe((data) => {
+      console.log(data);
       this.articulos = data;
+      console.log(this.articulos);
     });
   }
 

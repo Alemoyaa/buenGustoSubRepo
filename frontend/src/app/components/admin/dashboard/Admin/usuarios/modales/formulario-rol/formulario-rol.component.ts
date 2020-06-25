@@ -149,13 +149,13 @@ export class FormularioRolComponent implements OnInit {
         this.alerts.mensajeError('No se ah podido actualizar el Rol del usuario', 'ah ocurrido un error y no se ah podido realizar la actualizacio, porfavor verifique que esten todos los datos correctos');
       }
     );
-  
+
 
   }
 
   //  selecciono el rol en el formulario, traigo el rol seleccionado y lo seteo a mi usuario
   seleccionarRol(id: number) {
-   
+
     // accedo al control usuario
     const control = <FormGroup>this.formularioPersona.controls['usuario'];
     // dentro de usuarios se encuentra rol
@@ -170,7 +170,7 @@ export class FormularioRolComponent implements OnInit {
           id: rol.id,
           nombreRol: rol.nombreRol
         });
-      
+
       });
     }
   }

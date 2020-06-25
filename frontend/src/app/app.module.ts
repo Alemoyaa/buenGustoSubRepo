@@ -32,8 +32,8 @@ import { NgxPaginationModule } from 'ngx-pagination';
 // componentes de empleados/admin
 import { PedidosCajeroComponent } from './components/admin/dashboard/Cajero/pedidos-cajero/pedidos-cajero.component';
 import { FacturacionCajeroComponent } from './components/admin/dashboard/Cajero/facturacion-cajero/facturacion-cajero.component';
-import { GestorOrdenesCocineroComponent } from './components/admin/dashboard/Cocinero/gestor-ordenes-cocinero/gestor-ordenes-cocinero.component';
-import { BajasStockCocineroComponent } from './components/admin/dashboard/Cocinero/bajas-stock-cocinero/bajas-stock-cocinero.component';
+
+
 import { StockComponent } from './components/admin/dashboard/Admin/stock/stock.component';
 import { EstadisticasComponent } from './components/admin/dashboard/Admin/estadisticas/estadisticas.component';
 import { FacturaDetalleComponent } from './components/cliente/factura-detalle/factura-detalle.component';
@@ -48,7 +48,10 @@ import { MenuPlatosComponent } from './components/admin/dashboard/Admin/crud-pla
 import { UnidadMedidaPlatosComponent } from './components/admin/dashboard/Admin/crud-platos/unidad-medida-platos/unidad-medida-platos.component';
 import { CategoriaPlatosComponent } from './components/admin/dashboard/Admin/crud-platos/categoria-platos/categoria-platos.component';
 import { ArtManufacturadoPlatosComponent } from './components/admin/dashboard/Admin/crud-platos/art-manufacturado-platos/art-manufacturado-platos.component';
-
+//cocinero
+import { ModificacionPlatoCocineroComponent } from './components/admin/dashboard/Cocinero/modificacion-plato-cocinero/modificacion-plato-cocinero.component';
+import { GestorOrdenesCocineroComponent } from './components/admin/dashboard/Cocinero/gestor-ordenes-cocinero/gestor-ordenes-cocinero.component';
+import { ModalFacturaComponent } from './components/admin/dashboard/Cajero/facturacion-cajero/modal-factura/modal-factura.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -70,7 +73,6 @@ import { ArtManufacturadoPlatosComponent } from './components/admin/dashboard/Ad
     PedidosCajeroComponent,
     FacturacionCajeroComponent,
     GestorOrdenesCocineroComponent,
-    BajasStockCocineroComponent,
     FacturaDetalleComponent,
     PedidosDetalleComponent,
     ArtStockMinimoComponent,
@@ -82,6 +84,8 @@ import { ArtManufacturadoPlatosComponent } from './components/admin/dashboard/Ad
     UnidadMedidaPlatosComponent,
     CategoriaPlatosComponent,
     ArtManufacturadoPlatosComponent,
+    ModificacionPlatoCocineroComponent,
+    ModalFacturaComponent,
   ],
   imports: [
     BrowserModule,

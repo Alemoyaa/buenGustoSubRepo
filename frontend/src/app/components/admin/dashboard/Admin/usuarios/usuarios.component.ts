@@ -20,7 +20,7 @@ import { Domicilio } from 'src/app/entidades/Domicilio';
   styleUrls: ['./usuarios.component.css'],
 })
 export class UsuariosComponent implements OnInit {
- 
+
   usuarios: Cliente[] = new Array<Cliente>();
 
   pageActual: number = 1;
@@ -29,21 +29,23 @@ export class UsuariosComponent implements OnInit {
   cliente: Cliente = new Cliente();
   filtroBuscador: any = '';
   constructor(
-   
+
     private clienteService: ClienteService,
-  
+
     private alerts: AlertsService
   ) { }
 
   ngOnInit(): void {
     this.traerDatos();
-   
 
-    this.alerts.mensajeSuccess('Bienvenido a la seccion Usuario', 'Aqui usted podra asignar el rol a cada usuario registrado en la pagina');
+
+    // this.alerts.mensajeSuccess('Bienvenido a la seccion Usuario', 'Aqui usted podra asignar el rol a cada usuario registrado en la pagina');
   }
 
   get filtrar(): Cliente[] {
+
     var matcher = new RegExp(this.filtroBuscador, 'i');
+
     return this.usuarios.filter(function (cliente) {
       return matcher.test([cliente.nombre, cliente.apellido, cliente.usuario.rol.nombreRol].join());
     });
@@ -61,8 +63,8 @@ export class UsuariosComponent implements OnInit {
     });
   }
 
- 
-  mostrarDomicilio(cliente:Cliente){
+
+  mostrarDomicilio(cliente: Cliente) {
     this.domicilio = cliente.domicilio;
     console.log(this.domicilio);
   }
@@ -70,14 +72,14 @@ export class UsuariosComponent implements OnInit {
   // pre cargo los datos en el formulario de el usuario seleccionnado para editar el rol
   preCargarDatosFormulario(cliente: Cliente) {
     this.cliente = cliente;
-   console.log(this.cliente);
+    console.log(this.cliente);
   }
 
 
 
   // post a la base de datos con el cliente y su rol
   // actualizarRol() {
-    // this.clienteService.put(this.idCliente, this.formularioPersona.value);
+  // this.clienteService.put(this.idCliente, this.formularioPersona.value);
   //   console.log('id cliente actualziarRol() ', this.idUsuario);
   //   console.log(
   //     'formulario value actualziarRol() ',
