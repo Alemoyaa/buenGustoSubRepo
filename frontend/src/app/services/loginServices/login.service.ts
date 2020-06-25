@@ -109,14 +109,15 @@ export class LoginService {
     if (this.checkEmailExists(email)) {
       this.route.navigate(['login']);
     } else {
-      console.log("Else de register");
+      console.log('Else de register');
       return new Promise((resolve, reject) => {
         this.afsAuth
           .createUserWithEmailAndPassword(email, password)
           .then((data) =>
             data.user.sendEmailVerification()
               .then(async () => {
-                console.log(".then sendEmailVerification");
+                console.log(resolve, reject);
+                console.log('.then sendEmailVerification');
                 await this.setearClienteConIsAuth();
                 alert(
                   'Se envió un mail de verificación a tu dirección de correo'
@@ -126,11 +127,11 @@ export class LoginService {
                 await this.afsAuth.signOut();
               })
               .catch((error) => {
-                console.log("Error de promesa");
+                console.log('Error de promesa');
                 console.error(error);
               })
               .finally(() => {
-                //this.route.navigate(['login']);
+                this.route.navigate(['login']);
               })
           );
       });
@@ -140,7 +141,7 @@ export class LoginService {
   async setearClienteConIsAuth() {
     await this.isAuth().subscribe((data) => {
       // this.clientePost.nombre = data.displayName;
-      this.clientePost.usuario.email = data.email as string ;
+      this.clientePost.usuario.email = data.email as string;
       this.clientePost.usuario.uid_firebase = data.uid;
       this.clientePost.usuario.rol.id = 5;
       // this.clientePost.usuario.rol.nombreRol = 'Cliente';
@@ -152,17 +153,17 @@ export class LoginService {
     });
   }
 
-  postCliente(){
+  postCliente() {
     this.cServicio.post(this.clientePost).subscribe((post) => {
       console.log('Cliente posteado', post);
     }, error => {
-      console.log('Err ->', error.message);
+      console.log('Error -->', error.message);
     });
   }
 
   // Para saber si esta logueado
   isAuth() {
-    return this.afsAuth.authState.pipe(map((auth) => auth ));
+    return this.afsAuth.authState.pipe(map((auth) => auth));
   }
 
   recuperarPassword(email: string) {
