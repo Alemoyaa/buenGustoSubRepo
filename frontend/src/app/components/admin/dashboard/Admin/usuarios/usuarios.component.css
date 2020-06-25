@@ -1,0 +1,36 @@
+#body {
+    font-family: -apple-system, BlinkMacSystemFont, Raleway, "Segoe UI", Roboto,
+      "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
+      "Segoe UI Symbol";
+  }
+  
+  @media (max-width: 1300px) {
+    #body {
+      padding: 20px;
+    }
+  }
+  
+  
+  @media (max-width: 1200px) {
+    #body  {
+      width: 800px;
+      padding: 20px;
+    }
+  }
+  
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  p {
+    font-family: -apple-system, BlinkMacSystemFont, Raleway, "Segoe UI", Roboto,
+      "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
+      "Segoe UI Symbol";
+  }
+  
+  .buscador{float: right;}
+  
+  
+  
