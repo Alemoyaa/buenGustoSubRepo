@@ -55,7 +55,7 @@ export class FacturacionCajeroComponent implements OnInit {
       }
 
     );
-
+ 
   }
 
   mostrarFactura(factura){
