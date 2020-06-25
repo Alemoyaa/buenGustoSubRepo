@@ -114,7 +114,6 @@ export class LoginService {
           .then((data) =>
             data.user
               .sendEmailVerification()
-              .then(this.postUser)
               .then(function () {
                 alert(
                   'Se envió un mail de verificación a tu dirección de correo'
@@ -122,6 +121,7 @@ export class LoginService {
               })
               .then(() => {
                 this.afsAuth.signOut();
+                this.postUser();
               })
               .catch(function (error) {
                 console.log(error);

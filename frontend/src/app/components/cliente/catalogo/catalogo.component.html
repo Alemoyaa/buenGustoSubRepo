@@ -16,58 +16,13 @@
         </div>
 
         <div class="container platos col-lg-9">
-          <!-- <h3>Platos recomendados</h3>
-          <div class="recomendados justify-content-start d-flex">
-            <div class="card plato" style="width: 18rem;">
-              <img
-                class="card-img-top card-img-recomendado"
-                src="../../../../assets/assetsCatalogo/assets/img/hamburguesa/Burger-.jpg"
-                alt="Card image cap"
-              />
-              <div class="card-body">
-                <p class="card-text">
-                  Burger recomendada
-                </p>
-              </div>
-            </div>
-            <div class="card plato" style="width: 18rem;">
-              <img
-                class="card-img-top card-img-recomendado"
-                src="../../../../assets/assetsCatalogo/assets/img/hamburguesa/Burger-.jpg"
-                alt="Card image cap"
-              />
-              <div class="card-body">
-                <p class="card-text">
-                  Pizza recomendada
-                </p>
-              </div>
-            </div>
-            <div class="card plato" style="width: 18rem;">
-              <img
-                class="card-img-top card-img-recomendado"
-                src="../../../../assets/assetsCatalogo/assets/img/hamburguesa/Burger-.jpg"
-                alt="Card image cap"
-              />
-              <div class="card-body">
-                <p class="card-text">
-                  Lomo recomendado
-                </p>
-              </div>
-            </div>
-          </div> -->
-
-          <h3>Pizzas</h3>
-
           <div class="row articulo">
             <ng-container
               *ngFor="let articulo of articulos"
               class="articulo-container"
             >
               <div class="card-container col-lg-4">
-                <div
-                  class="card articulo"
-                  *ngIf="articulo.es_catalogo && articulo.categoria.id === 3"
-                >
+                <div class="card articulo" *ngIf="articulo.es_catalogo">
                   <img
                     class="card-img-top card-img-recomendado"
                     src="../../../../assets/assetsCatalogo/assets/img/pizza/pizza3.jpg"
@@ -79,7 +34,7 @@
                     <p>Categoria: {{ articulo.categoria.nombreCategoria }}</p>
                     <small>Tiempo estimado: 20m</small>
                     <br />
-                    <b>{{ articulo.precio_de_venta }}</b>
+                    <b>${{ articulo.precio_de_venta }}</b>
                     <div class="stars">
                       <i class="fas fa-star"></i>
                       <i class="fas fa-star"></i>
