@@ -1,11 +1,32 @@
 <div class="container mt-5">
-<h3>Pedidos a facturar</h3>
+
+  <div class="col-12 text-center jumbotron" style="margin-bottom: 20px;">
+    <h1 class="display-4">Pedidos a facturar</h1>
+    <div class="buscador"> 
+      <i class="fas fa-cash-register" style="font-size:35px;"></i>
+      <p>Cajero</p>
+    </div> 
+  </div>
+
+  <div class="row mb-4 ml-2">
+   
+    <!-- Buscador -->
+    <div class="buscador">
+      <form>
+        <p style="font-size: 25px;"> Buscar : </p>
+        <!-- [(ngModel)]="filtroBuscador"  [ngModelOptions]="{ standalone: true }"  -->
+        <input class="form-control mr-sm-2" type="search" placeholder="Nombre/Apellido" aria-label="Search"
+          />
+      </form>
+    </div>
+  </div>
+
 <table class="table table-striped">
   <thead>
     <tr>
       <th scope="row">Orden</th>
       <td>Cliente</td>
-      <td>Fecha</td>
+      <td>Fecha</td> 
       <td>Estado</td>
       <td>Factura</td>
     </tr>

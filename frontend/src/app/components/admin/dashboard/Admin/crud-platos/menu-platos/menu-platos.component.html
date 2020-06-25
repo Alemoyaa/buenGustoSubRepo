@@ -1,4 +1,14 @@
-<div class="container">
+<div class="container" >
+
+  <div class="col-12 text-center jumbotron" style="margin-bottom: 20px;">
+    <h1 class="display-4">Administracion de Platos</h1>
+    <div class="buscador">
+      <i class="fa fa-user " style="font-size:35px;"></i>
+      <p>Admin</p> 
+    </div>
+  </div>
+
+
   <select
     class="custom-select custom-select-lg mt-3"
     [(ngModel)]="valorSelected"
@@ -19,8 +29,8 @@
     <div *ngSwitchCase="3">
       <app-unidad-medida-platos></app-unidad-medida-platos>
     </div>
-    <div *ngSwitchDefault>
-      <h1 class="display-4 mt-5 mb-5">Elija un componente en el menu superior</h1>
+    <div *ngSwitchDefault class="col-12 text-center jumbotron" style="margin-top: 20px; margin-bottom: 20px;">
+      <h2 class="display-4 mt-5 mb-5">Elija un componente en el menu superior</h2>
       <br/>
       <br/>
     </div>
