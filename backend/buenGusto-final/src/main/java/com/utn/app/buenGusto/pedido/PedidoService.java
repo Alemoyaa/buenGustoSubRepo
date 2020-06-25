@@ -7,6 +7,7 @@ import java.util.Optional;
 import org.springframework.stereotype.Service;
 
 import com.utn.app.buenGusto.common.CommonService;
+import com.utn.app.buenGusto.estadoPedido.EstadoPedidoEntity;
 
 @Service
 public class PedidoService extends CommonService<PedidoEntity, PedidoRepository> {
@@ -50,6 +51,30 @@ public class PedidoService extends CommonService<PedidoEntity, PedidoRepository>
 
 			throw new Exception(e.getMessage());
 		}
+	}
+	
+	public PedidoEntity editarEstadoPedido(long id, EstadoPedidoEntity estado) throws Exception { 
+		
+			try {
+					
+				Optional<PedidoEntity> varOptional = repository.findById(id);
+				
+					
+				if(varOptional.isPresent()) {
+
+					PedidoEntity entityNew = varOptional.get(); 
+					
+					entityNew.setEstadoPedido(estado);
+					
+					entityNew = repository.save(entityNew);
+						
+					return entityNew; 
+				} 
+				throw new Exception("No existe pedido");
+			} catch (Exception e) {
+				throw new Exception(e.getMessage());
+			} 
+			
 	}
 
 }
