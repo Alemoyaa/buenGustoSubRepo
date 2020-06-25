@@ -1,11 +1,11 @@
-import { EstadoPedidoServices } from './../../../../../services/serviciosCliente/estadoPedidoSerivces/estadoPedido.service';
 import { Component, OnInit } from '@angular/core';
 import { Pedido } from 'src/app/entidades/Pedido';
 import { PedidoServices } from '../../../../../services/serviciosCliente/pedidoServices/pedido.service';
-import { filter } from 'rxjs/operators';
+
 import { AlertsService } from 'src/app/services/alertServices/alerts.service';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import Swal from 'sweetalert2';
+import { EstadoPedidoServices } from 'src/app/services/serviciosCliente/estadoPedidoServices/estadoPedido.service';
 
 
 @Component({
