@@ -1,3 +1,4 @@
+import { Usuario } from './../../../entidades/Usuario';
 import { UsuarioServices } from './../../../services/serviciosCliente/usuarioServices/usuario.services';
 import { ClienteService } from './../../../services/serviciosCliente/clienteServices/cliente.service';
 import { LoginService } from './../../../services/loginServices/login.service';
@@ -39,7 +40,7 @@ export class UserProfileComponent implements OnInit {
   };
 
   constructor(
-    private service: ClienteService,
+    private service: UsuarioServices,
     private rutaActiva: ActivatedRoute,
     private serviceLogin: LoginService
   ) {
@@ -59,7 +60,7 @@ export class UserProfileComponent implements OnInit {
 
   async getOneByUid(uid: string) {
     await this.service.getByUidFirebase(uid).subscribe((data) => {
-      this.cliente = data;
+      this.cliente.usuario = data;
       console.log(this.cliente);
     });
   }

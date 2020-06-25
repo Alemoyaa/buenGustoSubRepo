@@ -13,4 +13,11 @@ export class UsuarioServices extends CommonService<Usuario> {
   constructor(http: HttpClient) {
     super(http);
   }
+  getByEmail(email: string): Observable<Usuario> {
+    return this.http.get<Usuario>(this._url + 'email/' + email);
+  }
+
+  getByUidFirebase(uid: string): Observable<Usuario> {
+    return this.http.get<Usuario>(this._url + 'firebase/' + uid);
+  }
 }
