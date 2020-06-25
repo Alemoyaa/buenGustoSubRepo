@@ -15,7 +15,7 @@
         <th>Retraso Pedido</th>
         <th>Detalle</th>
         <th>Estado</th>
-        <th>Color</th>
+
       </tr>
     </thead>
     <tbody>
@@ -25,7 +25,7 @@
         <td>{{pedido.fechaRealizacion}}</td>
         <td>{{pedido.hora_estimada_fin |date:'mediumTime'}}</td>
         <td>
-          <button class="btn btn-danger" >
+          <button class="btn btn-danger">
             +10'
           </button>
         </td>
@@ -37,22 +37,13 @@
         </td>
         <td>
           <form [formGroup]="formularioEstado">
-            <select class="form-control" name="estado"  formControlName="id" (change)="seleccionarEstado($event.target.value, pedido)">
-              <option *ngFor="let estado of estados" [value]="estado.id">
-                {{estado.nombreEstado}}
-              </option>
+            <select class="form-control" name="estado" formControlName="id"
+              (change)="seleccionarEstado($event.target.value, pedido)">
+              <option class="preparando" value="4">Preparando</option>
+              <option class="listo" value="7">Listo</option>
             </select>
           </form>
         </td>
-        <!-- <td>
-          <select class="custom-select" name="estado">
-            <option *ngFor="let estado of estados" [value]="estado.id">
-              {{estado.nombreEstado}}
-            </option>
-          </select>
-
-        </td> -->
-        <td>COLOR AZUL</td>
       </tr>
     </tbody>
   </table>
