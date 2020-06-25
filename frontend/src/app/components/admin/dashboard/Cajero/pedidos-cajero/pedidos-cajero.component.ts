@@ -53,23 +53,15 @@ export class PedidosCajeroComponent implements OnInit {
 
 
   getPedidosPendientes() {
-
     this.pedidoService.getAll().subscribe(
-
       data => {
         data.filter((pedido) => {
-
           if (pedido.estadoPedido.nombreEstado === 'Pendiente') {
-
-          return this.pedidos.push(pedido);
+            return this.pedidos.push(pedido);
           }
         });
-
-
       }
-
     );
-
   }
 
   crearFormulario() {
@@ -97,7 +89,6 @@ export class PedidosCajeroComponent implements OnInit {
       }).then((result) => {
         if (result.value) {
 
-
           console.log(estado);
           this.formularioEstado.setValue({
             id: estado.id,
@@ -108,7 +99,7 @@ export class PedidosCajeroComponent implements OnInit {
           this.pedidoSeleccionado.estadoPedido.id = this.formularioEstado.value.id;
           this.pedidoSeleccionado.estadoPedido.nombreEstado = this.formularioEstado.value.nombreEstado;
 
-          // this.pedidoService.put(this.pedidoSeleccionado.id, this.pedidoSeleccionado).subscribe();
+          this.pedidoService.editarEstadoPedido(this.pedidoSeleccionado.id, this.pedidoSeleccionado.estadoPedido).subscribe();
           console.log(this.pedidoSeleccionado);
 
           Swal.fire(
@@ -122,15 +113,6 @@ export class PedidosCajeroComponent implements OnInit {
           this.formularioEstado.reset();
         }
       });
-
-
-
-
     });
-
-
-
   }
-
-
 }

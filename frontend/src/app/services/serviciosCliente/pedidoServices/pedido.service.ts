@@ -22,7 +22,7 @@ export class PedidoServices extends CommonService<Pedido> {
       .pipe(catchError(this.handleError));
   }
 
-  getEstadoPedido(id: number, estado: EstadoPedido): Observable<Pedido> {
+  editarEstadoPedido(id: number, estado: EstadoPedido): Observable<Pedido> {
     return this.http
       .put<Pedido>(this._url + 'cambiar_estado/' + id, estado)
       .pipe(catchError(this.handleError));
