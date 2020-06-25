@@ -1,11 +1,11 @@
-import { ClienteService } from './../serviciosCliente/clienteServices/cliente.service';
-import { Router } from '@angular/router';
-import { AngularFireAuth } from '@angular/fire/auth';
-import { Usuario } from '../../entidades/Usuario';
-import { Injectable } from '@angular/core';
-import { map } from 'rxjs/operators';
-import { auth } from 'firebase/app';
-import { Cliente } from '../../entidades/Cliente';
+import {ClienteService} from './../serviciosCliente/clienteServices/cliente.service';
+import {Router} from '@angular/router';
+import {AngularFireAuth} from '@angular/fire/auth';
+import {Usuario} from '../../entidades/Usuario';
+import {Injectable} from '@angular/core';
+import {map} from 'rxjs/operators';
+import {auth} from 'firebase/app';
+import {Cliente} from '../../entidades/Cliente';
 
 @Injectable({
   providedIn: 'root',
@@ -36,7 +36,8 @@ export class LoginService {
     private afsAuth: AngularFireAuth,
     private route: Router,
     private cServicio: ClienteService
-  ) {}
+  ) {
+  }
 
   //me traigo los datos que me da google
   datosGoogle(usuario: Usuario) {
@@ -94,8 +95,8 @@ export class LoginService {
     }
   }
 
-  checkEmailExists(email): any {
-    this.cServicio.getByEmail(email).subscribe((data) => {
+  async checkEmailExists(email) {
+    await this.cServicio.getByEmail(email).subscribe((data) => {
       if (data) {
         return true;
       } else {
@@ -104,7 +105,7 @@ export class LoginService {
     });
   }
 
-  register(email: string, password: string) {
+ register(email: string, password: string) {
     if (this.checkEmailExists(email)) {
       this.route.navigate(['login']);
     } else {
@@ -140,23 +141,25 @@ export class LoginService {
   async setearClienteConIsAuth() {
     await this.isAuth().subscribe(
       (data) => {
-        // this.clientePost.nombre = data.displayName;
-        this.clientePost.usuario.email = data.email as string;
-        this.clientePost.usuario.uid_firebase = data.uid;
-        this.clientePost.usuario.rol.id = 5;
-        // this.clientePost.usuario.rol.nombreRol = 'Cliente';
+        this.postCliente(data);
       },
       (error) => {
         console.log('Error en postUser', error);
       },
       async () => {
         console.log('Cliente complete' + this.clientePost);
-        await this.postCliente();
       }
     );
   }
 
-  postCliente() {
+  postCliente(data) {
+    if (!data){
+      throw new Error('Error post: No data');
+    }
+    this.clientePost.usuario.email = data.email;
+    this.clientePost.usuario.uid_firebase = data.uid;
+    this.clientePost.usuario.rol.id = 5;
+
     this.cServicio.post(this.clientePost).subscribe(
       (post) => {
         console.log('Cliente posteado', post);

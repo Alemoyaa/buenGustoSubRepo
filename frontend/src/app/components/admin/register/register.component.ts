@@ -40,6 +40,7 @@ export class RegisterComponent implements OnInit {
           this.formularioRegister.value.password
         )
         .then((data) => {
+          console.log("data",data)
           this.mostrarCargar = false;
         })
         .catch((error) => {
