@@ -1,3 +1,4 @@
+import  Swal  from 'sweetalert2';
 import { EstadoPedido } from './../../../../../entidades/EstadoPedido';
 import { EstadoPedidoServices } from './../../../../../services/serviciosCliente/estadoPedidoServices/estadoPedido.service';
 import { PedidoServices } from './../../../../../services/serviciosCliente/pedidoServices/pedido.service';
@@ -45,10 +46,17 @@ export class GestorOrdenesCocineroComponent implements OnInit {
   }
 
   getAllPedidos() {
+    this.esperarAlert();
     this.pedidoService.getAll().subscribe(
       (res) => {
         this.pedidos = res;
         console.log(this.pedidos);
+        Swal.fire({
+                icon: 'success',
+                title: 'Datos cargados',
+                showConfirmButton: false,
+                timer: 1200,
+              });
       },
       (error) => {
         console.warn("error =>  ", error);
@@ -56,16 +64,9 @@ export class GestorOrdenesCocineroComponent implements OnInit {
     );
   }
 
-  async getOnePedido(id: number) {
-    await this.pedidoService.getOne(id).subscribe(
-      (res) => {
-        this.pedidoOne = res;
-        console.log(this.pedidoOne);
-      },
-      (error) => {
-        console.warn("error =>  ", error);
-      }
-    );
+  async getOnePedido(pedido) {
+    this.pedidoOne = pedido;
+    console.log(this.pedidoOne)
   }
 
 
@@ -74,7 +75,7 @@ export class GestorOrdenesCocineroComponent implements OnInit {
     this.estadoService.getAll().subscribe(
       (res) => {
         this.estados = res;
-        console.log(this.estados);
+        // console.log(this.estados);
       },
       (error) => {
         console.warn("error =>  ", error);
@@ -103,6 +104,19 @@ export class GestorOrdenesCocineroComponent implements OnInit {
     }
     // console.log(this.formStock.value)
 
+  }
+
+  esperarAlert() {
+    Swal.fire({
+      title: 'Por favor espere',
+      html: 'Recuperando los datos...',
+      // timer: 1500,
+      onBeforeOpen: () => {
+        Swal.showLoading();
+      },
+    }).then((result) => {
+      console.log(result);
+    });
   }
 
 

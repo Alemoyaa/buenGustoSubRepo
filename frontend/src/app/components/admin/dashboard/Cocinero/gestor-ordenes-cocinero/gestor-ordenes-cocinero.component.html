@@ -25,7 +25,7 @@
         <td>{{pedido.hora_estimada_fin |date:'mediumTime'}}</td>
         <td>
           <button class="btn btn-warning" data-toggle="modal" data-target="#verDetalle"
-            (click)="getOnePedido(pedido.id)">
+            (click)="getOnePedido(pedido)">
             <strong>Ver detalle</strong>
           </button>
         </td>
@@ -49,7 +49,7 @@
 
 <!-- Modal Ver detalle Pedido -->
 
-<div class="modal" id="verDetalle" data-backdrop="static" tabindex="-1" role="dialog">
+<div class="modal" id="verDetalle" data-backdrop="static" tabindex="-1" role="dialog" *ngIf="pedidoOne">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -75,14 +75,14 @@
               <hr>
             </div>
 
-            <div class="recorrer pedido">
+            <div class="recorrer pedido" *ngFor="let detalle of pedidoOne.lista_detallePedido">
 
               <div class="col-6 text-center">
-                <h5 class="modal-title text-center">{{pedido.lista_detallePedido}}</h5>
+                <h5 class="modal-title text-center">{{detalle.cantidad }}</h5>
                 <hr>
               </div>
-              <div class="col-6 text-center">
-                <h5 class="modal-title text-center">{{pedido.lista_detallePedido}} </h5>
+              <div class="col-6 text-center" >
+                <h5 class="modal-title text-center">{{detalle.articulo.denominacion}} </h5>
                 <hr>
               </div>
 
