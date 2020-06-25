@@ -23,13 +23,13 @@ public class ClienteEntity extends CommonEntity implements Serializable {
 	private String apellido;
 	private long telefono;
 
-	@OneToOne(cascade = CascadeType.ALL, optional = true)
+	@OneToOne(cascade = CascadeType.REMOVE, optional = true)
 	@JoinColumn(name = "usuario_id")
 	private UsuarioEntity usuario;
 
-	@OneToOne(cascade = CascadeType.ALL, optional = false)
-	@JoinColumn(name = "domicilio_id", nullable = false)
-	private DomicilioEntity domicilio = new DomicilioEntity();
+	@OneToOne(cascade = CascadeType.ALL, optional = true)
+	@JoinColumn(name = "domicilio_id", nullable = true)
+	private DomicilioEntity domicilio;
 
 	public String getNombre() {
 		return nombre;

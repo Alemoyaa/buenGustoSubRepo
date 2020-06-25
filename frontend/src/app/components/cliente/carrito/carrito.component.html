@@ -76,11 +76,18 @@
         </div>
       </div>
       <div class="center justify-content-center d-flex">
+        <a href="/catalogo">
+          <button type="button" class="btn btn-primary mr-3">
+            Seguir comprando
+          </button>
+        </a>
+
         <button
           *ngIf="!(articulos.length === 0)"
           type="button"
           class="btn btn-success"
           data-toggle="modal"
+          data-target="#paymentModal"
         >
           Pagar
         </button>
@@ -99,7 +106,7 @@
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="paymentModal">Paypal</h5>
+          <h5 class="modal-title" id="paymentModal">Confirmación</h5>
           <button
             type="button"
             class="close"
@@ -110,7 +117,122 @@
           </button>
         </div>
         <div class="modal-body">
-          ...
+          <div class="container" *ngFor="let articulo of articulos">
+            <div class="row">
+              <div
+                class="product justify-content-center align-items-center d-flex"
+              >
+                <div class="product-image">
+                  <img
+                    width="100px"
+                    class="img-fluid d-block mx-auto image"
+                    src="{{ articulo.url_imagen }}"
+                  />
+                </div>
+                <div class="product-info">
+                  <h5 class="product-name" href="#">
+                    {{ articulo.denominacion }}
+                  </h5>
+                  <div class="product-specs">
+                    <div>
+                      <span>$&nbsp;</span
+                      ><span class="value">
+                        {{ articulo.precio_de_venta }}
+                      </span>
+                    </div>
+                  </div>
+                  <div class="">
+                    <button
+                      type="button"
+                      class="btn btn-success"
+                      data-toggle="modal"
+                      (click)="
+                        addArticulo(
+                          articulo.id,
+                          articulo.denominacion,
+                          articulo.url_imagen,
+                          articulo.precio_de_venta
+                        )
+                      "
+                    >
+                      <svg
+                        class="bi bi-plus-circle-fill"
+                        width="1em"
+                        height="1em"
+                        viewBox="0 0 16 16"
+                        fill="currentColor"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          fill-rule="evenodd"
+                          d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4a.5.5 0 0 0-1 0v3.5H4a.5.5 0 0 0 0 1h3.5V12a.5.5 0 0 0 1 0V8.5H12a.5.5 0 0 0 0-1H8.5V4z"
+                        />
+                      </svg>
+                    </button>
+                    <button
+                      type="button"
+                      class="btn btn-danger"
+                      data-toggle="modal"
+                      (click)="deleteArticulo(articulo.id)"
+                    >
+                      <svg
+                        class="bi bi-dash-circle-fill"
+                        width="1em"
+                        height="1em"
+                        viewBox="0 0 16 16"
+                        fill="currentColor"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          fill-rule="evenodd"
+                          d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM4 7.5a.5.5 0 0 0 0 1h8a.5.5 0 0 0 0-1H4z"
+                        />
+                      </svg>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <br />
+          <h3>Total: {{ total }}</h3>
+          <br />
+          <div class="botonesEnvio" *ngIf="tipoEnvio === 'null'">
+            <button
+              type="button"
+              class="btn btn-primary btn-lg btn-block"
+              (click)="setEnvio('0')"
+            >
+              Envío a domicilio
+            </button>
+            <button
+              type="button"
+              class="btn btn-primary btn-lg btn-block"
+              (click)="setEnvio('1')"
+            >
+              Retiro en el local
+              <br />
+              <small>Descuento 10%</small>
+            </button>
+          </div>
+          <div class="botonesEnvio" *ngIf="tipoEnvio != 'null'">
+            <button
+              type="button"
+              class="btn btn-primary btn-lg btn-block"
+              (click)="setEnvio('2')"
+            >
+              Pago en efectivo
+              <br />
+              <small>Descuento 10%</small>
+            </button>
+            <button
+              type="button"
+              class="btn btn-primary btn-lg btn-block"
+              (click)="setEnvio('1')"
+            >
+              Paypal
+            </button>
+          </div>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">

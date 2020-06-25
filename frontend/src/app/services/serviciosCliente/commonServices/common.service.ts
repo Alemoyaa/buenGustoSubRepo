@@ -25,9 +25,11 @@ export class CommonService<Entity> {
   }
 
   post(entidad: Entity): Observable<Entity> {
+    console.log("--------------",entidad);
     return this.http
       .post<Entity>(this._url, entidad)
       .pipe(catchError(this.handleError));
+
   }
 
   put(id: number, entidad: Entity): Observable<Entity> {

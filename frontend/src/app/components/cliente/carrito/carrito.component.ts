@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Articulo } from 'src/app/entidades/Articulo';
+import { Pedido } from 'src/app/entidades/Pedido';
+import { LoginService } from 'src/app/services/loginServices/login.service';
+import { ClienteService } from 'src/app/services/serviciosCliente/clienteServices/cliente.service';
+import { PedidoServices } from 'src/app/services/serviciosCliente/pedidoServices/pedido.service';
 
 @Component({
   selector: 'app-carrito',
@@ -7,13 +11,30 @@ import { Articulo } from 'src/app/entidades/Articulo';
   styleUrls: ['./carrito.component.css'],
 })
 export class CarritoComponent implements OnInit {
-  constructor() {}
+  constructor(
+    private loginService: LoginService,
+    private clienteService: ClienteService,
+    private pedidoService: PedidoServices
+  ) {}
+
+  tipoEnvio = 'null';
+  pedido: Pedido = {
+    clientePedido: null,
+    estadoPedido: null,
+    fechaRealizacion: null,
+    numero: null,
+    hora_estimada_fin: null,
+    id: null,
+    lista_detallePedido: null,
+    tipo_Envio: null,
+  };
 
   ngOnInit() {
     this.getArticulos();
   }
 
   articulos: Array<Articulo> = [];
+  total = 0;
 
   deleteArticulo(id) {
     let articulosStorage = localStorage.getItem('carrito');
@@ -59,5 +80,40 @@ export class CarritoComponent implements OnInit {
       this.articulos.push(element);
     });
     console.log('e', this.articulos);
+    this.getTotal();
+  }
+
+  getTotal() {
+    this.total = 0;
+    this.articulos.forEach((element) => {
+      this.total += element.precio_de_venta;
+    });
+  }
+
+  setEnvio(tipoEnvio) {
+    if (tipoEnvio === '1') {
+      this.tipoEnvio = '1';
+    }
+    if (tipoEnvio === '0') {
+      this.tipoEnvio = '0';
+    }
+  }
+
+  async setPedido() {
+    await this.loginService.isAuth().subscribe((data) => {
+      this.clienteService.getByUidFirebase(data.uid).subscribe((user) => {
+        this.pedido.clientePedido = user;
+        this.pedido.hora_estimada_fin = new Date();
+        this.pedido.fechaRealizacion = new Date();
+        if (this.tipoEnvio === '1') {
+          this.pedido.tipo_Envio = true;
+        } else {
+          this.pedido.tipo_Envio = false;
+        }
+      });
+    });
+    this.pedidoService.post(this.pedido).subscribe((posted) => {
+      console.log('posted');
+    });
   }
 }

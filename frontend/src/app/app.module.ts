@@ -51,6 +51,7 @@ import { ArtManufacturadoPlatosComponent } from './components/admin/dashboard/Ad
 //cocinero
 import { ModificacionPlatoCocineroComponent } from './components/admin/dashboard/Cocinero/modificacion-plato-cocinero/modificacion-plato-cocinero.component';
 import { GestorOrdenesCocineroComponent } from './components/admin/dashboard/Cocinero/gestor-ordenes-cocinero/gestor-ordenes-cocinero.component';
+import { ModalFacturaComponent } from './components/admin/dashboard/Cajero/facturacion-cajero/modal-factura/modal-factura.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -84,6 +85,7 @@ import { GestorOrdenesCocineroComponent } from './components/admin/dashboard/Coc
     CategoriaPlatosComponent,
     ArtManufacturadoPlatosComponent,
     ModificacionPlatoCocineroComponent,
+    ModalFacturaComponent,
   ],
   imports: [
     BrowserModule,

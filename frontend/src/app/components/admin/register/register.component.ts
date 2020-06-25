@@ -31,27 +31,31 @@ export class RegisterComponent implements OnInit {
   }
 
   registrarConMailPassword() {
-    if (this.formularioRegister.valid) {
-      this.datosCorrectos = true;
-      this.mostrarCargar = true;
-      this.loginService
-        .register(
-          this.formularioRegister.value.email,
-          this.formularioRegister.value.password
-        )
-        .then((data) => {
-          this.mostrarCargar = false;
-        })
-        .catch((error) => {
-          this.datosCorrectos = false;
-          this.mostrarCargar = false;
-          this.textoError = error.message;
-        });
-    } else {
-      this.datosCorrectos = false;
-      this.mostrarCargar = false;
-      this.textoError = 'Por favor revisa que los datos sean correctos';
-    }
+
+    this.loginService.register(this.formularioRegister.value.email,this.formularioRegister.value.password);
+
+    // if (this.formularioRegister.valid) {
+    //   this.datosCorrectos = true;
+    //   this.mostrarCargar = true;
+    //   this.loginService
+    //     .register(
+    //       this.formularioRegister.value.email,
+    //       this.formularioRegister.value.password
+    //     )
+    //     .then((data) => {
+    //       console.log("data",data)
+    //       this.mostrarCargar = false;
+    //     })
+    //     .catch((error) => {
+    //       this.datosCorrectos = false;
+    //       this.mostrarCargar = false;
+    //       this.textoError = error.message;
+    //     });
+    // } else {
+    //   this.datosCorrectos = false;
+    //   this.mostrarCargar = false;
+    //   this.textoError = 'Por favor revisa que los datos sean correctos';
+    // }
   }
 
   ingresarConGoogle() {

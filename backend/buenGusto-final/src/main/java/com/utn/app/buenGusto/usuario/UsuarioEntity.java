@@ -21,7 +21,7 @@ public class UsuarioEntity extends CommonEntity implements Serializable {
 	private String email;
 	private String uid_firebase;
 
-	@ManyToOne(cascade = CascadeType.ALL, optional = false)
+	@ManyToOne(cascade = CascadeType.MERGE, optional = false)
 	@JoinColumn(name = "rol_id")
 	private RolEntity rol;
 
