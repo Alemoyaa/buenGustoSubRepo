@@ -1,12 +1,12 @@
-import { UsuarioServices } from './../serviciosCliente/usuarioServices/usuario.services';
-import { ClienteService } from './../serviciosCliente/clienteServices/cliente.service';
-import { Router } from '@angular/router';
-import { AngularFireAuth } from '@angular/fire/auth';
-import { Usuario } from '../../entidades/Usuario';
-import { Injectable } from '@angular/core';
-import { map } from 'rxjs/operators';
-import { auth } from 'firebase/app';
-import { Cliente } from '../../entidades/Cliente';
+import {ClienteService} from './../serviciosCliente/clienteServices/cliente.service';
+import {Router} from '@angular/router';
+import {AngularFireAuth} from '@angular/fire/auth';
+import {Usuario} from '../../entidades/Usuario';
+import {Injectable} from '@angular/core';
+import {map} from 'rxjs/operators';
+import {auth} from 'firebase/app';
+import {Cliente} from '../../entidades/Cliente';
+
 @Injectable({
   providedIn: 'root',
 })
@@ -30,13 +30,14 @@ export class LoginService {
   //   },
   // };
 
-  clientePost: Cliente;
+  clientePost: Cliente = new Cliente();
 
   constructor(
     private afsAuth: AngularFireAuth,
     private route: Router,
     private cServicio: ClienteService
-  ) {}
+  ) {
+  }
 
   //me traigo los datos que me da google
   datosGoogle(usuario: Usuario) {
@@ -54,7 +55,7 @@ export class LoginService {
       this.afsAuth.signInWithPopup(new auth.GoogleAuthProvider()).then(
         (data) => {
           if (!this.checkEmailExists(data.user.email)) {
-            this.postUser();
+            this.setearClienteConIsAuth();
           }
           console.log('data', data);
           let uidCliente = data.user.uid;
@@ -94,8 +95,8 @@ export class LoginService {
     }
   }
 
-  checkEmailExists(email): any {
-    this.cServicio.getByEmail(email).subscribe((data) => {
+  async checkEmailExists(email) {
+    await this.cServicio.getByEmail(email).subscribe((data) => {
       if (data) {
         return true;
       } else {
@@ -104,27 +105,30 @@ export class LoginService {
     });
   }
 
-  register(email: string, password: string) {
+ register(email: string, password: string) {
     if (this.checkEmailExists(email)) {
       this.route.navigate(['login']);
     } else {
+      console.log('Else de register');
       return new Promise((resolve, reject) => {
         this.afsAuth
           .createUserWithEmailAndPassword(email, password)
           .then((data) =>
             data.user
               .sendEmailVerification()
-              .then(function () {
+              .then(async () => {
+                console.log('.then sendEmailVerification');
+                await this.setearClienteConIsAuth();
                 alert(
                   'Se envió un mail de verificación a tu dirección de correo'
                 );
               })
-              .then(() => {
-                this.afsAuth.signOut();
-                this.postUser();
+              .then(async () => {
+                await this.afsAuth.signOut();
               })
-              .catch(function (error) {
-                console.log(error);
+              .catch((error) => {
+                console.log('Error de promesa');
+                console.error(error);
               })
               .finally(() => {
                 this.route.navigate(['login']);
@@ -134,20 +138,39 @@ export class LoginService {
     }
   }
 
-  async postUser() {
-    await this.isAuth().subscribe((data) => {
-      this.clientePost.nombre = data.displayName;
-      this.clientePost.usuario.email = data.email;
-      this.clientePost.usuario.uid_firebase = data.uid;
-      this.clientePost.usuario.rol.id = 5;
-      this.clientePost.usuario.rol.nombreRol = 'Cliente';
-    });
-    await this.cServicio.post(this.clientePost).subscribe((post) => {
-      console.log('Cliente posteado');
-    });
+  async setearClienteConIsAuth() {
+    await this.isAuth().subscribe(
+      (data) => {
+        this.postCliente(data);
+      },
+      (error) => {
+        console.log('Error en postUser', error);
+      },
+      async () => {
+        console.log('Cliente complete' + this.clientePost);
+      }
+    );
   }
 
-  //Para saber si esta logueado
+  postCliente(data) {
+    if (!data){
+      throw new Error('Error post: No data');
+    }
+    this.clientePost.usuario.email = data.email;
+    this.clientePost.usuario.uid_firebase = data.uid;
+    this.clientePost.usuario.rol.id = 5;
+
+    this.cServicio.post(this.clientePost).subscribe(
+      (post) => {
+        console.log('Cliente posteado', post);
+      },
+      (error) => {
+        console.log('Error -->', error.message);
+      }
+    );
+  }
+
+  // Para saber si esta logueado
   isAuth() {
     return this.afsAuth.authState.pipe(map((auth) => auth));
   }
