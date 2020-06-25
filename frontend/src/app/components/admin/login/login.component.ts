@@ -16,7 +16,7 @@ export class LoginComponent implements OnInit {
 
 
 
-  constructor(private fb: FormBuilder, private loginService: LoginService) {}
+  constructor(private fb: FormBuilder, private loginService: LoginService) { }
 
   ngOnInit(): void {
     this.crearFormularioLogin();
@@ -33,29 +33,31 @@ export class LoginComponent implements OnInit {
   }
 
   ingresarConEmailPassword() {
-    if (this.formularioLogin.valid) {
-      this.datosCorrectos = true;
-      this.mostrarCargar = true;
-      this.loginService
-        .loginEmailPassword(
-          this.formularioLogin.value.email,
-          this.formularioLogin.value.password
-        )
-        .then((data) => {
-          console.log(data);
-          this.mostrarCargar = false;
-        })
-        .catch((error) => {
-          console.log('Error catch');
-          this.datosCorrectos = false;
-          this.mostrarCargar = false;
-          this.textoError = error.message;
-        });
-    } else {
-      this.datosCorrectos = false;
-      this.mostrarCargar = false;
-      this.textoError = 'Porfavor revisa que los datos sean correctos';
-    }
+
+    this.loginService.loginEmailPassword(this.formularioLogin.value.email,this.formularioLogin.value.password);
+    // if (this.formularioLogin.valid) {
+    //   this.datosCorrectos = true;
+    //   this.mostrarCargar = true;
+    //   this.loginService
+    //     .loginEmailPassword(
+    //       this.formularioLogin.value.email,
+    //       this.formularioLogin.value.password
+    //     )
+    //     .then((data) => {
+    //       console.log(data);
+    //       this.mostrarCargar = false;
+    //     })
+    //     .catch((error) => {
+    //       console.log('Error catch');
+    //       this.datosCorrectos = false;
+    //       this.mostrarCargar = false;
+    //       this.textoError = error.message;
+    //     });
+    // } else {
+    //   this.datosCorrectos = false;
+    //   this.mostrarCargar = false;
+    //   this.textoError = 'Porfavor revisa que los datos sean correctos';
+    // }
   }
 
   ingresarConGoogle() {
@@ -63,7 +65,7 @@ export class LoginComponent implements OnInit {
   }
 
 
-  recuperarPassword(){
+  recuperarPassword() {
     this.loginService.recuperarPassword(this.formularioLogin.value.email).then(() => {
       alert('Se ha enviado un correo a su cuenta. Porfavor siga los pasos indicados');
     });
