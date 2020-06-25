@@ -27,10 +27,10 @@
         <th hidden>#</th>
         <th scope="col">Denominacion</th>
         <th scope="col">Categoria</th>
-        <th scope="col">Catalogo ?</th>
+        <th scope="col">Catalogo</th>
         <th scope="col">Costo</th>
         <th scope="col">Precio Venta</th>
-        <th scope="col">require_refrigeracion</th>
+        <th scope="col">Refrigueracion</th>
         <th scope="col">Stock Actual</th>
         <th scope="col">Stock Minimo</th>
         <th scope="col">Imagen</th>
@@ -44,10 +44,16 @@
         <th hidden>{{i.id}}</th>
         <td>{{i.denominacion}}</td>
         <td>{{i.categoria.nombreCategoria}}</td>
-        <td>{{i.es_catalogo}}</td>
-        <td>{{i.costo_de_venta}}</td>
-        <td>{{i.precio_de_venta}}</td>
-        <td>{{i.requiere_refrigeracion}}</td>
+        <td>
+          <p *ngIf="i.es_catalogo === true">Si</p>
+          <p *ngIf="i.es_catalogo === false">No</p>
+        </td>
+        <td>$ {{i.costo_de_venta}}</td>
+        <td>$ {{i.precio_de_venta}}</td>
+        <td>
+          <p *ngIf="i.requiere_refrigeracion === true">Si</p>
+          <p *ngIf="i.requiere_refrigeracion === false">No</p>
+        </td>
         <td>{{i.stock_actual}}</td>
         <td>{{i.stock_minimo}}</td>
         <td>
@@ -88,23 +94,22 @@
         <form name="formStock" [formGroup]="formStock">
           <div class="row">
             <div class="col-12">
-              <h5 class="modal-title" id="exampleModalLabel">Ingrese los datos del articulo</h5>
-              <br />
-              <br />
+              <h5 class="modal-title" id="exampleModalLabel"> <strong>Ingrese los datos del articulo</strong> </h5>
+              <hr/>
             </div>
 
             <div class="col-6">
               <div class="form-group">
                 <label for="denominacion">Denominacion</label>
                 <input type="text" class="form-control" name="denominacion" id="denominacion"
-                  formControlName="denominacion" />
+                  formControlName="denominacion" placeholder="nombre articulo.." />
               </div>
             </div>
 
 
             <div class="col-2">
               <div class="form-group">
-                <label for="es_catalogo">Es catalogo?</label>
+                <label for="es_catalogo">Es catalogo ?</label>
                 <input type="text" class="form-control" name="es_catalogo" id="es_catalogo"
                   formControlName="es_catalogo" />
               </div>

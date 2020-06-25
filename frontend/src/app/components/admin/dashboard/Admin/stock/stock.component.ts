@@ -1,5 +1,3 @@
-import { catchError } from 'rxjs/operators';
-import { throwError } from 'rxjs';
 import Swal from 'sweetalert2';
 import {
   FormGroup,
@@ -13,7 +11,6 @@ import { Component, OnInit } from '@angular/core';
 import { CategoriaService } from 'src/app/services/serviciosCliente/categoriaServices/categoria.service';
 import { Categoria } from 'src/app/entidades/Categoria';
 import { UnidadMedidaService } from 'src/app/services/serviciosCliente/unidadMedidaServices/unidad_medida.services';
-import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-stock',
@@ -74,7 +71,6 @@ export class StockComponent implements OnInit {
       requiere_refrigeracion: new FormControl(null),
       stock_actual: new FormControl(null),
       stock_minimo: new FormControl(null),
-
       unidadMedidaID: new FormGroup({
         id: new FormControl(0),
         denominacion: new FormControl(''),
@@ -94,7 +90,6 @@ export class StockComponent implements OnInit {
     var matcher = new RegExp(this.filtroBuscador, 'i');
     return this.articulosInsumos.filter(function (articulo) {
       return matcher.test([articulo.denominacion, articulo.categoria].join());
-
     });
   }
 
@@ -102,7 +97,6 @@ export class StockComponent implements OnInit {
     this.artInsumoService.getAll().subscribe(
       (res) => {
         this.articulosInsumos = res;
-        console.log(this.articulosInsumos);
       },
       (error) => {
         console.warn("error =>  ", error);
@@ -117,34 +111,26 @@ export class StockComponent implements OnInit {
     this.categoriaService.getAll().subscribe(
       async (categorias) => {
         this.categorias = categorias;
-        console.log('Categorias todas:,', this.categorias);
         await this.getCategorias();
       },
       (error) => {
-
         console.warn("error =>  ", error);
       }
     );
   }
-
-
 
   //Me trae las unidades de medida
   async getUnidades() {
     await this.unidadMedidaService.getAll().subscribe(
       (unidad) => {
         this.unidadesMedida = unidad;
-        console.log('Unidades: ', this.unidadesMedida);
       }, (error) => {
-
         console.warn("error =>  ", error);
       }
     );
   }
 
-
   seleccionarUnidad(id: number) {
-    console.log(id);
     //  selecciono la unidad en el formulario, traigo la unidad seleccionado y lo seteo a mi usuario
     const control = <FormGroup>this.formStock.controls['unidadMedidaID'];
     // verifico q no me envie un null
@@ -153,39 +139,27 @@ export class StockComponent implements OnInit {
       this.unidadMedidaService.getOne(id).subscribe((unidad) => {
 
         this.unidadSeleccionada = unidad;
-        console.log(unidad)
         // seteo el formulario con la unidad id y el nombre de la unidad traida
         this.formStock.controls.unidadMedidaID.setValue({
           id: unidad.id,
           denominacion: unidad.denominacion,
           abreviatura: unidad.abreviatura
         });
-
       });
     }
-    console.log(this.formStock.value)
-
   }
-
-
-
 
   async getCategorias() {
     this.categorias.forEach((e) => {
       if (e.hijos) {
-        console.log('Esta es una categoria padre', e);
         this.categoriasPadre.push(e);
       } else {
-        //console.log('Esta es una categoria hijo', e);
         this.categoriasHijo.push(e);
       }
     });
-    // await this.getCategoriasPadreHijo();
   }
 
   seleccionarPadre(id: number) {
-    console.log(id);
-    //  selecciono el rol en el formulario, traigo el rol seleccionado y lo seteo a mi usuario
     const control = <FormGroup>this.formStock.controls['categoria'];
     // verifico q no me envie un null
     if (id != null) {
@@ -198,11 +172,8 @@ export class StockComponent implements OnInit {
           id: this.categoriaSeleccionada.id,
           nombreCategoria: this.categoriaSeleccionada.nombreCategoria
         });
-
       });
     }
-    console.log(this.formStock.value)
-
   }
 
   //Post
@@ -213,12 +184,9 @@ export class StockComponent implements OnInit {
         this.articulosInsumos.push(this.articulo);
         this.getAllArticulos();
         this.formStock.reset();
-        console.log(this.articulosInsumos);
-        console.log(this.articulo);
         Swal.fire('success', 'Articulo agregado ', 'success');
       },
       (error) => {
-
         console.warn("error =>  ", error);
       }
     );
@@ -237,10 +205,8 @@ export class StockComponent implements OnInit {
       if (result.value) {
         this.artInsumoService.delete(articulo.id).subscribe(
           (res) => {
-            console.log(articulo.id);
             const indexArticulo = this.articulosInsumos.indexOf(articulo);
             this.articulosInsumos.splice(indexArticulo, 1);
-
             Swal.fire('Deleted!', 'Articulo eliminado con éxito', 'success');
           },
           (error) => {
@@ -255,13 +221,11 @@ export class StockComponent implements OnInit {
   update() {
     this.artInsumoService.put(this.id, this.formStock.value).subscribe(
       (data) => {
-        console.log(this.id);
         this.getAllArticulos();
         this.esEditar = false;
         this.formStock.reset(); //Que me limpie los campos
       },
       (error) => {
-
         console.warn("error =>  ", error);
       }
     );
@@ -310,13 +274,4 @@ export class StockComponent implements OnInit {
     });
   }
 
-  //   manejarError (error: HttpErrorResponse){
-  //     Swal.fire({
-  //       icon: 'error',
-  //       title: 'Ocurrio un problema',
-  //       html: 'Por favor vuelva a intentarlo mas tarde',
-  //     });
-  //     console.warn("error =>  ", error);
-  //     return throwError('Error atrapado');
-  //   }
 }
