@@ -1,17 +1,27 @@
 <div class="container mt-5 text-center" *ngIf="pedidos" >
-<h1 class="display-3">Estado de Pedidos</h1>
-<form class="form-inline mt-4 ml-2 mb-4">
-  <label style="font-size: 25px;" ><strong><i class="fas fa-search"> Buscar : </i></strong></label>
-  <input 
-    class="form-control mr-sm-2 ml-2"
-    type="search"
-    placeholder="Nombre/Apellido o Rol"
-    aria-label="Search"
-    [(ngModel)]="filtroBuscador"
-    [ngModelOptions]="{ standalone: true }"
-  />
-</form>
-<table class="table table-striped" >
+  <div class="col-12 text-center jumbotron" style="margin-bottom: 20px;">
+    <h1 class="display-4">Estado de Pedidos</h1>
+    <div class="buscador"> 
+      <i class="fas fa-cash-register" style="font-size:35px;"></i>
+      <p>Cajero</p>
+    </div>
+  </div>
+
+  <div class="row mb-4 ml-2">
+   
+    <!-- Buscador -->
+    <div class="buscador">
+      <form>
+        <p style="font-size: 25px;"> Buscar : </p>
+
+        <input class="form-control mr-sm-2" type="search" placeholder="Nombre/Apellido" aria-label="Search"
+          [(ngModel)]="filtroBuscador" [ngModelOptions]="{ standalone: true }" />
+      </form>
+    </div>
+  </div>
+  
+
+<table class="table table-striped text-center" >
   <thead>
     <tr>
       <th scope="row">Orden</th>
