@@ -1,0 +1,148 @@
+<div class="container mt-3" id="body">
+  <div class="col-12 text-center jumbotron" style="margin-bottom: 20px;">
+    <h1 class="display-4">Modificacion de Plato</h1>
+    <div class="buscador">
+      <i class="fa fa-cutlery " style="font-size:35px;"></i>
+      <p>Cocinero</p>
+    </div>
+  </div>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="row">Orden</th>
+        <th>Aclaracion</th>
+        <th>Receta</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- Relleno tabla -->
+      <tr *ngFor="let pedido of pedidos | paginate: {itemsPerPage: 4, currentPage: pageActual}">
+        <th scope="row">{{pedido.id}}</th>
+
+        <td>
+          <button class="btn btn-primary" data-toggle="modal" data-target="#verAclaracion"
+            (click)="getOnePedido(pedido.id)">
+            <strong>Aclaracion</strong>
+          </button>
+        </td>
+
+        <td>
+          <button class="btn btn-warning" data-toggle="modal" data-target="#verReceta"
+            (click)="getOnePedido(pedido.id)">
+            <strong>Editar Receta</strong>
+          </button>
+        </td>
+
+      </tr>
+    </tbody>
+  </table>
+  <div class="text-center">
+     <pagination-controls (pageChange)="pageActual = $event"></pagination-controls>
+  </div>
+
+</div>
+
+<!-- Modal Ver detalle receta -->
+
+<div class="modal" id="verReceta" data-backdrop="static" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title"> <strong>Detalle Pedido </strong> </h5>
+
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+
+      </div>
+      <div class="modal-body">
+
+        <div class="container">
+          <div class="row">
+
+            <div class="col-6">
+              <h4 class="modal-title text-center"> <strong>Cantidad</strong></h4>
+              <hr>
+            </div>
+
+            <div class="col-6">
+              <h4 class="modal-title text-center"><strong>Plato</strong></h4>
+              <hr>
+            </div>
+
+            <div class="recorrer pedido">
+
+              <!-- <div class="col-6 text-center">
+                <h5 class="modal-title text-center">{{pedido.lista_detallePedido}}</h5>
+                <hr>
+              </div>
+              <div class="col-6 text-center">
+                <h5 class="modal-title text-center">{{pedido.lista_detallePedido}} </h5>
+                <hr>
+              </div> -->
+
+              <hr>
+              <div class="col-12 text-center">
+                <h5 class="modal-title text-center"> <strong>Hay x detalles</strong> </h5>
+              </div>
+
+            </div>
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Modal Ver aclaracion -->
+
+<div class="modal" id="verAclaracion" data-backdrop="static" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title"> <strong>Aclaracion Pedido</strong> </h5>
+
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+
+      </div>
+      <div class="modal-body">
+
+        <div class="container">
+          <div class="row">
+
+            <div class="col-6">
+              <h4 class="modal-title text-center"> <strong>Cantidad</strong></h4>
+              <hr>
+            </div>
+
+            <div class="col-6">
+              <h4 class="modal-title text-center"><strong>Plato</strong></h4>
+              <hr>
+            </div>
+
+            <div class="recorrer pedido">
+
+              <!-- <div class="col-6 text-center">
+                <h5 class="modal-title text-center">{{pedido.lista_detallePedido}}</h5>
+                <hr>
+              </div>
+              <div class="col-6 text-center">
+                <h5 class="modal-title text-center">{{pedido.lista_detallePedido}} </h5>
+                <hr>
+              </div> -->
+
+              <hr>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
