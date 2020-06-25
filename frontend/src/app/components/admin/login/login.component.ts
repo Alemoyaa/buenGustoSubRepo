@@ -46,6 +46,7 @@ export class LoginComponent implements OnInit {
           this.mostrarCargar = false;
         })
         .catch((error) => {
+          console.log('Error catch');
           this.datosCorrectos = false;
           this.mostrarCargar = false;
           this.textoError = error.message;
@@ -63,17 +64,8 @@ export class LoginComponent implements OnInit {
 
 
   recuperarPassword(){
-
     this.loginService.recuperarPassword(this.formularioLogin.value.email).then(() => {
       alert('Se ha enviado un correo a su cuenta. Porfavor siga los pasos indicados');
     });
   }
-
- 
-
-
-
-
-
-
 }

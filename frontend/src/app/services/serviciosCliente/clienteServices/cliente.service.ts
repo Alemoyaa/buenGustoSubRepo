@@ -1,8 +1,8 @@
-import { Observable } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
-import { CommonService } from './../commonServices/common.service';
-import { Injectable } from '@angular/core';
-import { Cliente } from 'src/app/entidades/Cliente';
+import {Observable} from 'rxjs';
+import {HttpClient} from '@angular/common/http';
+import {CommonService} from './../commonServices/common.service';
+import {Injectable} from '@angular/core';
+import {Cliente} from 'src/app/entidades/Cliente';
 
 @Injectable({
   providedIn: 'root',
@@ -19,6 +19,6 @@ export class ClienteService extends CommonService<Cliente> {
   }
 
   getByEmail(email: string): Observable<Cliente> {
-    return this.http.get<Cliente>(this._url + 'api/cliente/email/' + email);
+    return this.http.get<Cliente>(this._url + 'email/' + email);
   }
 }
