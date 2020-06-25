@@ -4,7 +4,7 @@
     <div class="buscador"> 
       <i class="fas fa-cash-register" style="font-size:35px;"></i>
       <p>Cajero</p>
-    </div>
+    </div> 
   </div>
 
   <div class="row mb-4 ml-2">
@@ -34,7 +34,7 @@
       <th scope="row">Aceptar/Rechazar Pedido</th>
     </tr> 
   </thead>
-
+ 
   
   <tbody *ngIf="filtrar" >
     <tr *ngFor="let pedido of filtrar | paginate: {itemsPerPage: 5, currentPage: pageActual}">

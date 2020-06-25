@@ -39,7 +39,7 @@ export class UsuariosComponent implements OnInit {
     this.traerDatos();
 
 
-    this.alerts.mensajeSuccess('Bienvenido a la seccion Usuario', 'Aqui usted podra asignar el rol a cada usuario registrado en la pagina');
+    // this.alerts.mensajeSuccess('Bienvenido a la seccion Usuario', 'Aqui usted podra asignar el rol a cada usuario registrado en la pagina');
   }
 
   get filtrar(): Cliente[] {
