@@ -1,5 +1,16 @@
 <div class="container mt-5 text-center" *ngIf="pedidos" >
 <h1 class="display-3">Estado de Pedidos</h1>
+<form class="form-inline mt-4 ml-2 mb-4">
+  <label style="font-size: 25px;" ><strong><i class="fas fa-search"> Buscar : </i></strong></label>
+  <input 
+    class="form-control mr-sm-2 ml-2"
+    type="search"
+    placeholder="Nombre/Apellido o Rol"
+    aria-label="Search"
+    [(ngModel)]="filtroBuscador"
+    [ngModelOptions]="{ standalone: true }"
+  />
+</form>
 <table class="table table-striped" >
   <thead>
     <tr>
@@ -14,21 +25,15 @@
     </tr> 
   </thead>
 
-  <!-- fechaRealizacion: Date;
-  hora_estimada_fin: any;
-  numero: number; 
-  tipo_Envio: boolean;
-  lista_detallePedido: DetallePedido[];
-  estadoPedido: EstadoPedido;
-  clientePedido: Cliente; -->
+  
   <tbody *ngIf="filtrar" >
-    <tr *ngFor="let pedido of filtrar">
+    <tr *ngFor="let pedido of filtrar | paginate: {itemsPerPage: 5, currentPage: pageActual}">
       <th scope="row">1</th>
       <td>{{pedido.clientePedido.nombre}}</td>
       <td>{{pedido.hora_estimada_fin | date}}</td>
       <td>
-        <p *ngIf="pedido.tipo_Envio == true"> Retira en Local</p>
-        <p *ngIf="pedido.tipo_Envio == false"> Delivery</p>
+        <p *ngIf="pedido.tipo_Envio == false"> Retira en Local</p>
+        <p *ngIf="pedido.tipo_Envio == true"> Delivery</p>
       </td> 
       <td>{{pedido.fechaRealizacion | date}}</td>
       <td>{{pedido.estadoPedido.nombreEstado}}</td>
@@ -42,10 +47,15 @@
       </td>
     </tr>
   </tbody>
+ 
 </table>
 
+  <pagination-controls  (pageChange)="pageActual = $event" ></pagination-controls>
 
+ 
 </div>
+
+
 
 
 

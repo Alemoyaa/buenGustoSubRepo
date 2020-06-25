@@ -7,6 +7,7 @@ import { AlertsService } from 'src/app/services/alertServices/alerts.service';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import Swal from 'sweetalert2';
 
+
 @Component({
   selector: 'app-pedidos-cajero',
   templateUrl: './pedidos-cajero.component.html',
@@ -14,8 +15,10 @@ import Swal from 'sweetalert2';
 })
 export class PedidosCajeroComponent implements OnInit {
   pedidoSeleccionado: Pedido;
-  pedidos: Pedido[];
+  pedidos: Array<Pedido> = [];
   formularioEstado: FormGroup;
+  pageActual: number = 1;
+  filtroBuscador: any = '';
   // Pedido.ts
   // fechaRealizacion: Date;
   // hora_estimada_fin: any;
@@ -42,19 +45,31 @@ export class PedidosCajeroComponent implements OnInit {
 
   get filtrar(): Pedido[] {
 
-    var matcher = new RegExp('Pendiente', 'i');
+    const matcher = new RegExp(this.filtroBuscador, 'i');
     return this.pedidos.filter((pedido) => {
 
-      return matcher.test([pedido.estadoPedido.nombreEstado].join());
+      return matcher.test([pedido.clientePedido.nombre, pedido.clientePedido.apellido].join());
+
 
     });
   }
 
 
+
   getPedidosPendientes() {
+
     this.pedidoService.getAll().subscribe(
+
       data => {
-        this.pedidos = data;
+        data.filter((pedido) => {
+
+          if (pedido.estadoPedido.nombreEstado === 'Pendiente') {
+
+          return this.pedidos.push(pedido);
+          }
+        });
+
+
       }
 
     );
@@ -99,7 +114,7 @@ export class PedidosCajeroComponent implements OnInit {
 
           // this.pedidoService.put(this.pedidoSeleccionado.id, this.pedidoSeleccionado).subscribe();
           console.log(this.pedidoSeleccionado);
-          
+
           Swal.fire(
             `El estado de su pedido fue modificado correctamente a: ${estado.nombreEstado}`,
             'Puedes continuar con mas pedidos en la seccion de Estados de Pedidos!',
@@ -107,7 +122,7 @@ export class PedidosCajeroComponent implements OnInit {
           );
 
           this.formularioEstado.reset();
-        }else{
+        } else {
           this.formularioEstado.reset();
         }
       });
