@@ -36,19 +36,20 @@ export class StockComponent implements OnInit {
   id: number;
   public formStock: FormGroup;
 
-  public articulo: ArticuloInsumo = {
-    costo_de_venta: null,
-    requiere_refrigeracion: null,
-    stock_actual: null,
-    stock_minimo: null,
-    unidadMedidaID: null,
-    id: null,
-    precio_de_venta: null,
-    url_imagen: '',
-    es_catalogo: null,
-    denominacion: '',
-    categoria: null,
-  };
+  // public articulo: ArticuloInsumo = {
+  //   precio_de_compra: null,
+  //   requiere_refrigeracion: null,
+  //   stock_actual: null,
+  //   stock_minimo: null,
+  //   unidadMedidaID: null,
+  //   id: null,
+  //   precio_de_venta: null,
+  //   url_imagen: '',
+  //   es_catalogo: null,
+  //   denominacion: '',
+  //   categoria: null,
+  // };
+  public articulo: ArticuloInsumo;
 
   public articuloInsumoActual: ArticuloInsumo; //Para editar
 
@@ -67,14 +68,14 @@ export class StockComponent implements OnInit {
   /* Método que construye nuestro formulario */
   crearFormulario(): void {
     this.formStock = new FormGroup({
-      costo_de_venta: new FormControl(null),
+      precio_de_compra: new FormControl(null),
       requiere_refrigeracion: new FormControl(null),
       stock_actual: new FormControl(null),
       stock_minimo: new FormControl(null),
       unidadMedidaID: new FormGroup({
         id: new FormControl(0),
-        denominacion: new FormControl(''),
-        abreviatura: new FormControl(''),
+        denominacion: new FormControl(null),
+        abreviatura: new FormControl(null),
       }),
       id: new FormControl(0),
       precio_de_venta: new FormControl(null),
@@ -82,6 +83,7 @@ export class StockComponent implements OnInit {
       es_catalogo: new FormControl(null),
       denominacion: new FormControl(''),
       categoria: new FormControl(null),
+      habilitado: new FormControl(null)
     });
   }
 
@@ -97,6 +99,7 @@ export class StockComponent implements OnInit {
     this.artInsumoService.getAll().subscribe(
       (res) => {
         this.articulosInsumos = res;
+        console.log(this.articulosInsumos)
       },
       (error) => {
         console.warn("error =>  ", error);
@@ -236,7 +239,7 @@ export class StockComponent implements OnInit {
     console.log(articulo);
     this.esEditar = true;
     this.formStock.setValue({
-      costo_de_venta: articulo.costo_de_venta,
+      precio_de_compra: articulo.precio_de_compra,
       requiere_refrigeracion: articulo.requiere_refrigeracion,
       stock_actual: articulo.stock_actual,
       stock_minimo: articulo.stock_minimo,
@@ -247,6 +250,7 @@ export class StockComponent implements OnInit {
       es_catalogo: articulo.es_catalogo,
       denominacion: articulo.denominacion,
       categoria: articulo.categoria,
+      habilitado: articulo.habilitado
     });
     this.id = articulo.id;
     console.log(this.id);

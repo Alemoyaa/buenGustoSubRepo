@@ -7,4 +7,5 @@ export abstract class Articulo extends Common {
   es_catalogo: boolean;
   denominacion: string;
   categoria: Categoria;
+  habilitado: boolean;
 }

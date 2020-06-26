@@ -53,6 +53,7 @@ export class PedidosCajeroComponent implements OnInit {
 
 
   getPedidosPendientes() {
+    this.pedidos.length = 0;
     this.pedidoService.getAll().subscribe(
       data => {
         data.filter((pedido) => {
@@ -107,7 +108,7 @@ export class PedidosCajeroComponent implements OnInit {
             'Puedes continuar con mas pedidos en la seccion de Estados de Pedidos!',
             'success'
           );
-
+          this.getPedidosPendientes();
           this.formularioEstado.reset();
         } else {
           this.formularioEstado.reset();

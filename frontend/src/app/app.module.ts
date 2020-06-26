@@ -49,7 +49,7 @@ import { UnidadMedidaPlatosComponent } from './components/admin/dashboard/Admin/
 import { CategoriaPlatosComponent } from './components/admin/dashboard/Admin/crud-platos/categoria-platos/categoria-platos.component';
 import { ArtManufacturadoPlatosComponent } from './components/admin/dashboard/Admin/crud-platos/art-manufacturado-platos/art-manufacturado-platos.component';
 //cocinero
-import { ModificacionPlatoCocineroComponent } from './components/admin/dashboard/Cocinero/modificacion-plato-cocinero/modificacion-plato-cocinero.component';
+
 import { GestorOrdenesCocineroComponent } from './components/admin/dashboard/Cocinero/gestor-ordenes-cocinero/gestor-ordenes-cocinero.component';
 import { ModalFacturaComponent } from './components/admin/dashboard/Cajero/facturacion-cajero/modal-factura/modal-factura.component';
 @NgModule({
@@ -84,7 +84,6 @@ import { ModalFacturaComponent } from './components/admin/dashboard/Cajero/factu
     UnidadMedidaPlatosComponent,
     CategoriaPlatosComponent,
     ArtManufacturadoPlatosComponent,
-    ModificacionPlatoCocineroComponent,
     ModalFacturaComponent,
   ],
   imports: [

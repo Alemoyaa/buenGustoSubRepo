@@ -87,8 +87,8 @@
                   </td>
 
                   <td class="text-center">
-                    <p *ngIf="detalle.aclaracion != null">{{detalle.aclaracion}}</p>
-                    <p *ngIf=""> No hay aclaracion</p>
+                    <p *ngIf="detalle.aclaracion">{{detalle.aclaracion}}</p>
+                    <p *ngIf="!detalle.aclaracion "> No hay aclaracion</p>
                   </td>
 
                 </tr>

@@ -18,7 +18,6 @@ import { UsuariosComponent } from './components/admin/dashboard/Admin/usuarios/u
 import { PedidosCajeroComponent } from './components/admin/dashboard/Cajero/pedidos-cajero/pedidos-cajero.component';
 import { FacturacionCajeroComponent } from './components/admin/dashboard/Cajero/facturacion-cajero/facturacion-cajero.component';
 import { GestorOrdenesCocineroComponent } from './components/admin/dashboard/Cocinero/gestor-ordenes-cocinero/gestor-ordenes-cocinero.component';
-import { ModificacionPlatoCocineroComponent } from './components/admin/dashboard/Cocinero/modificacion-plato-cocinero/modificacion-plato-cocinero.component';
 import { AuthGuard } from './Guard/auth.guard';
 
 const routes: Routes = [
@@ -91,11 +90,6 @@ const routes: Routes = [
   {
     path: 'dashboard/admin/cocinero/gestorOrdenes',
     component: GestorOrdenesCocineroComponent,
-    canActivate: [AuthGuard],
-  },
-  {
-    path: 'dashboard/admin/cocinero/modificacionPlato',
-    component: ModificacionPlatoCocineroComponent,
     canActivate: [AuthGuard],
   },
   { path: '**', component: NotfoundComponent },
