@@ -7,16 +7,17 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public abstract class CommonService<E extends CommonEntity, R extends JpaRepository<E, Long>> implements CommonIService<E> {
+public abstract class CommonService<E extends CommonEntity, R extends JpaRepository<E, Long>>
+		implements CommonIService<E> {
 
-	@Autowired 
+	@Autowired
 	protected R repository;
 
 	@Override
 	public E findById(long id) throws Exception {
 		try {
 			Optional<E> varOptional = repository.findById(id);
-			if(varOptional.isPresent())
+			if (varOptional.isPresent())
 				return varOptional.get();
 			else
 				return null;
@@ -36,7 +37,7 @@ public abstract class CommonService<E extends CommonEntity, R extends JpaReposit
 			throw new Exception(e.getMessage());
 		}
 	}
-	
+
 	@Override
 	public E update(long id, E entity) throws Exception {
 		try {
@@ -76,9 +77,12 @@ public abstract class CommonService<E extends CommonEntity, R extends JpaReposit
 	}
 
 	public boolean delete(long id) throws Exception {
+		E entity;
 		try {
 			if (repository.existsById(id)) {
-				repository.deleteById(id);
+				entity = repository.getOne(id);
+				entity.setHabilitado(false);
+				entity = repository.save(entity);
 			}
 
 		} catch (Exception e) {
@@ -86,6 +90,7 @@ public abstract class CommonService<E extends CommonEntity, R extends JpaReposit
 		}
 
 		return !repository.existsById(id);
+
 	}
 
 }

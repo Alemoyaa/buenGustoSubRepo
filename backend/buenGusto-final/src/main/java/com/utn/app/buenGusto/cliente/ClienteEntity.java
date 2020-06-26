@@ -12,6 +12,8 @@ import com.utn.app.buenGusto.common.CommonEntity;
 import com.utn.app.buenGusto.domicilio.DomicilioEntity;
 import com.utn.app.buenGusto.usuario.UsuarioEntity;
 
+
+
 @Entity
 @Table(name = "cliente")
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
@@ -30,7 +32,7 @@ public class ClienteEntity extends CommonEntity implements Serializable {
 	@OneToOne(cascade = CascadeType.ALL, optional = true)
 	@JoinColumn(name = "domicilio_id", nullable = true)
 	private DomicilioEntity domicilio;
-
+	
 	public String getNombre() {
 		return nombre;
 	}

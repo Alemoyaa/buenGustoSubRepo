@@ -12,6 +12,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import com.utn.app.buenGusto.cliente.ClienteEntity;
 import com.utn.app.buenGusto.common.CommonEntity;
@@ -29,6 +30,9 @@ public class PedidoEntity extends CommonEntity implements Serializable {
 	private boolean tipo_Envio;
 	private int numero;
 
+	@Transient
+	private double totalPedido;
+	
 	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
 	@JoinColumn(name = "pedido_id")
 	private List<DetallePedidoEntity> lista_detallePedido = new ArrayList<DetallePedidoEntity>();
@@ -95,6 +99,26 @@ public class PedidoEntity extends CommonEntity implements Serializable {
 
 	public void setHora_estimada_fin(Timestamp hora_estimada_fin) {
 		this.hora_estimada_fin = hora_estimada_fin;
+	}
+	
+	public double getTotalPedido() {
+		double result = 0.0d;
+		if(this.lista_detallePedido.isEmpty()) {
+			return result;
+		}else {
+			for (DetallePedidoEntity p:this.lista_detallePedido) {
+				try {
+					result = result + p.getSubtotal();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+			return result;
+		}
+	}
+
+	public void setTotalPedido(double totalPedido) {
+		this.totalPedido = totalPedido;
 	}
 
 }
