@@ -65,6 +65,7 @@ export class GestorOrdenesCocineroComponent implements OnInit {
   //Me trae los pedidos confirmados por el cajero
   getAllPedidos() {
     this.esperarAlert();
+    this.pedidos.length = 0;
     this.pedidoService.getAll().subscribe(
       (res) => {
         console.log(res);
@@ -155,9 +156,10 @@ export class GestorOrdenesCocineroComponent implements OnInit {
               'success'
             );
 
-            if (this.pedidoSeleccionado.estadoPedido.id === 7) {
-              window.location.reload();
-            }
+            this.getAllPedidos();
+            // if (this.pedidoSeleccionado.estadoPedido.id === 7) {
+            //   window.location.reload();
+            // }
             // this.formularioEstado.reset();
 
           } else {

@@ -3,7 +3,7 @@ import { Articulo } from './Articulo';
 import { UnidadMedida } from './UnidadMedida';
 
 export class ArticuloInsumo extends Articulo {
-  costo_de_venta: number;
+  precio_de_compra: number;
   requiere_refrigeracion: boolean;
   stock_actual: number;
   stock_minimo: number;
