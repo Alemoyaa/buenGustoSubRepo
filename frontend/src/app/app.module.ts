@@ -1,3 +1,4 @@
+import { ExcelService } from './services/excelServices/excel.service';
 import { CatalogoDetalleComponent } from './components/cliente/catalogo-detalle/catalogo-detalle.component';
 import { CommonService } from './services/serviciosCliente/commonServices/common.service';
 import { BrowserModule } from '@angular/platform-browser';
@@ -33,7 +34,6 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { PedidosCajeroComponent } from './components/admin/dashboard/Cajero/pedidos-cajero/pedidos-cajero.component';
 import { FacturacionCajeroComponent } from './components/admin/dashboard/Cajero/facturacion-cajero/facturacion-cajero.component';
 
-
 import { StockComponent } from './components/admin/dashboard/Admin/stock/stock.component';
 import { EstadisticasComponent } from './components/admin/dashboard/Admin/estadisticas/estadisticas.component';
 import { FacturaDetalleComponent } from './components/cliente/factura-detalle/factura-detalle.component';
@@ -52,6 +52,7 @@ import { ArtManufacturadoPlatosComponent } from './components/admin/dashboard/Ad
 import { ModificacionPlatoCocineroComponent } from './components/admin/dashboard/Cocinero/modificacion-plato-cocinero/modificacion-plato-cocinero.component';
 import { GestorOrdenesCocineroComponent } from './components/admin/dashboard/Cocinero/gestor-ordenes-cocinero/gestor-ordenes-cocinero.component';
 import { ModalFacturaComponent } from './components/admin/dashboard/Cajero/facturacion-cajero/modal-factura/modal-factura.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -97,7 +98,7 @@ import { ModalFacturaComponent } from './components/admin/dashboard/Cajero/factu
     FontAwesomeModule,
     NgxPaginationModule,
   ],
-  providers: [AngularFireAuth, CommonService],
+  providers: [AngularFireAuth, CommonService, ExcelService],
   bootstrap: [AppComponent],
   schemas: [],
 })

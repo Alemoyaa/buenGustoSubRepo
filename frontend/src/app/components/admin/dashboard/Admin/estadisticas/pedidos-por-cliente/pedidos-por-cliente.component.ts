@@ -1,3 +1,4 @@
+import { ExcelService } from './../../../../../../services/excelServices/excel.service';
 import { PedidoServices } from './../../../../../../services/serviciosCliente/pedidoServices/pedido.service';
 import Swal from 'sweetalert2';
 import { NgForm } from '@angular/forms';
@@ -18,7 +19,10 @@ export class PedidosPorClienteComponent implements OnInit {
   DateHasta: Date;
   DateDesde: Date;
 
-  idCliente: number; 
+  mostrar: boolean = false;
+
+  idCliente: number;
+  nombreCliente: string;
 
   pedidosRecuperadosDesdeHasta: Pedido[] = [];
   pageActual: number = 1;
@@ -27,7 +31,8 @@ export class PedidosPorClienteComponent implements OnInit {
 
   constructor(
     private serviceCliente: ClienteService,
-    private servicePedidos: PedidoServices
+    private servicePedidos: PedidoServices,
+    private excelService: ExcelService
   ) {}
 
   ngOnInit(): void {
@@ -60,7 +65,16 @@ export class PedidosPorClienteComponent implements OnInit {
 
   recuperarID(clienteSeleccionado: Cliente) {
     this.idCliente = clienteSeleccionado.id;
+    this.nombreCliente =
+      clienteSeleccionado.nombre + ' ' + clienteSeleccionado.apellido;
     this.pedidosRecuperadosDesdeHasta = [];
+  }
+
+  exportAsXLSX(): void {
+    this.excelService.exportAsExcelFile(
+      this.pedidosRecuperadosDesdeHasta,
+      'Pedidos por cliente: ' + this.nombreCliente
+    );
   }
 
   onSubmit(form: NgForm) {
@@ -82,6 +96,7 @@ export class PedidosPorClienteComponent implements OnInit {
                   this.pedidosRecuperadosDesdeHasta.push(pedidoRecuperado);
                 }
               });
+              this.mostrar = true;
             } else {
               Swal.fire({
                 icon: 'error',

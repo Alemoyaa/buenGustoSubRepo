@@ -1,3 +1,4 @@
+import { ExcelService } from './../../../../../services/excelServices/excel.service';
 import { Pedido } from './../../../../../entidades/Pedido';
 import { PedidoServices } from './../../../../../services/serviciosCliente/pedidoServices/pedido.service';
 import { Chart } from 'node_modules/chart.js';
@@ -15,9 +16,14 @@ export class EstadisticasComponent implements OnInit {
   DateHasta: Date;
   DateDesde: Date;
 
+  mostrarExcel: boolean = false;
+
   pedidosRecuperadosDesdeHasta: Pedido[] = [];
 
-  constructor(private servicePedido: PedidoServices) {}
+  constructor(
+    private servicePedido: PedidoServices,
+    private excelService: ExcelService
+  ) {}
 
   ngOnInit(): void {}
 
@@ -79,11 +85,19 @@ export class EstadisticasComponent implements OnInit {
         });
       });
 
+      this.mostrarExcel = true;
       cantidadElementos.push(cantidad);
       cantidad = 0;
     });
 
     this.newChart('canvaFecha', elementosSinRepetir, cantidadElementos);
+  }
+
+  exportAsXLSX(): void {
+    this.excelService.exportAsExcelFile(
+      this.pedidosRecuperadosDesdeHasta,
+      'Ranking comidas'
+    );
   }
 
   newChart(nombre, labels, data) {
