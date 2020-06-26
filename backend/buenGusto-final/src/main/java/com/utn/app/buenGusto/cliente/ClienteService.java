@@ -17,7 +17,7 @@ public class ClienteService extends CommonService<ClienteEntity, ClienteReposito
 			if (entityOptional != null) {
 				return entityOptional;
 			} else {
-				throw new Exception();
+				return null;
 			}
 		} catch (Exception e) {
 			throw new Exception();
@@ -33,23 +33,7 @@ public class ClienteService extends CommonService<ClienteEntity, ClienteReposito
 			if (entityOptional != null) {
 				return entityOptional;
 			} else {
-				throw new Exception();
-			}
-		} catch (Exception e) {
-			throw new Exception();
-		}
-
-	}
-	
-	public ClienteEntity findByEmail(String email) throws Exception {
-
-		ClienteEntity entityOptional = repository.findByEmail(email);
-		
-		try {
-			if (entityOptional != null) {
-				return entityOptional;
-			} else {
-				throw new Exception();
+				return null;
 			}
 		} catch (Exception e) {
 			throw new Exception();
