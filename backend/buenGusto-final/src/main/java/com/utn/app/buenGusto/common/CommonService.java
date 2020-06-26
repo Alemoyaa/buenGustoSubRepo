@@ -64,11 +64,11 @@ public abstract class CommonService<E extends CommonEntity, R extends JpaReposit
 	}
 
 	@Override
-	public List<E> findAll(int page, int size) throws Exception {
+	public List<E> findAll(/*int page, int size*/) throws Exception {
 
 		try {
-			Pageable pageable = PageRequest.of(page, size);
-			return repository.findAll(pageable).getContent();
+			//Pageable pageable = PageRequest.of(page, size);
+			return repository.findAll(/*pageable*/)/*.getContent()*/;
 
 		} catch (Exception e) {
 			throw new Exception(e.getMessage());

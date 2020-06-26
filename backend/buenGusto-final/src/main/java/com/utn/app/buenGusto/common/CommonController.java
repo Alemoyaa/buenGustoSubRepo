@@ -28,10 +28,10 @@ public class CommonController<E, S extends CommonIService<E>> {
 
 	@GetMapping("")
 	@Transactional
-	public ResponseEntity<?> getAll(@RequestParam(value = "page", defaultValue = "0") int page,
-			@RequestParam(value = "size", defaultValue = "10") int size) {
+	public ResponseEntity<?> getAll(/*@RequestParam(value = "page", defaultValue = "0") int page,
+			@RequestParam(value = "size", defaultValue = "10") int size*/) {
 		try {
-			return ResponseEntity.status(HttpStatus.OK).body(service.findAll(page, size));
+			return ResponseEntity.status(HttpStatus.OK).body(service.findAll(/*page, size*/));
 		} catch (Exception e) {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND)
 					.body("{\"Error in getAll \": \"" + e.getMessage() + "\"}");
