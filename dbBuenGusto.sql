@@ -232,7 +232,7 @@ CREATE TABLE `estado_pedido` (
 
 /*Data for the table `estado_pedido` */
 
-insert  into `estado_pedido`(`id`,`habilitado`,`nombre_estado`) values (1,'','Pendiente'),(2,'','Cancelado'),(3,'','Confirmado'),(4,'','Preparando'),(5,'','En camino'),(6,'','Entregado');
+insert  into `estado_pedido`(`id`,`habilitado`,`nombre_estado`) values (1,'','Pendiente'),(2,'','Cancelado'),(3,'','Confirmado'),(4,'','Preparando'),(5,'','En camino'),(6,'','Entregado'),(7,'','Listo'),(8,'','Facturado');
 
 /*Table structure for table `factura` */
 

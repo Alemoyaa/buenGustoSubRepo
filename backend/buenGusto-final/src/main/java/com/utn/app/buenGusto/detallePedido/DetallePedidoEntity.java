@@ -28,6 +28,16 @@ public class DetallePedidoEntity extends CommonEntity implements Serializable {
 	
 	@Transient
 	private double subtotal = 0.0d;
+	
+	private String aclaracion;
+
+	public String getAclaracion() {
+		return aclaracion;
+	}
+
+	public void setAclaracion(String aclaracion) {
+		this.aclaracion = aclaracion;
+	}
 
 	@ManyToOne(optional = false, cascade = CascadeType.ALL)
 	@JoinColumn(name = "articulo_id")
