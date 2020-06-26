@@ -18,7 +18,7 @@
 
       </tr>
     </thead>
-    <tbody>
+    <tbody *ngIf="pedidos.length > 0">
       <!-- Relleno tabla -->
       <tr *ngFor="let pedido of pedidos | paginate: {itemsPerPage: 4, currentPage: pageActual}">
         <th scope="row">{{pedido.id}}</th>
@@ -47,9 +47,15 @@
       </tr>
     </tbody>
   </table>
-  <div class="text-center">
+  <div class="text-center" *ngIf="pedidos.length > 0">
     <pagination-controls (pageChange)="pageActual = $event"></pagination-controls>
   </div>
+  <div class="text-center" *ngIf="pedidos.length === 0">
+    <div class="alert alert-success" role="alert">
+      No hay nuevos pedidos para la cocina
+    </div>
+  </div>
+
 
 </div>
 
@@ -68,14 +74,14 @@
       </div>
       <div class="modal-body">
 
-        <div class="tabla col-lg-12">
+        <div class="tabla col-lg-12" >
           <div class="row cuadro">
             <table class="table table-striped table-bordered">
               <thead>
                 <tr>
                   <th scope="col" class="text-center">Cantidad</th>
                   <th scope="col" class="text-center">Plato</th>
-                  <th scope="col" class="text-center">Imagen</th>
+                   <th scope="col" class="text-center">Imagen</th>
                   <th scope="col" class="text-center">Aclaracion</th>
                 </tr>
               </thead>

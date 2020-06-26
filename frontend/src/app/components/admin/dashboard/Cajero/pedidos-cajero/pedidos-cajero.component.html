@@ -1,4 +1,4 @@
-<div class="container mt-5 text-center" *ngIf="pedidos" >
+<div class="container mt-5 text-center" *ngIf="pedidos"  id="body">
   <div class="col-12 text-center jumbotron" style="margin-bottom: 20px;">
     <h1 class="display-4">Estado de Pedidos</h1>
     <div class="buscador">
@@ -21,7 +21,7 @@
   </div>
 
 
-<table class="table table-striped text-center" >
+<table class="table table-striped text-center" *ngIf="filtrar">
   <thead>
     <tr>
       <th scope="row">Orden</th>
@@ -36,7 +36,7 @@
   </thead>
 
 
-  <tbody *ngIf="filtrar" >
+  <tbody  >
     <tr *ngFor="let pedido of filtrar | paginate: {itemsPerPage: 5, currentPage: pageActual}">
       <th scope="row">1</th>
       <td>{{pedido.clientePedido.nombre}}</td>
@@ -58,9 +58,17 @@
     </tr>
   </tbody>
 
+    
+
 </table>
 
-  <pagination-controls  (pageChange)="pageActual = $event" ></pagination-controls>
+<div *ngIf="pedidos.length === 0">
+  <div class="alert alert-success" role="alert">
+    No hay nuevos pedidos para verificar
+  </div>
+</div>
+
+  <pagination-controls *ngIf="pedidos.length > 0"  (pageChange)="pageActual = $event" ></pagination-controls>
 
 
 </div>

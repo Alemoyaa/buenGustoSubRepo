@@ -1,34 +1,41 @@
-<div class="container mt-5">
+<div class="container mt-5" id="body">
 
   <div class="col-12 text-center jumbotron" style="margin-bottom: 20px;">
     <h1 class="display-4">Pedidos a facturar</h1>
-    <div class="buscador"> 
+    <div class="buscador">
       <i class="fas fa-cash-register" style="font-size:35px;"></i>
       <p>Cajero</p>
-    </div> 
+    </div>
   </div>
 
   <div class="row mb-4 ml-2">
-   
+
     <!-- Buscador -->
     <div class="buscador">
       <form>
         <p style="font-size: 25px;"> Buscar : </p>
-        
+
         <input class="form-control mr-sm-2" type="search" placeholder="Nombre/Apellido" aria-label="Search"
         [(ngModel)]="filtroBuscador"  [ngModelOptions]="{ standalone: true }"  />
       </form>
     </div>
   </div>
 
-<table class="table table-striped">
+<table class="table table-striped" *ngIf="filtrar">
   <thead>
     <tr>
       <th scope="row">Orden</th>
+<<<<<<< HEAD
       <td>Cliente</td>
-      <td>Fecha</td> 
+      <td>Fecha</td>
       <td>Estado</td>
       <td>Factura</td>
+=======
+      <th scope="row">Cliente</th>
+      <th scope="row">Fecha</th> 
+      <th scope="row">Estado</th>
+      <th scope="row">Factura</th>
+>>>>>>> local
     </tr>
   </thead>
   <!-- // fecha: Date;
@@ -40,21 +47,33 @@
   // detalleFactura: DetalleFactura[];
   // datosEmpresaID: DatosEmpresa; -->
 
-  <tbody *ngIf="filtrar" >
+  <tbody  >
     <tr *ngFor="let factura of filtrar | paginate: {itemsPerPage: 5, currentPage: pageActual}">
       <th scope="row">1</th>
       <td>{{factura.pedidofacturado.clientePedido.nombre}} {{factura.pedidofacturado.clientePedido.apellido}}</td>
       <td>{{factura.pedidofacturado.fechaRealizacion | date}}</td>
       <td>{{factura.pedidofacturado.estadoPedido.nombreEstado}}</td>
+<<<<<<< HEAD
       <td>
+
+=======
+      <td> 
        
+>>>>>>> local
         <button class="btn btn-primary" data-toggle="modal"
         data-target="#factura" (click)="mostrarFactura(factura)">Ver factura</button>
       </td>
     </tr>
   </tbody>
 </table>
-<pagination-controls  (pageChange)="pageActual = $event" ></pagination-controls>
+<pagination-controls *ngIf="facturas.length > 0" (pageChange)="pageActual = $event" ></pagination-controls>
+<div class="text-center" *ngIf="facturas.length === 0">
+  <div class="alert alert-success" role="alert">
+    No hay nuevos pedidos a facturar
+  </div>
 </div>
+</div>
+ 
+
 
 <app-modal-factura [facturaProp]="factura"></app-modal-factura>
