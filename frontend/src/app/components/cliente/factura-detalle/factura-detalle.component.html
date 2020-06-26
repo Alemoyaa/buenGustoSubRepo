@@ -3,6 +3,7 @@
     <div class="row">
       <div class="col-lg-6 justify-content-center d-flex p-5">
         <h1>El Buen Gusto</h1>
+   
       </div>
       <div class="col-lg-6 justify-content-end d-flex p-5">
         <h5 class="mr-5">Tipo de factura: {{ factura.tipoFactura }}</h5>
@@ -32,10 +33,10 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let item of factura.detalleFactura">
+            <tr *ngFor="let item of factura.pedidofacturado.lista_detallePedido">
               <td>{{ item.cantidad }}</td>
-              <td>{{ item.nombreArticulo }}</td>
-              <td>{{ item.precioUnitario }}</td>
+              <td>{{ item.articulo.denominacion }}</td>
+              <td>{{ item.articulo.precio_de_venta }}</td>
             </tr>
           </tbody>
         </table>
