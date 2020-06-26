@@ -17,7 +17,6 @@ export class CarritoComponent implements OnInit {
     private pedidoService: PedidoServices
   ) {}
 
-  tipoEnvio = 'null';
   pedido: Pedido = {
     clientePedido: null,
     estadoPedido: null,
@@ -37,6 +36,7 @@ export class CarritoComponent implements OnInit {
   articulosSinRepetir: Array<Articulo> = [];
   total = 0;
   otroMedioDePago = false;
+  envio = false;
 
   deleteArticulo(id) {
     let articulosStorage = localStorage.getItem('carrito');
@@ -105,22 +105,30 @@ export class CarritoComponent implements OnInit {
     });
   }
 
-  async setPedido() {
+  async crearPedido() {
     await this.loginService.isAuth().subscribe((data) => {
       this.clienteService.getByUidFirebase(data.uid).subscribe((user) => {
+        if (!this.envio) {
+          this.pedido.tipo_Envio = false;
+        } else {
+          this.pedido.tipo_Envio = true;
+        }
         this.pedido.clientePedido = user;
         this.pedido.hora_estimada_fin = new Date();
         this.pedido.fechaRealizacion = new Date();
-        if (this.tipoEnvio === '1') {
-          this.pedido.tipo_Envio = true;
-        } else {
-          this.pedido.tipo_Envio = false;
-        }
       });
     });
     this.pedidoService.post(this.pedido).subscribe((posted) => {
       console.log('posted');
     });
+  }
+
+  setEnvio(envio) {
+    if (envio === '0') {
+      this.envio = false;
+    } else {
+      this.envio = true;
+    }
   }
 
   setPago(pago) {
