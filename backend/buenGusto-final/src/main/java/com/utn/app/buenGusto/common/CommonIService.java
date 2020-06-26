@@ -1,7 +1,5 @@
 package com.utn.app.buenGusto.common;
 
-import java.util.List;
-
 public interface CommonIService<E> {
 
 	public E findById(long id) throws Exception;
@@ -12,7 +10,10 @@ public interface CommonIService<E> {
 
 	public int countPages(int size) throws Exception;
 
-	public List<E> findAll(int page, int size) throws Exception;
+	public Iterable<E> findAll() throws Exception;
 
 	public boolean delete(long id) throws Exception;
+
+	public Iterable<E> findAllByHabilitado(boolean habilitado) throws Exception;
+	
 }

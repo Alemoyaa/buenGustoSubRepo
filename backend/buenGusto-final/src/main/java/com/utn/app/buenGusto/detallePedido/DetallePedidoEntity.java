@@ -3,11 +3,7 @@ package com.utn.app.buenGusto.detallePedido;
 import java.io.Serializable;
 
 import javax.persistence.CascadeType;
-import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -28,11 +24,21 @@ public class DetallePedidoEntity extends CommonEntity implements Serializable {
 	
 	@Transient
 	private double subtotal = 0.0d;
+	
+	private String aclaracion;
+	
+	public String getAclaracion() {
+		return aclaracion;
+	}
+
+	public void setAclaracion(String aclaracion) {
+		this.aclaracion = aclaracion;
+	}
 
 	@ManyToOne(optional = false, cascade = CascadeType.ALL)
 	@JoinColumn(name = "articulo_id")
 	private ArticuloEntity articulo;
-
+	
 	public int getCantidad() {
 		return cantidad;
 	}
