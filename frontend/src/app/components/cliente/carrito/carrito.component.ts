@@ -34,6 +34,7 @@ export class CarritoComponent implements OnInit {
   }
 
   articulos: Array<Articulo> = [];
+  articulosSinRepetir: Array<Articulo> = [];
   total = 0;
   otroMedioDePago = false;
 
@@ -81,7 +82,20 @@ export class CarritoComponent implements OnInit {
       this.articulos.push(element);
     });
     console.log('e', this.articulos);
+    this.setCantidad();
     this.getTotal();
+  }
+
+  setCantidad() {
+    this.articulos.forEach((e) => {
+      if (this.articulosSinRepetir.includes(e)) {
+        console.log('si');
+      } else {
+        this.articulosSinRepetir = [];
+        this.articulosSinRepetir.push(e);
+      }
+    });
+    console.log(this.articulosSinRepetir);
   }
 
   getTotal() {
