@@ -117,6 +117,7 @@ export class GestorOrdenesCocineroComponent implements OnInit {
   // }
 
 
+
   //Traer estados de pedido, traerme solo los confirmados
   getAllEstados() {
     this.estadoService.getAll().subscribe(
