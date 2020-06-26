@@ -44,7 +44,7 @@ export class FacturacionCajeroComponent implements OnInit {
       data => {
         data.filter((factura) => {
 
-          if (factura.pedidofacturado.estadoPedido.id === 4 || factura.pedidofacturado.estadoPedido.id === 5) {
+          if (factura.pedidofacturado.estadoPedido.nombreEstado === 'Preparando') {
             // console.log(factura);
             return this.facturas.push(factura);
           }

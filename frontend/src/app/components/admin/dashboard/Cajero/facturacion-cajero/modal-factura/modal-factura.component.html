@@ -46,15 +46,16 @@
                           </tr>
                         </thead>
                         <tbody>
-                          <tr *ngFor="let item of factura.detalleFactura">
+                          <tr *ngFor="let item of factura.pedidofacturado.lista_detallePedido">
                             <td>{{ item.cantidad }}</td>
-                            <td>{{ item.nombreArticulo }}</td>
-                            <td>{{ item.precioUnitario }}</td>
+                            <td>{{ item.articulo.denominacion}}</td>
+                            <td>{{ item.articulo.precio_de_venta}}</td>
                           </tr>
-                        </tbody>
+                        </tbody> 
                       </table>
                     </div>
                   </div>
+                  
                   <div class="row col-lg-12 justify-content-end d-flex">
                     <b>
                       <p>
@@ -67,7 +68,9 @@
               </div>
               
               <div class="printFactura mt-3 mb-3 text-center">
-                <button class="btn btn-success" (click)="crearFacturaPDF()">
+                <button class="btn btn-success" (click)="cambiarEstado(factura)" > Facturar Pedido </button>
+                
+                <button class="btn btn-warning ml-4" (click)="crearFacturaPDF()">
                   Crear factura PDF
                 </button>
               </div>
