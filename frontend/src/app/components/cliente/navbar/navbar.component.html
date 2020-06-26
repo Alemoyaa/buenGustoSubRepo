@@ -29,6 +29,9 @@
         <a class="btn btn-success" id="boton-ofertas"  [routerLink]="['/catalogo']" role="button">Catalogo</a>
 
         <li *ngIf="navbarUsuario" class="nav-item" role="presentation">
+          <a class="nav-link" [routerLink]="['/carrito']">Carrito</a>
+        </li>
+        <li *ngIf="navbarUsuario" class="nav-item" role="presentation">
           <a class="nav-link" [routerLink]="['/user-profile/', uid]">Perfil</a>
         </li>
         <li *ngIf="navbarUsuario" class="nav-item" role="presentation">
