@@ -1,6 +1,6 @@
 <!-- <div class="" *ngIf="!hideNavbar()"> -->
 
-
+  
 <nav class="navbar navbar-light navbar-expand-sm sticky-top">
   <div class="container">
 
@@ -11,11 +11,12 @@
       <a class="navbar-brand text-success" id="logo-letra" [routerLink]="['/']">Buen<strong>Gusto</strong></a>
     </h5>
 
+   
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent">
       <span class="navbar-toggler-icon"></span>
     </button>
 
-    <div class="collapse navbar-collapse" id="navbarToggleExternalContent">
+    <div class="collapse navbar-collapse navbar-scrollable" id="navbarToggleExternalContent">
       <div class="navbar-nav ml-auto">
 
         <a *ngIf="!navbarUsuario" class="nav-item" role="presentation">
@@ -25,8 +26,10 @@
         <li *ngIf="!navbarUsuario" class="nav-item" role="presentation">
           <a class="nav-link" [routerLink]="['/register']">Registrar</a>
         </li>
-
-        <a class="btn btn-success" id="boton-ofertas"  [routerLink]="['/catalogo']" role="button">Catalogo</a>
+        <li>
+          <a class=" nav-link"  [routerLink]="['/catalogo']">Catalogo</a>
+        </li>
+        
 
         <li *ngIf="navbarUsuario" class="nav-item" role="presentation">
           <a class="nav-link" [routerLink]="['/carrito']">Carrito</a>
@@ -47,11 +50,11 @@
             Panel de Administrador
             <i class="fas fa-tools"> </i>
           </a>
-          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <!-- to do:   Condicion si es admin mostrar, si no es admin no mostrar el div seleccionado -->
-            <div class="seccionAdministrador">
-              <!-- comienzo de el dropdown menu -->
-              <div class="text-center">
+          <div class="dropdown-menu" id="anyClass"  aria-labelledby="navbarDropdown"> 
+             <!-- to do:   Condicion si es admin mostrar, si no es admin no mostrar el div seleccionado -->
+            <div class="seccionAdministrador"> 
+              <!-- comienzo de el dropdown menu  -->
+               <div class="text-center">
                 <p> <strong>Administrador</strong></p>
 
               </div>
@@ -60,27 +63,27 @@
 
               <a class="dropdown-item" [routerLink]="['/dashboard/admin/gestionArticulos']">
                 <p><i class="fas fa-fw fa-pizza-slice"></i> Platos</p>
-              </a>
+              </a> 
               <!-- fin platos -->
 
               <a class="dropdown-item" [routerLink]="['/dashboard/admin/gestionStock']">
                 <p><i class="fas fa-fw fa-clipboard"></i> Stock</p>
-              </a>
+              </a> 
               <!-- fin stock -->
 
               <a class="dropdown-item" [routerLink]="['/dashboard/admin/gestionEmpleados']">
                 <p><i class="fas fa-user"></i> Usuarios</p>
-              </a>
+              </a> 
               <!-- fin Usuarios -->
 
               <a class="dropdown-item" [routerLink]="['/dashboard/admin/estadisticas']">
                 <p><i class="fas fa-fw fa-chart-area"></i> Estadisticas</p>
               </a>
-            </div>
+            </div> 
 
 
-            <!-- to do: si es admin o cajero mostrar este div, sino no -->
-            <div class="seccionCajero">
+            <!-- to do: si es admin o cajero mostrar este div, sino no  -->
+           <div class="seccionCajero">
               <div class="dropdown-divider"></div>
               <div class="text-center">
                 <p> <strong>Cajero</strong> </p>
@@ -98,9 +101,9 @@
                   ]">
                 <p><i class="fas fa-money"></i> Facturacion</p>
               </a>
-            </div>
+            </div> 
             <!-- to do: si es admin o cocinero mostrar este div, sino no -->
-            <div class="seccionCocinero">
+           <div class="seccionCocinero">
               <div class="dropdown-divider"></div>
               <div class="text-center">
                 <p> <strong>Cocinero</strong> </p>
@@ -113,8 +116,8 @@
               </a>
             </div>
           </div>
-        </li>
-      </div>
-    </div>
-  </div>
-</nav>
+        </li> 
+       </div>  
+     </div>
+  </div> 
+</nav> 
