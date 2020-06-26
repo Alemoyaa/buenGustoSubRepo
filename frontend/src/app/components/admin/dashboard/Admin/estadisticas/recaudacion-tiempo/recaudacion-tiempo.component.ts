@@ -1,3 +1,4 @@
+import { ExcelService } from './../../../../../../services/excelServices/excel.service';
 import { Pedido } from './../../../../../../entidades/Pedido';
 import { PedidoServices } from './../../../../../../services/serviciosCliente/pedidoServices/pedido.service';
 import { Chart } from 'node_modules/chart.js';
@@ -18,7 +19,12 @@ export class RecaudacionTiempoComponent implements OnInit {
   recaudacionTotal: number;
   mostrar: boolean = true;
 
-  constructor(private servicePedido: PedidoServices) {}
+  listaDePedidos: Pedido[];
+
+  constructor(
+    private servicePedido: PedidoServices,
+    private excelService: ExcelService
+  ) {}
 
   ngOnInit(): void {}
 
@@ -35,6 +41,7 @@ export class RecaudacionTiempoComponent implements OnInit {
         .subscribe(
           (res) => {
             this.calcularRecaudacion(res);
+            this.listaDePedidos = res;
           },
           (err) => {
             Swal.fire({
@@ -61,6 +68,13 @@ export class RecaudacionTiempoComponent implements OnInit {
       });
       this.recaudacionTotal += precioDetallePedido;
     });
+  }
+
+  exportAsXLSX(): void {
+    this.excelService.exportAsExcelFile(
+      this.listaDePedidos,
+      'Recaudacion por tiempo'
+    );
   }
 
   newChart(nombre, labels, data) {

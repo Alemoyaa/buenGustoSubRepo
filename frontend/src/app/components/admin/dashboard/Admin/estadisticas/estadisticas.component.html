@@ -2,21 +2,18 @@
   <div class="col-12 text-center jumbotron" style="margin-bottom: 20px;">
     <h1 class="display-4">Estadisticas</h1>
     <div class="buscador">
-      <i class="fa fa-user " style="font-size:35px;"></i>
+      <i class="fa fa-user" style="font-size: 35px;"></i>
       <p>Admin</p>
     </div>
   </div>
- 
 
   <div class="row mb-4 ml-2">
     <p class="lead mt-2">
-     <strong>Ranking comidas más pedidas en un periodo de tiempo determinado</strong> 
+      <strong
+        >Ranking comidas más pedidas en un periodo de tiempo determinado</strong
+      >
     </p>
   </div>
-
-  
-
- 
 
   <button
     type="button"
@@ -98,6 +95,14 @@
           <canvas id="canvaFecha"></canvas>
           <div class="card-body">
             <h4>Desde: {{ DateDesde }} - hasta: {{ DateHasta }}</h4>
+            <button
+              class="btn btn-success"
+              (click)="exportAsXLSX()"
+              *ngIf="mostrarExcel"
+            >
+              <i class="fa fa-file-excel-o"></i>
+              <p class="lead">Exportar a excel</p>
+            </button>
           </div>
         </div>
       </div>
