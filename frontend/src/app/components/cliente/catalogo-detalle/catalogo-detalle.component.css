@@ -4,6 +4,24 @@
   text-align: center;
 }
 
+/* #body {
+  font-family: -apple-system, BlinkMacSystemFont, Raleway, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
+    "Segoe UI Symbol";
+} */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  font-family: -apple-system, BlinkMacSystemFont, Raleway, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
+    "Segoe UI Symbol";
+}
+
 .articulo-detalle {
   margin-top: 2em;
   margin-bottom: 2em;
@@ -22,7 +40,7 @@
   text-align: right;
 }
 
-h3 {
+/* h3 {
   font-family: "Sriracha", cursive;
 }
 
@@ -32,7 +50,7 @@ h5 {
 
 h4 {
   font-family: "Staatliches", cursive;
-}
+} */
 
 .widthfull {
   width: 100%;
