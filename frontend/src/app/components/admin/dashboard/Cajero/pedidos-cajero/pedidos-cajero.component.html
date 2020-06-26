@@ -1,14 +1,14 @@
 <div class="container mt-5 text-center" *ngIf="pedidos" >
   <div class="col-12 text-center jumbotron" style="margin-bottom: 20px;">
     <h1 class="display-4">Estado de Pedidos</h1>
-    <div class="buscador"> 
+    <div class="buscador">
       <i class="fas fa-cash-register" style="font-size:35px;"></i>
       <p>Cajero</p>
-    </div> 
+    </div>
   </div>
 
   <div class="row mb-4 ml-2">
-   
+
     <!-- Buscador -->
     <div class="buscador">
       <form>
@@ -19,7 +19,7 @@
       </form>
     </div>
   </div>
-  
+
 
 <table class="table table-striped text-center" >
   <thead>
@@ -32,10 +32,10 @@
       <th scope="row">Estado</th>
 
       <th scope="row">Aceptar/Rechazar Pedido</th>
-    </tr> 
+    </tr>
   </thead>
- 
-  
+
+
   <tbody *ngIf="filtrar" >
     <tr *ngFor="let pedido of filtrar | paginate: {itemsPerPage: 5, currentPage: pageActual}">
       <th scope="row">1</th>
@@ -44,25 +44,25 @@
       <td>
         <p *ngIf="pedido.tipo_Envio == false"> Retira en Local</p>
         <p *ngIf="pedido.tipo_Envio == true"> Delivery</p>
-      </td> 
+      </td>
       <td>{{pedido.fechaRealizacion | date}}</td>
       <td>{{pedido.estadoPedido.nombreEstado}}</td>
       <td>
         <form [formGroup]="formularioEstado">
           <select class="form-control" name="estado"  formControlName="id" (change)="seleccionarEstado($event.target.value, pedido)">
-            <option  value="2">Cancelar</option>
-            <option  value="3">Confirmar</option>
+            <option class="cancelar" value="2">  Cancelar</option>
+            <option class="confirmar" value="3">Confirmar</option>
           </select>
         </form>
       </td>
     </tr>
   </tbody>
- 
+
 </table>
 
   <pagination-controls  (pageChange)="pageActual = $event" ></pagination-controls>
 
- 
+
 </div>
 
 

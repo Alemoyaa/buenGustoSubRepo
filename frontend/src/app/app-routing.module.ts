@@ -1,5 +1,6 @@
 
 
+
 import { MenuPlatosComponent } from './components/admin/dashboard/Admin/crud-platos/menu-platos/menu-platos.component';
 import { PedidosPorClienteComponent } from './components/admin/dashboard/Admin/estadisticas/pedidos-por-cliente/pedidos-por-cliente.component';
 import { PedidosDetalleComponent } from './components/cliente/pedidos-detalle/pedidos-detalle.component';
@@ -15,18 +16,20 @@ import { NotfoundComponent } from './components/cliente/notfound/notfound.compon
 import { CatalogoComponent } from './components/cliente/catalogo/catalogo.component';
 import { HomeComponent } from './components/cliente/home/home.component';
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { Routes, RouterModule, CanActivate } from '@angular/router';
 import { UsuariosComponent } from './components/admin/dashboard/Admin/usuarios/usuarios.component';
 import { PedidosCajeroComponent } from './components/admin/dashboard/Cajero/pedidos-cajero/pedidos-cajero.component';
 import { FacturacionCajeroComponent } from './components/admin/dashboard/Cajero/facturacion-cajero/facturacion-cajero.component';
 import { GestorOrdenesCocineroComponent } from './components/admin/dashboard/Cocinero/gestor-ordenes-cocinero/gestor-ordenes-cocinero.component';
 import { ModificacionPlatoCocineroComponent } from './components/admin/dashboard/Cocinero/modificacion-plato-cocinero/modificacion-plato-cocinero.component';
+import { AuthGuard } from './Guard/auth.guard';
+
 const routes: Routes = [
   // Vistas usuario
   { path: '', component: HomeComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
-  { path: 'catalogo', component: CatalogoComponent },
+  { path: 'catalogo', component: CatalogoComponent , canActivate:[AuthGuard]},
   { path: 'catalogo-detalle/:id', component: CatalogoDetalleComponent },
   { path: 'user-profile/:id', component: UserProfileComponent },
   { path: 'carrito', component: CarritoComponent },

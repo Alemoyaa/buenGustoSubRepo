@@ -1,11 +1,9 @@
-import { Usuario } from './../../../entidades/Usuario';
-import { UsuarioServices } from './../../../services/serviciosCliente/usuarioServices/usuario.services';
 import { ClienteService } from './../../../services/serviciosCliente/clienteServices/cliente.service';
 import { LoginService } from './../../../services/loginServices/login.service';
 import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Cliente } from '../../../entidades/Cliente';
-import { Domicilio } from '../../../entidades/Domicilio';
+
 
 @Component({
   selector: 'app-user-profile',
@@ -40,7 +38,7 @@ export class UserProfileComponent implements OnInit {
   };
 
   constructor(
-    private service: UsuarioServices,
+    private service: ClienteService,
     private rutaActiva: ActivatedRoute,
     private serviceLogin: LoginService
   ) {
@@ -60,7 +58,7 @@ export class UserProfileComponent implements OnInit {
 
   async getOneByUid(uid: string) {
     await this.service.getByUidFirebase(uid).subscribe((data) => {
-      this.cliente.usuario = data;
+      this.cliente = data;
       console.log(this.cliente);
     });
   }

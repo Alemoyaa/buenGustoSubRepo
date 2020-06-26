@@ -17,7 +17,5 @@ export class UsuarioServices extends CommonService<Usuario> {
     return this.http.get<Usuario>(this._url + 'email/' + email);
   }
 
-  getByUidFirebase(uid: string): Observable<Usuario> {
-    return this.http.get<Usuario>(this._url + 'firebase/' + uid);
-  }
+
 }
