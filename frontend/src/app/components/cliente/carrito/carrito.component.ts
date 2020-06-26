@@ -17,7 +17,6 @@ export class CarritoComponent implements OnInit {
     private pedidoService: PedidoServices
   ) {}
 
-  tipoEnvio = 'null';
   pedido: Pedido = {
     clientePedido: null,
     estadoPedido: null,
@@ -34,7 +33,10 @@ export class CarritoComponent implements OnInit {
   }
 
   articulos: Array<Articulo> = [];
+  articulosSinRepetir: Array<Articulo> = [];
   total = 0;
+  otroMedioDePago = false;
+  envio = false;
 
   deleteArticulo(id) {
     let articulosStorage = localStorage.getItem('carrito');
@@ -80,7 +82,20 @@ export class CarritoComponent implements OnInit {
       this.articulos.push(element);
     });
     console.log('e', this.articulos);
+    this.setCantidad();
     this.getTotal();
+  }
+
+  setCantidad() {
+    this.articulos.forEach((e) => {
+      if (this.articulosSinRepetir.includes(e)) {
+        console.log('si');
+      } else {
+        this.articulosSinRepetir = [];
+        this.articulosSinRepetir.push(e);
+      }
+    });
+    console.log(this.articulosSinRepetir);
   }
 
   getTotal() {
@@ -90,30 +105,37 @@ export class CarritoComponent implements OnInit {
     });
   }
 
-  setEnvio(tipoEnvio) {
-    if (tipoEnvio === '1') {
-      this.tipoEnvio = '1';
-    }
-    if (tipoEnvio === '0') {
-      this.tipoEnvio = '0';
-    }
-  }
-
-  async setPedido() {
+  async crearPedido() {
     await this.loginService.isAuth().subscribe((data) => {
       this.clienteService.getByUidFirebase(data.uid).subscribe((user) => {
+        if (!this.envio) {
+          this.pedido.tipo_Envio = false;
+        } else {
+          this.pedido.tipo_Envio = true;
+        }
         this.pedido.clientePedido = user;
         this.pedido.hora_estimada_fin = new Date();
         this.pedido.fechaRealizacion = new Date();
-        if (this.tipoEnvio === '1') {
-          this.pedido.tipo_Envio = true;
-        } else {
-          this.pedido.tipo_Envio = false;
-        }
       });
     });
     this.pedidoService.post(this.pedido).subscribe((posted) => {
       console.log('posted');
     });
+  }
+
+  setEnvio(envio) {
+    if (envio === '0') {
+      this.envio = false;
+    } else {
+      this.envio = true;
+    }
+  }
+
+  setPago(pago) {
+    if (pago === '0') {
+      this.otroMedioDePago = false;
+    } else {
+      this.otroMedioDePago = true;
+    }
   }
 }

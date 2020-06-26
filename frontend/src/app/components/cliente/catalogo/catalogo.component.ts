@@ -2,6 +2,8 @@ import { ArticuloServices } from '../../../services/serviciosCliente/articuloSer
 import { Articulo } from 'src/app/entidades/Articulo';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ArticuloManufacturado } from 'src/app/entidades/ArticuloManufacturado';
+import { ArticuloManufacturadoService } from 'src/app/services/serviciosCliente/articuloManufacturadoServices/articuloManufacturado.service';
 
 @Component({
   selector: 'app-catalogo',
