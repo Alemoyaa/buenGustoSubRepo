@@ -45,7 +45,8 @@ export class GestorOrdenesCocineroComponent implements OnInit {
   }
 
 
-  constructor(private pedidoService: PedidoServices,
+  constructor(
+    private pedidoService: PedidoServices,
     private estadoService: EstadoPedidoServices,
     private fb: FormBuilder) { }
 

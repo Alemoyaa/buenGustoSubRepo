@@ -37,7 +37,7 @@
     </div>
   </div>
 
-  <table class="table table-striped text-center" >
+  <table class="table table-striped text-center" *ngIf="filtrar">
     <thead>
       <tr>
         <th scope="col"></th>
@@ -87,7 +87,12 @@
     </tbody>
   </table>
   <div id="paginador">
-    <pagination-controls  (pageChange)="pageActual = $event" ></pagination-controls>
+    <pagination-controls *ngIf="usuarios.length > 0"  (pageChange)="pageActual = $event" ></pagination-controls>
+  </div>
+  <div class="text-center" *ngIf="usuarios.length === 0">
+    <div class="alert alert-danger" role="alert">
+      No hay usuarios en la base de datos
+    </div>
   </div>
   
 </div>
