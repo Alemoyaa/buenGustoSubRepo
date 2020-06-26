@@ -138,4 +138,38 @@ export class CarritoComponent implements OnInit {
       this.otroMedioDePago = true;
     }
   }
+
+  get checkearHorario(): Boolean {
+    var diayHoraActual = new Date();
+    var horaActual = diayHoraActual.getHours();
+    var minutoActual = diayHoraActual.getMinutes();
+    var segundoActual = diayHoraActual.getSeconds();
+    var dia = new Array(7);
+    dia[0] = 'Domingo';
+    dia[1] = 'Lunes';
+    dia[2] = 'Martes';
+    dia[3] = 'Miercoles';
+    dia[4] = 'Jueves';
+    dia[5] = 'Viernes';
+    dia[6] = 'Sabado';
+    var nombredia = dia[diayHoraActual.getDay()];
+
+    console.log(diayHoraActual);
+    console.log(horaActual);
+    console.log(minutoActual);
+    console.log(segundoActual);
+    console.log(nombredia);
+
+    if (
+      (nombredia = 'Sabado' || 'Domingo') &&
+      horaActual >= 11 &&
+      horaActual < 15
+    ) {
+      return true;
+    } else if (horaActual > 20 && horaActual <= 23) {
+      return true;
+    } else {
+      return false;
+    }
+  }
 }

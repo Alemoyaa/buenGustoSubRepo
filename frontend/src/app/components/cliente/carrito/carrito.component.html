@@ -82,8 +82,10 @@
           </button>
         </a>
 
+        <h2 *ngIf="!this.checkearHorario">El local se encuentra cerrado</h2>
+
         <button
-          *ngIf="!(articulos.length === 0)"
+          *ngIf="!(articulos.length === 0) && this.checkearHorario"
           type="button"
           class="btn btn-success"
           data-toggle="modal"
