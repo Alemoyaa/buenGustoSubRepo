@@ -32,6 +32,21 @@
                     <br />
                     <b>${{ articulo.precio_de_venta }}</b>
                     <div class="stars"></div>
+                    <div class="ingredientes">
+                      <ul>
+                        <ng-container
+                          *ngFor="
+                            let ingrediente of articulo.lista_detalleManufacturado
+                          "
+                        >
+                          <li class="align-left">
+                            <small>{{
+                              ingrediente.articuloInsumoID.denominacion
+                            }}</small>
+                          </li>
+                        </ng-container>
+                      </ul>
+                    </div>
                     <button
                       type="button"
                       class="btn btn-primary"

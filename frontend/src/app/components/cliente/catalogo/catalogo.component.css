@@ -54,3 +54,7 @@
 .float-right {
   float: right;
 }
+
+.align-left {
+  text-align: left;
+}

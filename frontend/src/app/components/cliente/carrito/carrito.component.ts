@@ -107,16 +107,16 @@ export class CarritoComponent implements OnInit {
 
   async setPedido() {
     await this.loginService.isAuth().subscribe((data) => {
-      // this.clienteService.getByUidFirebase(data.uid).subscribe((user) => {
-      //   this.pedido.clientePedido = user;
-      //   this.pedido.hora_estimada_fin = new Date();
-      //   this.pedido.fechaRealizacion = new Date();
-      //   if (this.tipoEnvio === '1') {
-      //     this.pedido.tipo_Envio = true;
-      //   } else {
-      //     this.pedido.tipo_Envio = false;
-      //   }
-      // });
+      this.clienteService.getByUidFirebase(data.uid).subscribe((user) => {
+        this.pedido.clientePedido = user;
+        this.pedido.hora_estimada_fin = new Date();
+        this.pedido.fechaRealizacion = new Date();
+        if (this.tipoEnvio === '1') {
+          this.pedido.tipo_Envio = true;
+        } else {
+          this.pedido.tipo_Envio = false;
+        }
+      });
     });
     this.pedidoService.post(this.pedido).subscribe((posted) => {
       console.log('posted');
