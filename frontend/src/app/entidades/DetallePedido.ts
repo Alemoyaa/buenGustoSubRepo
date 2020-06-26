@@ -5,4 +5,5 @@ export class DetallePedido extends Common {
   articulo: Articulo;
   cantidad: number;
   subtotal: number;
+  aclaracion: string;
 }

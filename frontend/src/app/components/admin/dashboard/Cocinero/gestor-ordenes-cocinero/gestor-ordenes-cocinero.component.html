@@ -23,7 +23,7 @@
       <tr *ngFor="let pedido of pedidos | paginate: {itemsPerPage: 4, currentPage: pageActual}">
         <th scope="row">{{pedido.id}}</th>
         <td>{{pedido.fechaRealizacion}}</td>
-        <td>{{pedido.hora_estimada_fin |date:'mediumTime'}}</td>
+        <td>{{pedido.hora_estimada_fin |date:'shortTime'}}</td>
         <td>
           <button class="btn btn-danger">
             +10'
@@ -85,7 +85,7 @@
                   <td class="text-center">{{detalle.articulo.denominacion}} </td>
                   <td><img class="img-thumbnail img-fluid" src={{detalle.articulo.url_imagen}} width="140" height="40">
                   </td>
-                  <td class="text-center">Hamburguesa sin condimento </td>
+                  <td class="text-center">{{detalle.aclaracion}}</td>
                 </tr>
               </tbody>
             </table>
