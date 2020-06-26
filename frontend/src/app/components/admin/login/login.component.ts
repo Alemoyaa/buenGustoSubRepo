@@ -14,9 +14,7 @@ export class LoginComponent implements OnInit {
   datosCorrectos: boolean = true;
   textoError: string = '';
 
-
-
-  constructor(private fb: FormBuilder, private loginService: LoginService) { }
+  constructor(private fb: FormBuilder, private loginService: LoginService) {}
 
   ngOnInit(): void {
     this.crearFormularioLogin();
@@ -33,8 +31,10 @@ export class LoginComponent implements OnInit {
   }
 
   ingresarConEmailPassword() {
-
-    this.loginService.loginEmailPassword(this.formularioLogin.value.email,this.formularioLogin.value.password);
+    this.loginService.loginEmailPassword(
+      this.formularioLogin.value.email,
+      this.formularioLogin.value.password
+    );
     // if (this.formularioLogin.valid) {
     //   this.datosCorrectos = true;
     //   this.mostrarCargar = true;
@@ -64,10 +64,13 @@ export class LoginComponent implements OnInit {
     this.loginService.loginGoogle();
   }
 
-
   recuperarPassword() {
-    this.loginService.recuperarPassword(this.formularioLogin.value.email).then(() => {
-      alert('Se ha enviado un correo a su cuenta. Porfavor siga los pasos indicados');
-    });
+    this.loginService
+      .recuperarPassword(this.formularioLogin.value.email)
+      .then(() => {
+        alert(
+          'Se ha enviado un correo a su cuenta. Porfavor siga los pasos indicados'
+        );
+      });
   }
 }

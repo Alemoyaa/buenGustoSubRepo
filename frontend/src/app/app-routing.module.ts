@@ -1,6 +1,3 @@
-
-
-
 import { MenuPlatosComponent } from './components/admin/dashboard/Admin/crud-platos/menu-platos/menu-platos.component';
 import { PedidosPorClienteComponent } from './components/admin/dashboard/Admin/estadisticas/pedidos-por-cliente/pedidos-por-cliente.component';
 import { PedidosDetalleComponent } from './components/cliente/pedidos-detalle/pedidos-detalle.component';
@@ -29,46 +26,77 @@ const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
-  { path: 'catalogo', component: CatalogoComponent , canActivate:[AuthGuard]},
-  { path: 'catalogo-detalle/:id', component: CatalogoDetalleComponent },
-  { path: 'user-profile/:id', component: UserProfileComponent },
-  { path: 'carrito', component: CarritoComponent },
-  { path: 'pedido/:id', component: PedidosDetalleComponent },
-  { path: 'factura/:id', component: FacturaDetalleComponent },
+  { path: 'catalogo', component: CatalogoComponent },
+  {
+    path: 'catalogo-detalle/:id',
+    component: CatalogoDetalleComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'user-profile/:id',
+    component: UserProfileComponent,
+    canActivate: [AuthGuard],
+  },
+  { path: 'carrito', component: CarritoComponent, canActivate: [AuthGuard] },
+  {
+    path: 'pedido/:id',
+    component: PedidosDetalleComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'factura/:id',
+    component: FacturaDetalleComponent,
+    canActivate: [AuthGuard],
+  },
   //  vistas de administrador / cajero / cocinero : Faltan hacer los Guards
   // El administrador deberiaa poder ver todas (lasa de admin, cajero y cocinero)
   // { path: 'dashboard', component: DashboardComponent },
-  { path: 'dashboard/admin/gestionEmpleados', component: UsuariosComponent },
+  {
+    path: 'dashboard/admin/gestionEmpleados',
+    component: UsuariosComponent,
+    canActivate: [AuthGuard],
+  },
   {
     path: 'dashboard/admin/gestionStock',
     component: StockComponent,
+    canActivate: [AuthGuard],
   },
   {
     path: 'dashboard/admin/gestionArticulos',
     component: MenuPlatosComponent,
+    canActivate: [AuthGuard],
   }, //Estadisticas
-  { path: 'dashboard/admin/estadisticas', component: EstadisticasComponent },
+  {
+    path: 'dashboard/admin/estadisticas',
+    component: EstadisticasComponent,
+    canActivate: [AuthGuard],
+  },
   {
     path: 'dashboard/admin/estadisticas/cliente',
     component: PedidosPorClienteComponent,
+    canActivate: [AuthGuard],
   },
   // vistas cajero
   {
     path: 'dashboard/admin/cajero/administracionDePedidos',
     component: PedidosCajeroComponent,
+    canActivate: [AuthGuard],
   },
   {
     path: 'dashboard/admin/cajero/administracionFacturacion',
     component: FacturacionCajeroComponent,
+    canActivate: [AuthGuard],
   },
   // vistas cocinero
   {
     path: 'dashboard/admin/cocinero/gestorOrdenes',
     component: GestorOrdenesCocineroComponent,
+    canActivate: [AuthGuard],
   },
   {
     path: 'dashboard/admin/cocinero/modificacionPlato',
     component: ModificacionPlatoCocineroComponent,
+    canActivate: [AuthGuard],
   },
   { path: '**', component: NotfoundComponent },
 ];
