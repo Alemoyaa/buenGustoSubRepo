@@ -1,9 +1,12 @@
+import { Cliente } from 'src/app/entidades/Cliente';
+import { DetallePedido } from 'src/app/entidades/DetallePedido';
 import { Component, OnInit } from '@angular/core';
 import { Articulo } from 'src/app/entidades/Articulo';
 import { Pedido } from 'src/app/entidades/Pedido';
 import { LoginService } from 'src/app/services/loginServices/login.service';
 import { ClienteService } from 'src/app/services/serviciosCliente/clienteServices/cliente.service';
 import { PedidoServices } from 'src/app/services/serviciosCliente/pedidoServices/pedido.service';
+import { EstadoPedido } from 'src/app/entidades/EstadoPedido';
 
 @Component({
   selector: 'app-carrito',
@@ -11,6 +14,8 @@ import { PedidoServices } from 'src/app/services/serviciosCliente/pedidoServices
   styleUrls: ['./carrito.component.css'],
 })
 export class CarritoComponent implements OnInit {
+  listaDetallePedido: DetallePedido[] = [];
+
   constructor(
     private loginService: LoginService,
     private clienteService: ClienteService,
@@ -106,20 +111,48 @@ export class CarritoComponent implements OnInit {
   }
 
   async crearPedido() {
-    await this.loginService.isAuth().subscribe((data) => {
-      this.clienteService.getByUidFirebase(data.uid).subscribe((user) => {
-        if (!this.envio) {
-          this.pedido.tipo_Envio = false;
-        } else {
-          this.pedido.tipo_Envio = true;
+    await this.loginService.isAuth().subscribe(async (data) => {
+      console.log('_-----------> ', data);
+      await this.clienteService.getByUidFirebase(data.uid).subscribe(
+        (user) => {
+          this.pedido = new Pedido();
+          if (!this.envio) {
+            this.pedido.tipo_Envio = false;
+          } else {
+            this.pedido.tipo_Envio = true;
+          }
+
+          console.log('--- user', user);
+
+          this.pedido.clientePedido = new Cliente();
+
+          this.pedido.clientePedido = user;
+          this.pedido.fechaRealizacion = new Date();
+          this.pedido.hora_estimada_fin = new Date();
+
+          let articulosStorage = localStorage.getItem('carrito');
+          let articulosJson = JSON.parse(articulosStorage);
+
+          articulosJson.forEach((element) => {
+            this.listaDetallePedido.push(element);
+            console.log(element);
+          });
+
+          this.pedido.lista_detallePedido = this.listaDetallePedido;
+
+          this.pedido.estadoPedido = new EstadoPedido();
+
+          this.pedido.estadoPedido.id = 1;
+
+          console.log(this.pedido);
+          this.pedidoService.post(this.pedido).subscribe((posted) => {
+            console.log('posted', posted);
+          });
+        },
+        (err) => {
+          console.log(err);
         }
-        this.pedido.clientePedido = user;
-        this.pedido.hora_estimada_fin = new Date();
-        this.pedido.fechaRealizacion = new Date();
-      });
-    });
-    this.pedidoService.post(this.pedido).subscribe((posted) => {
-      console.log('posted');
+      );
     });
   }
 
@@ -154,11 +187,11 @@ export class CarritoComponent implements OnInit {
     dia[6] = 'Sabado';
     var nombredia = dia[diayHoraActual.getDay()];
 
-    console.log(diayHoraActual);
-    console.log(horaActual);
-    console.log(minutoActual);
-    console.log(segundoActual);
-    console.log(nombredia);
+    // console.log(diayHoraActual);
+    // console.log(horaActual);
+    // console.log(minutoActual);
+    // console.log(segundoActual);
+    // console.log(nombredia);
 
     if (
       (nombredia = 'Sabado' || 'Domingo') &&
@@ -169,7 +202,7 @@ export class CarritoComponent implements OnInit {
     } else if (horaActual > 20 && horaActual <= 23) {
       return true;
     } else {
-      return false;
+      return true;
     }
   }
 }
