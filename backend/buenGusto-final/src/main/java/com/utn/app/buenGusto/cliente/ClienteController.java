@@ -37,13 +37,4 @@ public class ClienteController extends CommonController<ClienteEntity, ClienteSe
 		}
 	} 
 	
-	@GetMapping("/email/{email}") 
-	public ResponseEntity<?> getByEmail(@PathVariable String email) {
-		try {
-			return ResponseEntity.status(HttpStatus.OK).body(service.findByEmail(email));
-		} catch (Exception e) {
-			return ResponseEntity.status(HttpStatus.NOT_FOUND)
-					.body("{\"Error in getOneByEmail \": \"" + e.getMessage() + "\"}");
-		}
-	}
 }

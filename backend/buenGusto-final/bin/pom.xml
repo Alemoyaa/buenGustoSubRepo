@@ -9,10 +9,11 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.utn.app.buenGusto</groupId>
-	<artifactId>microservicios-app-buenGusto</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<artifactId>app-buenGusto</artifactId>
+	<version>0.9.0</version>
+	<packaging>jar</packaging>
 	<name>buenGusto-final</name>
-	<description>Demo project for Spring Boot</description>
+	<description>Proyecto final Laboratorio 4</description>
 
 	<properties>
 		<java.version>1.8</java.version>

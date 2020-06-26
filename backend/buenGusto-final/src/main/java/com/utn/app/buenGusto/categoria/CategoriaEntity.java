@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -28,6 +29,7 @@ public class CategoriaEntity extends CommonEntity implements Serializable {
 
 	@JsonIgnoreProperties(value = { "padre" }, allowSetters = true)
 	@OneToMany(/* fetch = FetchType.LAZY, */mappedBy = "padre", cascade = CascadeType.ALL)
+	@Transient
 	private List<CategoriaEntity> hijos;
 
 	public boolean isInsumoOManuf() {
