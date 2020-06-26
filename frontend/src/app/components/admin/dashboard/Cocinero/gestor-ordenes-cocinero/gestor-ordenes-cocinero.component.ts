@@ -19,7 +19,7 @@ export class GestorOrdenesCocineroComponent implements OnInit {
   pedidoSeleccionado: Pedido;
   public estados: EstadoPedido[] = []
   public estadoSeleccionado: any;
-  horaSeleccionada: Pedido;
+  horaSeleccionada: Date;
 
   formularioEstado: FormGroup;
   public pageActual = 1; //Paginador
@@ -34,7 +34,8 @@ export class GestorOrdenesCocineroComponent implements OnInit {
       id: null,
       articulo: null,
       cantidad: null,
-      subtotal: null
+      subtotal: null,
+      aclaracion: ''
     }],
     estadoPedido: {
       id: null,
@@ -66,8 +67,9 @@ export class GestorOrdenesCocineroComponent implements OnInit {
     this.esperarAlert();
     this.pedidoService.getAll().subscribe(
       (res) => {
+        console.log(res);
         res.filter((pedido) => {
-          if (pedido.estadoPedido.nombreEstado === 'Confirmado'){
+          if (pedido.estadoPedido.nombreEstado === 'Confirmado') {
             return this.pedidos.push(pedido);
           }
         })
@@ -90,14 +92,28 @@ export class GestorOrdenesCocineroComponent implements OnInit {
     console.log(this.pedidoOne)
   }
 
+  getHora(hora: Date) {
+    this.horaSeleccionada = hora;
+    console.log(this.horaSeleccionada);
+    this.sumarMinutos(this.horaSeleccionada, 10);
+    //return Date;
+  }
+
+  sumarMinutos(hora, minutos) {
+    alert(hora);
+    hora.setMinutes(hora.getMinutes() + 10);
+    alert(hora);
+  }
+
   //FUNCION QUE ME RETRASE EL PEDIDO 1O MINUTOS
-  // retrasoPedido(id: number, hora: Date){
+  // retrasoPedido(pedido: Pedido, hora: Date) {
+  //   this.getOnePedido(pedido);
   //   hora = new Date();
   //   hora.setMinutes(10);
-  //   this.pedidoService.getOne(id).subscribe(
-  //     (res) =>{
+  //   this.pedidoService.getOne(pedido).subscribe(
+  //     (res) => {
 
-  //   })
+  //     })
   // }
 
 
@@ -122,43 +138,43 @@ export class GestorOrdenesCocineroComponent implements OnInit {
     this.estadoService.getOne(id).subscribe(
       (estado) => {
 
-      Swal.fire({
-        title: `Realmente desea cambiar el estado del pedido `,
-        text: "Recuerda que una vez asignado un nuevo estado, no podras volver a cambiarlo!",
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'Si, modificar estado',
-        cancelButtonText: 'Cancelar modificacion'
-      }).then((result) => {
-        if (result.value) {
+        Swal.fire({
+          title: `Realmente desea cambiar el estado del pedido `,
+          text: "Recuerda que una vez asignado un nuevo estado, no podras volver a cambiarlo!",
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Si, modificar estado',
+          cancelButtonText: 'Cancelar modificacion'
+        }).then((result) => {
+          if (result.value) {
 
-          this.formularioEstado.setValue({
-            id: estado.id,
-            nombreEstado: estado.nombreEstado
-          });
+            this.formularioEstado.setValue({
+              id: estado.id,
+              nombreEstado: estado.nombreEstado
+            });
 
-          this.pedidoSeleccionado.estadoPedido = new EstadoPedido();
-          this.pedidoSeleccionado.estadoPedido.id = this.formularioEstado.value.id;
-          this.pedidoSeleccionado.estadoPedido.nombreEstado = this.formularioEstado.value.nombreEstado;
-          this.pedidoService.editarEstadoPedido(this.pedidoSeleccionado.id, this.pedidoSeleccionado.estadoPedido).subscribe();
+            this.pedidoSeleccionado.estadoPedido = new EstadoPedido();
+            this.pedidoSeleccionado.estadoPedido.id = this.formularioEstado.value.id;
+            this.pedidoSeleccionado.estadoPedido.nombreEstado = this.formularioEstado.value.nombreEstado;
+            this.pedidoService.editarEstadoPedido(this.pedidoSeleccionado.id, this.pedidoSeleccionado.estadoPedido).subscribe();
 
-          Swal.fire(
-            `El estado de su pedido fue modificado correctamente a: `,
-            'Puedes continuar con mas pedidos en la seccion de Estados de Pedidos!',
-            'success'
-          );
+            Swal.fire(
+              `El estado de su pedido fue modificado correctamente a: `,
+              'Puedes continuar con mas pedidos en la seccion de Estados de Pedidos!',
+              'success'
+            );
 
-          this.formularioEstado.reset();
-        } else {
-          this.formularioEstado.reset();
-        }
-      });
-    },
-    (error) => {
-      console.warn("error =>  ", error);
-    }
+            this.formularioEstado.reset();
+          } else {
+            this.formularioEstado.reset();
+          }
+        });
+      },
+      (error) => {
+        console.warn("error =>  ", error);
+      }
     );
   }
 

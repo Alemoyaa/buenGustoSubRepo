@@ -23,7 +23,8 @@ export class ModificacionPlatoCocineroComponent implements OnInit {
       id: null,
       articulo: null,
       cantidad: null,
-      subtotal: null
+      subtotal: null,
+      aclaracion: ''
     }],
     estadoPedido: null,
     clientePedido: null
