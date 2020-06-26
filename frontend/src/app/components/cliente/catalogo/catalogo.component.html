@@ -1,20 +1,16 @@
 <div class="page catalog-page">
   <section class="clean-block clean-catalog dark">
     <div class="container container-catalogo">
-      <h1 class="col-lg-12">Catálogo de platos</h1>
+      <div class="row justify-content-around d-flex">
+        <h1>Catálogo de platos</h1>
+        <a [routerLink]="['/carrito']">
+          <button type="button" class="btn btn-primary">
+            <i class="fas fa-shopping-cart"></i> Carrito
+          </button>
+        </a>
+      </div>
 
       <div class="catalogo col-lg-12 mt-4 justify-content-center d-flex">
-        <div class="filtros col-lg-3">
-          <div class="filtro-header">
-            <h3>Categorías</h3>
-          </div>
-          <div class="filtro-cat">
-            <button type="button" class="btn btn-primary">Pizzas</button>
-            <button type="button" class="btn btn-primary">Lomos</button>
-            <button type="button" class="btn btn-primary">Bebidas</button>
-          </div>
-        </div>
-
         <div class="container platos col-lg-9">
           <div class="row articulo">
             <ng-container
@@ -35,52 +31,22 @@
                     <small>Tiempo estimado: 20m</small>
                     <br />
                     <b>${{ articulo.precio_de_venta }}</b>
-                    <div class="stars">
-                      <i class="fas fa-star"></i>
-                      <i class="fas fa-star"></i>
-                      <i class="fas fa-star"></i>
-                      <i class="fas fa-star"></i>
-                      <i class="far fa-star"></i>
+                    <div class="stars"></div>
+                    <div class="ingredientes">
+                      <ul>
+                        <ng-container
+                          *ngFor="
+                            let ingrediente of articulo.lista_detalleManufacturado
+                          "
+                        >
+                          <li class="align-left">
+                            <small>{{
+                              ingrediente.articuloInsumoID.denominacion
+                            }}</small>
+                          </li>
+                        </ng-container>
+                      </ul>
                     </div>
-                    <button
-                      type="button"
-                      class="btn btn-primary"
-                      data-toggle="modal"
-                      (click)="goToDetail(articulo.id)"
-                    >
-                      Ver más
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </ng-container>
-          </div>
-
-          <h3>Hamburguesas</h3>
-
-          <div class="row articulo">
-            <ng-container
-              *ngFor="let articulo of articulos"
-              class="articulo-container"
-            >
-              <div class="card-container col-lg-4">
-                <div
-                  class="card articulo"
-                  *ngIf="articulo.es_catalogo && articulo.categoria.id === 2"
-                >
-                  <img
-                    class="card-img-top card-img-recomendado"
-                    src="{{ articulo.url_imagen }}"
-                  />
-                  <div class="card-body">
-                    <h4 class="card-text">
-                      {{ articulo.denominacion }}
-                    </h4>
-                    <p>Categoria: {{ articulo.categoria.nombreCategoria }}</p>
-                    <small>Tiempo estimado: 20m</small>
-                    <br />
-                    <b>${{ articulo.precio_de_venta }}</b>
-                    <br />
                     <button
                       type="button"
                       class="btn btn-primary"

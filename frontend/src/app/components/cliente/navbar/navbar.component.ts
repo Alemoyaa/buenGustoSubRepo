@@ -14,6 +14,8 @@ export class NavbarComponent implements OnInit {
 
   @Output() irDashboard = new EventEmitter();
 
+  estaLogueado: boolean = true;
+
   uid: string;
 
   cliente: Usuario = new Usuario();
@@ -38,6 +40,7 @@ export class NavbarComponent implements OnInit {
   }
 
   cerrarSesion() {
+    this.serviceLogin.salir();
     this.serviceLogin.logout();
   }
 

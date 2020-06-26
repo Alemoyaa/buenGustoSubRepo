@@ -1,7 +1,9 @@
 <div class="container">
-  <button type="button" class="btn btn-primary margin-top">
-    <b>Volver al catálogo</b>
-  </button>
+  <a [routerLink]="['/catalogo']">
+    <button type="button" class="btn btn-primary margin-top">
+      <b>Volver al catálogo</b>
+    </button>
+  </a>
 </div>
 
 <div class="container justify-content-center d-flex">
@@ -50,7 +52,10 @@
             <h5>{{ ingrediente.articuloInsumoID.denominacion }}</h5>
           </div>
           <div class="col-lg-3 col-md-3 col-sm-3 right-align">
-            <h5>x{{ ingrediente.cantidad }}</h5>
+            <h5>
+              x{{ ingrediente.cantidad }}
+              {{ ingrediente.unidadMedidaID.abreviatura }}
+            </h5>
           </div>
         </div>
       </div>

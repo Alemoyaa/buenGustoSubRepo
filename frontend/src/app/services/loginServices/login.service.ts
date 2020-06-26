@@ -1,9 +1,10 @@
+import { AlertsService } from './../alertServices/alerts.service';
 import { UsuarioServices } from './../serviciosCliente/usuarioServices/usuario.services';
 import { ClienteService } from './../serviciosCliente/clienteServices/cliente.service';
 import { Router } from '@angular/router';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { Usuario } from '../../entidades/Usuario';
-import { Injectable } from '@angular/core';
+import { Injectable, EventEmitter } from '@angular/core';
 import { map } from 'rxjs/operators';
 import { auth } from 'firebase/app';
 import { Cliente } from '../../entidades/Cliente';
@@ -15,14 +16,33 @@ import { Rol } from 'src/app/entidades/Rol';
 export class LoginService {
   public providerId: string = 'null';
 
+  public logueado = false;
+  public logged: EventEmitter<boolean>;
+
   clientePost: Cliente = new Cliente();
   usuarioPost: Usuario = new Usuario();
   constructor(
     private afsAuth: AngularFireAuth,
     private route: Router,
     private cServicio: ClienteService,
-    private usuarioService: UsuarioServices
-  ) {}
+    private usuarioService: UsuarioServices,
+    private alertSweet: AlertsService
+  ) {
+    this.logged = new EventEmitter();
+  }
+
+  public ingresar(): void {
+    console.log('Sesion iniciada');
+    this.logueado = true;
+    this.logged.emit(true);
+  }
+
+  public salir(): void {
+    console.log('Sesion cerrada');
+    this.logueado = false;
+    this.logged.emit(false);
+    this.route.navigate(['/']);
+  }
 
   // me traigo los datos que me da google
   datosGoogle(usuario: Usuario) {
@@ -37,11 +57,12 @@ export class LoginService {
 
   loginGoogle() {
     this.afsAuth.signInWithPopup(new auth.GoogleAuthProvider()).then((data) => {
-      console.log('data', data);
-      console.log('dataCredential', data.credential);
+      //console.log('data', data);
+      //console.log('dataCredential', data.credential);
 
       if (this.checkEmailExists(data.user.email)) {
         this.postCliente(data, true);
+        this.ingresar();
         this.route.navigate(['user-profile/' + data.user.uid]);
       } else {
         this.route.navigate(['user-profile/' + data.user.uid]);
@@ -50,9 +71,15 @@ export class LoginService {
   }
 
   loginEmailPassword(email: string, password: string) {
-    this.afsAuth.signInWithEmailAndPassword(email, password).then((res) => {
-      this.route.navigate(['user-profile/' + res.user.uid]);
-    });
+    this.afsAuth.signInWithEmailAndPassword(email, password).then(
+      (res) => {
+        this.ingresar();
+        this.route.navigate(['catalogo']);
+      },
+      (err) => {
+        console.error(err);
+      }
+    );
 
     //         if (res.user.emailVerified !== true) {
     //           this.logout();
@@ -80,10 +107,10 @@ export class LoginService {
       this.afsAuth
         .createUserWithEmailAndPassword(email, password)
         .then((data) => {
-          console.log(data);
+          //console.log(data);
           data.user.sendEmailVerification();
           this.postCliente(data, false);
-          alert('Se envió un mail de verificación a tu dirección de correo');
+          //alert('Se envió un mail de verificación a tu dirección de correo');
         })
         .then(async () => {
           await this.afsAuth.signOut();
@@ -91,7 +118,7 @@ export class LoginService {
     }
   }
 
-  async setearClienteConIsAuth() {
+  /*async setearClienteConIsAuth() {
     await this.isAuth().subscribe(
       (data) => {
         this.postCliente(data, false);
@@ -100,10 +127,10 @@ export class LoginService {
         console.log('Error en postUser', error);
       },
       async () => {
-        console.log('Cliente complete' + this.clientePost);
+        //console.log('Cliente complete' + this.clientePost);
       }
     );
-  }
+  }*/
 
   async postCliente(data, comprobadorDeGoogle: boolean) {
     if (!data) {
@@ -137,14 +164,20 @@ export class LoginService {
       this.clientePost.telefono = 0;
     }
 
-    console.log(this.clientePost);
+    //console.log(this.clientePost);
 
     await this.cServicio.post(this.clientePost).subscribe(
       (post) => {
-        console.log('poss anduvo', post);
+        this.alertSweet.mensajeSuccessTimer(
+          'Verifica tu cuenta',
+          'Fue enviado un email de verificacion',
+          3000
+        );
+        //console.log('poss anduvo', post);
       },
       (error) => {
-        console.log('Error -->', error.message);
+        this.alertSweet.mensajeError('Error', error);
+        //console.log('Error -->', error.message);
       }
     );
   }
@@ -159,6 +192,7 @@ export class LoginService {
   }
 
   logout() {
+    this.salir();
     this.afsAuth.signOut();
   }
 }

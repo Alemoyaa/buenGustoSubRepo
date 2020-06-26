@@ -21,6 +21,7 @@ import com.utn.app.buenGusto.common.CommonEntity;
 public abstract class ArticuloEntity extends CommonEntity implements Serializable {
 
 	private static final long serialVersionUID = 4801679657904614999L;
+	
 	protected double precio_de_venta;
 	protected String url_imagen;
 	protected boolean es_catalogo;

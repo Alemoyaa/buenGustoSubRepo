@@ -1,9 +1,7 @@
 package com.utn.app.buenGusto.cliente; 
  
 import java.util.List;
-
 import org.springframework.stereotype.Service;
-
 import com.utn.app.buenGusto.common.CommonService; 
 
 @Service
@@ -17,7 +15,7 @@ public class ClienteService extends CommonService<ClienteEntity, ClienteReposito
 			if (entityOptional != null) {
 				return entityOptional;
 			} else {
-				throw new Exception();
+				return null;
 			}
 		} catch (Exception e) {
 			throw new Exception();
@@ -33,23 +31,7 @@ public class ClienteService extends CommonService<ClienteEntity, ClienteReposito
 			if (entityOptional != null) {
 				return entityOptional;
 			} else {
-				throw new Exception();
-			}
-		} catch (Exception e) {
-			throw new Exception();
-		}
-
-	}
-	
-	public ClienteEntity findByEmail(String email) throws Exception {
-
-		ClienteEntity entityOptional = repository.findByEmail(email);
-		
-		try {
-			if (entityOptional != null) {
-				return entityOptional;
-			} else {
-				throw new Exception();
+				return null;
 			}
 		} catch (Exception e) {
 			throw new Exception();

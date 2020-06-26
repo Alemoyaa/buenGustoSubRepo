@@ -1,15 +1,12 @@
 import { Injectable } from '@angular/core';
 import Swal from 'sweetalert2';
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AlertsService {
-
-  constructor() { }
-
+  constructor() {}
 
   mensajeError(title: string, message: string) {
-
     Swal.fire({
       icon: 'error',
       title: title,
@@ -19,7 +16,6 @@ export class AlertsService {
   }
 
   mensajeSuccess(title: string, message: string) {
-
     Swal.fire({
       icon: 'success',
       title: title,
@@ -29,7 +25,6 @@ export class AlertsService {
   }
 
   mensajeWarning(title: string, message: string) {
-
     Swal.fire({
       icon: 'warning',
       title: title,
@@ -38,4 +33,13 @@ export class AlertsService {
     });
   }
 
+  mensajeSuccessTimer(title: string, message: string, timer_: number) {
+    Swal.fire({
+      icon: 'success',
+      timer: timer_,
+      title: title,
+      text: message,
+      // footer: '<a href>Why do I have this issue?</a>'
+    });
+  }
 }
