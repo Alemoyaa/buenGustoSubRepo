@@ -85,7 +85,12 @@
                   <td class="text-center">{{detalle.articulo.denominacion}} </td>
                   <td><img class="img-thumbnail img-fluid" src={{detalle.articulo.url_imagen}} width="140" height="40">
                   </td>
-                  <td class="text-center">{{detalle.aclaracion}}</td>
+
+                  <td class="text-center">
+                    <p *ngIf="detalle.aclaracion != null">{{detalle.aclaracion}}</p>
+                    <p *ngIf=""> No hay aclaracion</p>
+                  </td>
+
                 </tr>
               </tbody>
             </table>

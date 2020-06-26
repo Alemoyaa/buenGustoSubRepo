@@ -69,7 +69,7 @@ export class GestorOrdenesCocineroComponent implements OnInit {
       (res) => {
         console.log(res);
         res.filter((pedido) => {
-          if (pedido.estadoPedido.nombreEstado === 'Confirmado') {
+          if (pedido.estadoPedido.nombreEstado === 'Confirmado' || pedido.estadoPedido.nombreEstado === 'Preparando') {
             return this.pedidos.push(pedido);
           }
         })
@@ -104,18 +104,6 @@ export class GestorOrdenesCocineroComponent implements OnInit {
     hora.setMinutes(hora.getMinutes() + 10);
     alert(hora);
   }
-
-  //FUNCION QUE ME RETRASE EL PEDIDO 1O MINUTOS
-  // retrasoPedido(pedido: Pedido, hora: Date) {
-  //   this.getOnePedido(pedido);
-  //   hora = new Date();
-  //   hora.setMinutes(10);
-  //   this.pedidoService.getOne(pedido).subscribe(
-  //     (res) => {
-
-  //     })
-  // }
-
 
 
   //Traer estados de pedido, traerme solo los confirmados
@@ -160,13 +148,18 @@ export class GestorOrdenesCocineroComponent implements OnInit {
             this.pedidoSeleccionado.estadoPedido.nombreEstado = this.formularioEstado.value.nombreEstado;
             this.pedidoService.editarEstadoPedido(this.pedidoSeleccionado.id, this.pedidoSeleccionado.estadoPedido).subscribe();
 
+            console.log(this.pedidoSeleccionado.estadoPedido.id)
             Swal.fire(
               `El estado de su pedido fue modificado correctamente a: `,
               'Puedes continuar con mas pedidos en la seccion de Estados de Pedidos!',
               'success'
             );
 
-            this.formularioEstado.reset();
+            if (this.pedidoSeleccionado.estadoPedido.id === 7) {
+              window.location.reload();
+            }
+            // this.formularioEstado.reset();
+
           } else {
             this.formularioEstado.reset();
           }
