@@ -16,6 +16,8 @@ export class ModalFacturaComponent implements OnInit {
   @Input() set facturaProp(factura) {
     if (factura) {
       this.factura = factura;
+
+      
     }
   }
   constructor(
@@ -25,6 +27,9 @@ export class ModalFacturaComponent implements OnInit {
 
   ngOnInit(): void {
   }
+
+
+
 
 
   crearFacturaPDF() {
