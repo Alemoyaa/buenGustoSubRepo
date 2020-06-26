@@ -64,13 +64,30 @@ i {
 }
 
 @media (max-width: 991px) {
+ 
   #promo {
+    padding: 20px;
+  }
+}
+
+@media (max-width: 600px) {
+  #anyClass {
+    height:150px;
+    overflow-y: scroll;
+  }
+
+  #promo .jumbotron {
     padding: 20px;
   }
 }
 
 
 @media (max-width: 360px) {
+  #anyClass {
+    height:150px;
+    overflow-y: scroll;
+  }
+
   #promo .jumbotron {
     padding: 20px;
   }
@@ -142,6 +159,4 @@ img {
 img, svg {
   vertical-align: middle;
 }
-
-
 
