@@ -1,3 +1,4 @@
-export abstract class Common{
+export abstract class Common {
   id: number;
+  habilitado?: boolean;
 }
