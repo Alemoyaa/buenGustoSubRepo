@@ -22,8 +22,7 @@ export class CategoriaPlatosComponent implements OnInit {
   categoria: Categoria = {
     id: null,
     nombreCategoria: null,
-    insumoOManuf: null,
-    hijos: null,
+    esCategoriaCatalogo: null,
     padre: null,
   };
 
@@ -60,11 +59,11 @@ export class CategoriaPlatosComponent implements OnInit {
     this.formularioCategoria = this.fb.group({
       id: [],
       nombreCategoria: [''],
-      insumoOManuf: [],
+      esCategoriaCatalogo: [''],
       padre: this.fb.group({
         id: [],
         nombreCategoria: [''],
-        insumoOManuf: [],
+        esCategoriaCatalogo: [''],
       }),
     });
     /*this.formularioCategoria = new FormGroup({
@@ -123,11 +122,11 @@ export class CategoriaPlatosComponent implements OnInit {
     this.formularioCategoria.setValue({
       id: categoria.id,
       nombreCategoria: categoria.nombreCategoria,
-      insumoOManuf: categoria.insumoOManuf,
-      padre: categoria.padre
+      esCategoriaCatalogo: categoria.esCategoriaCatalogo,
+      padre: categoria.padre,
     });
-    console.log( JSON.stringify(categoria) +"CAtegoria")
-    console.log(JSON.stringify(this.formularioCategoria.value)+"Formuilario");
+    console.log(JSON.stringify(categoria) + 'CAtegoria');
+    console.log(JSON.stringify(this.formularioCategoria.value) + 'Formuilario');
     this.id = categoria.id;
   }
 

@@ -1,10 +1,10 @@
-import { EstadoPedido } from './../../../../../../box/EntidadesNuevas/EstadoPedido';
 import { catchError } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Pedido } from '../../../entidades/Pedido';
 import { CommonService } from '../commonServices/common.service';
 import { Injectable } from '@angular/core';
+import { EstadoPedido } from 'src/app/entidades/EstadoPedido';
 
 @Injectable({
   providedIn: 'root',
