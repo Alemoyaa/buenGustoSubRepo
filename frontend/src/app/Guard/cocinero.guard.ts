@@ -9,13 +9,17 @@ import {
 import { Observable } from 'rxjs';
 import { LoginService } from 'src/app/services/loginServices/login.service';
 import { rejects } from 'assert';
+import { ClienteService } from '../services/serviciosCliente/clienteServices/cliente.service';
 
 @Injectable({
   providedIn: 'root',
 })
-export class AuthGuard implements CanActivate {
-  constructor(private logService: LoginService, private router: Router) {}
-
+export class CocineroGuard implements CanActivate {
+  constructor(
+    private logService: LoginService,
+    private router: Router,
+    private clienteService: ClienteService
+  ) {}
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
@@ -26,11 +30,13 @@ export class AuthGuard implements CanActivate {
     | UrlTree {
     return new Promise((resolve) => {
       this.logService.isAuth().subscribe((data) => {
-        if (data) {
-          resolve(true);
-        } else {
-          resolve(false);
-        }
+        this.clienteService.getByUidFirebase(data.uid).subscribe((user) => {
+          if (user.usuario.rol.id === 3) {
+            resolve(true);
+          } else {
+            resolve(false);
+          }
+        });
       });
     });
   }

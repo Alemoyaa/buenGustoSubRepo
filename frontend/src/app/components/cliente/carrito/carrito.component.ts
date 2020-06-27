@@ -7,6 +7,7 @@ import { LoginService } from 'src/app/services/loginServices/login.service';
 import { ClienteService } from 'src/app/services/serviciosCliente/clienteServices/cliente.service';
 import { PedidoServices } from 'src/app/services/serviciosCliente/pedidoServices/pedido.service';
 import { EstadoPedido } from 'src/app/entidades/EstadoPedido';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-carrito',
@@ -19,7 +20,8 @@ export class CarritoComponent implements OnInit {
   constructor(
     private loginService: LoginService,
     private clienteService: ClienteService,
-    private pedidoService: PedidoServices
+    private pedidoService: PedidoServices,
+    private router: Router
   ) {}
 
   pedido: Pedido = {
@@ -107,6 +109,17 @@ export class CarritoComponent implements OnInit {
     this.total = 0;
     this.articulos.forEach((element) => {
       this.total += element.precio_de_venta;
+    });
+  }
+
+  pagar() {
+    this.loginService.isAuth().subscribe((data) => {
+      if (data) {
+        this.crearPedido();
+      } else {
+        //Colocar alerta bonita
+        this.router.navigate(['/login']);
+      }
     });
   }
 
