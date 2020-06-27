@@ -16,6 +16,7 @@ public class CategoriaEntity extends CommonEntity implements Serializable {
 	private static final long serialVersionUID = 8910812748496309673L;
 
 	private String nombreCategoria;
+	private boolean esCategoriaCatalogo;
 
 	@ManyToOne(cascade = CascadeType.ALL) //Probar si este cascade es correcto
 	private CategoriaEntity padre;
@@ -34,6 +35,14 @@ public class CategoriaEntity extends CommonEntity implements Serializable {
 
 	public void setPadre(CategoriaEntity padre) {
 		this.padre = padre;
+	}
+
+	public boolean isEsCategoriaCatalogo() {
+		return esCategoriaCatalogo;
+	}
+
+	public void setEsCategoriaCatalogo(boolean esCategoriaCatalogo) {
+		this.esCategoriaCatalogo = esCategoriaCatalogo;
 	}
 
 }

@@ -151,6 +151,5 @@ public class PedidoEntity extends CommonEntity implements Serializable {
 		calendar.add(Calendar.MINUTE, min);
 		this.setHora_estimada_fin(calendar.getTime());
 	}
-
 	
 }
