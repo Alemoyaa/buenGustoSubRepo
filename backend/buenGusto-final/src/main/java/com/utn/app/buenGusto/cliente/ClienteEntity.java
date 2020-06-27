@@ -30,7 +30,7 @@ public class ClienteEntity extends CommonEntity implements Serializable {
 	private UsuarioEntity usuario;
 
 	@OneToOne(cascade = CascadeType.ALL, optional = true)
-	@JoinColumn(name = "domicilio_id", nullable = true)
+	@JoinColumn(name = "domicilio_id")
 	private DomicilioEntity domicilio;
 	
 	public String getNombre() {

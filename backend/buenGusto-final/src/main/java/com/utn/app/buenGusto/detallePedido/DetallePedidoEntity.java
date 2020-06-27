@@ -7,10 +7,9 @@ import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.persistence.Transient;
-
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.utn.app.buenGusto.articulo.ArticuloEntity;
+import com.utn.app.buenGusto.articuloInsumo.ArticuloInsumoEntity;
+import com.utn.app.buenGusto.articuloManufacturado.ArticuloManufacturadoEntity;
 import com.utn.app.buenGusto.common.CommonEntity;
 
 @Entity
@@ -21,11 +20,17 @@ public class DetallePedidoEntity extends CommonEntity implements Serializable {
 	private static final long serialVersionUID = -7168593642662662191L;
 
 	private int cantidad;
-	
-	@Transient
-	private double subtotal = 0.0d;
-	
+	private double subtotal;
 	private String aclaracion;
+	private boolean esInsumo;
+
+	@ManyToOne(cascade = CascadeType.ALL, optional = true)
+	@JoinColumn(name = "articuloinsumo_id")
+	private ArticuloInsumoEntity articuloInsumo;
+	
+	@ManyToOne(cascade = CascadeType.ALL, optional = true)
+	@JoinColumn(name = "articulomanufacturado_id")
+	private ArticuloManufacturadoEntity articuloManufacturado;
 	
 	public String getAclaracion() {
 		return aclaracion;
@@ -34,10 +39,6 @@ public class DetallePedidoEntity extends CommonEntity implements Serializable {
 	public void setAclaracion(String aclaracion) {
 		this.aclaracion = aclaracion;
 	}
-
-	@ManyToOne(optional = false, cascade = CascadeType.ALL)
-	@JoinColumn(name = "articulo_id")
-	private ArticuloEntity articulo;
 	
 	public int getCantidad() {
 		return cantidad;
@@ -47,12 +48,18 @@ public class DetallePedidoEntity extends CommonEntity implements Serializable {
 		this.cantidad = cantidad;
 	}
 
-	public double getSubtotal() throws Exception {
+	public double getSubtotal() {
+		return subtotal;
+	}
+	
+	public double calcularSubtotal(DetallePedidoEntity detalleAcalcular) {
 		double result = 0.0d;
-		if(this.articulo == null) {
+		if(detalleAcalcular.articuloInsumo == null && detalleAcalcular.articuloManufacturado == null) {
 			return result;
+		}else if(detalleAcalcular.esInsumo && detalleAcalcular.articuloInsumo.isEs_catalogo()){
+			result = detalleAcalcular.articuloInsumo.getPrecio_de_venta() * detalleAcalcular.cantidad;
 		}else {
-			result = this.articulo.getPrecio_de_venta() * this.cantidad;
+			result = detalleAcalcular.articuloManufacturado.getPrecio_de_venta() * detalleAcalcular.cantidad;
 		}
 		return result;
 	}
@@ -61,12 +68,28 @@ public class DetallePedidoEntity extends CommonEntity implements Serializable {
 		this.subtotal = subtotal;
 	}
 
-	public ArticuloEntity getArticulo() {
-		return articulo;
+	public boolean isEsInsumo() {
+		return esInsumo;
 	}
 
-	public void setArticulo(ArticuloEntity articulo) {
-		this.articulo = articulo;
+	public void setEsInsumo(boolean esInsumo) {
+		this.esInsumo = esInsumo;
+	}
+
+	public ArticuloInsumoEntity getArticuloInsumo() {
+		return articuloInsumo;
+	}
+
+	public void setArticuloInsumo(ArticuloInsumoEntity articuloInsumo) {
+		this.articuloInsumo = articuloInsumo;
+	}
+
+	public ArticuloManufacturadoEntity getArticuloManufacturado() {
+		return articuloManufacturado;
+	}
+
+	public void setArticuloManufacturado(ArticuloManufacturadoEntity articuloManufacturado) {
+		this.articuloManufacturado = articuloManufacturado;
 	}
 
 }

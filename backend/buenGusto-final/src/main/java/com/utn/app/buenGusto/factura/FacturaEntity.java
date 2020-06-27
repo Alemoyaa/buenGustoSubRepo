@@ -8,7 +8,6 @@ import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
@@ -27,45 +26,32 @@ public class FacturaEntity extends CommonEntity implements Serializable {
 	private static final long serialVersionUID = -824096367323433145L;
 
 	private Date fecha;
-	private String formaPago;
 	private int nroFactura;
-	private double precioTotal;
+	private double montoDescuento;
+	private double totalFactura;
+	private String formaPago;
+	private String nroTarjeta; 
 	private String tipoFactura;
+
+	@Transient
+	private List<DetallePedidoEntity> detalleFactura = new ArrayList<DetallePedidoEntity>();
 
 	@OneToOne(optional = true, cascade = CascadeType.ALL)
 	@JoinColumn(name = "pedido_id")
 	private PedidoEntity pedidofacturado;
 
-	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-	@JoinColumn(name = "factura_id")
-	@Transient
-	private List<DetallePedidoEntity> detalleFactura = new ArrayList<DetallePedidoEntity>();
-
-	@ManyToOne(optional = false)
+	@ManyToOne(optional = true)
 	@JoinColumn(name = "datos_empresa_id")
 	private DatosEmpresaEntity datosEmpresaID;
-
-	public String getTipoFactura() {
-		return tipoFactura;
-	}
-
-	public void setTipoFactura(String tipoFactura) {
-		this.tipoFactura = tipoFactura;
-	}
-
-	public double getPrecioTotal() {
-		return precioTotal;
-	}
-
-	public void setPrecioTotal(double precioTotal) {
-		int montoDescuento = 10;
-		if(this.formaPago == "Contado") {
-			
-			this.precioTotal = precioTotal - (precioTotal/montoDescuento);
+	
+	public double calcularTotalFactura(FacturaEntity facturaACalcular) {
+		double resultado = 0.0d;
+		if(facturaACalcular.formaPago == "Contado") {
+			resultado = facturaACalcular.pedidofacturado.getTotalPedido() - (facturaACalcular.pedidofacturado.getTotalPedido()/facturaACalcular.montoDescuento);
 		}else{
-			this.precioTotal = precioTotal;
+			resultado = facturaACalcular.pedidofacturado.getTotalPedido();
 		}
-		
+		return resultado;
 	}
 
 	public Date getFecha() {
@@ -84,20 +70,20 @@ public class FacturaEntity extends CommonEntity implements Serializable {
 		this.nroFactura = nroFactura;
 	}
 
-	public List<DetallePedidoEntity> getDetalleFactura() {
-		return detalleFactura;
+	public double getMontoDescuento() {
+		return montoDescuento;
 	}
 
-	public void setDetalleFactura(List<DetallePedidoEntity> detalleFactura) {
-		this.detalleFactura = this.pedidofacturado.getLista_detallePedido();
+	public void setMontoDescuento(double montoDescuento) {
+		this.montoDescuento = montoDescuento;
 	}
 
-	public DatosEmpresaEntity getDatosEmpresaID() {
-		return datosEmpresaID;
+	public double getTotalFactura() {
+		return totalFactura;
 	}
 
-	public void setDatosEmpresaID(DatosEmpresaEntity datosEmpresaID) {
-		this.datosEmpresaID = datosEmpresaID;
+	public void setTotalFactura(double totalFactura) {
+		this.totalFactura = totalFactura;
 	}
 
 	public String getFormaPago() {
@@ -108,12 +94,44 @@ public class FacturaEntity extends CommonEntity implements Serializable {
 		this.formaPago = formaPago;
 	}
 
+	public String getNroTarjeta() {
+		return nroTarjeta;
+	}
+
+	public void setNroTarjeta(String nroTarjeta) {
+		this.nroTarjeta = nroTarjeta;
+	}
+
+	public String getTipoFactura() {
+		return tipoFactura;
+	}
+
+	public void setTipoFactura(String tipoFactura) {
+		this.tipoFactura = tipoFactura;
+	}
+
+	public List<DetallePedidoEntity> getDetalleFactura() {
+		return detalleFactura;
+	}
+
+	public void setDetalleFactura(List<DetallePedidoEntity> detalleFactura) {
+		this.detalleFactura = detalleFactura;
+	}
+
 	public PedidoEntity getPedidofacturado() {
 		return pedidofacturado;
 	}
 
 	public void setPedidofacturado(PedidoEntity pedidofacturado) {
 		this.pedidofacturado = pedidofacturado;
+	}
+
+	public DatosEmpresaEntity getDatosEmpresaID() {
+		return datosEmpresaID;
+	}
+
+	public void setDatosEmpresaID(DatosEmpresaEntity datosEmpresaID) {
+		this.datosEmpresaID = datosEmpresaID;
 	}
 
 }

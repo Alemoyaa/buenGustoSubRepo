@@ -6,31 +6,45 @@ import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
-
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.utn.app.buenGusto.articulo.ArticuloEntity;
+import com.utn.app.buenGusto.categoria.CategoriaEntity;
+import com.utn.app.buenGusto.common.CommonEntity;
 import com.utn.app.buenGusto.unidadMedida.UnidadMedidaEntity;
 
 @Entity
 @Table(name = "articulo_insumo")
-@PrimaryKeyJoinColumn(name = "articulo_insumo_Id")
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
-public class ArticuloInsumoEntity extends ArticuloEntity implements Serializable {
+public class ArticuloInsumoEntity extends CommonEntity implements Serializable {
 
 	private static final long serialVersionUID = -8356649232468048872L;
 
+	private String denominacion;
 	//suponemos que el precio_de_compra es por Kg o por L o por Unidad del Insumo
 	private double precio_de_compra;
-	private boolean requiere_refrigeracion;
+	private double precio_de_venta;
 	private float stock_actual;
 	private float stock_minimo;
 	private float stock_maximo;
-
+	private boolean requiere_refrigeracion;
+	private boolean es_catalogo;
+	private String url_imagen;
+	
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "unidad_medida_id")
 	private UnidadMedidaEntity unidadMedidaID;
+	
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "categoria_id")
+	protected CategoriaEntity categoria;
+
+	public String getDenominacion() {
+		return denominacion;
+	}
+
+	public void setDenominacion(String denominacion) {
+		this.denominacion = denominacion;
+	}
 
 	public double getPrecio_de_compra() {
 		return precio_de_compra;
@@ -40,12 +54,12 @@ public class ArticuloInsumoEntity extends ArticuloEntity implements Serializable
 		this.precio_de_compra = precio_de_compra;
 	}
 
-	public boolean isRequiere_refrigeracion() {
-		return requiere_refrigeracion;
+	public double getPrecio_de_venta() {
+		return precio_de_venta;
 	}
 
-	public void setRequiere_refrigeracion(boolean requiere_refrigeracion) {
-		this.requiere_refrigeracion = requiere_refrigeracion;
+	public void setPrecio_de_venta(double precio_de_venta) {
+		this.precio_de_venta = precio_de_venta;
 	}
 
 	public float getStock_actual() {
@@ -63,7 +77,7 @@ public class ArticuloInsumoEntity extends ArticuloEntity implements Serializable
 	public void setStock_minimo(float stock_minimo) {
 		this.stock_minimo = stock_minimo;
 	}
-	
+
 	public float getStock_maximo() {
 		return stock_maximo;
 	}
@@ -72,12 +86,44 @@ public class ArticuloInsumoEntity extends ArticuloEntity implements Serializable
 		this.stock_maximo = stock_maximo;
 	}
 
+	public boolean isRequiere_refrigeracion() {
+		return requiere_refrigeracion;
+	}
+
+	public void setRequiere_refrigeracion(boolean requiere_refrigeracion) {
+		this.requiere_refrigeracion = requiere_refrigeracion;
+	}
+
+	public boolean isEs_catalogo() {
+		return es_catalogo;
+	}
+
+	public void setEs_catalogo(boolean es_catalogo) {
+		this.es_catalogo = es_catalogo;
+	}
+
+	public String getUrl_imagen() {
+		return url_imagen;
+	}
+
+	public void setUrl_imagen(String url_imagen) {
+		this.url_imagen = url_imagen;
+	}
+
 	public UnidadMedidaEntity getUnidadMedidaID() {
 		return unidadMedidaID;
 	}
 
 	public void setUnidadMedidaID(UnidadMedidaEntity unidadMedidaID) {
 		this.unidadMedidaID = unidadMedidaID;
+	}
+
+	public CategoriaEntity getCategoria() {
+		return categoria;
+	}
+
+	public void setCategoria(CategoriaEntity categoria) {
+		this.categoria = categoria;
 	}
 
 }

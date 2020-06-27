@@ -1,9 +1,9 @@
 package com.utn.app.buenGusto.pedido;
 
 import java.io.Serializable;
-import java.sql.Date;
-import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -26,32 +26,27 @@ public class PedidoEntity extends CommonEntity implements Serializable {
 	private static final long serialVersionUID = 2109963082457857151L;
 
 	private Date fechaRealizacion;
-	private Timestamp hora_estimada_fin;
+	private Date hora_estimada_fin;
 	private boolean tipo_Envio;
 	private int numero;
 
 	@Transient
 	private double totalPedido;
 	
+	@Transient
+	private int minutosTotal;
+
 	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
 	@JoinColumn(name = "pedido_id")
 	private List<DetallePedidoEntity> lista_detallePedido = new ArrayList<DetallePedidoEntity>();
 
-	@ManyToOne(optional = false)
+	@ManyToOne(optional = true)
 	@JoinColumn(name = "estado_pedido_id")
 	private EstadoPedidoEntity EstadoPedido;
 
-	@ManyToOne(optional = false, cascade = CascadeType.ALL)
+	@ManyToOne(optional = true, cascade = CascadeType.ALL)
 	@JoinColumn(name = "cliente_id")
 	private ClienteEntity ClientePedido;
-
-	public Date getFechaRealizacion() {
-		return fechaRealizacion;
-	}
-
-	public void setFechaRealizacion(Date fechaRealizacion) {
-		this.fechaRealizacion = fechaRealizacion;
-	}
 
 	public boolean isTipo_Envio() {
 		return tipo_Envio;
@@ -93,20 +88,12 @@ public class PedidoEntity extends CommonEntity implements Serializable {
 		ClientePedido = clientePedido;
 	}
 
-	public Timestamp getHora_estimada_fin() {
-		return hora_estimada_fin;
-	}
-
-	public void setHora_estimada_fin(Timestamp hora_estimada_fin) {
-		this.hora_estimada_fin = hora_estimada_fin;
-	}
-	
 	public double getTotalPedido() {
 		double result = 0.0d;
-		if(this.lista_detallePedido.isEmpty()) {
+		if (this.lista_detallePedido.isEmpty()) {
 			return result;
-		}else {
-			for (DetallePedidoEntity p:this.lista_detallePedido) {
+		} else {
+			for (DetallePedidoEntity p : this.lista_detallePedido) {
 				try {
 					result = result + p.getSubtotal();
 				} catch (Exception e) {
@@ -121,4 +108,49 @@ public class PedidoEntity extends CommonEntity implements Serializable {
 		this.totalPedido = totalPedido;
 	}
 
+	public Date getFechaRealizacion() {
+		return fechaRealizacion;
+	}
+
+	public void setFechaRealizacion(Date fechaRealizacion) {
+		this.fechaRealizacion = fechaRealizacion;
+	}
+
+	public Date getHora_estimada_fin() {
+		return hora_estimada_fin;
+	}
+
+	public void setHora_estimada_fin(Date hora_estimada_fin) {
+		this.hora_estimada_fin = hora_estimada_fin;
+	}
+	
+	public int getMinutosTotal() {
+		return minutosTotal;
+	}
+
+	public void setMinutosTotal(int minutosTotal) {
+		int result = 0;
+		for (DetallePedidoEntity p:this.lista_detallePedido) {
+			if(!p.isEsInsumo()) {
+				result = result + p.getArticuloManufacturado().getTiempo_estimado_manuf();
+			}
+		}
+		this.minutosTotal = result;
+	}
+
+	public Date calcularHora_estimada_fin(Date fechaactual, int min) {
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(fechaactual);
+		calendar.add(Calendar.MINUTE, min);
+		return calendar.getTime();
+	}
+
+	public void agregarMinRetraso(int min) {
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(this.hora_estimada_fin);
+		calendar.add(Calendar.MINUTE, min);
+		this.setHora_estimada_fin(calendar.getTime());
+	}
+
+	
 }

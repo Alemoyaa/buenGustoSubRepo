@@ -21,7 +21,7 @@ public class PedidoService extends CommonService<PedidoEntity, PedidoRepository>
 
 			entity.setId(varOptional.get().getId());
 			entity.setFechaRealizacion(varOptional.get().getFechaRealizacion());
-			entity.setHora_estimada_fin(varOptional.get().getHora_estimada_fin());
+			entity.setHora_estimada_fin(varOptional.get().calcularHora_estimada_fin(varOptional.get().getFechaRealizacion(), varOptional.get().getMinutosTotal()));
 			entity.setTipo_Envio(varOptional.get().isTipo_Envio());
 			entity.setNumero(varOptional.get().getNumero());
 
