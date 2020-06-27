@@ -61,13 +61,13 @@ const routes: Routes = [
   {
     path: 'dashboard/admin/gestionStock',
     component: StockComponent,
-    canActivate: [AdminGuard, CocineroGuard],
+    canActivate: [CocineroGuard],
     //guards: admin, cocinero
   },
   {
     path: 'dashboard/admin/gestionArticulos',
     component: MenuPlatosComponent,
-    canActivate: [AdminGuard],
+    canActivate: [CocineroGuard],
     //guards: admin, cocinero
   }, //Estadisticas
   {
@@ -80,25 +80,26 @@ const routes: Routes = [
     path: 'dashboard/admin/estadisticas/cliente',
     component: PedidosPorClienteComponent,
     canActivate: [AdminGuard],
+    //guards: admin
   },
   // vistas cajero
   {
     path: 'dashboard/admin/cajero/administracionDePedidos',
     component: PedidosCajeroComponent,
-    canActivate: [AdminGuard, CajeroGuard],
+    canActivate: [CajeroGuard],
     //guards: admin, cajero
   },
   {
     path: 'dashboard/admin/cajero/administracionFacturacion',
     component: FacturacionCajeroComponent,
-    canActivate: [AdminGuard, CajeroGuard],
+    canActivate: [CajeroGuard],
     //guards: admin, cajero
   },
   // vistas cocinero
   {
     path: 'dashboard/admin/cocinero/gestorOrdenes',
     component: GestorOrdenesCocineroComponent,
-    canActivate: [AdminGuard, CocineroGuard],
+    canActivate: [CocineroGuard],
     //guards: admin, cocinero
   },
   { path: '**', component: NotfoundComponent },

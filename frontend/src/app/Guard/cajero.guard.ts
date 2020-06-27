@@ -31,7 +31,7 @@ export class CajeroGuard implements CanActivate {
     return new Promise((resolve) => {
       this.logService.isAuth().subscribe((data) => {
         this.clienteService.getByUidFirebase(data.uid).subscribe((user) => {
-          if (user.usuario.rol.id === 2) {
+          if (user.usuario.rol.id === 2 || user.usuario.rol.id === 1) {
             resolve(true);
           } else {
             resolve(false);

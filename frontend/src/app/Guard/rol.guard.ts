@@ -14,7 +14,7 @@ import { ClienteService } from '../services/serviciosCliente/clienteServices/cli
 @Injectable({
   providedIn: 'root',
 })
-export class CocineroGuard implements CanActivate {
+export class AdminGuard implements CanActivate {
   constructor(
     private logService: LoginService,
     private router: Router,
@@ -31,7 +31,7 @@ export class CocineroGuard implements CanActivate {
     return new Promise((resolve) => {
       this.logService.isAuth().subscribe((data) => {
         this.clienteService.getByUidFirebase(data.uid).subscribe((user) => {
-          if (user.usuario.rol.id === 3 || user.usuario.rol.id === 1) {
+          if (user.usuario.rol.id != 5) {
             resolve(true);
           } else {
             resolve(false);
