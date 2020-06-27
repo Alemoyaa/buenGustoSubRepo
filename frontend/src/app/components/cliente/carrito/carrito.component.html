@@ -8,35 +8,66 @@
         <div class="row">
           <div class="product justify-content-center align-items-center d-flex">
             <div class="product-image">
-              <img width="100px" class="img-fluid d-block mx-auto image" src="{{ articulo.url_imagen }}" />
+              <img
+                width="100px"
+                class="img-fluid d-block mx-auto image"
+                src="{{ articulo.url_imagen }}"
+              />
             </div>
             <div class="product-info">
               <h5 class="product-name" href="#">{{ articulo.denominacion }}</h5>
               <div class="product-specs">
                 <div>
-                  <span>$&nbsp;</span><span class="value"> {{ articulo.precio_de_venta }} </span>
+                  <span>$&nbsp;</span
+                  ><span class="value"> {{ articulo.precio_de_venta }} </span>
                 </div>
               </div>
               <div class="">
-                <button type="button" class="btn btn-success" data-toggle="modal" (click)="
+                <button
+                  type="button"
+                  class="btn btn-success"
+                  data-toggle="modal"
+                  (click)="
                     addArticulo(
                       articulo.id,
                       articulo.denominacion,
                       articulo.url_imagen,
                       articulo.precio_de_venta
                     )
-                  ">
-                  <svg class="bi bi-plus-circle-fill" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor"
-                    xmlns="http://www.w3.org/2000/svg">
-                    <path fill-rule="evenodd"
-                      d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4a.5.5 0 0 0-1 0v3.5H4a.5.5 0 0 0 0 1h3.5V12a.5.5 0 0 0 1 0V8.5H12a.5.5 0 0 0 0-1H8.5V4z" />
+                  "
+                >
+                  <svg
+                    class="bi bi-plus-circle-fill"
+                    width="1em"
+                    height="1em"
+                    viewBox="0 0 16 16"
+                    fill="currentColor"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      fill-rule="evenodd"
+                      d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4a.5.5 0 0 0-1 0v3.5H4a.5.5 0 0 0 0 1h3.5V12a.5.5 0 0 0 1 0V8.5H12a.5.5 0 0 0 0-1H8.5V4z"
+                    />
                   </svg>
                 </button>
-                <button type="button" class="btn btn-danger" data-toggle="modal" (click)="deleteArticulo(articulo.id)">
-                  <svg class="bi bi-dash-circle-fill" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor"
-                    xmlns="http://www.w3.org/2000/svg">
-                    <path fill-rule="evenodd"
-                      d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM4 7.5a.5.5 0 0 0 0 1h8a.5.5 0 0 0 0-1H4z" />
+                <button
+                  type="button"
+                  class="btn btn-danger"
+                  data-toggle="modal"
+                  (click)="deleteArticulo(articulo.id)"
+                >
+                  <svg
+                    class="bi bi-dash-circle-fill"
+                    width="1em"
+                    height="1em"
+                    viewBox="0 0 16 16"
+                    fill="currentColor"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      fill-rule="evenodd"
+                      d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM4 7.5a.5.5 0 0 0 0 1h8a.5.5 0 0 0 0-1H4z"
+                    />
                   </svg>
                 </button>
               </div>
@@ -60,28 +91,45 @@
           data-toggle="modal"
           data-target="#paymentModal"
         >
-         <p>Pagar</p>
+          <p>Pagar</p>
         </button>
       </div>
     </div>
   </section>
   <!-- Modal -->
-  <div class="modal fade" id="paymentModal" tabindex="-1" role="dialog" aria-labelledby="paymentModal"
-    aria-hidden="true">
+  <div
+    class="modal fade"
+    id="paymentModal"
+    tabindex="-1"
+    role="dialog"
+    aria-labelledby="paymentModal"
+    aria-hidden="true"
+  >
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title" id="paymentModal">Confirmación</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <button
+            type="button"
+            class="close"
+            data-dismiss="modal"
+            aria-label="Close"
+          >
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
         <div class="modal-body">
           <div class="container" *ngFor="let articulo of articulos">
             <div class="row">
-              <div class="product justify-content-center align-items-center d-flex">
+              <div
+                class="product justify-content-center align-items-center d-flex"
+              >
                 <div class="product-image">
-                  <img width="100px" class="img-fluid d-block mx-auto image" src="{{ articulo.url_imagen }}" />
+                  <img
+                    width="100px"
+                    class="img-fluid d-block mx-auto image"
+                    src="{{ articulo.url_imagen }}"
+                  />
                 </div>
                 <div class="product-info">
                   <h5 class="product-name" href="#">
@@ -89,32 +137,58 @@
                   </h5>
                   <div class="product-specs">
                     <div>
-                      <span>$&nbsp;</span><span class="value">
+                      <span>$&nbsp;</span
+                      ><span class="value">
                         {{ articulo.precio_de_venta }}
                       </span>
                     </div>
                   </div>
                   <div class="">
-                    <button type="button" class="btn btn-success" data-toggle="modal" (click)="
+                    <button
+                      type="button"
+                      class="btn btn-success"
+                      data-toggle="modal"
+                      (click)="
                         addArticulo(
                           articulo.id,
                           articulo.denominacion,
                           articulo.url_imagen,
                           articulo.precio_de_venta
                         )
-                      ">
-                      <svg class="bi bi-plus-circle-fill" width="1em" height="1em" viewBox="0 0 16 16"
-                        fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                        <path fill-rule="evenodd"
-                          d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4a.5.5 0 0 0-1 0v3.5H4a.5.5 0 0 0 0 1h3.5V12a.5.5 0 0 0 1 0V8.5H12a.5.5 0 0 0 0-1H8.5V4z" />
+                      "
+                    >
+                      <svg
+                        class="bi bi-plus-circle-fill"
+                        width="1em"
+                        height="1em"
+                        viewBox="0 0 16 16"
+                        fill="currentColor"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          fill-rule="evenodd"
+                          d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4a.5.5 0 0 0-1 0v3.5H4a.5.5 0 0 0 0 1h3.5V12a.5.5 0 0 0 1 0V8.5H12a.5.5 0 0 0 0-1H8.5V4z"
+                        />
                       </svg>
                     </button>
-                    <button type="button" class="btn btn-danger" data-toggle="modal"
-                      (click)="deleteArticulo(articulo.id)">
-                      <svg class="bi bi-dash-circle-fill" width="1em" height="1em" viewBox="0 0 16 16"
-                        fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                        <path fill-rule="evenodd"
-                          d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM4 7.5a.5.5 0 0 0 0 1h8a.5.5 0 0 0 0-1H4z" />
+                    <button
+                      type="button"
+                      class="btn btn-danger"
+                      data-toggle="modal"
+                      (click)="deleteArticulo(articulo.id)"
+                    >
+                      <svg
+                        class="bi bi-dash-circle-fill"
+                        width="1em"
+                        height="1em"
+                        viewBox="0 0 16 16"
+                        fill="currentColor"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          fill-rule="evenodd"
+                          d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM4 7.5a.5.5 0 0 0 0 1h8a.5.5 0 0 0 0-1H4z"
+                        />
                       </svg>
                     </button>
                   </div>
@@ -151,23 +225,35 @@
           </div>
           <hr />
           <div class="form-check">
-            <input class="form-check-input" type="radio" name="pago" id="pago1" value="pagoOption1" checked
-              (click)="setPago('0')" />
+            <input
+              class="form-check-input"
+              type="radio"
+              name="pago"
+              id="pago1"
+              value="pagoOption1"
+              checked
+              (click)="setPago('0')"
+            />
             <label class="form-check-label" for="exampleRadios1">
               <p>Efectivo</p>
             </label>
           </div>
           <div class="form-check">
-            <input class="form-check-input" type="radio" name="pago" id="pago2" value="pagoOption2"
-              (click)="setPago('1')" />
+            <input
+              class="form-check-input"
+              type="radio"
+              name="pago"
+              id="pago2"
+              value="pagoOption2"
+              (click)="setPago('1')"
+            />
             <label class="form-check-label" for="exampleRadios2">
               <p>Otro medio de pago</p>
             </label>
           </div>
           <hr />
           <div class="metodoDePago" *ngIf="otroMedioDePago">
-<<<<<<< HEAD
-            <p> <label for="cars">Elegir método de pago</label></p>
+            <p><label for="cars">Elegir método de pago</label></p>
 
             <select name="pago" id="medioPago">
               <option value="debito">
@@ -179,14 +265,6 @@
               <option value="paypal">
                 <p>Paypal</p>
               </option>
-=======
-            <label for="cars">Elegir método de pago</label>
-
-            <select name="pago" id="medioPago">
-              <option value="debito">Débito</option>
-              <option value="credito">Crédito</option>
-              <option value="paypal">Paypal</option>
->>>>>>> 1c621b258bd60d002f9b6d1e7b7d64024be33836
             </select>
           </div>
         </div>
@@ -197,12 +275,6 @@
           <button (click)="crearPedido()" type="button" class="btn btn-primary">
             <p>Comprar</p>
           </button>
-<<<<<<< HEAD
-=======
-          <button (click)="crearPedido()" type="button" class="btn btn-primary">
-            Comprar
-          </button>
->>>>>>> 1c621b258bd60d002f9b6d1e7b7d64024be33836
         </div>
       </div>
     </div>
