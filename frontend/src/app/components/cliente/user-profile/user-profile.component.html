@@ -10,7 +10,7 @@
                 <div class="mb-3">
                   <div class="col mt-3">
                     <a
-                      class="btn btn-primary btn-sm"
+                      class="btn btn-primary text-white btn-sm"
                       type="button"
                       data-toggle="modal"
                       data-target=".bd-pedido-modal-xl"
@@ -20,7 +20,7 @@
                   </div>
                   <div class="col mt-3">
                     <a
-                      class="btn btn-primary btn-sm"
+                      class="btn btn-primary text-white btn-sm"
                       type="button"
                       data-toggle="modal"
                       data-target=".bd-factura-modal-xl"
@@ -41,7 +41,10 @@
                       </p>
                     </div>
                     <div class="card-body">
-                      <form>
+                      <form
+                        #formUser="ngForm"
+                        (ngSubmit)="updateUsuario(formUser)"
+                      >
                         <div class="form-row">
                           <div class="col">
                             <div class="form-group">
@@ -100,32 +103,33 @@
                             </div>
                           </div>
                         </div>
-                        <div class="form-group">
-                          <button class="btn btn-primary btn-sm" type="submit">
-                            Guardar configuracion
-                          </button>
+                        <div class="form-row">
+                          <div class="col">
+                            <div class="form-group">
+                              <label for="calle"><strong>Calle</strong></label>
+                              <input
+                                class="form-control"
+                                type="text"
+                                placeholder="Ingrese su calle"
+                                name="calle"
+                                [(ngModel)]="cliente.domicilio.calle"
+                              />
+                            </div>
+                            <div class="form-group">
+                              <label for="aclaracion"
+                                ><strong>Aclaracion</strong></label
+                              >
+                              <input
+                                class="form-control"
+                                type="text"
+                                placeholder="Ingrese su aclaracion"
+                                name="text"
+                                [(ngModel)]="cliente.domicilio.aclaracion"
+                              />
+                            </div>
+                          </div>
                         </div>
-                      </form>
-                    </div>
-                  </div>
-                  <div class="card shadow">
-                    <div class="card-header py-3">
-                      <p class="text-primary m-0 font-weight-bold">
-                        Datos del Domicilio
-                      </p>
-                    </div>
-                    <div class="card-body">
-                      <form>
-                        <div class="form-group">
-                          <label for="address"><strong>Calle</strong></label>
-                          <input
-                            class="form-control"
-                            type="text"
-                            placeholder="Ingrese su calle"
-                            name="address"
-                            [(ngModel)]="cliente.domicilio.calle"
-                          />
-                        </div>
+
                         <div class="form-row">
                           <div class="col">
                             <div class="form-group">
@@ -143,18 +147,58 @@
                           </div>
                           <div class="col">
                             <div class="form-group">
-                              <label for="country"
-                                ><strong>Localidad</strong></label
+                              <label for="country">
+                                <strong>Localidad</strong>
+                              </label>
+                              <select
+                                class="form-control"
+                                [(ngModel)]="cliente.domicilio.localidad"
                               >
+                                <option
+                                  value="cliente.domicilio.localidad.id"
+                                  >{{
+                                    cliente.domicilio.localidad.nombre
+                                  }}</option
+                                >
+                                <option
+                                  *ngFor="let localidad of listaLocalidades"
+                                  value="localidad.id"
+                                  >{{ localidad.nombre }}</option
+                                >
+                              </select>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="form-row">
+                          <div class="col">
+                            <div class="form-group">
+                              <label for="piso"><strong>Piso</strong></label>
                               <input
                                 class="form-control"
-                                type="text"
-                                name="Ingrese su localidad"
-                                [(ngModel)]="cliente.domicilio.localidad.nombre"
+                                type="number"
+                                placeholder="Ingrese el piso"
+                                name="piso"
+                                [(ngModel)]="cliente.domicilio.piso"
+                              />
+                            </div>
+                          </div>
+                          <div class="col">
+                            <div class="form-group">
+                              <label for="departamento">
+                                <strong>Numero Departamento</strong>
+                              </label>
+                              <input
+                                class="form-control"
+                                type="number"
+                                placeholder="Ingrese el departamento"
+                                name="departamento"
+                                [(ngModel)]="cliente.domicilio.nroDepartamento"
                               />
                             </div>
                           </div>
                         </div>
+
                         <div class="form-group">
                           <button class="btn btn-primary btn-sm" type="submit">
                             Guardar configuracion

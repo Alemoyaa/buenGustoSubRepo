@@ -38,12 +38,12 @@ export class NavbarComponent implements OnInit {
       }
     });
   }
-
   cerrarSesion() {
-    this.serviceLogin.salir();
-    this.serviceLogin.logout();
+    if (confirm('Desea cerrar su sesión')) {
+      this.serviceLogin.salir();
+      this.serviceLogin.logout();
+    }
   }
-
   // hideNavbar() {
   //   if (this.route.url.includes('admin')) {
   //     return true;
