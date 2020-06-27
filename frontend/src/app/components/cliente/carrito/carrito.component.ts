@@ -111,6 +111,7 @@ export class CarritoComponent implements OnInit {
   }
 
   async crearPedido() {
+<<<<<<< HEAD
     await this.loginService.isAuth().subscribe(async (data) => {
       console.log('_-----------> ', data);
       await this.clienteService.getByUidFirebase(data.uid).subscribe(
@@ -203,6 +204,39 @@ export class CarritoComponent implements OnInit {
       return true;
     } else {
       return true;
+    }
+=======
+    await this.loginService.isAuth().subscribe((data) => {
+      this.clienteService.getByUidFirebase(data.uid).subscribe((user) => {
+        if (!this.envio) {
+          this.pedido.tipo_Envio = false;
+        } else {
+          this.pedido.tipo_Envio = true;
+        }
+        this.pedido.clientePedido = user;
+        this.pedido.hora_estimada_fin = new Date();
+        this.pedido.fechaRealizacion = new Date();
+      });
+    });
+    this.pedidoService.post(this.pedido).subscribe((posted) => {
+      console.log('posted');
+    });
+>>>>>>> 1c621b258bd60d002f9b6d1e7b7d64024be33836
+  }
+
+  setEnvio(envio) {
+    if (envio === '0') {
+      this.envio = false;
+    } else {
+      this.envio = true;
+    }
+  }
+
+  setPago(pago) {
+    if (pago === '0') {
+      this.otroMedioDePago = false;
+    } else {
+      this.otroMedioDePago = true;
     }
   }
 }

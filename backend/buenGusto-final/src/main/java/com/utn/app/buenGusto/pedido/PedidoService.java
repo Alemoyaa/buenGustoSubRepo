@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.stereotype.Service;
-
 import com.utn.app.buenGusto.common.CommonService;
 import com.utn.app.buenGusto.estadoPedido.EstadoPedidoEntity;
 
@@ -75,6 +74,21 @@ public class PedidoService extends CommonService<PedidoEntity, PedidoRepository>
 				throw new Exception(e.getMessage());
 			} 
 			
+	}
+
+	@Override
+	public Iterable<PedidoEntity> findAllByHabilitado(boolean habilitado) throws Exception {
+		List<PedidoEntity> entityOptional;
+		entityOptional = repository.findAllByHabilitado(habilitado);
+		try {
+			if (entityOptional != null) {
+				return entityOptional;
+			} else {
+				return null;
+			}
+		} catch (Exception e) {
+			throw new Exception();
+		}
 	}
 
 }

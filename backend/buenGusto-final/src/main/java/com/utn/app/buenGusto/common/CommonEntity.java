@@ -6,7 +6,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 
-import org.springframework.beans.factory.annotation.Value;
 
 @MappedSuperclass
 public class CommonEntity {
@@ -16,7 +15,7 @@ public class CommonEntity {
 	@Column(name = "id")
 	protected long id;
 	
-	@Column(name = "habilitado")
+	@Column(name = "habilitado", columnDefinition="boolean default true")
 	protected boolean habilitado;
 
 	public long getId() {

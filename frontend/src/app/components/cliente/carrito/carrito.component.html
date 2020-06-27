@@ -125,15 +125,28 @@
           <br />
           <h3>Total: {{ total }}</h3>
           <div class="form-check">
-            <input class="form-check-input" type="radio" name="envio" id="envio1" value="envioOption2" checked />
+            <input
+              class="form-check-input"
+              type="radio"
+              name="envio"
+              id="envio1"
+              value="envioOption2"
+              checked
+            />
             <label class="form-check-label" for="exampleRadios1">
-              <p>Delivery</p>
+              Delivery
             </label>
           </div>
           <div class="form-check">
-            <input class="form-check-input" type="radio" name="envio" id="envio2" value="envioOption2" />
+            <input
+              class="form-check-input"
+              type="radio"
+              name="envio"
+              id="envio2"
+              value="envioOption2"
+            />
             <label class="form-check-label" for="exampleRadios2">
-              <p> Retiro en local <small>10% de descuento</small></p>
+              Retiro en local <small>10% de descuento</small>
             </label>
           </div>
           <hr />
@@ -153,6 +166,7 @@
           </div>
           <hr />
           <div class="metodoDePago" *ngIf="otroMedioDePago">
+<<<<<<< HEAD
             <p> <label for="cars">Elegir método de pago</label></p>
 
             <select name="pago" id="medioPago">
@@ -165,6 +179,14 @@
               <option value="paypal">
                 <p>Paypal</p>
               </option>
+=======
+            <label for="cars">Elegir método de pago</label>
+
+            <select name="pago" id="medioPago">
+              <option value="debito">Débito</option>
+              <option value="credito">Crédito</option>
+              <option value="paypal">Paypal</option>
+>>>>>>> 1c621b258bd60d002f9b6d1e7b7d64024be33836
             </select>
           </div>
         </div>
@@ -175,6 +197,12 @@
           <button (click)="crearPedido()" type="button" class="btn btn-primary">
             <p>Comprar</p>
           </button>
+<<<<<<< HEAD
+=======
+          <button (click)="crearPedido()" type="button" class="btn btn-primary">
+            Comprar
+          </button>
+>>>>>>> 1c621b258bd60d002f9b6d1e7b7d64024be33836
         </div>
       </div>
     </div>

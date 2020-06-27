@@ -13,4 +13,7 @@ public interface PedidoRepository extends JpaRepository<PedidoEntity, Long> {
 	@Query("SELECT p FROM PedidoEntity p WHERE p.fechaRealizacion BETWEEN :desde AND :hasta")
 	public List<PedidoEntity> findPedidoFechaDeterminada(Date desde, Date hasta);
 	
+	@Query("SELECT c FROM PedidoEntity c WHERE c.habilitado = ?1")
+	public List<PedidoEntity> findAllByHabilitado(boolean hab); 
+	
 }

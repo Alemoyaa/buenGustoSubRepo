@@ -15,5 +15,8 @@ public interface ClienteRepository extends JpaRepository<ClienteEntity, Long> {
 	 
 	@Query("SELECT c FROM ClienteEntity c WHERE c.usuario.uid_firebase = ?1")
 	public ClienteEntity findByUidFirebase(String uid); 
+	
+	@Query("SELECT c FROM ClienteEntity c WHERE c.habilitado = ?1")
+	public List<ClienteEntity> findAllByHabilitado(boolean hab); 
 	 
 }

@@ -38,4 +38,19 @@ public class ClienteService extends CommonService<ClienteEntity, ClienteReposito
 		}
 
 	}
+	
+	@Override
+	public Iterable<ClienteEntity> findAllByHabilitado(boolean habilitado) throws Exception{
+		List<ClienteEntity> entityOptional;
+		entityOptional = repository.findAllByHabilitado(habilitado);
+		try {
+			if (entityOptional != null) {
+				return entityOptional;
+			} else {
+				return null;
+			}
+		} catch (Exception e) {
+			throw new Exception();
+		}
+	};
 }

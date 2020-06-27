@@ -1,11 +1,12 @@
 package com.utn.app.buenGusto.common;
 
-import java.util.List;
+
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
+
 
 public abstract class CommonService<E extends CommonEntity, R extends JpaRepository<E, Long>>
 		implements CommonIService<E> {
@@ -64,16 +65,12 @@ public abstract class CommonService<E extends CommonEntity, R extends JpaReposit
 	}
 
 	@Override
-	public List<E> findAll(/*int page, int size*/) throws Exception {
-
+	public Iterable<E> findAll() throws Exception {
 		try {
-			//Pageable pageable = PageRequest.of(page, size);
-			return repository.findAll(/*pageable*/)/*.getContent()*/;
-
+			return repository.findAll();
 		} catch (Exception e) {
 			throw new Exception(e.getMessage());
 		}
-
 	}
 
 	public boolean delete(long id) throws Exception {
