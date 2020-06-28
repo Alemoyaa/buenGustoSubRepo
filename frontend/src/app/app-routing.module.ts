@@ -36,18 +36,18 @@ const routes: Routes = [
   {
     path: 'user-profile/:id',
     component: UserProfileComponent,
-    canActivate: [AdminGuard, CajeroGuard, CocineroGuard, ClienteGuard],
+    canActivate: [/*AdminGuard, CajeroGuard, CocineroGuard, */ ClienteGuard],
   },
   { path: 'carrito', component: CarritoComponent },
   {
     path: 'pedido/:id',
     component: PedidosDetalleComponent,
-    canActivate: [AdminGuard, CajeroGuard, CocineroGuard, ClienteGuard],
+    canActivate: [/*AdminGuard, CajeroGuard, CocineroGuard, */ ClienteGuard],
   },
   {
     path: 'factura/:id',
     component: FacturaDetalleComponent,
-    canActivate: [AdminGuard, CajeroGuard, CocineroGuard, ClienteGuard],
+    canActivate: [/*AdminGuard, CajeroGuard, CocineroGuard, */ ClienteGuard],
   },
   //  vistas de administrador / cajero / cocinero : Faltan hacer los Guards
   // El administrador deberiaa poder ver todas (lasa de admin, cajero y cocinero)

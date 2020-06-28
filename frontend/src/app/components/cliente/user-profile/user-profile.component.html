@@ -3,14 +3,14 @@
     <div class="d-flex flex-column" id="content-wrapper">
       <div id="content">
         <div class="container-fluid">
-          <h3 class="text-dark p-4">Perfil</h3>
+          <h3 class="text-dark text-center p-4">Perfil</h3>
           <div class="row mb-3">
             <div class="col-lg-4">
               <div class="card mb-3">
                 <div class="mb-3">
                   <div class="col mt-3">
                     <a
-                      class="btn btn-primary text-white btn-sm"
+                      class="btn btn-primary text-white"
                       type="button"
                       data-toggle="modal"
                       data-target=".bd-pedido-modal-xl"
@@ -20,7 +20,7 @@
                   </div>
                   <div class="col mt-3">
                     <a
-                      class="btn btn-primary text-white btn-sm"
+                      class="btn btn-primary text-white"
                       type="button"
                       data-toggle="modal"
                       data-target=".bd-factura-modal-xl"
@@ -151,18 +151,13 @@
                                 <strong>Localidad</strong>
                               </label>
                               <select
+                                name="localidad"
                                 class="form-control"
                                 [(ngModel)]="cliente.domicilio.localidad"
                               >
                                 <option
-                                  value="cliente.domicilio.localidad.id"
-                                  >{{
-                                    cliente.domicilio.localidad.nombre
-                                  }}</option
-                                >
-                                <option
                                   *ngFor="let localidad of listaLocalidades"
-                                  value="localidad.id"
+                                  [value]="localidad.id"
                                   >{{ localidad.nombre }}</option
                                 >
                               </select>

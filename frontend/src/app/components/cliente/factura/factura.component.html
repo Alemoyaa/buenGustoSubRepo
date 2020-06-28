@@ -1,5 +1,5 @@
 <div class="container">
-  <table class="table table-striped table-dark mt-3 table-responsive">
+  <table class="table table-striped table-dark mt-3">
     <thead class="thead-light">
       <tr>
         <th scope="col" hidden>ID</th>
@@ -15,7 +15,7 @@
         <td hidden>{{ facturaItem.id }}</td>
         <td>{{ facturaItem.fecha }}</td>
         <td>{{ facturaItem.nroFactura }}</td>
-        <td>{{ facturaItem.precioTotal }}</td>
+        <td>{{ facturaItem.totalFactura }}</td>
         <td *ngIf="facturaItem.pedidofacturado.tipo_Envio; else SinEnvio">
           Delivery
         </td>

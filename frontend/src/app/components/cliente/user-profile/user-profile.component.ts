@@ -15,27 +15,27 @@ import { LocalidadService } from 'src/app/services/serviciosCliente/localidadSer
 })
 export class UserProfileComponent implements OnInit {
   cliente: Cliente = {
-    id: null,
+    id: 0,
     nombre: '',
     apellido: '',
+    telefono: null,
     domicilio: {
-      id: null,
-      aclaracion: null,
-      calle: null,
-      localidad: {
-        id: null,
-        nombre: '',
-        provincia: null,
-      },
+      id: 0,
+      aclaracion: '',
+      calle: '',
       nroDepartamento: null,
       numero: null,
       piso: null,
+      localidad: {
+        id: 0,
+        nombre: '',
+        provincia: null,
+      },
     },
-    telefono: null,
     usuario: {
       id: 0,
-      email: null,
-      uid_firebase: null,
+      email: '',
+      uid_firebase: '',
       rol: null,
     },
   };
@@ -76,26 +76,21 @@ export class UserProfileComponent implements OnInit {
   async getLocalidades() {
     await this.serviceLocalidad.getAll().subscribe(
       (res) => {
-        res.forEach((localidad) => {
-          if (this.cliente.domicilio.localidad.id === localidad.id) {
-          } else {
-            this.listaLocalidades.push(localidad);
-          }
-        });
+        this.listaLocalidades = res;
       },
       (err) => {
-        //console.error(err);
-        this.serviceLogin.salir();
-        this.serviceLogin.logout();
+        console.error(err);
       }
     );
   }
 
   async getOneByUid(uid: string) {
-    await this.serviceCliente.getByUidFirebase(uid).subscribe((data) => {
-      this.cliente = data;
-      // console.log(this.cliente);
-    });
+    await this.serviceCliente.getByUidFirebase(uid).subscribe(
+      (data) => {
+        this.cliente = data;
+      },
+      (error) => {}
+    );
   }
 
   updateUsuario(formUser: NgForm) {
@@ -109,13 +104,17 @@ export class UserProfileComponent implements OnInit {
       this.serviceCliente.put(this.cliente.id, this.cliente).subscribe(
         (res) => {
           this.cliente = res;
+          this.serviceAlert.mensajeSuccess(
+            'Realizado',
+            'Sus datos fueron actualizados con exito'
+          );
         },
         (err) => {
           this.serviceAlert.mensajeError(
             'Ocurrio un problema',
             'Por favor vuelva a intentarlo mas tarde'
           );
-          //console.log(err);
+          console.log(err);
         }
       );
     }

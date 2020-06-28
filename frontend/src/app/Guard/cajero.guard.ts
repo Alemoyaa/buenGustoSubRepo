@@ -29,15 +29,21 @@ export class CajeroGuard implements CanActivate {
     | boolean
     | UrlTree {
     return new Promise((resolve) => {
-      this.logService.isAuth().subscribe((data) => {
-        this.clienteService.getByUidFirebase(data.uid).subscribe((user) => {
-          if (user.usuario.rol.id === 2 || user.usuario.rol.id === 1) {
-            resolve(true);
-          } else {
-            resolve(false);
-          }
-        });
-      });
+      this.logService.isAuth().subscribe(
+        (data) => {
+          this.clienteService.getByUidFirebase(data.uid).subscribe(
+            (user) => {
+              if (user.usuario.rol.id === 2 || user.usuario.rol.id === 1) {
+                resolve(true);
+              } else {
+                resolve(false);
+              }
+            },
+            (error) => {}
+          );
+        },
+        (error) => {}
+      );
     });
   }
 }

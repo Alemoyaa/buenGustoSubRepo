@@ -9,6 +9,7 @@ import { map } from 'rxjs/operators';
 import { auth } from 'firebase/app';
 import { Cliente } from '../../entidades/Cliente';
 import { Rol } from 'src/app/entidades/Rol';
+import { Domicilio } from 'src/app/entidades/Domicilio';
 
 @Injectable({
   providedIn: 'root',
@@ -57,16 +58,16 @@ export class LoginService {
 
   loginGoogle() {
     this.afsAuth.signInWithPopup(new auth.GoogleAuthProvider()).then((data) => {
-      //console.log('data', data);
+      console.log('data', data.user.uid);
+      this.route.navigate(['user-profile/' + data.user.uid]);
       //console.log('dataCredential', data.credential);
 
-      if (this.checkEmailExists(data.user.email)) {
+      /* if (!this.checkEmailExists(data.user.email)) {
         this.postCliente(data, true);
         this.ingresar();
         this.route.navigate(['user-profile/' + data.user.uid]);
-      } else {
-        this.route.navigate(['user-profile/' + data.user.uid]);
-      }
+      } else {*/
+      //}
     });
   }
 
@@ -108,6 +109,7 @@ export class LoginService {
         .createUserWithEmailAndPassword(email, password)
         .then((data) => {
           //console.log(data);
+          this.logout();
           data.user.sendEmailVerification();
           this.postCliente(data, false);
           //alert('Se envió un mail de verificación a tu dirección de correo');
@@ -142,12 +144,12 @@ export class LoginService {
     this.usuarioPost.uid_firebase = data.user.uid;
     this.usuarioPost.rol = new Rol();
     this.usuarioPost.rol.id = 5;
-    this.usuarioPost.rol.nombreRol = 'Cliente';
 
     console.log(this.usuarioPost);
 
     this.clientePost.usuario = new Usuario();
     this.clientePost.usuario = this.usuarioPost;
+    this.clientePost.domicilio = new Domicilio();
 
     if (comprobadorDeGoogle) {
       this.clientePost.nombre = data.additionalUserInfo.profile.given_name;
