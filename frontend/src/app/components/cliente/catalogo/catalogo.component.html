@@ -20,8 +20,8 @@
               *ngFor="let articulo of articulos"
               class="articulo-container"
             >
-              <div class="card-container col-lg-4">
-                <div class="card articulo" *ngIf="articulo.es_catalogo">
+              <div class="card-container col-lg-4 col-md-4">
+                <div class="card articulo">
                   <img
                     class="card-img-top card-img-recomendado"
                     src="{{ articulo.url_imagen }}"
@@ -30,16 +30,14 @@
                     <h4 class="card-text">
                       {{ articulo.denominacion }}
                     </h4>
-                    <p>Categoria: {{ articulo.categoria.nombreCategoria }}</p>
-                    <!-- <small>Tiempo estimado: 20m</small> -->
-                    <br />
+                    <p>Categoria: {{ articulo.rubro.denominacion }}</p>
                     <strong
                       ><h3>${{ articulo.precio_de_venta }}</h3></strong
                     >
                     <div class="stars"></div>
                     <div class="ingredientes">
                       <ul>
-                        <!-- <ng-container
+                        <ng-container
                           *ngFor="
                             let ingrediente of articulo.lista_detalleManufacturado
                           "
@@ -49,7 +47,7 @@
                               ingrediente.articuloInsumoID.denominacion
                             }}</small>
                           </li>
-                        </ng-container> -->
+                        </ng-container>
                       </ul>
                     </div>
                     <button
