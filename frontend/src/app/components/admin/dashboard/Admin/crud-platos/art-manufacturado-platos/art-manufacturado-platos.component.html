@@ -18,11 +18,11 @@
     <table class="table table-striped">
       <thead>
         <tr>
-          <th scope="col">Categoria</th>
           <th scope="col">Denominacion</th>
+          <th scope="col">Rubro</th>
+          <th scope="col">Tiempo estimado</th>
           <th scope="col">Ingredientes</th>
           <th scope="col">Precio</th>
-          <th scope="col">Costo</th>
           <th scope="col">Acciones</th>
         </tr>
       </thead>
@@ -33,16 +33,9 @@
               | paginate: { itemsPerPage: 5, currentPage: pageActual }
           "
         >
-          <td *ngIf="articulo.categoria.padre; else elseCategoriaPadre">
-            {{ articulo.categoria.padre.nombreCategoria }} -
-            {{ articulo.categoria.nombreCategoria }}
-          </td>
-          <ng-template #elseCategoriaPadre>
-            <td>
-              {{ articulo.categoria.nombreCategoria }}
-            </td>
-          </ng-template>
           <td>{{ articulo.denominacion }}</td>
+          <td>{{ articulo.rubro.denominacion }}</td>
+          <td>{{ articulo.tiempo_estimado_manuf }}'</td>
           <td>
             <button
               aria-expanded="false"
@@ -55,9 +48,7 @@
 
             <ul class="dropdown-menu" role="menu">
               <li
-                *ngFor="
-                  let item of articulo.lista_detalleManufacturado
-                "
+                *ngFor="let item of articulo.lista_detalleManufacturado"
                 class="list-group-item"
               >
                 {{ item.articuloInsumoID.denominacion }} - {{ item.cantidad }} -
@@ -66,7 +57,6 @@
             </ul>
           </td>
           <td>${{ articulo.precio_de_venta }}</td>
-          <td>${{ articulo.costo_de_manuf }}</td>
           <td>
             <button
               (click)="editar(articulo)"
@@ -144,17 +134,6 @@
               </div>
 
               <div class="form-group">
-                <label for="es_catalogo">Es catalogo?</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  name="es_catalogo"
-                  id="es_catalogo"
-                  formControlName="es_catalogo"
-                />
-              </div>
-
-              <div class="form-group">
                 <label for="">precio de venta</label>
                 <input
                   type="text"
@@ -174,22 +153,6 @@
                   id="url_imagen"
                   formControlName="url_imagen"
                 />
-              </div>
-
-              <div class="form-group">
-                <label for="">Unidad de medida</label>
-                <select
-                  class="form-control"
-                  id="denominacion"
-                  name="denominacion"
-                  formControlName="denominacion"
-                >
-                  <option value="i"></option>
-                  <option value="1">kilogramos</option>
-                  <option value="2">litros</option>
-                  <option value="3">unidad</option>
-                </select>
-
               </div>
               <!-- <div formGroupName="categoria">
                 <div class="form-group">

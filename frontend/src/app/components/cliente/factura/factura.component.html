@@ -13,7 +13,7 @@
     <tbody>
       <tr *ngFor="let facturaItem of facturaCliente">
         <td hidden>{{ facturaItem.id }}</td>
-        <td>{{ facturaItem.fecha }}</td>
+        <td>{{ facturaItem.fecha | date }}</td>
         <td>{{ facturaItem.nroFactura }}</td>
         <td>{{ facturaItem.totalFactura }}</td>
         <td *ngIf="facturaItem.pedidofacturado.tipo_Envio; else SinEnvio">
@@ -22,7 +22,7 @@
         <ng-template #SinEnvio>
           <td>Local</td>
         </ng-template>
-        <td> 
+        <td>
           <a [routerLink]="['/factura', facturaItem.id]" data-dismiss="modal"
             >Ver factura</a
           >

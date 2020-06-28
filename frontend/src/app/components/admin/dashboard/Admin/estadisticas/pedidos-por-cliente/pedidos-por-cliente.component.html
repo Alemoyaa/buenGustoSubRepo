@@ -107,27 +107,10 @@
         </thead>
         <tbody>
           <tr *ngFor="let pedido of this.pedidosRecuperadosDesdeHasta">
-            <td>{{ pedido.fechaRealizacion }}</td>
+            <td>{{ pedido.fechaRealizacion | date }}</td>
 
             <td>
-              <button
-                aria-expanded="false"
-                data-toggle="dropdown"
-                class="btn btn-info dropdown-toggle"
-                type="button"
-              >
-                Detalle Pedido<span class="caret"></span>
-              </button>
-
-              <ul role="menu" class="dropdown-menu">
-                <li
-                  class="list-group-item"
-                  *ngFor="let item of pedido.lista_detallePedido; index as i"
-                >
-                  {{ pedido.lista_detallePedido[i].articulo.denominacion }} -
-                  {{ pedido.lista_detallePedido[i].cantidad }}
-                </li>
-              </ul>
+              {{ pedido.totalPedido }}
             </td>
 
             <td *ngIf="pedido.tipo_Envio; else elseTemplate">
