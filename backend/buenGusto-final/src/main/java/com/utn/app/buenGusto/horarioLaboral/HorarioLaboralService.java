@@ -1,7 +1,6 @@
 package com.utn.app.buenGusto.horarioLaboral;
 
 import java.util.List;
-
 import org.springframework.stereotype.Service;
 import com.utn.app.buenGusto.common.CommonService;
 
@@ -24,4 +23,19 @@ public class HorarioLaboralService
 		}
 	}
 
+	public List<HorarioLaboralEntity> findAllHabwithName(boolean habilitado, String nombre) throws Exception {
+
+		List<HorarioLaboralEntity> entityOptional= repository.findAllHabwithName(habilitado, nombre);
+		
+		try {
+			if (entityOptional != null) {
+				return entityOptional;
+			} else {
+				return null;
+			}
+		} catch (Exception e) {
+			throw new Exception();
+		}
+
+	}
 }

@@ -13,4 +13,8 @@ public interface HorarioLaboralRepository extends JpaRepository<HorarioLaboralEn
 	@Query("SELECT c FROM HorarioLaboralEntity c WHERE c.habilitado = ?1")
 	public List<HorarioLaboralEntity> findAllByHabilitado(boolean hab); 
 
+	
+	@Query("SELECT c FROM HorarioLaboralEntity c WHERE c.habilitado = ?1 AND c.nombre_dia = ?2")
+	public List<HorarioLaboralEntity> findAllHabwithName(boolean hab, String nombre); 
+	
 }

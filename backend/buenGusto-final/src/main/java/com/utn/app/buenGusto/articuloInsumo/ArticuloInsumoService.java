@@ -23,5 +23,7 @@ public class ArticuloInsumoService extends CommonService<ArticuloInsumoEntity, A
 			throw new Exception();
 		}
 	}
+	
+
 
 }

@@ -23,9 +23,9 @@ public class ArticuloInsumoEntity extends CommonEntity implements Serializable {
 	//suponemos que el precio_de_compra es por Kg o por L o por Unidad del Insumo
 	private double precio_de_compra;
 	private double precio_de_venta;
-	private float stock_actual;
-	private float stock_minimo;
-	private float stock_maximo;
+	private double stock_actual;
+	private double stock_minimo;
+	private double stock_maximo;
 	private boolean requiere_refrigeracion;
 	private boolean es_catalogo;
 	private String url_imagen;
@@ -36,7 +36,14 @@ public class ArticuloInsumoEntity extends CommonEntity implements Serializable {
 	
 	@ManyToOne(cascade = CascadeType.MERGE)
 	@JoinColumn(name = "categoria_id")
-	protected CategoriaEntity categoria;
+	private CategoriaEntity categoria;
+	
+	
+
+	public ArticuloInsumoEntity() {
+		super();
+		this.precio_de_venta = 0.0d;
+	}
 
 	public String getDenominacion() {
 		return denominacion;
@@ -62,27 +69,27 @@ public class ArticuloInsumoEntity extends CommonEntity implements Serializable {
 		this.precio_de_venta = precio_de_venta;
 	}
 
-	public float getStock_actual() {
+	public double getStock_actual() {
 		return stock_actual;
 	}
 
-	public void setStock_actual(float stock_actual) {
+	public void setStock_actual(double stock_actual) {
 		this.stock_actual = stock_actual;
 	}
 
-	public float getStock_minimo() {
+	public double getStock_minimo() {
 		return stock_minimo;
 	}
 
-	public void setStock_minimo(float stock_minimo) {
+	public void setStock_minimo(double stock_minimo) {
 		this.stock_minimo = stock_minimo;
 	}
 
-	public float getStock_maximo() {
+	public double getStock_maximo() {
 		return stock_maximo;
 	}
 
-	public void setStock_maximo(float stock_maximo) {
+	public void setStock_maximo(double stock_maximo) {
 		this.stock_maximo = stock_maximo;
 	}
 
@@ -125,5 +132,10 @@ public class ArticuloInsumoEntity extends CommonEntity implements Serializable {
 	public void setCategoria(CategoriaEntity categoria) {
 		this.categoria = categoria;
 	}
+	
+	public void descontarStock(double cantidad) {
+		this.stock_actual -= cantidad;
+	}
 
+	
 }

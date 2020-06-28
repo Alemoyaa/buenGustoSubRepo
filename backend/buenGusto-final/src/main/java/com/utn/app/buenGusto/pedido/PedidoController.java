@@ -58,4 +58,26 @@ public class PedidoController extends CommonController<PedidoEntity, PedidoServi
 					.body("{\"Error in getDetalle \": \"" + e.getMessage() + "\"}"); 
 		}
 	}
+	
+	@PutMapping("/atrasar_pedido/{id}")
+	@Transactional
+	public ResponseEntity<?> putByIdMin(@PathVariable long id) {
+		try {
+			return ResponseEntity.status(HttpStatus.OK).body(service.editarhoraEstimadaPedido(id));
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND)
+					.body("{\"Error in getDetalle \": \"" + e.getMessage() + "\"}"); 
+		}
+	}
+	
+	@PutMapping("/descontar_stock/{id}")
+	@Transactional
+	public ResponseEntity<?> putByIdStock(@PathVariable long id) {
+		try {
+			return ResponseEntity.status(HttpStatus.OK).body(service.descontarStockPedido(id));
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND)
+					.body("Error en PedidoController"); 
+		}
+	}
 }

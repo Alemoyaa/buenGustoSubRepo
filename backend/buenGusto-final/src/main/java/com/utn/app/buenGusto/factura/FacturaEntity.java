@@ -44,12 +44,12 @@ public class FacturaEntity extends CommonEntity implements Serializable {
 	@JoinColumn(name = "datos_empresa_id")
 	private DatosEmpresaEntity datosEmpresaID;
 	
-	public double calcularTotalFactura(FacturaEntity facturaACalcular) {
+	public double calcularTotalFactura() {
 		double resultado = 0.0d;
-		if(facturaACalcular.formaPago == "Contado") {
-			resultado = facturaACalcular.pedidofacturado.getTotalPedido() - (facturaACalcular.pedidofacturado.getTotalPedido()/facturaACalcular.montoDescuento);
+		if(this.formaPago == "Contado") {
+			resultado = this.pedidofacturado.getTotalPedido() - (this.pedidofacturado.getTotalPedido()/this.montoDescuento);
 		}else{
-			resultado = facturaACalcular.pedidofacturado.getTotalPedido();
+			resultado = this.pedidofacturado.getTotalPedido();
 		}
 		return resultado;
 	}

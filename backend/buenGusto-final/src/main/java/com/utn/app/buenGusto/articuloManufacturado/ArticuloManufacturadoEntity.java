@@ -3,14 +3,12 @@ package com.utn.app.buenGusto.articuloManufacturado;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.utn.app.buenGusto.common.CommonEntity;
 import com.utn.app.buenGusto.detalleManufacturado.DetalleManufacturadoEntity;
@@ -27,9 +25,6 @@ public class ArticuloManufacturadoEntity extends CommonEntity implements Seriali
 	private String url_imagen;
 	private String denominacion;
 	private int tiempo_estimado_manuf;
-	
-	@Transient
-	private double costo_de_manuf;
 
 	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
 	@JoinColumn(name = "articuloManufacturado_id")
@@ -42,6 +37,7 @@ public class ArticuloManufacturadoEntity extends CommonEntity implements Seriali
 	public ArticuloManufacturadoEntity() {
 		super();
 		this.lista_detalleManufacturado = new ArrayList<DetalleManufacturadoEntity>();
+		
 	}
 
 	public int getTiempo_estimado_manuf() {
@@ -52,10 +48,6 @@ public class ArticuloManufacturadoEntity extends CommonEntity implements Seriali
 		this.tiempo_estimado_manuf = tiempo_estimado_manuf;
 	}
 	
-	public double getCosto_de_manuf() {
-		return costo_de_manuf;
-	}
-
 	public double calcularCostodeManuf(List<DetalleManufacturadoEntity> lista) {
 		double result = 0.0d;
 		if(!lista.isEmpty()) {
@@ -67,10 +59,6 @@ public class ArticuloManufacturadoEntity extends CommonEntity implements Seriali
 		else {
 			return result;
 		}
-	}
-
-	public void setCosto_de_manuf(double costo_de_manuf) {
-		this.costo_de_manuf = costo_de_manuf;
 	}
 
 	public List<DetalleManufacturadoEntity> getLista_detalleManufacturado() {
@@ -111,6 +99,12 @@ public class ArticuloManufacturadoEntity extends CommonEntity implements Seriali
 
 	public void setRubro(RubroGeneralEntity rubro) {
 		this.rubro = rubro;
+	}
+	
+	public void descontarStock(int cantidadPedida) {
+		for (DetalleManufacturadoEntity p : this.lista_detalleManufacturado) {
+			p.descontarStock(cantidadPedida);
+		}
 	}
 
 }

@@ -13,7 +13,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
-
 import com.utn.app.buenGusto.cliente.ClienteEntity;
 import com.utn.app.buenGusto.common.CommonEntity;
 import com.utn.app.buenGusto.detallePedido.DetallePedidoEntity;
@@ -32,9 +31,6 @@ public class PedidoEntity extends CommonEntity implements Serializable {
 
 	@Transient
 	private double totalPedido;
-	
-	@Transient
-	private int minutosTotal;
 
 	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
 	@JoinColumn(name = "pedido_id")
@@ -47,7 +43,7 @@ public class PedidoEntity extends CommonEntity implements Serializable {
 	@ManyToOne(cascade = CascadeType.MERGE, optional = true)
 	@JoinColumn(name = "cliente_id")
 	private ClienteEntity ClientePedido;
-	
+
 	public PedidoEntity() {
 		super();
 		this.lista_detallePedido = new ArrayList<DetallePedidoEntity>();
@@ -95,18 +91,12 @@ public class PedidoEntity extends CommonEntity implements Serializable {
 
 	public double getTotalPedido() {
 		double result = 0.0d;
-		if (this.lista_detallePedido.isEmpty()) {
-			return result;
-		} else {
+		if (!this.lista_detallePedido.isEmpty()) {
 			for (DetallePedidoEntity p : this.lista_detallePedido) {
-				try {
-					result = result + p.getSubtotal();
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
+				result = result + p.getSubtotal();
 			}
-			return result;
 		}
+		return result;
 	}
 
 	public void setTotalPedido(double totalPedido) {
@@ -128,33 +118,39 @@ public class PedidoEntity extends CommonEntity implements Serializable {
 	public void setHora_estimada_fin(Date hora_estimada_fin) {
 		this.hora_estimada_fin = hora_estimada_fin;
 	}
-	
-	public int getMinutosTotal() {
-		return minutosTotal;
-	}
 
-	public void setMinutosTotal(int minutosTotal) {
+	public int calcularMinutos() {
 		int result = 0;
-		for (DetallePedidoEntity p:this.lista_detallePedido) {
-			if(!p.isEsInsumo()) {
-				result = result + p.getArticuloManufacturado().getTiempo_estimado_manuf();
+		if (!this.lista_detallePedido.isEmpty()) {
+			for (DetallePedidoEntity p : this.lista_detallePedido) {
+				if (!p.isEsInsumo()) {
+					result = result + p.getArticuloManufacturado().getTiempo_estimado_manuf();
+				}
 			}
 		}
-		this.minutosTotal = result;
+		return result;
 	}
 
-	public Date calcularHora_estimada_fin(Date fechaactual, int min) {
+	public Date calcularHora_estimada_fin() {
+		int minuto = this.calcularMinutos();
 		Calendar calendar = Calendar.getInstance();
-		calendar.setTime(fechaactual);
-		calendar.add(Calendar.MINUTE, min);
+		calendar.setTime(this.fechaRealizacion);
+		calendar.add(Calendar.MINUTE, minuto);
 		return calendar.getTime();
 	}
 
-	public void agregarMinRetraso(int min) {
+	public PedidoEntity agregarMinRetraso() {
 		Calendar calendar = Calendar.getInstance();
 		calendar.setTime(this.hora_estimada_fin);
-		calendar.add(Calendar.MINUTE, min);
+		calendar.add(Calendar.MINUTE, 10);
 		this.setHora_estimada_fin(calendar.getTime());
+		return this;
 	}
-	
+
+	public PedidoEntity descontarStock() {
+		for (DetallePedidoEntity p : this.lista_detallePedido) {
+			p.descontarStock();
+		}
+		return this;
+	}
 }

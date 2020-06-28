@@ -58,12 +58,12 @@ public class DetalleManufacturadoEntity extends CommonEntity implements Serializ
 		this.articuloInsumoID = articuloInsumoID;
 	}
 
-	public double calcularSubCosto(DetalleManufacturadoEntity entidad) {
+	public double calcularSubCosto() {
 		double result = 0.0d;
-		if(entidad.articuloInsumoID == null || entidad.unidadMedidaID == null) {
+		if(this.articuloInsumoID == null || this.unidadMedidaID == null) {
 			return result;
 		}else {
-			result = entidad.articuloInsumoID.getPrecio_de_compra() * (entidad.cantidad * entidad.unidadMedidaID.getEquivalencia_KgOL());
+			result = this.articuloInsumoID.getPrecio_de_compra() * (this.cantidad * this.unidadMedidaID.getEquivalencia_KgOL());
 		}
 		return result;
 	}
@@ -74,6 +74,14 @@ public class DetalleManufacturadoEntity extends CommonEntity implements Serializ
 
 	public double getSubCosto() {
 		return subCosto;
+	}
+	
+	public void descontarStock(int cantidadPedida) {
+		if(this.articuloInsumoID.getUnidadMedidaID().getEquivalencia_KgOL() == this.getUnidadMedidaID().getEquivalencia_KgOL()) {
+			this.articuloInsumoID.descontarStock(this.getCantidad()*cantidadPedida);
+		}else {
+			this.articuloInsumoID.descontarStock(this.getCantidad()*this.getUnidadMedidaID().getEquivalencia_KgOL()*cantidadPedida);
+		}
 	}
 	
 }

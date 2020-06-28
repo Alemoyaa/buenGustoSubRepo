@@ -52,14 +52,14 @@ public class DetallePedidoEntity extends CommonEntity implements Serializable {
 		return subtotal;
 	}
 	
-	public double calcularSubtotal(DetallePedidoEntity detalleAcalcular) {
+	public double calcularSubtotal() {
 		double result = 0.0d;
-		if(detalleAcalcular.articuloInsumo == null && detalleAcalcular.articuloManufacturado == null) {
+		if(this.articuloInsumo == null && this.articuloManufacturado == null) {
 			return result;
-		}else if(detalleAcalcular.esInsumo && detalleAcalcular.articuloInsumo.isEs_catalogo()){
-			result = detalleAcalcular.articuloInsumo.getPrecio_de_venta() * detalleAcalcular.cantidad;
+		}else if(this.esInsumo){
+			result = this.articuloInsumo.getPrecio_de_venta() * this.cantidad;
 		}else {
-			result = detalleAcalcular.articuloManufacturado.getPrecio_de_venta() * detalleAcalcular.cantidad;
+			result = this.articuloManufacturado.getPrecio_de_venta() * this.cantidad;
 		}
 		return result;
 	}
@@ -92,4 +92,13 @@ public class DetallePedidoEntity extends CommonEntity implements Serializable {
 		this.articuloManufacturado = articuloManufacturado;
 	}
 
+	public void descontarStock() {
+		if(this.isEsInsumo()) {
+			this.articuloInsumo.descontarStock(this.cantidad);
+		}else {
+			this.articuloManufacturado.descontarStock(this.cantidad);
+		}
+	}
+	
+	
 }
