@@ -58,7 +58,7 @@ export class StockComponent implements OnInit {
     private artInsumoService: ArticuloInsumoService,
     private categoriaService: CategoriaService,
     private unidadMedidaService: UnidadMedidaService
-  ) { }
+  ) {}
 
   async ngOnInit() {
     await this.getAllArticulos();
@@ -83,7 +83,7 @@ export class StockComponent implements OnInit {
       es_catalogo: new FormControl(null),
       denominacion: new FormControl(''),
       categoria: new FormControl(null),
-      habilitado: new FormControl(null)
+      habilitado: new FormControl(null),
     });
   }
 
@@ -99,16 +99,15 @@ export class StockComponent implements OnInit {
     this.artInsumoService.getAll().subscribe(
       (res) => {
         this.articulosInsumos = res;
-        console.log(this.articulosInsumos)
+        console.log(this.articulosInsumos);
       },
       (error) => {
-        console.warn("error =>  ", error);
+        console.warn('error =>  ', error);
       }
     );
     this.getAllCategorias();
     this.getUnidades();
   }
-
 
   getAllCategorias() {
     this.categoriaService.getAll().subscribe(
@@ -117,7 +116,7 @@ export class StockComponent implements OnInit {
         await this.getCategorias();
       },
       (error) => {
-        console.warn("error =>  ", error);
+        console.warn('error =>  ', error);
       }
     );
   }
@@ -127,8 +126,9 @@ export class StockComponent implements OnInit {
     await this.unidadMedidaService.getAll().subscribe(
       (unidad) => {
         this.unidadesMedida = unidad;
-      }, (error) => {
-        console.warn("error =>  ", error);
+      },
+      (error) => {
+        console.warn('error =>  ', error);
       }
     );
   }
@@ -140,13 +140,12 @@ export class StockComponent implements OnInit {
     if (id != null) {
       // traigo la unidad utilizanda el id que me envian por formulario
       this.unidadMedidaService.getOne(id).subscribe((unidad) => {
-
         this.unidadSeleccionada = unidad;
         // seteo el formulario con la unidad id y el nombre de la unidad traida
         this.formStock.controls.unidadMedidaID.setValue({
           id: unidad.id,
           denominacion: unidad.denominacion,
-          abreviatura: unidad.abreviatura
+          abreviatura: unidad.abreviatura,
         });
       });
     }
@@ -154,10 +153,10 @@ export class StockComponent implements OnInit {
 
   async getCategorias() {
     this.categorias.forEach((e) => {
-      if (e.hijos) {
-        this.categoriasPadre.push(e);
-      } else {
+      if (e.padre != null) {
         this.categoriasHijo.push(e);
+      } else {
+        this.categoriasPadre.push(e);
       }
     });
   }
@@ -168,12 +167,11 @@ export class StockComponent implements OnInit {
     if (id != null) {
       // traigo el rol utilizando el id que me envian por formulario
       this.categoriaService.getOne(id).subscribe((padre) => {
-
         this.categoriaSeleccionada = padre;
         // seteo el formulario con el rol id y el nombre del rol traido
         this.formStock.controls.categoria.setValue({
           id: this.categoriaSeleccionada.id,
-          nombreCategoria: this.categoriaSeleccionada.nombreCategoria
+          nombreCategoria: this.categoriaSeleccionada.nombreCategoria,
         });
       });
     }
@@ -190,7 +188,7 @@ export class StockComponent implements OnInit {
         Swal.fire('success', 'Articulo agregado ', 'success');
       },
       (error) => {
-        console.warn("error =>  ", error);
+        console.warn('error =>  ', error);
       }
     );
   }
@@ -213,8 +211,7 @@ export class StockComponent implements OnInit {
             Swal.fire('Deleted!', 'Articulo eliminado con éxito', 'success');
           },
           (error) => {
-
-            console.warn("error =>  ", error);
+            console.warn('error =>  ', error);
           }
         );
       }
@@ -229,7 +226,7 @@ export class StockComponent implements OnInit {
         this.formStock.reset(); //Que me limpie los campos
       },
       (error) => {
-        console.warn("error =>  ", error);
+        console.warn('error =>  ', error);
       }
     );
   }
@@ -250,7 +247,7 @@ export class StockComponent implements OnInit {
       es_catalogo: articulo.es_catalogo,
       denominacion: articulo.denominacion,
       categoria: articulo.categoria,
-      habilitado: articulo.habilitado
+      habilitado: articulo.habilitado,
     });
     this.id = articulo.id;
     console.log(this.id);
@@ -277,5 +274,4 @@ export class StockComponent implements OnInit {
       console.log(result);
     });
   }
-
 }

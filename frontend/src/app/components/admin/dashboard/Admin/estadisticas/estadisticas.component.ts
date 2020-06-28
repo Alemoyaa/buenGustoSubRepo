@@ -62,11 +62,11 @@ export class EstadisticasComponent implements OnInit {
       pedidoItem.lista_detallePedido.forEach((articuloDetallePedido) => {
         if (
           !elementosSinRepetir.includes(
-            articuloDetallePedido.articulo.denominacion
+            articuloDetallePedido.articuloManufacturado.denominacion
           )
         ) {
           elementosSinRepetir.push(
-            articuloDetallePedido.articulo.denominacion as string
+            articuloDetallePedido.articuloManufacturado.denominacion as string
           );
         }
       });
@@ -78,7 +78,8 @@ export class EstadisticasComponent implements OnInit {
       listaDePedidos.forEach((pedido) => {
         pedido.lista_detallePedido.forEach((ItemDetallePedido) => {
           if (
-            (ItemDetallePedido.articulo.denominacion as string) === elemento
+            (ItemDetallePedido.articuloManufacturado.denominacion as string) ===
+            elemento
           ) {
             cantidad += ItemDetallePedido.cantidad;
           }

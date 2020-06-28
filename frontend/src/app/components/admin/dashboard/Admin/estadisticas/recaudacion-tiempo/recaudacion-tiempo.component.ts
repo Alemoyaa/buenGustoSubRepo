@@ -63,7 +63,7 @@ export class RecaudacionTiempoComponent implements OnInit {
     listaDePedidos.forEach((pedidoItem) => {
       pedidoItem.lista_detallePedido.forEach((detallePedidoItem) => {
         precioDetallePedido +=
-          detallePedidoItem.articulo.precio_de_venta *
+          detallePedidoItem.articuloManufacturado.precio_de_venta *
           detallePedidoItem.cantidad;
       });
       this.recaudacionTotal += precioDetallePedido;

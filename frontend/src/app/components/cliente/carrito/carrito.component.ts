@@ -1,12 +1,12 @@
 import { Cliente } from 'src/app/entidades/Cliente';
 import { DetallePedido } from 'src/app/entidades/DetallePedido';
 import { Component, OnInit } from '@angular/core';
-import { Articulo } from 'src/app/entidades/Articulo';
 import { Pedido } from 'src/app/entidades/Pedido';
 import { LoginService } from 'src/app/services/loginServices/login.service';
 import { ClienteService } from 'src/app/services/serviciosCliente/clienteServices/cliente.service';
 import { PedidoServices } from 'src/app/services/serviciosCliente/pedidoServices/pedido.service';
 import { EstadoPedido } from 'src/app/entidades/EstadoPedido';
+import { ArticuloManufacturado } from 'src/app/entidades/ArticuloManufacturado';
 
 @Component({
   selector: 'app-carrito',
@@ -23,7 +23,10 @@ export class CarritoComponent implements OnInit {
   ) {}
 
   pedido: Pedido = {
-    clientePedido: null,
+    ClientePedido: null,
+    minutosTotal: null,
+    totalPedido: null,
+    habilitado: null,
     estadoPedido: null,
     fechaRealizacion: null,
     numero: null,
@@ -37,8 +40,8 @@ export class CarritoComponent implements OnInit {
     this.getArticulos();
   }
 
-  articulos: Array<Articulo> = [];
-  articulosSinRepetir: Array<Articulo> = [];
+  articulos: Array<ArticuloManufacturado> = [];
+  articulosSinRepetir: Array<ArticuloManufacturado> = [];
   total = 0;
   otroMedioDePago = false;
   envio = false;
@@ -124,9 +127,9 @@ export class CarritoComponent implements OnInit {
 
           console.log('--- user', user);
 
-          this.pedido.clientePedido = new Cliente();
+          this.pedido.ClientePedido = new Cliente();
 
-          this.pedido.clientePedido = user;
+          this.pedido.ClientePedido = user;
           this.pedido.fechaRealizacion = new Date();
           this.pedido.hora_estimada_fin = new Date();
 

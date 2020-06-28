@@ -1,5 +1,3 @@
-import { ArticuloServices } from '../../../services/serviciosCliente/articuloServices/articuloServices';
-import { Articulo } from 'src/app/entidades/Articulo';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ArticuloManufacturado } from 'src/app/entidades/ArticuloManufacturado';
@@ -12,12 +10,12 @@ import { ArticuloManufacturadoService } from 'src/app/services/serviciosCliente/
 })
 export class CatalogoComponent implements OnInit {
   pageActual: number = 1; //paginador
-  articulos: Array<Articulo> = [];
+  articulos: Array<ArticuloManufacturado> = [];
 
-  articulo: Articulo;
+  articulo: ArticuloManufacturado;
 
   constructor(
-    public articulosService: ArticuloServices,
+    public articulosService: ArticuloManufacturadoService,
     private router: Router
   ) {}
 
