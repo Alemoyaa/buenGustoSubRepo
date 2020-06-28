@@ -24,11 +24,11 @@ public class DetallePedidoEntity extends CommonEntity implements Serializable {
 	private String aclaracion;
 	private boolean esInsumo;
 
-	@ManyToOne(cascade = CascadeType.ALL, optional = true)
+	@ManyToOne(cascade = CascadeType.MERGE, optional = true)
 	@JoinColumn(name = "articuloinsumo_id")
 	private ArticuloInsumoEntity articuloInsumo;
 	
-	@ManyToOne(cascade = CascadeType.ALL, optional = true)
+	@ManyToOne(cascade = CascadeType.MERGE, optional = true)
 	@JoinColumn(name = "articulomanufacturado_id")
 	private ArticuloManufacturadoEntity articuloManufacturado;
 	

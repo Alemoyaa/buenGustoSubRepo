@@ -38,15 +38,20 @@ public class PedidoEntity extends CommonEntity implements Serializable {
 
 	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
 	@JoinColumn(name = "pedido_id")
-	private List<DetallePedidoEntity> lista_detallePedido = new ArrayList<DetallePedidoEntity>();
+	private List<DetallePedidoEntity> lista_detallePedido;
 
-	@ManyToOne(optional = true)
+	@ManyToOne(cascade = CascadeType.MERGE, optional = true)
 	@JoinColumn(name = "estado_pedido_id")
 	private EstadoPedidoEntity EstadoPedido;
 
-	@ManyToOne(optional = true, cascade = CascadeType.ALL)
+	@ManyToOne(cascade = CascadeType.MERGE, optional = true)
 	@JoinColumn(name = "cliente_id")
 	private ClienteEntity ClientePedido;
+	
+	public PedidoEntity() {
+		super();
+		this.lista_detallePedido = new ArrayList<DetallePedidoEntity>();
+	}
 
 	public boolean isTipo_Envio() {
 		return tipo_Envio;
