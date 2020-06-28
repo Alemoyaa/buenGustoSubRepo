@@ -7,7 +7,7 @@
   aria-labelledby="ModalEditarLabel"
   aria-hidden="true"
 >
-  <div class="modal-dialog modal-dialog-scrollable" role="document">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel"><i class="fas fa-pencil-alt"></i> Editar Rol de usuario</h5>
@@ -22,10 +22,10 @@
         </button>
       </div>
       <div class="modal-body text-lg-center">
-        
-       
+
+
         <form action="" [formGroup]="formularioPersona">
-          
+
           <div class="row">
             <div class="col-12">
               <h5 class="modal-title" id="exampleModalLabel">
@@ -38,7 +38,7 @@
                 <label for="">Nombre</label>
                 <input
                   type="text"
-                  disabled 
+                  disabled
                   formControlName="nombre"
                   class="form-control"
                 />
@@ -67,7 +67,7 @@
               </div>
             </div>
 
-          
+
           </div>
           <div formGroupName="usuario">
             <div class="row">
@@ -86,7 +86,7 @@
                     formControlName="email"
                     class="form-control"
                   />
-                </div> 
+                </div>
               </div>
               <div class="col-6" formGroupName="rol">
 
@@ -108,8 +108,8 @@
                   </div>
                 </div>
               </div>
-           
-              
+
+
             </div>
           </div>
 
@@ -208,10 +208,10 @@
                     />
                   </div>
                 </div>
-  
+
               </div>
 
-              
+
           <div formGroupName="pais">
             <div class="row">
               <input type="hidden" class="hidden" disabled   formControlName="id">
@@ -230,23 +230,23 @@
             </div>
 
           </div>
-  
+
             </div>
 
           </div>
-            
-            
+
+
           </div>
 
-        
-            
 
-          
+
+
+
 
         </form>
       </div>
       <div class="modal-footer">
-       
+
         <button type="button" class="btn btn-warning"  (click)="actualizar()" data-dismiss="modal">
           <i class="fas fa-pencil-alt">   </i>
           <p>Actualizar Rol</p>

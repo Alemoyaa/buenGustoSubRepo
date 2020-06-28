@@ -1,14 +1,14 @@
 <div class="modal" id="domicilio" data-backdrop="static" tabindex="-1" role="dialog">
-    <div class="modal-dialog" role="document">
+    <div class="modal-dialog modal-lg" role="document">
       <div class="modal-content">
         <div class="modal-header">
            <h5 class="modal-title"> <i class="fas fa-home"></i>Datos del domicilio </h5>
-           
+
           <button type="button" class="close" data-dismiss="modal" aria-label="Close" >
             <span aria-hidden="true">&times;</span>
           </button>
-  
-          
+
+
         </div>
         <div class="modal-body" >
 
@@ -18,7 +18,7 @@
                   <h4 class="modal-title text-center">Domicilio </h4>
                   <hr>
                 </div>
-               
+
                 <div class="col-6 text-center">
                   <h5 class="modal-title text-center">Calle: </h5>
                    <p>{{domicilioAMostrar.calle}}</p>
@@ -34,9 +34,9 @@
                 <div class="col-6 text-center" *ngIf="domicilioAMostrar.piso != 0">
                   <h5 class="modal-title text-center">numero de Departamento: </h5>
                   <p>{{domicilioAMostrar.nroDepartamento}}</p>
-                 
+
                 </div>
-                
+
               </div>
               <div class="row">
                 <div class="class col-12 text-center">
@@ -59,15 +59,15 @@
                   <h5 class="modal-title text-center">Pais: </h5>
                   <p>{{domicilioAMostrar.localidad.provincia.pais.nombre}}</p>
                 </div>
-               
-                
+
+
               </div>
             </div>
 
-            
-  
+
+
         </div>
       </div>
     </div>
   </div>
-  
+

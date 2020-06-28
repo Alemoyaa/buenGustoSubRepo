@@ -3,6 +3,7 @@ import { Usuario } from '../../../entidades/Usuario';
 import { LoginService } from './../../../services/loginServices/login.service';
 
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { ClienteService } from 'src/app/services/serviciosCliente/clienteServices/cliente.service';
 
 @Component({
   selector: 'app-navbar',
@@ -10,7 +11,11 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
   styleUrls: ['./navbar.component.css'],
 })
 export class NavbarComponent implements OnInit {
-  constructor(private serviceLogin: LoginService, private route: Router) {}
+  constructor(
+    private serviceLogin: LoginService,
+    private route: Router,
+    private clienteService: ClienteService
+  ) {}
 
   @Output() irDashboard = new EventEmitter();
 
@@ -28,11 +33,18 @@ export class NavbarComponent implements OnInit {
     this.serviceLogin.datosGoogle(this.cliente); //para mostrar la foto de perfil en el navbar
   }
 
+  canAccessPanel = false;
+
   existeUsuario() {
     this.serviceLogin.isAuth().subscribe((user) => {
       if (user) {
         this.navbarUsuario = true;
         this.uid = user.uid;
+        this.clienteService.getByUidFirebase(user.uid).subscribe((data) => {
+          if (data.usuario.rol.id != 5) {
+            this.canAccessPanel = true;
+          }
+        });
       } else {
         this.navbarUsuario = false;
       }
