@@ -14,5 +14,5 @@ export class Pedido extends Common {
 
   lista_detallePedido: DetallePedido[];
   estadoPedido: EstadoPedido;
-  ClientePedido: Cliente;
+  clientePedido: Cliente;
 }

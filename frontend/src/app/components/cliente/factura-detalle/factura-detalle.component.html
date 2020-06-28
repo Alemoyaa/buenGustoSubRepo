@@ -13,11 +13,11 @@
       <div class="row cuadro justify-content-between">
         <h5>
           {{ factura.datosEmpresaID.domicilio.localidad.nombre }},
-          {{ factura.fecha }}
+          {{ factura.fecha | date }}
         </h5>
         <h5>
-          Comprador: {{ factura.pedidofacturado.ClientePedido.nombre }}
-          {{ factura.pedidofacturado.ClientePedido.apellido }}
+          Comprador: {{ factura.pedidofacturado.clientePedido.nombre }}
+          {{ factura.pedidofacturado.clientePedido.apellido }}
         </h5>
         <h5 *ngIf="factura.pedidofacturado.tipo_Envio">
           Tipo de Envio: Delivery
@@ -39,7 +39,7 @@
           <thead>
             <tr>
               <th scope="col">Cantidad</th>
-              <th scope="col">Concepto</th>
+              <th scope="col">Nombre</th>
               <th scope="col">Precio unitario</th>
               <th scope="col">Subtotal</th>
             </tr>
@@ -49,8 +49,19 @@
               *ngFor="let item of factura.pedidofacturado.lista_detallePedido"
             >
               <td>{{ item.cantidad }}</td>
-              <td>{{ item.articulo.denominacion }}</td>
-              <td>{{ item.articulo.precio_de_venta }}</td>
+              <td *ngIf="item.articuloInsumo">
+                {{ item.articuloInsumo.denominacion }}
+              </td>
+              <td *ngIf="item.articuloManufacturado">
+                {{ item.articuloManufacturado.denominacion }}
+              </td>
+              <td *ngIf="item.articuloInsumo">
+                {{ item.articuloInsumo.precio_de_venta }}
+              </td>
+              <td *ngIf="item.articuloManufacturado">
+                {{ item.articuloManufacturado.precio_de_venta }}
+              </td>
+
               <td>{{ item.subtotal }}</td>
             </tr>
           </tbody>

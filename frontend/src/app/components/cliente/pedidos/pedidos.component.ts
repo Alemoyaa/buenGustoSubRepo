@@ -25,7 +25,7 @@ export class PedidosComponent implements OnInit {
         data.forEach((pedido) => {
           if (
             this.clienteUser.usuario.uid_firebase ===
-            pedido.ClientePedido.usuario.uid_firebase
+            pedido.clientePedido.usuario.uid_firebase
           ) {
             this.pedidosCliente.push(pedido);
           }

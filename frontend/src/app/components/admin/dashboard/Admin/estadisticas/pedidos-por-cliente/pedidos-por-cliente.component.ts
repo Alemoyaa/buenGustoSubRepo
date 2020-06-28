@@ -40,8 +40,8 @@ export class PedidosPorClienteComponent implements OnInit {
   }
 
   get filtrar(): Cliente[] {
-    var matcher = new RegExp(this.filtroBuscador, 'i');
-    return this.clientesEncontrados.filter(function (cliente) {
+    const matcher = new RegExp(this.filtroBuscador, 'i');
+    return this.clientesEncontrados.filter((cliente) => {
       return matcher.test([cliente.nombre, cliente.apellido].join());
     });
   }
@@ -92,7 +92,7 @@ export class PedidosPorClienteComponent implements OnInit {
           (res) => {
             if (res) {
               res.forEach((pedidoRecuperado) => {
-                if (pedidoRecuperado.ClientePedido.id === this.idCliente) {
+                if (pedidoRecuperado.clientePedido.id === this.idCliente) {
                   this.pedidosRecuperadosDesdeHasta.push(pedidoRecuperado);
                 }
               });

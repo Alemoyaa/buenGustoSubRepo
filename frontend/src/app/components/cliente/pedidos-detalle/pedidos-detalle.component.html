@@ -15,17 +15,26 @@
       </thead>
       <tbody>
         <tr *ngFor="let item of pedidoDetalle.lista_detallePedido">
-          <td>
-            {{ item.articulo.denominacion }}
+          <td *ngIf="item.articuloManufacturado">
+            {{ item.articuloManufacturado.denominacion }}
           </td>
-          <td>
+          <td *ngIf="item.articuloInsumo">
+            {{ item.articuloInsumo.denominacion }}
+          </td>
+          <td >
             {{ item.cantidad }}
           </td>
-          <td>
-            {{ item.articulo.categoria.nombreCategoria }}
+          <td *ngIf="item.articuloManufacturado">
+            {{ item.articuloManufacturado.rubro.denominacion }}
           </td>
-          <td>
-            {{ item.articulo.precio_de_venta }}
+          <td *ngIf="item.articuloInsumo">
+            {{ item.articuloInsumo.categoria.nombreCategoria }}
+          </td>
+          <td *ngIf="item.articuloManufacturado">
+            {{ item.articuloManufacturado.precio_de_venta }}
+          </td>
+          <td *ngIf="item.articuloInsumo">
+            {{ item.articuloInsumo.precio_de_venta }}
           </td>
           <td>
             {{ item.subtotal }}

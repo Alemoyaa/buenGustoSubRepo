@@ -29,8 +29,8 @@ export class FacturacionCajeroComponent implements OnInit {
     return this.facturas.filter((factura) => {
       return matcher.test(
         [
-          factura.pedidofacturado.ClientePedido.nombre,
-          factura.pedidofacturado.ClientePedido.apellido,
+          factura.pedidofacturado.clientePedido.nombre,
+          factura.pedidofacturado.clientePedido.apellido,
         ].join()
       );
     });

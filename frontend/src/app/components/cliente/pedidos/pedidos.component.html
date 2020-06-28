@@ -14,10 +14,10 @@
     <tbody>
       <tr *ngFor="let pedido of pedidosCliente">
         <td hidden>{{ pedido.id }}</td>
-        <td>{{ pedido.fechaRealizacion }}</td>
+        <td>{{ pedido.fechaRealizacion | date }}</td>
         <td>{{ pedido.numero }}</td>
         <td>{{ pedido.estadoPedido.nombreEstado }}</td>
-        <td>{{ pedido.hora_estimada_fin }}</td>
+        <td>{{ pedido.hora_estimada_fin | date: "medium" }}</td>
         <td *ngIf="pedido.tipo_Envio; else SinEnvio">Delivery</td>
         <ng-template #SinEnvio>
           <td>Local</td>
