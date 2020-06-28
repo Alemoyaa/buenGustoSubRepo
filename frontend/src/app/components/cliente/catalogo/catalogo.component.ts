@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ArticuloManufacturado } from 'src/app/entidades/ArticuloManufacturado';
 import { ArticuloManufacturadoService } from 'src/app/services/serviciosCliente/articuloManufacturadoServices/articuloManufacturado.service';
+import { ArticuloInsumo } from 'src/app/entidades/ArticuloInsumo';
+import { ArticuloInsumoService } from 'src/app/services/serviciosCliente/articuloInsumoServices/articuloInsumo.service';
 
 @Component({
   selector: 'app-catalogo',
@@ -10,12 +12,12 @@ import { ArticuloManufacturadoService } from 'src/app/services/serviciosCliente/
 })
 export class CatalogoComponent implements OnInit {
   pageActual: number = 1; //paginador
-  articulos: Array<ArticuloManufacturado> = [];
-
-  articulo: ArticuloManufacturado;
+  articulosManufacturado: Array<ArticuloManufacturado> = [];
+  articulosInsumo: Array<ArticuloInsumo> = [];
 
   constructor(
-    public articulosService: ArticuloManufacturadoService,
+    public articulosManufacturadosService: ArticuloManufacturadoService,
+    public articulosInsumoService: ArticuloInsumoService,
     private router: Router
   ) {}
 
@@ -24,14 +26,19 @@ export class CatalogoComponent implements OnInit {
   }
 
   async getArticulos() {
-    await this.articulosService.getAll().subscribe((data) => {
-      console.log(data);
-      this.articulos = data;
-      console.log(this.articulos);
+    await this.articulosManufacturadosService.getAll().subscribe((data) => {
+      this.articulosManufacturado = data;
+    });
+    await this.articulosInsumoService.getAll().subscribe((data) => {
+      this.articulosInsumo = data;
     });
   }
 
-  goToDetail(id) {
-    this.router.navigate(['catalogo-detalle/', id]);
+  goToDetail(id, articulo) {
+    if (articulo === 0) {
+      this.router.navigate(['detalle-manufacturado/', id]);
+    } else {
+      this.router.navigate(['detalle-insumo/', id]);
+    }
   }
 }

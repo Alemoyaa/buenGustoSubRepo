@@ -3,7 +3,7 @@
     <div class="container container-catalogo">
       <div class="row justify-content-around d-flex">
         <div class="col-12 text-center jumbotron" style="margin-bottom: 20px;">
-          <h1 class="display-4"><strong>Nuestros Platos </strong></h1>
+          <h1 class="display-4"><strong>Nuestros productos </strong></h1>
         </div>
         <a [routerLink]="['/carrito']">
           <button type="button" class="btn btn-primary">
@@ -13,11 +13,12 @@
         </a>
       </div>
 
-      <div class="catalogo col-lg-12 mt-4 justify-content-center d-flex">
+      <div class="catalogo col-lg-12 mt-4">
+        <h3>Platos</h3>
         <div class="container platos col-lg-9">
           <div class="row articulo">
             <ng-container
-              *ngFor="let articulo of articulos"
+              *ngFor="let articulo of articulosManufacturado"
               class="articulo-container"
             >
               <div class="card-container col-lg-4 col-md-4">
@@ -54,13 +55,54 @@
                       type="button"
                       class="btn btn-primary"
                       data-toggle="modal"
-                      (click)="goToDetail(articulo.id)"
+                      (click)="goToDetail(articulo.id, 0)"
                     >
                       <p>Ver más</p>
                     </button>
                   </div>
                 </div>
               </div>
+            </ng-container>
+          </div>
+        </div>
+      </div>
+
+      <div class="catalogo col-lg-12 mt-4">
+        <h3>Insumos</h3>
+        <div class="container platos col-lg-9">
+          <div class="row articulo">
+            <ng-container
+              *ngFor="let articulo of articulosInsumo"
+              class="articulo-container"
+            >
+              <ng-container *ngIf="articulo.es_catalogo">
+                <div class="card-container col-lg-4 col-md-4">
+                  <div class="card articulo">
+                    <img
+                      class="card-img-top card-img-recomendado"
+                      src="{{ articulo.url_imagen }}"
+                    />
+                    <div class="card-body">
+                      <h4 class="card-text">
+                        {{ articulo.denominacion }}
+                      </h4>
+                      <strong
+                        ><h3>${{ articulo.precio_de_venta }}</h3></strong
+                      >
+                      <div class="stars"></div>
+
+                      <button
+                        type="button"
+                        class="btn btn-primary"
+                        data-toggle="modal"
+                        (click)="goToDetail(articulo.id, 1)"
+                      >
+                        <p>Ver más</p>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </ng-container>
             </ng-container>
           </div>
         </div>

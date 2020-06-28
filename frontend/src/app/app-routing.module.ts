@@ -22,6 +22,7 @@ import { AdminGuard } from './Guard/admin.guard';
 import { CajeroGuard } from './Guard/cajero.guard';
 import { ClienteGuard } from './Guard/cliente.guard';
 import { CocineroGuard } from './Guard/cocinero.guard';
+import { CatalogoDetalleInsumoComponent } from './components/cliente/catalogo-detalle-insumo/catalogo-detalle-insumo.component';
 
 const routes: Routes = [
   // Vistas usuario
@@ -30,8 +31,12 @@ const routes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: 'catalogo', component: CatalogoComponent },
   {
-    path: 'catalogo-detalle/:id',
+    path: 'detalle-manufacturado/:id',
     component: CatalogoDetalleComponent,
+  },
+  {
+    path: 'detalle-insumo/:id',
+    component: CatalogoDetalleInsumoComponent,
   },
   {
     path: 'user-profile/:id',

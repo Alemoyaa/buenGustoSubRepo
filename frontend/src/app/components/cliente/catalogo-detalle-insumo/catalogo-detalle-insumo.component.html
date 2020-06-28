@@ -1,0 +1,37 @@
+<div class="container">
+  <a [routerLink]="['/catalogo']">
+    <button type="button" class="btn btn-primary margin-top">
+      <p>Volver al catálogo</p>
+    </button>
+  </a>
+</div>
+
+<div class="container justify-content-center d-flex">
+  <div class="container col-lg-6 col-md-12 col-sm-12">
+    <div class="card articulo-detalle" style="width: 30rem;">
+      <img
+        src="{{ articulo.url_imagen }}"
+        class="card-img-top"
+        alt="Foto de {{ articulo.denominacion }}"
+      />
+      <div class="card-body">
+        <h3 class="card-title">{{ articulo.denominacion }}</h3>
+
+        <div class="row">
+          <div class="col-lg-4 col-md-4 col-sm-4 left-align">
+            <h4>${{ articulo.precio_de_venta }}</h4>
+          </div>
+          <div class="col-lg-8 col-md-8 col-sm-8 right-align">
+            <button
+              type="button"
+              class="btn btn-warning"
+              (click)="addToCart(articulo)"
+            >
+              <p>Agregar al carrito</p>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
