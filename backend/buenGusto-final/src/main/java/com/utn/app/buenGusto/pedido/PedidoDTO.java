@@ -1,7 +1,6 @@
 package com.utn.app.buenGusto.pedido;
 
-import java.sql.Date;
-import java.sql.Timestamp;
+import java.util.Date;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,15 +16,12 @@ public class PedidoDTO {
 	private long id;
 
 	private Date fechaRealizacion;
-	private Timestamp hora_estimada_fin;
+	private Date hora_estimada_fin;
 	private boolean tipo_Envio;
 	private int numero;
-
 	private List<DetallePedidoEntity> lista_detallePedido = new ArrayList<DetallePedidoEntity>();
-
 	private FacturaEntity facturaEntity;
 	private EstadoPedidoEntity estadoPedido;
-
 	private ClienteEntity clientePedido;
 
 	public long getId() {
@@ -40,16 +36,16 @@ public class PedidoDTO {
 		return fechaRealizacion;
 	}
 
-	public void setFechaRealizacion(Date fechaRealizacion) {
-		this.fechaRealizacion = fechaRealizacion;
-	}
-
-	public Timestamp getHora_estimada_fin() {
+	public Date getHora_estimada_fin() {
 		return hora_estimada_fin;
 	}
 
-	public void setHora_estimada_fin(Timestamp hora_estimada_fin) {
+	public void setHora_estimada_fin(Date hora_estimada_fin) {
 		this.hora_estimada_fin = hora_estimada_fin;
+	}
+
+	public void setFechaRealizacion(Date fechaRealizacion) {
+		this.fechaRealizacion = fechaRealizacion;
 	}
 
 	public boolean isTipo_Envio() {

@@ -37,7 +37,9 @@ export class ArtManufacturadoPlatosComponent implements OnInit {
   get filtrar(): ArticuloManufacturado[] {
     var matcher = new RegExp(this.filtroBuscador, 'i');
     return this.articuloManufacturado.filter(function (articulo) {
-      return matcher.test([articulo.denominacion, articulo.categoria].join());
+      return matcher.test(
+        [articulo.denominacion, articulo.rubro.denominacion].join()
+      );
     });
   }
 
@@ -143,8 +145,8 @@ export class ArtManufacturadoPlatosComponent implements OnInit {
       precio_de_venta: articulo.precio_de_venta,
       url_imagen: articulo.url_imagen,
       denominacion: articulo.denominacion,
-      categoria: articulo.categoria,
-      es_catalogo: articulo.es_catalogo,
+      categoria: articulo.rubro,
+      // es_catalogo: articulo.,
       costo_de_manuf: articulo.costo_de_manuf,
       tiempo_estimado_manuf: articulo.tiempo_estimado_manuf,
       lista_detalleManufacturado: articulo.lista_detalleManufacturado,
@@ -154,7 +156,7 @@ export class ArtManufacturadoPlatosComponent implements OnInit {
   }
 
   cerrar() {
-    this.crearFormulario()
+    this.crearFormulario();
     this.esEditar = false;
   }
 }

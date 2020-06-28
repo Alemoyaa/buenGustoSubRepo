@@ -4,6 +4,6 @@ import { UnidadMedida } from './UnidadMedida';
 
 export class DetalleManufacturado extends Common {
   cantidad: number;
-  articuloInsumoID: ArticuloInsumo;
   unidadMedidaID: UnidadMedida;
+  articuloInsumoID: ArticuloInsumo;
 }

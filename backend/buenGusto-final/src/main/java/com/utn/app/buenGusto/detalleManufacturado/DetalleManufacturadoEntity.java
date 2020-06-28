@@ -23,11 +23,11 @@ public class DetalleManufacturadoEntity extends CommonEntity implements Serializ
 
 	private int cantidad;
 
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne(cascade = CascadeType.MERGE)
 	@JoinColumn(name = "unidad_medida_id")
 	private UnidadMedidaEntity unidadMedidaID;
 
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne(cascade = CascadeType.MERGE)
 	@JoinColumn(name = "articulo_insumo_id")
 	private ArticuloInsumoEntity articuloInsumoID;
 	
@@ -58,12 +58,12 @@ public class DetalleManufacturadoEntity extends CommonEntity implements Serializ
 		this.articuloInsumoID = articuloInsumoID;
 	}
 
-	public double getSubCosto() {
+	public double calcularSubCosto(DetalleManufacturadoEntity entidad) {
 		double result = 0.0d;
-		if(this.articuloInsumoID == null || this.unidadMedidaID == null) {
+		if(entidad.articuloInsumoID == null || entidad.unidadMedidaID == null) {
 			return result;
 		}else {
-			result = this.articuloInsumoID.getPrecio_de_compra() * (this.cantidad * this.unidadMedidaID.getEquivalencia_KgOL());
+			result = entidad.articuloInsumoID.getPrecio_de_compra() * (entidad.cantidad * entidad.unidadMedidaID.getEquivalencia_KgOL());
 		}
 		return result;
 	}
@@ -71,7 +71,9 @@ public class DetalleManufacturadoEntity extends CommonEntity implements Serializ
 	public void setSubCosto(double subCosto) {
 		this.subCosto = subCosto;
 	}
-	
-	
 
+	public double getSubCosto() {
+		return subCosto;
+	}
+	
 }

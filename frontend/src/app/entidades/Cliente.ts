@@ -6,6 +6,7 @@ export class Cliente extends Common {
   nombre: string;
   apellido: string;
   telefono: number;
-  domicilio: Domicilio;
+
   usuario: Usuario;
+  domicilio: Domicilio;
 }

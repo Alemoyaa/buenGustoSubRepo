@@ -3,8 +3,7 @@ import { DetalleManufacturado } from './../../../entidades/DetalleManufacturado'
 import { DetalleManufacturadoService } from './../../../services/serviciosCliente/detalleManufacturadoServices/detalle-manufacturado.service';
 import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ArticuloServices } from 'src/app/services/serviciosCliente/articuloServices/articuloServices';
-import { Articulo } from 'src/app/entidades/Articulo';
+
 import { ArticuloInsumo } from 'src/app/entidades/ArticuloInsumo';
 import { ArticuloInsumoService } from 'src/app/services/serviciosCliente/articuloInsumoServices/articuloInsumo.service';
 import { ArticuloManufacturado } from 'src/app/entidades/ArticuloManufacturado';
@@ -15,7 +14,7 @@ import { ArticuloManufacturado } from 'src/app/entidades/ArticuloManufacturado';
   styleUrls: ['./catalogo-detalle.component.css'],
 })
 export class CatalogoDetalleComponent implements OnInit {
-  articulo: Articulo;
+  articulo: ArticuloManufacturado;
   articuloManuf: ArticuloManufacturado;
   id: number;
 
@@ -27,7 +26,7 @@ export class CatalogoDetalleComponent implements OnInit {
   };
 
   constructor(
-    private articuloService: ArticuloServices,
+    private articuloService: ArticuloManufacturadoService,
     private routerActive: ActivatedRoute,
     private router: Router,
     private articuloManufService: ArticuloManufacturadoService

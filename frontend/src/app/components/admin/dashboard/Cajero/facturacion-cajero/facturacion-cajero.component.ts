@@ -8,24 +8,31 @@ import { FacturaService } from '../../../../../services/serviciosCliente/factura
 @Component({
   selector: 'app-facturacion-cajero',
   templateUrl: './facturacion-cajero.component.html',
-  styleUrls: ['./facturacion-cajero.component.css']
+  styleUrls: ['./facturacion-cajero.component.css'],
 })
 export class FacturacionCajeroComponent implements OnInit {
   facturas: Array<Factura> = [];
   factura: Factura;
   filtroBuscador: any = '';
   pageActual: number = 1;
-  constructor(private facturaService: FacturaService, private alerts: AlertsService,) { }
+  constructor(
+    private facturaService: FacturaService,
+    private alerts: AlertsService
+  ) {}
 
   ngOnInit(): void {
     this.getPedidosPendientes();
   }
 
   get filtrar(): Factura[] {
-
     const matcher = new RegExp(this.filtroBuscador, 'i');
     return this.facturas.filter((factura) => {
-      return matcher.test([factura.pedidofacturado.clientePedido.nombre, factura.pedidofacturado.clientePedido.apellido].join());
+      return matcher.test(
+        [
+          factura.pedidofacturado.ClientePedido.nombre,
+          factura.pedidofacturado.ClientePedido.apellido,
+        ].join()
+      );
     });
   }
   // fecha: Date;
@@ -38,27 +45,20 @@ export class FacturacionCajeroComponent implements OnInit {
   // datosEmpresaID: DatosEmpresa;
 
   getPedidosPendientes() {
+    this.facturaService.getAll().subscribe((data) => {
+      data.filter((factura) => {
+        if (factura.pedidofacturado.estadoPedido.nombreEstado === 'Listo') {
+          // console.log(factura);
+          return this.facturas.push(factura);
+        }
+        // console.log(this.facturas);
+      });
 
-    this.facturaService.getAll().subscribe(
-
-      data => {
-        data.filter((factura) => {
-
-          if (factura.pedidofacturado.estadoPedido.nombreEstado === 'Listo') {
-            // console.log(factura);
-            return this.facturas.push(factura);
-          }
-          // console.log(this.facturas);
-        });
-
-        //this.pedidos = data;
-      }
-
-    );
-
+      //this.pedidos = data;
+    });
   }
 
-  mostrarFactura(factura){
+  mostrarFactura(factura) {
     this.factura = factura;
     console.log(this.factura);
   }

@@ -6,18 +6,18 @@ import { PedidoServices } from './../../../../../services/serviciosCliente/pedid
 
 import { Pedido } from './../../../../../entidades/Pedido';
 import { Component, OnInit } from '@angular/core';
+import { Cliente } from 'src/app/entidades/Cliente';
 
 @Component({
   selector: 'app-gestor-ordenes-cocinero',
   templateUrl: './gestor-ordenes-cocinero.component.html',
-  styleUrls: ['./gestor-ordenes-cocinero.component.css']
+  styleUrls: ['./gestor-ordenes-cocinero.component.css'],
 })
 export class GestorOrdenesCocineroComponent implements OnInit {
-
-  public pedidos: Pedido[] = []
+  public pedidos: Pedido[] = [];
   public pedidoOne: Pedido;
   pedidoSeleccionado: Pedido;
-  public estados: EstadoPedido[] = []
+  public estados: EstadoPedido[] = [];
   public estadoSeleccionado: any;
   horaSeleccionada: Date;
 
@@ -30,25 +30,33 @@ export class GestorOrdenesCocineroComponent implements OnInit {
     hora_estimada_fin: new Date(),
     numero: null,
     tipo_Envio: null,
-    lista_detallePedido: [{
-      id: null,
-      articulo: null,
-      cantidad: null,
-      subtotal: null,
-      aclaracion: ''
-    }],
+    lista_detallePedido: [
+      {
+        id: null,
+        articuloInsumo: null,
+        articuloManufacturado: null,
+        esInsumo: null,
+        habilitado: null,
+        cantidad: null,
+        subtotal: null,
+        aclaracion: '',
+      },
+    ],
     estadoPedido: {
       id: null,
-      nombreEstado: ''
+      nombreEstado: '',
     },
-    clientePedido: null
-  }
-
+    ClientePedido: new Cliente(),
+    minutosTotal: null,
+    totalPedido: null,
+    habilitado: null,
+  };
 
   constructor(
     private pedidoService: PedidoServices,
     private estadoService: EstadoPedidoServices,
-    private fb: FormBuilder) { }
+    private fb: FormBuilder
+  ) {}
 
   async ngOnInit() {
     await this.getAllPedidos();
@@ -59,7 +67,7 @@ export class GestorOrdenesCocineroComponent implements OnInit {
   crearFormulario() {
     this.formularioEstado = this.fb.group({
       id: 0,
-      nombreEstado: ''
+      nombreEstado: '',
     });
   }
 
@@ -71,10 +79,13 @@ export class GestorOrdenesCocineroComponent implements OnInit {
       (res) => {
         console.log(res);
         res.filter((pedido) => {
-          if (pedido.estadoPedido.nombreEstado === 'Confirmado' || pedido.estadoPedido.nombreEstado === 'Preparando') {
+          if (
+            pedido.estadoPedido.nombreEstado === 'Confirmado' ||
+            pedido.estadoPedido.nombreEstado === 'Preparando'
+          ) {
             return this.pedidos.push(pedido);
           }
-        })
+        });
         console.log(this.pedidos);
         Swal.fire({
           icon: 'success',
@@ -84,14 +95,14 @@ export class GestorOrdenesCocineroComponent implements OnInit {
         });
       },
       (error) => {
-        console.warn("error =>  ", error);
+        console.warn('error =>  ', error);
       }
     );
   }
 
   async getOnePedido(pedido) {
     this.pedidoOne = pedido;
-    console.log(this.pedidoOne)
+    console.log(this.pedidoOne);
   }
 
   getHora(hora: Date) {
@@ -107,7 +118,6 @@ export class GestorOrdenesCocineroComponent implements OnInit {
     alert(hora);
   }
 
-
   //Traer estados de pedido, traerme solo los confirmados
   getAllEstados() {
     this.estadoService.getAll().subscribe(
@@ -116,41 +126,44 @@ export class GestorOrdenesCocineroComponent implements OnInit {
         // console.log(this.estados);
       },
       (error) => {
-        console.warn("error =>  ", error);
+        console.warn('error =>  ', error);
       }
     );
   }
-
 
   //para setearle al pedido un estado
   seleccionarEstado(id: number, pedido: Pedido) {
     this.pedidoSeleccionado = pedido;
     this.estadoService.getOne(id).subscribe(
       (estado) => {
-
         Swal.fire({
           title: `Realmente desea cambiar el estado del pedido `,
-          text: "Recuerda que una vez asignado un nuevo estado, no podras volver a cambiarlo!",
+          text:
+            'Recuerda que una vez asignado un nuevo estado, no podras volver a cambiarlo!',
           icon: 'warning',
           showCancelButton: true,
           confirmButtonColor: '#3085d6',
           cancelButtonColor: '#d33',
           confirmButtonText: 'Si, modificar estado',
-          cancelButtonText: 'Cancelar modificacion'
+          cancelButtonText: 'Cancelar modificacion',
         }).then((result) => {
           if (result.value) {
-
             this.formularioEstado.setValue({
               id: estado.id,
-              nombreEstado: estado.nombreEstado
+              nombreEstado: estado.nombreEstado,
             });
 
             this.pedidoSeleccionado.estadoPedido = new EstadoPedido();
             this.pedidoSeleccionado.estadoPedido.id = this.formularioEstado.value.id;
             this.pedidoSeleccionado.estadoPedido.nombreEstado = this.formularioEstado.value.nombreEstado;
-            this.pedidoService.editarEstadoPedido(this.pedidoSeleccionado.id, this.pedidoSeleccionado.estadoPedido).subscribe();
+            this.pedidoService
+              .editarEstadoPedido(
+                this.pedidoSeleccionado.id,
+                this.pedidoSeleccionado.estadoPedido
+              )
+              .subscribe();
 
-            console.log(this.pedidoSeleccionado.estadoPedido.id)
+            console.log(this.pedidoSeleccionado.estadoPedido.id);
             Swal.fire(
               `El estado de su pedido fue modificado correctamente a: `,
               'Puedes continuar con mas pedidos en la seccion de Estados de Pedidos!',
@@ -162,14 +175,13 @@ export class GestorOrdenesCocineroComponent implements OnInit {
             //   window.location.reload();
             // }
             // this.formularioEstado.reset();
-
           } else {
             this.formularioEstado.reset();
           }
         });
       },
       (error) => {
-        console.warn("error =>  ", error);
+        console.warn('error =>  ', error);
       }
     );
   }
@@ -186,6 +198,4 @@ export class GestorOrdenesCocineroComponent implements OnInit {
       console.log(result);
     });
   }
-
-
 }

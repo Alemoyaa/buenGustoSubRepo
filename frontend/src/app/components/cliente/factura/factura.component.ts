@@ -22,7 +22,7 @@ export class FacturaComponent implements OnInit {
   async getAll() {
     await this.servicio.getAll().subscribe((data) => {
       data.forEach((factura) => {
-        if (this.clienteUser.id === factura.pedidofacturado.clientePedido.id) {
+        if (this.clienteUser.id === factura.pedidofacturado.ClientePedido.id) {
           this.facturaCliente.push(factura);
           console.log(this.facturaCliente);
         }

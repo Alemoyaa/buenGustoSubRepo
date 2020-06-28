@@ -9,28 +9,22 @@ import { PedidoServices } from 'src/app/services/serviciosCliente/pedidoServices
 @Component({
   selector: 'app-modal-factura',
   templateUrl: './modal-factura.component.html',
-  styleUrls: ['./modal-factura.component.css']
+  styleUrls: ['./modal-factura.component.css'],
 })
 export class ModalFacturaComponent implements OnInit {
   factura: Factura;
   @Input() set facturaProp(factura) {
     if (factura) {
       this.factura = factura;
-
-      
     }
   }
   constructor(
     private pedidoService: PedidoServices,
     private alerts: AlertsService,
-    private estadoPedidoService: EstadoPedidoServices) { }
+    private estadoPedidoService: EstadoPedidoServices
+  ) {}
 
-  ngOnInit(): void {
-  }
-
-
-
-
+  ngOnInit(): void {}
 
   crearFacturaPDF() {
     var data = document.getElementById('facturaPDF');
@@ -49,33 +43,31 @@ export class ModalFacturaComponent implements OnInit {
   }
 
   cambiarEstado(factura) {
-
-
-
     console.log(factura);
 
-
-    this.estadoPedidoService.getOne(8).subscribe(estado => {
-
+    this.estadoPedidoService.getOne(8).subscribe((estado) => {
       Swal.fire({
         title: `Realmente desea cambiar el estado del pedido a ${estado.nombreEstado}?`,
-        text: "Recuerda que una vez asignado un nuevo estado, no podras volver a cambiarlo!",
+        text:
+          'Recuerda que una vez asignado un nuevo estado, no podras volver a cambiarlo!',
         icon: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
         cancelButtonColor: '#d33',
         confirmButtonText: 'Si, modificar estado',
-        cancelButtonText: 'Cancelar modificacion'
+        cancelButtonText: 'Cancelar modificacion',
       }).then((result) => {
         if (result.value) {
-
           console.log(estado);
           this.factura.pedidofacturado.estadoPedido.id = 8;
           this.factura.pedidofacturado.estadoPedido.nombreEstado = 'Facturado';
 
-
-
-          this.pedidoService.editarEstadoPedido(this.factura.pedidofacturado.id, this.factura.pedidofacturado.estadoPedido).subscribe();
+          this.pedidoService
+            .editarEstadoPedido(
+              this.factura.pedidofacturado.id,
+              this.factura.pedidofacturado.estadoPedido
+            )
+            .subscribe();
           console.log(this.factura);
 
           Swal.fire(
@@ -83,16 +75,9 @@ export class ModalFacturaComponent implements OnInit {
             'Puedes continuar con mas pedidos en la seccion de Estados de Pedidos!',
             'success'
           );
-
-          ;
         } else {
-
         }
       });
     });
   }
 }
-
-
-
-

@@ -3,7 +3,6 @@
     <div class="row">
       <div class="col-lg-6 justify-content-center d-flex p-5">
         <h1>El Buen Gusto</h1>
-
       </div>
       <div class="col-lg-6 justify-content-end d-flex p-5">
         <h5 class="mr-5">Tipo de factura: {{ factura.tipoFactura }}</h5>
@@ -17,23 +16,19 @@
           {{ factura.fecha }}
         </h5>
         <h5>
-          Comprador: {{ factura.pedidofacturado.clientePedido.nombre }}
-          {{ factura.pedidofacturado.clientePedido.apellido }}
+          Comprador: {{ factura.pedidofacturado.ClientePedido.nombre }}
+          {{ factura.pedidofacturado.ClientePedido.apellido }}
         </h5>
-        <h5 *ngIf="factura.pedidofacturado.tipo_Envio"> 
-          Tipo de Envio: Delivery 
-          
+        <h5 *ngIf="factura.pedidofacturado.tipo_Envio">
+          Tipo de Envio: Delivery
         </h5>
-        <h5 *ngIf="!factura.pedidofacturado.tipo_Envio"> 
+        <h5 *ngIf="!factura.pedidofacturado.tipo_Envio">
           Tipo de Envio: Retira en el local
-        
         </h5>
-        <h5 *ngIf="factura.pedidofacturado.tipo_Envio"> 
-        
+        <h5 *ngIf="factura.pedidofacturado.tipo_Envio">
           Descuento:no posee descuento
         </h5>
-        <h5 *ngIf="!factura.pedidofacturado.tipo_Envio"> 
-          
+        <h5 *ngIf="!factura.pedidofacturado.tipo_Envio">
           Descuento: 10%
         </h5>
       </div>
@@ -50,7 +45,9 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let item of factura.pedidofacturado.lista_detallePedido">
+            <tr
+              *ngFor="let item of factura.pedidofacturado.lista_detallePedido"
+            >
               <td>{{ item.cantidad }}</td>
               <td>{{ item.articulo.denominacion }}</td>
               <td>{{ item.articulo.precio_de_venta }}</td>
@@ -59,9 +56,7 @@
           </tbody>
         </table>
         <div>
-          <h5 > 
-            Precio final: {{factura.precioTotal}}
-          </h5>   
+          <h5>Precio final: {{ factura.totalFactura }}</h5>
         </div>
       </div>
     </div>

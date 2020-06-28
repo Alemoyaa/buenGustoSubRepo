@@ -7,7 +7,6 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import Swal from 'sweetalert2';
 import { EstadoPedidoServices } from 'src/app/services/serviciosCliente/estadoPedidoServices/estadoPedido.service';
 
-
 @Component({
   selector: 'app-pedidos-cajero',
   templateUrl: './pedidos-cajero.component.html',
@@ -32,9 +31,8 @@ export class PedidosCajeroComponent implements OnInit {
     private fb: FormBuilder,
     private pedidoService: PedidoServices,
     private alerts: AlertsService,
-    private estadoPedidoService: EstadoPedidoServices) {
-
-  }
+    private estadoPedidoService: EstadoPedidoServices
+  ) {}
 
   ngOnInit(): void {
     this.getPedidosPendientes();
@@ -42,33 +40,30 @@ export class PedidosCajeroComponent implements OnInit {
     // this.alerts.mensajeSuccess('Bienvenido al tablero de Pedidos del modulo Cajero', 'Aqui usted podra aceptar y enviar a cocina o rechazar pedidos entrantes');
   }
 
-
   get filtrar(): Pedido[] {
     const matcher = new RegExp(this.filtroBuscador, 'i');
     return this.pedidos.filter((pedido) => {
-      return matcher.test([pedido.clientePedido.nombre, pedido.clientePedido.apellido].join());
+      return matcher.test(
+        [pedido.ClientePedido.nombre, pedido.ClientePedido.apellido].join()
+      );
     });
   }
 
-
-
   getPedidosPendientes() {
     this.pedidos.length = 0;
-    this.pedidoService.getAll().subscribe(
-      data => {
-        data.filter((pedido) => {
-          if (pedido.estadoPedido.nombreEstado === 'Pendiente') {
-            return this.pedidos.push(pedido);
-          }
-        });
-      }
-    );
+    this.pedidoService.getAll().subscribe((data) => {
+      data.filter((pedido) => {
+        if (pedido.estadoPedido.nombreEstado === 'Pendiente') {
+          return this.pedidos.push(pedido);
+        }
+      });
+    });
   }
 
   crearFormulario() {
     this.formularioEstado = this.fb.group({
       id: 0,
-      nombreEstado: ''
+      nombreEstado: '',
     });
   }
 
@@ -76,31 +71,35 @@ export class PedidosCajeroComponent implements OnInit {
     console.log(id);
     console.log(pedido);
     this.pedidoSeleccionado = pedido;
-    this.estadoPedidoService.getOne(id).subscribe(estado => {
-
+    this.estadoPedidoService.getOne(id).subscribe((estado) => {
       Swal.fire({
         title: `Realmente desea cambiar el estado del pedido a ${estado.nombreEstado}?`,
-        text: "Recuerda que una vez asignado un nuevo estado, no podras volver a cambiarlo!",
+        text:
+          'Recuerda que una vez asignado un nuevo estado, no podras volver a cambiarlo!',
         icon: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
         cancelButtonColor: '#d33',
         confirmButtonText: 'Si, modificar estado',
-        cancelButtonText: 'Cancelar modificacion'
+        cancelButtonText: 'Cancelar modificacion',
       }).then((result) => {
         if (result.value) {
-
           console.log(estado);
           this.formularioEstado.setValue({
             id: estado.id,
-            nombreEstado: estado.nombreEstado
+            nombreEstado: estado.nombreEstado,
           });
           console.log(this.formularioEstado.value);
 
           this.pedidoSeleccionado.estadoPedido.id = this.formularioEstado.value.id;
           this.pedidoSeleccionado.estadoPedido.nombreEstado = this.formularioEstado.value.nombreEstado;
 
-          this.pedidoService.editarEstadoPedido(this.pedidoSeleccionado.id, this.pedidoSeleccionado.estadoPedido).subscribe();
+          this.pedidoService
+            .editarEstadoPedido(
+              this.pedidoSeleccionado.id,
+              this.pedidoSeleccionado.estadoPedido
+            )
+            .subscribe();
           console.log(this.pedidoSeleccionado);
 
           Swal.fire(

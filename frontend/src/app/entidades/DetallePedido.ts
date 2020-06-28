@@ -1,9 +1,13 @@
+import { ArticuloInsumo } from './ArticuloInsumo';
 import { Common } from './Common';
-import { Articulo } from './Articulo';
+import { ArticuloManufacturado } from './ArticuloManufacturado';
 
 export class DetallePedido extends Common {
-  articulo: Articulo;
   cantidad: number;
   subtotal: number;
   aclaracion: string;
+  esInsumo: boolean;
+
+  articuloInsumo: ArticuloInsumo;
+  articuloManufacturado: ArticuloManufacturado;
 }

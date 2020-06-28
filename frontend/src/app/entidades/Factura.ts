@@ -1,15 +1,18 @@
 import { Common } from './Common';
 import { DatosEmpresa } from './DatosEmpresa';
 import { Pedido } from './Pedido';
-import { DetalleFactura } from './DetalleFactura';
+import { DetallePedido } from './DetallePedido';
 
 export class Factura extends Common {
   fecha: Date;
+  nroFactura: number;
+  montoDescuento: number;
+  totalFactura: number;
   formaPago: string;
   tipoFactura: string;
-  nroFactura: number;
-  precioTotal: number;
+  nroTarjeta: string;
+
+  detalleFactura: DetallePedido[];
   pedidofacturado: Pedido;
-  detalleFactura: DetalleFactura[];
   datosEmpresaID: DatosEmpresa;
 }

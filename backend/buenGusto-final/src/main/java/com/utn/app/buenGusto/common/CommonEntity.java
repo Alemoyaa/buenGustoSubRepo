@@ -18,6 +18,11 @@ public class CommonEntity {
 	@Column(name = "habilitado", columnDefinition="boolean default true")
 	protected boolean habilitado;
 
+	public CommonEntity() {
+		super();
+		this.habilitado = true;
+	}
+
 	public long getId() {
 		return id;
 	}

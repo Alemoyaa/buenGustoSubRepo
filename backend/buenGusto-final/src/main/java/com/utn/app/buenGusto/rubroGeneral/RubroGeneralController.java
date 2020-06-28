@@ -1,16 +1,15 @@
-package com.utn.app.buenGusto.articulo;
+package com.utn.app.buenGusto.rubroGeneral;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-
 import com.utn.app.buenGusto.common.CommonController;
 
 @RestController
 @CrossOrigin(origins = "*", methods = { RequestMethod.GET, RequestMethod.POST, RequestMethod.DELETE,
 		RequestMethod.PUT })
-@RequestMapping(path = "api/articulo")
-public class ArticuloController extends CommonController<ArticuloEntity, ArticuloService> {
+@RequestMapping(path = "api/rubro_general")
+public class RubroGeneralController extends CommonController<RubroGeneralEntity, RubroGeneralService> {
 
 }
