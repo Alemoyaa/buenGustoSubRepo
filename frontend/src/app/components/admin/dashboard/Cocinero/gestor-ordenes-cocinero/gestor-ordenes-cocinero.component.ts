@@ -46,7 +46,7 @@ export class GestorOrdenesCocineroComponent implements OnInit {
       id: null,
       nombreEstado: '',
     },
-    ClientePedido: new Cliente(),
+    clientePedido: new Cliente(),
     minutosTotal: null,
     totalPedido: null,
     habilitado: null,

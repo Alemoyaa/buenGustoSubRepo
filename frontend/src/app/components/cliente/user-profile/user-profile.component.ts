@@ -28,8 +28,6 @@ export class UserProfileComponent implements OnInit {
       piso: null,
       localidad: {
         id: 0,
-        nombre: '',
-        provincia: null,
       },
     },
     usuario: {
@@ -67,7 +65,7 @@ export class UserProfileComponent implements OnInit {
     this.datosUser();
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
   datosUser() {
     return this.serviceLogin.datosGoogle(this.cliente.usuario); //me traigo los datos de google desde el service
@@ -89,11 +87,12 @@ export class UserProfileComponent implements OnInit {
       (data) => {
         this.cliente = data;
       },
-      (error) => {}
+      (error) => { }
     );
   }
 
   updateUsuario(formUser: NgForm) {
+    console.log(formUser.value);
     if (formUser.invalid) {
       console.log('invalido', formUser.invalid);
       this.serviceAlert.mensajeError(
@@ -101,6 +100,7 @@ export class UserProfileComponent implements OnInit {
         'Por favor revise el orden de las fechas ingresadas'
       );
     } else {
+
       this.serviceCliente.put(this.cliente.id, this.cliente).subscribe(
         (res) => {
           this.cliente = res;
@@ -118,5 +118,41 @@ export class UserProfileComponent implements OnInit {
         }
       );
     }
+  }
+
+  mostrarDatos(id: number) {
+    console.log(id);
+
+    this.serviceLocalidad.getOne(id).subscribe((localidad) => {
+
+      // seteo el formulario con el rol id y el nombre del rol traido
+      this.cliente.domicilio.localidad = {
+        id: localidad.id,
+        nombre: localidad.nombre,
+        provincia: localidad.provincia
+
+      }
+
+    });
+    // let localidadSeleccionada = this.listaLocalidades.find((localidad) => {
+
+    //   localidad.id === id;
+
+    //   console.log(localidad);
+    // }
+    // );
+    // console.log(localidadSeleccionada);
+    // this.cliente.domicilio.localidad = {
+    //   id: localidadSeleccionada.id,
+    //   nombre: localidadSeleccionada.nombre,
+    //   provincia: localidadSeleccionada.provincia
+
+    // }
+
+
+  }
+
+  pasarDatos(cliente){
+    this.cliente = cliente;
   }
 }

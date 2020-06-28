@@ -92,7 +92,7 @@ export class PedidosPorClienteComponent implements OnInit {
           (res) => {
             if (res) {
               res.forEach((pedidoRecuperado) => {
-                if (pedidoRecuperado.ClientePedido.id === this.idCliente) {
+                if (pedidoRecuperado.clientePedido.id === this.idCliente) {
                   this.pedidosRecuperadosDesdeHasta.push(pedidoRecuperado);
                 }
               });

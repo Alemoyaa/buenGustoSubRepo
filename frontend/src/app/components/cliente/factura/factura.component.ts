@@ -9,29 +9,38 @@ import { Component, OnInit, Input } from '@angular/core';
   styleUrls: ['./factura.component.css'],
 })
 export class FacturaComponent implements OnInit {
-  @Input() clienteUser: Cliente;
+  cliente: Cliente;
+  @Input() set clienteUser(cliente) {
+    this.cliente = cliente;
+  };
 
   facturaCliente: Factura[] = [];
 
-  constructor(private servicio: FacturaService) {}
+  constructor(private servicio: FacturaService) { }
 
   ngOnInit() {
-    setTimeout(() => {
-      this.getAll();
-    }, 3000);
+
+    this.getAll();
+
   }
 
   async getAll() {
+
     await this.servicio.getAll().subscribe(
       (data) => {
         data.forEach((factura) => {
+          // let uid = ;
+          console.log(factura);
+          console.log(this.cliente.usuario.uid_firebase);
+          console.log( factura.pedidofacturado.clientePedido.usuario.uid_firebase);
           if (
-            this.clienteUser.usuario.uid_firebase ===
-            factura.pedidofacturado.ClientePedido.usuario.uid_firebase
+            this.cliente.usuario.uid_firebase === factura.pedidofacturado.clientePedido.usuario.uid_firebase
           ) {
             this.facturaCliente.push(factura);
+            console.log(this.facturaCliente);
           }
         });
+        // this.facturaCliente = data
       },
       (error) => {
         console.log('Error');

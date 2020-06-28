@@ -44,7 +44,7 @@ export class PedidosCajeroComponent implements OnInit {
     const matcher = new RegExp(this.filtroBuscador, 'i');
     return this.pedidos.filter((pedido) => {
       return matcher.test(
-        [pedido.ClientePedido.nombre, pedido.ClientePedido.apellido].join()
+        [pedido.clientePedido.nombre, pedido.clientePedido.apellido].join()
       );
     });
   }

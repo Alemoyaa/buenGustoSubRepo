@@ -25,7 +25,7 @@ export class CarritoComponent implements OnInit {
   ) {}
 
   pedido: Pedido = {
-    ClientePedido: null,
+    clientePedido: null,
     minutosTotal: null,
     totalPedido: null,
     habilitado: null,
@@ -140,9 +140,9 @@ export class CarritoComponent implements OnInit {
 
           console.log('--- user', user);
 
-          this.pedido.ClientePedido = new Cliente();
+          this.pedido.clientePedido = new Cliente();
 
-          this.pedido.ClientePedido = user;
+          this.pedido.clientePedido = user;
           this.pedido.fechaRealizacion = new Date();
           this.pedido.hora_estimada_fin = new Date();
 
