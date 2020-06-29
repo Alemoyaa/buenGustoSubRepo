@@ -58,8 +58,9 @@
           </td>
           <td>${{ articulo.precio_de_venta }}</td>
           <td>
+            <!-- (click)="editar(articulo)" -->
             <button
-              (click)="editar(articulo)"
+              
               class="btn btn-info mr-3"
               data-target="#ModalProductos"
               data-toggle="modal"
@@ -83,121 +84,4 @@
   </div>
 </div>
 
-<div
-  class="modal fade"
-  data-backdrop="static"
-  id="ModalProductos"
-  tabindex="-1"
-  role="form"
-  aria-labelledby="ModalStockLabel"
-  aria-hidden="true"
->
-  <div class="modal-dialog modal-lg" role="document" id="body">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 *ngIf="!esEditar" class="modal-title" id="modalAgregar">
-          <strong>Agregar nuevo articulo</strong>
-        </h5>
-        <h5 *ngIf="esEditar" class="modal-title" id="modalEditar">
-          <strong>Editar</strong>
-        </h5>
-        <button
-          type="button"
-          class="close"
-          data-dismiss="modal"
-          aria-label="Close"
-        >
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body text-lg-center">
-        <form name="formStock" [formGroup]="formularioArticulo">
-          <div class="row">
-            <div class="col-12">
-              <h5 class="modal-title" id="exampleModalLabel">
-                Ingrese los datos del articulo
-              </h5>
-              <br />
-              <br />
-            </div>
-
-            <div class="col-6">
-              <div class="form-group">
-                <label for="denominacion">Denominacion</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  name="denominacion"
-                  id=""
-                  formControlName="denominacion"
-                />
-              </div>
-
-              <div class="form-group">
-                <label for="">precio de venta</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  name="precio_de_venta"
-                  id="precio_de_venta"
-                  formControlName="precio_de_venta"
-                />
-              </div>
-
-              <div class="form-group">
-                <label for="">Url Imagen</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  name="url_imagen"
-                  id="url_imagen"
-                  formControlName="url_imagen"
-                />
-              </div>
-              <!-- <div formGroupName="categoria">
-                <div class="form-group">
-                  <label for="">Categoria</label>
-                  <select class="form-control" id="" name="">
-                    <option *ngFor="let padre of categoriasPadre" value="0">{{
-                      padre.nombreCategoria
-                    }}</option>
-                  </select>
-                </div>
-              </div> -->
-            </div>
-          </div>
-        </form>
-      </div>
-      <div class="modal-footer">
-        <button
-          type="button"
-          class="btn btn-primary"
-          data-dismiss="modal"
-          (click)="cerrar()"
-        >
-          Close
-        </button>
-
-        <button
-          *ngIf="esEditar"
-          [disabled]="formularioArticulo.invalid"
-          type="button"
-          class="btn btn-info"
-          (click)="actualizar()"
-        >
-          Editar articulo
-        </button>
-
-        <button
-          *ngIf="!esEditar"
-          [disabled]="formularioArticulo.invalid"
-          type="button"
-          class="btn btn-info"
-          (click)="crear()"
-        >
-          Crear nuevo articulo
-        </button>
-      </div>
-    </div>
-  </div>
-</div>
+<app-modal-platos></app-modal-platos>
