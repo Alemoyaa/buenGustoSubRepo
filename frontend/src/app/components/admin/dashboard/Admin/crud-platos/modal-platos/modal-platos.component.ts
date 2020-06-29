@@ -1,3 +1,4 @@
+import { RubroGeneralService } from './../../../../../../services/serviciosCliente/rubro-general.service';
 import { UnidadMedida } from 'src/app/entidades/UnidadMedida';
 
 import { Component, OnInit } from '@angular/core';
@@ -20,7 +21,7 @@ export class ModalPlatosComponent implements OnInit {
   // cargar datos de ingredientes
   nombreIngrediente: ArticuloInsumo[];
   unidadDeMedidaIngrediente: UnidadMedida[];
-  rubro: RubroGeneral[];
+  rubroGeneral: RubroGeneral[];
 
   esEditar: boolean = false;
   formularioArticulo: FormGroup;
@@ -31,7 +32,7 @@ export class ModalPlatosComponent implements OnInit {
     private serviceArtManufac: ArticuloManufacturadoService,
     private serviceArticuloInsumo: ArticuloInsumoService,
     private serviceUnidadDeMedida: UnidadMedidaService,
-    
+    private serviceRubroGeneral: RubroGeneralService,
     private sweet: AlertsService,
     private alerts: AlertsService) { }
 
@@ -40,7 +41,7 @@ export class ModalPlatosComponent implements OnInit {
     this.crearFormulario();
     this.traerNombreIngredientes();
     this.traerUnidadesDeMedida();
-
+    this.traerRubrosGenerales();
   }
 
 
@@ -60,7 +61,9 @@ export class ModalPlatosComponent implements OnInit {
 
   // rubro: RubroGeneral[];
   traerRubrosGenerales(){
-
+    this.serviceRubroGeneral.getAll().subscribe(rubro => {
+      this.rubroGeneral = rubro;
+    });
   }
 
 

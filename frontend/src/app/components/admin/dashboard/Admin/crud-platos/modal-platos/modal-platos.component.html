@@ -61,7 +61,9 @@ aria-labelledby="ModalStockLabel" aria-hidden="true">
                                 <!-- formControlName="precioUnitario" -->
                                 <select class="custom-select" formControlName="id">
                                   
-                                  <option value="Hamburguesa">Hamburguesa</option>
+                                  <option [value]="rubro.id" *ngFor="let rubro of rubroGeneral" >
+                                      {{rubro.denominacion}}
+                                  </option>
                                  
                                 </select>
                                 <!--    formControlName="es_catalogo" -->
