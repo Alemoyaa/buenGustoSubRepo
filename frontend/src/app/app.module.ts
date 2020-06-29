@@ -53,6 +53,7 @@ import { ArtManufacturadoPlatosComponent } from './components/admin/dashboard/Ad
 import { GestorOrdenesCocineroComponent } from './components/admin/dashboard/Cocinero/gestor-ordenes-cocinero/gestor-ordenes-cocinero.component';
 import { ModalFacturaComponent } from './components/admin/dashboard/Cajero/facturacion-cajero/modal-factura/modal-factura.component';
 import { CatalogoDetalleInsumoComponent } from './components/cliente/catalogo-detalle-insumo/catalogo-detalle-insumo.component';
+import { ModalPlatosComponent } from './components/admin/dashboard/Admin/crud-platos/modal-platos/modal-platos.component';
 
 @NgModule({
   declarations: [
@@ -88,6 +89,7 @@ import { CatalogoDetalleInsumoComponent } from './components/cliente/catalogo-de
     ArtManufacturadoPlatosComponent,
     ModalFacturaComponent,
     CatalogoDetalleInsumoComponent,
+    ModalPlatosComponent,
   ],
   imports: [
     BrowserModule,

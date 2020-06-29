@@ -9,6 +9,6 @@ import { HttpClient } from '@angular/common/http';
 export class RolService extends CommonService<Rol>{
 
   _url = 'http://localhost:8080/api/rol/';
-
+ 
   constructor(http: HttpClient) { super(http) }
 }

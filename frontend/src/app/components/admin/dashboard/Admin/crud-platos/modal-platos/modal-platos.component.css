@@ -1,0 +1,11 @@
+#trash{
+    margin-top: 30px;
+    float: inline-end;
+}
+
+#ingrediente{
+    margin-top: 35px;
+    margin-left: 10px;
+    border-color: grey;
+    border-radius: 5px;
+}
