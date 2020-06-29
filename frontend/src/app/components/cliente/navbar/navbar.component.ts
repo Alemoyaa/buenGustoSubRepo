@@ -64,12 +64,19 @@ export class NavbarComponent implements OnInit {
   //   }
   // }
   setCarrito() {
-    if (localStorage.getItem('carrito')) {
-      console.log('Carrito existe');
+    if (localStorage.getItem('carritoManufactura')) {
+      console.log('Carrito manufacturado existe');
     } else {
       let articulos = [];
       let articulosJson = JSON.stringify(articulos);
-      localStorage.setItem('carrito', articulosJson);
+      localStorage.setItem('carritoManufactura', articulosJson);
+    }
+    if (localStorage.getItem('carritoInsumo')) {
+      console.log('Carrito insumo existe');
+    } else {
+      let articulos = [];
+      let articulosJson = JSON.stringify(articulos);
+      localStorage.setItem('carritoInsumo', articulosJson);
     }
   }
 

@@ -40,7 +40,7 @@ export class CatalogoDetalleInsumoComponent implements OnInit {
   }
 
   addToCart(articulo) {
-    let string = localStorage.getItem('carrito');
+    let string = localStorage.getItem('carritoInsumo');
     let json = JSON.parse(string);
     json.push({
       id: articulo.id,
@@ -48,8 +48,8 @@ export class CatalogoDetalleInsumoComponent implements OnInit {
       precio_de_venta: articulo.precio_de_venta,
       url_imagen: articulo.url_imagen,
     });
-    localStorage.setItem('carrito', JSON.stringify(json));
-    console.log(localStorage.getItem('carrito'));
+    localStorage.setItem('carritoInsumo', JSON.stringify(json));
+    console.log(localStorage.getItem('carcarritoInsumorito'));
     this.router.navigate(['carrito']);
   }
 }

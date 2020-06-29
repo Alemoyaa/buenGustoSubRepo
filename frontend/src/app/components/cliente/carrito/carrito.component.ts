@@ -8,6 +8,9 @@ import { PedidoServices } from 'src/app/services/serviciosCliente/pedidoServices
 import { EstadoPedido } from 'src/app/entidades/EstadoPedido';
 import { ArticuloManufacturado } from 'src/app/entidades/ArticuloManufacturado';
 import { Router } from '@angular/router';
+import { ArticuloManufacturadoService } from 'src/app/services/serviciosCliente/articuloManufacturadoServices/articuloManufacturado.service';
+import { ArticuloInsumoService } from 'src/app/services/serviciosCliente/articuloInsumoServices/articuloInsumo.service';
+import { ArticuloInsumo } from 'src/app/entidades/ArticuloInsumo';
 
 @Component({
   selector: 'app-carrito',
@@ -23,7 +26,9 @@ export class CarritoComponent implements OnInit {
     private loginService: LoginService,
     private clienteService: ClienteService,
     private pedidoService: PedidoServices,
-    private router: Router
+    private router: Router,
+    private articuloManufacturadoService: ArticuloManufacturadoService,
+    private articuloInsumoService: ArticuloInsumoService
   ) {}
 
   pedido: Pedido = {
@@ -44,76 +49,107 @@ export class CarritoComponent implements OnInit {
     this.getArticulos();
   }
 
-  articulos: Array<ArticuloManufacturado> = [];
-  articulosSinRepetir: Array<ArticuloManufacturado> = [];
+  articulosManufactura: Array<ArticuloManufacturado> = [];
+  articulosInsumo: Array<ArticuloInsumo> = [];
+
   total = 0;
   otroMedioDePago = false;
   envio = false;
 
-  deleteArticulo(id) {
-    let articulosStorage = localStorage.getItem('carrito');
-    let articulosJson = JSON.parse(articulosStorage);
-    let newJson: Array<string> = [];
-    let found = false;
-    articulosJson.forEach((element) => {
-      if (id === element.id) {
-        if (!found) {
-          found = true;
+  deleteArticulo(id, esManuf) {
+    if (esManuf) {
+      let articulosStorage = localStorage.getItem('carritoManufactura');
+      let articulosJson = JSON.parse(articulosStorage);
+      let newJson: Array<string> = [];
+      let found = false;
+      articulosJson.forEach((element) => {
+        if (id === element.id) {
+          if (!found) {
+            found = true;
+          } else {
+            newJson.push(element);
+          }
         } else {
           newJson.push(element);
         }
-      } else {
-        newJson.push(element);
-      }
-    });
-    let newJsonString = JSON.stringify(newJson);
-    localStorage.setItem('carrito', newJsonString);
-    this.articulos = [];
+      });
+      let newJsonString = JSON.stringify(newJson);
+      localStorage.setItem('carritoManufactura', newJsonString);
+    } else {
+      let articulosStorage = localStorage.getItem('carritoInsumo');
+      let articulosJson = JSON.parse(articulosStorage);
+      let newJson: Array<string> = [];
+      let found = false;
+      articulosJson.forEach((element) => {
+        if (id === element.id) {
+          if (!found) {
+            found = true;
+          } else {
+            newJson.push(element);
+          }
+        } else {
+          newJson.push(element);
+        }
+      });
+      let newJsonString = JSON.stringify(newJson);
+      localStorage.setItem('carritoInsumo', newJsonString);
+    }
+
+    this.articulosManufactura = [];
     this.getArticulos();
   }
 
-  addArticulo(id, denominacion, url_imagen, precio_de_venta) {
-    let articulosStorage = localStorage.getItem('carrito');
-    let articulosJson = JSON.parse(articulosStorage);
-    articulosJson.push({
-      id: id,
-      denominacion: denominacion,
-      precio_de_venta: precio_de_venta,
-      url_imagen: url_imagen,
-    });
-    let newJsonString = JSON.stringify(articulosJson);
-    localStorage.setItem('carrito', newJsonString);
-    this.articulos = [];
-    this.getArticulos();
+  addArticulo(id, esManuf) {
+    if (esManuf) {
+      this.articuloManufacturadoService.getOne(id).subscribe((articulo) => {
+        let articulosStorage = localStorage.getItem('carritoManufactura');
+        let articulosJson = JSON.parse(articulosStorage);
+        articulosJson.push(articulo);
+        let newJsonString = JSON.stringify(articulosJson);
+        localStorage.setItem('carritoManufactura', newJsonString);
+        this.articulosManufactura = [];
+        this.getArticulos();
+      });
+    } else {
+      this.articuloInsumoService.getOne(id).subscribe((articulo) => {
+        let articulosStorage = localStorage.getItem('carritoInsumo');
+        let articulosJson = JSON.parse(articulosStorage);
+        articulosJson.push(articulo);
+        let newJsonString = JSON.stringify(articulosJson);
+        localStorage.setItem('carritoInsumo', newJsonString);
+        this.articulosManufactura = [];
+        this.getArticulos();
+      });
+    }
   }
 
   getArticulos() {
-    let articulosStorage = localStorage.getItem('carrito');
-    let articulosJson = JSON.parse(articulosStorage);
-    articulosJson.forEach((element) => {
-      this.listaDetallePedido.push(element);
-      //this.articulos.push(element);
-    });
-    console.log('e', this.articulos);
-    this.setCantidad();
-    this.getTotal();
-  }
+    let articulosManufacturaStorage = localStorage.getItem(
+      'carritoManufactura'
+    );
+    let articulosManufacturaJson = JSON.parse(articulosManufacturaStorage);
+    let articulosInsumoStorage = localStorage.getItem('carritoInsumo');
+    let articulosInsumoJson = JSON.parse(articulosInsumoStorage);
+    this.articulosManufactura = articulosManufacturaJson;
+    this.articulosInsumo = articulosInsumoJson;
+    console.log(
+      'Productos manufacturados en carrito:',
+      articulosManufacturaJson
+    );
+    console.log('Productos insumo en carrito:', articulosInsumoJson);
 
-  setCantidad() {
-    this.articulos.forEach((e) => {
-      if (this.articulosSinRepetir.includes(e)) {
-        console.log('si');
-      } else {
-        this.articulosSinRepetir = [];
-        this.articulosSinRepetir.push(e);
-      }
-    });
-    console.log(this.articulosSinRepetir);
+    // articulosJson.forEach((element) => {
+    //   this.listaDetallePedido.push(element);
+    //   //this.articulos.push(element);
+    // });
+    // console.log('e', this.articulos);
+    // this.setCantidad();
+    // this.getTotal();
   }
 
   getTotal() {
     this.total = 0;
-    this.articulos.forEach((element) => {
+    this.articulosManufactura.forEach((element) => {
       this.total += element.precio_de_venta;
     });
   }
@@ -153,7 +189,7 @@ export class CarritoComponent implements OnInit {
           this.pedido.fechaRealizacion = new Date();
           // this.pedido.hora_estimada_fin = new Date();
 
-          let articulosStorage = localStorage.getItem('carrito');
+          let articulosStorage = localStorage.getItem('carritoManufactura');
           let articulosJson = JSON.parse(articulosStorage);
 
           articulosJson.forEach((element) => {

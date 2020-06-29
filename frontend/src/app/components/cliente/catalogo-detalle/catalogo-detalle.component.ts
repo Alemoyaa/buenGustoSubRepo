@@ -49,7 +49,7 @@ export class CatalogoDetalleComponent implements OnInit {
   }
 
   addToCart(articulo) {
-    let string = localStorage.getItem('carrito');
+    let string = localStorage.getItem('carritoManufactura');
     let json = JSON.parse(string);
     json.push({
       id: articulo.id,
@@ -57,8 +57,8 @@ export class CatalogoDetalleComponent implements OnInit {
       precio_de_venta: articulo.precio_de_venta,
       url_imagen: articulo.url_imagen,
     });
-    localStorage.setItem('carrito', JSON.stringify(json));
-    console.log(localStorage.getItem('carrito'));
+    localStorage.setItem('carritoManufactura', JSON.stringify(json));
+    console.log(localStorage.getItem('carritoManufactura'));
     this.router.navigate(['carrito']);
   }
 
