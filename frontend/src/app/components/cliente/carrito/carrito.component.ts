@@ -5,9 +5,9 @@ import { Pedido } from 'src/app/entidades/Pedido';
 import { LoginService } from 'src/app/services/loginServices/login.service';
 import { ClienteService } from 'src/app/services/serviciosCliente/clienteServices/cliente.service';
 import { PedidoServices } from 'src/app/services/serviciosCliente/pedidoServices/pedido.service';
-import { EstadoPedido } from 'src/app/entidades/EstadoPedido'; 
-import { ArticuloManufacturado } from 'src/app/entidades/ArticuloManufacturado'; 
-import { Router } from '@angular/router'; 
+import { EstadoPedido } from 'src/app/entidades/EstadoPedido';
+import { ArticuloManufacturado } from 'src/app/entidades/ArticuloManufacturado';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-carrito',
@@ -16,6 +16,8 @@ import { Router } from '@angular/router';
 })
 export class CarritoComponent implements OnInit {
   listaDetallePedido: DetallePedido[] = [];
+
+  aclaracion: String;
 
   constructor(
     private loginService: LoginService,
@@ -89,7 +91,8 @@ export class CarritoComponent implements OnInit {
     let articulosStorage = localStorage.getItem('carrito');
     let articulosJson = JSON.parse(articulosStorage);
     articulosJson.forEach((element) => {
-      this.articulos.push(element);
+      this.listaDetallePedido.push(element);
+      //this.articulos.push(element);
     });
     console.log('e', this.articulos);
     this.setCantidad();
@@ -140,25 +143,38 @@ export class CarritoComponent implements OnInit {
 
           console.log('--- user', user);
 
-          this.pedido.clientePedido = new Cliente();
+          //this.pedido.clientePedido = new Cliente();
+
+          this.pedido.estadoPedido = new EstadoPedido();
+          this.pedido.estadoPedido.id = 1;
 
           this.pedido.clientePedido = user;
+
           this.pedido.fechaRealizacion = new Date();
-          this.pedido.hora_estimada_fin = new Date();
+          // this.pedido.hora_estimada_fin = new Date();
 
           let articulosStorage = localStorage.getItem('carrito');
           let articulosJson = JSON.parse(articulosStorage);
 
           articulosJson.forEach((element) => {
-            this.listaDetallePedido.push(element);
+            let detallePedidoItem = new DetallePedido();
+
+            detallePedidoItem.cantidad = 1;
+            detallePedidoItem.aclaracion = 'Aclaracion de ejemplo';
+
+            if (element.esInsumo) {
+              detallePedidoItem.esInsumo = true;
+              detallePedidoItem.articuloInsumo = element;
+            } else {
+              detallePedidoItem.esInsumo = false;
+              detallePedidoItem.articuloManufacturado = element;
+            }
+            this.listaDetallePedido.push(detallePedidoItem);
+
             console.log(element);
           });
 
           this.pedido.lista_detallePedido = this.listaDetallePedido;
-
-          this.pedido.estadoPedido = new EstadoPedido();
-
-          this.pedido.estadoPedido.id = 1;
 
           console.log(this.pedido);
           this.pedidoService.post(this.pedido).subscribe((posted) => {

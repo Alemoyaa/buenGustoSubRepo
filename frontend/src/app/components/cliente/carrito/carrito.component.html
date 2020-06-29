@@ -198,7 +198,17 @@
           </div>
           <br />
           <h3>Total: {{ total }}</h3>
-          <div class="form-check">
+          <label class="mt-2">
+            <strong>Aclaracion</strong>
+          </label>
+          <input
+            class="form-control"
+            type="text"
+            placeholder="Aclaracion"
+            name=""
+            [(ngModel)]="aclaracion"
+          />
+          <div class="form-check mt-2">
             <input
               class="form-check-input"
               type="radio"

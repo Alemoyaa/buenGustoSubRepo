@@ -27,4 +27,22 @@ export class PedidoServices extends CommonService<Pedido> {
       .put<Pedido>(this._url + 'cambiar_estado/' + id, estado)
       .pipe(catchError(this.handleError));
   }
+
+  getNoDetalle(id: number) {
+    return this.http
+      .get<Pedido>(this._url + 'no_detalle/' + id)
+      .pipe(catchError(this.handleError));
+  }
+
+  atrasarPor10Min(id: number): Observable<Pedido> {
+    return this.http
+      .put<Pedido>(this._url + 'atrasar_pedido/' + id, null)
+      .pipe(catchError(this.handleError));
+  }
+
+  editarByIdStock(id: number): Observable<Pedido> {
+    return this.http
+      .put<Pedido>(this._url + 'descontar_stock/' + id, null)
+      .pipe(catchError(this.handleError));
+  }
 }
