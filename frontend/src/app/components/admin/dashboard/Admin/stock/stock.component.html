@@ -1,22 +1,35 @@
-<div class="container mt-3" id="body">
+<div class="container mt-3">
   <div class="col-12 text-center jumbotron" style="margin-bottom: 20px;">
     <h1 class="display-4">Administracion de Stock</h1>
     <div class="buscador">
-      <i class="fa fa-user " style="font-size:35px;"></i>
+      <i class="fa fa-user" style="font-size: 35px;"></i>
       <p>Admin</p>
     </div>
   </div>
 
   <div class="row mb-4 ml-2">
-    <button class="btn btn-success mr-3  " data-toggle="modal" data-target="#ModalStock">+ Nuevo
-      articulo</button>
-    <!-- Buscador -->
+    <button
+      class="btn btn-success mr-3"
+      data-toggle="modal"
+      data-target="#ModalStock"
+      (click)="limpiarForm()"
+    >
+      Nuevo articulo
+    </button>
     <div class="buscador">
       <form>
-        <p style="font-size: 25px;"> Buscar : </p>
+        <p style="font-size: 25px;">Buscar :</p>
 
-        <input class="form-control mr-sm-2" type="search" placeholder="Articulo..." aria-label="Search"
-          [(ngModel)]="filtroBuscador" [ngModelOptions]="{ standalone: true }" />
+        <input
+          class="form-control mr-sm-2"
+          type="search"
+          placeholder="Articulo..."
+          aria-label="Search"
+          [(ngModel)]="filtroBuscador"
+        />
+        <!--
+          [ngModelOptions]="{ standalone: true }"
+         -->
       </form>
     </div>
   </div>
@@ -33,6 +46,7 @@
         <th scope="col">Refrigueracion</th>
         <th scope="col">Stock Actual</th>
         <th scope="col">Stock Minimo</th>
+        <th scope="col">Stock Maximo</th>
         <th scope="col">Imagen</th>
         <th scope="col">Unidad de medida</th>
         <th scope="col">Acciones</th>
@@ -40,53 +54,87 @@
     </thead>
     <tbody>
       <!-- trackBy Mejora el rendimiento -->
-      <tr *ngFor="let i of filtrar | paginate: {itemsPerPage: 4, currentPage: pageActual} ; trackBy: trackByFn">
-        <th hidden>{{i.id}}</th>
-        <td>{{i.denominacion}}</td>
-        <td>{{i.categoria.nombreCategoria}}</td>
+      <tr
+        *ngFor="
+          let i of filtrar
+            | paginate: { itemsPerPage: 4, currentPage: pageActual };
+          trackBy: trackByFn
+        "
+      >
+        <th hidden>{{ i.id }}</th>
+        <td>{{ i.denominacion }}</td>
+        <td>{{ i.categoria.nombreCategoria }}</td>
         <td>
           <p *ngIf="i.es_catalogo === true">Si</p>
           <p *ngIf="i.es_catalogo === false">No</p>
         </td>
-        <td>$ {{i.precio_de_compra}}</td>
-        <td>$ {{i.precio_de_venta}}</td>
+        <td>$ {{ i.precio_de_compra }}</td>
+        <td>$ {{ i.precio_de_venta }}</td>
         <td>
           <p *ngIf="i.requiere_refrigeracion === true">Si</p>
           <p *ngIf="i.requiere_refrigeracion === false">No</p>
         </td>
-        <td>{{i.stock_actual}}</td>
-        <td>{{i.stock_minimo}}</td>
+        <td>{{ i.stock_actual }}</td>
+        <td>{{ i.stock_minimo }}</td>
+        <td>{{ i.stock_maximo }}</td>
         <td>
-          <img src={{i.url_imagen}} class="img-thumbnail img-fluid">
+          <img src="{{ i.url_imagen }}" class="img-thumbnail img-fluid" />
         </td>
-        <td>{{i.unidadMedidaID.denominacion}}</td>
+        <td>{{ i.unidadMedidaID.denominacion }}</td>
         <td>
-          <button class="btn btn-info mr-3" data-toggle="modal" data-target="#ModalStock" (click)="editar(i)"><i
-              class="fas fa-pencil-alt"></i></button>
+          <button
+            class="btn btn-info mr-1"
+            data-toggle="modal"
+            data-target="#ModalStock"
+            (click)="editar(i)"
+          >
+            <i class="fas fa-pencil-alt"></i>
+          </button>
         </td>
         <td>
-          <button class="btn btn-danger mr-3" data-toggle="modal" (click)="delete(i)"><i
-              class="fas fa-trash"></i></button>
+          <button
+            class="btn btn-danger"
+            data-toggle="modal"
+            (click)="delete(i)"
+          >
+            <i class="fas fa-trash"></i>
+          </button>
         </td>
       </tr>
-
     </tbody>
   </table>
   <div class="text-center">
-    <pagination-controls (pageChange)="pageActual = $event"></pagination-controls>
+    <pagination-controls
+      (pageChange)="pageActual = $event"
+    ></pagination-controls>
   </div>
 </div>
 
-<!-- Modal NUEVO -->
 <!-- Modal EDITAR -->
-<div class="modal fade" data-backdrop="static" id="ModalStock" tabindex="-1" role="form"
-  aria-labelledby="ModalStockLabel" aria-hidden="true">
+<div
+  class="modal fade"
+  data-backdrop="static"
+  id="ModalStock"
+  tabindex="-1"
+  role="form"
+  aria-labelledby="ModalStockLabel"
+  aria-hidden="true"
+>
   <div class="modal-dialog modal-lg" role="document" id="body">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 *ngIf="!esEditar" class="modal-title" id="modalAgregar"><strong>Agregar nuevo articulo</strong></h5>
-        <h5 *ngIf="esEditar" class="modal-title" id="modalEditar"> <strong>Editar</strong></h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <h5 *ngIf="!esEditar" class="modal-title" id="modalAgregar">
+          <strong>Agregar nuevo articulo</strong>
+        </h5>
+        <h5 *ngIf="esEditar" class="modal-title" id="modalEditar">
+          <strong>Editar</strong>
+        </h5>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
@@ -94,104 +142,177 @@
         <form name="formStock" [formGroup]="formStock">
           <div class="row">
             <div class="col-12">
-              <h5 class="modal-title" id="exampleModalLabel"> <strong>Ingrese los datos del articulo</strong> </h5>
+              <h5 class="modal-title" id="exampleModalLabel">
+                <strong>Ingrese los datos del articulo</strong>
+              </h5>
               <hr />
             </div>
 
             <div class="col-6">
               <div class="form-group">
-                <label for="denominacion">Denominacion</label>
-                <input type="text" class="form-control" name="denominacion" id="denominacion"
-                  formControlName="denominacion" placeholder="nombre articulo.." />
-              </div>
-            </div>
-
-
-            <div class="col-2">
-              <div class="form-group">
-                <label for="es_catalogo">Es catalogo ?</label>
-                <input type="text" class="form-control" name="es_catalogo" id="es_catalogo"
-                  formControlName="es_catalogo" />
-              </div>
-            </div>
-
-
-            <div class="col-2">
-              <div class="form-group">
-                <label for="">Precio de Costo</label>
-                <input type="number" class="form-control" name="precio_de_compra" id="precio_de_compra"
-                  formControlName="precio_de_compra" />
+                <label>Denominacion</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  name="denominacion"
+                  formControlName="denominacion"
+                  placeholder="nombre articulo.."
+                />
               </div>
             </div>
 
             <div class="col-2">
               <div class="form-group">
-                <label for="">Precio de venta</label>
-                <input type="text" class="form-control" name="precio_de_venta" id="precio_de_venta"
-                  formControlName="precio_de_venta" />
+                <label>Es catalogo ?</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  name="es_catalogo"
+                  formControlName="es_catalogo"
+                />
               </div>
             </div>
 
             <div class="col-2">
               <div class="form-group">
-                <label for="">Refrigeracion ?</label>
-                <input type="text" class="form-control" name="requiere_refrigeracion" id="requiere_refrigeracion"
-                  formControlName="requiere_refrigeracion" />
+                <label>Precio de Costo</label>
+                <input
+                  type="number"
+                  class="form-control"
+                  name="precio_de_compra"
+                  formControlName="precio_de_compra"
+                />
+              </div>
+            </div>
+
+            <div class="col-2">
+              <div class="form-group">
+                <label>Precio de venta</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  name="precio_de_venta"
+                  formControlName="precio_de_venta"
+                />
+              </div>
+            </div>
+
+            <div class="col-2">
+              <div class="form-group">
+                <label>Requiere refrigeracion</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  name="requiere_refrigeracion"
+                  formControlName="requiere_refrigeracion"
+                />
               </div>
             </div>
             <div class="col-2">
               <div class="form-group">
-                <label for="">stock actual</label>
-                <input type="number" class="form-control" name="stock_actual" id="stock_actual"
-                  formControlName="stock_actual" />
+                <label>Stock Actual</label>
+                <input
+                  type="number"
+                  class="form-control"
+                  name="stock_actual"
+                  formControlName="stock_actual"
+                />
               </div>
               <div class="form-group">
-                <label for="">Stock minimo</label>
-                <input type="number" class="form-control" name="stock_minimo" id="stock_minimo"
-                  formControlName="stock_minimo" />
+                <label>Stock Minimo</label>
+                <input
+                  type="number"
+                  class="form-control"
+                  name="stock_minimo"
+                  formControlName="stock_minimo"
+                />
               </div>
-
               <div class="form-group">
-                <label for="">Url Imagen</label>
-                <input type="text" class="form-control" name="url_imagen" id="url_imagen"
-                  formControlName="url_imagen" />
+                <label>Stock Maximo</label>
+                <input
+                  type="number"
+                  class="form-control"
+                  name="stock_maximo"
+                  formControlName="stock_maximo"
+                />
+              </div>
+              <div class="form-group">
+                <label>Url Imagen</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  name="url_imagen"
+                  formControlName="url_imagen"
+                />
               </div>
             </div>
 
             <div formGroupName="unidadMedidaID">
               <div class="form-group">
-                <label for="">Unidad de medida</label>
-                <select (change)="seleccionarUnidad($event.target.value)" formControlName="id" class="form-control"
-                  id="rol" name="rol">
-                  <option *ngFor="let unidad of unidadesMedida" [value]="unidad.id">
-                    {{unidad.denominacion}}
+                <label>Unidad de medida</label>
+                <select
+                  (change)="seleccionarUnidad($event.target.value)"
+                  class="form-control"
+                  name="unidadMedidaID"
+                >
+                  <!--
+                  formControlName="unidadMedidaID" -->
+                  <option
+                    *ngFor="let unidad of unidadesMedida"
+                    [value]="unidad.id"
+                  >
+                    {{ unidad.denominacion }}
                   </option>
                 </select>
               </div>
             </div>
-            <div>
+            <div formGroupName="categoria">
               <div class="form-group">
-                <label for="">Categoria</label>
-                <select (change)="seleccionarPadre($event.target.value)" formControlName="categoria"
-                  class="form-control" id="rol" name="rol">
-                  <option *ngFor="let padre of categoriasPadre" [value]="padre.id">
+                <label>Categoria</label>
+                <select
+                  (change)="seleccionarPadre($event.target.value)"
+                  class="form-control"
+                  name="categoria"
+                >
+                  <!-- formControlName="categoria" -->
+                  <option *ngFor="let padre of categorias" [value]="padre.id">
                     {{ padre.nombreCategoria }}
                   </option>
                 </select>
               </div>
             </div>
           </div>
-
         </form>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="cerrar()">Close</button>
+        <button
+          type="button"
+          class="btn btn-primary"
+          data-dismiss="modal"
+          (click)="cerrar()"
+        >
+          Cerrar
+        </button>
 
-        <button *ngIf="esEditar" [disabled]="formStock.invalid" type="button" class="btn btn-info"
-          (click)="update()">Editar articulo</button>
+        <button
+          *ngIf="esEditar"
+          [disabled]="formStock.invalid"
+          type="button"
+          class="btn btn-info"
+          (click)="update()"
+        >
+          Editar articulo
+        </button>
 
-        <button *ngIf="!esEditar" [disabled]="formStock.invalid" type="button" class="btn btn-info"
-          (click)="agregar()">Crear nuevo articulo</button>
+        <button
+          *ngIf="!esEditar"
+          [disabled]="formStock.invalid"
+          type="button"
+          class="btn btn-info"
+          (click)="agregar()"
+        >
+          Crear nuevo articulo
+        </button>
       </div>
     </div>
   </div>

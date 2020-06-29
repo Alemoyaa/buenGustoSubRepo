@@ -1,16 +1,12 @@
 import Swal from 'sweetalert2';
-import {
-  FormGroup,
-  FormBuilder,
-  FormControl,
-  Validators,
-} from '@angular/forms';
-import { ArticuloInsumoService } from './../../../../../services/serviciosCliente/articuloInsumoServices/articuloInsumo.service';
-import { ArticuloInsumo } from 'src/app/entidades/ArticuloInsumo';
-import { Component, OnInit } from '@angular/core';
-import { CategoriaService } from 'src/app/services/serviciosCliente/categoriaServices/categoria.service';
-import { Categoria } from 'src/app/entidades/Categoria';
-import { UnidadMedidaService } from 'src/app/services/serviciosCliente/unidadMedidaServices/unidad_medida.services';
+import {FormControl, FormGroup} from '@angular/forms';
+import {ArticuloInsumoService} from './../../../../../services/serviciosCliente/articuloInsumoServices/articuloInsumo.service';
+import {ArticuloInsumo} from 'src/app/entidades/ArticuloInsumo';
+import {Component, OnInit} from '@angular/core';
+import {CategoriaService} from 'src/app/services/serviciosCliente/categoriaServices/categoria.service';
+import {Categoria} from 'src/app/entidades/Categoria';
+import {UnidadMedidaService} from 'src/app/services/serviciosCliente/unidadMedidaServices/unidad_medida.services';
+import {UnidadMedida} from '../../../../../entidades/UnidadMedida';
 
 @Component({
   selector: 'app-stock',
@@ -18,7 +14,7 @@ import { UnidadMedidaService } from 'src/app/services/serviciosCliente/unidadMed
   styleUrls: ['./stock.component.css'],
 })
 export class StockComponent implements OnInit {
-  pageActual: number = 1; //paginacion
+  pageActual: number = 1; // paginacion
 
   public articulosInsumos: ArticuloInsumo[] = [];
 
@@ -26,7 +22,7 @@ export class StockComponent implements OnInit {
 
   unidadSeleccionada: any;
 
-  public unidadesMedida: Array<any> = [];
+  public unidadesMedida: Array<UnidadMedida> = [];
   public categorias: Array<Categoria> = [];
   public categoriasHijo: Array<Categoria> = [];
   public categoriasPadre: Array<Categoria> = [];
@@ -51,14 +47,24 @@ export class StockComponent implements OnInit {
   // };
   public articulo: ArticuloInsumo;
 
-  public articuloInsumoActual: ArticuloInsumo; //Para editar
+  public articuloInsumoActual: ArticuloInsumo; // Para editar
 
   esEditar: boolean = false;
+
   constructor(
     private artInsumoService: ArticuloInsumoService,
     private categoriaService: CategoriaService,
     private unidadMedidaService: UnidadMedidaService
-  ) {}
+  ) {
+  }
+
+  // buscador
+  get filtrar(): ArticuloInsumo[] {
+    const matcher = new RegExp(this.filtroBuscador, 'i');
+    return this.articulosInsumos.filter((articulo) => {
+      return matcher.test([articulo.denominacion, articulo.categoria].join());
+    });
+  }
 
   async ngOnInit() {
     await this.getAllArticulos();
@@ -68,31 +74,34 @@ export class StockComponent implements OnInit {
   /* Método que construye nuestro formulario */
   crearFormulario(): void {
     this.formStock = new FormGroup({
-      precio_de_compra: new FormControl(null),
+      id: new FormControl(0),
+      denominacion: new FormControl(null),
+      precio_de_venta: new FormControl(0),
+      precio_de_compra: new FormControl(0),
+      stock_actual: new FormControl(0),
+      stock_minimo: new FormControl(0),
+      stock_maximo: new FormControl(0),
       requiere_refrigeracion: new FormControl(null),
-      stock_actual: new FormControl(null),
-      stock_minimo: new FormControl(null),
+      es_catalogo: new FormControl(null),
+      url_imagen: new FormControl(null),
       unidadMedidaID: new FormGroup({
         id: new FormControl(0),
         denominacion: new FormControl(null),
         abreviatura: new FormControl(null),
+        paraRecetas: new FormControl(null),
+        equivalencia_KgOL: new FormControl(0),
       }),
-      id: new FormControl(0),
-      precio_de_venta: new FormControl(null),
-      url_imagen: new FormControl(''),
-      es_catalogo: new FormControl(null),
-      denominacion: new FormControl(''),
-      categoria: new FormControl(null),
-      habilitado: new FormControl(null),
+      categoria: new FormGroup({
+        id: new FormControl(0),
+        nombreCategoria: new FormControl(null),
+        esCategoriaCatalogo: new FormControl(0),
+        padre: new FormControl(null),
+      }),
     });
   }
 
-  //buscador
-  get filtrar(): ArticuloInsumo[] {
-    var matcher = new RegExp(this.filtroBuscador, 'i');
-    return this.articulosInsumos.filter(function (articulo) {
-      return matcher.test([articulo.denominacion, articulo.categoria].join());
-    });
+  limpiarForm() {
+    this.crearFormulario();
   }
 
   getAllArticulos() {
@@ -111,9 +120,8 @@ export class StockComponent implements OnInit {
 
   getAllCategorias() {
     this.categoriaService.getAll().subscribe(
-      async (categorias) => {
+      (categorias) => {
         this.categorias = categorias;
-        await this.getCategorias();
       },
       (error) => {
         console.warn('error =>  ', error);
@@ -121,9 +129,9 @@ export class StockComponent implements OnInit {
     );
   }
 
-  //Me trae las unidades de medida
-  async getUnidades() {
-    await this.unidadMedidaService.getAll().subscribe(
+  // Me trae las unidades de medida
+  getUnidades() {
+    this.unidadMedidaService.getAll().subscribe(
       (unidad) => {
         this.unidadesMedida = unidad;
       },
@@ -135,7 +143,7 @@ export class StockComponent implements OnInit {
 
   seleccionarUnidad(id: number) {
     //  selecciono la unidad en el formulario, traigo la unidad seleccionado y lo seteo a mi usuario
-    const control = <FormGroup>this.formStock.controls['unidadMedidaID'];
+    const control = this.formStock.controls.unidadMedidaID as FormGroup;
     // verifico q no me envie un null
     if (id != null) {
       // traigo la unidad utilizanda el id que me envian por formulario
@@ -146,23 +154,25 @@ export class StockComponent implements OnInit {
           id: unidad.id,
           denominacion: unidad.denominacion,
           abreviatura: unidad.abreviatura,
+          paraRecetas: unidad.paraRecetas,
+          equivalencia_KgOL: unidad.equivalencia_KgOL,
         });
       });
     }
   }
 
-  async getCategorias() {
-    this.categorias.forEach((e) => {
-      if (e.padre != null) {
-        this.categoriasHijo.push(e);
-      } else {
-        this.categoriasPadre.push(e);
-      }
-    });
-  }
+  // async getCategorias() {
+  //   this.categorias.forEach((e) => {
+  //     if (e.padre != null) {
+  //       this.categoriasHijo.push(e);
+  //     } else {
+  //       this.categoriasPadre.push(e);
+  //     }
+  //   });
+  // }
 
   seleccionarPadre(id: number) {
-    const control = <FormGroup>this.formStock.controls['categoria'];
+    const control = this.formStock.controls.categoria as FormGroup;
     // verifico q no me envie un null
     if (id != null) {
       // traigo el rol utilizando el id que me envian por formulario
@@ -172,12 +182,14 @@ export class StockComponent implements OnInit {
         this.formStock.controls.categoria.setValue({
           id: this.categoriaSeleccionada.id,
           nombreCategoria: this.categoriaSeleccionada.nombreCategoria,
+          esCategoriaCatalogo: this.categoriaSeleccionada.esCategoriaCatalogo,
+          padre: this.categoriaSeleccionada.padre,
         });
       });
     }
   }
 
-  //Post
+  // Post
   agregar() {
     this.artInsumoService.post(this.formStock.value).subscribe(
       (data) => {
@@ -196,7 +208,7 @@ export class StockComponent implements OnInit {
   delete(articulo: ArticuloInsumo) {
     Swal.fire({
       title: 'Estas seguro?',
-      text: ' No podrás revertir esto!',
+      text: 'No podrás revertir esto!',
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
@@ -221,9 +233,10 @@ export class StockComponent implements OnInit {
   update() {
     this.artInsumoService.put(this.id, this.formStock.value).subscribe(
       (data) => {
+        console.log('data:', data);
         this.getAllArticulos();
         this.esEditar = false;
-        this.formStock.reset(); //Que me limpie los campos
+        this.formStock.reset(); // Que me limpie los campos
       },
       (error) => {
         console.warn('error =>  ', error);
@@ -231,23 +244,23 @@ export class StockComponent implements OnInit {
     );
   }
 
-  //form editar
+  // form editar
   editar(articulo: ArticuloInsumo) {
     console.log(articulo);
     this.esEditar = true;
     this.formStock.setValue({
+      id: articulo.id,
+      denominacion: articulo.denominacion,
+      es_catalogo: articulo.es_catalogo,
       precio_de_compra: articulo.precio_de_compra,
+      precio_de_venta: articulo.precio_de_venta,
       requiere_refrigeracion: articulo.requiere_refrigeracion,
       stock_actual: articulo.stock_actual,
+      stock_maximo: articulo.stock_maximo,
       stock_minimo: articulo.stock_minimo,
-      unidadMedidaID: articulo.unidadMedidaID,
-      id: articulo.id,
-      precio_de_venta: articulo.precio_de_venta,
       url_imagen: articulo.url_imagen,
-      es_catalogo: articulo.es_catalogo,
-      denominacion: articulo.denominacion,
+      unidadMedidaID: articulo.unidadMedidaID,
       categoria: articulo.categoria,
-      habilitado: articulo.habilitado,
     });
     this.id = articulo.id;
     console.log(this.id);
@@ -257,7 +270,7 @@ export class StockComponent implements OnInit {
     this.esEditar = false;
   }
 
-  //trackBy Mejora el rendimiento
+  // trackBy Mejora el rendimiento
   trackByFn(index: number, i: ArticuloInsumo): number {
     return i.id;
   }
