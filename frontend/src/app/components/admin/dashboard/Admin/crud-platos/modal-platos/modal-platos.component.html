@@ -59,7 +59,7 @@ aria-labelledby="ModalStockLabel" aria-hidden="true">
                                 <label for="precioUnitario">Rubro:</label> 
                                 <!-- <input type="number" class="form-control" name="precioUnitario" id="precioUnitario" > -->
                                 <!-- formControlName="precioUnitario" -->
-                                <select class="custom-select" formControlName="id">
+                                <select (change)="seleccionarRubro($event.target.value)" class="custom-select" formControlName="id">
                                   
                                   <option [value]="rubro.id" *ngFor="let rubro of rubroGeneral" >
                                       {{rubro.denominacion}}
@@ -91,7 +91,7 @@ aria-labelledby="ModalStockLabel" aria-hidden="true">
                                  <div class="form-group col-md-3" formGroupName="UnidadMedidaID">
                                     <label for="formaPago"> Unidad de medida:</label>
                                  
-                                    <select class="custom-select" formControlName="id" >
+                                    <select (change)="seleccionarUnidadDeMedida($event.target.value)" class="custom-select" formControlName="id" >
                                       
                                       <option [value]="unidadMedida.id" *ngFor="let unidadMedida of unidadDeMedidaIngrediente">
                                         {{unidadMedida.denominacion}}
@@ -103,7 +103,7 @@ aria-labelledby="ModalStockLabel" aria-hidden="true">
                               <div class="form-group  col-md-3" formGroupName="articuloInsumoID">
                                 
                                 <label for="cantidad">Nombre ingrediente:</label>
-                                <select class="custom-select" formControlName="id">
+                                <select (change)="seleccionarIngrediente($event.target.value)" class="custom-select" formControlName="id">
                                   
                                     <option [value]="ingrediente.id" *ngFor="let ingrediente of nombreIngrediente">
                                         {{ingrediente.denominacion}}
@@ -138,7 +138,7 @@ aria-labelledby="ModalStockLabel" aria-hidden="true">
                 </button>
 
                 <button *ngIf="esEditar" [disabled]="formularioArticulo.invalid" type="button" class="btn btn-info"
-                    (click)="actualizar()">
+                    >
                     Editar Plato
                 </button>
 
