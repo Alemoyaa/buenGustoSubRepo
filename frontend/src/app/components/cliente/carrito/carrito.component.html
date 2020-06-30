@@ -47,19 +47,19 @@
                       <img
                         width="100px"
                         class="img-fluid d-block mx-auto image"
-                        src="{{ detallePedidoItem.imagenArticulo() }}"
+                        src="{{ imagenArticulo(detallePedidoItem) }}"
                       />
                     </div>
                   </div>
                   <div class="col-md-5 product-info">
                     <h5 class="product-name">
-                      {{ detallePedidoItem.denominacion() }}
+                      {{ denominacion(detallePedidoItem) }}
                     </h5>
                     <div class="product-specs">
                       <div>
                         <span><b>$</b>&nbsp;</span>
                         <span class="value">
-                          <b> {{ detallePedidoItem.precioVenta() }}</b>
+                          <b> {{ precioVenta(detallePedidoItem) }}</b>
                         </span>
                       </div>
                     </div>

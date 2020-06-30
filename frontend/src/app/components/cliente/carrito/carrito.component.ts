@@ -56,7 +56,19 @@ export class CarritoComponent implements OnInit {
   otroMedioDePago = false;
   envio = false;
 
-  deleteArticulo(id, esManuf) {
+  deleteArticulo(iterador /*, esManuf*/) {
+    //if (esManuf) {
+    console.log('Quitando');
+    if (this.listaDetallePedido[iterador].cantidad === 1) {
+      alert('Si desea eliminar el articulo, seleccione la esquina izquierda');
+    } else {
+      this.listaDetallePedido[iterador].cantidad--;
+      console.log(this.listaDetallePedido[iterador].cantidad);
+
+      let newJsonString = JSON.stringify(this.listaDetallePedido);
+      localStorage.setItem('carritoDetallesPedido', newJsonString);
+    }
+
     /*if (esManuf) {
       let articulosStorage = localStorage.getItem('carritoManufactura');
       let articulosJson = JSON.parse(articulosStorage);
@@ -97,11 +109,19 @@ export class CarritoComponent implements OnInit {
 
     this.articulosManufactura = [];
     this.getArticulos();*/
+    this.getArticulos();
   }
 
   addArticulo(iterador /*, esManuf*/) {
     //if (esManuf) {
+    console.log('Agragando');
     this.listaDetallePedido[iterador].cantidad++;
+    console.log(this.listaDetallePedido[iterador].cantidad);
+
+    let newJsonString = JSON.stringify(this.listaDetallePedido);
+    localStorage.setItem('carritoDetallesPedido', newJsonString);
+
+    this.getArticulos();
     /*this.articuloManufacturadoService.getOne(id).subscribe((articulo) => {
         let articulosStorage = localStorage.getItem('carritoManufactura');
         let articulosJson = JSON.parse(articulosStorage);
@@ -125,30 +145,39 @@ export class CarritoComponent implements OnInit {
   }
 
   getArticulos() {
-    let articulosManufacturaStorage = localStorage.getItem(
-      'carritoManufactura'
-    );
-    let articulosManufacturaJson = JSON.parse(articulosManufacturaStorage);
-    let articulosInsumoStorage = localStorage.getItem('carritoInsumo');
-    let articulosInsumoJson = JSON.parse(articulosInsumoStorage);
-    this.articulosManufactura = articulosManufacturaJson;
-    this.articulosInsumo = articulosInsumoJson;
-    console.log(
-      'Productos manufacturados en carrito:',
-      articulosManufacturaJson
-    );
-    console.log('Productos insumo en carrito:', articulosInsumoJson);
+    let detallesPedidoStorage = localStorage.getItem('carritoDetallesPedido');
+    let detallesPedido = JSON.parse(detallesPedidoStorage);
+    console.log(detallesPedido);
+    this.listaDetallePedido = detallesPedido;
+    // let articulosManufacturaStorage = localStorage.getItem(
+    //   'carritoManufactura'
+    // );
+    // let articulosManufacturaJson = JSON.parse(articulosManufacturaStorage);
+    // let articulosInsumoStorage = localStorage.getItem('carritoInsumo');
+    // let articulosInsumoJson = JSON.parse(articulosInsumoStorage);
+    // this.articulosManufactura = articulosManufacturaJson;
+    // this.articulosInsumo = articulosInsumoJson;
+    // console.log(
+    //   'Productos manufacturados en carrito:',
+    //   articulosManufacturaJson
+    // );
+    // console.log('Productos insumo en carrito:', articulosInsumoJson);
     this.getTotal();
-    this.crearPedidosDetalle();
+    // this.crearPedidosDetalle();
   }
 
   getTotal() {
     this.total = 0;
-    this.articulosManufactura.forEach((element) => {
-      this.total += element.precio_de_venta;
-    });
-    this.articulosInsumo.forEach((element) => {
-      this.total += element.precio_de_venta;
+    this.listaDetallePedido.forEach((detallePedidoItem) => {
+      if (detallePedidoItem.esInsumo) {
+        this.total +=
+          detallePedidoItem.articuloInsumo.precio_de_venta *
+          detallePedidoItem.cantidad;
+      } else {
+        this.total +=
+          detallePedidoItem.articuloManufacturado.precio_de_venta *
+          detallePedidoItem.cantidad;
+      }
     });
   }
 
@@ -170,77 +199,10 @@ export class CarritoComponent implements OnInit {
     let articulosManufacturaJson = JSON.parse(articulosManufacturaStorage);
     let articulosInsumoStorage = localStorage.getItem('carritoInsumo');
     let articulosInsumoJson = JSON.parse(articulosInsumoStorage);
-
-    try {
-      articulosInsumoJson.forEach((articuloInsumo) => {
-        let found;
-
-        this.listaDetallePedido.forEach((detalle) => {
-          if (detalle.articuloInsumo === articuloInsumo) {
-            found = detalle;
-          }
-        });
-
-        if (found) {
-          this.listaDetallePedido[found.id].cantidad++;
-          this.listaDetallePedido[found.id].subtotal +=
-            articuloInsumo.precio_de_venta;
-          console.log(
-            'Cambie la cantiadd y subtotal' + this.listaDetallePedido[found.id]
-          );
-          found = null;
-        } else {
-          let detalleGuardar = new DetallePedido();
-          detalleGuardar.articuloInsumo = articuloInsumo;
-          detalleGuardar.esInsumo = true;
-          detalleGuardar.cantidad = 1;
-          detalleGuardar.subtotal = articuloInsumo.precio_de_venta;
-          console.log('Lo guarde como' + detalleGuardar);
-          this.listaDetallePedido.push(detalleGuardar);
-          found = null;
-        }
-      });
-    } catch (error) {
-      console.log(error);
-    }
-
-    try {
-      console.log('---manufacutrado--');
-      let found;
-      articulosManufacturaJson.forEach((articuloManufacturado) => {
-        this.listaDetallePedido.forEach((detalle) => {
-          detalle.articuloManufacturado.id === articuloManufacturado.id;
-          found = detalle;
-        });
-
-        console.log('---detalleGuardar---');
-
-        if (!found) {
-          console.log('---detalleGuardar---');
-          let detalleGuardar = new DetallePedido();
-          detalleGuardar.articuloManufacturado = articuloManufacturado;
-          detalleGuardar.esInsumo = false;
-          detalleGuardar.cantidad = 1;
-          detalleGuardar.subtotal = articuloManufacturado.precio_de_venta;
-
-          this.listaDetallePedido.push(detalleGuardar);
-          found = null;
-        } else {
-          console.log('Else');
-          this.listaDetallePedido[found.id].cantidad++;
-          this.listaDetallePedido[found.id].subtotal +=
-            articuloManufacturado.precio_de_venta;
-          found = null;
-        }
-      });
-    } catch (error) {
-      console.log(error);
-    }
-
-    console.log(this.listaDetallePedido);
   }
 
   async crearPedido() {
+    this.getTotal();
     await this.loginService.isAuth().subscribe(async (data) => {
       //console.log('_-----------> ', data);
       await this.clienteService.getByUidFirebase(data.uid).subscribe(
@@ -276,6 +238,24 @@ export class CarritoComponent implements OnInit {
         }
       );
     });
+  }
+
+  denominacion(detallePedido: DetallePedido): string {
+    return detallePedido.esInsumo
+      ? detallePedido.articuloInsumo.denominacion
+      : detallePedido.articuloManufacturado.denominacion;
+  }
+
+  precioVenta(detallePedido: DetallePedido): number {
+    return detallePedido.esInsumo
+      ? detallePedido.articuloInsumo.precio_de_venta
+      : detallePedido.articuloManufacturado.precio_de_venta;
+  }
+
+  imagenArticulo(detallePedido: DetallePedido): string {
+    return detallePedido.esInsumo
+      ? detallePedido.articuloInsumo.url_imagen
+      : detallePedido.articuloManufacturado.url_imagen;
   }
 
   setEnvio(envio) {

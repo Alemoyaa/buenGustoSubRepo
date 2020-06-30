@@ -11,25 +11,25 @@ export class DetallePedido extends Common {
   articuloInsumo: ArticuloInsumo;
   articuloManufacturado: ArticuloManufacturado;
 
-  denominacion() {
-    return this.esInsumo
-      ? this.articuloInsumo.denominacion
-      : this.articuloManufacturado.denominacion;
-  }
+  // get denominacion(): string {
+  //   return this.esInsumo
+  //     ? this.articuloInsumo.denominacion
+  //     : this.articuloManufacturado.denominacion;
+  // }
 
-  precioVenta() {
-    return this.esInsumo
-      ? this.articuloInsumo.precio_de_venta
-      : this.articuloManufacturado.precio_de_venta;
-  }
+  // get precioVenta(): number {
+  //   return this.esInsumo
+  //     ? this.articuloInsumo.precio_de_venta
+  //     : this.articuloManufacturado.precio_de_venta;
+  // }
 
-  imagenArticulo() {
-    return this.esInsumo
-      ? this.articuloInsumo.url_imagen
-      : this.articuloManufacturado.url_imagen;
-  }
+  // get imagenArticulo(): string {
+  //   return this.esInsumo
+  //     ? this.articuloInsumo.url_imagen
+  //     : this.articuloManufacturado.url_imagen;
+  // }
 
-  articulo() {
-    return this.esInsumo ? this.articuloInsumo : this.articuloManufacturado;
-  }
+  // get articulo(): Object {
+  //   return this.esInsumo ? this.articuloInsumo : this.articuloManufacturado;
+  // }
 }

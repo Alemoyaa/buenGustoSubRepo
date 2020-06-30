@@ -39,28 +39,19 @@ export class CatalogoDetalleInsumoComponent implements OnInit {
     });
   }
 
-  addToCart(articulo: ArticuloInsumo) {
-    let string = localStorage.getItem('carritoInsumo');
+  addToCart(articulo) {
+    let string = localStorage.getItem('carritoDetallesPedido');
     let json = JSON.parse(string);
+
     json.push({
-      id: articulo.id,
-      denominacion: articulo.denominacion,
-      precio_de_venta: articulo.precio_de_venta,
-      precio_de_compra: articulo.precio_de_compra,
-      stock_actual: articulo.stock_actual,
-      stock_minimo: articulo.stock_minimo,
-      stock_maximo: articulo.stock_maximo,
-      requiere_refrigeracion: articulo.requiere_refrigeracion,
-      es_catalogo: articulo.es_catalogo,
-      url_imagen: articulo.url_imagen,
-      unidadMedidaID: articulo.unidadMedidaID,
-      categoria: articulo.categoria,
+      cantidad: 1,
+      subtotal: articulo.precio_de_venta,
+      aclaracion: '',
+      esInsumo: false,
+      articuloManufacturado: articulo,
     });
-    localStorage.setItem('carritoInsumo', JSON.stringify(json));
-    console.log(
-      'localStorage CarritoInsumo ->',
-      localStorage.getItem('carritoInsumo')
-    );
+
+    localStorage.setItem('carritoDetallesPedido', JSON.stringify(json));
     this.router.navigate(['carrito']);
   }
 }
