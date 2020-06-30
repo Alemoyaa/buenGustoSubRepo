@@ -1,6 +1,7 @@
 package com.utn.app.buenGusto.pedido;
 
-import java.sql.Date;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -80,6 +81,8 @@ public class PedidoService extends CommonService<PedidoEntity, PedidoRepository>
 			throw new Exception();
 		}
 	}
+	
+	
 
 	public PedidoEntity editarhoraEstimadaPedido(long id) throws Exception {
 		try {
@@ -115,6 +118,27 @@ public class PedidoService extends CommonService<PedidoEntity, PedidoRepository>
 			}
 		} catch (Exception e) {
 			throw new Exception("Error en pedidoService");
+		}
+	}
+
+	public PedidoEntity guardarPedido(PedidoEntity entity, int cantcocineros) throws Exception {
+		try {
+			List<PedidoEntity> listaCompleta = repository.findAll();
+			List<PedidoEntity> lista = new ArrayList<PedidoEntity>();
+			for (PedidoEntity p : listaCompleta) {
+				if(true) {
+					lista.add(p);
+				}
+			}
+			int numeroPedido = listaCompleta.get(listaCompleta.size()-1).getNumero();
+			Date horaFin = entity.calcularHora_estimada_fin(lista, cantcocineros);
+			entity.setHora_estimada_fin(horaFin);
+			numeroPedido++;
+			entity.setNumero(numeroPedido);
+			entity = repository.save(entity);
+			return entity;
+		} catch (Exception e) {
+			throw new Exception(e.getMessage());
 		}
 	}
 	

@@ -33,7 +33,6 @@ public class ConfiguracionGeneralEntity extends CommonEntity implements Serializ
 	
 	public ConfiguracionGeneralEntity() {
 		super();
-		this.horarios = new ArrayList<HorarioLaboralEntity>();
 	}
 
 	public int getCantidadCocineros() {
