@@ -84,4 +84,12 @@ public class DetalleManufacturadoEntity extends CommonEntity implements Serializ
 		}
 	}
 	
+	public boolean stockSuficiente(int cantidadPedida) {
+		if(this.articuloInsumoID.getUnidadMedidaID().getEquivalencia_KgOL() == this.getUnidadMedidaID().getEquivalencia_KgOL()) {
+			return this.articuloInsumoID.comprobarStock(this.getCantidad()*cantidadPedida);
+		}else {
+			return this.articuloInsumoID.comprobarStock(this.getCantidad()*this.getUnidadMedidaID().getEquivalencia_KgOL()*cantidadPedida);
+		}
+	}
+	
 }

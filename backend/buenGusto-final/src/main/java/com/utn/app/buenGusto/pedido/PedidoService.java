@@ -118,5 +118,8 @@ public class PedidoService extends CommonService<PedidoEntity, PedidoRepository>
 		}
 	}
 	
+	public boolean comprobarStockPedido(PedidoEntity entidad) {
+			 return entidad.stockSuficiente();
+	}
 	
 }

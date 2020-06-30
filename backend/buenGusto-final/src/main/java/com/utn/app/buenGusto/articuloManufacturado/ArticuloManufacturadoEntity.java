@@ -106,5 +106,15 @@ public class ArticuloManufacturadoEntity extends CommonEntity implements Seriali
 			p.descontarStock(cantidadPedida);
 		}
 	}
+	
+	public boolean comprobarStock(int cantidadPedida) {
+		boolean resultado = true;
+		for (DetalleManufacturadoEntity p : this.lista_detalleManufacturado) {
+			if(!p.stockSuficiente(cantidadPedida)) {
+				resultado = false;
+			}
+		}
+		return resultado;
+	}
 
 }

@@ -153,4 +153,15 @@ public class PedidoEntity extends CommonEntity implements Serializable {
 		}
 		return this;
 	}
+	
+	public boolean stockSuficiente() {
+		boolean resultado = true;
+		for (DetallePedidoEntity p : this.lista_detallePedido) {
+			if(!p.stockSuficiente()) {
+				resultado=false;
+				break;
+			}
+		}
+		return resultado;
+	}
 }

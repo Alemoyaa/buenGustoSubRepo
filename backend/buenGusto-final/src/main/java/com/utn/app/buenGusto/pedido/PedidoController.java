@@ -80,4 +80,15 @@ public class PedidoController extends CommonController<PedidoEntity, PedidoServi
 					.body("Error en PedidoController"); 
 		}
 	}
+	
+	@GetMapping("/comprobar_stock/")
+	@Transactional
+	public ResponseEntity<Boolean> comprobarStock(@RequestBody PedidoEntity entidad) {
+		try {
+			return ResponseEntity.status(HttpStatus.OK).body(service.comprobarStockPedido(entidad));
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND)
+					.body(false); 
+		}
+	}
 }
