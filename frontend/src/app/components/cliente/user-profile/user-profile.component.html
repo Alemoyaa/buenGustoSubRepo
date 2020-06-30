@@ -159,7 +159,6 @@
                                 [(ngModel)]="cliente.domicilio.localidad.id"
                               >
                                 <option
-                                
                                   *ngFor="let localidad of listaLocalidades"
                                   [value]="localidad.id"
                                   >{{ localidad.nombre }}</option
@@ -199,7 +198,7 @@
                         </div>
 
                         <div class="form-group">
-                          <button class="btn btn-primary btn-sm"  type="submit" >
+                          <button class="btn btn-primary btn-sm" type="submit">
                             Guardar configuracion
                           </button>
                         </div>
@@ -223,7 +222,7 @@
   aria-labelledby="myExtraLargeModalLabel"
   aria-hidden="true"
 >
-  <div class="modal-dialog modal-xl" role="document">
+  <div class="modal-dialog modal-xl modal-dialog-scrollable" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalCenterTitle">
@@ -262,7 +261,7 @@
   aria-labelledby="myExtraLargeModalLabel"
   aria-hidden="true"
 >
-  <div class="modal-dialog modal-xl" role="document">
+  <div class="modal-dialog modal-xl modal-dialog-scrollable" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalCenterTitle">
@@ -276,7 +275,7 @@
         >
           <span aria-hidden="true">&times;</span>
         </button>
-      </div> 
+      </div>
       <div class="modal-body">
         <app-factura [clienteUser]="cliente"></app-factura>
         <div

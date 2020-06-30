@@ -1,3 +1,5 @@
+import { ArticuloManufacturado } from './../../../entidades/ArticuloManufacturado';
+import { ArticuloInsumo } from './../../../entidades/ArticuloInsumo';
 import { Router } from '@angular/router';
 import { Usuario } from '../../../entidades/Usuario';
 import { LoginService } from './../../../services/loginServices/login.service';
@@ -67,14 +69,14 @@ export class NavbarComponent implements OnInit {
     if (localStorage.getItem('carritoManufactura')) {
       console.log('Carrito manufacturado existe');
     } else {
-      let articulos = [];
+      let articulos = new ArticuloManufacturado();
       let articulosJson = JSON.stringify(articulos);
       localStorage.setItem('carritoManufactura', articulosJson);
     }
     if (localStorage.getItem('carritoInsumo')) {
       console.log('Carrito insumo existe');
     } else {
-      let articulos = [];
+      let articulos = new ArticuloInsumo();
       let articulosJson = JSON.stringify(articulos);
       localStorage.setItem('carritoInsumo', articulosJson);
     }
