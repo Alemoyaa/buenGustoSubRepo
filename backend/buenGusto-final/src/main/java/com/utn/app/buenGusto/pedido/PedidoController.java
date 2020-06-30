@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -79,5 +80,21 @@ public class PedidoController extends CommonController<PedidoEntity, PedidoServi
 			return ResponseEntity.status(HttpStatus.NOT_FOUND)
 					.body("Error en PedidoController"); 
 		}
+	}
+	
+	@PostMapping("/cocineros/{cocineros}")
+	@Transactional
+	public ResponseEntity<?> post(@PathVariable Integer cocineros, @RequestBody PedidoEntity entity) {
+
+		try {
+			return ResponseEntity.status(HttpStatus.CREATED).body(service.guardarPedido(entity, cocineros));
+
+		} catch (Exception e) {
+
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+					.body("{\"Error in Post \": \"" + e.getMessage() + "\"}");
+
+		}
+
 	}
 }

@@ -16,6 +16,7 @@ import javax.persistence.Transient;
 import com.utn.app.buenGusto.cliente.ClienteEntity;
 import com.utn.app.buenGusto.common.CommonEntity;
 import com.utn.app.buenGusto.detallePedido.DetallePedidoEntity;
+import com.utn.app.buenGusto.domicilio.DomicilioEntity;
 import com.utn.app.buenGusto.estadoPedido.EstadoPedidoEntity;
 
 @Entity
@@ -28,6 +29,8 @@ public class PedidoEntity extends CommonEntity implements Serializable {
 	private Date hora_estimada_fin;
 	private boolean tipo_Envio;
 	private int numero;
+	private int minTotalsinDelivery;
+	private DomicilioEntity domilicio;
 
 	@Transient
 	private double totalPedido;
@@ -38,11 +41,11 @@ public class PedidoEntity extends CommonEntity implements Serializable {
 
 	@ManyToOne(cascade = CascadeType.MERGE, optional = true)
 	@JoinColumn(name = "estado_pedido_id")
-	private EstadoPedidoEntity EstadoPedido;
+	private EstadoPedidoEntity estadoPedido;
 
 	@ManyToOne(cascade = CascadeType.MERGE, optional = true)
 	@JoinColumn(name = "cliente_id")
-	private ClienteEntity ClientePedido;
+	private ClienteEntity clientePedido;
 
 	public PedidoEntity() {
 		super();
@@ -74,19 +77,19 @@ public class PedidoEntity extends CommonEntity implements Serializable {
 	}
 
 	public EstadoPedidoEntity getEstadoPedido() {
-		return EstadoPedido;
+		return estadoPedido;
 	}
 
 	public void setEstadoPedido(EstadoPedidoEntity estadoPedido) {
-		EstadoPedido = estadoPedido;
+		this.estadoPedido = estadoPedido;
 	}
 
 	public ClienteEntity getClientePedido() {
-		return ClientePedido;
+		return clientePedido;
 	}
 
 	public void setClientePedido(ClienteEntity clientePedido) {
-		ClientePedido = clientePedido;
+		this.clientePedido = clientePedido;
 	}
 
 	public double getTotalPedido() {
@@ -119,24 +122,47 @@ public class PedidoEntity extends CommonEntity implements Serializable {
 		this.hora_estimada_fin = hora_estimada_fin;
 	}
 
+	public DomicilioEntity getDomilicio() {
+		return domilicio;
+	}
+
+	public void setDomilicio(DomicilioEntity domilicio) {
+		this.domilicio = domilicio;
+	}
+	
 	public int calcularMinutos() {
 		int result = 0;
 		if (!this.lista_detallePedido.isEmpty()) {
 			for (DetallePedidoEntity p : this.lista_detallePedido) {
 				if (!p.isEsInsumo()) {
-					result = result + p.getArticuloManufacturado().getTiempo_estimado_manuf();
+					result += p.getArticuloManufacturado().getTiempo_estimado_manuf() * p.getCantidad();
 				}
+			}
+			this.minTotalsinDelivery = result;
+			if(this.tipo_Envio) {
+				result += 10;
 			}
 		}
 		return result;
 	}
 
-	public Date calcularHora_estimada_fin() {
+	public Date calcularHora_estimada_fin(List<PedidoEntity> lista, int cantcocineros) {
 		int minuto = this.calcularMinutos();
+		int minutoPendientes = this.calcularMinutosCocina(lista, cantcocineros);
+		minuto += minutoPendientes;
 		Calendar calendar = Calendar.getInstance();
 		calendar.setTime(this.fechaRealizacion);
 		calendar.add(Calendar.MINUTE, minuto);
 		return calendar.getTime();
+	}
+	
+	public int calcularMinutosCocina(List<PedidoEntity> lista, int cantcocineros) {
+		int result = 0;
+		for (PedidoEntity p : lista) {
+			result = result + p.minTotalsinDelivery;
+		}
+		result /= cantcocineros;
+		return result;
 	}
 
 	public PedidoEntity agregarMinRetraso() {
@@ -153,4 +179,14 @@ public class PedidoEntity extends CommonEntity implements Serializable {
 		}
 		return this;
 	}
+
+	public int getMinTotalsinDelivery() {
+		return minTotalsinDelivery;
+	}
+
+	public void setMinTotalsinDelivery(int minTotalsinDelivery) {
+		this.minTotalsinDelivery = minTotalsinDelivery;
+	}
+
+	
 }
