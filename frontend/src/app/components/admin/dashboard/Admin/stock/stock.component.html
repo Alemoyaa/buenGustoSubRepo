@@ -8,25 +8,15 @@
   </div>
 
   <div class="row mb-4 ml-2">
-    <button
-      class="btn btn-success mr-3"
-      data-toggle="modal"
-      data-target="#ModalStock"
-      (click)="limpiarForm()"
-    >
+    <button class="btn btn-success mr-3" data-toggle="modal" data-target="#ModalStock" (click)="limpiarForm()">
       Nuevo articulo
     </button>
     <div class="buscador">
       <form>
         <p style="font-size: 25px;">Buscar :</p>
 
-        <input
-          class="form-control mr-sm-2"
-          type="search"
-          placeholder="Articulo..."
-          aria-label="Search"
-          [(ngModel)]="filtroBuscador"
-        />
+        <input class="form-control mr-sm-2" type="search" placeholder="Articulo..." aria-label="Search"
+          [(ngModel)]="filtroBuscador" />
         <!--
           [ngModelOptions]="{ standalone: true }"
          -->
@@ -54,15 +44,15 @@
     </thead>
     <tbody>
       <!-- trackBy Mejora el rendimiento -->
-      <tr
-        *ngFor="
+      <tr *ngFor="
           let i of filtrar
             | paginate: { itemsPerPage: 4, currentPage: pageActual };
-          trackBy: trackByFn
-        "
-      >
+          trackBy: trackByFn ">
+
         <th hidden>{{ i.id }}</th>
-        <td>{{ i.denominacion }}</td>
+        <td *ngIf="i.denominacion">{{ i.denominacion }}</td>
+        <td *ngIf="!i.denominacion" class=""></td>
+
         <td>{{ i.categoria.nombreCategoria }}</td>
         <td>
           <p *ngIf="i.es_catalogo === true">Si</p>
@@ -78,25 +68,18 @@
         <td>{{ i.stock_minimo }}</td>
         <td>{{ i.stock_maximo }}</td>
         <td>
-          <img src="{{ i.url_imagen }}" class="img-thumbnail img-fluid" />
+          <img src="{{ i.url_imagen }}" class="img-thumbnail img-fluid" *ngIf="i.url_imagen" />
+          <img src="../../../../../../assets/image-not-available.png" class="img-thumbnail img-fluid"
+            *ngIf="!i.url_imagen" />
         </td>
         <td>{{ i.unidadMedidaID.denominacion }}</td>
         <td>
-          <button
-            class="btn btn-info mr-1"
-            data-toggle="modal"
-            data-target="#ModalStock"
-            (click)="editar(i)"
-          >
+          <button class="btn btn-info mr-1" data-toggle="modal" data-target="#ModalStock" (click)="editar(i)">
             <i class="fas fa-pencil-alt"></i>
           </button>
         </td>
         <td>
-          <button
-            class="btn btn-danger"
-            data-toggle="modal"
-            (click)="delete(i)"
-          >
+          <button class="btn btn-danger" data-toggle="modal" (click)="delete(i)">
             <i class="fas fa-trash"></i>
           </button>
         </td>
@@ -104,22 +87,13 @@
     </tbody>
   </table>
   <div class="text-center">
-    <pagination-controls
-      (pageChange)="pageActual = $event"
-    ></pagination-controls>
+    <pagination-controls (pageChange)="pageActual = $event"></pagination-controls>
   </div>
 </div>
 
 <!-- Modal EDITAR -->
-<div
-  class="modal fade"
-  data-backdrop="static"
-  id="ModalStock"
-  tabindex="-1"
-  role="form"
-  aria-labelledby="ModalStockLabel"
-  aria-hidden="true"
->
+<div class="modal fade" data-backdrop="static" id="ModalStock" tabindex="-1" role="form"
+  aria-labelledby="ModalStockLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg" role="document" id="body">
     <div class="modal-content">
       <div class="modal-header">
@@ -129,12 +103,7 @@
         <h5 *ngIf="esEditar" class="modal-title" id="modalEditar">
           <strong>Editar</strong>
         </h5>
-        <button
-          type="button"
-          class="close"
-          data-dismiss="modal"
-          aria-label="Close"
-        >
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
@@ -151,116 +120,65 @@
             <div class="col-6">
               <div class="form-group">
                 <label>Denominacion</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  name="denominacion"
-                  formControlName="denominacion"
-                  placeholder="nombre articulo.."
-                />
+                <input type="text" class="form-control" name="denominacion" formControlName="denominacion"
+                  placeholder="nombre articulo.." />
               </div>
             </div>
 
             <div class="col-2">
               <div class="form-group">
                 <label>Es catalogo ?</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  name="es_catalogo"
-                  formControlName="es_catalogo"
-                />
+                <input type="text" class="form-control" name="es_catalogo" formControlName="es_catalogo" />
               </div>
             </div>
 
             <div class="col-2">
               <div class="form-group">
                 <label>Precio de Costo</label>
-                <input
-                  type="number"
-                  class="form-control"
-                  name="precio_de_compra"
-                  formControlName="precio_de_compra"
-                />
+                <input type="number" class="form-control" name="precio_de_compra" formControlName="precio_de_compra" />
               </div>
             </div>
 
             <div class="col-2">
               <div class="form-group">
                 <label>Precio de venta</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  name="precio_de_venta"
-                  formControlName="precio_de_venta"
-                />
+                <input type="text" class="form-control" name="precio_de_venta" formControlName="precio_de_venta" />
               </div>
             </div>
 
             <div class="col-2">
               <div class="form-group">
                 <label>Requiere refrigeracion</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  name="requiere_refrigeracion"
-                  formControlName="requiere_refrigeracion"
-                />
+                <input type="text" class="form-control" name="requiere_refrigeracion"
+                  formControlName="requiere_refrigeracion" />
               </div>
             </div>
             <div class="col-2">
               <div class="form-group">
                 <label>Stock Actual</label>
-                <input
-                  type="number"
-                  class="form-control"
-                  name="stock_actual"
-                  formControlName="stock_actual"
-                />
+                <input type="number" class="form-control" name="stock_actual" formControlName="stock_actual" />
               </div>
               <div class="form-group">
                 <label>Stock Minimo</label>
-                <input
-                  type="number"
-                  class="form-control"
-                  name="stock_minimo"
-                  formControlName="stock_minimo"
-                />
+                <input type="number" class="form-control" name="stock_minimo" formControlName="stock_minimo" />
               </div>
               <div class="form-group">
                 <label>Stock Maximo</label>
-                <input
-                  type="number"
-                  class="form-control"
-                  name="stock_maximo"
-                  formControlName="stock_maximo"
-                />
+                <input type="number" class="form-control" name="stock_maximo" formControlName="stock_maximo" />
               </div>
               <div class="form-group">
                 <label>Url Imagen</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  name="url_imagen"
-                  formControlName="url_imagen"
-                />
+                <input type="text" class="form-control" name="url_imagen" formControlName="url_imagen" />
               </div>
             </div>
 
             <div formGroupName="unidadMedidaID">
               <div class="form-group">
                 <label>Unidad de medida</label>
-                <select
-                  (change)="seleccionarUnidad($event.target.value)"
-                  class="form-control"
-                  name="unidadMedidaID"
-                >
+                <select (change)="seleccionarUnidad($event.target.value)" class="form-control" name="unidadMedidaID">
                   <!--
                   formControlName="unidadMedidaID" -->
-                  <option
-                    *ngFor="let unidad of unidadesMedida"
-                    [value]="unidad.id"
-                  >
+                  <option *ngFor="let unidad of unidadesMedida" [value]="unidad.id">
                     {{ unidad.denominacion }}
                   </option>
                 </select>
@@ -269,11 +187,7 @@
             <div formGroupName="categoria">
               <div class="form-group">
                 <label>Categoria</label>
-                <select
-                  (change)="seleccionarPadre($event.target.value)"
-                  class="form-control"
-                  name="categoria"
-                >
+                <select (change)="seleccionarPadre($event.target.value)" class="form-control" name="categoria">
                   <!-- formControlName="categoria" -->
                   <option *ngFor="let padre of categorias" [value]="padre.id">
                     {{ padre.nombreCategoria }}
@@ -285,32 +199,15 @@
         </form>
       </div>
       <div class="modal-footer">
-        <button
-          type="button"
-          class="btn btn-primary"
-          data-dismiss="modal"
-          (click)="cerrar()"
-        >
+        <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="cerrar()">
           Cerrar
         </button>
 
-        <button
-          *ngIf="esEditar"
-          [disabled]="formStock.invalid"
-          type="button"
-          class="btn btn-info"
-          (click)="update()"
-        >
+        <button *ngIf="esEditar" [disabled]="formStock.invalid" type="button" class="btn btn-info" (click)="update()">
           Editar articulo
         </button>
 
-        <button
-          *ngIf="!esEditar"
-          [disabled]="formStock.invalid"
-          type="button"
-          class="btn btn-info"
-          (click)="agregar()"
-        >
+        <button *ngIf="!esEditar" [disabled]="formStock.invalid" type="button" class="btn btn-info" (click)="agregar()">
           Crear nuevo articulo
         </button>
       </div>

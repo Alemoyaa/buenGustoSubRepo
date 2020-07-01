@@ -56,7 +56,7 @@ export class GestorOrdenesCocineroComponent implements OnInit {
     private pedidoService: PedidoServices,
     private estadoService: EstadoPedidoServices,
     private fb: FormBuilder
-  ) {}
+  ) { }
 
   async ngOnInit() {
     await this.getAllPedidos();
@@ -102,6 +102,7 @@ export class GestorOrdenesCocineroComponent implements OnInit {
 
   async getOnePedido(pedido) {
     this.pedidoOne = pedido;
+    console.log("pedido one")
     console.log(this.pedidoOne);
   }
 
