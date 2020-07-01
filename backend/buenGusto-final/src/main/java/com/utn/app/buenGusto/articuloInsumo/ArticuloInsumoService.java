@@ -42,13 +42,10 @@ public class ArticuloInsumoService extends CommonService<ArticuloInsumoEntity, A
 	}
 	
 	@Override
-	public ArticuloInsumoEntity update(long id, ArticuloInsumoEntity entity) throws Exception {
-		try {
-			if (repository.existsById(id) == false) {
-				throw new Exception("No value present");
-			}
-			entity.setId(id);
-			if(entity.getUrl_imagen().isEmpty()) {
+	public ArticuloInsumoEntity save(ArticuloInsumoEntity entity) throws Exception {
+		try {   
+			
+			if(entity.getUrl_imagen() == null) {
 				entity.setUrl_imagen("https://www.industriasnelson.com.ar/wp-content/uploads/2019/03/sin-imagen-350x435.jpg");
 			}
 			entity = repository.save(entity);
