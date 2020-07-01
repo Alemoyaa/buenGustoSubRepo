@@ -1,12 +1,12 @@
 import Swal from 'sweetalert2';
-import {FormControl, FormGroup} from '@angular/forms';
-import {ArticuloInsumoService} from './../../../../../services/serviciosCliente/articuloInsumoServices/articuloInsumo.service';
-import {ArticuloInsumo} from 'src/app/entidades/ArticuloInsumo';
-import {Component, OnInit} from '@angular/core';
-import {CategoriaService} from 'src/app/services/serviciosCliente/categoriaServices/categoria.service';
-import {Categoria} from 'src/app/entidades/Categoria';
-import {UnidadMedidaService} from 'src/app/services/serviciosCliente/unidadMedidaServices/unidad_medida.services';
-import {UnidadMedida} from '../../../../../entidades/UnidadMedida';
+import { FormControl, FormGroup } from '@angular/forms';
+import { ArticuloInsumoService } from './../../../../../services/serviciosCliente/articuloInsumoServices/articuloInsumo.service';
+import { ArticuloInsumo } from 'src/app/entidades/ArticuloInsumo';
+import { Component, OnInit } from '@angular/core';
+import { CategoriaService } from 'src/app/services/serviciosCliente/categoriaServices/categoria.service';
+import { Categoria } from 'src/app/entidades/Categoria';
+import { UnidadMedidaService } from 'src/app/services/serviciosCliente/unidadMedidaServices/unidad_medida.services';
+import { UnidadMedida } from '../../../../../entidades/UnidadMedida';
 
 @Component({
   selector: 'app-stock',
@@ -15,40 +15,20 @@ import {UnidadMedida} from '../../../../../entidades/UnidadMedida';
 })
 export class StockComponent implements OnInit {
   pageActual: number = 1; // paginacion
+  filtroBuscador: any = '';
+  public articuloInsumoActual: ArticuloInsumo; // Para editar
 
   public articulosInsumos: ArticuloInsumo[] = [];
-
   categoriaSeleccionada: any;
-
   unidadSeleccionada: any;
-
   public unidadesMedida: Array<UnidadMedida> = [];
   public categorias: Array<Categoria> = [];
   public categoriasHijo: Array<Categoria> = [];
   public categoriasPadre: Array<Categoria> = [];
   public categoriasPadreHijo: Array<any> = [];
-
-  filtroBuscador: any = '';
   id: number;
   public formStock: FormGroup;
-
-  // public articulo: ArticuloInsumo = {
-  //   precio_de_compra: null,
-  //   requiere_refrigeracion: null,
-  //   stock_actual: null,
-  //   stock_minimo: null,
-  //   unidadMedidaID: null,
-  //   id: null,
-  //   precio_de_venta: null,
-  //   url_imagen: '',
-  //   es_catalogo: null,
-  //   denominacion: '',
-  //   categoria: null,
-  // };
   public articulo: ArticuloInsumo;
-
-  public articuloInsumoActual: ArticuloInsumo; // Para editar
-
   esEditar: boolean = false;
 
   constructor(
@@ -129,7 +109,7 @@ export class StockComponent implements OnInit {
     );
   }
 
-  // Me trae las unidades de medida
+
   getUnidades() {
     this.unidadMedidaService.getAll().subscribe(
       (unidad) => {
@@ -142,14 +122,12 @@ export class StockComponent implements OnInit {
   }
 
   seleccionarUnidad(id: number) {
-    //  selecciono la unidad en el formulario, traigo la unidad seleccionado y lo seteo a mi usuario
     const control = this.formStock.controls.unidadMedidaID as FormGroup;
-    // verifico q no me envie un null
     if (id != null) {
-      // traigo la unidad utilizanda el id que me envian por formulario
+
       this.unidadMedidaService.getOne(id).subscribe((unidad) => {
         this.unidadSeleccionada = unidad;
-        // seteo el formulario con la unidad id y el nombre de la unidad traida
+
         this.formStock.controls.unidadMedidaID.setValue({
           id: unidad.id,
           denominacion: unidad.denominacion,
@@ -161,24 +139,26 @@ export class StockComponent implements OnInit {
     }
   }
 
-  // async getCategorias() {
-  //   this.categorias.forEach((e) => {
-  //     if (e.padre != null) {
-  //       this.categoriasHijo.push(e);
-  //     } else {
-  //       this.categoriasPadre.push(e);
-  //     }
-  //   });
-  // }
+  async getCategorias() {
+    this.categorias.forEach((e) => {
+      if (e.padre != null) {
+        this.categoriasHijo.push(e);
+      } else {
+        this.categoriasPadre.push(e);
+      }
+    });
+  }
 
   seleccionarPadre(id: number) {
-    const control = this.formStock.controls.categoria as FormGroup;
-    // verifico q no me envie un null
+    console.log(id);
+
+    const control = <FormGroup>this.formStock.controls['categoria'];
+
     if (id != null) {
-      // traigo el rol utilizando el id que me envian por formulario
+
       this.categoriaService.getOne(id).subscribe((padre) => {
         this.categoriaSeleccionada = padre;
-        // seteo el formulario con el rol id y el nombre del rol traido
+
         this.formStock.controls.categoria.setValue({
           id: this.categoriaSeleccionada.id,
           nombreCategoria: this.categoriaSeleccionada.nombreCategoria,
@@ -186,11 +166,14 @@ export class StockComponent implements OnInit {
           padre: this.categoriaSeleccionada.padre,
         });
       });
+    } else {
+      console.warn("No se pudo seleccionar categoria")
     }
   }
 
   // Post
   agregar() {
+
     this.artInsumoService.post(this.formStock.value).subscribe(
       (data) => {
         this.articulo = data;
