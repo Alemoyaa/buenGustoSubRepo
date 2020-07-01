@@ -1,12 +1,8 @@
-import { ArticuloManufacturadoService } from './../../../services/serviciosCliente/articuloManufacturadoServices/articuloManufacturado.service';
-import { DetalleManufacturado } from './../../../entidades/DetalleManufacturado';
-import { DetalleManufacturadoService } from './../../../services/serviciosCliente/detalleManufacturadoServices/detalle-manufacturado.service';
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { ArticuloInsumo } from 'src/app/entidades/ArticuloInsumo';
 import { ArticuloInsumoService } from 'src/app/services/serviciosCliente/articuloInsumoServices/articuloInsumo.service';
-import { ArticuloManufacturado } from 'src/app/entidades/ArticuloManufacturado';
 
 @Component({
   selector: 'app-catalogo-detalle-insumo',
@@ -15,7 +11,6 @@ import { ArticuloManufacturado } from 'src/app/entidades/ArticuloManufacturado';
 })
 export class CatalogoDetalleInsumoComponent implements OnInit {
   articulo: ArticuloInsumo;
-  articuloManuf: ArticuloInsumo;
   id: number;
 
   constructor(
@@ -40,16 +35,18 @@ export class CatalogoDetalleInsumoComponent implements OnInit {
   }
 
   addToCart(articulo) {
-    let string = localStorage.getItem('carritoInsumo');
+    let string = localStorage.getItem('carritoDetallesPedido');
     let json = JSON.parse(string);
+
     json.push({
-      id: articulo.id,
-      denominacion: articulo.denominacion,
-      precio_de_venta: articulo.precio_de_venta,
-      url_imagen: articulo.url_imagen,
+      cantidad: 1,
+      subtotal: articulo.precio_de_venta,
+      aclaracion: '',
+      esInsumo: false,
+      articuloManufacturado: articulo,
     });
-    localStorage.setItem('carritoInsumo', JSON.stringify(json));
-    console.log(localStorage.getItem('carcarritoInsumorito'));
+
+    localStorage.setItem('carritoDetallesPedido', JSON.stringify(json));
     this.router.navigate(['carrito']);
   }
 }

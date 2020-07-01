@@ -56,8 +56,29 @@ export class CarritoComponent implements OnInit {
   otroMedioDePago = false;
   envio = false;
 
-  deleteArticulo(id, esManuf) {
-    if (esManuf) {
+  deleteArticulo(iterador /*, esManuf*/) {
+    //if (esManuf) {
+    console.log('Quitando');
+    if (this.listaDetallePedido[iterador].cantidad === 1) {
+      alert('Si desea eliminar el articulo, seleccione la esquina izquierda');
+    } else {
+      this.listaDetallePedido[iterador].cantidad--;
+      console.log(this.listaDetallePedido[iterador].cantidad);
+      if (this.listaDetallePedido[iterador].esInsumo) {
+        this.listaDetallePedido[iterador].subtotal -= this.listaDetallePedido[
+          iterador
+        ].articuloInsumo.precio_de_venta;
+      } else {
+        this.listaDetallePedido[iterador].subtotal -= this.listaDetallePedido[
+          iterador
+        ].articuloManufacturado.precio_de_venta;
+      }
+
+      let newJsonString = JSON.stringify(this.listaDetallePedido);
+      localStorage.setItem('carritoDetallesPedido', newJsonString);
+    }
+
+    /*if (esManuf) {
       let articulosStorage = localStorage.getItem('carritoManufactura');
       let articulosJson = JSON.parse(articulosStorage);
       let newJson: Array<string> = [];
@@ -95,13 +116,29 @@ export class CarritoComponent implements OnInit {
       localStorage.setItem('carritoInsumo', newJsonString);
     }
 
-    this.articulosManufactura = [];
+    this.articulosManufactura = []; */
     this.getArticulos();
   }
 
-  addArticulo(id, esManuf) {
-    if (esManuf) {
-      this.articuloManufacturadoService.getOne(id).subscribe((articulo) => {
+  addArticulo(iterador /*, esManuf*/) {
+    //if (esManuf) {
+    this.listaDetallePedido[iterador].cantidad++;
+
+    if (this.listaDetallePedido[iterador].esInsumo) {
+      this.listaDetallePedido[iterador].subtotal += this.listaDetallePedido[
+        iterador
+      ].articuloInsumo.precio_de_venta;
+    } else {
+      this.listaDetallePedido[iterador].subtotal += this.listaDetallePedido[
+        iterador
+      ].articuloManufacturado.precio_de_venta;
+    }
+
+    let newJsonString = JSON.stringify(this.listaDetallePedido);
+    localStorage.setItem('carritoDetallesPedido', newJsonString);
+
+    this.getArticulos();
+    /*this.articuloManufacturadoService.getOne(id).subscribe((articulo) => {
         let articulosStorage = localStorage.getItem('carritoManufactura');
         let articulosJson = JSON.parse(articulosStorage);
         articulosJson.push(articulo);
@@ -109,9 +146,9 @@ export class CarritoComponent implements OnInit {
         localStorage.setItem('carritoManufactura', newJsonString);
         this.articulosManufactura = [];
         this.getArticulos();
-      });
-    } else {
-      this.articuloInsumoService.getOne(id).subscribe((articulo) => {
+      });*/
+    //} else {
+    /*this.articuloInsumoService.getOne(id).subscribe((articulo) => {
         let articulosStorage = localStorage.getItem('carritoInsumo');
         let articulosJson = JSON.parse(articulosStorage);
         articulosJson.push(articulo);
@@ -119,38 +156,44 @@ export class CarritoComponent implements OnInit {
         localStorage.setItem('carritoInsumo', newJsonString);
         this.articulosManufactura = [];
         this.getArticulos();
-      });
-    }
+      });*/
+    //}
   }
 
   getArticulos() {
-    let articulosManufacturaStorage = localStorage.getItem(
-      'carritoManufactura'
-    );
-    let articulosManufacturaJson = JSON.parse(articulosManufacturaStorage);
-    let articulosInsumoStorage = localStorage.getItem('carritoInsumo');
-    let articulosInsumoJson = JSON.parse(articulosInsumoStorage);
-    this.articulosManufactura = articulosManufacturaJson;
-    this.articulosInsumo = articulosInsumoJson;
-    console.log(
-      'Productos manufacturados en carrito:',
-      articulosManufacturaJson
-    );
-    console.log('Productos insumo en carrito:', articulosInsumoJson);
-
-    // articulosJson.forEach((element) => {
-    //   this.listaDetallePedido.push(element);
-    //   //this.articulos.push(element);
-    // });
-    // console.log('e', this.articulos);
-    // this.setCantidad();
-    // this.getTotal();
+    let detallesPedidoStorage = localStorage.getItem('carritoDetallesPedido');
+    let detallesPedido = JSON.parse(detallesPedidoStorage);
+    console.log(detallesPedido);
+    this.listaDetallePedido = detallesPedido;
+    // let articulosManufacturaStorage = localStorage.getItem(
+    //   'carritoManufactura'
+    // );
+    // let articulosManufacturaJson = JSON.parse(articulosManufacturaStorage);
+    // let articulosInsumoStorage = localStorage.getItem('carritoInsumo');
+    // let articulosInsumoJson = JSON.parse(articulosInsumoStorage);
+    // this.articulosManufactura = articulosManufacturaJson;
+    // this.articulosInsumo = articulosInsumoJson;
+    // console.log(
+    //   'Productos manufacturados en carrito:',
+    //   articulosManufacturaJson
+    // );
+    // console.log('Productos insumo en carrito:', articulosInsumoJson);
+    this.getTotal();
+    // this.crearPedidosDetalle();
   }
 
   getTotal() {
     this.total = 0;
-    this.articulosManufactura.forEach((element) => {
-      this.total += element.precio_de_venta;
+    this.listaDetallePedido.forEach((detallePedidoItem) => {
+      if (detallePedidoItem.esInsumo) {
+        this.total +=
+          detallePedidoItem.articuloInsumo.precio_de_venta *
+          detallePedidoItem.cantidad;
+      } else {
+        this.total +=
+          detallePedidoItem.articuloManufacturado.precio_de_venta *
+          detallePedidoItem.cantidad;
+      }
     });
   }
 
@@ -166,8 +209,9 @@ export class CarritoComponent implements OnInit {
   }
 
   async crearPedido() {
+    this.getTotal();
     await this.loginService.isAuth().subscribe(async (data) => {
-      console.log('_-----------> ', data);
+      //console.log('_-----------> ', data);
       await this.clienteService.getByUidFirebase(data.uid).subscribe(
         (user) => {
           this.pedido = new Pedido();
@@ -176,39 +220,14 @@ export class CarritoComponent implements OnInit {
           } else {
             this.pedido.tipo_Envio = true;
           }
-
-          console.log('--- user', user);
-
+          //console.log('--- user', user);
           //this.pedido.clientePedido = new Cliente();
-
           this.pedido.estadoPedido = new EstadoPedido();
           this.pedido.estadoPedido.id = 1;
 
           this.pedido.clientePedido = user;
-
           this.pedido.fechaRealizacion = new Date();
-          // this.pedido.hora_estimada_fin = new Date();
-
-          let articulosStorage = localStorage.getItem('carritoManufactura');
-          let articulosJson = JSON.parse(articulosStorage);
-
-          articulosJson.forEach((element) => {
-            let detallePedidoItem = new DetallePedido();
-
-            detallePedidoItem.cantidad = 1;
-            detallePedidoItem.aclaracion = 'Aclaracion de ejemplo';
-
-            if (element.esInsumo) {
-              detallePedidoItem.esInsumo = true;
-              detallePedidoItem.articuloInsumo = element;
-            } else {
-              detallePedidoItem.esInsumo = false;
-              detallePedidoItem.articuloManufacturado = element;
-            }
-            this.listaDetallePedido.push(detallePedidoItem);
-
-            console.log(element);
-          });
+          //this.pedido.hora_estimada_fin = new Date();
 
           this.pedido.lista_detallePedido = this.listaDetallePedido;
 
@@ -222,6 +241,24 @@ export class CarritoComponent implements OnInit {
         }
       );
     });
+  }
+
+  denominacion(detallePedido: DetallePedido): string {
+    return detallePedido.esInsumo
+      ? detallePedido.articuloInsumo.denominacion
+      : detallePedido.articuloManufacturado.denominacion;
+  }
+
+  precioVenta(detallePedido: DetallePedido): number {
+    return detallePedido.esInsumo
+      ? detallePedido.articuloInsumo.precio_de_venta
+      : detallePedido.articuloManufacturado.precio_de_venta;
+  }
+
+  imagenArticulo(detallePedido: DetallePedido): string {
+    return detallePedido.esInsumo
+      ? detallePedido.articuloInsumo.url_imagen
+      : detallePedido.articuloManufacturado.url_imagen;
   }
 
   setEnvio(envio) {

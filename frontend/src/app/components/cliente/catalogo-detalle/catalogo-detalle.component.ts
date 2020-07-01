@@ -48,17 +48,20 @@ export class CatalogoDetalleComponent implements OnInit {
     this.getManuf(id);
   }
 
-  addToCart(articulo) {
-    let string = localStorage.getItem('carritoManufactura');
+  addToCart(articulo: ArticuloManufacturado) {
+    let string = localStorage.getItem('carritoDetallesPedido');
     let json = JSON.parse(string);
+
     json.push({
-      id: articulo.id,
-      denominacion: articulo.denominacion,
-      precio_de_venta: articulo.precio_de_venta,
-      url_imagen: articulo.url_imagen,
+      cantidad: 1,
+      subtotal: articulo.precio_de_venta,
+      aclaracion: '',
+      esInsumo: false,
+      articuloManufacturado: articulo,
     });
-    localStorage.setItem('carritoManufactura', JSON.stringify(json));
-    console.log(localStorage.getItem('carritoManufactura'));
+
+    localStorage.setItem('carritoDetallesPedido', JSON.stringify(json));
+    console.log(localStorage.getItem('carritoDetallesPedido'));
     this.router.navigate(['carrito']);
   }
 

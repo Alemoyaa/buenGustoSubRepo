@@ -1,170 +1,154 @@
 <div class="page shopping-cart-page">
   <section class="clean-block clean-cart dark">
-    <div class="articulos col-lg-12">
-      <h3
-        *ngIf="
-          articulosManufactura.length === 0 && articulosInsumo.length === 0
-        "
-      >
-        El carrito está vacío
-      </h3>
-      <div class="container" *ngFor="let articulo of articulosManufactura">
-        <div class="row">
-          <div
-            class="product justify-content-between align-items-center d-flex"
-          >
-            <div class="product-image">
-              <img
-                width="100px"
-                class="img-fluid d-block mx-auto image"
-                src="{{ articulo.url_imagen }}"
-              />
-            </div>
-            <div class="product-info">
-              <h5 class="product-name" href="#">{{ articulo.denominacion }}</h5>
-              <div class="product-specs">
-                <div>
-                  <span><b>$</b>&nbsp;</span>
-                  <span class="value">
-                    <b> {{ articulo.precio_de_venta }}</b>
-                  </span>
-                </div>
-              </div>
-            </div>
-            <div class="botones">
-              <button
-                type="button"
-                class="btn btn-danger mr-3"
-                data-toggle="modal"
-                (click)="deleteArticulo(articulo.id, true)"
-              >
-                <svg
-                  class="bi bi-dash-circle-fill"
-                  width="1em"
-                  height="1em"
-                  viewBox="0 0 16 16"
-                  fill="currentColor"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    fill-rule="evenodd"
-                    d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM4 7.5a.5.5 0 0 0 0 1h8a.5.5 0 0 0 0-1H4z"
-                  />
-                </svg>
-              </button>
-              <button
-                (click)="addArticulo(articulo.id, true)"
-                type="button"
-                class="btn btn-success"
-                data-toggle="modal"
-              >
-                <svg
-                  class="bi bi-plus-circle-fill"
-                  width="1em"
-                  height="1em"
-                  viewBox="0 0 16 16"
-                  fill="currentColor"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    fill-rule="evenodd"
-                    d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4a.5.5 0 0 0-1 0v3.5H4a.5.5 0 0 0 0 1h3.5V12a.5.5 0 0 0 1 0V8.5H12a.5.5 0 0 0 0-1H8.5V4z"
-                  />
-                </svg>
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="container" *ngFor="let articulo of articulosInsumo">
-        <div class="row">
-          <div
-            class="product justify-content-between align-items-center d-flex"
-          >
-            <div class="product-image">
-              <img
-                width="100px"
-                class="img-fluid d-block mx-auto image"
-                src="{{ articulo.url_imagen }}"
-              />
-            </div>
-            <div class="product-info">
-              <h5 class="product-name" href="#">{{ articulo.denominacion }}</h5>
-              <div class="product-specs">
-                <div>
-                  <span><b>$</b>&nbsp;</span>
-                  <span class="value">
-                    <b> {{ articulo.precio_de_venta }}</b>
-                  </span>
-                </div>
-              </div>
-            </div>
-            <div class="botones">
-              <button
-                (click)="deleteArticulo(articulo.id, false)"
-                type="button"
-                class="btn btn-danger mr-3"
-                data-toggle="modal"
-              >
-                <svg
-                  class="bi bi-dash-circle-fill"
-                  width="1em"
-                  height="1em"
-                  viewBox="0 0 16 16"
-                  fill="currentColor"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    fill-rule="evenodd"
-                    d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM4 7.5a.5.5 0 0 0 0 1h8a.5.5 0 0 0 0-1H4z"
-                  />
-                </svg>
-              </button>
-              <button
-                (click)="addArticulo(articulo.id, false)"
-                type="button"
-                class="btn btn-success"
-                data-toggle="modal"
-              >
-                <svg
-                  class="bi bi-plus-circle-fill"
-                  width="1em"
-                  height="1em"
-                  viewBox="0 0 16 16"
-                  fill="currentColor"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    fill-rule="evenodd"
-                    d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4a.5.5 0 0 0-1 0v3.5H4a.5.5 0 0 0 0 1h3.5V12a.5.5 0 0 0 1 0V8.5H12a.5.5 0 0 0 0-1H8.5V4z"
-                  />
-                </svg>
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="center justify-content-center d-flex">
-        <a href="/catalogo">
-          <button type="button" class="btn btn-primary mr-3">
-            <p>Seguir comprando</p>
-          </button>
-        </a>
-
-        <h2 *ngIf="!this.checkearHorario">El local se encuentra cerrado</h2>
-
-        <button
-          *ngIf="this.checkearHorario"
-          type="button"
-          class="btn btn-success"
-          data-toggle="modal"
-          data-target="#paymentModal"
+    <div class="container">
+      <div class="block-heading">
+        <h2 class="text-info">Factura</h2>
+        <h3
+          *ngIf="
+            articulosManufactura.length === 0 && articulosInsumo.length === 0
+          "
         >
-          <p>Pagar</p>
-        </button>
+          El carrito está vacío
+        </h3>
+      </div>
+      <div class="content">
+        <div class="row no-gutters">
+          <div class="col-md-12 col-lg-8">
+            <div class="items">
+              <div
+                class="product"
+                *ngFor="
+                  let detallePedidoItem of listaDetallePedido;
+                  let i = index
+                "
+              >
+                <button type="button" class="btn">
+                  <svg
+                    width="1em"
+                    height="1em"
+                    viewBox="0 0 16 16"
+                    class="bi bi-archive"
+                    fill="currentColor"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      fill-rule="evenodd"
+                      d="M2 5v7.5c0 .864.642 1.5 1.357 1.5h9.286c.715 0 1.357-.636 1.357-1.5V5h1v7.5c0 1.345-1.021 2.5-2.357 2.5H3.357C2.021 15 1 13.845 1 12.5V5h1z"
+                    />
+                    <path
+                      fill-rule="evenodd"
+                      d="M5.5 7.5A.5.5 0 0 1 6 7h4a.5.5 0 0 1 0 1H6a.5.5 0 0 1-.5-.5zM15 2H1v2h14V2zM1 1a1 1 0 0 0-1 1v2a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H1z"
+                    />
+                  </svg>
+                </button>
+                <div class="row justify-content-center align-items-center">
+                  <div class="col-md-3">
+                    <div class="product-image">
+                      <img
+                        width="100px"
+                        class="img-fluid d-block mx-auto image"
+                        src="{{ imagenArticulo(detallePedidoItem) }}"
+                      />
+                    </div>
+                  </div>
+                  <div class="col-md-5 product-info">
+                    <h5 class="product-name">
+                      {{ denominacion(detallePedidoItem) }}
+                    </h5>
+                    <div class="product-specs">
+                      <div>
+                        <span><b>$</b>&nbsp;</span>
+                        <span class="value">
+                          <b> {{ precioVenta(detallePedidoItem) }}</b>
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-6 col-md-2 quantity">
+                    <label class="d-none d-md-block" for="quantity"
+                      >Cantidad</label
+                    ><input
+                      type="number"
+                      id="number"
+                      min="1"
+                      class="form-control quantity-input"
+                      [(ngModel)]="detallePedidoItem.cantidad"
+                      value="detallePedidoItem.cantidad"
+                      disabled
+                    />
+                  </div>
+                </div>
+                <div class="botones">
+                  <button
+                    type="button"
+                    class="btn btn-danger mr-3"
+                    data-toggle="modal"
+                    (click)="deleteArticulo(i)"
+                  >
+                    <svg
+                      class="bi bi-dash-circle-fill"
+                      width="1em"
+                      height="1em"
+                      viewBox="0 0 16 16"
+                      fill="currentColor"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        fill-rule="evenodd"
+                        d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM4 7.5a.5.5 0 0 0 0 1h8a.5.5 0 0 0 0-1H4z"
+                      />
+                    </svg>
+                  </button>
+                  <button
+                    (click)="addArticulo(i)"
+                    type="button"
+                    class="btn btn-success"
+                    data-toggle="modal"
+                  >
+                    <svg
+                      class="bi bi-plus-circle-fill"
+                      width="1em"
+                      height="1em"
+                      viewBox="0 0 16 16"
+                      fill="currentColor"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        fill-rule="evenodd"
+                        d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4a.5.5 0 0 0-1 0v3.5H4a.5.5 0 0 0 0 1h3.5V12a.5.5 0 0 0 1 0V8.5H12a.5.5 0 0 0 0-1H8.5V4z"
+                      />
+                    </svg>
+                  </button>
+                </div>
+              </div>
+              <div class="center justify-content-center d-flex">
+                <a href="/catalogo">
+                  <button type="button" class="btn btn-primary mr-3">
+                    <p>Seguir comprando</p>
+                  </button>
+                </a>
+
+                <h2 *ngIf="!this.checkearHorario">
+                  El local se encuentra cerrado
+                </h2>
+
+                <button
+                  *ngIf="this.checkearHorario"
+                  type="button"
+                  class="btn btn-success"
+                  data-toggle="modal"
+                  data-target="#paymentModal"
+                >
+                  <p>Pagar</p>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </section>
+
   <!-- Modal -->
   <div
     class="modal fade"
@@ -209,8 +193,8 @@
                     </span>
                   </div>
                 </div>
-              </div> 
-                  
+              </div>
+
             </div>
           </div>
           <br /> -->
