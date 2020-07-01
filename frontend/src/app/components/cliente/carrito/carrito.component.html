@@ -2,7 +2,14 @@
   <section class="clean-block clean-cart dark">
     <div class="container">
       <div class="block-heading">
-        <h2 class="text-info">Factura</h2>
+        <h2
+          class="text-info"
+          *ngIf="
+            articulosManufactura.length !== 0 && articulosInsumo.length !== 0
+          "
+        >
+          Factura
+        </h2>
         <h3
           *ngIf="
             articulosManufactura.length === 0 && articulosInsumo.length === 0
@@ -133,7 +140,11 @@
                 </h2>
 
                 <button
-                  *ngIf="this.checkearHorario"
+                  *ngIf="
+                    this.checkearHorario &&
+                    articulosManufactura.length !== 0 &&
+                    articulosInsumo.length !== 0
+                  "
                   type="button"
                   class="btn btn-success"
                   data-toggle="modal"
@@ -283,7 +294,12 @@
           <button type="button" class="btn btn-secondary" data-dismiss="modal">
             <p>Cerrar</p>
           </button>
-          <button (click)="pagar()" type="button" class="btn btn-primary">
+          <button
+            (click)="pagar()"
+            type="button"
+            class="btn btn-primary"
+            data-dismiss="modal"
+          >
             <p>Comprar</p>
           </button>
         </div>

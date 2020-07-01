@@ -1,4 +1,4 @@
-import { Cliente } from 'src/app/entidades/Cliente';
+import { AlertsService } from './../../../services/alertServices/alerts.service';
 import { DetallePedido } from 'src/app/entidades/DetallePedido';
 import { Component, OnInit } from '@angular/core';
 import { Pedido } from 'src/app/entidades/Pedido';
@@ -8,8 +8,6 @@ import { PedidoServices } from 'src/app/services/serviciosCliente/pedidoServices
 import { EstadoPedido } from 'src/app/entidades/EstadoPedido';
 import { ArticuloManufacturado } from 'src/app/entidades/ArticuloManufacturado';
 import { Router } from '@angular/router';
-import { ArticuloManufacturadoService } from 'src/app/services/serviciosCliente/articuloManufacturadoServices/articuloManufacturado.service';
-import { ArticuloInsumoService } from 'src/app/services/serviciosCliente/articuloInsumoServices/articuloInsumo.service';
 import { ArticuloInsumo } from 'src/app/entidades/ArticuloInsumo';
 
 @Component({
@@ -27,8 +25,7 @@ export class CarritoComponent implements OnInit {
     private clienteService: ClienteService,
     private pedidoService: PedidoServices,
     private router: Router,
-    private articuloManufacturadoService: ArticuloManufacturadoService,
-    private articuloInsumoService: ArticuloInsumoService
+    private alert: AlertsService
   ) {}
 
   pedido: Pedido = {
@@ -184,17 +181,19 @@ export class CarritoComponent implements OnInit {
 
   getTotal() {
     this.total = 0;
-    this.listaDetallePedido.forEach((detallePedidoItem) => {
-      if (detallePedidoItem.esInsumo) {
-        this.total +=
-          detallePedidoItem.articuloInsumo.precio_de_venta *
-          detallePedidoItem.cantidad;
-      } else {
-        this.total +=
-          detallePedidoItem.articuloManufacturado.precio_de_venta *
-          detallePedidoItem.cantidad;
-      }
-    });
+    try {
+      this.listaDetallePedido.forEach((detallePedidoItem) => {
+        if (detallePedidoItem.esInsumo) {
+          this.total +=
+            detallePedidoItem.articuloInsumo.precio_de_venta *
+            detallePedidoItem.cantidad;
+        } else {
+          this.total +=
+            detallePedidoItem.articuloManufacturado.precio_de_venta *
+            detallePedidoItem.cantidad;
+        }
+      });
+    } catch (error) {}
   }
 
   pagar() {
@@ -202,7 +201,10 @@ export class CarritoComponent implements OnInit {
       if (data) {
         this.crearPedido();
       } else {
-        //Colocar alerta bonita
+        this.alert.mensajeWarning(
+          'No inicio sesion',
+          'Debe registrarse para poder comprar'
+        );
         this.router.navigate(['/login']);
       }
     });
@@ -234,6 +236,12 @@ export class CarritoComponent implements OnInit {
           console.log(this.pedido);
           this.pedidoService.post(this.pedido).subscribe((posted) => {
             console.log('posted', posted);
+            this.alert.mensajeSuccess(
+              'Realizado',
+              'Su pedido fue realizado con exito'
+            );
+            this.router.navigate(['user-profile/' + data.uid]);
+            localStorage.clear();
           });
         },
         (err) => {
