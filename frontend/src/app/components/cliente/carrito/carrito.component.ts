@@ -64,6 +64,15 @@ export class CarritoComponent implements OnInit {
     } else {
       this.listaDetallePedido[iterador].cantidad--;
       console.log(this.listaDetallePedido[iterador].cantidad);
+      if (this.listaDetallePedido[iterador].esInsumo) {
+        this.listaDetallePedido[iterador].subtotal -= this.listaDetallePedido[
+          iterador
+        ].articuloInsumo.precio_de_venta;
+      } else {
+        this.listaDetallePedido[iterador].subtotal -= this.listaDetallePedido[
+          iterador
+        ].articuloManufacturado.precio_de_venta;
+      }
 
       let newJsonString = JSON.stringify(this.listaDetallePedido);
       localStorage.setItem('carritoDetallesPedido', newJsonString);
@@ -107,16 +116,23 @@ export class CarritoComponent implements OnInit {
       localStorage.setItem('carritoInsumo', newJsonString);
     }
 
-    this.articulosManufactura = [];
-    this.getArticulos();*/
+    this.articulosManufactura = []; */
     this.getArticulos();
   }
 
   addArticulo(iterador /*, esManuf*/) {
     //if (esManuf) {
-    console.log('Agragando');
     this.listaDetallePedido[iterador].cantidad++;
-    console.log(this.listaDetallePedido[iterador].cantidad);
+
+    if (this.listaDetallePedido[iterador].esInsumo) {
+      this.listaDetallePedido[iterador].subtotal += this.listaDetallePedido[
+        iterador
+      ].articuloInsumo.precio_de_venta;
+    } else {
+      this.listaDetallePedido[iterador].subtotal += this.listaDetallePedido[
+        iterador
+      ].articuloManufacturado.precio_de_venta;
+    }
 
     let newJsonString = JSON.stringify(this.listaDetallePedido);
     localStorage.setItem('carritoDetallesPedido', newJsonString);
@@ -192,15 +208,6 @@ export class CarritoComponent implements OnInit {
     });
   }
 
-  crearPedidosDetalle() {
-    let articulosManufacturaStorage = localStorage.getItem(
-      'carritoManufactura'
-    );
-    let articulosManufacturaJson = JSON.parse(articulosManufacturaStorage);
-    let articulosInsumoStorage = localStorage.getItem('carritoInsumo');
-    let articulosInsumoJson = JSON.parse(articulosInsumoStorage);
-  }
-
   async crearPedido() {
     this.getTotal();
     await this.loginService.isAuth().subscribe(async (data) => {
@@ -213,25 +220,21 @@ export class CarritoComponent implements OnInit {
           } else {
             this.pedido.tipo_Envio = true;
           }
-
           //console.log('--- user', user);
-
           //this.pedido.clientePedido = new Cliente();
-
           this.pedido.estadoPedido = new EstadoPedido();
           this.pedido.estadoPedido.id = 1;
 
           this.pedido.clientePedido = user;
-
           this.pedido.fechaRealizacion = new Date();
-          // this.pedido.hora_estimada_fin = new Date();
+          //this.pedido.hora_estimada_fin = new Date();
 
           this.pedido.lista_detallePedido = this.listaDetallePedido;
 
           console.log(this.pedido);
-          /*this.pedidoService.post(this.pedido).subscribe((posted) => {
+          this.pedidoService.post(this.pedido).subscribe((posted) => {
             console.log('posted', posted);
-          });*/
+          });
         },
         (err) => {
           console.log(err);
