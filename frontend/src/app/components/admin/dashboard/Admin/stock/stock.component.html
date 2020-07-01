@@ -78,7 +78,8 @@
         <td>{{ i.stock_minimo }}</td>
         <td>{{ i.stock_maximo }}</td>
         <td>
-          <img src="{{ i.url_imagen }}" class="img-thumbnail img-fluid" />
+          <img src="{{ i.url_imagen }}" class="img-thumbnail img-fluid" *ngIf="i.url_imagen" />
+          <img src="../../../../../../assets/image-not-available.png" class="img-thumbnail img-fluid" *ngIf="!i.url_imagen" />
         </td>
         <td>{{ i.unidadMedidaID.denominacion }}</td>
         <td>

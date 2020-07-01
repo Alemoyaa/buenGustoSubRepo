@@ -22,8 +22,8 @@
       <!-- Relleno tabla -->
       <tr *ngFor="let pedido of pedidos | paginate: {itemsPerPage: 4, currentPage: pageActual}">
         <th scope="row">{{pedido.id}}</th>
-        <td>{{pedido.fechaRealizacion}}</td>
-        <td>{{pedido.hora_estimada_fin |date:'shortTime'}}</td>
+        <td>{{pedido.fechaRealizacion | date: "dd/MM/yyyy" }}</td>
+        <td>{{pedido.hora_estimada_fin | date: 'mediumTime' : '+0'}}</td>
         <td>
           <button class="btn btn-danger">
             +10'
@@ -74,38 +74,49 @@
       </div>
       <div class="modal-body">
 
-        <div class="tabla col-lg-12" >
+        <div class="tabla col-lg-12">
           <div class="row cuadro">
             <table class="table table-striped table-bordered">
               <thead>
                 <tr>
                   <th scope="col" class="text-center">Cantidad</th>
                   <th scope="col" class="text-center">Plato</th>
-                   <th scope="col" class="text-center">Imagen</th>
+                  <th scope="col" class="text-center">Imagen</th>
                   <th scope="col" class="text-center">Aclaracion</th>
                 </tr>
               </thead>
               <tbody>
                 <tr *ngFor="let detalle of pedidoOne.lista_detallePedido">
-                  <td class="text-center">x{{detalle.cantidad }}</td>
-                  <td class="text-center">{{detalle.articulo.denominacion}} </td>
-                  <td><img class="img-thumbnail img-fluid" src={{detalle.articulo.url_imagen}} width="140" height="40">
+
+                  <!-- Cantidad -->
+                  <td class="text-center" *ngIf="detalle.cantidad">x {{detalle.cantidad}}</td>
+                  <td class="text-center alert-danger" *ngIf="!detalle.cantidad"> VERIFICAR CANTIDAD </td>
+
+                  <!-- Denominacion -->
+                  <td class="text-center" *ngIf="detalle.articuloManufacturado.denominacion">
+                    {{detalle.articuloManufacturado.denominacion}} </td>
+                  <td class="text-center alert-danger" *ngIf="!detalle.articuloManufacturado.denominacion">
+                    VERIFICAR PEDIDO </td>
+
+                  <!-- Imagen -->
+                  <td>
+                    <img class="img-thumbnail img-fluid" src={{detalle.articuloManufacturado.url_imagen}} width="140"
+                      height="40" *ngIf="detalle.articuloManufacturado.url_imagen">
+                    <img src="../../../../../../assets/image-not-available.png" class="img-thumbnail img-fluid"
+                      width="140" height="40" *ngIf="!detalle.articuloManufacturado.url_imagen" />
                   </td>
 
+                  <!-- Aclaracion -->
                   <td class="text-center">
-                    <p *ngIf="detalle.aclaracion">{{detalle.aclaracion}}</p>
+                    <p class="alert-danger" *ngIf="detalle.aclaracion">· {{detalle.aclaracion}}</p>
                     <p *ngIf="!detalle.aclaracion "> No hay aclaracion</p>
                   </td>
-
                 </tr>
               </tbody>
             </table>
           </div>
         </div>
         <hr>
-        <!-- <div class="col-12 text-center">
-          <h5 class="modal-title text-center"> <strong>Hay x detalles</strong> </h5>
-        </div> -->
       </div>
     </div>
   </div>

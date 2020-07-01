@@ -10,6 +10,13 @@
   }
 }
 
+.alert-danger {
+  color: #721c24;
+  background: #fd5d6a;
+  border-color: #f5c6cb;
+  margin-bottom: 5px;
+}
+
 .preparando{
   background-color: #fbd46d;
 }
