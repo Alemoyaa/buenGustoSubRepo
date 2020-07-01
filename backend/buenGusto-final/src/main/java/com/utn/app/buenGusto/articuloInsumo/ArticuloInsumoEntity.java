@@ -3,6 +3,7 @@ package com.utn.app.buenGusto.articuloInsumo;
 import java.io.Serializable;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -27,7 +28,7 @@ public class ArticuloInsumoEntity extends CommonEntity implements Serializable {
 	private double stock_minimo;
 	private double stock_maximo;
 	private boolean requiere_refrigeracion;
-	private boolean es_catalogo;
+	private boolean es_catalogo; 
 	private String url_imagen;
 	
 	@ManyToOne(cascade = CascadeType.MERGE)
