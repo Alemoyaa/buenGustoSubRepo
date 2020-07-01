@@ -24,4 +24,17 @@ public class FacturaService extends CommonService<FacturaEntity, FacturaReposito
 		}
 	}
 
+	@Override
+	public FacturaEntity save(FacturaEntity entity) throws Exception {
+		try {
+			List<FacturaEntity> facturas = this.repository.findAll();
+			int numero = facturas.get(facturas.size()-1).getNroFactura();
+			numero++;
+			entity.setNroFactura(numero);
+			entity = repository.save(entity);
+			return entity;
+		} catch (Exception e) {
+			throw new Exception(e.getMessage());
+		}
+	}
 }

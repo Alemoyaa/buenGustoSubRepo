@@ -136,6 +136,18 @@ public class ArticuloInsumoEntity extends CommonEntity implements Serializable {
 	public void descontarStock(double cantidad) {
 		this.stock_actual -= cantidad;
 	}
-
 	
+	public boolean comprobarStock(double cantidad) {
+		if(this.stock_actual >= cantidad) {
+			return true;
+		}else {
+			return false;
+		}	
+	}
+
+	public void aumentarStock(double stock, double precioPorKg) {
+		this.stock_actual += stock;
+		double precio = (this.precio_de_compra + precioPorKg)/2;
+		this.precio_de_compra = precio;
+	}
 }
