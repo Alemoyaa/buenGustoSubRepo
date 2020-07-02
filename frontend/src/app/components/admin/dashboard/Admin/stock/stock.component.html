@@ -50,29 +50,65 @@
           trackBy: trackByFn ">
 
         <th hidden>{{ i.id }}</th>
-        <td *ngIf="i.denominacion">{{ i.denominacion }}</td>
-        <td *ngIf="!i.denominacion" class=""></td>
 
-        <td>{{ i.categoria.nombreCategoria }}</td>
+        <td>
+          <p *ngIf="i.denominacion">{{ i.denominacion }}</p>
+          <p *ngIf="!i.denominacion" class="alert-danger">VERIFICAR ARTICULO</p>
+        </td>
+
+        <td>
+          <p *ngIf="i.categoria.nombreCategoria">{{ i.categoria.nombreCategoria }}</p>
+          <p *ngIf="!i.categoria.nombreCategoria" class="alert-danger">VERIFICAR ARTICULO</p>
+        </td>
+
+
         <td>
           <p *ngIf="i.es_catalogo === true">Si</p>
           <p *ngIf="i.es_catalogo === false">No</p>
         </td>
-        <td>$ {{ i.precio_de_compra }}</td>
-        <td>$ {{ i.precio_de_venta }}</td>
+
+        <td>
+          <p *ngIf="i.precio_de_compra">$ {{ i.precio_de_compra }}</p>
+          <p *ngIf="!i.precio_de_compra" class="alert-danger">VERIFICAR ARTICULO</p>
+        </td>
+
+        <td>
+          <p *ngIf="i.precio_de_venta">$ {{ i.precio_de_venta }}</p>
+          <p *ngIf="!i.precio_de_venta" class="alert-danger">VERIFICAR ARTICULO</p>
+        </td>
+
+
         <td>
           <p *ngIf="i.requiere_refrigeracion === true">Si</p>
           <p *ngIf="i.requiere_refrigeracion === false">No</p>
         </td>
-        <td>{{ i.stock_actual }}</td>
-        <td>{{ i.stock_minimo }}</td>
-        <td>{{ i.stock_maximo }}</td>
+
+        <td>
+          <p *ngIf="i.stock_actual">{{ i.stock_actual }}</p>
+          <p *ngIf="!i.stock_actual" class="alert-danger">VERIFICAR ARTICULO</p>
+        </td>
+
+        <td>
+          <p *ngIf="i.stock_minimo">{{ i.stock_minimo }}</p>
+          <p *ngIf="!i.stock_minimo" class="alert-danger">VERIFICAR ARTICULO</p>
+        </td>
+
+        <td>
+          <p *ngIf="i.stock_maximo">{{ i.stock_maximo }}</p>
+          <p *ngIf="!i.stock_maximo" class="alert-danger">VERIFICAR ARTICULO</p>
+        </td>
+
         <td>
           <img src="{{ i.url_imagen }}" class="img-thumbnail img-fluid" *ngIf="i.url_imagen" />
           <img src="../../../../../../assets/image-not-available.png" class="img-thumbnail img-fluid"
             *ngIf="!i.url_imagen" />
         </td>
-        <td>{{ i.unidadMedidaID.denominacion }}</td>
+
+        <td>
+          <p *ngIf="i.unidadMedidaID.denominacion">{{ i.unidadMedidaID.denominacion }}</p>
+          <p *ngIf="!i.unidadMedidaID.denominacion" class="alert-danger">VERIFICAR ARTICULO</p>
+        </td>
+
         <td>
           <button class="btn btn-info mr-1" data-toggle="modal" data-target="#ModalStock" (click)="editar(i)">
             <i class="fas fa-pencil-alt"></i>
@@ -91,6 +127,8 @@
   </div>
 </div>
 
+
+
 <!-- Modal EDITAR -->
 <div class="modal fade" data-backdrop="static" id="ModalStock" tabindex="-1" role="form"
   aria-labelledby="ModalStockLabel" aria-hidden="true">
@@ -98,10 +136,10 @@
     <div class="modal-content">
       <div class="modal-header">
         <h5 *ngIf="!esEditar" class="modal-title" id="modalAgregar">
-          <strong>Agregar nuevo articulo</strong>
+          <i class="fas fa-pencil-alt"></i>  <strong>   Agregar nuevo articulo</strong>
         </h5>
         <h5 *ngIf="esEditar" class="modal-title" id="modalEditar">
-          <strong>Editar</strong>
+          <i class="fas fa-pencil-alt"></i>  <strong  >Editar</strong>
         </h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
@@ -109,15 +147,16 @@
       </div>
       <div class="modal-body text-lg-center">
         <form name="formStock" [formGroup]="formStock">
+
           <div class="row">
             <div class="col-12">
               <h5 class="modal-title" id="exampleModalLabel">
-                <strong>Ingrese los datos del articulo</strong>
+                Ingrese los datos del articulo
               </h5>
               <hr />
             </div>
 
-            <div class="col-6">
+            <div class="col-md-4">
               <div class="form-group">
                 <label>Denominacion</label>
                 <input type="text" class="form-control" name="denominacion" formControlName="denominacion"
@@ -125,54 +164,99 @@
               </div>
             </div>
 
-            <div class="col-2">
+            <div class="col-md-4">
               <div class="form-group">
                 <label>Es catalogo ?</label>
-                <input type="text" class="form-control" name="es_catalogo" formControlName="es_catalogo" />
+                <select formControlName="es_catalogo" class="form-control">
+                  <option value="true">Si</option>
+                  <option value="false">No</option>
+                </select>
               </div>
             </div>
 
-            <div class="col-2">
+            <div class="col-md-4">
+              <div class="form-group">
+                <label>Requiere refrigeracion</label>
+                <select formControlName="requiere_refrigeracion" class="form-control">
+                  <option  value="true">Si</option>
+                  <option value="false">No</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+
+            <div class="col-12">
+              <hr />
+              <p class="alert">Costos</p>
+                <hr />
+            </div>
+
+            <div class="col-md-4">
               <div class="form-group">
                 <label>Precio de Costo</label>
                 <input type="number" class="form-control" name="precio_de_compra" formControlName="precio_de_compra" />
               </div>
             </div>
 
-            <div class="col-2">
+            <div class="col-md-4">
               <div class="form-group">
                 <label>Precio de venta</label>
                 <input type="text" class="form-control" name="precio_de_venta" formControlName="precio_de_venta" />
               </div>
             </div>
 
-            <div class="col-2">
-              <div class="form-group">
-                <label>Requiere refrigeracion</label>
-                <input type="text" class="form-control" name="requiere_refrigeracion"
-                  formControlName="requiere_refrigeracion" />
-              </div>
+          </div>
+
+          <div class="row">
+
+            <div class="col-12">
+              <hr />
+              <p class="alert">Stock</p>
+              <hr />
             </div>
-            <div class="col-2">
+
+            <div class="col-md-4">
               <div class="form-group">
                 <label>Stock Actual</label>
                 <input type="number" class="form-control" name="stock_actual" formControlName="stock_actual" />
               </div>
+            </div>
+
+            <div class="col-md-4">
               <div class="form-group">
                 <label>Stock Minimo</label>
                 <input type="number" class="form-control" name="stock_minimo" formControlName="stock_minimo" />
               </div>
+            </div>
+
+            <div class="col-md-4">
               <div class="form-group">
                 <label>Stock Maximo</label>
                 <input type="number" class="form-control" name="stock_maximo" formControlName="stock_maximo" />
               </div>
+            </div>
+
+
+          </div>
+
+
+          <div class="row">
+            <div class="col-12">
+              <hr />
+              <p class="alert">Otros</p>
+              <hr />
+            </div>
+            <div class="col-md-4">
               <div class="form-group">
                 <label>Url Imagen</label>
                 <input type="text" class="form-control" name="url_imagen" formControlName="url_imagen" />
               </div>
             </div>
 
-            <div formGroupName="unidadMedidaID">
+
+            <div class="col-md-4" formGroupName="unidadMedidaID">
               <div class="form-group">
                 <label>Unidad de medida</label>
                 <select (change)="seleccionarUnidad($event.target.value)" class="form-control" name="unidadMedidaID">
@@ -184,7 +268,8 @@
                 </select>
               </div>
             </div>
-            <div formGroupName="categoria">
+
+            <div class="col-md-4" formGroupName="categoria">
               <div class="form-group">
                 <label>Categoria</label>
                 <select (change)="seleccionarPadre($event.target.value)" class="form-control" name="categoria">
