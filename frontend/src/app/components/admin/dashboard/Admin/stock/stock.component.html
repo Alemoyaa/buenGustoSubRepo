@@ -132,11 +132,11 @@
 <!-- Modal EDITAR -->
 <div class="modal fade" data-backdrop="static" id="ModalStock" tabindex="-1" role="form"
   aria-labelledby="ModalStockLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg" role="document" id="body">
+  <div class="modal-dialog modal-xl" role="document" id="body">
     <div class="modal-content">
       <div class="modal-header">
         <h5 *ngIf="!esEditar" class="modal-title" id="modalAgregar">
-          <i class="fas fa-pencil-alt"></i>  <strong>   Agregar nuevo articulo</strong>
+               Agregar nuevo articulo
         </h5>
         <h5 *ngIf="esEditar" class="modal-title" id="modalEditar">
           <i class="fas fa-pencil-alt"></i>  <strong  >Editar</strong>
@@ -147,16 +147,21 @@
       </div>
       <div class="modal-body text-lg-center">
         <form name="formStock" [formGroup]="formStock">
-
           <div class="row">
-            <div class="col-12">
-              <h5 class="modal-title" id="exampleModalLabel">
-                Ingrese los datos del articulo
-              </h5>
-              <hr />
-            </div>
+            <div class="col-12 contact100-form-title imagen-titulo">
+              <span class="contact100-form-title-1">
+              Stock de Articulos
+              </span>
 
+              <span class="contact100-form-title-2">
+                Ingrese los datos del articulo
+                </span>
+            </div>
+          </div>
+
+            <div class="row ">
             <div class="col-md-4">
+
               <div class="form-group">
                 <label>Denominacion</label>
                 <input type="text" class="form-control" name="denominacion" formControlName="denominacion"
@@ -165,6 +170,7 @@
             </div>
 
             <div class="col-md-4">
+
               <div class="form-group">
                 <label>Es catalogo ?</label>
                 <select formControlName="es_catalogo" class="form-control">
@@ -175,6 +181,7 @@
             </div>
 
             <div class="col-md-4">
+
               <div class="form-group">
                 <label>Requiere refrigeracion</label>
                 <select formControlName="requiere_refrigeracion" class="form-control">
@@ -187,11 +194,11 @@
 
           <div class="row">
 
-            <div class="col-12">
+            <!-- <div class="col-12">
               <hr />
               <p class="alert">Costos</p>
                 <hr />
-            </div>
+            </div> -->
 
             <div class="col-md-4">
               <div class="form-group">
@@ -211,11 +218,11 @@
 
           <div class="row">
 
-            <div class="col-12">
+            <!-- <div class="col-12">
               <hr />
               <p class="alert">Stock</p>
               <hr />
-            </div>
+            </div> -->
 
             <div class="col-md-4">
               <div class="form-group">
@@ -243,11 +250,11 @@
 
 
           <div class="row">
-            <div class="col-12">
+            <!-- <div class="col-12">
               <hr />
               <p class="alert">Otros</p>
               <hr />
-            </div>
+            </div> -->
             <div class="col-md-4">
               <div class="form-group">
                 <label>Url Imagen</label>
