@@ -17,6 +17,11 @@
   margin-bottom: 5px;
 }
 
+.alert {
+  background: #e7f8ff;
+  margin-bottom: 5px;
+}
+
 
 @media (max-width: 1200px) {
   #body  {

@@ -80,6 +80,7 @@ export class StockComponent implements OnInit {
     });
   }
 
+
   limpiarForm() {
     this.crearFormulario();
   }
@@ -97,6 +98,8 @@ export class StockComponent implements OnInit {
     this.getAllCategorias();
     this.getUnidades();
   }
+
+
 
   getAllCategorias() {
     this.categoriaService.getAll().subscribe(
@@ -138,6 +141,9 @@ export class StockComponent implements OnInit {
       });
     }
   }
+
+
+
 
   async getCategorias() {
     this.categorias.forEach((e) => {
