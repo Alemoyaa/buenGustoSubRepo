@@ -220,7 +220,9 @@ export class StockComponent implements OnInit {
   }
 
   update() {
-    this.artInsumoService.put(this.id, this.formStock.value).subscribe(
+    console.log("update")
+    console.log(this.formStock.value)
+    this.artInsumoService.put(this.formStock.value.id, this.formStock.value).subscribe(
       (data) => {
         console.log('data:', data);
         this.getAllArticulos();

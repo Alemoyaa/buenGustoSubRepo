@@ -1,3 +1,5 @@
+import { catchError } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { CommonService } from '../commonServices/common.service';
 import { Injectable } from '@angular/core';
@@ -14,4 +16,11 @@ export class ArticuloInsumoService extends CommonService<ArticuloInsumo> {
   constructor(http: HttpClient) {
     super(http);
   }
+
+  reponerArticulo(id: number, entidad: ArticuloInsumo): Observable<ArticuloInsumo> {
+    return this.http
+      .put<ArticuloInsumo>(this._url + 'reponer/'+ id , entidad)
+      .pipe(catchError(this.handleError));
+  }
+
 }

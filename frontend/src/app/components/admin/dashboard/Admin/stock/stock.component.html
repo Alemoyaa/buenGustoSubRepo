@@ -62,7 +62,7 @@
 
         <td>
           <p *ngIf="i.categoria.nombreCategoria">{{ i.categoria.nombreCategoria }}</p>
-          <p *ngIf="!i.categoria.nombreCategoria" class="alert-danger">VERIFICAR ARTICULO</p>
+          <!-- <p *ngIf="!i.categoria.nombreCategoria" class="alert-danger">VERIFICAR ARTICULO</p> -->
         </td>
 
 
@@ -299,11 +299,11 @@
           Cerrar
         </button>
 
-        <button *ngIf="esEditar" [disabled]="formStock.invalid" type="button" class="btn btn-info" (click)="update()">
+        <button *ngIf="esEditar" data-dismiss="modal" [disabled]="formStock.invalid" type="button" class="btn btn-info" (click)="update()">
           Editar articulo
         </button>
 
-        <button *ngIf="!esEditar" [disabled]="formStock.invalid" type="button" class="btn btn-info" (click)="agregar()">
+        <button *ngIf="!esEditar" data-dismiss="modal" [disabled]="formStock.invalid" type="button" class="btn btn-info" (click)="agregar()">
           Crear nuevo articulo
         </button>
       </div>
