@@ -1,4 +1,4 @@
-<div class="container " id="body" >
+<div class="container" id="body">
   <div class="row">
     <!-- <div class="col-12 text-center" >
       <h1 class="display-3">Administracion de Usuarios</h1>
@@ -16,66 +16,80 @@
     </div>
 
   </div> -->
-    <div class="col-12 contact100-form-title imagen-titulo text-center jumbotron" style="margin-bottom: 20px;">
-
+    <div
+      class="col-lg-12 col-md-12 col-sm-12 contact100-form-title imagen-titulo text-center jumbotron"
+      style="margin-bottom: 20px;"
+    >
       <span class="contact100-form-title-1">
         Administracion de Usuarios
       </span>
-
-
     </div>
 
-  <div class="row mb-4 ml-2">
+    <div class="row mb-4 ml-2">
+      <!-- Buscador -->
+      <div class="buscador">
+        <form>
+          <p style="font-size: 25px;">Buscar :</p>
 
-    <!-- Buscador -->
-    <div class="buscador">
-      <form>
-        <p style="font-size: 25px;"> Buscar : </p>
-
-        <input class="form-control mr-sm-2" type="search" placeholder="Nombre/Apellido o Rol" aria-label="Search"
-          [(ngModel)]="filtroBuscador" [ngModelOptions]="{ standalone: true }" />
-      </form>
+          <input
+            class="form-control mr-sm-2"
+            type="search"
+            placeholder="Nombre/Apellido o Rol"
+            aria-label="Search"
+            [(ngModel)]="filtroBuscador"
+            [ngModelOptions]="{ standalone: true }"
+          />
+        </form>
+      </div>
     </div>
-  </div>
 
-  <table class="table table-striped text-center" *ngIf="filtrar">
-    <thead>
-      <tr>
-        <th scope="col"></th>
-        <th scope="col">Email</th>
-        <th scope="col">Nombre Completo</th>
-        <th scope="col">Telefono</th>
-        <th scope="col">Rol</th>
-        <th scope="col">Datos del domicilio</th>
-        <th scope="col">Acciones </th>
-
-      </tr>
-    </thead>
-    <tbody >
-      <tr *ngFor="let cliente of filtrar | paginate: {itemsPerPage: 6, currentPage: pageActual}">
-        <th scope="row"><i class="fas fa-user"></i></th>
-        <td>{{ cliente.usuario.email}}</td>
-        <td>{{ cliente.nombre }} {{ cliente.apellido }}</td>
-        <td>{{ cliente.telefono }}</td>
-        <td>{{ cliente.usuario.rol.nombreRol }}</td>
-        <td>
-          <button class="btn btn-dark" data-toggle="modal"
-          data-target="#domicilio" (click)="mostrarDomicilio(cliente)" >
-          <i class="fas fa-home"> </i>
-         <p>Ver Domicilio</p>
-          </button>
-        </td>
-        <td>
-          <button
-            class="btn btn-warning mr-3"
-            data-toggle="modal"
-            data-target="#ModalPersona"
-            (click)="preCargarDatosFormulario(cliente)"
+    <div class="table-responsive">
+      <table class="table table-striped text-center" *ngIf="filtrar">
+        <thead>
+          <tr>
+            <th scope="col"></th>
+            <th scope="col">Email</th>
+            <th scope="col">Nombre Completo</th>
+            <th scope="col">Telefono</th>
+            <th scope="col">Rol</th>
+            <th scope="col">Datos del domicilio</th>
+            <th scope="col">Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr
+            *ngFor="
+              let cliente of filtrar
+                | paginate: { itemsPerPage: 6, currentPage: pageActual }
+            "
           >
-            <i class="fas fa-pencil-alt"></i>
-            <p> Editar Rol</p>
-          </button>
-          <!-- <button
+            <th scope="row"><i class="fas fa-user"></i></th>
+            <td>{{ cliente.usuario.email }}</td>
+            <td>{{ cliente.nombre }} {{ cliente.apellido }}</td>
+            <td>{{ cliente.telefono }}</td>
+            <td>{{ cliente.usuario.rol.nombreRol }}</td>
+            <td>
+              <button
+                class="btn btn-dark"
+                data-toggle="modal"
+                data-target="#domicilio"
+                (click)="mostrarDomicilio(cliente)"
+              >
+                <i class="fas fa-home"> </i>
+                <p>Ver Domicilio</p>
+              </button>
+            </td>
+            <td>
+              <button
+                class="btn btn-warning mr-3"
+                data-toggle="modal"
+                data-target="#ModalPersona"
+                (click)="preCargarDatosFormulario(cliente)"
+              >
+                <i class="fas fa-pencil-alt"></i>
+                <p>Editar Rol</p>
+              </button>
+              <!-- <button
             class="btn btn-danger mr-3"
             data-toggle="modal"
             (click)="eliminar(cliente.id)"
@@ -83,23 +97,28 @@
             <i class="fas fa-trash"> Deshabilitar Usuario</i>
           </button>
            -->
-        </td>
-      </tr>
-    </tbody>
-  </table>
-  <div id="paginador">
-    <pagination-controls *ngIf="usuarios.length > 0"  (pageChange)="pageActual = $event" ></pagination-controls>
-  </div>
-  <div class="text-center" *ngIf="usuarios.length === 0">
-    <div class="alert alert-danger" role="alert">
-      No hay usuarios en la base de datos
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div id="paginador">
+      <pagination-controls
+        *ngIf="usuarios.length > 0"
+        (pageChange)="pageActual = $event"
+      ></pagination-controls>
+    </div>
+    <div class="text-center" *ngIf="usuarios.length === 0">
+      <div class="alert alert-danger" role="alert">
+        No hay usuarios en la base de datos
+      </div>
     </div>
   </div>
 
+  <app-mostrar-domicilio
+    [domicilioSeleccionado]="domicilio"
+  ></app-mostrar-domicilio>
+
+  <app-formulario-rol [clienteSeleccionado]="cliente"></app-formulario-rol>
 </div>
-
-<app-mostrar-domicilio [domicilioSeleccionado]="domicilio" ></app-mostrar-domicilio>
-
-<app-formulario-rol [clienteSeleccionado]="cliente"></app-formulario-rol>
-
-

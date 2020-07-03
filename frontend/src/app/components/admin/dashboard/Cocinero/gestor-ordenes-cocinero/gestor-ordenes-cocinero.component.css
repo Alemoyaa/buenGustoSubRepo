@@ -4,12 +4,9 @@
     "Segoe UI Symbol";
 }
 
-@media (max-width: 1300px) {
-  #body {
-    padding: 20px;
-  }
+#body {
+  padding: 20px;
 }
-
 .alert-danger {
   color: #721c24;
   background: #fd5d6a;
@@ -17,28 +14,20 @@
   margin-bottom: 5px;
 }
 
-.preparando{
+.preparando {
   background-color: #fbd46d;
 }
 
-.listo{
+.listo {
   background-color: #9bdeac;
 }
 
-.right{
-align-self: flex-end;
+.right {
+  align-self: flex-end;
 }
 
- .ancho{
-   width: 100%;
- }
-
-
-@media (max-width: 1200px) {
-  #body  {
-    width: 800px;
-    padding: 20px;
-  }
+.ancho {
+  width: 100%;
 }
 
 h1,
@@ -53,8 +42,10 @@ p {
     "Segoe UI Symbol";
 }
 
-.buscador{float: right;}
+.buscador {
+  float: right;
+}
 
 .contact100-form-title {
-background-image: url("../../../../../../assets/cocinero.jpg");
+  background-image: url("../../../../../../assets/cocinero.jpg");
 }

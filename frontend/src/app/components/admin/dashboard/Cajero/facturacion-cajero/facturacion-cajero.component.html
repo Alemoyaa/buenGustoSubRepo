@@ -1,6 +1,9 @@
 <div class="container mt-5" id="body">
-  <div class="col-12 text-center jumbotron" style="margin-bottom: 20px;">
-    <h1 class="display-4">Pedidos a facturar</h1>
+  <div
+    class="col-12 text-center jumbotron justify-content-center d-flex"
+    style="margin-bottom: 20px;"
+  >
+    <h1 class="display-5">Pedidos a facturar</h1>
     <div class="buscador">
       <i class="fas fa-cash-register" style="font-size: 35px;"></i>
       <p>Cajero</p>
@@ -25,17 +28,18 @@
     </div>
   </div>
 
-  <table class="table table-striped" *ngIf="filtrar">
-    <thead>
-      <tr>
-        <th scope="row">Orden</th>
-        <th scope="row">Cliente</th>
-        <th scope="row">Fecha</th>
-        <th scope="row">Estado</th>
-        <th scope="row">Factura</th>
-      </tr>
-    </thead>
-    <!-- // fecha: Date;
+  <div class="table-responsive">
+    <table class="table table-striped" *ngIf="filtrar">
+      <thead>
+        <tr>
+          <th scope="row">Orden</th>
+          <th scope="row">Cliente</th>
+          <th scope="row">Fecha</th>
+          <th scope="row">Estado</th>
+          <th scope="row">Factura</th>
+        </tr>
+      </thead>
+      <!-- // fecha: Date;
   // formaPago: string;
   // tipoFactura: string;
   // nroFactura: number;
@@ -44,33 +48,35 @@
   // detalleFactura: DetalleFactura[];
   // datosEmpresaID: DatosEmpresa; -->
 
-    <tbody>
-      <tr
-        *ngFor="
-          let factura of filtrar
-            | paginate: { itemsPerPage: 5, currentPage: pageActual }
-        "
-      >
-        <th scope="row">1</th>
-        <td>
-          {{ factura.pedidofacturado.clientePedido.nombre }}
-          {{ factura.pedidofacturado.clientePedido.apellido }}
-        </td>
-        <td>{{ factura.pedidofacturado.fechaRealizacion | date }}</td>
-        <td>{{ factura.pedidofacturado.estadoPedido.nombreEstado }}</td>
-        <td>
-          <button
-            class="btn btn-primary"
-            data-toggle="modal"
-            data-target="#factura"
-            (click)="mostrarFactura(factura)"
-          >
-            Ver factura
-          </button>
-        </td>
-      </tr>
-    </tbody>
-  </table>
+      <tbody>
+        <tr
+          *ngFor="
+            let factura of filtrar
+              | paginate: { itemsPerPage: 5, currentPage: pageActual }
+          "
+        >
+          <th scope="row">1</th>
+          <td>
+            {{ factura.pedidofacturado.clientePedido.nombre }}
+            {{ factura.pedidofacturado.clientePedido.apellido }}
+          </td>
+          <td>{{ factura.pedidofacturado.fechaRealizacion | date }}</td>
+          <td>{{ factura.pedidofacturado.estadoPedido.nombreEstado }}</td>
+          <td>
+            <button
+              class="btn btn-primary"
+              data-toggle="modal"
+              data-target="#factura"
+              (click)="mostrarFactura(factura)"
+            >
+              Ver factura
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
   <pagination-controls
     *ngIf="facturas.length > 0"
     (pageChange)="pageActual = $event"

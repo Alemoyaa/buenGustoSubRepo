@@ -1,79 +1,90 @@
-<div class="container mt-5 text-center" *ngIf="pedidos"  id="body">
-  <div class="col-12 text-center jumbotron" style="margin-bottom: 20px;">
-    <h1 class="display-4">Estado de Pedidos</h1>
+<div class="container mt-5 text-center" *ngIf="pedidos" id="body">
+  <div
+    class="col-12 text-center jumbotron justify-content-center d-flex"
+    style="margin-bottom: 20px;"
+  >
+    <h1 class="display-5">Estado de Pedidos</h1>
     <div class="buscador">
-      <i class="fas fa-cash-register" style="font-size:35px;"></i>
+      <i class="fas fa-cash-register" style="font-size: 35px;"></i>
       <p>Cajero</p>
     </div>
   </div>
 
   <div class="row mb-4 ml-2">
-
     <!-- Buscador -->
     <div class="buscador">
       <form>
-        <p style="font-size: 25px;"> Buscar : </p>
+        <p style="font-size: 25px;">Buscar :</p>
 
-        <input class="form-control mr-sm-2" type="search" placeholder="Nombre/Apellido" aria-label="Search"
-          [(ngModel)]="filtroBuscador" [ngModelOptions]="{ standalone: true }" />
+        <input
+          class="form-control mr-sm-2"
+          type="search"
+          placeholder="Nombre/Apellido"
+          aria-label="Search"
+          [(ngModel)]="filtroBuscador"
+          [ngModelOptions]="{ standalone: true }"
+        />
       </form>
     </div>
   </div>
 
+  <div class="table-responsive">
+    <table class="table table-striped text-center" *ngIf="filtrar">
+      <thead>
+        <tr>
+          <th scope="row">Orden</th>
+          <th scope="row">Cliente</th>
+          <th scope="row">Tiempo estimado</th>
+          <th scope="row">Tipo de envío</th>
+          <th scope="row">Fecha</th>
+          <th scope="row">Estado</th>
 
-<table class="table table-striped text-center" *ngIf="filtrar">
-  <thead>
-    <tr>
-      <th scope="row">Orden</th>
-      <th scope="row">Cliente</th>
-      <th scope="row">Tiempo estimado</th>
-      <th scope="row">Tipo de envío</th>
-      <th scope="row">Fecha</th>
-      <th scope="row">Estado</th>
+          <th scope="row">Aceptar/Rechazar Pedido</th>
+        </tr>
+      </thead>
 
-      <th scope="row">Aceptar/Rechazar Pedido</th>
-    </tr>
-  </thead>
-
-
-  <tbody  >
-    <tr *ngFor="let pedido of filtrar | paginate: {itemsPerPage: 5, currentPage: pageActual}">
-      <th scope="row">1</th>
-      <td>{{pedido.clientePedido.nombre}}</td>
-      <td>{{pedido.hora_estimada_fin | date}}</td>
-      <td>
-        <p *ngIf="pedido.tipo_Envio == false"> Retira en Local</p>
-        <p *ngIf="pedido.tipo_Envio == true"> Delivery</p>
-      </td>
-      <td>{{pedido.fechaRealizacion | date}}</td>
-      <td>{{pedido.estadoPedido.nombreEstado}}</td>
-      <td>
-        <form [formGroup]="formularioEstado">
-          <select class="form-control" name="estado"  formControlName="id" (change)="seleccionarEstado($event.target.value, pedido)">
-            <option class="cancelar" value="2">  Cancelar</option>
-            <option class="confirmar" value="3">Confirmar</option>
-          </select>
-        </form>
-      </td>
-    </tr>
-  </tbody>
-
-    
-
-</table>
-
-<div *ngIf="pedidos.length === 0">
-  <div class="alert alert-success" role="alert">
-    No hay nuevos pedidos para verificar
+      <tbody>
+        <tr
+          *ngFor="
+            let pedido of filtrar
+              | paginate: { itemsPerPage: 5, currentPage: pageActual }
+          "
+        >
+          <th scope="row">1</th>
+          <td>{{ pedido.clientePedido.nombre }}</td>
+          <td>{{ pedido.hora_estimada_fin | date }}</td>
+          <td>
+            <p *ngIf="pedido.tipo_Envio == false">Retira en Local</p>
+            <p *ngIf="pedido.tipo_Envio == true">Delivery</p>
+          </td>
+          <td>{{ pedido.fechaRealizacion | date }}</td>
+          <td>{{ pedido.estadoPedido.nombreEstado }}</td>
+          <td>
+            <form [formGroup]="formularioEstado">
+              <select
+                class="form-control"
+                name="estado"
+                formControlName="id"
+                (change)="seleccionarEstado($event.target.value, pedido)"
+              >
+                <option class="cancelar" value="2"> Cancelar</option>
+                <option class="confirmar" value="3">Confirmar</option>
+              </select>
+            </form>
+          </td>
+        </tr>
+      </tbody>
+    </table>
   </div>
+
+  <div *ngIf="pedidos.length === 0">
+    <div class="alert alert-success" role="alert">
+      No hay nuevos pedidos para verificar
+    </div>
+  </div>
+
+  <pagination-controls
+    *ngIf="pedidos.length > 0"
+    (pageChange)="pageActual = $event"
+  ></pagination-controls>
 </div>
-
-  <pagination-controls *ngIf="pedidos.length > 0"  (pageChange)="pageActual = $event" ></pagination-controls>
-
-
-</div>
-
-
-
-
-
