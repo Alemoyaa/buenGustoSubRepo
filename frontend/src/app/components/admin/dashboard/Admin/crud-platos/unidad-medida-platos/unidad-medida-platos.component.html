@@ -15,52 +15,54 @@
         Crear nueva unidad
       </button>
     </div>
+    <div class="table-responsive">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">Abreviatura</th>
+            <th scope="col">Denominacion</th>
+            <th scope="col">paraRecetas</th>
+            <th scope="col">equivalencia_KgOL</th>
+            <th scope="col">Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr
+            *ngFor="
+              let unidadMedida of listaUnidadMedidas
+                | paginate: { itemsPerPage: 5, currentPage: pageActual }
+            "
+          >
+            <td>
+              {{ unidadMedida.abreviatura }}
+            </td>
+            <td>{{ unidadMedida.denominacion }}</td>
+            <td>
+              {{ unidadMedida.paraRecetas }}
+            </td>
+            <td>{{ unidadMedida.equivalencia_KgOL }}</td>
+            <td>
+              <button
+                (click)="editar(unidadMedida)"
+                class="btn btn-info mr-3"
+                data-target="#ModalUnidad"
+                data-toggle="modal"
+              >
+                <i class="fas fa-pencil-alt">Editar</i>
+              </button>
+              <button
+                (click)="eliminar(unidadMedida)"
+                class="btn btn-danger mr-3"
+                data-toggle="modal"
+              >
+                <i class="fas fa-trash">Eliminar</i>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
 
-    <table class="table table-striped">
-      <thead>
-        <tr>
-          <th scope="col">Abreviatura</th>
-          <th scope="col">Denominacion</th>
-          <th scope="col">paraRecetas</th>
-          <th scope="col">equivalencia_KgOL</th>
-          <th scope="col">Acciones</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr
-          *ngFor="
-            let unidadMedida of listaUnidadMedidas
-              | paginate: { itemsPerPage: 5, currentPage: pageActual }
-          "
-        >
-          <td>
-            {{ unidadMedida.abreviatura }}
-          </td>
-          <td>{{ unidadMedida.denominacion }}</td>
-          <td>
-            {{ unidadMedida.paraRecetas }}
-          </td>
-          <td>{{ unidadMedida.equivalencia_KgOL }}</td>
-          <td>
-            <button
-              (click)="editar(unidadMedida)"
-              class="btn btn-info mr-3"
-              data-target="#ModalUnidad"
-              data-toggle="modal"
-            >
-              <i class="fas fa-pencil-alt">Editar</i>
-            </button>
-            <button
-              (click)="eliminar(unidadMedida)"
-              class="btn btn-danger mr-3"
-              data-toggle="modal"
-            >
-              <i class="fas fa-trash">Eliminar</i>
-            </button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
     <pagination-controls
       (pageChange)="pageActual = $event"
     ></pagination-controls>

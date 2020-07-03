@@ -1,13 +1,14 @@
 <div class="container" id="body">
-
-  <div class="col-12 text-center jumbotron" style="margin-bottom: 20px;">
-    <h1 class="display-4">Administracion de Platos</h1>
+  <div
+    class="col-lg-12 col-md-12 col-sm-12 text-center jumbotron p-1 justify-content-around d-flex"
+    style="margin-bottom: 20px;"
+  >
+    <h2 class="display-5 p-2">Administracion de Platos</h2>
     <div class="buscador">
-      <i class="fa fa-user " style="font-size:35px;"></i>
+      <i class="fa fa-user mt-1" style="font-size: 35px;"></i>
       <p>Admin</p>
     </div>
   </div>
-
 
   <select
     class="custom-select custom-select-lg mt-3"
@@ -29,10 +30,16 @@
     <div *ngSwitchCase="3">
       <app-unidad-medida-platos></app-unidad-medida-platos>
     </div>
-    <div *ngSwitchDefault class="col-12 text-center jumbotron" style="margin-top: 20px; margin-bottom: 20px;">
-      <h2 class="display-4 mt-5 mb-5">Elija un componente en el menu superior</h2>
-      <br/>
-      <br/>
+    <div
+      *ngSwitchDefault
+      class="col-12 text-center jumbotron"
+      style="margin-top: 20px;"
+    >
+      <h2 class="display-5 mt-3 mb-3">
+        Elija un componente en el menu superior
+      </h2>
+      <br />
+      <br />
     </div>
   </div>
 </div>

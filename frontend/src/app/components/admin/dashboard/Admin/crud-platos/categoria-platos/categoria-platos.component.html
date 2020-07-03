@@ -2,7 +2,7 @@
   <div class="container mt-5">
     <div class="row">
       <div class="col-12 text-center">
-        <h1>Administracion de Categoria</h1>
+        <h3>Administracion de Categoria</h3>
       </div>
     </div>
 
@@ -15,51 +15,53 @@
         Crear nuevo categoria
       </button>
     </div>
+    <div class="table-responsive">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">Denominacion</th>
+            <th scope="col">Categoria padre</th>
+            <th scope="col">Es catalogo</th>
+            <th scope="col">Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr
+            *ngFor="
+              let categoria of listaCategorias
+                | paginate: { itemsPerPage: 5, currentPage: pageActual }
+            "
+          >
+            <td>
+              {{ categoria.nombreCategoria }}
+            </td>
+            <td *ngIf="categoria.padre; else elsePadretabla">
+              {{ categoria.padre.nombreCategoria }}
+            </td>
+            <ng-template #elsePadretabla><td>No posee</td></ng-template>
+            <td>{{ categoria.esCategoriaCatalogo }}</td>
+            <td>
+              <button
+                (click)="editar(categoria)"
+                class="btn btn-info mr-3"
+                data-target="#ModalCategoria"
+                data-toggle="modal"
+              >
+                <i class="fas fa-pencil-alt">Editar</i>
+              </button>
+              <button
+                (click)="eliminar(categoria)"
+                class="btn btn-danger mr-3"
+                data-toggle="modal"
+              >
+                <i class="fas fa-trash">Eliminar</i>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
 
-    <table class="table table-striped">
-      <thead>
-        <tr>
-          <th scope="col">Denominacion</th>
-          <th scope="col">Categoria padre</th>
-          <th scope="col">Es catalogo</th>
-          <th scope="col">Acciones</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr
-          *ngFor="
-            let categoria of listaCategorias
-              | paginate: { itemsPerPage: 5, currentPage: pageActual }
-          "
-        >
-          <td>
-            {{ categoria.nombreCategoria }}
-          </td>
-          <td *ngIf="categoria.padre; else elsePadretabla">
-            {{ categoria.padre.nombreCategoria }}
-          </td>
-          <ng-template #elsePadretabla><td>No posee</td></ng-template>
-          <td>{{ categoria.esCategoriaCatalogo }}</td>
-          <td>
-            <button
-              (click)="editar(categoria)"
-              class="btn btn-info mr-3"
-              data-target="#ModalCategoria"
-              data-toggle="modal"
-            >
-              <i class="fas fa-pencil-alt">Editar</i>
-            </button>
-            <button
-              (click)="eliminar(categoria)"
-              class="btn btn-danger mr-3"
-              data-toggle="modal"
-            >
-              <i class="fas fa-trash">Eliminar</i>
-            </button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
     <pagination-controls
       (pageChange)="pageActual = $event"
     ></pagination-controls>
