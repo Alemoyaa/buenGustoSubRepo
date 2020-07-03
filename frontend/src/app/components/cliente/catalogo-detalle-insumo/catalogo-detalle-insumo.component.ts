@@ -1,3 +1,4 @@
+import { DetallePedido } from './../../../entidades/DetallePedido';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
@@ -34,19 +35,45 @@ export class CatalogoDetalleInsumoComponent implements OnInit {
     });
   }
 
-  addToCart(articulo) {
-    let string = localStorage.getItem('carritoDetallesPedido');
-    let json = JSON.parse(string);
+  agregarLocalStorage(articulo: ArticuloInsumo) {
+    let detallePedidoAntiguos: DetallePedido[] = this.getDetallePedidoEnStorage;
 
-    json.push({
-      cantidad: 1,
-      subtotal: articulo.precio_de_venta,
-      aclaracion: '',
-      esInsumo: false,
-      articuloManufacturado: articulo,
-    });
+    if (!(detallePedidoAntiguos instanceof Array)) {
+      detallePedidoAntiguos = new Array<DetallePedido>();
+      detallePedidoAntiguos.push({
+        id: 0,
+        cantidad: 1,
+        subtotal: articulo.precio_de_venta,
+        aclaracion: '',
+        esInsumo: true,
+        articuloInsumo: articulo,
+      });
+    } else {
+      detallePedidoAntiguos.push({
+        id: 0,
+        cantidad: 1,
+        subtotal: articulo.precio_de_venta,
+        aclaracion: '',
+        esInsumo: true,
+        articuloInsumo: articulo,
+      });
+    }
 
-    localStorage.setItem('carritoDetallesPedido', JSON.stringify(json));
+    localStorage.setItem(
+      'carritoDetallesPedido',
+      JSON.stringify(detallePedidoAntiguos)
+    );
     this.router.navigate(['carrito']);
+  }
+
+  get getDetallePedidoEnStorage(): DetallePedido[] {
+    const detallePedidoStorage: DetallePedido[] = JSON.parse(
+      localStorage.getItem('carritoDetallesPedido')
+    );
+
+    if (detallePedidoStorage == null) {
+      return new Array<DetallePedido>();
+    }
+    return detallePedidoStorage;
   }
 }

@@ -8,8 +8,8 @@ export class DetallePedido extends Common {
   aclaracion: string;
   esInsumo: boolean;
 
-  articuloInsumo: ArticuloInsumo;
-  articuloManufacturado: ArticuloManufacturado;
+  articuloInsumo?: ArticuloInsumo;
+  articuloManufacturado?: ArticuloManufacturado;
 
   // get denominacion(): string {
   //   return this.esInsumo

@@ -10,22 +10,22 @@
   <div class="container col-lg-6 col-md-12 col-sm-12">
     <div class="card articulo-detalle" style="width: 30rem;">
       <img
-        src="{{ articulo.url_imagen }}"
+        src="{{ articuloManuf.url_imagen }}"
         class="card-img-top"
-        alt="Foto de {{ articulo.denominacion }}"
+        alt="Foto de {{ articuloManuf.denominacion }}"
       />
       <div class="card-body">
-        <h3 class="card-title">{{ articulo.denominacion }}</h3>
+        <h3 class="card-title">{{ articuloManuf.denominacion }}</h3>
 
         <div class="row">
           <div class="col-lg-4 col-md-4 col-sm-4 left-align">
-            <h4>${{ articulo.precio_de_venta }}</h4>
+            <h4>${{ articuloManuf.precio_de_venta }}</h4>
           </div>
           <div class="col-lg-8 col-md-8 col-sm-8 right-align">
             <button
               type="button"
               class="btn btn-warning"
-              (click)="addToCart(articulo)"
+              (click)="agregarLocalStorage(articuloManuf)"
             >
               <p>Agregar al carrito</p>
             </button>
