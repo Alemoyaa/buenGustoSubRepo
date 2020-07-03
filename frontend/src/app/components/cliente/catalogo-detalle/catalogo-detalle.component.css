@@ -40,18 +40,14 @@ p {
   text-align: right;
 }
 
-/* h3 {
-  font-family: "Sriracha", cursive;
-}
-
-h5 {
-  font-family: "Sriracha", cursive;
-}
-
-h4 {
-  font-family: "Staatliches", cursive;
-} */
-
 .widthfull {
   width: 100%;
+}
+
+.container-card {
+  display: inline-block;
+}
+
+.card-img-top {
+  height: 15em;
 }
