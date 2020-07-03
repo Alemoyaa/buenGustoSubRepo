@@ -1,3 +1,4 @@
+import { Observable } from 'rxjs';
 import { AlertsService } from './../../../services/alertServices/alerts.service';
 import { DetallePedido } from 'src/app/entidades/DetallePedido';
 import { Component, OnInit } from '@angular/core';
@@ -26,7 +27,9 @@ export class CarritoComponent implements OnInit {
     private pedidoService: PedidoServices,
     private router: Router,
     private alert: AlertsService
-  ) {}
+  ) {
+    this.getArticulos();
+  }
 
   pedido: Pedido = {
     clientePedido: null,
@@ -42,9 +45,7 @@ export class CarritoComponent implements OnInit {
     tipo_Envio: null,
   };
 
-  ngOnInit() {
-    this.getArticulos();
-  }
+  ngOnInit() {}
 
   articulosManufactura: Array<ArticuloManufacturado> = [];
   articulosInsumo: Array<ArticuloInsumo> = [];
@@ -53,15 +54,41 @@ export class CarritoComponent implements OnInit {
   otroMedioDePago = false;
   envio = false;
 
-  deleteArticulo(iterador /*, esManuf*/) {
-    //if (esManuf) {
-    console.log('Quitando');
+  deleteArticulo(index: number) {
+    let detallePedidoStorage = JSON.parse(
+      localStorage.getItem('carritoDetallesPedido')
+    );
+    let newJson: Array<DetallePedido> = [];
+
+    for (let iterador = 0; iterador < detallePedidoStorage.length; iterador++) {
+      if (iterador === index) {
+        console.log(
+          'Index: ',
+          index,
+          'Iterador: ',
+          iterador,
+          ' -> item ->',
+          detallePedidoStorage[iterador]
+        );
+      } else {
+        console.log('Pushh ->', detallePedidoStorage[iterador]);
+        newJson.push(detallePedidoStorage[iterador]);
+      }
+    }
+
+    let newJsonString = JSON.stringify(newJson);
+    localStorage.setItem('carritoDetallesPedido', newJsonString);
+    this.listaDetallePedido = [];
+    this.getArticulos();
+  }
+
+  reducirArticulo(iterador: number) {
     if (this.listaDetallePedido[iterador].cantidad === 1) {
       alert('Si desea eliminar el articulo, seleccione la esquina izquierda');
     } else {
       this.listaDetallePedido[iterador].cantidad--;
-      console.log(this.listaDetallePedido[iterador].cantidad);
-      if (this.listaDetallePedido[iterador].esInsumo) {
+
+      if (this.listaDetallePedido[iterador].articuloInsumo) {
         this.listaDetallePedido[iterador].subtotal -= this.listaDetallePedido[
           iterador
         ].articuloInsumo.precio_de_venta;
@@ -74,58 +101,17 @@ export class CarritoComponent implements OnInit {
       let newJsonString = JSON.stringify(this.listaDetallePedido);
       localStorage.setItem('carritoDetallesPedido', newJsonString);
     }
-
-    /*if (esManuf) {
-      let articulosStorage = localStorage.getItem('carritoManufactura');
-      let articulosJson = JSON.parse(articulosStorage);
-      let newJson: Array<string> = [];
-      let found = false;
-      articulosJson.forEach((element) => {
-        if (id === element.id) {
-          if (!found) {
-            found = true;
-          } else {
-            newJson.push(element);
-          }
-        } else {
-          newJson.push(element);
-        }
-      });
-      let newJsonString = JSON.stringify(newJson);
-      localStorage.setItem('carritoManufactura', newJsonString);
-    } else {
-      let articulosStorage = localStorage.getItem('carritoInsumo');
-      let articulosJson = JSON.parse(articulosStorage);
-      let newJson: Array<string> = [];
-      let found = false;
-      articulosJson.forEach((element) => {
-        if (id === element.id) {
-          if (!found) {
-            found = true;
-          } else {
-            newJson.push(element);
-          }
-        } else {
-          newJson.push(element);
-        }
-      });
-      let newJsonString = JSON.stringify(newJson);
-      localStorage.setItem('carritoInsumo', newJsonString);
-    }
-
-    this.articulosManufactura = []; */
-    this.getArticulos();
+    this.getTotal();
   }
 
-  addArticulo(iterador /*, esManuf*/) {
-    //if (esManuf) {
-    this.listaDetallePedido[iterador].cantidad++;
-
-    if (this.listaDetallePedido[iterador].esInsumo) {
+  addArticulo(iterador: number) {
+    if (this.listaDetallePedido[iterador].articuloInsumo) {
+      this.listaDetallePedido[iterador].cantidad++;
       this.listaDetallePedido[iterador].subtotal += this.listaDetallePedido[
         iterador
       ].articuloInsumo.precio_de_venta;
     } else {
+      this.listaDetallePedido[iterador].cantidad++;
       this.listaDetallePedido[iterador].subtotal += this.listaDetallePedido[
         iterador
       ].articuloManufacturado.precio_de_venta;
@@ -134,27 +120,7 @@ export class CarritoComponent implements OnInit {
     let newJsonString = JSON.stringify(this.listaDetallePedido);
     localStorage.setItem('carritoDetallesPedido', newJsonString);
 
-    this.getArticulos();
-    /*this.articuloManufacturadoService.getOne(id).subscribe((articulo) => {
-        let articulosStorage = localStorage.getItem('carritoManufactura');
-        let articulosJson = JSON.parse(articulosStorage);
-        articulosJson.push(articulo);
-        let newJsonString = JSON.stringify(articulosJson);
-        localStorage.setItem('carritoManufactura', newJsonString);
-        this.articulosManufactura = [];
-        this.getArticulos();
-      });*/
-    //} else {
-    /*this.articuloInsumoService.getOne(id).subscribe((articulo) => {
-        let articulosStorage = localStorage.getItem('carritoInsumo');
-        let articulosJson = JSON.parse(articulosStorage);
-        articulosJson.push(articulo);
-        let newJsonString = JSON.stringify(articulosJson);
-        localStorage.setItem('carritoInsumo', newJsonString);
-        this.articulosManufactura = [];
-        this.getArticulos();
-      });*/
-    //}
+    this.getTotal();
   }
 
   getArticulos() {
@@ -162,38 +128,19 @@ export class CarritoComponent implements OnInit {
     let detallesPedido = JSON.parse(detallesPedidoStorage);
     console.log(detallesPedido);
     this.listaDetallePedido = detallesPedido;
-    // let articulosManufacturaStorage = localStorage.getItem(
-    //   'carritoManufactura'
-    // );
-    // let articulosManufacturaJson = JSON.parse(articulosManufacturaStorage);
-    // let articulosInsumoStorage = localStorage.getItem('carritoInsumo');
-    // let articulosInsumoJson = JSON.parse(articulosInsumoStorage);
-    // this.articulosManufactura = articulosManufacturaJson;
-    // this.articulosInsumo = articulosInsumoJson;
-    // console.log(
-    //   'Productos manufacturados en carrito:',
-    //   articulosManufacturaJson
-    // );
-    // console.log('Productos insumo en carrito:', articulosInsumoJson);
+
     this.getTotal();
-    // this.crearPedidosDetalle();
   }
 
   getTotal() {
     this.total = 0;
     try {
       this.listaDetallePedido.forEach((detallePedidoItem) => {
-        if (detallePedidoItem.esInsumo) {
-          this.total +=
-            detallePedidoItem.articuloInsumo.precio_de_venta *
-            detallePedidoItem.cantidad;
-        } else {
-          this.total +=
-            detallePedidoItem.articuloManufacturado.precio_de_venta *
-            detallePedidoItem.cantidad;
-        }
+        this.total += detallePedidoItem.subtotal;
       });
-    } catch (error) {}
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   pagar() {
@@ -251,24 +198,6 @@ export class CarritoComponent implements OnInit {
     });
   }
 
-  denominacion(detallePedido: DetallePedido): string {
-    return detallePedido.esInsumo
-      ? detallePedido.articuloInsumo.denominacion
-      : detallePedido.articuloManufacturado.denominacion;
-  }
-
-  precioVenta(detallePedido: DetallePedido): number {
-    return detallePedido.esInsumo
-      ? detallePedido.articuloInsumo.precio_de_venta
-      : detallePedido.articuloManufacturado.precio_de_venta;
-  }
-
-  imagenArticulo(detallePedido: DetallePedido): string {
-    return detallePedido.esInsumo
-      ? detallePedido.articuloInsumo.url_imagen
-      : detallePedido.articuloManufacturado.url_imagen;
-  }
-
   setEnvio(envio) {
     if (envio === '0') {
       this.envio = false;
@@ -285,7 +214,7 @@ export class CarritoComponent implements OnInit {
     }
   }
 
-  get checkearHorario(): Boolean {
+  get checkearHorario(): boolean {
     var diayHoraActual = new Date();
     var horaActual = diayHoraActual.getHours();
     var minutoActual = diayHoraActual.getMinutes();

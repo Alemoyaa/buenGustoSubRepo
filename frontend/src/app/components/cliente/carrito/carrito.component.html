@@ -2,19 +2,10 @@
   <section class="clean-block clean-cart dark">
     <div class="container">
       <div class="block-heading">
-        <h2
-          class="text-info"
-          *ngIf="
-            articulosManufactura.length !== 0 && articulosInsumo.length !== 0
-          "
-        >
+        <h2 class="text-info" *ngIf="listaDetallePedido.length !== 0">
           Factura
         </h2>
-        <h3
-          *ngIf="
-            articulosManufactura.length === 0 && articulosInsumo.length === 0
-          "
-        >
+        <h3 *ngIf="listaDetallePedido.length === 0">
           El carrito está vacío
         </h3>
       </div>
@@ -29,7 +20,7 @@
                   let i = index
                 "
               >
-                <button type="button" class="btn">
+                <button type="button" class="btn" (click)="deleteArticulo(i)">
                   <svg
                     width="1em"
                     height="1em"
@@ -48,25 +39,81 @@
                     />
                   </svg>
                 </button>
-                <div class="row justify-content-center align-items-center">
+                <div
+                  class="row justify-content-center align-items-center"
+                  *ngIf="
+                    detallePedidoItem.articuloInsumo;
+                    else elseArticuloManufacturado
+                  "
+                >
                   <div class="col-md-3">
                     <div class="product-image">
                       <img
                         width="100px"
                         class="img-fluid d-block mx-auto image"
-                        src="{{ imagenArticulo(detallePedidoItem) }}"
+                        src="{{ detallePedidoItem.articuloInsumo.url_imagen }}"
                       />
                     </div>
                   </div>
                   <div class="col-md-5 product-info">
                     <h5 class="product-name">
-                      {{ denominacion(detallePedidoItem) }}
+                      {{ detallePedidoItem.articuloInsumo.denominacion }}
                     </h5>
                     <div class="product-specs">
                       <div>
                         <span><b>$</b>&nbsp;</span>
                         <span class="value">
-                          <b> {{ precioVenta(detallePedidoItem) }}</b>
+                          <b>
+                            {{
+                              detallePedidoItem.articuloInsumo.precio_de_venta
+                            }}</b
+                          >
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-6 col-md-2 quantity">
+                    <label class="d-none d-md-block" for="quantity"
+                      >Cantidad</label
+                    ><input
+                      type="number"
+                      id="number"
+                      min="1"
+                      class="form-control quantity-input"
+                      [(ngModel)]="detallePedidoItem.cantidad"
+                      value="detallePedidoItem.cantidad"
+                      disabled
+                    />
+                  </div>
+                </div>
+
+                <ng-template #elseArticuloManufacturado>
+                  <div class="col-md-3">
+                    <div class="product-image">
+                      <img
+                        width="100px"
+                        class="img-fluid d-block mx-auto image"
+                        src="{{
+                          detallePedidoItem.articuloManufacturado.url_imagen
+                        }}"
+                      />
+                    </div>
+                  </div>
+                  <div class="col-md-5 product-info">
+                    <h5 class="product-name">
+                      {{ detallePedidoItem.articuloManufacturado.denominacion }}
+                    </h5>
+                    <div class="product-specs">
+                      <div>
+                        <span><b>$</b>&nbsp;</span>
+                        <span class="value">
+                          <b>
+                            {{
+                              detallePedidoItem.articuloManufacturado
+                                .precio_de_venta
+                            }}</b
+                          >
                         </span>
                       </div>
                     </div>
@@ -84,13 +131,13 @@
                       disabled
                     />
                   </div>
-                </div>
+                </ng-template>
                 <div class="botones">
                   <button
                     type="button"
                     class="btn btn-danger mr-3"
                     data-toggle="modal"
-                    (click)="deleteArticulo(i)"
+                    (click)="reducirArticulo(i)"
                   >
                     <svg
                       class="bi bi-dash-circle-fill"
@@ -129,21 +176,19 @@
                 </div>
               </div>
               <div class="center justify-content-center d-flex">
-                <a href="/catalogo">
+                <a [routerLink]="['/catalogo']">
                   <button type="button" class="btn btn-primary mr-3">
                     <p>Seguir comprando</p>
                   </button>
                 </a>
 
-                <h2 *ngIf="!this.checkearHorario">
+                <h2 *ngIf="!checkearHorario">
                   El local se encuentra cerrado
                 </h2>
 
                 <button
                   *ngIf="
-                    this.checkearHorario &&
-                    articulosManufactura.length !== 0 &&
-                    articulosInsumo.length !== 0
+                    this.checkearHorario && listaDetallePedido.length !== 0
                   "
                   type="button"
                   class="btn btn-success"
@@ -199,13 +244,12 @@
                 <div class="product-specs">
                   <div>
                     <span>$&nbsp;</span
-                    ><span class="value">
+                    ><spa n class="value">
                       {{ articulo.precio_de_venta }}
                     </span>
                   </div>
                 </div>
               </div>
-
             </div>
           </div>
           <br /> -->
