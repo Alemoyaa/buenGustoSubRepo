@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { LoginService } from '../../../services/loginServices/login.service';
+import { AlertsService } from 'src/app/services/alertServices/alerts.service';
 
 @Component({
   selector: 'app-login',
@@ -14,7 +15,10 @@ export class LoginComponent implements OnInit {
   datosCorrectos: boolean = true;
   textoError: string = '';
 
-  constructor(private fb: FormBuilder, private loginService: LoginService) {}
+  constructor(
+    private fb: FormBuilder, 
+    private loginService: LoginService, 
+    private alertsService: AlertsService) { }
 
   ngOnInit(): void {
     this.crearFormularioLogin();
@@ -31,33 +35,34 @@ export class LoginComponent implements OnInit {
   }
 
   ingresarConEmailPassword() {
-    this.loginService.loginEmailPassword(
-      this.formularioLogin.value.email,
-      this.formularioLogin.value.password
-    );
-    // if (this.formularioLogin.valid) {
-    //   this.datosCorrectos = true;
-    //   this.mostrarCargar = true;
-    //   this.loginService
-    //     .loginEmailPassword(
-    //       this.formularioLogin.value.email,
-    //       this.formularioLogin.value.password
-    //     )
-    //     .then((data) => {
-    //       console.log(data);
-    //       this.mostrarCargar = false;
-    //     })
-    //     .catch((error) => {
-    //       console.log('Error catch');
-    //       this.datosCorrectos = false;
-    //       this.mostrarCargar = false;
-    //       this.textoError = error.message;
-    //     });
-    // } else {
-    //   this.datosCorrectos = false;
-    //   this.mostrarCargar = false;
-    //   this.textoError = 'Porfavor revisa que los datos sean correctos';
-    // }
+
+    if (this.formularioLogin.valid) {
+      // mostramos cargador y damos por hecha la validacion del form
+      this.datosCorrectos = true;
+      this.mostrarCargar = true;
+
+      // intentamos logear
+      this.loginService
+        .loginEmailPassword(
+          this.formularioLogin.value.email,
+          this.formularioLogin.value.password
+        );
+      // en caso de q no se logee se mostrara un mesanje a los 2 segundos de fracasar la peticion
+      setTimeout(() => {
+        if (!this.loginService.logueado) {
+          this.datosCorrectos = false;
+          this.mostrarCargar = false;
+          this.alertsService.mensajeError('Error al iniciar Sesion', 'No se ah podido iniciar sesion. Porfavor revisa que los datos sean correctos')
+          this.textoError = 'No se ah podido iniciar sesion. Porfavor revisa que los datos sean correctos';
+        }
+      }, 2000);
+
+      // si no es q esta mal el formulario( posee una validacion el boton tambien para q no deje apretarse)
+    } else {
+      this.datosCorrectos = false;
+      this.mostrarCargar = false;
+      this.textoError = 'Porfavor revisa que los datos sean completados en su formato correcto';
+    }
   }
 
   ingresarConGoogle() {
@@ -68,9 +73,7 @@ export class LoginComponent implements OnInit {
     this.loginService
       .recuperarPassword(this.formularioLogin.value.email)
       .then(() => {
-        alert(
-          'Se ha enviado un correo a su cuenta. Porfavor siga los pasos indicados'
-        );
+        this.alertsService.mensajeSuccess('Recuperacion de contraseña', 'Se ha enviado un correo a su cuenta. Porfavor siga los pasos indicados');
       });
   }
 }

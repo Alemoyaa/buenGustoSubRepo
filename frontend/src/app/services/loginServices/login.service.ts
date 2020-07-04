@@ -82,17 +82,6 @@ export class LoginService {
       }
     );
 
-    //         if (res.user.emailVerified !== true) {
-    //           this.logout();
-    //           alert('Verifica tu mail');
-    //           window.location.reload();
-    //         }
-
-    //        .catch((err) => {
-    //         console.log(err);
-    //         alert('Datos incorrectos');
-    //         window.location.reload();
-    //        });
   }
 
   async checkEmailExists(emailACheckear) {
@@ -103,6 +92,7 @@ export class LoginService {
 
   register(email: string, password: string) {
     if (!this.checkEmailExists(email)) {
+      
       this.route.navigate(['login']);
     } else {
       this.afsAuth
@@ -120,19 +110,7 @@ export class LoginService {
     }
   }
 
-  /*async setearClienteConIsAuth() {
-    await this.isAuth().subscribe(
-      (data) => {
-        this.postCliente(data, false);
-      },
-      (error) => {
-        console.log('Error en postUser', error);
-      },
-      async () => {
-        //console.log('Cliente complete' + this.clientePost);
-      }
-    );
-  }*/
+
 
   async postCliente(data, comprobadorDeGoogle: boolean) {
     if (!data) {
@@ -149,7 +127,6 @@ export class LoginService {
 
     this.clientePost.usuario = new Usuario();
     this.clientePost.usuario = this.usuarioPost;
-    this.clientePost.domicilio = new Domicilio();
 
     if (comprobadorDeGoogle) {
       this.clientePost.nombre = data.additionalUserInfo.profile.given_name;
