@@ -38,6 +38,7 @@
           <th scope="row">Tipo de envío</th>
           <th scope="row">Fecha</th>
           <th scope="row">Estado</th>
+          <th scope="row">Articulos</th>
 
           <th scope="row">Aceptar/Rechazar Pedido</th>
         </tr>
@@ -59,6 +60,33 @@
           </td>
           <td>{{ pedido.fechaRealizacion | date }}</td>
           <td>{{ pedido.estadoPedido.nombreEstado }}</td>
+          <td>
+            <button
+              class="btn btn-primary dropdown-toggle"
+              type="button"
+              data-toggle="dropdown"
+              role="menu"
+            >
+              Articulos <span class="caret"></span>
+            </button>
+
+            <ul class="dropdown-menu">
+              <div *ngFor="let item of pedido.lista_detallePedido">
+                <li
+                  *ngIf="item.articuloInsumo; else articuloManufac"
+                  class="ml-2 mr-2"
+                >
+                  {{ item.articuloInsumo.denominacion }} | {{ item.cantidad }}
+                </li>
+                <ng-template #articuloManufac>
+                  <li class="ml-2 mr-2">
+                    {{ item.articuloManufacturado.denominacion }} |
+                    {{ item.cantidad }}
+                  </li>
+                </ng-template>
+              </div>
+            </ul>
+          </td>
           <td>
             <form [formGroup]="formularioEstado">
               <select
