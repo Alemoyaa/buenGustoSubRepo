@@ -57,26 +57,21 @@ export class LoginService {
   }
 
   loginGoogle() {
-
     this.afsAuth.signInWithPopup(new auth.GoogleAuthProvider()).then((data) => {
-      this.usuarioService.getByEmail(data.user.email).subscribe(
-        respuesta => {
-           if (respuesta === true) {
-        console.log('if');
+      this.usuarioService.getByEmail(data.user.email).subscribe((respuesta) => {
+        if (respuesta === true) {
+          console.log('if');
 
-        this.route.navigate(['user-profile/' + data.user.uid]);
+          this.route.navigate(['user-profile/' + data.user.uid]);
 
-       // this.postCliente(data, true);
-      } else {
-        console.log('else');
-        console.log('data', data.user.uid);
-        this.postCliente(data, true);
-        this.route.navigate(['user-profile/' + data.user.uid]);
-
-      }
+          // this.postCliente(data, true);
+        } else {
+          console.log('else');
+          console.log('data', data.user.uid);
+          this.postCliente(data, true);
+          this.route.navigate(['user-profile/' + data.user.uid]);
         }
-      );
-
+      });
     });
   }
 
@@ -90,7 +85,6 @@ export class LoginService {
         console.error(err);
       }
     );
-
   }
 
   async checkEmailExists(emailACheckear) {
@@ -102,16 +96,17 @@ export class LoginService {
 
   register(email: string, password: string) {
     if (!this.checkEmailExists(email)) {
-
       this.route.navigate(['login']);
     } else {
       this.afsAuth
         .createUserWithEmailAndPassword(email, password)
         .then((data) => {
           //console.log(data);
-          this.logout();
+          // this.logout();
+          this.ingresar();
           data.user.sendEmailVerification();
           this.postCliente(data, false);
+          this.route.navigate(['login']);
           //alert('Se envió un mail de verificación a tu dirección de correo');
         })
         .then(async () => {
@@ -119,8 +114,6 @@ export class LoginService {
         });
     }
   }
-
-
 
   async postCliente(data, comprobadorDeGoogle: boolean) {
     if (!data) {

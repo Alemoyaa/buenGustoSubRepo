@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { Usuario } from '../../../entidades/Usuario';
 import { LoginService } from './../../../services/loginServices/login.service';
 
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ClienteService } from 'src/app/services/serviciosCliente/clienteServices/cliente.service';
 import { AlertsService } from 'src/app/services/alertServices/alerts.service';
 import Swal from 'sweetalert2';
@@ -18,7 +18,7 @@ export class NavbarComponent implements OnInit {
     private route: Router,
     private clienteService: ClienteService,
     private alertService: AlertsService
-  ) { }
+  ) {}
 
   estaLogueado: boolean = true;
 
@@ -54,16 +54,18 @@ export class NavbarComponent implements OnInit {
   cerrarSesion() {
     Swal.fire({
       title: 'Realmente deseas cerrar sesion?',
-      text: 'Recuerda que solo podras realizar compras si posees una sesion abierta',
+      text:
+        'Recuerda que solo podras realizar compras si posees una sesion abierta',
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
       confirmButtonText: 'Si, deseo cerrar mi sesion!',
-      cancelButtonText: 'No, quiero seguir con mi sesion iniciada'
+      cancelButtonText: 'No, quiero seguir con mi sesion iniciada',
     }).then((result) => {
       if (result.value) {
         this.serviceLogin.logout();
+        localStorage.clear();
         this.canAccessPanel = false;
         Swal.fire(
           'Sesion Cerrada con exito',
@@ -72,7 +74,6 @@ export class NavbarComponent implements OnInit {
         );
       }
     });
-
   }
 
   setCarrito() {
@@ -83,6 +84,4 @@ export class NavbarComponent implements OnInit {
       localStorage.setItem('carritoDetallesPedido', JSON.stringify(articulos));
     }
   }
-
-
 }

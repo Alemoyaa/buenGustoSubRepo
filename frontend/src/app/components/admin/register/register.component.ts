@@ -18,7 +18,8 @@ export class RegisterComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private loginService: LoginService,
-    private alertsService: AlertsService) { }
+    private alertsService: AlertsService
+  ) {}
 
   ngOnInit(): void {
     this.crearFormularioRegister();
@@ -35,31 +36,32 @@ export class RegisterComponent implements OnInit {
   }
 
   registrarConMailPassword() {
-
     if (this.formularioRegister.valid) {
-
       this.datosCorrectos = true;
       this.mostrarCargar = true;
-      this.loginService
-        .register(
-          this.formularioRegister.value.email,
-          this.formularioRegister.value.password
-        );
-        // espera 2 segundos para mostrar el cargar y si el usuario esta en uso muestra una alerta
+      this.loginService.register(
+        this.formularioRegister.value.email,
+        this.formularioRegister.value.password
+      );
+      // espera 2 segundos para mostrar el cargar y si el usuario esta en uso muestra una alerta
       setTimeout(() => {
         if (!this.loginService.logueado) {
           this.datosCorrectos = false;
           this.mostrarCargar = false;
-          this.alertsService.mensajeError('Error al crear la cuenta', 'No se ah podido Crear la cuenta Debido a que este usuario ya esta en uso')
-          this.textoError = 'No se ah podido Crear la cuenta Debido a que este usuario ya esta en uso';
-
+          this.alertsService.mensajeError(
+            'Error al crear la cuenta',
+            'No se ah podido Crear la cuenta Debido a que este usuario ya esta en uso'
+          );
+          this.textoError =
+            'No se ah podido Crear la cuenta Debido a que este usuario ya esta en uso';
         }
       }, 2000);
       // else en caso de q no funcionen las validaciones en el boton
     } else {
       this.datosCorrectos = false;
       this.mostrarCargar = false;
-      this.textoError = 'Porfavor revisa que los datos sean completados en su formato correcto';
+      this.textoError =
+        'Porfavor revisa que los datos sean completados en su formato correcto';
     }
   }
 
