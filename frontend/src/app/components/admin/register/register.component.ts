@@ -36,8 +36,6 @@ export class RegisterComponent implements OnInit {
 
   registrarConMailPassword() {
 
-    //this.loginService.register(this.formularioRegister.value.email, this.formularioRegister.value.password);
-
     if (this.formularioRegister.valid) {
 
       this.datosCorrectos = true;
@@ -47,13 +45,14 @@ export class RegisterComponent implements OnInit {
           this.formularioRegister.value.email,
           this.formularioRegister.value.password
         );
+        // espera 2 segundos para mostrar el cargar y si el usuario esta en uso muestra una alerta
       setTimeout(() => {
         if (!this.loginService.logueado) {
           this.datosCorrectos = false;
           this.mostrarCargar = false;
           this.alertsService.mensajeError('Error al crear la cuenta', 'No se ah podido Crear la cuenta Debido a que este usuario ya esta en uso')
           this.textoError = 'No se ah podido Crear la cuenta Debido a que este usuario ya esta en uso';
-         
+
         }
       }, 2000);
       // else en caso de q no funcionen las validaciones en el boton
