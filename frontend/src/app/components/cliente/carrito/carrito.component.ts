@@ -1,3 +1,6 @@
+import { FacturaService } from './../../../services/serviciosCliente/facturaServices/factura.service';
+import { Domicilio } from './../../../entidades/Domicilio';
+import { Factura } from './../../../entidades/Factura';
 import { Observable } from 'rxjs';
 import { AlertsService } from './../../../services/alertServices/alerts.service';
 import { DetallePedido } from 'src/app/entidades/DetallePedido';
@@ -18,6 +21,7 @@ import { ArticuloInsumo } from 'src/app/entidades/ArticuloInsumo';
 })
 export class CarritoComponent implements OnInit {
   listaDetallePedido: DetallePedido[] = [];
+  factura: Factura = new Factura();
 
   aclaracion: String;
 
@@ -25,6 +29,7 @@ export class CarritoComponent implements OnInit {
     private loginService: LoginService,
     private clienteService: ClienteService,
     private pedidoService: PedidoServices,
+    private facturaService: FacturaService,
     private router: Router,
     private alert: AlertsService
   ) {
@@ -139,7 +144,7 @@ export class CarritoComponent implements OnInit {
         this.total += detallePedidoItem.subtotal;
       });
     } catch (error) {
-      console.log(error);
+      console.log('No existen articulos seleccionados');
     }
   }
 
@@ -160,17 +165,12 @@ export class CarritoComponent implements OnInit {
   async crearPedido() {
     this.getTotal();
     await this.loginService.isAuth().subscribe(async (data) => {
-      //console.log('_-----------> ', data);
       await this.clienteService.getByUidFirebase(data.uid).subscribe(
         (user) => {
           this.pedido = new Pedido();
-          if (!this.envio) {
-            this.pedido.tipo_Envio = false;
-          } else {
-            this.pedido.tipo_Envio = true;
-          }
-          //console.log('--- user', user);
-          //this.pedido.clientePedido = new Cliente();
+
+          this.pedido.tipo_Envio = this.envio;
+
           this.pedido.estadoPedido = new EstadoPedido();
           this.pedido.estadoPedido.id = 1;
 
@@ -180,15 +180,35 @@ export class CarritoComponent implements OnInit {
 
           this.pedido.lista_detallePedido = this.listaDetallePedido;
 
-          console.log(this.pedido);
+          this.factura.fecha = new Date();
+
+          if (this.envio) {
+            this.factura.formaPago = 'Efectivo';
+            this.factura.montoDescuento = (this.total / 100) * 10;
+            this.factura.nroFactura = 0;
+          }
+
+          this.factura.tipoFactura = 'C';
+          this.factura.totalFactura = this.total;
+
           this.pedidoService.post(this.pedido).subscribe((posted) => {
+            this.factura.pedidofacturado = posted;
             console.log('posted', posted);
-            this.alert.mensajeSuccess(
-              'Realizado',
-              'Su pedido fue realizado con exito'
+            console.log(this.factura);
+            this.facturaService.post(this.factura).subscribe(
+              (Factura) => {
+                console.log('Factura', Factura);
+                this.alert.mensajeSuccess(
+                  'Realizado',
+                  'Su pedido fue realizado con exito'
+                );
+                this.router.navigate(['user-profile/' + data.uid]);
+                localStorage.clear();
+              },
+              (err) => {
+                console.error(err);
+              }
             );
-            this.router.navigate(['user-profile/' + data.uid]);
-            localStorage.clear();
           });
         },
         (err) => {
@@ -196,14 +216,6 @@ export class CarritoComponent implements OnInit {
         }
       );
     });
-  }
-
-  setEnvio(envio) {
-    if (envio === '0') {
-      this.envio = false;
-    } else {
-      this.envio = true;
-    }
   }
 
   setPago(pago) {

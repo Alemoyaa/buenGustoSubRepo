@@ -86,9 +86,23 @@
                       disabled
                     />
                   </div>
+
+                  <label class="mt-2">
+                    <strong>Aclaracion</strong>
+                  </label>
+                  <input
+                    class="form-control"
+                    type="text"
+                    placeholder="Aclaracion"
+                    name="aclaracion"
+                    [(ngModel)]="detallePedidoItem.aclaracion"
+                  />
                 </div>
 
-                <ng-template #elseArticuloManufacturado>
+                <ng-template
+                  #elseArticuloManufacturado
+                  class="row justify-content-center align-items-center"
+                >
                   <div class="col-md-3">
                     <div class="product-image">
                       <img
@@ -129,6 +143,16 @@
                       [(ngModel)]="detallePedidoItem.cantidad"
                       value="detallePedidoItem.cantidad"
                       disabled
+                    />
+                    <label class="mt-2">
+                      <strong>Aclaracion</strong>
+                    </label>
+                    <input
+                      class="form-control"
+                      type="text"
+                      placeholder="Aclaracion"
+                      name="aclaracion"
+                      [(ngModel)]="detallePedidoItem.aclaracion"
                     />
                   </div>
                 </ng-template>
@@ -228,65 +252,13 @@
           </button>
         </div>
         <div class="modal-body">
-          <!-- <div class="container" *ngFor="let articulo of articulos">
-            <div class="row justify-content-around d-flex product-pay">
-              <div class="product-image">
-                <img
-                  width="100px"
-                  class="img-fluid d-block mx-auto image"
-                  src="{{ articulo.url_imagen }}"
-                />
-              </div>
-              <div class="product-info">
-                <h5 class="product-name">
-                  {{ articulo.denominacion }}
-                </h5>
-                <div class="product-specs">
-                  <div>
-                    <span>$&nbsp;</span
-                    ><spa n class="value">
-                      {{ articulo.precio_de_venta }}
-                    </span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <br /> -->
           <h3>Total: {{ total }}</h3>
-          <label class="mt-2">
-            <strong>Aclaracion</strong>
-          </label>
-          <input
-            class="form-control"
-            type="text"
-            placeholder="Aclaracion"
-            name=""
-            [(ngModel)]="aclaracion"
-          />
           <div class="form-check mt-2">
-            <input
-              class="form-check-input"
-              type="radio"
-              name="envio"
-              id="envio1"
-              value="envioOption2"
-              checked
-            />
-            <label class="form-check-label" for="exampleRadios1">
-              Delivery
-            </label>
-          </div>
-          <div class="form-check">
-            <input
-              class="form-check-input"
-              type="radio"
-              name="envio"
-              id="envio2"
-              value="envioOption2"
-            />
-            <label class="form-check-label" for="exampleRadios2">
-              Retiro en local <small>10% de descuento</small>
+            <input type="checkbox" [(ngModel)]="envio" />
+            <label class="form-check-label ml-3">Envio a domicilio</label>
+            <label class="form-check-label ml-3">
+              Si el pedido es retirado en el local, obtendra un
+              <strong>10% de descuento</strong> en su factura
             </label>
           </div>
           <hr />
@@ -300,11 +272,11 @@
               checked
               (click)="setPago('0')"
             />
-            <label class="form-check-label" for="exampleRadios1">
+            <label class="form-check-label ml-3" for="exampleRadios1">
               <p>Efectivo</p>
             </label>
           </div>
-          <div class="form-check">
+          <div class="form-check" *ngIf="!envio">
             <input
               class="form-check-input"
               type="radio"
@@ -313,25 +285,25 @@
               value="pagoOption2"
               (click)="setPago('1')"
             />
-            <label class="form-check-label" for="exampleRadios2">
+            <label class="form-check-label ml-3" for="exampleRadios2">
               <p>Otro medio de pago</p>
             </label>
           </div>
           <hr />
-          <div class="metodoDePago" *ngIf="otroMedioDePago">
+          <div class="metodoDePago" *ngIf="otroMedioDePago && !envio">
             <p><label for="cars">Elegir método de pago</label></p>
 
-            <select name="pago" id="medioPago">
-              <option value="debito">
+            <select [(ngModel)]="factura.formaPago" name="pago" id="medioPago">
+              <option value="Debito">
                 <p>Débito</p>
               </option>
-              <option value="credito">
+              <option value="Credito">
                 <p>Crédito</p>
               </option>
-              <option value="paypal">
-                <p>Paypal</p>
-              </option>
             </select>
+            <br />
+            <label>Ingrese su numero de tarjeta</label>
+            <input type="text" [(ngModel)]="factura.nroTarjeta" />
           </div>
         </div>
         <div class="modal-footer">
