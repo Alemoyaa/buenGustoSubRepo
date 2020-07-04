@@ -13,8 +13,8 @@ export class UsuarioServices extends CommonService<Usuario> {
   constructor(http: HttpClient) {
     super(http);
   }
-  getByEmail(email: string): Observable<Usuario> {
-    return this.http.get<Usuario>(this._url + 'email/' + email);
+  getByEmail(email: string): Observable<boolean> {
+    return this.http.get<boolean>(this._url + 'email/' + email);
   }
 
 

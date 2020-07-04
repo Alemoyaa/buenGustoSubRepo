@@ -57,17 +57,26 @@ export class LoginService {
   }
 
   loginGoogle() {
-    this.afsAuth.signInWithPopup(new auth.GoogleAuthProvider()).then((data) => {
-      console.log('data', data.user.uid);
-      this.route.navigate(['user-profile/' + data.user.uid]);
-      //console.log('dataCredential', data.credential);
 
-      /* if (!this.checkEmailExists(data.user.email)) {
-        this.postCliente(data, true);
-        this.ingresar();
+    this.afsAuth.signInWithPopup(new auth.GoogleAuthProvider()).then((data) => {
+      this.usuarioService.getByEmail(data.user.email).subscribe(
+        respuesta => {
+           if (respuesta === true) {
+        console.log('if');
+
         this.route.navigate(['user-profile/' + data.user.uid]);
-      } else {*/
-      //}
+
+       // this.postCliente(data, true);
+      } else {
+        console.log('else');
+        console.log('data', data.user.uid);
+        this.postCliente(data, true);
+        this.route.navigate(['user-profile/' + data.user.uid]);
+
+      }
+        }
+      );
+
     });
   }
 
@@ -86,13 +95,14 @@ export class LoginService {
 
   async checkEmailExists(emailACheckear) {
     await this.usuarioService.getByEmail(emailACheckear).subscribe((data) => {
+      console.log(data);
       return data;
     });
   }
 
   register(email: string, password: string) {
     if (!this.checkEmailExists(email)) {
-      
+
       this.route.navigate(['login']);
     } else {
       this.afsAuth
