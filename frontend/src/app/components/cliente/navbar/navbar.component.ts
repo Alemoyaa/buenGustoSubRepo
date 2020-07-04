@@ -5,7 +5,8 @@ import { LoginService } from './../../../services/loginServices/login.service';
 
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { ClienteService } from 'src/app/services/serviciosCliente/clienteServices/cliente.service';
-
+import { AlertsService } from 'src/app/services/alertServices/alerts.service';
+import Swal from 'sweetalert2';
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
@@ -15,10 +16,9 @@ export class NavbarComponent implements OnInit {
   constructor(
     private serviceLogin: LoginService,
     private route: Router,
-    private clienteService: ClienteService
-  ) {}
-
-  @Output() irDashboard = new EventEmitter();
+    private clienteService: ClienteService,
+    private alertService: AlertsService
+  ) { }
 
   estaLogueado: boolean = true;
 
@@ -52,18 +52,32 @@ export class NavbarComponent implements OnInit {
     });
   }
   cerrarSesion() {
-    if (confirm('Desea cerrar su sesión')) {
-      this.serviceLogin.salir();
-      this.serviceLogin.logout();
-    }
+    Swal.fire({
+      title: 'Realmente deseas cerrar sesion?',
+      text: 'Recuerda que solo podras realizar compras si posees una sesion abierta',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Si, deseo cerrar mi sesion!',
+      cancelButtonText: 'No, quiero seguir con mi sesion iniciada'
+    }).then((result) => {
+      if (result.value) {
+        this.serviceLogin.logout();
+        this.canAccessPanel = false;
+        Swal.fire(
+          'Sesion Cerrada con exito',
+          'Puedes volver a iniciar sesion cuando lo desees!',
+          'success'
+        );
+      }
+    });
+    // if (confirm('Desea cerrar su sesión')) {
+    //   this.serviceLogin.logout();
+    //   this.canAccessPanel = false;
+    // }
   }
-  // hideNavbar() {
-  //   if (this.route.url.includes('admin')) {
-  //     return true;
-  //   } else {
-  //     return false;
-  //   }
-  // }
+
   setCarrito() {
     if (localStorage.getItem('carritoDetallesPedido')) {
       console.log('Carrito detallePedido existe');
@@ -73,8 +87,5 @@ export class NavbarComponent implements OnInit {
     }
   }
 
-  // enviamos un true al componente padre app.component.ts para irnos a la dashboard de admin
-  irAdmin(event) {
-    this.irDashboard.emit(true);
-  }
+
 }
