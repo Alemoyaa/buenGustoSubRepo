@@ -92,6 +92,7 @@ export class LoginService {
 
   register(email: string, password: string) {
     if (!this.checkEmailExists(email)) {
+      
       this.route.navigate(['login']);
     } else {
       this.afsAuth
@@ -126,7 +127,6 @@ export class LoginService {
 
     this.clientePost.usuario = new Usuario();
     this.clientePost.usuario = this.usuarioPost;
-    this.clientePost.domicilio = new Domicilio();
 
     if (comprobadorDeGoogle) {
       this.clientePost.nombre = data.additionalUserInfo.profile.given_name;

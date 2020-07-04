@@ -72,10 +72,7 @@ export class NavbarComponent implements OnInit {
         );
       }
     });
-    // if (confirm('Desea cerrar su sesión')) {
-    //   this.serviceLogin.logout();
-    //   this.canAccessPanel = false;
-    // }
+
   }
 
   setCarrito() {
