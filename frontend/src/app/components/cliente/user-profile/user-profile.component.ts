@@ -46,7 +46,9 @@ export class UserProfileComponent implements OnInit {
     private serviceLogin: LoginService,
     private serviceLocalidad: LocalidadService,
     private serviceAlert: AlertsService
-  ) {
+  ) {}
+
+  ngOnInit(): void {
     this.rutaActiva.params.subscribe(
       (data) => {
         if (data.id !== null) {
@@ -55,7 +57,7 @@ export class UserProfileComponent implements OnInit {
         }
       },
       (err) => {
-        serviceAlert.mensajeWarning(
+        this.serviceAlert.mensajeWarning(
           'Usuario no encontrado',
           'El usuario no fue encontrado. Por favor vuelva a intentarlo mas tarde'
         );
@@ -63,9 +65,7 @@ export class UserProfileComponent implements OnInit {
       }
     );
     this.datosUser();
-  }
-
-  ngOnInit(): void { }
+   }
 
   datosUser() {
     return this.serviceLogin.datosGoogle(this.cliente.usuario); //me traigo los datos de google desde el service
@@ -73,7 +73,9 @@ export class UserProfileComponent implements OnInit {
 
   async getLocalidades() {
     await this.serviceLocalidad.getAll().subscribe(
+  
       (res) => {
+        console.log('localidad ', res);
         this.listaLocalidades = res;
       },
       (err) => {
@@ -134,21 +136,6 @@ export class UserProfileComponent implements OnInit {
       }
 
     });
-    // let localidadSeleccionada = this.listaLocalidades.find((localidad) => {
-
-    //   localidad.id === id;
-
-    //   console.log(localidad);
-    // }
-    // );
-    // console.log(localidadSeleccionada);
-    // this.cliente.domicilio.localidad = {
-    //   id: localidadSeleccionada.id,
-    //   nombre: localidadSeleccionada.nombre,
-    //   provincia: localidadSeleccionada.provincia
-
-    // }
-
 
   }
 

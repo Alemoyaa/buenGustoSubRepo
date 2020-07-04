@@ -152,7 +152,7 @@
                               <label for="country">
                                 <strong>Localidad</strong>
                               </label>
-                              <select
+                              <select *ngIf="listaLocalidades.length > 0"
                                 (change)="mostrarDatos($event.target.value)"
                                 name="localidad"
                                 class="form-control"
