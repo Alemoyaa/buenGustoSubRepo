@@ -1,7 +1,7 @@
 import { AlertsService } from 'src/app/services/alertServices/alerts.service';
 import { CategoriaService } from './../../../../../../services/serviciosCliente/categoriaServices/categoria.service';
 import { Categoria } from './../../../../../../entidades/Categoria';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 
 @Component({
@@ -32,9 +32,10 @@ export class CategoriaPlatosComponent implements OnInit {
     private serviceCate: CategoriaService
   ) {}
 
-  ngOnInit(): void {
-    this.getAllCategoria();
-    this.crearFormulario();
+  async ngOnInit() {
+    await this.crearFormulario();
+    await this.getAllCategoria();
+    this.reRender();
   }
 
   get filtrar(): Categoria[] {
@@ -44,8 +45,13 @@ export class CategoriaPlatosComponent implements OnInit {
     });
   }
 
-  getAllCategoria() {
-    this.serviceCate.getAll().subscribe(
+  async reRender() {
+    await this.crearFormulario();
+    await this.getAllCategoria();
+  }
+
+  async getAllCategoria() {
+    await this.serviceCate.getAll().subscribe(
       (res) => {
         this.listaCategorias = res;
       },
@@ -53,6 +59,10 @@ export class CategoriaPlatosComponent implements OnInit {
         console.log(err);
       }
     );
+  }
+
+  simulateClick() {
+    document.getElementById('modalAgregar').click();
   }
 
   crearFormulario() {

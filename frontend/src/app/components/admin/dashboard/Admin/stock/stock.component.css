@@ -1,26 +1,25 @@
-
 /*//////////////////////////////////////////////////////////////////
 [ FONT ]*/
 
 @font-face {
   font-family: Poppins-Regular;
-src: url('../../../../../../assets/fonts/poppins/Poppins-Regular.ttf');
+  src: url("../../../../../../assets/fonts/poppins/Poppins-Regular.ttf");
   /* src: url('../fonts/poppins/Poppins-Regular.ttf');  */
 }
 
 @font-face {
   font-family: Poppins-Medium;
-  src: url('../../../../../../assets/fonts/poppins/Poppins-Medium.ttf');
+  src: url("../../../../../../assets/fonts/poppins/Poppins-Medium.ttf");
 }
 
 @font-face {
   font-family: Poppins-Bold;
-  src: url('../../../../../../assets/fonts/poppins/Poppins-Bold.ttf');
+  src: url("../../../../../../assets/fonts/poppins/Poppins-Bold.ttf");
 }
 
 @font-face {
   font-family: Poppins-SemiBold;
-  src: url('../../../../../../assets/fonts/poppins/Poppins-SemiBold.ttf');
+  src: url("../../../../../../assets/fonts/poppins/Poppins-SemiBold.ttf");
 }
 
 #body {
@@ -28,14 +27,6 @@ src: url('../../../../../../assets/fonts/poppins/Poppins-Regular.ttf');
     "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
     "Segoe UI Symbol";
 }
-
-@media (max-width: 1300px) {
-  #body {
-    padding: 20px;
-  }
-}
-
-
 
 /*---------------------------------------------*/
 /* input {
@@ -100,7 +91,7 @@ iframe {
 
 .contact100-form-title {
   background-image: url("../../../../../../assets/59880.jpg");
-  }
+}
 
 .alert-danger {
   color: #721c24;
@@ -112,14 +103,6 @@ iframe {
 .alert {
   background: #e7f8ff;
   margin-bottom: 5px;
-}
-
-
-@media (max-width: 1200px) {
-  #body  {
-    width: 800px;
-    padding: 20px;
-  }
 }
 
 h1,
@@ -134,4 +117,6 @@ p {
     "Segoe UI Symbol";
 }
 
-.buscador{float: right;}
+.buscador {
+  float: right;
+}
