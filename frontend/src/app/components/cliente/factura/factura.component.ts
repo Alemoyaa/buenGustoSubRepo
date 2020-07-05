@@ -30,14 +30,12 @@ export class FacturaComponent implements OnInit {
       (data) => {
         data.forEach((factura) => {
           // let uid = ;
-          console.log(factura);
-          console.log(this.cliente.usuario.uid_firebase);
-          console.log( factura.pedidofacturado.clientePedido.usuario.uid_firebase);
+
           if (
             this.cliente.usuario.uid_firebase === factura.pedidofacturado.clientePedido.usuario.uid_firebase
           ) {
             this.facturaCliente.push(factura);
-            console.log(this.facturaCliente);
+       
           }
         });
         // this.facturaCliente = data

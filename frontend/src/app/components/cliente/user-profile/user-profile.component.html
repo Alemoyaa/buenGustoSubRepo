@@ -1,4 +1,4 @@
-<div class="container mt-3" id="body">
+<div class="container mt-3" id="body" *ngIf="cliente.nombre">
   <div id="wrapper">
     <div class="d-flex flex-column" id="content-wrapper">
       <div id="content">
@@ -9,37 +9,19 @@
               <div class="card mb-3">
                 <div class="mb-3 text-center">
                   <div class="col mt-3">
-                    <a
-                      class="btn btn-primary text-white"
-                      type="button"
-                      data-toggle="modal"
-                      data-target=".bd-pedido-modal-xl"
-                      (click)="pasarDatos(cliente)"
-                    >
-                      Historial de pedidos</a
-                    >
+                    <a class="btn btn-primary text-white" type="button" data-toggle="modal"
+                      data-target=".bd-pedido-modal-xl" (click)="pasarDatos(cliente)">
+                      Historial de pedidos</a>
                   </div>
                   <div class="col mt-3">
-                    <a
-                      class="btn btn-primary text-white"
-                      type="button"
-                      data-toggle="modal"
-                      data-target=".bd-factura-modal-xl"
-                      (click)="pasarDatos(cliente)"
-                    >
-                      Historial de facturas</a
-                    >
+                    <a class="btn btn-primary text-white" type="button" data-toggle="modal"
+                      data-target=".bd-factura-modal-xl" (click)="pasarDatos(cliente)">
+                      Historial de facturas</a>
                   </div>
                   <div class="col mt-3">
-                    <a
-                      class="btn btn-primary text-white"
-                      type="button"
-                      data-toggle="modal"
-                      data-target=".modal-formulario-xl"
-                      (click)="pasarDatos(cliente)"
-                    >
-                      Modificar Datos Personales</a
-                    >
+                    <a class="btn btn-primary text-white" type="button" data-toggle="modal"
+                      data-target=".modal-formulario-xl" (click)="pasarDatos(cliente)">
+                      Datos Personales</a>
                   </div>
                 </div>
               </div>
@@ -49,168 +31,113 @@
                 <div class="col">
                   <div class="card shadow mb-3">
                     <div class="card-header py-3">
-                      <p class="text-primary m-0 font-weight-bold">
+                      <p class="text-primary m-0 font-weight-bold" style="font-size: 20px;">
                         Datos del Usuario
                       </p>
                     </div>
                     <div class="card-body">
-                     
-                        <div class="form-row">
-                          <div class="col">
-                            <div class="form-group">
-                              <label for="first_name"
-                                ><strong>Nombre</strong></label
-                              >
-                              <input
-                                class="form-control"
-                                type="text"
-                                placeholder="Ingrese su nombre"
-                                name="first_name"
-                                [(ngModel)]="cliente.nombre"
-                              />
-                            </div>
-                          </div>
-                          <div class="col">
-                            <div class="form-group">
-                              <label for="last_name"
-                                ><strong>Apellido</strong></label
-                              >
-                              <input
-                                class="form-control"
-                                type="text"
-                                placeholder="Ingrese su apellido"
-                                name="last_name"
-                                [(ngModel)]="cliente.apellido"
-                              />
+
+                      <div class="row text-center" style="font-size: 15px;">
+                        <div class="col-6">
+
+                          <label for="first_name"><strong>Nombre</strong></label>
+                          <p>{{cliente.nombre}}</p>
+
+                        </div>
+                        <div class="col-6">
+                          <label for="last_name"><strong>Apellido</strong></label>
+                          <p>{{cliente.apellido}}</p>
+
+                        </div>
+
+                        <div class="col-6 mt-4" *ngIf="cliente.telefono">
+
+                          <label for="telefono"><strong>Telefono</strong></label>
+                          <p>{{cliente.telefono}}</p>
+
+                        </div>
+                        <div class="col-6 mt-4">
+
+                          <label for="email"><strong>Email</strong></label>
+                          <p>{{cliente.usuario.email}}</p>
+
+                        </div>
+
+
+                      </div>
+
+                      <div class="row text-center" *ngIf="cliente.domicilio.calle">
+                        <hr>
+                        <div class="col-6 mt-4">
+
+                          <label for="calle"><strong>Calle</strong></label>
+                          <p>{{cliente.domicilio.calle}}</p>
+
+                        </div>
+
+                        <div class="col-6 mt-4">
+
+                          <label for="aclaracion"><strong>Aclaracion</strong></label>
+                          <p>{{cliente.domicilio.aclaracion}}</p>
+
+                        </div>
+
+                        <div class="col-4 mt-4">
+
+                          <label for="city"><strong>Numeracion</strong></label>
+                          <p>{{cliente.domicilio.numero}}</p>
+
+                        </div>
+
+                        <div class="col-4 mt-4">
+
+                          <label for="piso"><strong>Piso</strong></label>
+                          <p>{{cliente.domicilio.piso}}</p>
+
+                        </div>
+                        <div class="col-4 mt-4">
+                          <label for="departamento">
+                            <strong>Numero Departamento</strong>
+                          </label>
+                          <p>{{cliente.domicilio.nroDepartamento}}</p>
+
+                        </div>
+
+                        <div class="col-6 mt-4">
+
+                          <label for="country">
+                            <strong>Localidad</strong>
+                          </label>
+                          <p>{{cliente.domicilio.localidad.nombre}}</p>
+
+                        </div>
+                        <div class="col-6 mt-4">
+
+                          <label for="country">
+                            <strong>Localidad</strong>
+                          </label>
+                          <p>{{cliente.domicilio.localidad.provincia.nombre}}</p>
+
+                        </div>
+                      </div>
+
+                      <div class="row text-center">
+                        <div class="col-12">
+                          <hr>
+                          <div class="alert alert-danger" role="alert">
+                            <strong>Usted no posee un domicilio asociado a su cuenta!!</strong>
+                            <p>Recuerde que solo podra acceder a la opcion de delivery solo si posee un domicilio en su
+                              perfil</p>
+                            <div class="">
+                              <a class="btn btn-primary text-white" type="button" data-toggle="modal"
+                                data-target=".modal-formulario-xl" (click)="pasarDatos(cliente)">
+                                Cargar nuevo domicilio</a>
                             </div>
                           </div>
                         </div>
-                        <div class="form-row">
-                          <div class="col">
-                            <div class="form-group">
-                              <label for="telefono"
-                                ><strong>Telefono</strong></label
-                              >
-                              <input
-                                class="form-control"
-                                type="number"
-                                placeholder="Ingrese su telefono"
-                                name="telefono"
-                                [(ngModel)]="cliente.telefono"
-                              />
-                            </div>
-                          </div>
-                          <div class="col">
-                            <div class="form-group">
-                              <label for="email"><strong>Email</strong></label>
-                              <input
-                                class="form-control"
-                                type="email"
-                                placeholder="Ingrese su Email"
-                                name="email"
-                                [(ngModel)]="cliente.usuario.email"
-                              />
-                            </div>
-                          </div>
-                        </div>
-                        <!-- <div class="form-row">
-                          <div class="col">
-                            <div class="form-group">
-                              <label for="calle"><strong>Calle</strong></label>
-                              <input
-                                class="form-control"
-                                type="text"
-                                placeholder="Ingrese su calle"
-                                name="calle"
-                                [(ngModel)]="cliente.domicilio.calle"
-                              />
-                            </div>
-                            <div class="form-group">
-                              <label for="aclaracion"
-                                ><strong>Aclaracion</strong></label
-                              >
-                              <input
-                                class="form-control"
-                                type="text"
-                                placeholder="Ingrese su aclaracion"
-                                name="text"
-                                [(ngModel)]="cliente.domicilio.aclaracion"
-                              />
-                            </div>
-                          </div>
-                        </div> -->
+                      </div>
 
-                        <!-- <div class="form-row">
-                          <div class="col">
-                            <div class="form-group">
-                              <label for="city"
-                                ><strong>Numeracion</strong></label
-                              >
-                              <input
-                                class="form-control"
-                                type="number"
-                                placeholder="Ingrese su numeracion"
-                                name="city"
-                                [(ngModel)]="cliente.domicilio.numero"
-                              />
-                            </div>
-                          </div>
-                          <div class="col">
-                            <div class="form-group">
-                              <label for="country">
-                                <strong>Localidad</strong>
-                              </label>
-                              <select 
-                                (change)="mostrarDatos($event.target.value)"
-                                name="localidad"
-                                class="form-control"
-                                [(ngModel)]="cliente.domicilio.localidad.id"
-                              >
-                                <option
-                                  *ngFor="let localidad of listaLocalidades"
-                                  [value]="localidad.id"
-                                  >{{ localidad.nombre }}</option
-                                >
-                              </select>
-                            </div>
-                          </div>
-                        </div> -->
 
-                        <!-- <div class="form-row">
-                          <div class="col">
-                            <div class="form-group">
-                              <label for="piso"><strong>Piso</strong></label>
-                              <input
-                                class="form-control"
-                                type="number"
-                                placeholder="Ingrese el piso"
-                                name="piso"
-                                [(ngModel)]="cliente.domicilio.piso"
-                              />
-                            </div>
-                          </div>
-                          <div class="col">
-                            <div class="form-group">
-                              <label for="departamento">
-                                <strong>Numero Departamento</strong>
-                              </label>
-                              <input
-                                class="form-control"
-                                type="number"
-                                placeholder="Ingrese el departamento"
-                                name="departamento"
-                                [(ngModel)]="cliente.domicilio.nroDepartamento"
-                              />
-                            </div>
-                          </div>
-                        </div> -->
-
-                        <div class="form-group">
-                          <button class="btn btn-primary btn-sm" type="submit">
-                            Guardar configuracion
-                          </button>
-                        </div>
-                      
                     </div>
                   </div>
                 </div>
@@ -226,6 +153,6 @@
 <app-modal-historial-pedidos [clienteUser]="cliente"></app-modal-historial-pedidos>
 
 
-<app-modal-historial-facturas [clienteUser]="cliente" ></app-modal-historial-facturas>
+<app-modal-historial-facturas [clienteUser]="cliente"></app-modal-historial-facturas>
 
-<app-modal-formulario [clienteUser]="cliente" ></app-modal-formulario>
+<app-modal-formulario [clienteUser]="cliente"></app-modal-formulario>

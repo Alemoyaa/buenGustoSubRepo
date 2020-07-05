@@ -7,6 +7,7 @@ import { AlertsService } from 'src/app/services/alertServices/alerts.service';
 import { ClienteService } from 'src/app/services/serviciosCliente/clienteServices/cliente.service';
 import { Localidad } from 'src/app/entidades/Localidad';
 import { NgForm } from '@angular/forms';
+import { Domicilio } from '../../../../../entidades/Domicilio';
 
 @Component({
   selector: 'app-modal-formulario',
@@ -16,8 +17,14 @@ import { NgForm } from '@angular/forms';
 export class ModalFormularioComponent implements OnInit {
   listaLocalidades: Localidad[] = [];
   cliente: Cliente;
+  domicilio = new Domicilio();
   @Input() set clienteUser(cliente) {
-    this.cliente = cliente;
+    if(!cliente.Domicilio){
+
+      this.cliente = cliente;
+      this.cliente.domicilio = this.domicilio;
+    }
+    
   };
   constructor(    
     private serviceCliente: ClienteService,
@@ -27,21 +34,9 @@ export class ModalFormularioComponent implements OnInit {
     private serviceAlert: AlertsService) { }
 
   ngOnInit(): void {
-    this.rutaActiva.params.subscribe(
-      (data) => {
-        if (data.id !== null) {
-          
-          this.getLocalidades();
-        }
-      },
-      (err) => {
-        this.serviceAlert.mensajeWarning(
-          'Usuario no encontrado',
-          'El usuario no fue encontrado. Por favor vuelva a intentarlo mas tarde'
-        );
-        console.error(err);
-      }
-    );
+   
+this.getLocalidades();
+     
   }
 
   updateUsuario(formUser: NgForm) {

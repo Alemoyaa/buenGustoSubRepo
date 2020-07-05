@@ -47,7 +47,7 @@ export class UserProfileComponent implements OnInit {
     private serviceLocalidad: LocalidadService,
     private serviceAlert: AlertsService
   ) {}
-
+ 
   ngOnInit(): void {
     this.rutaActiva.params.subscribe(
       (data) => {
