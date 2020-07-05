@@ -3,7 +3,7 @@ import { FacturaService } from './../../../services/serviciosCliente/facturaServ
 import { Factura } from './../../../entidades/Factura';
 import { Component, OnInit, Input } from '@angular/core';
 
-@Component({
+@Component({ 
   selector: 'app-factura',
   templateUrl: './factura.component.html',
   styleUrls: ['./factura.component.css'],

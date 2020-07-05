@@ -7,7 +7,7 @@
           <div class="row mb-3">
             <div class="col-lg-4">
               <div class="card mb-3">
-                <div class="mb-3">
+                <div class="mb-3 text-center">
                   <div class="col mt-3">
                     <a
                       class="btn btn-primary text-white"
@@ -30,6 +30,17 @@
                       Historial de facturas</a
                     >
                   </div>
+                  <div class="col mt-3">
+                    <a
+                      class="btn btn-primary text-white"
+                      type="button"
+                      data-toggle="modal"
+                      data-target=".modal-formulario-xl"
+                      (click)="pasarDatos(cliente)"
+                    >
+                      Modificar Datos Personales</a
+                    >
+                  </div>
                 </div>
               </div>
             </div>
@@ -43,10 +54,7 @@
                       </p>
                     </div>
                     <div class="card-body">
-                      <form
-                        #formUser="ngForm"
-                        (ngSubmit)="updateUsuario(formUser)"
-                      >
+                     
                         <div class="form-row">
                           <div class="col">
                             <div class="form-group">
@@ -105,7 +113,7 @@
                             </div>
                           </div>
                         </div>
-                        <div class="form-row">
+                        <!-- <div class="form-row">
                           <div class="col">
                             <div class="form-group">
                               <label for="calle"><strong>Calle</strong></label>
@@ -130,9 +138,9 @@
                               />
                             </div>
                           </div>
-                        </div>
+                        </div> -->
 
-                        <div class="form-row">
+                        <!-- <div class="form-row">
                           <div class="col">
                             <div class="form-group">
                               <label for="city"
@@ -166,9 +174,9 @@
                               </select>
                             </div>
                           </div>
-                        </div>
+                        </div> -->
 
-                        <div class="form-row">
+                        <!-- <div class="form-row">
                           <div class="col">
                             <div class="form-group">
                               <label for="piso"><strong>Piso</strong></label>
@@ -195,14 +203,14 @@
                               />
                             </div>
                           </div>
-                        </div>
+                        </div> -->
 
                         <div class="form-group">
                           <button class="btn btn-primary btn-sm" type="submit">
                             Guardar configuracion
                           </button>
                         </div>
-                      </form>
+                      
                     </div>
                   </div>
                 </div>
@@ -215,80 +223,9 @@
   </div>
 </div>
 
-<div
-  class="modal fade bd-pedido-modal-xl"
-  tabindex="-1"
-  role="dialog"
-  aria-labelledby="myExtraLargeModalLabel"
-  aria-hidden="true"
->
-  <div class="modal-dialog modal-xl modal-dialog-scrollable" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalCenterTitle">
-          Historial de pedidos
-        </h5>
-        <button
-          type="button"
-          class="close"
-          data-dismiss="modal"
-          aria-label="Close"
-        >
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <app-pedidos [clienteUser]="cliente"></app-pedidos>
-        <div
-          data-spy="scroll"
-          data-target="#navbar-example2"
-          data-offset="0"
-        ></div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">
-          Cerrar
-        </button>
-      </div>
-    </div>
-  </div>
-</div>
+<app-modal-historial-pedidos [clienteUser]="cliente"></app-modal-historial-pedidos>
 
-<div
-  class="modal fade bd-factura-modal-xl"
-  tabindex="-1"
-  role="dialog"
-  aria-labelledby="myExtraLargeModalLabel"
-  aria-hidden="true"
->
-  <div class="modal-dialog modal-xl modal-dialog-scrollable" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalCenterTitle">
-          Historial de facturas
-        </h5>
-        <button
-          type="button"
-          class="close"
-          data-dismiss="modal"
-          aria-label="Close"
-        >
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <app-factura [clienteUser]="cliente"></app-factura>
-        <div
-          data-spy="scroll"
-          data-target="#navbar-example2"
-          data-offset="0"
-        ></div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">
-          Cerrar
-        </button>
-      </div>
-    </div>
-  </div>
-</div>
+
+<app-modal-historial-facturas [clienteUser]="cliente" ></app-modal-historial-facturas>
+
+<app-modal-formulario [clienteUser]="cliente" ></app-modal-formulario>
