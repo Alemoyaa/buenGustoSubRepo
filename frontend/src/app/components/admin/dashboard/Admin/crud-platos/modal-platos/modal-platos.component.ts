@@ -1,4 +1,3 @@
-import { RubroGeneralService } from './../../../../../../services/serviciosCliente/rubro-general.service';
 import { UnidadMedida } from 'src/app/entidades/UnidadMedida';
 
 import { Component, OnInit } from '@angular/core';
@@ -11,6 +10,7 @@ import { ArticuloInsumo } from 'src/app/entidades/ArticuloInsumo';
 import { RubroGeneral } from '../../../../../../entidades/RubroGeneral';
 import { ArticuloInsumoService } from '../../../../../../services/serviciosCliente/articuloInsumoServices/articuloInsumo.service';
 import { UnidadMedidaService } from 'src/app/services/serviciosCliente/unidadMedidaServices/unidad_medida.services';
+import { RubroGeneralService } from 'src/app/services/serviciosCliente/rubroGeneralServices/rubro-general.service';
 
 @Component({
   selector: 'app-modal-platos',

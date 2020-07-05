@@ -54,6 +54,9 @@ import { GestorOrdenesCocineroComponent } from './components/admin/dashboard/Coc
 import { ModalFacturaComponent } from './components/admin/dashboard/Cajero/facturacion-cajero/modal-factura/modal-factura.component';
 import { CatalogoDetalleInsumoComponent } from './components/cliente/catalogo-detalle-insumo/catalogo-detalle-insumo.component';
 import { ModalPlatosComponent } from './components/admin/dashboard/Admin/crud-platos/modal-platos/modal-platos.component';
+import { ModalHistorialFacturasComponent } from './components/cliente/user-profile/modales/modal-historial-facturas/modal-historial-facturas.component';
+import { ModalHistorialPedidosComponent } from './components/cliente/user-profile/modales/modal-historial-pedidos/modal-historial-pedidos.component';
+import { ModalFormularioComponent } from './components/cliente/user-profile/modales/modal-formulario/modal-formulario.component';
 
 @NgModule({
   declarations: [
@@ -90,6 +93,9 @@ import { ModalPlatosComponent } from './components/admin/dashboard/Admin/crud-pl
     ModalFacturaComponent,
     CatalogoDetalleInsumoComponent,
     ModalPlatosComponent,
+    ModalHistorialFacturasComponent,
+    ModalHistorialPedidosComponent,
+    ModalFormularioComponent,
   ],
   imports: [
     BrowserModule,
