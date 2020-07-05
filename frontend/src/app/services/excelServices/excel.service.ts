@@ -11,6 +11,7 @@ const EXCEL_EXTENSION = '.xlsx';
 })
 export class ExcelService {
   constructor() {}
+
   public exportAsExcelFile(json: any[], excelFileName: string): void {
     const worksheet: XLSX.WorkSheet = XLSX.utils.json_to_sheet(json);
     const workbook: XLSX.WorkBook = {
@@ -23,6 +24,7 @@ export class ExcelService {
     });
     this.saveAsExcelFile(excelBuffer, excelFileName);
   }
+
   private saveAsExcelFile(buffer: any, fileName: string): void {
     const data: Blob = new Blob([buffer], { type: EXCEL_TYPE });
     FileSaver.saveAs(

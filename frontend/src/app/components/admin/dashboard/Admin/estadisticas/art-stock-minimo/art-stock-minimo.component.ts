@@ -1,3 +1,4 @@
+import { ExcelService } from './../../../../../../services/excelServices/excel.service';
 import { ArticuloInsumo } from './../../../../../../entidades/ArticuloInsumo';
 import { ArticuloInsumoService } from './../../../../../../services/serviciosCliente/articuloInsumoServices/articuloInsumo.service';
 import { Component, OnInit } from '@angular/core';
@@ -13,7 +14,10 @@ export class ArtStockMinimoComponent implements OnInit {
 
   mostrar: boolean = false;
 
-  constructor(private serviceArtInsumo: ArticuloInsumoService) {
+  constructor(
+    private serviceArtInsumo: ArticuloInsumoService,
+    private excelService: ExcelService
+  ) {
     this.getArticulosBajoStock();
   }
 
@@ -59,5 +63,12 @@ export class ArtStockMinimoComponent implements OnInit {
     }).then((result) => {
       console.log(result);
     });
+  }
+
+  exportAsXLSX(): void {
+    this.excelService.exportAsExcelFile(
+      this.articulosBajoStock,
+      'Articulos con stock bajo'
+    );
   }
 }

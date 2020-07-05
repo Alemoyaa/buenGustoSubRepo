@@ -14,6 +14,10 @@
     </tr>
   </tbody>
 </table>
+<button class="btn btn-success" (click)="exportAsXLSX()" *ngIf="mostrar">
+  <i class="fa fa-file-excel-o"></i>
+  <p class="lead">Exportar a excel</p>
+</button>
 
 <ng-template #elseTemplate>
   <h6 class="lead">No existen articulos con stock en minimo</h6>
