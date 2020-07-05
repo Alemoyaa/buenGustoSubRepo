@@ -20,6 +20,9 @@ export class EstadisticasComponent implements OnInit {
 
   pedidosRecuperadosDesdeHasta: Pedido[] = [];
 
+  elementosSinRepetir: Array<string> = [];
+  cantidadElementos: Array<number> = [];
+
   constructor(
     private servicePedido: PedidoServices,
     private excelService: ExcelService
@@ -55,50 +58,83 @@ export class EstadisticasComponent implements OnInit {
   }
 
   getCantidades(listaDePedidos: Pedido[]) {
-    let elementosSinRepetir: Array<string> = [];
-    let cantidadElementos: Array<number> = [];
+    // let elementosSinRepetir: Array<string> = [];
+    // let cantidadElementos: Array<number> = [];
 
     listaDePedidos.forEach((pedidoItem) => {
       pedidoItem.lista_detallePedido.forEach((articuloDetallePedido) => {
-        if (
-          !elementosSinRepetir.includes(
-            articuloDetallePedido.articuloManufacturado.denominacion
-          )
-        ) {
-          elementosSinRepetir.push(
-            articuloDetallePedido.articuloManufacturado.denominacion as string
-          );
+        if (articuloDetallePedido.articuloInsumo) {
+          if (
+            !this.elementosSinRepetir.includes(
+              articuloDetallePedido.articuloInsumo.denominacion
+            )
+          ) {
+            this.elementosSinRepetir.push(
+              articuloDetallePedido.articuloInsumo.denominacion as string
+            );
+          }
+        } else {
+          if (
+            !this.elementosSinRepetir.includes(
+              articuloDetallePedido.articuloManufacturado.denominacion
+            )
+          ) {
+            this.elementosSinRepetir.push(
+              articuloDetallePedido.articuloManufacturado.denominacion as string
+            );
+          }
         }
       });
     });
 
-    elementosSinRepetir.forEach((elemento) => {
+    this.elementosSinRepetir.forEach((elemento) => {
       let cantidad = 0;
 
       listaDePedidos.forEach((pedido) => {
         pedido.lista_detallePedido.forEach((ItemDetallePedido) => {
-          if (
-            (ItemDetallePedido.articuloManufacturado.denominacion as string) ===
-            elemento
-          ) {
-            cantidad += ItemDetallePedido.cantidad;
+          if (ItemDetallePedido.articuloInsumo) {
+            if (
+              (ItemDetallePedido.articuloInsumo.denominacion as string) ===
+              elemento
+            ) {
+              cantidad += ItemDetallePedido.cantidad;
+            }
+          } else {
+            if (
+              (ItemDetallePedido.articuloManufacturado
+                .denominacion as string) === elemento
+            ) {
+              cantidad += ItemDetallePedido.cantidad;
+            }
           }
         });
       });
 
       this.mostrarExcel = true;
-      cantidadElementos.push(cantidad);
+      this.cantidadElementos.push(cantidad);
       cantidad = 0;
     });
 
-    this.newChart('canvaFecha', elementosSinRepetir, cantidadElementos);
+    this.newChart(
+      'canvaFecha',
+      this.elementosSinRepetir,
+      this.cantidadElementos
+    );
   }
 
   exportAsXLSX(): void {
-    this.excelService.exportAsExcelFile(
-      this.pedidosRecuperadosDesdeHasta,
-      'Ranking comidas'
-    );
+    let array = [];
+
+    for (let index = 0; index < this.elementosSinRepetir.length; index++) {
+      let objAExcel = {
+        nombreArticulo: this.elementosSinRepetir[index],
+        cantidadVendida: this.cantidadElementos[index],
+      };
+
+      array.push(objAExcel);
+    }
+
+    this.excelService.exportAsExcelFile(array, 'Ranking comidas');
   }
 
   newChart(nombre, labels, data) {

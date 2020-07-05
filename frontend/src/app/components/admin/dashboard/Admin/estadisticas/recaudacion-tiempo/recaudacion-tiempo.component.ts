@@ -20,6 +20,7 @@ export class RecaudacionTiempoComponent implements OnInit {
   mostrar: boolean = true;
 
   listaDePedidos: Pedido[];
+  totalParaExcel: Pedido = new Pedido();
 
   constructor(
     private servicePedido: PedidoServices,
@@ -62,15 +63,23 @@ export class RecaudacionTiempoComponent implements OnInit {
 
     listaDePedidos.forEach((pedidoItem) => {
       pedidoItem.lista_detallePedido.forEach((detallePedidoItem) => {
-        precioDetallePedido +=
-          detallePedidoItem.articuloManufacturado.precio_de_venta *
-          detallePedidoItem.cantidad;
+        if (detallePedidoItem.articuloInsumo) {
+          precioDetallePedido +=
+            detallePedidoItem.articuloInsumo.precio_de_venta *
+            detallePedidoItem.cantidad;
+        } else {
+          precioDetallePedido +=
+            detallePedidoItem.articuloManufacturado.precio_de_venta *
+            detallePedidoItem.cantidad;
+        }
       });
       this.recaudacionTotal += precioDetallePedido;
+      this.totalParaExcel.totalPedido = this.recaudacionTotal;
     });
   }
 
   exportAsXLSX(): void {
+    this.listaDePedidos.push(this.totalParaExcel);
     this.excelService.exportAsExcelFile(
       this.listaDePedidos,
       'Recaudacion por tiempo'

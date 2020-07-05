@@ -11,7 +11,7 @@
   </form>
 
   <br />
-  <div>
+  <div class="table-responsive">
     <table class="table table-hover">
       <thead class="thead-dark">
         <tr>
@@ -93,37 +93,69 @@
         </div>
       </form>
 
-      <table
-        class="table table-hover"
-        *ngIf="pedidosRecuperadosDesdeHasta; else templatePedidos"
-      >
-        <thead class="thead-dark">
-          <tr>
-            <th scope="col">Fecha</th>
-            <th scope="col">Articulo de pedido</th>
-            <th scope="col">Tipo envio</th>
-            <th scope="col">Numero de pedido</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let pedido of this.pedidosRecuperadosDesdeHasta">
-            <td>{{ pedido.fechaRealizacion | date }}</td>
+      <div class="table-responsive">
+        <table
+          class="table table-hover"
+          *ngIf="pedidosRecuperadosDesdeHasta; else templatePedidos"
+        >
+          <thead class="thead-dark">
+            <tr>
+              <th scope="col">Fecha</th>
+              <th scope="col">Total de pedido</th>
+              <th scope="col">Articulos de pedido</th>
+              <th scope="col">Tipo envio</th>
+              <th scope="col">Numero de pedido</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let pedido of this.pedidosRecuperadosDesdeHasta">
+              <td>{{ pedido.fechaRealizacion | date }}</td>
 
-            <td>
-              {{ pedido.totalPedido }}
-            </td>
+              <td>
+                {{ pedido.totalPedido }}
+              </td>
 
-            <td *ngIf="pedido.tipo_Envio; else elseTemplate">
-              Envio
-            </td>
-            <ng-template #elseTemplate>
-              <td>En local</td>
-            </ng-template>
+              <td>
+                <button
+                  class="btn btn-primary dropdown-toggle"
+                  type="button"
+                  data-toggle="dropdown"
+                  role="menu"
+                >
+                  Articulos <span class="caret"></span>
+                </button>
 
-            <td>{{ pedido.numero }}</td>
-          </tr>
-        </tbody>
-      </table>
+                <ul class="dropdown-menu">
+                  <div *ngFor="let item of pedido.lista_detallePedido">
+                    <li
+                      *ngIf="item.articuloInsumo; else articuloManufac"
+                      class="ml-2 mr-2"
+                    >
+                      {{ item.articuloInsumo.denominacion }} |
+                      {{ item.cantidad }}
+                    </li>
+                    <ng-template #articuloManufac>
+                      <li class="ml-2 mr-2">
+                        {{ item.articuloManufacturado.denominacion }} |
+                        {{ item.cantidad }}
+                      </li>
+                    </ng-template>
+                  </div>
+                </ul>
+              </td>
+
+              <td *ngIf="pedido.tipo_Envio; else elseTemplate">
+                Envio
+              </td>
+              <ng-template #elseTemplate>
+                <td>En local</td>
+              </ng-template>
+
+              <td>{{ pedido.numero }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
       <ng-template #templatePedidos>
         <h2>Este cliente no tiene pedidos</h2>
       </ng-template>
