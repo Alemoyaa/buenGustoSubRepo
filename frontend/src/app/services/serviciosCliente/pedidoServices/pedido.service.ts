@@ -40,7 +40,7 @@ export class PedidoServices extends CommonService<Pedido> {
       .pipe(catchError(this.handleError));
   }
 
-  editarByIdStock(id: number): Observable<Pedido> {
+  descontarStock(id: number): Observable<Pedido> {
     return this.http
       .put<Pedido>(this._url + 'descontar_stock/' + id, null)
       .pipe(catchError(this.handleError));
