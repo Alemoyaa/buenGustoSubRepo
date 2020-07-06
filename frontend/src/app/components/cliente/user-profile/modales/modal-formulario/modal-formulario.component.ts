@@ -9,6 +9,7 @@ import { ClienteService } from 'src/app/services/serviciosCliente/clienteService
 import { Localidad } from 'src/app/entidades/Localidad';
 import { NgForm, FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { Domicilio } from '../../../../../entidades/Domicilio';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-modal-formulario',
@@ -21,73 +22,75 @@ export class ModalFormularioComponent implements OnInit {
   cliente: Cliente;
   domicilio = new Domicilio();
   @Input() set clienteUser(cliente) {
+
     this.BuildForm();
 
+    try {
+      if (cliente.domicilio) {
+        this.cliente = cliente;
+        console.log(cliente);
+        this.formulario.patchValue({
+          id: cliente.id,
+          nombre: cliente.nombre,
+          apellido: cliente.apellido,
+          telefono: cliente.telefono,
 
-    if (cliente.domicilio) {
-      this.cliente = cliente;
-      console.log(cliente);
-      this.formulario.setValue({
-        id: cliente.id,
-        nombre: cliente.nombre,
-        apellido: cliente.apellido,
-        telefono: cliente.telefono,
+          usuario: {
+            id: cliente.usuario.id,
+            email: cliente.usuario.email,
+            uid_firebase: cliente.usuario.uid_firebase,
+            rol: {
+              id: cliente.usuario.rol.id
+            }
+          },
+          domicilio: {
+            id: cliente.domicilio.id,
+            calle: cliente.domicilio.calle,
+            numero: cliente.domicilio.numero,
+            piso: cliente.domicilio.piso,
+            nroDepartamento: cliente.domicilio.nroDepartamento,
+            aclaracion: cliente.domicilio.aclaracion,
+            localidad: {
+              id: cliente.domicilio.localidad.id,
+              nombre: cliente.domicilio.localidad.nombre
+            }
+          }
+        });
 
-        usuario: {
-          id: cliente.usuario.id,
-          email: cliente.usuario.email,
-          uid_firebase: cliente.usuario.uid_firebase,
-          rol: {
-            id: cliente.usuario.rol.id
-          }
-        },
-        domicilio: {
-          id: cliente.domicilio.id,
-          calle: cliente.domicilio.calle,
-          numero: cliente.domicilio.numero,
-          piso: cliente.domicilio.piso,
-          nroDepartamento: cliente.domicilio.nroDepartamento,
-          aclaracion: cliente.domicilio.aclaracion,
-          localidad: {
-            id: cliente.domicilio.localidad.id,
-            nombre: cliente.domicilio.localidad.nombre
-          }
-        }
-      });
-    } else {
-      this.cliente = cliente;
-      this.formulario.setValue({
-        id: cliente.id,
-        nombre: cliente.nombre,
-        apellido: cliente.apellido,
-        telefono: cliente.telefono,
-        usuario: {
-          id: cliente.usuario.id,
-          email: cliente.usuario.email,
-          uid_firebase: cliente.usuario.uid_firebase,
-          rol: {
-            id: cliente.usuario.rol.id
-          }
-        },
-        domicilio: {
-          id: 0,
-          calle: '',
-          numero: 0,
-          piso: 0,
-          nroDepartamento: 0,
-          aclaracion: '',
-          localidad: {
+      } else {
+        this.cliente = cliente;
+        this.formulario.patchValue({
+          id: cliente.id,
+          nombre: cliente.nombre,
+          apellido: cliente.apellido,
+          telefono: cliente.telefono,
+          usuario: {
+            id: cliente.usuario.id,
+            email: cliente.usuario.email,
+            uid_firebase: cliente.usuario.uid_firebase,
+            rol: {
+              id: cliente.usuario.rol.id
+            }
+          },
+          domicilio: {
             id: 0,
-            nombre: ''
+            calle: '',
+            numero: 0,
+            piso: 0,
+            nroDepartamento: 0,
+            aclaracion: '',
+            localidad: {
+              id: 0,
+              nombre: ''
+            }
           }
-        }
-      });
+        });
 
+
+      }
+    } catch (error) {
 
     }
-
-
-
 
   };
   constructor(
@@ -99,6 +102,7 @@ export class ModalFormularioComponent implements OnInit {
     @Host() private perfil: UserProfileComponent) { }
 
   ngOnInit(): void {
+
     this.BuildForm();
     this.getLocalidades();
 
@@ -195,5 +199,6 @@ export class ModalFormularioComponent implements OnInit {
       })
     });
   }
+
 
 }

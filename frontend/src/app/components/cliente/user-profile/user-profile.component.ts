@@ -7,6 +7,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Cliente } from '../../../entidades/Cliente';
 import { LocalidadService } from 'src/app/services/serviciosCliente/localidadServices/localidad.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-user-profile',
@@ -49,6 +50,16 @@ export class UserProfileComponent implements OnInit {
   ) {}
  
   ngOnInit(): void {
+    this.traerDatos();
+    
+   }
+
+  datosUser() {
+    return this.serviceLogin.datosGoogle(this.cliente.usuario); //me traigo los datos de google desde el service
+  }
+
+  traerDatos(){
+    this.esperarAlert();
     this.rutaActiva.params.subscribe(
       (data) => {
         if (data.id !== null) {
@@ -65,18 +76,21 @@ export class UserProfileComponent implements OnInit {
       }
     );
     this.datosUser();
-   }
-
-  datosUser() {
-    return this.serviceLogin.datosGoogle(this.cliente.usuario); //me traigo los datos de google desde el service
   }
 
 
-
   async getOneByUid(uid: string) {
+    this.esperarAlert();
     await this.serviceCliente.getByUidFirebase(uid).subscribe(
       (data) => {
+
         this.cliente = data;
+        Swal.fire({
+          icon: 'success',
+          title: 'Datos cargados',
+          showConfirmButton: false,
+          timer: 1200,
+        });
       },
       (error) => { }
     );
@@ -88,4 +102,18 @@ export class UserProfileComponent implements OnInit {
   pasarDatos(cliente){
     this.cliente = cliente;
   }
+
+  esperarAlert() {
+    Swal.fire({
+      title: 'Por favor espere',
+      html: 'Recuperando los datos...',
+      // timer: 1500,
+      onBeforeOpen: () => {
+        Swal.showLoading();
+      },
+    }).then((result) => {
+      console.log(result);
+    });
+  }
+ 
 }

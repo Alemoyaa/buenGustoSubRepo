@@ -1,3 +1,4 @@
+
 <div class="container mt-3" id="body" *ngIf="cliente.nombre">
   <div id="wrapper">
     <div class="d-flex flex-column" id="content-wrapper">
@@ -166,4 +167,4 @@
 
 <app-modal-historial-facturas [clienteUser]="cliente"></app-modal-historial-facturas>
 
-<app-modal-formulario [clienteUser]="cliente"></app-modal-formulario>
+<app-modal-formulario [clienteUser]="cliente" *ngIf="cliente"></app-modal-formulario>
