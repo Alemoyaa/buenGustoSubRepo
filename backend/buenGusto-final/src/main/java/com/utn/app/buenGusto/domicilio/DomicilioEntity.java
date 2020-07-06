@@ -25,7 +25,7 @@ public class DomicilioEntity extends CommonEntity implements Serializable {
 	private int nroDepartamento;
 	private String aclaracion;
 
-	@ManyToOne(cascade = CascadeType.MERGE)
+	@ManyToOne
 	@JoinColumn(name = "localidad_id")
 	private LocalidadEntity localidad;
 

@@ -18,7 +18,7 @@ public class CategoriaEntity extends CommonEntity implements Serializable {
 	private String nombreCategoria;
 	private boolean esCategoriaCatalogo;
 
-	@ManyToOne(cascade = CascadeType.ALL) //Probar si este cascade es correcto
+	@ManyToOne
 	private CategoriaEntity padre;
 
 	public String getNombreCategoria() {

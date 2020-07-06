@@ -36,7 +36,7 @@ public class FacturaEntity extends CommonEntity implements Serializable {
 	@Transient
 	private List<DetallePedidoEntity> detalleFactura = new ArrayList<DetallePedidoEntity>();
 
-	@OneToOne(optional = true, cascade = CascadeType.ALL)
+	@OneToOne(optional = true)
 	@JoinColumn(name = "pedido_id")
 	private PedidoEntity pedidofacturado;
 
