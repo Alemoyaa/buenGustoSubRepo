@@ -31,15 +31,13 @@ public class ArticuloInsumoEntity extends CommonEntity implements Serializable {
 	private boolean es_catalogo; 
 	private String url_imagen;
 	
-	@ManyToOne(cascade = CascadeType.MERGE)
+	@ManyToOne
 	@JoinColumn(name = "unidad_medida_id")
 	private UnidadMedidaEntity unidadMedidaID;
 	
-	@ManyToOne(cascade = CascadeType.MERGE)
+	@ManyToOne
 	@JoinColumn(name = "categoria_id")
 	private CategoriaEntity categoria;
-	
-	
 
 	public ArticuloInsumoEntity() {
 		super();

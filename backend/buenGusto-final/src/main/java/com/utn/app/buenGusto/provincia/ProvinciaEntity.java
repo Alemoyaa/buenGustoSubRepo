@@ -20,7 +20,7 @@ public class ProvinciaEntity extends CommonEntity implements Serializable {
 
 	private String nombre;
 
-	@ManyToOne(cascade = CascadeType.MERGE)
+	@ManyToOne
 	@JoinColumn(name = "pais_id")
 	private PaisEntity pais;
 

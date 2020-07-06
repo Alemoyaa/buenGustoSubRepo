@@ -20,7 +20,7 @@ public class LocalidadEntity extends CommonEntity implements Serializable {
 
 	private String nombre;
 
-	@ManyToOne(cascade = CascadeType.MERGE)
+	@ManyToOne
 	@JoinColumn(name = "provincia_id")
 	private ProvinciaEntity provincia;
 

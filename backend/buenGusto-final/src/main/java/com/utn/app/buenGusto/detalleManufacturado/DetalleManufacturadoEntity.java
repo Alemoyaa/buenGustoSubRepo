@@ -23,11 +23,11 @@ public class DetalleManufacturadoEntity extends CommonEntity implements Serializ
 
 	private int cantidad;
 
-	@ManyToOne(cascade = CascadeType.MERGE)
+	@ManyToOne
 	@JoinColumn(name = "unidad_medida_id")
 	private UnidadMedidaEntity unidadMedidaID;
 
-	@ManyToOne(cascade = CascadeType.MERGE)
+	@ManyToOne
 	@JoinColumn(name = "articulo_insumo_id")
 	private ArticuloInsumoEntity articuloInsumoID;
 	

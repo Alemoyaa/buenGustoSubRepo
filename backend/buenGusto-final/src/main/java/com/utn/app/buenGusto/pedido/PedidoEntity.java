@@ -39,11 +39,11 @@ public class PedidoEntity extends CommonEntity implements Serializable {
 	@JoinColumn(name = "pedido_id")
 	private List<DetallePedidoEntity> lista_detallePedido;
 
-	@ManyToOne(cascade = CascadeType.MERGE, optional = true)
+	@ManyToOne(optional = true)
 	@JoinColumn(name = "estado_pedido_id")
 	private EstadoPedidoEntity estadoPedido;
 
-	@ManyToOne(cascade = CascadeType.MERGE, optional = true)
+	@ManyToOne(optional = true)
 	@JoinColumn(name = "cliente_id")
 	private ClienteEntity clientePedido;
 

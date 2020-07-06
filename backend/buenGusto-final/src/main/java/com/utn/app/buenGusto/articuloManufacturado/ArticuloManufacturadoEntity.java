@@ -30,7 +30,7 @@ public class ArticuloManufacturadoEntity extends CommonEntity implements Seriali
 	@JoinColumn(name = "articuloManufacturado_id")
 	private List<DetalleManufacturadoEntity> lista_detalleManufacturado;
 	
-	@ManyToOne(cascade = CascadeType.MERGE)
+	@ManyToOne
 	@JoinColumn(name = "rubro_general_id")
 	protected RubroGeneralEntity rubro;
 
