@@ -69,7 +69,7 @@
 
           <td>
             <p *ngIf="i.denominacion">{{ i.denominacion }}</p>
-            <p *ngIf="!i.denominacion" class="alert-danger">
+            <p *ngIf="!i.denominacion" class="alert-articulo">
               VERIFICAR ARTICULO
             </p>
           </td>
@@ -88,15 +88,15 @@
 
           <td>
             <p *ngIf="i.precio_de_compra">$ {{ i.precio_de_compra }}</p>
-            <p *ngIf="!i.precio_de_compra" class="alert-danger">
+            <p *ngIf="!i.precio_de_compra" class="alert-articulo">
               VERIFICAR ARTICULO
             </p>
           </td>
 
           <td>
             <p *ngIf="i.precio_de_venta">$ {{ i.precio_de_venta }}</p>
-            <p *ngIf="!i.precio_de_venta" class="alert-danger">
-              VERIFICAR ARTICULO
+            <p *ngIf="!i.precio_de_venta" >
+              Articulo insumo
             </p>
           </td>
 
@@ -107,21 +107,21 @@
 
           <td>
             <p *ngIf="i.stock_actual">{{ i.stock_actual }}</p>
-            <p *ngIf="!i.stock_actual" class="alert-danger">
+            <p *ngIf="!i.stock_actual" class="alert-articulo">
               VERIFICAR ARTICULO
             </p>
           </td>
 
           <td>
             <p *ngIf="i.stock_minimo">{{ i.stock_minimo }}</p>
-            <p *ngIf="!i.stock_minimo" class="alert-danger">
+            <p *ngIf="!i.stock_minimo" class="alert-articulo">
               VERIFICAR ARTICULO
             </p>
           </td>
 
           <td>
             <p *ngIf="i.stock_maximo">{{ i.stock_maximo }}</p>
-            <p *ngIf="!i.stock_maximo" class="alert-danger">
+            <p *ngIf="!i.stock_maximo" class="alert-articulo">
               VERIFICAR ARTICULO
             </p>
           </td>
@@ -143,7 +143,7 @@
             <p *ngIf="i.unidadMedidaID.denominacion">
               {{ i.unidadMedidaID.denominacion }}
             </p>
-            <p *ngIf="!i.unidadMedidaID.denominacion" class="alert-danger">
+            <p *ngIf="!i.unidadMedidaID.denominacion" class="alert-articulo">
               VERIFICAR ARTICULO
             </p>
           </td>
@@ -232,6 +232,10 @@
                   formControlName="denominacion"
                   placeholder="nombre articulo.."
                 />
+                <div *ngIf="formStock.controls['denominacion'].invalid && formStock.controls['denominacion'].dirty" class="alert alert-danger" role="alert">
+
+                  <span *ngIf="formStock.controls['denominacion'].errors.required">El nombre es requerido </span>
+                </div>
               </div>
             </div>
 
@@ -260,11 +264,7 @@
           </div>
 
           <div class="row">
-            <!-- <div class="col-12">
-              <hr />
-              <p class="alert">Costos</p>
-                <hr />
-            </div> -->
+
 
             <div class="col-md-4">
               <div class="form-group">
@@ -275,6 +275,10 @@
                   name="precio_de_compra"
                   formControlName="precio_de_compra"
                 />
+                <div *ngIf="formStock.controls['precio_de_compra'].invalid && formStock.controls['precio_de_compra'].dirty" class="alert alert-danger" role="alert">
+
+                  <span *ngIf="formStock.controls['precio_de_compra'].errors.required">El <strong>precio de compra</strong>  es requerido </span>
+                </div>
               </div>
             </div>
 
@@ -282,7 +286,7 @@
               <div class="form-group">
                 <label>Precio de venta</label>
                 <input
-                  type="text"
+                  type="number"
                   class="form-control"
                   name="precio_de_venta"
                   formControlName="precio_de_venta"

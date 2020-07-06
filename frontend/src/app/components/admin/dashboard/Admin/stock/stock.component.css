@@ -1,10 +1,7 @@
-/*//////////////////////////////////////////////////////////////////
-[ FONT ]*/
 
 @font-face {
   font-family: Poppins-Regular;
   src: url("../../../../../../assets/fonts/poppins/Poppins-Regular.ttf");
-  /* src: url('../fonts/poppins/Poppins-Regular.ttf');  */
 }
 
 @font-face {
@@ -28,82 +25,23 @@
     "Segoe UI Symbol";
 }
 
-/*---------------------------------------------*/
-/* input {
-	outline: none;
-	border: none;
-}
 
-input[type="number"] {
-    -moz-appearance: textfield;
-    appearance: none;
-    -webkit-appearance: none;
-}
-
-input[type="number"]::-webkit-outer-spin-button,
-input[type="number"]::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-}
-
-textarea {
-  outline: none;
-  border: none;
-}
-
-textarea:focus, input:focus {
-  border-color: transparent !important;
-}
-
-input:focus::-webkit-input-placeholder { color:transparent; }
-input:focus:-moz-placeholder { color:transparent; }
-input:focus::-moz-placeholder { color:transparent; }
-input:focus:-ms-input-placeholder { color:transparent; }
-
-textarea:focus::-webkit-input-placeholder { color:transparent; }
-textarea:focus:-moz-placeholder { color:transparent; }
-textarea:focus::-moz-placeholder { color:transparent; }
-textarea:focus:-ms-input-placeholder { color:transparent; }
-
-input::-webkit-input-placeholder {color: #999999;}
-input:-moz-placeholder {color: #999999;}
-input::-moz-placeholder {color: #999999;}
-input:-ms-input-placeholder {color: #999999;}
-
-textarea::-webkit-input-placeholder {color: #999999;}
-textarea:-moz-placeholder {color: #999999;}
-textarea::-moz-placeholder {color: #999999;}
-textarea:-ms-input-placeholder {color: #999999;} */
-
-/*---------------------------------------------*/
-/* button {
-	outline: none !important;
-	border: none;
-	background: transparent;
-}
-
-button:hover {
-	cursor: pointer;
-}
-
-iframe {
-	border: none !important;
-} */
 
 .contact100-form-title {
   background-image: url("../../../../../../assets/59880.jpg");
 }
 
-.alert-danger {
+.alert-articulo {
   color: #721c24;
   background: #fd5d6a;
   border-color: #f5c6cb;
   margin-bottom: 5px;
 }
 
-.alert {
+/* .alert {
   background: #e7f8ff;
   margin-bottom: 5px;
-}
+} */
 
 h1,
 h2,

@@ -1,5 +1,5 @@
 import Swal from 'sweetalert2';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ArticuloInsumoService } from './../../../../../services/serviciosCliente/articuloInsumoServices/articuloInsumo.service';
 import { ArticuloInsumo } from 'src/app/entidades/ArticuloInsumo';
 import { Component, OnInit } from '@angular/core';
@@ -34,16 +34,7 @@ export class StockComponent implements OnInit {
   constructor(
     private artInsumoService: ArticuloInsumoService,
     private categoriaService: CategoriaService,
-    private unidadMedidaService: UnidadMedidaService
-  ) {
-  }
-
-  // buscador
-  get filtrar(): ArticuloInsumo[] {
-    const matcher = new RegExp(this.filtroBuscador, 'i');
-    return this.articulosInsumos.filter((articulo) => {
-      return matcher.test([articulo.denominacion, articulo.categoria].join());
-    });
+    private unidadMedidaService: UnidadMedidaService) {
   }
 
   async ngOnInit() {
@@ -51,18 +42,18 @@ export class StockComponent implements OnInit {
     await this.crearFormulario();
   }
 
-  /* Método que construye nuestro formulario */
+  /* Formularios */
   crearFormulario(): void {
     this.formStock = new FormGroup({
       id: new FormControl(0),
-      denominacion: new FormControl(null),
-      precio_de_venta: new FormControl(0),
-      precio_de_compra: new FormControl(0),
-      stock_actual: new FormControl(0),
-      stock_minimo: new FormControl(0),
-      stock_maximo: new FormControl(0),
-      requiere_refrigeracion: new FormControl(null),
-      es_catalogo: new FormControl(null),
+      denominacion: new FormControl('', Validators.required),
+      precio_de_venta: new FormControl(0, Validators.required),
+      precio_de_compra: new FormControl(0, Validators.required),
+      stock_actual: new FormControl(0, Validators.required),
+      stock_minimo: new FormControl(0, Validators.required),
+      stock_maximo: new FormControl(0, Validators.required),
+      requiere_refrigeracion: new FormControl(null, Validators.required),
+      es_catalogo: new FormControl(null, Validators.required),
       url_imagen: new FormControl(null),
       unidadMedidaID: new FormGroup({
         id: new FormControl(0),
@@ -80,106 +71,34 @@ export class StockComponent implements OnInit {
     });
   }
 
-
-  limpiarForm() {
-    this.crearFormulario();
-  }
-
-  getAllArticulos() {
-    this.artInsumoService.getAll().subscribe(
-      (res) => {
-        this.articulosInsumos = res;
-        console.log(this.articulosInsumos);
-      },
-      (error) => {
-        console.warn('error =>  ', error);
-      }
-    );
-    this.getAllCategorias();
-    this.getUnidades();
-  }
-
-
-
-  getAllCategorias() {
-    this.categoriaService.getAll().subscribe(
-      (categorias) => {
-        this.categorias = categorias;
-      },
-      (error) => {
-        console.warn('error =>  ', error);
-      }
-    );
-  }
-
-
-  getUnidades() {
-    this.unidadMedidaService.getAll().subscribe(
-      (unidad) => {
-        this.unidadesMedida = unidad;
-      },
-      (error) => {
-        console.warn('error =>  ', error);
-      }
-    );
-  }
-
-  seleccionarUnidad(id: number) {
-    const control = this.formStock.controls.unidadMedidaID as FormGroup;
-    if (id != null) {
-
-      this.unidadMedidaService.getOne(id).subscribe((unidad) => {
-        this.unidadSeleccionada = unidad;
-
-        this.formStock.controls.unidadMedidaID.setValue({
-          id: unidad.id,
-          denominacion: unidad.denominacion,
-          abreviatura: unidad.abreviatura,
-          paraRecetas: unidad.paraRecetas,
-          equivalencia_KgOL: unidad.equivalencia_KgOL,
-        });
-      });
-    }
-  }
-
-
-
-
-  async getCategorias() {
-    this.categorias.forEach((e) => {
-      if (e.padre != null) {
-        this.categoriasHijo.push(e);
-      } else {
-        this.categoriasPadre.push(e);
-      }
+  editar(articulo: ArticuloInsumo) {
+    console.log("formulario editar");
+    console.log(articulo);
+    this.esEditar = true;
+    this.formStock.patchValue({
+      id: articulo.id,
+      denominacion: articulo.denominacion,
+      es_catalogo: articulo.es_catalogo,
+      precio_de_compra: articulo.precio_de_compra,
+      precio_de_venta: articulo.precio_de_venta,
+      requiere_refrigeracion: articulo.requiere_refrigeracion,
+      stock_actual: articulo.stock_actual,
+      stock_maximo: articulo.stock_maximo,
+      stock_minimo: articulo.stock_minimo,
+      url_imagen: articulo.url_imagen,
+      unidadMedidaID: ({
+        id: articulo.unidadMedidaID.id,
+      }),
+      categoria: ({
+        id: articulo.categoria.id,
+      })
     });
+    this.id = articulo.id;
   }
 
-  seleccionarPadre(id: number) {
-    console.log(id);
+  /* Servicios */
 
-    const control = <FormGroup>this.formStock.controls['categoria'];
-
-    if (id != null) {
-
-      this.categoriaService.getOne(id).subscribe((padre) => {
-        this.categoriaSeleccionada = padre;
-
-        this.formStock.controls.categoria.setValue({
-          id: this.categoriaSeleccionada.id,
-          nombreCategoria: this.categoriaSeleccionada.nombreCategoria,
-          esCategoriaCatalogo: this.categoriaSeleccionada.esCategoriaCatalogo,
-          padre: this.categoriaSeleccionada.padre,
-        });
-      });
-    } else {
-      console.warn("No se pudo seleccionar categoria")
-    }
-  }
-
-  // Post
   agregar() {
-
     this.artInsumoService.post(this.formStock.value).subscribe(
       (data) => {
         this.articulo = data;
@@ -187,6 +106,29 @@ export class StockComponent implements OnInit {
         this.getAllArticulos();
         this.formStock.reset();
         Swal.fire('success', 'Articulo agregado ', 'success');
+      },
+      (error) => {
+        console.warn('error =>  ', error);
+      }
+    );
+  }
+
+  update() {
+    console.log("servicio update")
+    console.log(this.formStock.value)
+    this.artInsumoService.put(this.formStock.value.id, this.formStock.value).subscribe(
+      (data) => {
+        console.log("Entro");
+        this.articulosInsumos.filter(item => {
+          if (item.id === this.formStock.value.id) {
+            const indexArticulo = this.articulosInsumos.indexOf(item);
+            this.articulosInsumos.splice(indexArticulo, 1, data)
+          }
+        })
+        console.log('data:', data);
+        this.getAllArticulos();
+        this.esEditar = false;
+        this.formStock.reset();
       },
       (error) => {
         console.warn('error =>  ', error);
@@ -219,15 +161,25 @@ export class StockComponent implements OnInit {
     });
   }
 
-  update() {
-    console.log("update")
-    console.log(this.formStock.value)
-    this.artInsumoService.put(this.formStock.value.id, this.formStock.value).subscribe(
-      (data) => {
-        console.log('data:', data);
-        this.getAllArticulos();
-        this.esEditar = false;
-        this.formStock.reset(); // Que me limpie los campos
+  /* Metodos Propios */
+  getAllArticulos() {
+    this.artInsumoService.getAll().subscribe(
+      (res) => {
+        this.articulosInsumos = res;
+        console.log(this.articulosInsumos);
+      },
+      (error) => {
+        console.warn('error =>  ', error);
+      }
+    );
+    this.getAllCategorias();
+    this.getUnidades();
+  }
+
+  getAllCategorias() {
+    this.categoriaService.getAll().subscribe(
+      (categorias) => {
+        this.categorias = categorias;
       },
       (error) => {
         console.warn('error =>  ', error);
@@ -235,47 +187,83 @@ export class StockComponent implements OnInit {
     );
   }
 
-  // form editar
-  editar(articulo: ArticuloInsumo) {
-    console.log(articulo);
-    this.esEditar = true;
-    this.formStock.setValue({
-      id: articulo.id,
-      denominacion: articulo.denominacion,
-      es_catalogo: articulo.es_catalogo,
-      precio_de_compra: articulo.precio_de_compra,
-      precio_de_venta: articulo.precio_de_venta,
-      requiere_refrigeracion: articulo.requiere_refrigeracion,
-      stock_actual: articulo.stock_actual,
-      stock_maximo: articulo.stock_maximo,
-      stock_minimo: articulo.stock_minimo,
-      url_imagen: articulo.url_imagen,
-      unidadMedidaID: articulo.unidadMedidaID,
-      categoria: articulo.categoria,
+  async getCategorias() {
+    this.categorias.forEach((e) => {
+      if (e.padre != null) {
+        this.categoriasHijo.push(e);
+      } else {
+        this.categoriasPadre.push(e);
+      }
     });
-    this.id = articulo.id;
-    console.log(this.id);
+  }
+
+  getUnidades() {
+    this.unidadMedidaService.getAll().subscribe(
+      (unidad) => {
+        this.unidadesMedida = unidad;
+      },
+      (error) => {
+        console.warn('error =>  ', error);
+      }
+    );
+  }
+
+  seleccionarUnidad(id: number) {
+    const control = this.formStock.controls.unidadMedidaID as FormGroup;
+    if (id != null) {
+
+      this.unidadMedidaService.getOne(id).subscribe((unidad) => {
+        this.unidadSeleccionada = unidad;
+
+        this.formStock.controls.unidadMedidaID.setValue({
+          id: unidad.id,
+          denominacion: unidad.denominacion,
+          abreviatura: unidad.abreviatura,
+          paraRecetas: unidad.paraRecetas,
+          equivalencia_KgOL: unidad.equivalencia_KgOL,
+        });
+      });
+    }
+  }
+
+
+  seleccionarPadre(id: number) {
+    console.log(id);
+    const control = <FormGroup>this.formStock.controls['categoria'];
+    if (id != null) {
+      this.categoriaService.getOne(id).subscribe((padre) => {
+        this.categoriaSeleccionada = padre;
+
+        this.formStock.controls.categoria.setValue({
+          id: this.categoriaSeleccionada.id,
+          nombreCategoria: this.categoriaSeleccionada.nombreCategoria,
+          esCategoriaCatalogo: this.categoriaSeleccionada.esCategoriaCatalogo,
+          padre: this.categoriaSeleccionada.padre,
+        });
+      });
+    } else {
+      console.warn("No se pudo seleccionar categoria")
+    }
+  }
+
+  limpiarForm() {
+    this.crearFormulario();
   }
 
   cerrar() {
     this.esEditar = false;
   }
 
-  // trackBy Mejora el rendimiento
+  /* Mejora el rendimiento de la tabla */
   trackByFn(index: number, i: ArticuloInsumo): number {
     return i.id;
   }
 
-  esperarAlert() {
-    Swal.fire({
-      title: 'Por favor espere',
-      html: 'Recuperando los datos...',
-      // timer: 1500,
-      onBeforeOpen: () => {
-        Swal.showLoading();
-      },
-    }).then((result) => {
-      console.log(result);
+  /* Buscador */
+  get filtrar(): ArticuloInsumo[] {
+    const matcher = new RegExp(this.filtroBuscador, 'i');
+    return this.articulosInsumos.filter((articulo) => {
+      return matcher.test([articulo.denominacion, articulo.categoria].join());
     });
   }
 }

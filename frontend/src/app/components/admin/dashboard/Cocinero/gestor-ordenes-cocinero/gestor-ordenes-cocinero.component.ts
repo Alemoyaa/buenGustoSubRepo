@@ -56,7 +56,7 @@ export class GestorOrdenesCocineroComponent implements OnInit {
     private pedidoService: PedidoServices,
     private estadoService: EstadoPedidoServices,
     private fb: FormBuilder
-  ) {}
+  ) { }
 
   async ngOnInit() {
     await this.getAllPedidos();
@@ -172,12 +172,8 @@ export class GestorOrdenesCocineroComponent implements OnInit {
               'Puedes continuar con mas pedidos en la seccion de Estados de Pedidos!',
               'success'
             );
-
+            this.formularioEstado.reset();
             this.getAllPedidos();
-            // if (this.pedidoSeleccionado.estadoPedido.id === 7) {
-            //   window.location.reload();
-            // }
-            // this.formularioEstado.reset();
           } else {
             this.formularioEstado.reset();
           }
