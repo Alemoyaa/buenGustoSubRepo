@@ -1,3 +1,4 @@
+import { AlertsService } from './../../../../../services/alertServices/alerts.service';
 import Swal from 'sweetalert2';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ArticuloInsumoService } from './../../../../../services/serviciosCliente/articuloInsumoServices/articuloInsumo.service';
@@ -34,7 +35,8 @@ export class StockComponent implements OnInit {
   constructor(
     private artInsumoService: ArticuloInsumoService,
     private categoriaService: CategoriaService,
-    private unidadMedidaService: UnidadMedidaService) {
+    private unidadMedidaService: UnidadMedidaService,
+    private alerts: AlertsService) {
   }
 
   async ngOnInit() {
@@ -57,23 +59,14 @@ export class StockComponent implements OnInit {
       url_imagen: new FormControl(null),
       unidadMedidaID: new FormGroup({
         id: new FormControl(0),
-        denominacion: new FormControl(null),
-        abreviatura: new FormControl(null),
-        paraRecetas: new FormControl(null),
-        equivalencia_KgOL: new FormControl(0),
       }),
       categoria: new FormGroup({
         id: new FormControl(0),
-        nombreCategoria: new FormControl(null),
-        esCategoriaCatalogo: new FormControl(0),
-        padre: new FormControl(null),
       }),
     });
   }
 
   editar(articulo: ArticuloInsumo) {
-    console.log("formulario editar");
-    console.log(articulo);
     this.esEditar = true;
     this.formStock.patchValue({
       id: articulo.id,
@@ -99,15 +92,24 @@ export class StockComponent implements OnInit {
   /* Servicios */
 
   agregar() {
+    console.log("metodo");
+    console.log(this.formStock.value);
     this.artInsumoService.post(this.formStock.value).subscribe(
       (data) => {
+        console.log("post");
+        console.log(data);
         this.articulo = data;
         this.articulosInsumos.push(this.articulo);
         this.getAllArticulos();
         this.formStock.reset();
-        Swal.fire('success', 'Articulo agregado ', 'success');
+        Swal.fire( 'Articulo agregado ', 'success');
       },
       (error) => {
+        Swal.fire({
+          icon: 'error',
+          title: 'Ocurrio un problema',
+          html: 'Por favor vuelva a intentarlo mas tarde',
+        });
         console.warn('error =>  ', error);
       }
     );
@@ -118,7 +120,11 @@ export class StockComponent implements OnInit {
     console.log(this.formStock.value)
     this.artInsumoService.put(this.formStock.value.id, this.formStock.value).subscribe(
       (data) => {
-        console.log("Entro");
+        this.alerts.mensajeSuccess(
+          'Actualizacion realizada',
+          `El articulo "${this.formStock.value.denominacion}" se actualizo correctamente`
+        );
+          console.log("Entro");
         this.articulosInsumos.filter(item => {
           if (item.id === this.formStock.value.id) {
             const indexArticulo = this.articulosInsumos.indexOf(item);
@@ -131,6 +137,10 @@ export class StockComponent implements OnInit {
         this.formStock.reset();
       },
       (error) => {
+        this.alerts.mensajeError(
+          'No se actualizó el Articulo',
+          'Ocurrio un error, porfavor verifique que esten todos los datos correctos'
+        );
         console.warn('error =>  ', error);
       }
     );
@@ -209,6 +219,7 @@ export class StockComponent implements OnInit {
   }
 
   seleccionarUnidad(id: number) {
+    console.log(id);
     const control = this.formStock.controls.unidadMedidaID as FormGroup;
     if (id != null) {
 
@@ -217,12 +228,10 @@ export class StockComponent implements OnInit {
 
         this.formStock.controls.unidadMedidaID.setValue({
           id: unidad.id,
-          denominacion: unidad.denominacion,
-          abreviatura: unidad.abreviatura,
-          paraRecetas: unidad.paraRecetas,
-          equivalencia_KgOL: unidad.equivalencia_KgOL,
         });
       });
+    }else {
+      console.warn("No se pudo seleccionar la unidad")
     }
   }
 
