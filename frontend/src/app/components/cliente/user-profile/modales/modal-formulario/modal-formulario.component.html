@@ -5,6 +5,7 @@ tabindex="-1"
 role="dialog"
 aria-labelledby="myExtraLargeModalLabel"
 aria-hidden="true"
+
 >
 <div class="modal-dialog modal-xl modal-dialog-scrollable" role="document">
     <div class="modal-content">
@@ -23,35 +24,36 @@ aria-hidden="true"
       </div>
       <div class="modal-body text-center">
         <form
-        #formUser="ngForm"
-        (ngSubmit)="updateUsuario(formUser)"
+        [formGroup]="formulario"
+        (ngSubmit)="updateUsuario()"
         >
+        <input type="hidden" name="id" id="id" formControlName="id">
         <div class="form-row">
           <div class="col">
             <div class="form-group">
-              <label for="first_name"
+              <label for="nombre"
                 ><strong>Nombre</strong></label
               >
               <input
                 class="form-control"
                 type="text"
                 placeholder="Ingrese su nombre"
-                name="first_name"
-                [(ngModel)]="cliente.nombre"
+                name="nombre"
+                formControlName="nombre"
               />
             </div>
           </div>
           <div class="col">
             <div class="form-group">
-              <label for="last_name"
+              <label for="apellido"
                 ><strong>Apellido</strong></label
               >
               <input
                 class="form-control"
                 type="text"
                 placeholder="Ingrese su apellido"
-                name="last_name"
-                [(ngModel)]="cliente.apellido"
+                name="apellido"
+                formControlName="apellido"
               />
             </div>
           </div>
@@ -67,23 +69,25 @@ aria-hidden="true"
                 type="number"
                 placeholder="Ingrese su telefono"
                 name="telefono"
-                [(ngModel)]="cliente.telefono"
+                formControlName="telefono"
               />
             </div>
           </div>
           <div class="col">
-            <div class="form-group">
+            <div class="form-group" formGroupName="usuario">
+              <input type="hidden" class="hidden" formControlName="id">
               <label for="email"><strong>Email</strong></label>
               <input
                 class="form-control"
                 type="email"
                 placeholder="Ingrese su Email"
                 name="email"
-                [(ngModel)]="cliente.usuario.email"
+                formControlName="email"
               />
             </div>
           </div>
         </div>
+        <div formGroupName="domicilio">
          <div class="form-row">
           <div class="col">
             <div class="form-group">
@@ -93,7 +97,7 @@ aria-hidden="true"
                 type="text"
                 placeholder="Ingrese su calle"
                 name="calle"
-                [(ngModel)]="cliente.domicilio.calle"
+                formControlName="calle"
               />
             </div>
             <div class="form-group">
@@ -104,8 +108,8 @@ aria-hidden="true"
                 class="form-control"
                 type="text"
                 placeholder="Ingrese su aclaracion"
-                name="text"
-                [(ngModel)]="cliente.domicilio.aclaracion"
+                name="aclaracion"
+                formControlName="aclaracion"
               />
             </div>
           </div>
@@ -114,28 +118,28 @@ aria-hidden="true"
        <div class="form-row">
           <div class="col">
             <div class="form-group">
-              <label for="city"
+              <label for="numero"
                 ><strong>Numeracion</strong></label
               >
               <input
                 class="form-control"
                 type="number"
                 placeholder="Ingrese su numeracion"
-                name="city"
-                [(ngModel)]="cliente.domicilio.numero"
+                name="numero"
+                formControlName="numero"
               />
             </div>
           </div>
           <div class="col">
-            <div class="form-group">
-              <label for="country">
+            <div class="form-group" formGroupName="domicilio">
+              <label for="localidad">
                 <strong>Localidad</strong>
               </label>
               <select 
                 (change)="mostrarDatos($event.target.value)"
                 name="localidad"
                 class="form-control"
-                [(ngModel)]="cliente.domicilio.localidad.id"
+                formControlName="id"
               >
                 <option
                   *ngFor="let localidad of listaLocalidades"
@@ -156,7 +160,7 @@ aria-hidden="true"
                 type="number"
                 placeholder="Ingrese el piso"
                 name="piso"
-                [(ngModel)]="cliente.domicilio.piso"
+                formControlName="piso"
               />
             </div>
           </div>
@@ -170,18 +174,22 @@ aria-hidden="true"
                 type="number"
                 placeholder="Ingrese el departamento"
                 name="departamento"
-                [(ngModel)]="cliente.domicilio.nroDepartamento"
+                formControlName="nroDepartamento"
+                
               />
             </div>
           </div>
         </div> 
+      </div>
         
-        <div class="form-group">
-          <button class="btn btn-primary btn-sm" type="submit">
-            Guardar configuracion
-          </button>
-        </div>
+      <button class="btn btn-primary btn-sm" type="submit" >
+        Guardar configuracion
+      </button>  
+        
+        
         </form>
+
+      
         
       </div>
       <div class="modal-footer">
