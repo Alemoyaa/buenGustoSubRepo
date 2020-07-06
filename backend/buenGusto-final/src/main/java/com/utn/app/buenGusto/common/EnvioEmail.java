@@ -1,9 +1,5 @@
 package com.utn.app.buenGusto.common;
 
-import java.io.IOException;
-import java.io.InputStream;
-
-import javax.activation.DataSource;
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 
@@ -37,17 +33,7 @@ public class EnvioEmail
 		helper.setFrom(simpleMailMessage.getFrom());
 		helper.setTo(to);
 		helper.setSubject(subject);
-		helper.setText(String.format(
-			simpleMailMessage.getText(), dear, date));
-		
-		InputStream file2 = null;
-		try {
-			file2 = file.getInputStream();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		helper.addAttachment("Factura", (DataSource) file2);
+		helper.setText(String.format(simpleMailMessage.getText(), dear, date));
 
 		/*FileSystemResource file = new FileSystemResource("/home/luis/Escritorio/TRABAJO FINAL.pdf")
 		helper.addAttachment(file.getFilename(), file);*/
@@ -57,6 +43,8 @@ public class EnvioEmail
 	     }
 	     mailSender.send(message);
          }
+	
+	
 }
 
 
