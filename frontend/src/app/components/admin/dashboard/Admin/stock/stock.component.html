@@ -31,9 +31,7 @@
           [(ngModel)]="filtroBuscador"
           [ngModelOptions]="{ standalone: true }"
         />
-        <!--
-          [ngModelOptions]="{ standalone: true }"
-         -->
+
       </form>
     </div>
   </div>
@@ -233,10 +231,7 @@
                   placeholder="nombre articulo.."
                 />
                 <div
-                  *ngIf="
-                    formStock.controls['denominacion'].invalid &&
-                    formStock.controls['denominacion'].dirty
-                  "
+                  *ngIf="formStock.controls['denominacion'].dirty"
                   class="alert alert-danger"
                   role="alert"
                 >
@@ -257,7 +252,6 @@
                 </select>
                 <div
                 *ngIf="
-                  formStock.controls['es_catalogo'].invalid &&
                   formStock.controls['es_catalogo'].dirty
                 "
                 class="alert alert-danger"
@@ -283,7 +277,7 @@
                 </select>
                 <div
                 *ngIf="
-                  formStock.controls['requiere_refrigeracion'].invalid &&
+
                   formStock.controls['requiere_refrigeracion'].dirty
                 "
                 class="alert alert-danger"
@@ -310,7 +304,7 @@
                 />
                 <div
                   *ngIf="
-                    formStock.controls['precio_de_compra'].invalid &&
+
                     formStock.controls['precio_de_compra'].dirty
                   "
                   class="alert alert-danger"
@@ -335,7 +329,7 @@
                 />
                 <div
                   *ngIf="
-                    formStock.controls['precio_de_venta'].invalid &&
+
                     formStock.controls['precio_de_venta'].dirty
                   "
                   class="alert alert-danger"
@@ -362,7 +356,7 @@
                 />
                 <div
                   *ngIf="
-                    formStock.controls['stock_actual'].invalid &&
+
                     formStock.controls['stock_actual'].dirty
                   "
                   class="alert alert-danger"
@@ -387,7 +381,7 @@
                 />
                 <div
                 *ngIf="
-                  formStock.controls['stock_minimo'].invalid &&
+
                   formStock.controls['stock_minimo'].dirty
                 "
                 class="alert alert-danger"
@@ -412,7 +406,7 @@
                 />
                 <div
                 *ngIf="
-                  formStock.controls['stock_maximo'].invalid &&
+
                   formStock.controls['stock_maximo'].dirty
                 "
                 class="alert alert-danger"
@@ -458,7 +452,7 @@
                 </select>
                 <div
                 *ngIf="
-                  formStock.controls['id'].invalid &&
+
                   formStock.controls['id'].dirty
                 "
                 class="alert alert-danger"
@@ -487,7 +481,7 @@
                 </select>
                 <div
                 *ngIf="
-                  formStock.controls['id'].invalid &&
+
                   formStock.controls['id'].dirty
                 "
                 class="alert alert-danger"

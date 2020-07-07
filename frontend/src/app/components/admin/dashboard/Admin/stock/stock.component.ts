@@ -48,18 +48,12 @@ export class StockComponent implements OnInit {
   crearFormulario(): void {
     this.formStock = new FormGroup({
       id: new FormControl(0),
-      denominacion: new FormControl('', Validators.compose([
-        Validators.required, Validators.pattern('^[a-zA-Z]+$')])),
-      precio_de_venta: new FormControl(0, Validators.compose([
-        Validators.required, Validators.pattern('^[0-9]+$')])),
-      precio_de_compra: new FormControl(0, Validators.compose([
-        Validators.required, Validators.pattern('^[0-9]+$')])),
-      stock_actual: new FormControl(0, Validators.compose([
-        Validators.required, Validators.pattern('^[0-9]+$')])),
-      stock_minimo: new FormControl(0, Validators.compose([
-        Validators.required, Validators.pattern('^[0-9]+$')])),
-      stock_maximo: new FormControl(0, Validators.compose([
-        Validators.required, Validators.pattern('^[0-9]+$')])),
+      denominacion: new FormControl('',Validators.required),
+      precio_de_venta: new FormControl(null, Validators.required),
+      precio_de_compra: new FormControl(null, Validators.required),
+      stock_actual: new FormControl(null, Validators.required),
+      stock_minimo: new FormControl(null, Validators.required),
+      stock_maximo: new FormControl(null,Validators.required),
       requiere_refrigeracion: new FormControl(null, Validators.required),
       es_catalogo: new FormControl(null, Validators.required),
       url_imagen: new FormControl(''),
@@ -277,7 +271,7 @@ export class StockComponent implements OnInit {
   get filtrar(): ArticuloInsumo[] {
     const matcher = new RegExp(this.filtroBuscador, 'i');
     return this.articulosInsumos.filter((articulo) => {
-      return matcher.test([articulo.denominacion].join());
+      return matcher.test([articulo.denominacion , articulo.categoria.nombreCategoria].join());
     });
   }
 }
