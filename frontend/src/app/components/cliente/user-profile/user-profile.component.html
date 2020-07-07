@@ -1,3 +1,4 @@
+
 <div class="container mt-3" id="body" *ngIf="cliente.nombre">
   <div id="wrapper">
     <div class="d-flex flex-column" id="content-wrapper">
@@ -41,26 +42,30 @@
                         <div class="col-6">
 
                           <label for="first_name"><strong>Nombre</strong></label>
-                          <p>{{cliente.nombre}}</p>
-
+                          <hr>
+                          <p>{{cliente.nombre | uppercase}}</p>
+                          <hr>
                         </div>
                         <div class="col-6">
                           <label for="last_name"><strong>Apellido</strong></label>
-                          <p>{{cliente.apellido}}</p>
-
+                          <hr>
+                          <p>{{cliente.apellido | uppercase}}</p>
+                          <hr>
                         </div>
-
+                  
                         <div class="col-6 mt-4" *ngIf="cliente.telefono">
 
                           <label for="telefono"><strong>Telefono</strong></label>
+                          <hr>
                           <p>{{cliente.telefono}}</p>
-
+                          <hr>
                         </div>
                         <div class="col-6 mt-4">
 
                           <label for="email"><strong>Email</strong></label>
+                          <hr>
                           <p>{{cliente.usuario.email}}</p>
-
+                          <hr>
                         </div>
 
 
@@ -71,36 +76,41 @@
                         <div class="col-6 mt-4">
 
                           <label for="calle"><strong>Calle</strong></label>
-                          <p>{{cliente.domicilio.calle}}</p>
-
+                          <hr>
+                          <p>{{cliente.domicilio.calle  | uppercase}}</p>
+                          <hr>
                         </div>
 
                         <div class="col-6 mt-4">
 
                           <label for="aclaracion"><strong>Aclaracion</strong></label>
+                          <hr>
                           <p>{{cliente.domicilio.aclaracion}}</p>
-
+                          <hr>
                         </div>
 
                         <div class="col-4 mt-4">
 
                           <label for="city"><strong>Numeracion</strong></label>
+                          <hr>
                           <p>{{cliente.domicilio.numero}}</p>
-
+                          <hr>
                         </div>
 
                         <div class="col-4 mt-4">
 
                           <label for="piso"><strong>Piso</strong></label>
+                          <hr>
                           <p>{{cliente.domicilio.piso}}</p>
-
+                          <hr>
                         </div>
                         <div class="col-4 mt-4">
                           <label for="departamento">
-                            <strong>Numero Departamento</strong>
+                            <strong>Numero Dpto</strong>
                           </label>
+                          <hr>
                           <p>{{cliente.domicilio.nroDepartamento}}</p>
-
+                          <hr>
                         </div>
 
                         <div class="col-6 mt-4">
@@ -108,20 +118,22 @@
                           <label for="country">
                             <strong>Localidad</strong>
                           </label>
-                          <p>{{cliente.domicilio.localidad.nombre}}</p>
-
+                          <hr>
+                          <p>{{cliente.domicilio.localidad.nombre  | uppercase}}</p>
+                          <hr>
                         </div>
                         <div class="col-6 mt-4">
 
                           <label for="country">
-                            <strong>Localidad</strong>
+                            <strong>Provincia</strong>
                           </label>
-                          <p>{{cliente.domicilio.localidad.provincia.nombre}}</p>
-
+                          <hr>
+                          <p>{{cliente.domicilio.localidad.provincia.nombre  | uppercase}}</p>
+                          <hr>
                         </div>
                       </div>
 
-                      <div class="row text-center">
+                      <div class="row text-center" *ngIf="!cliente.domicilio.calle">
                         <div class="col-12">
                           <hr>
                           <div class="alert alert-danger" role="alert">
@@ -155,4 +167,4 @@
 
 <app-modal-historial-facturas [clienteUser]="cliente"></app-modal-historial-facturas>
 
-<app-modal-formulario [clienteUser]="cliente"></app-modal-formulario>
+<app-modal-formulario [clienteUser]="cliente" *ngIf="cliente"></app-modal-formulario>

@@ -1,4 +1,5 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { UserProfileComponent } from './../../user-profile.component';
+import { Component, OnInit, Input, Host } from '@angular/core';
 import { Cliente } from 'src/app/entidades/Cliente';
 import { ActivatedRoute } from '@angular/router';
 import { LoginService } from 'src/app/services/loginServices/login.service';
@@ -6,8 +7,9 @@ import { LocalidadService } from 'src/app/services/serviciosCliente/localidadSer
 import { AlertsService } from 'src/app/services/alertServices/alerts.service';
 import { ClienteService } from 'src/app/services/serviciosCliente/clienteServices/cliente.service';
 import { Localidad } from 'src/app/entidades/Localidad';
-import { NgForm } from '@angular/forms';
+import { NgForm, FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { Domicilio } from '../../../../../entidades/Domicilio';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-modal-formulario',
@@ -15,45 +17,115 @@ import { Domicilio } from '../../../../../entidades/Domicilio';
   styleUrls: ['./modal-formulario.component.css']
 })
 export class ModalFormularioComponent implements OnInit {
+  formulario: FormGroup;
   listaLocalidades: Localidad[] = [];
   cliente: Cliente;
   domicilio = new Domicilio();
   @Input() set clienteUser(cliente) {
-    if(!cliente.Domicilio){
 
-      this.cliente = cliente;
-      this.cliente.domicilio = this.domicilio;
+    this.BuildForm();
+
+    try {
+      if (cliente.domicilio) {
+        this.cliente = cliente;
+        console.log(cliente);
+        this.formulario.patchValue({
+          id: cliente.id,
+          nombre: cliente.nombre,
+          apellido: cliente.apellido,
+          telefono: cliente.telefono,
+
+          usuario: {
+            id: cliente.usuario.id,
+            email: cliente.usuario.email,
+            uid_firebase: cliente.usuario.uid_firebase,
+            rol: {
+              id: cliente.usuario.rol.id
+            }
+          },
+          domicilio: {
+            id: cliente.domicilio.id,
+            calle: cliente.domicilio.calle,
+            numero: cliente.domicilio.numero,
+            piso: cliente.domicilio.piso,
+            nroDepartamento: cliente.domicilio.nroDepartamento,
+            aclaracion: cliente.domicilio.aclaracion,
+            localidad: {
+              id: cliente.domicilio.localidad.id,
+              nombre: cliente.domicilio.localidad.nombre
+            }
+          }
+        });
+
+      } else {
+        this.cliente = cliente;
+        this.formulario.patchValue({
+          id: cliente.id,
+          nombre: cliente.nombre,
+          apellido: cliente.apellido,
+          telefono: cliente.telefono,
+          usuario: {
+            id: cliente.usuario.id,
+            email: cliente.usuario.email,
+            uid_firebase: cliente.usuario.uid_firebase,
+            rol: {
+              id: cliente.usuario.rol.id
+            }
+          },
+          domicilio: {
+            id: 0,
+            calle: '',
+            numero: 0,
+            piso: 0,
+            nroDepartamento: 0,
+            aclaracion: '',
+            localidad: {
+              id: 0,
+              nombre: ''
+            }
+          }
+        });
+
+
+      }
+    } catch (error) {
+
     }
-    
+
   };
-  constructor(    
+  constructor(
     private serviceCliente: ClienteService,
     private rutaActiva: ActivatedRoute,
-    private serviceLogin: LoginService,
     private serviceLocalidad: LocalidadService,
-    private serviceAlert: AlertsService) { }
+    private serviceAlert: AlertsService,
+    private fb: FormBuilder,
+    @Host() private perfil: UserProfileComponent) { }
 
   ngOnInit(): void {
-   
-this.getLocalidades();
-     
+
+    this.BuildForm();
+    this.getLocalidades();
+
   }
 
-  updateUsuario(formUser: NgForm) {
-    console.log(formUser.value);
-    if (formUser.invalid) {
-      console.log('invalido', formUser.invalid);
+  updateUsuario() {
+    console.log(this.formulario.value);
+    if (this.formulario.invalid) {
+      console.log('invalido', this.formulario.invalid);
       this.serviceAlert.mensajeError(
-        'La fecha son incorrectas',
-        'Por favor revise el orden de las fechas ingresadas'
+        'Datos incorrectos',
+        'Por favor revise que todos los datos sean completados en su formato correcto'
       );
     } else {
 
-      this.serviceCliente.put(this.cliente.id, this.cliente).subscribe(
+      this.serviceCliente.put(this.cliente.id, this.formulario.value).subscribe(
         (res) => {
+          console.log(res);
           this.cliente = res;
+          this.perfil.cliente = this.cliente;
+          this.formulario.reset();
           this.serviceAlert.mensajeSuccess(
-            'Realizado',
+            'Actualizacion de perfil realizada',
             'Sus datos fueron actualizados con exito'
           );
         },
@@ -68,10 +140,10 @@ this.getLocalidades();
     }
   }
 
-  
+
   async getLocalidades() {
     await this.serviceLocalidad.getAll().subscribe(
-  
+
       (res) => {
         console.log('localidad ', res);
         this.listaLocalidades = res;
@@ -97,5 +169,36 @@ this.getLocalidades();
     });
 
   }
+
+  BuildForm() {
+    this.formulario = this.fb.group({
+      id: new FormControl(0),
+      nombre: new FormControl('', Validators.required),
+      apellido: new FormControl('', Validators.required),
+      telefono: new FormControl(null, [Validators.required]),
+
+      usuario: this.fb.group({
+        id: new FormControl(0),
+        email: new FormControl('', Validators.required),
+        uid_firebase: new FormControl('', Validators.required),
+        rol: this.fb.group({
+          id: new FormControl(0),
+        })
+      }),
+      domicilio: this.fb.group({
+        id: new FormControl(0),
+        calle: new FormControl('', Validators.required),
+        numero: new FormControl(null, [Validators.required]),
+        piso: new FormControl(null, [Validators.required]),
+        nroDepartamento: new FormControl(null, [Validators.required]),
+        aclaracion: new FormControl('', Validators.required),
+        localidad: this.fb.group({
+          id: new FormControl(0),
+          nombre: new FormControl(null, [Validators.required]),
+        })
+      })
+    });
+  }
+
 
 }

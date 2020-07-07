@@ -1,5 +1,4 @@
 import Swal from 'sweetalert2';
-import { Categoria } from 'src/app/entidades/Categoria';
 import { Component, OnInit } from '@angular/core';
 import { ArticuloManufacturado } from '../../../../../../entidades/ArticuloManufacturado';
 import { ArticuloManufacturadoService } from '../../../../../../services/serviciosCliente/articuloManufacturadoServices/articuloManufacturado.service';
@@ -25,9 +24,8 @@ export class ArtManufacturadoPlatosComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private alerts: AlertsService,
-    private serviceArtManufac: ArticuloManufacturadoService,
-    private sweet: AlertsService
-  ) {}
+    private serviceArtManufac: ArticuloManufacturadoService
+  ) { }
 
   ngOnInit() {
     this.getAllArtManufac();
@@ -50,7 +48,7 @@ export class ArtManufacturadoPlatosComponent implements OnInit {
         console.log(this.articuloManufacturado);
       },
       (err) => {
-        this.sweet.mensajeError(
+        this.alerts.mensajeError(
           'Ocurrio un error',
           'Vuelva a intentarlo mas tarde'
         );
@@ -104,11 +102,11 @@ export class ArtManufacturadoPlatosComponent implements OnInit {
           console.log(data);
           const indexArticulo = this.articuloManufacturado.indexOf(articulo);
           this.articuloManufacturado.splice(indexArticulo, 1);
-          this.sweet.mensajeSuccess('Eliminacion exitosa', '');
+          this.alerts.mensajeSuccess('Eliminacion exitosa', '');
         },
         (error) => {
           console.error(error);
-          this.sweet.mensajeError(
+          this.alerts.mensajeError(
             'Error',
             'Hubo un problema al eliminar el articulo'
           );
