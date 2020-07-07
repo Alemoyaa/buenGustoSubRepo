@@ -1,3 +1,4 @@
+import { AlertsService } from './../../../../../services/alertServices/alerts.service';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import Swal from 'sweetalert2';
 import { EstadoPedido } from './../../../../../entidades/EstadoPedido';
@@ -55,8 +56,8 @@ export class GestorOrdenesCocineroComponent implements OnInit {
   constructor(
     private pedidoService: PedidoServices,
     private estadoService: EstadoPedidoServices,
-    private fb: FormBuilder
-  ) {}
+    private fb: FormBuilder,
+    private alerts: AlertsService) { }
 
   async ngOnInit() {
     await this.getAllPedidos();
@@ -95,6 +96,10 @@ export class GestorOrdenesCocineroComponent implements OnInit {
         });
       },
       (error) => {
+        this.alerts.mensajeError(
+          'Ocurrio un Error',
+          'Vuelva a intentarlo mas tarde'
+        );
         console.warn('error =>  ', error);
       }
     );
@@ -164,6 +169,7 @@ export class GestorOrdenesCocineroComponent implements OnInit {
               )
               .subscribe((data) => {
                 this.pedidoService.descontarStock(this.pedidoSeleccionado.id);
+                console.log("data");
               });
 
             console.log(this.pedidoSeleccionado.estadoPedido.id);
@@ -172,12 +178,8 @@ export class GestorOrdenesCocineroComponent implements OnInit {
               'Puedes continuar con mas pedidos en la seccion de Estados de Pedidos!',
               'success'
             );
-
+            this.formularioEstado.reset();
             this.getAllPedidos();
-            // if (this.pedidoSeleccionado.estadoPedido.id === 7) {
-            //   window.location.reload();
-            // }
-            // this.formularioEstado.reset();
           } else {
             this.formularioEstado.reset();
           }
