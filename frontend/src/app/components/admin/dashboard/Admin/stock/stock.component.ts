@@ -48,20 +48,26 @@ export class StockComponent implements OnInit {
   crearFormulario(): void {
     this.formStock = new FormGroup({
       id: new FormControl(0),
-      denominacion: new FormControl('', Validators.required),
-      precio_de_venta: new FormControl(0, Validators.required),
-      precio_de_compra: new FormControl(0, Validators.required),
-      stock_actual: new FormControl(0, Validators.required),
-      stock_minimo: new FormControl(0, Validators.required),
-      stock_maximo: new FormControl(0, Validators.required),
+      denominacion: new FormControl('', Validators.compose([
+        Validators.required, Validators.pattern('^[a-zA-Z]+$')])),
+      precio_de_venta: new FormControl(0, Validators.compose([
+        Validators.required, Validators.pattern('^[0-9]+$')])),
+      precio_de_compra: new FormControl(0, Validators.compose([
+        Validators.required, Validators.pattern('^[0-9]+$')])),
+      stock_actual: new FormControl(0, Validators.compose([
+        Validators.required, Validators.pattern('^[0-9]+$')])),
+      stock_minimo: new FormControl(0, Validators.compose([
+        Validators.required, Validators.pattern('^[0-9]+$')])),
+      stock_maximo: new FormControl(0, Validators.compose([
+        Validators.required, Validators.pattern('^[0-9]+$')])),
       requiere_refrigeracion: new FormControl(null, Validators.required),
       es_catalogo: new FormControl(null, Validators.required),
-      url_imagen: new FormControl(null),
+      url_imagen: new FormControl(''),
       unidadMedidaID: new FormGroup({
-        id: new FormControl(0),
+        id: new FormControl(0, Validators.required),
       }),
       categoria: new FormGroup({
-        id: new FormControl(0),
+        id: new FormControl(0, Validators.required)
       }),
     });
   }
@@ -92,7 +98,7 @@ export class StockComponent implements OnInit {
   /* Servicios */
 
   agregar() {
-    console.log("metodo");
+    console.log("metodo agregar");
     console.log(this.formStock.value);
     this.artInsumoService.post(this.formStock.value).subscribe(
       (data) => {
@@ -102,7 +108,7 @@ export class StockComponent implements OnInit {
         this.articulosInsumos.push(this.articulo);
         this.getAllArticulos();
         this.formStock.reset();
-        Swal.fire( 'Articulo agregado ', 'success');
+        Swal.fire('Articulo agregado ', 'success');
       },
       (error) => {
         Swal.fire({
@@ -124,7 +130,7 @@ export class StockComponent implements OnInit {
           'Actualizacion realizada',
           `El articulo "${this.formStock.value.denominacion}" se actualizo correctamente`
         );
-          console.log("Entro");
+        console.log("Entro");
         this.articulosInsumos.filter(item => {
           if (item.id === this.formStock.value.id) {
             const indexArticulo = this.articulosInsumos.indexOf(item);
@@ -219,6 +225,7 @@ export class StockComponent implements OnInit {
   }
 
   seleccionarUnidad(id: number) {
+    console.log("seleccionar unidad");
     console.log(id);
     const control = this.formStock.controls.unidadMedidaID as FormGroup;
     if (id != null) {
@@ -230,13 +237,14 @@ export class StockComponent implements OnInit {
           id: unidad.id,
         });
       });
-    }else {
+    } else {
       console.warn("No se pudo seleccionar la unidad")
     }
   }
 
 
   seleccionarPadre(id: number) {
+    console.log("seleccionar padre");
     console.log(id);
     const control = <FormGroup>this.formStock.controls['categoria'];
     if (id != null) {
@@ -244,10 +252,7 @@ export class StockComponent implements OnInit {
         this.categoriaSeleccionada = padre;
 
         this.formStock.controls.categoria.setValue({
-          id: this.categoriaSeleccionada.id,
-          nombreCategoria: this.categoriaSeleccionada.nombreCategoria,
-          esCategoriaCatalogo: this.categoriaSeleccionada.esCategoriaCatalogo,
-          padre: this.categoriaSeleccionada.padre,
+          id: this.categoriaSeleccionada.id
         });
       });
     } else {
