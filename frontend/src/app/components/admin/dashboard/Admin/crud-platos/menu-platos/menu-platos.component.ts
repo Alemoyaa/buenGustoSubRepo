@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./menu-platos.component.css'],
 })
 export class MenuPlatosComponent implements OnInit {
-  valorSelected: number = 0;
+  valorSelected: number = 1;
 
   constructor() {}
 

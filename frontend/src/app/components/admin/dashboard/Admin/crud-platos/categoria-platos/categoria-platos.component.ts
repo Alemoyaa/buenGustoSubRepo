@@ -1,8 +1,8 @@
-import { AlertsService } from 'src/app/services/alertServices/alerts.service';
-import { CategoriaService } from './../../../../../../services/serviciosCliente/categoriaServices/categoria.service';
-import { Categoria } from './../../../../../../entidades/Categoria';
-import { Component, OnInit, AfterViewInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import {AlertsService} from 'src/app/services/alertServices/alerts.service';
+import {CategoriaService} from './../../../../../../services/serviciosCliente/categoriaServices/categoria.service';
+import {Categoria} from './../../../../../../entidades/Categoria';
+import {Component, OnInit} from '@angular/core';
+import {FormBuilder, FormGroup} from '@angular/forms';
 
 @Component({
   selector: 'app-categoria-platos',
@@ -16,26 +16,16 @@ export class CategoriaPlatosComponent implements OnInit {
   formularioCategoria: FormGroup;
 
   filtroBuscador: any = '';
-  id: number;
+  // id: number;
   esEditar: boolean = false;
 
-  categoria: Categoria = {
-    id: null,
-    nombreCategoria: null,
-    esCategoriaCatalogo: null,
-    padre: null,
-  };
+  categoría: Categoria;
 
   constructor(
     private fb: FormBuilder,
     private sweet: AlertsService,
     private serviceCate: CategoriaService
-  ) {}
-
-  async ngOnInit() {
-    await this.crearFormulario();
-    await this.getAllCategoria();
-    this.reRender();
+  ) {
   }
 
   get filtrar(): Categoria[] {
@@ -45,9 +35,9 @@ export class CategoriaPlatosComponent implements OnInit {
     });
   }
 
-  async reRender() {
-    await this.crearFormulario();
-    await this.getAllCategoria();
+  ngOnInit() {
+    this.crearFormulario();
+    this.getAllCategoria();
   }
 
   async getAllCategoria() {
@@ -56,24 +46,18 @@ export class CategoriaPlatosComponent implements OnInit {
         this.listaCategorias = res;
       },
       (err) => {
-        console.log(err);
+        console.log('Error getAll', err);
       }
     );
   }
 
-  simulateClick() {
-    document.getElementById('modalAgregar').click();
-  }
-
   crearFormulario() {
     this.formularioCategoria = this.fb.group({
-      id: [],
+      id: [null],
       nombreCategoria: [''],
-      esCategoriaCatalogo: [''],
+      esCategoriaCatalogo: [null],
       padre: this.fb.group({
-        id: [],
-        nombreCategoria: [''],
-        esCategoriaCatalogo: [''],
+        id: [0]
       }),
     });
     /*this.formularioCategoria = new FormGroup({
@@ -84,15 +68,26 @@ export class CategoriaPlatosComponent implements OnInit {
     });*/
   }
 
+  seleccionarCategoria(id: number) {
+    const control = this.formularioCategoria.get('padre');
+
+    this.listaCategorias.filter(categoriaArreglo => {
+      if (categoriaArreglo.id === id) {
+        control.setValue({
+          id: categoriaArreglo.id,
+        });
+      }
+    });
+  }
+
   eliminar(categoriaAct: Categoria) {
     const opcion = confirm('¿Esta seguro que desea eliminar?');
     if (opcion) {
       this.serviceCate.delete(categoriaAct.id).subscribe(
         (data) => {
-          alert('Registro eliminado');
           const indexArticulo = this.listaCategorias.indexOf(categoriaAct);
           this.listaCategorias.splice(indexArticulo, 1);
-          this.sweet.mensajeSuccess('Eliminacion exitosa', '');
+          this.sweet.mensajeSuccess('Eliminación exitosa', '');
         },
         (err) => {
           console.log(err);
@@ -106,10 +101,10 @@ export class CategoriaPlatosComponent implements OnInit {
   }
 
   actualizar() {
-    this.serviceCate.put(this.id, this.formularioCategoria.value).subscribe(
+    this.serviceCate.put(this.formularioCategoria.value.id, this.formularioCategoria.value).subscribe(
       (data) => {
         this.sweet.mensajeSuccess(
-          'Actualizacion realizada',
+          'Actualización realizada',
           `La unidad ${this.formularioCategoria.value.denominacion} se actualizo correctamente, recuerde que puede modificarlo cuando usted lo desee`
         );
         console.log(data);
@@ -129,28 +124,30 @@ export class CategoriaPlatosComponent implements OnInit {
 
   editar(categoria: Categoria) {
     this.esEditar = true;
-    this.formularioCategoria.setValue({
+    this.formularioCategoria.patchValue({
       id: categoria.id,
       nombreCategoria: categoria.nombreCategoria,
       esCategoriaCatalogo: categoria.esCategoriaCatalogo,
-      padre: categoria.padre,
+      padre: {
+        id : categoria.padre.id,
+      },
     });
-    console.log(JSON.stringify(categoria) + 'CAtegoria');
-    console.log(JSON.stringify(this.formularioCategoria.value) + 'Formuilario');
-    this.id = categoria.id;
+    // console.log(JSON.stringify(categoria) + 'Categoría');
+    // console.log(JSON.stringify(this.formularioCategoria.value) + 'Formulario');
+    // this.id = categoria.id;
   }
 
   crear() {
     this.serviceCate.post(this.formularioCategoria.value).subscribe(
       (data) => {
         this.listaCategorias.push(data);
-        this.getAllCategoria();
+        // this.getAllCategoria();
         this.formularioCategoria.reset();
         this.sweet.mensajeSuccess('Articulo agregado', 'success');
       },
       (err) => {
         this.sweet.mensajeError(
-          'Ocurrio un problema',
+          'Ocurrió un problema',
           'Por favor vuelva a intentarlo mas tarde'
         );
         console.log(err);
