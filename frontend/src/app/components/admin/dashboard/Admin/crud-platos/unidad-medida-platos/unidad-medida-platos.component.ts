@@ -32,8 +32,8 @@ export class UnidadMedidaPlatosComponent implements OnInit {
   }
 
   get filtrar(): UnidadMedida[] {
-    var matcher = new RegExp(this.filtroBuscador, 'i');
-    return this.listaUnidadMedidas.filter(function (unidad) {
+    const matcher = new RegExp(this.filtroBuscador, 'i');
+    return this.listaUnidadMedidas.filter((unidad) => {
       return matcher.test([unidad.denominacion, unidad.abreviatura].join());
     });
   }

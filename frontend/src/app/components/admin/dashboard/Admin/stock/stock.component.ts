@@ -277,7 +277,7 @@ export class StockComponent implements OnInit {
   get filtrar(): ArticuloInsumo[] {
     const matcher = new RegExp(this.filtroBuscador, 'i');
     return this.articulosInsumos.filter((articulo) => {
-      return matcher.test([articulo.denominacion, articulo.categoria].join());
+      return matcher.test([articulo.denominacion].join());
     });
   }
 }
