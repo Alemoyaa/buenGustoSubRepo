@@ -1,7 +1,7 @@
 import { UnidadMedida } from 'src/app/entidades/UnidadMedida';
 
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, FormBuilder, FormArray } from '@angular/forms';
+import {FormGroup, FormControl, FormBuilder, FormArray, Form} from '@angular/forms';
 import Swal from 'sweetalert2';
 import { ArticuloManufacturado } from 'src/app/entidades/ArticuloManufacturado';
 import { ArticuloManufacturadoService } from 'src/app/services/serviciosCliente/articuloManufacturadoServices/articuloManufacturado.service';
@@ -25,7 +25,7 @@ export class ModalPlatosComponent implements OnInit {
 
   esEditar: boolean = false;
 
-  //formulario
+  // formulario
   formularioArticulo: FormGroup;
   // articuloActualizar: ArticuloManufacturado;
   // id: number;
@@ -78,19 +78,21 @@ export class ModalPlatosComponent implements OnInit {
     });
   }
 
-  seleccionarUnidadDeMedida(id: number) {
+  async seleccionarUnidadDeMedida(id: number, i) {
     console.log(id);
 
-    const control = <FormArray>this.formularioArticulo.controls['lista_detalleManufacturado'];
-    const controlunidad = <FormGroup>control.controls['UnidadMedidaID'];
+    console.log(i);
 
-    this.serviceUnidadDeMedida.getOne(id).subscribe(unidad => {
+    const control = this.formularioArticulo.get(['lista_detalleManufacturado', i, 'UnidadMedidaID']);
+
+    console.log(control);
+
+    await this.serviceUnidadDeMedida.getOne(id).subscribe(unidad => {
 
       console.log(unidad);
       console.log(control.value);
-      console.log(controlunidad.value);
 
-      controlunidad.setValue({
+      control.patchValue({
         id: unidad.id,
 
       });
@@ -100,14 +102,14 @@ export class ModalPlatosComponent implements OnInit {
 
   }
 
-  seleccionarIngrediente(id: number) {
+  seleccionarIngrediente(id: number, i) {
     console.log(id);
-    const control = <FormArray>this.formularioArticulo.controls['lista_detalleManufacturado']
+    console.log(i);
 
-    const controlarticulo = <FormGroup>control.controls['articuloInsumoID'];
+    const control = this.formularioArticulo.get(['lista_detalleManufacturado', i, 'articuloInsumoID']) ;
     this.serviceArticuloInsumo.getOne(id).subscribe(articulo => {
- 
-      controlarticulo.setValue({
+
+      control.patchValue({
         id: articulo.id
       });
       console.log(this.formularioArticulo.value);
@@ -117,16 +119,16 @@ export class ModalPlatosComponent implements OnInit {
   // seleccionar
 
   crearFormulario() {
-    this.formularioArticulo = new FormGroup({
-      id: new FormControl(null),
-      precio_de_venta: new FormControl(null),
-      url_imagen: new FormControl(null),
-      denominacion: new FormControl(null),
-      costo_de_manuf: new FormControl(0),
-      tiempo_estimado_manuf: new FormControl(null),
+    this.formularioArticulo = this.fb.group({
+      id: [null],
+      precio_de_venta: [null],
+      url_imagen: [''],
+      denominacion: [''],
+      costo_de_manuf: [null],
+      tiempo_estimado_manuf: [null],
       lista_detalleManufacturado: this.fb.array([]),
       rubro: this.fb.group({
-        id: new FormControl(0)
+        id: [null],
       })
     });
   }
@@ -136,14 +138,14 @@ export class ModalPlatosComponent implements OnInit {
   }
 
   agregarIngrediente() {
-    const ingredienteNuevo = new FormGroup({
-      cantidad: new FormControl(0),
-      UnidadMedidaID: new FormGroup({
-        id: new FormControl(0),
+    const ingredienteNuevo = this.fb.group({
+      cantidad: [null],
+      UnidadMedidaID: this.fb.group({
+        id: [null],
 
       }),
-      articuloInsumoID: new FormGroup({
-        id: new FormControl(0),
+      articuloInsumoID: this.fb.group({
+        id: [null],
 
       })
     });
@@ -151,11 +153,11 @@ export class ModalPlatosComponent implements OnInit {
     this.lista_detalleManufacturado.push(ingredienteNuevo);
   }
 
- 
+
 
 
   cerrar() {
-    this.crearFormulario()
+    this.crearFormulario();
     this.esEditar = false;
   }
 
@@ -173,7 +175,7 @@ export class ModalPlatosComponent implements OnInit {
       (err) => {
         Swal.fire({
           icon: 'error',
-          title: 'Ocurrio un problema',
+          title: 'Ocurrió un problema',
           html: 'Por favor vuelva a intentarlo mas tarde',
         });
         console.log(err);
@@ -218,7 +220,7 @@ export class ModalPlatosComponent implements OnInit {
   //       (err) => {
   //         this.alerts.mensajeError(
   //           'No se ah podido actualizar el Rol del usuario',
-  //           'ah ocurrido un error y no se ah podido realizar la actualizacio, porfavor verifique que esten todos los datos correctos'
+  //           'ah ocurrido un error y no se ah podido realizar la actualización, por favor verifique que este todos los datos correctos'
   //         );
   //       }
   //     );

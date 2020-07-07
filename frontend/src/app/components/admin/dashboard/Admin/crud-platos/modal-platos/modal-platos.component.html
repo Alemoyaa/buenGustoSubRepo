@@ -1,154 +1,152 @@
-
-<div class="modal fade" data-backdrop="static" id="ModalProductos" tabindex="-1" role="form"
-aria-labelledby="ModalStockLabel" aria-hidden="true">
-<div class="modal-dialog modal-xl" role="document" id="body">
+<div aria-hidden="true" aria-labelledby="ModalStockLabel" class="modal fade" data-backdrop="static" id="ModalProductos"
+     role="form" tabindex="-1">
+  <div class="modal-dialog modal-xl" id="body" role="document">
     <div class="modal-content">
-        <div class="modal-header">
-            <h5 *ngIf="!esEditar" class="modal-title" id="modalAgregar">
-                <strong>Agregar nuevo Plato</strong>
-            </h5>
-            <h5 *ngIf="esEditar" class="modal-title" id="modalEditar">
-                <strong>Editar</strong>
-            </h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-        <div class="modal-body text-lg-center">
-            <div class="container-fluid">
-                <h4 *ngIf="!esEditar" class="modal-title" id="modalAgregar">
-                    <strong>Ingresa los datos de tu plato</strong>
-                </h4>
-                <div class="row text-center">
-                    <p><strong>Datos basicos del plato</strong></p>
+      <div class="modal-header">
+        <h5 *ngIf="!esEditar" class="modal-title" id="modalAgregar">
+          <strong>Agregar nuevo Plato</strong>
+        </h5>
+        <h5 *ngIf="esEditar" class="modal-title" id="modalEditar">
+          <strong>Editar</strong>
+        </h5>
+        <button aria-label="Close" class="close" data-dismiss="modal" type="button">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body text-lg-center">
+        <div class="container-fluid">
+          <h4 *ngIf="!esEditar" class="modal-title" id="modalAgregar">
+            <strong>Ingresa los datos de tu plato</strong>
+          </h4>
+          <div class="row text-center">
+            <p><strong>Datos basicos del plato</strong></p>
+          </div>
+          <form [formGroup]="formularioArticulo">
+            <div class="row">
+              <div class="col-md-4">
+
+                <div class="form-group">
+                  <label>Nombre</label>
+                  <input class="form-control" formControlName="denominacion" type="text"/>
+                  <!-- formControlName="denominacion" -->
                 </div>
-                <form [formGroup]="formularioArticulo" >
-                    <div class="row">
-                        <div class="col-md-4">
+              </div>
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label>Precio de venta</label>
+                  <input class="form-control" formControlName="precio_de_venta" type="number"/>
+                  <!--  formControlName="precio_de_venta" -->
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label>Url Imagen</label>
+                  <input class="form-control" formControlName="url_imagen" type="text"/>
+                  <!-- formControlName="url_imagen" -->
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label>Tiempo estimado de Realizado:</label>
+                  <input class="form-control" formControlName="tiempo_estimado_manuf" type="number"/>
+                  <!--    formControlName="tiempo_estimado_manuf" -->
+                </div>
 
-                            <div class="form-group">
-                                <label for="">Nombre</label>
-                                <input type="text" class="form-control" formControlName="denominacion" />
-                                <!-- formControlName="denominacion" -->
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label for="">Precio de venta</label>
-                                <input type="number" class="form-control" formControlName="precio_de_venta" />
-                                <!--  formControlName="precio_de_venta" -->
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label for="">Url Imagen</label>
-                                <input type="text" class="form-control" formControlName="url_imagen" />
-                                <!-- formControlName="url_imagen" -->
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="cantidad">Tiempo estimado de Realizado:</label>
-                                <input type="number" class="form-control" formControlName="tiempo_estimado_manuf"  />
-                                <!--    formControlName="tiempo_estimado_manuf" -->
-                            </div>
+              </div>
+              <div class="col-md-6" formGroupName="rubro">
+                <div class="form-group">
+                  <label>Rubro:</label>
+                  <!-- <input type="number" class="form-control" name="precioUnitario" id="precioUnitario" > -->
+                  <!-- formControlName="precioUnitario" -->
+                  <select (change)="seleccionarRubro($event.target.value)" class="custom-select"
+                          formControlName="id">
 
-                        </div>
-                        <div class="col-md-6" formGroupName="rubro">
-                            <div class="form-group">
-                                <label for="precioUnitario">Rubro:</label> 
-                                <!-- <input type="number" class="form-control" name="precioUnitario" id="precioUnitario" > -->
-                                <!-- formControlName="precioUnitario" -->
-                                <select (change)="seleccionarRubro($event.target.value)" class="custom-select" formControlName="id">
-                                  
-                                  <option [value]="rubro.id" *ngFor="let rubro of rubroGeneral" >
-                                      {{rubro.denominacion}}
-                                  </option>
-                                 
-                                </select>
-                                <!--    formControlName="es_catalogo" -->
-                            </div>
-                        </div>
-                        <div class="float-left"> 
-                           
-                            <button class="btn btn-success" (click)="agregarIngrediente()" >Agregar Ingrediente</button>
-                        </div>
-                       
-                          <!-- formArrayName="detalleFactura" *ngFor="let detalle of lista_detalleManufacturado.controls; let i = index " -->
-                          <div class="" formArrayName="lista_detalleManufacturado" *ngFor="let detalle of lista_detalleManufacturado.controls; let i = index " >
-                          
+                    <option *ngFor="let rubro of rubroGeneral" [value]="rubro.id">
+                      {{rubro.denominacion}}
+                    </option>
 
-                            <!-- [formGroupName]="i" -->
-                            <div class="row" id="ingrediente" [formGroupName]="i">
+                  </select>
+                  <!--    formControlName="es_catalogo" -->
+                </div>
+              </div>
+              <div class="float-left">
 
-                                <div class="form-group col-md-3">
-                                    <label for="precioUnitario">Cantidad:</label> 
-                                   <!-- <input type="number" class="form-control" name="precioUnitario" id="precioUnitario" > -->
-                                   <!-- formControlName="precioUnitario" -->
-                                   <input type="number" class="form-control" formControlName="cantidad" />
-                                 </div>
+                <button (click)="agregarIngrediente()" class="btn btn-success">Agregar Ingrediente</button>
+              </div>
 
-                                 <div class="form-group col-md-3" formGroupName="UnidadMedidaID">
-                                    <label for="formaPago"> Unidad de medida:</label>
-                                 
-                                    <select (change)="seleccionarUnidadDeMedida($event.target.value)" class="custom-select" formControlName="id" >
-                                      
-                                      <option [value]="unidadMedida.id" *ngFor="let unidadMedida of unidadDeMedidaIngrediente">
-                                        {{unidadMedida.denominacion}}
-                                      </option>
-                               
-                                    </select>
-                                  </div>
+              <!-- formArrayName="detalleFactura" *ngFor="let detalle of lista_detalleManufacturado.controls; let i = index " -->
+              <div *ngFor="let detalle of lista_detalleManufacturado.controls; let i = index " class=""
+                   formArrayName="lista_detalleManufacturado">
 
-                              <div class="form-group  col-md-3" formGroupName="articuloInsumoID">
-                                
-                                <label for="cantidad">Nombre ingrediente:</label>
-                                <select (change)="seleccionarIngrediente($event.target.value)" class="custom-select" formControlName="id">
-                                  
-                                    <option [value]="ingrediente.id" *ngFor="let ingrediente of nombreIngrediente">
-                                        {{ingrediente.denominacion}}
-                                    </option>
-                                    
-                                  </select>
-                                
-                              </div>
-                              
-                              
-                
-                
-                             
-                
-                             
-                            
-                                  <!-- (click)="removerDetalle(i)" -->
-                                <a class="btn" id="trash" (click)="removerDetalle(i)" > <i class="fas fa-trash"></i></a>
-                            
-                
-                            </div>
-                          </div>
-                        
 
-                    </div>
-                </form>
+                <!-- [formGroupName]="i" -->
+                <div [formGroupName]="i" class="row" id="ingrediente">
+
+                  <div class="form-group col-md-3">
+                    <label>Cantidad:</label>
+                    <!-- <input type="number" class="form-control" name="precioUnitario" id="precioUnitario" > -->
+                    <!-- formControlName="precioUnitario" -->
+                    <input class="form-control" formControlName="cantidad" type="number"/>
+                  </div>
+
+                  <div class="form-group col-md-3" formGroupName="UnidadMedidaID">
+                    <label> Unidad de medida:</label>
+
+                    <select (change)="seleccionarUnidadDeMedida($event.target.value, i)" class="custom-select"
+                            formControlName="id">
+
+                      <option *ngFor="let unidadMedida of unidadDeMedidaIngrediente" [value]="unidadMedida.id">
+                        {{unidadMedida.denominacion}}
+                      </option>
+
+                    </select>
+                  </div>
+
+                  <div class="form-group  col-md-3" formGroupName="articuloInsumoID">
+
+                    <label>Nombre ingrediente:</label>
+                    <select (change)="seleccionarIngrediente($event.target.value, i)" class="custom-select"
+                            formControlName="id">
+
+                      <option *ngFor="let ingrediente of nombreIngrediente" [value]="ingrediente.id">
+                        {{ingrediente.denominacion}}
+                      </option>
+
+                    </select>
+
+                  </div>
+
+
+                  <!-- (click)="removerDetalle(i)" -->
+                  <a (click)="removerDetalle(i)" class="btn" id="trash"> <i class="fas fa-trash"></i></a>
+
+
+                </div>
+              </div>
+
 
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="cerrar()">
-                    Cerrar
-                </button>
+          </form>
 
-                <button *ngIf="esEditar" [disabled]="formularioArticulo.invalid" type="button" class="btn btn-info"
-                    >
-                    Editar Plato
-                </button>
-
-                <button *ngIf="!esEditar" [disabled]="formularioArticulo.invalid" type="button" class="btn btn-info"
-                    (click)="crear()">
-                    Crear nuevoPlato
-                </button>
-            </div>
         </div>
-    </div>
-</div>
+        <div class="modal-footer">
+          <button (click)="cerrar()" class="btn btn-primary" data-dismiss="modal" type="button">
+            Cerrar
+          </button>
 
+          <button *ngIf="esEditar" [disabled]="formularioArticulo.invalid" class="btn btn-info" type="button"
+          >
+            Editar Plato
+          </button>
+
+          <button (click)="crear()" *ngIf="!esEditar" [disabled]="formularioArticulo.invalid" class="btn btn-info"
+                  type="button">
+            Crear nuevoPlato
+          </button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
 
