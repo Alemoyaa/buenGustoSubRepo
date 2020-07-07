@@ -1,16 +1,16 @@
-import { UnidadMedida } from 'src/app/entidades/UnidadMedida';
+import {UnidadMedida} from 'src/app/entidades/UnidadMedida';
 
-import { Component, OnInit } from '@angular/core';
-import {FormGroup, FormControl, FormBuilder, FormArray, Form} from '@angular/forms';
+import {Component, OnInit} from '@angular/core';
+import {FormArray, FormBuilder, FormGroup} from '@angular/forms';
 import Swal from 'sweetalert2';
-import { ArticuloManufacturado } from 'src/app/entidades/ArticuloManufacturado';
-import { ArticuloManufacturadoService } from 'src/app/services/serviciosCliente/articuloManufacturadoServices/articuloManufacturado.service';
-import { AlertsService } from 'src/app/services/alertServices/alerts.service';
-import { ArticuloInsumo } from 'src/app/entidades/ArticuloInsumo';
-import { RubroGeneral } from '../../../../../../entidades/RubroGeneral';
-import { ArticuloInsumoService } from '../../../../../../services/serviciosCliente/articuloInsumoServices/articuloInsumo.service';
-import { UnidadMedidaService } from 'src/app/services/serviciosCliente/unidadMedidaServices/unidad_medida.services';
-import { RubroGeneralService } from 'src/app/services/serviciosCliente/rubroGeneralServices/rubro-general.service';
+import {ArticuloManufacturadoService} from 'src/app/services/serviciosCliente/articuloManufacturadoServices/articuloManufacturado.service';
+import {AlertsService} from 'src/app/services/alertServices/alerts.service';
+import {ArticuloInsumo} from 'src/app/entidades/ArticuloInsumo';
+import {RubroGeneral} from '../../../../../../entidades/RubroGeneral';
+import {ArticuloInsumoService} from '../../../../../../services/serviciosCliente/articuloInsumoServices/articuloInsumo.service';
+import {UnidadMedidaService} from 'src/app/services/serviciosCliente/unidadMedidaServices/unidad_medida.services';
+import {RubroGeneralService} from 'src/app/services/serviciosCliente/rubroGeneralServices/rubro-general.service';
+import {ArticuloManufacturado} from '../../../../../../entidades/ArticuloManufacturado';
 
 @Component({
   selector: 'app-modal-platos',
@@ -27,8 +27,10 @@ export class ModalPlatosComponent implements OnInit {
 
   // formulario
   formularioArticulo: FormGroup;
-  // articuloActualizar: ArticuloManufacturado;
-  // id: number;
+
+  articuloActualizar: ArticuloManufacturado;
+  id: number;
+
   constructor(
     private fb: FormBuilder,
     private serviceArtManufac: ArticuloManufacturadoService,
@@ -36,21 +38,23 @@ export class ModalPlatosComponent implements OnInit {
     private serviceUnidadDeMedida: UnidadMedidaService,
     private serviceRubroGeneral: RubroGeneralService,
     private sweet: AlertsService,
-    private alerts: AlertsService) { }
+    private alerts: AlertsService) {
+  }
+
+  get lista_detalleManufacturado() {
+    return this.formularioArticulo.get('lista_detalleManufacturado') as FormArray;
+  }
 
   ngOnInit(): void {
-
     this.crearFormulario();
     this.traerNombreIngredientes();
     this.traerUnidadesDeMedida();
     this.traerRubrosGenerales();
   }
 
-
   traerNombreIngredientes() {
     this.serviceArticuloInsumo.getAll().subscribe(articuloInsumo => {
       this.nombreIngrediente = articuloInsumo;
-
     });
   }
 
@@ -61,14 +65,14 @@ export class ModalPlatosComponent implements OnInit {
     });
   }
 
+  // (change)="seleccionarRubro($event.target.value)"
+
   // rubro: RubroGeneral[];
   traerRubrosGenerales() {
     this.serviceRubroGeneral.getAll().subscribe(rubro => {
       this.rubroGeneral = rubro;
     });
   }
-
-  // (change)="seleccionarRubro($event.target.value)"
 
   seleccionarRubro(id: number) {
     this.serviceRubroGeneral.getOne(id).subscribe(rubro => {
@@ -78,45 +82,34 @@ export class ModalPlatosComponent implements OnInit {
     });
   }
 
-  async seleccionarUnidadDeMedida(id: number, i) {
-    console.log(id);
+  seleccionarUnidadDeMedida(id: number, i: number) {
+    const control = this.formularioArticulo.get(['lista_detalleManufacturado', i, 'unidadMedidaID']);
 
-    console.log(i);
-
-    const control = this.formularioArticulo.get(['lista_detalleManufacturado', i, 'UnidadMedidaID']);
-
-    console.log(control);
-
-    await this.serviceUnidadDeMedida.getOne(id).subscribe(unidad => {
-
-      console.log(unidad);
-      console.log(control.value);
-
-      control.patchValue({
-        id: unidad.id,
-
-      });
-      console.log(this.formularioArticulo.value);
+    this.unidadDeMedidaIngrediente.filter(unidadDeMedidaArreglo => {
+      if (unidadDeMedidaArreglo.id === id) {
+        control.setValue({
+          id: unidadDeMedidaArreglo.id,
+        });
+      }
     });
-
-
-  }
-
-  seleccionarIngrediente(id: number, i) {
-    console.log(id);
-    console.log(i);
-
-    const control = this.formularioArticulo.get(['lista_detalleManufacturado', i, 'articuloInsumoID']) ;
-    this.serviceArticuloInsumo.getOne(id).subscribe(articulo => {
-
-      control.patchValue({
-        id: articulo.id
-      });
-      console.log(this.formularioArticulo.value);
-    });
+    console.log(control.value);
+    console.log(this.formularioArticulo.value);
   }
 
   // seleccionar
+  seleccionarIngrediente(id: number, i: number) {
+    const control = this.formularioArticulo.get(['lista_detalleManufacturado', i, 'articuloInsumoID']);
+
+    this.nombreIngrediente.filter((nombreDeIngredienteArreglo) => {
+      if (nombreDeIngredienteArreglo.id === id) {
+        control.setValue({
+          id: nombreDeIngredienteArreglo.id
+        });
+      }
+    });
+    console.log(control.value);
+    console.log(this.formularioArticulo.value);
+  }
 
   crearFormulario() {
     this.formularioArticulo = this.fb.group({
@@ -133,42 +126,30 @@ export class ModalPlatosComponent implements OnInit {
     });
   }
 
-  get lista_detalleManufacturado() {
-    return this.formularioArticulo.get('lista_detalleManufacturado') as FormArray;
-  }
-
   agregarIngrediente() {
     const ingredienteNuevo = this.fb.group({
       cantidad: [null],
-      UnidadMedidaID: this.fb.group({
+      unidadMedidaID: this.fb.group({
         id: [null],
-
       }),
       articuloInsumoID: this.fb.group({
         id: [null],
-
       })
     });
 
     this.lista_detalleManufacturado.push(ingredienteNuevo);
   }
 
-
-
-
   cerrar() {
     this.crearFormulario();
     this.esEditar = false;
   }
 
-
   crear() {
-
     console.log(this.formularioArticulo.value);
     this.serviceArtManufac.post(this.formularioArticulo.value).subscribe(
       (data) => {
-        // this.articuloActualizar = data;
-
+        console.log('Alito el lápiz', data);
         this.formularioArticulo.reset();
         Swal.fire('success', 'Articulo agregado ', 'success');
       },
@@ -183,47 +164,53 @@ export class ModalPlatosComponent implements OnInit {
     );
   }
 
-
   removerDetalle(id: number) {
     this.lista_detalleManufacturado.removeAt(id);
   }
-// editar(articulo: ArticuloManufacturado) {
-  //   console.log(articulo);
-  //   this.esEditar = true;
-  //   this.formularioArticulo.setValue({
-  //     id: articulo.id,
-  //     precio_de_venta: articulo.precio_de_venta,
-  //     url_imagen: articulo.url_imagen,
-  //     denominacion: articulo.denominacion,
-  //     tiempo_estimado_manuf: articulo.tiempo_estimado_manuf,
-  //     lista_detalleManufacturado: articulo.lista_detalleManufacturado,
-  //   });
-  //   this.id = articulo.id;
-  //   console.log(this.id);
-  // }
 
-   // actualizar() {
-  //   this.serviceArtManufac
-  //     .put(this.id, this.formularioArticulo.value)
-  //     .subscribe(
-  //       (res) => {
+  editar(articulo: ArticuloManufacturado) {
+    console.log(articulo);
+    this.esEditar = true;
+    let lista = [];
 
-  //         this.alerts.mensajeSuccess(
-  //           'Actualizacion realizada',
-  //           `El articulo ${this.articuloActualizar.denominacion} se actualizo correctamente, recuerde que puede modificarlo cuando usted lo desee`
-  //         );
-  //         console.log(this.id);
+    articulo.lista_detalleManufacturado.forEach((detalleManufacturado) => {
+      lista.push(detalleManufacturado);
+    });
 
-  //         this.esEditar = false;
-  //         this.formularioArticulo.reset();
-  //       },
-  //       (err) => {
-  //         this.alerts.mensajeError(
-  //           'No se ah podido actualizar el Rol del usuario',
-  //           'ah ocurrido un error y no se ah podido realizar la actualización, por favor verifique que este todos los datos correctos'
-  //         );
-  //       }
-  //     );
-  // }
+    this.formularioArticulo.patchValue({
+      id: articulo.id,
+      precio_de_venta: articulo.precio_de_venta,
+      url_imagen: articulo.url_imagen,
+      denominacion: articulo.denominacion,
+      tiempo_estimado_manuf: articulo.tiempo_estimado_manuf,
+      lista_detalleManufacturado: articulo.lista_detalleManufacturado,
+    });
+    this.id = articulo.id;
+    console.log(this.id);
+  }
+
+  actualizar() {
+    this.serviceArtManufac
+      .put(this.id, this.formularioArticulo.value)
+      .subscribe(
+        (res) => {
+          console.log(res);
+          this.alerts.mensajeSuccess(
+            'Actualización realizada',
+            `El articulo ${this.articuloActualizar.denominacion} se actualizo correctamente, recuerde que puede modificarlo cuando usted lo desee`
+          );
+          console.log(this.id);
+
+          this.esEditar = false;
+          this.formularioArticulo.reset();
+        },
+        (err) => {
+          this.alerts.mensajeError(
+            'No se ah podido actualizar el Rol del usuario',
+            'ah ocurrido un error y no se ah podido realizar la actualización, por favor verifique que este todos los datos correctos'
+          );
+        }
+      );
+  }
 
 }
