@@ -48,20 +48,20 @@ export class StockComponent implements OnInit {
   crearFormulario(): void {
     this.formStock = new FormGroup({
       id: new FormControl(0),
-      denominacion: new FormControl('',Validators.required),
-      precio_de_venta: new FormControl(null, Validators.required),
+      denominacion: new FormControl('', Validators.required),
+      precio_de_venta: new FormControl(null),
       precio_de_compra: new FormControl(null, Validators.required),
       stock_actual: new FormControl(null, Validators.required),
       stock_minimo: new FormControl(null, Validators.required),
-      stock_maximo: new FormControl(null,Validators.required),
+      stock_maximo: new FormControl(null, Validators.required),
       requiere_refrigeracion: new FormControl(null, Validators.required),
       es_catalogo: new FormControl(null, Validators.required),
       url_imagen: new FormControl(''),
       unidadMedidaID: new FormGroup({
-        id: new FormControl(0, Validators.required),
+        id: new FormControl(null, Validators.required),
       }),
       categoria: new FormGroup({
-        id: new FormControl(0, Validators.required)
+        id: new FormControl(null, Validators.required)
       }),
     });
   }
@@ -102,7 +102,7 @@ export class StockComponent implements OnInit {
         this.articulosInsumos.push(this.articulo);
         this.getAllArticulos();
         this.formStock.reset();
-        Swal.fire('Articulo agregado ', 'success');
+        Swal.fire('success', 'Articulo agregado ', 'success');
       },
       (error) => {
         Swal.fire({
@@ -271,7 +271,7 @@ export class StockComponent implements OnInit {
   get filtrar(): ArticuloInsumo[] {
     const matcher = new RegExp(this.filtroBuscador, 'i');
     return this.articulosInsumos.filter((articulo) => {
-      return matcher.test([articulo.denominacion , articulo.categoria.nombreCategoria].join());
+      return matcher.test([articulo.denominacion, articulo.categoria.nombreCategoria].join());
     });
   }
 }
