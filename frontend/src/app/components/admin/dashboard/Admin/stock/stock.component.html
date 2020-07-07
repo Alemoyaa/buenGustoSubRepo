@@ -31,7 +31,6 @@
           [(ngModel)]="filtroBuscador"
           [ngModelOptions]="{ standalone: true }"
         />
-
       </form>
     </div>
   </div>
@@ -43,13 +42,12 @@
           <th hidden>#</th>
           <th scope="col">Denominacion</th>
           <th scope="col">Categoria</th>
-          <th scope="col">Catalogo</th>
+          <!-- <th scope="col">Catalogo</th> -->
           <th scope="col">Costo</th>
           <th scope="col">Precio Venta</th>
           <th scope="col">Refrigueracion</th>
           <th scope="col">Stock Actual</th>
           <th scope="col">Stock Minimo</th>
-          <th scope="col">Stock Maximo</th>
           <th scope="col">Imagen</th>
           <th scope="col">Unidad de medida</th>
           <th scope="col">Acciones</th>
@@ -79,10 +77,10 @@
             </p>
           </td>
 
-          <td>
+          <!-- <td>
             <p *ngIf="i.es_catalogo === true">Si</p>
             <p *ngIf="i.es_catalogo === false">No</p>
-          </td>
+          </td> -->
 
           <td>
             <p *ngIf="i.precio_de_compra">$ {{ i.precio_de_compra }}</p>
@@ -117,12 +115,12 @@
             </p>
           </td>
 
-          <td>
+          <!-- <td>
             <p *ngIf="i.stock_maximo">{{ i.stock_maximo }}</p>
             <p *ngIf="!i.stock_maximo" class="alert-articulo">
               VERIFICAR ARTICULO
             </p>
-          </td>
+          </td> -->
 
           <td>
             <img
@@ -231,7 +229,10 @@
                   placeholder="nombre articulo.."
                 />
                 <div
-                  *ngIf="formStock.controls['denominacion'].dirty"
+                  *ngIf="
+                    formStock.controls['denominacion'].invalid &&
+                    formStock.controls['denominacion'].dirty
+                  "
                   class="alert alert-danger"
                   role="alert"
                 >
@@ -251,17 +252,18 @@
                   <option value="false">No</option>
                 </select>
                 <div
-                *ngIf="
-                  formStock.controls['es_catalogo'].dirty
-                "
-                class="alert alert-danger"
-                role="alert"
-              >
-                <span
-                  *ngIf="formStock.controls['es_catalogo'].errors.required"
-                  >La selección es requerida
-                </span>
-              </div>
+                  *ngIf="
+                    formStock.controls['es_catalogo'].invalid &&
+                    formStock.controls['es_catalogo'].dirty
+                  "
+                  class="alert alert-danger"
+                  role="alert"
+                >
+                  <span
+                    *ngIf="formStock.controls['es_catalogo'].errors.required"
+                    >La selección es requerida
+                  </span>
+                </div>
               </div>
             </div>
 
@@ -276,18 +278,21 @@
                   <option value="false">No</option>
                 </select>
                 <div
-                *ngIf="
-
-                  formStock.controls['requiere_refrigeracion'].dirty
-                "
-                class="alert alert-danger"
-                role="alert"
-              >
-                <span
-                  *ngIf="formStock.controls['requiere_refrigeracion'].errors.required"
-                  >La selección es requerida
-                </span>
-              </div>
+                  *ngIf="
+                    formStock.controls['requiere_refrigeracion'].invalid &&
+                    formStock.controls['requiere_refrigeracion'].dirty
+                  "
+                  class="alert alert-danger"
+                  role="alert"
+                >
+                  <span
+                    *ngIf="
+                      formStock.controls['requiere_refrigeracion'].errors
+                        .required
+                    "
+                    >La selección es requerida
+                  </span>
+                </div>
               </div>
             </div>
           </div>
@@ -304,14 +309,16 @@
                 />
                 <div
                   *ngIf="
-
+                    formStock.controls['precio_de_compra'].invalid &&
                     formStock.controls['precio_de_compra'].dirty
                   "
                   class="alert alert-danger"
                   role="alert"
                 >
                   <span
-                    *ngIf="formStock.controls['precio_de_compra'].errors.required"
+                    *ngIf="
+                      formStock.controls['precio_de_compra'].errors.required
+                    "
                     >El <strong>precio de compra</strong> es requerido
                   </span>
                 </div>
@@ -327,19 +334,6 @@
                   name="precio_de_venta"
                   formControlName="precio_de_venta"
                 />
-                <div
-                  *ngIf="
-
-                    formStock.controls['precio_de_venta'].dirty
-                  "
-                  class="alert alert-danger"
-                  role="alert"
-                >
-                  <span
-                    *ngIf="formStock.controls['precio_de_venta'].errors.required"
-                    >El <strong>precio de venta</strong> es requerido
-                  </span>
-                </div>
               </div>
             </div>
           </div>
@@ -356,7 +350,7 @@
                 />
                 <div
                   *ngIf="
-
+                    formStock.controls['stock_actual'].invalid &&
                     formStock.controls['stock_actual'].dirty
                   "
                   class="alert alert-danger"
@@ -380,18 +374,18 @@
                   formControlName="stock_minimo"
                 />
                 <div
-                *ngIf="
-
-                  formStock.controls['stock_minimo'].dirty
-                "
-                class="alert alert-danger"
-                role="alert"
-              >
-                <span
-                  *ngIf="formStock.controls['stock_minimo'].errors.required"
-                  >El <strong>Stock Minimo</strong> es requerido
-                </span>
-              </div>
+                  *ngIf="
+                    formStock.controls['stock_minimo'].invalid &&
+                    formStock.controls['stock_minimo'].dirty
+                  "
+                  class="alert alert-danger"
+                  role="alert"
+                >
+                  <span
+                    *ngIf="formStock.controls['stock_minimo'].errors.required"
+                    >El <strong>Stock Minimo</strong> es requerido
+                  </span>
+                </div>
               </div>
             </div>
 
@@ -405,18 +399,18 @@
                   formControlName="stock_maximo"
                 />
                 <div
-                *ngIf="
-
-                  formStock.controls['stock_maximo'].dirty
-                "
-                class="alert alert-danger"
-                role="alert"
-              >
-                <span
-                  *ngIf="formStock.controls['stock_maximo'].errors.required"
-                  >El <strong>Stock Maximo</strong> es requerido
-                </span>
-              </div>
+                  *ngIf="
+                    formStock.controls['stock_maximo'].invalid &&
+                    formStock.controls['stock_maximo'].dirty
+                  "
+                  class="alert alert-danger"
+                  role="alert"
+                >
+                  <span
+                    *ngIf="formStock.controls['stock_maximo'].errors.required"
+                    >El <strong>Stock Maximo</strong> es requerido
+                  </span>
+                </div>
               </div>
             </div>
           </div>
@@ -450,19 +444,6 @@
                     {{ unidad.denominacion }}
                   </option>
                 </select>
-                <div
-                *ngIf="
-
-                  formStock.controls['id'].dirty
-                "
-                class="alert alert-danger"
-                role="alert"
-              >
-                <span
-                  *ngIf="formStock.controls['id'].errors.required"
-                  >La selección es requerida
-                </span>
-              </div>
               </div>
             </div>
 
@@ -479,19 +460,6 @@
                     {{ padre.nombreCategoria }}
                   </option>
                 </select>
-                <div
-                *ngIf="
-
-                  formStock.controls['id'].dirty
-                "
-                class="alert alert-danger"
-                role="alert"
-              >
-                <span
-                  *ngIf="formStock.controls['id'].errors.required"
-                  >La selección es requerida
-                </span>
-              </div>
               </div>
             </div>
           </div>
