@@ -1,5 +1,5 @@
 
-<div class="container mt-3" id="body" *ngIf="cliente.nombre">
+<div class="container mt-3" id="body" *ngIf="cliente">
   <div id="wrapper">
     <div class="d-flex flex-column" id="content-wrapper">
       <div id="content">
@@ -39,39 +39,56 @@
                     <div class="card-body">
 
                       <div class="row text-center" style="font-size: 15px;">
-                        <div class="col-6">
 
-                          <label for="first_name"><strong>Nombre</strong></label>
-                          <hr>
-                          <p>{{cliente.nombre | uppercase}}</p>
-                          <hr>
-                        </div>
-                        <div class="col-6">
-                          <label for="last_name"><strong>Apellido</strong></label>
-                          <hr>
-                          <p>{{cliente.apellido | uppercase}}</p>
-                          <hr>
-                        </div>
-                  
-                        <div class="col-6 mt-4" *ngIf="cliente.telefono">
-
-                          <label for="telefono"><strong>Telefono</strong></label>
-                          <hr>
-                          <p>{{cliente.telefono}}</p>
-                          <hr>
-                        </div>
-                        <div class="col-6 mt-4">
+                        <div class="col-12 mt-4">
 
                           <label for="email"><strong>Email</strong></label>
                           <hr>
                           <p>{{cliente.usuario.email}}</p>
                           <hr>
                         </div>
+                        <div class="col-6" *ngIf="cliente.nombre">
+
+                          <label for="first_name"><strong>Nombre</strong></label>
+                          <hr>
+                          <p>{{cliente.nombre | uppercase}}</p>
+                          <hr>
+                        </div>
+                        <div class="col-6" *ngIf="cliente.apellido">
+                          <label for="last_name" ><strong>Apellido</strong></label>
+                          <hr>
+                          <p>{{cliente.apellido | uppercase}}</p>
+                          <hr>
+                        </div>
+                  
+                        <div class="col-12 mt-4" *ngIf="cliente.telefono">
+                         
+                          <label for="telefono"><strong>Telefono</strong></label>
+                          <hr>
+                          <p>{{cliente.telefono}}</p>
+                         <hr>
+                        </div>
+                        <div class="row text-center" *ngIf="!cliente.nombre ||  !cliente.apellido || !cliente.telefono">
+                          <div class="col-12">
+                            <hr>
+                            <div class="alert alert-danger" role="alert">
+                              <strong>Usted datos basicos en su cuenta!!</strong>
+                              <p>Debe completar los datos basicos de si persona, como por ejemplo nombre, apellido, telefono...</p>
+                              <div class="">
+                                <a class="btn btn-primary text-white" type="button" data-toggle="modal"
+                                  data-target=".modal-formulario-xl" (click)="pasarDatos(cliente)">
+                                  Cargar datos personales basicos</a>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+                        
 
 
                       </div>
 
-                      <div class="row text-center" *ngIf="cliente.domicilio.calle">
+                      <div class="row text-center" *ngIf="cliente.domicilio">
                         <hr>
                         <div class="col-6 mt-4">
 
@@ -122,7 +139,7 @@
                           <p>{{cliente.domicilio.localidad.nombre  | uppercase}}</p>
                           <hr>
                         </div>
-                        <div class="col-6 mt-4">
+                        <div class="col-6 mt-4" *ngIf="cliente.domicilio.localidad.provincia">
 
                           <label for="country">
                             <strong>Provincia</strong>
@@ -133,7 +150,7 @@
                         </div>
                       </div>
 
-                      <div class="row text-center" *ngIf="!cliente.domicilio.calle">
+                      <div class="row text-center" *ngIf="!cliente.domicilio">
                         <div class="col-12">
                           <hr>
                           <div class="alert alert-danger" role="alert">
