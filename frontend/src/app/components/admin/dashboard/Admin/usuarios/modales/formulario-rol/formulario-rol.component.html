@@ -1,69 +1,107 @@
-<div class="modal fade" data-backdrop="static" id="ModalPersona" tabindex="-1" role="form"
-  aria-labelledby="ModalEditarLabel" aria-hidden="true">
+<div
+  class="modal fade"
+  data-backdrop="static"
+  id="ModalPersona"
+  tabindex="-1"
+  role="form"
+  aria-labelledby="ModalEditarLabel"
+  aria-hidden="true"
+>
   <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel"><i class="fas fa-pencil-alt"></i> Editar Rol de usuario</h5>
+        <h5 class="modal-title" id="exampleModalLabel">
+          <i class="fas fa-pencil-alt"></i> Editar Rol de usuario
+        </h5>
 
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body text-lg-center">
-
-
         <form action="" [formGroup]="formularioPersona">
-
           <div class="row">
             <div class="col-12">
               <h5 class="modal-title" id="exampleModalLabel">
                 Datos Personales
               </h5>
             </div>
-            <input type="hidden" class="hidden" disabled formControlName="id">
+            <input type="hidden" class="hidden" disabled formControlName="id" />
             <div class="col-6">
               <div class="form-group">
                 <label for="">Nombre</label>
-                <input type="text" disabled formControlName="nombre" class="form-control" />
+                <input
+                  type="text"
+                  disabled
+                  formControlName="nombre"
+                  class="form-control"
+                />
               </div>
             </div>
             <div class="col-6">
               <div class="form-group">
                 <label for="">Apellido</label>
-                <input type="text" disabled formControlName="apellido" class="form-control" />
+                <input
+                  type="text"
+                  disabled
+                  formControlName="apellido"
+                  class="form-control"
+                />
               </div>
             </div>
             <div class="col-6">
               <div class="form-group">
-                <label for="">Telefono</label>
-                <input type="text" disabled formControlName="telefono" class="form-control" />
+                <label for="">Teléfono</label>
+                <input
+                  type="text"
+                  disabled
+                  formControlName="telefono"
+                  class="form-control"
+                />
               </div>
             </div>
-
-
           </div>
           <div formGroupName="usuario">
             <div class="row">
               <div class="col-12">
                 <h5 class="modal-title" id="exampleModalLabel">
-                  Datos de la Cuenta
+                  Datos de la cuenta
                 </h5>
               </div>
-              <input type="hidden" class="hidden" disabled formControlName="id">
+              <input
+                type="hidden"
+                class="hidden"
+                disabled
+                formControlName="id"
+              />
               <div class="col-6">
                 <div class="form-group">
                   <label for="">Email</label>
-                  <input type="text" disabled formControlName="email" class="form-control" />
+                  <input
+                    type="text"
+                    disabled
+                    formControlName="email"
+                    class="form-control"
+                  />
                 </div>
               </div>
               <div class="col-6" formGroupName="rol">
-
                 <div>
-                  <input type="hidden" class="hidden" formControlName="id">
+                  <input type="hidden" class="hidden" formControlName="id" />
                   <div class="form-group">
                     <label for="">Rol</label>
-                    <select (change)="seleccionarRol($event.target.value)" formControlName="id" class="form-control"
-                      id="rol" name="rol">
+                    <select
+                      (change)="seleccionarRol($event.target.value)"
+                      formControlName="id"
+                      class="form-control"
+                      id="rol"
+                      name="rol"
+                    >
                       <option *ngFor="let item of rol" [value]="item.id">
                         {{ item.nombreRol }}
                       </option>
@@ -71,8 +109,6 @@
                   </div>
                 </div>
               </div>
-
-
             </div>
           </div>
 
@@ -80,99 +116,154 @@
             <div class="row">
               <div class="col-12">
                 <h5 class="modal-title" id="exampleModalLabel">
-                  Datos del Domicilio
+                  Datos del domicilio
                 </h5>
               </div>
-              <input type="hidden" class="hidden" disabled formControlName="id">
+              <input
+                type="hidden"
+                class="hidden"
+                disabled
+                formControlName="id"
+              />
               <div class="col-3">
                 <div class="form-group">
                   <label for="">Calle</label>
-                  <input type="text" disabled formControlName="calle" class="form-control" />
+                  <input
+                    type="text"
+                    disabled
+                    formControlName="calle"
+                    class="form-control"
+                  />
                 </div>
               </div>
               <div class="col-3">
                 <div class="form-group">
-                  <label for="">Numero</label>
-                  <input type="text" disabled formControlName="numero" class="form-control" />
+                  <label for="">Número</label>
+                  <input
+                    type="text"
+                    disabled
+                    formControlName="numero"
+                    class="form-control"
+                  />
                 </div>
               </div>
               <div class="col-3">
                 <div class="form-group">
-                  <label for="">piso</label>
-                  <input type="text" disabled formControlName="piso" class="form-control" />
+                  <label for="">Piso</label>
+                  <input
+                    type="text"
+                    disabled
+                    formControlName="piso"
+                    class="form-control"
+                  />
                 </div>
               </div>
               <div class="col-3">
                 <div class="form-group">
                   <label for="">Nro Dpto</label>
-                  <input type="text" disabled formControlName="nroDepartamento" class="form-control" />
+                  <input
+                    type="text"
+                    disabled
+                    formControlName="nroDepartamento"
+                    class="form-control"
+                  />
                 </div>
               </div>
               <div class="col-12">
                 <div class="form-group">
-                  <label for="">Aclaracion</label>
-                  <input type="text" disabled formControlName="aclaracion" class="form-control" />
+                  <label for="">Aclaración</label>
+                  <input
+                    type="text"
+                    disabled
+                    formControlName="aclaracion"
+                    class="form-control"
+                  />
                 </div>
               </div>
             </div>
 
             <div formGroupName="localidad">
               <div class="row">
-                <input type="hidden" class="hidden" disabled formControlName="id">
+                <input
+                  type="hidden"
+                  class="hidden"
+                  disabled
+                  formControlName="id"
+                />
                 <div class="col-12">
                   <div class="form-group">
                     <label for="">Localidad</label>
-                    <input type="text" disabled formControlName="nombre" class="form-control" />
+                    <input
+                      type="text"
+                      disabled
+                      formControlName="nombre"
+                      class="form-control"
+                    />
                   </div>
                 </div>
               </div>
 
               <div formGroupName="provincia">
                 <div class="row">
-                  <input type="hidden" class="hidden" disabled formControlName="id">
+                  <input
+                    type="hidden"
+                    class="hidden"
+                    disabled
+                    formControlName="id"
+                  />
                   <div class="col-12">
                     <div class="form-group">
                       <label for="">Provincia</label>
-                      <input type="text" disabled formControlName="nombre" class="form-control" />
+                      <input
+                        type="text"
+                        disabled
+                        formControlName="nombre"
+                        class="form-control"
+                      />
                     </div>
                   </div>
-
                 </div>
-
 
                 <div formGroupName="pais">
                   <div class="row">
-                    <input type="hidden" class="hidden" disabled formControlName="id">
+                    <input
+                      type="hidden"
+                      class="hidden"
+                      disabled
+                      formControlName="id"
+                    />
                     <div class="col-12">
                       <div class="form-group">
-                        <label for="">Pais</label>
-                        <input type="text" disabled formControlName="nombre" class="form-control" />
+                        <label for="">País</label>
+                        <input
+                          type="text"
+                          disabled
+                          formControlName="nombre"
+                          class="form-control"
+                        />
                       </div>
                     </div>
-
                   </div>
-
                 </div>
-
               </div>
-
             </div>
-
-
           </div>
-
         </form>
       </div>
       <div class="modal-footer">
-
-        <button type="button" class="btn btn-warning" (click)="actualizar()" data-dismiss="modal">
+        <button
+          type="button"
+          class="btn btn-warning"
+          (click)="actualizar()"
+          data-dismiss="modal"
+        >
           <i class="fas fa-pencil-alt"> </i>
           <p>Actualizar Rol</p>
         </button>
 
         <button type="button" class="btn btn-primary" data-dismiss="modal">
           <i class="fas fa-window-close"></i>
-          <p> Cerrar</p>
+          <p>Cerrar</p>
         </button>
       </div>
     </div>

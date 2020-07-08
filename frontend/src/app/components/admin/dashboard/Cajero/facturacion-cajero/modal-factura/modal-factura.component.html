@@ -43,13 +43,13 @@
                   {{ factura.pedidofacturado.clientePedido.apellido }}
                 </h5>
                 <h5 *ngIf="factura.pedidofacturado.tipo_Envio">
-                  Tipo de Envio: Delivery
+                  Tipo de envío: Delivery
                 </h5>
                 <h5 *ngIf="!factura.pedidofacturado.tipo_Envio">
-                  Tipo de Envio: Retira en el local
+                  Tipo de envío: Retira en el local
                 </h5>
                 <h5 *ngIf="factura.pedidofacturado.tipo_Envio">
-                  Descuento:no posee descuento
+                  Descuento: no posee descuento
                 </h5>
                 <h5 *ngIf="!factura.pedidofacturado.tipo_Envio">
                   Descuento: 10%
@@ -64,7 +64,7 @@
                       <th scope="col">Cantidad</th>
                       <th scope="col">Concepto</th>
                       <th scope="col">Precio unitario</th>
-                      
+
                       <th scope="col">Subtotal</th>
                     </tr>
                   </thead>
@@ -75,11 +75,19 @@
                       "
                     >
                       <td>{{ item.cantidad }}</td>
-                      <td *ngIf="item.articuloManufacturado">{{ item.articuloManufacturado.denominacion }}</td>
-                      <td *ngIf="item.articuloManufacturado">{{ item.articuloManufacturado.precio_de_venta }}</td>
-                      <td *ngIf="item.articuloInsumo">{{ item.articuloInsumo.denominacion }}</td>
-                      <td *ngIf="item.articuloInsumo">{{ item.articuloInsumo.precio_de_venta }}</td>
-                   
+                      <td *ngIf="item.articuloManufacturado">
+                        {{ item.articuloManufacturado.denominacion }}
+                      </td>
+                      <td *ngIf="item.articuloManufacturado">
+                        {{ item.articuloManufacturado.precio_de_venta }}
+                      </td>
+                      <td *ngIf="item.articuloInsumo">
+                        {{ item.articuloInsumo.denominacion }}
+                      </td>
+                      <td *ngIf="item.articuloInsumo">
+                        {{ item.articuloInsumo.precio_de_venta }}
+                      </td>
+
                       <td>{{ item.subtotal }}</td>
                     </tr>
                   </tbody>

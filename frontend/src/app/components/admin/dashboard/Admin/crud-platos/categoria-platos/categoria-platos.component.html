@@ -101,7 +101,7 @@
           <div class="row">
             <div class="col-12">
               <h5 class="modal-title" id="exampleModalLabel">
-                Ingrese los datos de la categoria
+                Ingrese los datos de la categoría
               </h5>
             </div>
 
@@ -110,7 +110,7 @@
 
             <div class="col-6">
               <div class="form-group">
-                <label class="col-form-label">Denominacion</label>
+                <label class="col-form-label">Denominación</label>
                 <input
                   type="text"
                   class="form-control"
@@ -119,16 +119,18 @@
               </div>
 
               <div class="form-group">
-                <label class="form-check-label">Es catalogo</label>
-                <select formControlName="esCategoriaCatalogo" class="form-control">
+                <label class="form-check-label">Es catálogo</label>
+                <select
+                  formControlName="esCategoriaCatalogo"
+                  class="form-control"
+                >
                   <option value="true">Si</option>
                   <option value="false">No</option>
                 </select>
-
               </div>
 
               <div class="form-group" formGroupName="padre">
-                <label>Categoria padre</label>
+                <label>Categoría padre</label>
                 <select
                   (change)="seleccionarCategoria($event.target.value)"
                   class="form-control"
@@ -155,7 +157,7 @@
           data-dismiss="modal"
           (click)="cerrar()"
         >
-          Close
+          Cerrar
         </button>
 
         <button
@@ -166,7 +168,7 @@
           data-dismiss="modal"
           (click)="actualizar()"
         >
-          Editar categoria
+          Editar categoría
         </button>
 
         <button
@@ -177,7 +179,7 @@
           data-dismiss="modal"
           (click)="crear()"
         >
-          Crear nueva categoria
+          Crear nueva categoría
         </button>
       </div>
     </div>

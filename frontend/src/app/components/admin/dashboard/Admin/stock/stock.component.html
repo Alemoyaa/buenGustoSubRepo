@@ -5,7 +5,7 @@
       style="margin-bottom: 20px;"
     >
       <span class="contact100-form-title-1">
-        Administracion de Stock
+        Administración de Stock
       </span>
     </div>
   </div>
@@ -17,7 +17,7 @@
       data-target="#ModalStock"
       (click)="limpiarForm()"
     >
-      Nuevo articulo
+      Nuevo artículo
     </button>
     <div class="buscador">
       <form>
@@ -40,14 +40,14 @@
       <thead>
         <tr>
           <th hidden>#</th>
-          <th scope="col">Denominacion</th>
-          <th scope="col">Categoria</th>
+          <th scope="col">Denominación</th>
+          <th scope="col">Categoría</th>
           <!-- <th scope="col">Catalogo</th> -->
           <th scope="col">Costo</th>
           <th scope="col">Precio Venta</th>
-          <th scope="col">Refrigueracion</th>
+          <th scope="col">Refrigeración</th>
           <th scope="col">Stock Actual</th>
-          <th scope="col">Stock Minimo</th>
+          <th scope="col">Stock Mínimo</th>
           <th scope="col">Imagen</th>
           <th scope="col">Unidad de medida</th>
           <th scope="col">Acciones</th>
@@ -92,7 +92,7 @@
           <td>
             <p *ngIf="i.precio_de_venta">$ {{ i.precio_de_venta }}</p>
             <p *ngIf="!i.precio_de_venta">
-              Articulo insumo
+              Artículo insumo
             </p>
           </td>
 
@@ -189,7 +189,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <h5 *ngIf="!esEditar" class="modal-title" id="modalAgregar">
-          Agregar nuevo articulo
+          Agregar nuevo artículo
         </h5>
         <h5 *ngIf="esEditar" class="modal-title" id="modalEditar">
           <i class="fas fa-pencil-alt"></i> <strong>Editar</strong>
@@ -208,11 +208,11 @@
           <div class="row">
             <div class="col-12 contact100-form-title imagen-titulo">
               <span class="contact100-form-title-1">
-                Stock de Articulos
+                Stock de Artículos
               </span>
 
               <span class="contact100-form-title-2">
-                Ingrese los datos del articulo
+                Ingrese los datos del artículo
               </span>
             </div>
           </div>
@@ -220,7 +220,7 @@
           <div class="row">
             <div class="col-md-4">
               <div class="form-group">
-                <label>Denominacion</label>
+                <label>Denominación</label>
                 <input
                   type="text"
                   class="form-control"
@@ -246,7 +246,7 @@
 
             <div class="col-md-4">
               <div class="form-group">
-                <label>Es catalogo ?</label>
+                <label>Es catálogo ?</label>
                 <select formControlName="es_catalogo" class="form-control">
                   <option value="true">Si</option>
                   <option value="false">No</option>
@@ -269,7 +269,7 @@
 
             <div class="col-md-4">
               <div class="form-group">
-                <label>Requiere refrigeracion</label>
+                <label>Requiere refrigeración</label>
                 <select
                   formControlName="requiere_refrigeracion"
                   class="form-control"
@@ -300,7 +300,7 @@
           <div class="row">
             <div class="col-md-4">
               <div class="form-group">
-                <label>Precio de Costo</label>
+                <label>Precio de costo</label>
                 <input
                   type="number"
                   class="form-control"
@@ -366,7 +366,7 @@
 
             <div class="col-md-4">
               <div class="form-group">
-                <label>Stock Minimo</label>
+                <label>Stock Mínimo</label>
                 <input
                   type="number"
                   class="form-control"
@@ -383,7 +383,7 @@
                 >
                   <span
                     *ngIf="formStock.controls['stock_minimo'].errors.required"
-                    >El <strong>Stock Minimo</strong> es requerido
+                    >El <strong>Stock Mínimo</strong> es requerido
                   </span>
                 </div>
               </div>
@@ -391,7 +391,7 @@
 
             <div class="col-md-4">
               <div class="form-group">
-                <label>Stock Maximo</label>
+                <label>Stock Máximo</label>
                 <input
                   type="number"
                   class="form-control"
@@ -408,7 +408,7 @@
                 >
                   <span
                     *ngIf="formStock.controls['stock_maximo'].errors.required"
-                    >El <strong>Stock Maximo</strong> es requerido
+                    >El <strong>Stock Máximo</strong> es requerido
                   </span>
                 </div>
               </div>
@@ -449,7 +449,7 @@
 
             <div class="col-md-4" formGroupName="categoria">
               <div class="form-group">
-                <label>Categoria</label>
+                <label>Categoría</label>
                 <select
                   (change)="seleccionarPadre($event.target.value)"
                   class="form-control"
@@ -483,7 +483,7 @@
           class="btn btn-info"
           (click)="update()"
         >
-          Editar articulo
+          Editar artículo
         </button>
 
         <button
@@ -494,7 +494,7 @@
           class="btn btn-info"
           (click)="agregar()"
         >
-          Crear nuevo articulo
+          Crear nuevo artículo
         </button>
       </div>
     </div>

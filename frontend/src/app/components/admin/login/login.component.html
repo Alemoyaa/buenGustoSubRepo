@@ -1,25 +1,34 @@
 <main class="page login-page" id="fondo">
   <section class="clean-block clean-form dark">
-    <div class="container col-lg-4 col-md-8 col-sm-12"  id="cartaLogin">
-      <div class="col-12 contact100-form-title imagen-titulo text-center jumbotron" style="margin-bottom: 20px;">
-
+    <div class="container col-lg-4 col-md-8 col-sm-12" id="cartaLogin">
+      <div
+        class="col-12 contact100-form-title imagen-titulo text-center jumbotron"
+        style="margin-bottom: 20px;"
+      >
         <span class="contact100-form-title-1">
-          Iniciar Sesion
+          Iniciar Sesión
         </span>
-  
-  
       </div>
       <form [formGroup]="formularioLogin" class="text-center">
         <div class="form-group">
           <label for="email">
             <h4>Email</h4>
           </label>
-          <input class="form-control item" type="email" id="email" formControlName="email"
-            placeholder="ingrese su email">
-          <div class="alert alert-danger" *ngIf="
-          formularioLogin.controls['email'].invalid &&
-          formularioLogin.controls['email'].dirty
-        " role="alert">
+          <input
+            class="form-control item"
+            type="email"
+            id="email"
+            formControlName="email"
+            placeholder="ingrese su email"
+          />
+          <div
+            class="alert alert-danger"
+            *ngIf="
+              formularioLogin.controls['email'].invalid &&
+              formularioLogin.controls['email'].dirty
+            "
+            role="alert"
+          >
             <span *ngIf="formularioLogin.controls['email'].errors.required">
               <p>El email es requerido</p>
             </span>
@@ -32,43 +41,86 @@
           <label for="password">
             <h4>Contraseña</h4>
           </label>
-          <input class="form-control" type="password" id="password" formControlName="password"
-            placeholder="ingrese su password">
-          <div class="alert alert-danger" *ngIf="
-          formularioLogin.controls['password'].invalid &&
-          formularioLogin.controls['password'].dirty
-        " role="alert">
+          <input
+            class="form-control"
+            type="password"
+            id="password"
+            formControlName="password"
+            placeholder="ingrese su password"
+          />
+          <div
+            class="alert alert-danger"
+            *ngIf="
+              formularioLogin.controls['password'].invalid &&
+              formularioLogin.controls['password'].dirty
+            "
+            role="alert"
+          >
             <span *ngIf="formularioLogin.controls['password'].errors.required">
-              <p>password requerida</p>
+              <p>Contraseña requerida</p>
             </span>
           </div>
         </div>
-        <button *ngIf="!mostrarCargar" class="btn btn-primary btn-block" type="submit"
-          [disabled]="!formularioLogin.valid" (click)="ingresarConEmailPassword()">
-          <h5> <strong>Ingresar</strong> </h5>
+        <button
+          *ngIf="!mostrarCargar"
+          class="btn btn-primary btn-block"
+          type="submit"
+          [disabled]="!formularioLogin.valid"
+          (click)="ingresarConEmailPassword()"
+        >
+          <h5><strong>Ingresar</strong></h5>
         </button>
-        <button *ngIf="mostrarCargar" class="btn btn-primary btn-block" type="button" disabled>
-          <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
+        <button
+          *ngIf="mostrarCargar"
+          class="btn btn-primary btn-block"
+          type="button"
+          disabled
+        >
+          <span
+            class="spinner-grow spinner-grow-sm"
+            role="status"
+            aria-hidden="true"
+          ></span>
           <span class="sr-only">
             <p>Cargando...</p>
           </span>
         </button>
 
-        <p><button class="btn btn-danger btn-block mt-4" type="submit" (click)="ingresarConGoogle()"><i
-              class="fab fa-google"></i> Continuar con Google</button></p>
+        <p>
+          <button
+            class="btn btn-danger btn-block mt-4"
+            type="submit"
+            (click)="ingresarConGoogle()"
+          >
+            <i class="fab fa-google"></i> Continuar con Google
+          </button>
+        </p>
 
-        <p> <label for="email" class="text-center"> ¿Olvidaste tu Contraseña?
-            <button class="btn btn-warning" [disabled]="formularioLogin.controls['email'].invalid"
-              (click)="recuperarPassword()">Recuperar Contraseña</button></label> </p>
+        <p>
+          <label for="email" class="text-center">
+            ¿Olvidaste tu contraseña?
+            <button
+              class="btn btn-warning"
+              [disabled]="formularioLogin.controls['email'].invalid"
+              (click)="recuperarPassword()"
+            >
+              Recuperar contraseña
+            </button></label
+          >
+        </p>
 
-        <p> <label for="email" class="text-center">
-            ¿Todavia no tenes una cuenta?&nbsp;<a href="/register">&nbsp;Registrar</a>&nbsp;</label> </p>
+        <p>
+          <label for="email" class="text-center">
+            ¿Todavía no tenés una cuenta?&nbsp;<a href="/register"
+              >&nbsp;Registrar</a
+            >&nbsp;</label
+          >
+        </p>
       </form>
 
       <div class="alert alert-warning" role="alert" *ngIf="!datosCorrectos">
         {{ textoError }}
       </div>
-
     </div>
   </section>
 </main>

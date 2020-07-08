@@ -18,7 +18,7 @@
           <th scope="col" hidden>id</th>
           <th scope="col">Nombre</th>
           <th scope="col">Apellido</th>
-          <th scope="col">Numero de telefono</th>
+          <th scope="col">Numero de teléfono</th>
           <th scope="col">Acciones</th>
         </tr>
       </thead>
@@ -102,9 +102,9 @@
             <tr>
               <th scope="col">Fecha</th>
               <th scope="col">Total de pedido</th>
-              <th scope="col">Articulos de pedido</th>
-              <th scope="col">Tipo envio</th>
-              <th scope="col">Numero de pedido</th>
+              <th scope="col">Artículos de pedido</th>
+              <th scope="col">Tipo envío</th>
+              <th scope="col">Número de pedido</th>
             </tr>
           </thead>
           <tbody>
@@ -122,7 +122,7 @@
                   data-toggle="dropdown"
                   role="menu"
                 >
-                  Articulos <span class="caret"></span>
+                  Artículos <span class="caret"></span>
                 </button>
 
                 <ul class="dropdown-menu">
@@ -145,7 +145,7 @@
               </td>
 
               <td *ngIf="pedido.tipo_Envio; else elseTemplate">
-                Envio
+                Envío
               </td>
               <ng-template #elseTemplate>
                 <td>En local</td>
@@ -161,7 +161,7 @@
       </ng-template>
       <button class="btn btn-success" (click)="exportAsXLSX()" *ngIf="mostrar">
         <i class="fa fa-file-excel-o"></i>
-        <p class="lead">Exportar a excel</p>
+        <p class="lead">Exportar a planilla Excel</p>
       </button>
     </div>
   </div>
