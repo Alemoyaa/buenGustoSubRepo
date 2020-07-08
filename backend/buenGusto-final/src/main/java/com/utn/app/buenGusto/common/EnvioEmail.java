@@ -34,6 +34,8 @@ public class EnvioEmail
 		helper.setTo(to);
 		helper.setSubject(subject);
 		helper.setText(String.format(simpleMailMessage.getText(), dear, date));
+		
+		
 
 		/*FileSystemResource file = new FileSystemResource("/home/luis/Escritorio/TRABAJO FINAL.pdf")
 		helper.addAttachment(file.getFilename(), file);*/

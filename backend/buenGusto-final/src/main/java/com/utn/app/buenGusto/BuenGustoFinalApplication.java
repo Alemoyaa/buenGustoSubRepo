@@ -20,7 +20,7 @@ import java.io.OutputStream;
 public class BuenGustoFinalApplication {
 
 	public static void main(String[] args) throws IOException, DocumentException {
-		//SpringApplication.run(BuenGustoFinalApplication.class, args);
+		SpringApplication.run(BuenGustoFinalApplication.class, args);
 		
 		/*ApplicationContext context =
 	            new ClassPathXmlApplicationContext("Spring-Mail.xml");
@@ -29,9 +29,9 @@ public class BuenGustoFinalApplication {
 	    	
 	        mm.sendMail("luis_aruta@hotmail.com.ar", "Comprobante de compra", "Luis Aruta", "02/06/2020");*/
 		
-		PDFGenerator thymeleaf2Pdf = new PDFGenerator();
+		/*PDFGenerator thymeleaf2Pdf = new PDFGenerator();
         String html = thymeleaf2Pdf.parseThymeleafTemplate();
-        thymeleaf2Pdf.generatePdfFromHtml(html);
+        thymeleaf2Pdf.generatePdfFromHtml(html);*/
 		
 	}
 	
