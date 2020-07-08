@@ -34,7 +34,6 @@ export class ModalFormularioComponent implements OnInit {
           nombre: cliente.nombre,
           apellido: cliente.apellido,
           telefono: cliente.telefono,
-
           usuario: {
             id: cliente.usuario.id,
             email: cliente.usuario.email,
@@ -52,7 +51,6 @@ export class ModalFormularioComponent implements OnInit {
             aclaracion: cliente.domicilio.aclaracion,
             localidad: {
               id: cliente.domicilio.localidad.id,
-
             }
           }
         });
@@ -183,25 +181,31 @@ export class ModalFormularioComponent implements OnInit {
   mostrarDatos(id: number) {
     console.log(id);
 
-    this.serviceLocalidad.getOne(id).subscribe((localidad) => {
+    // this.serviceLocalidad.getOne(id).subscribe((localidad) => {
 
-      // seteo el formulario con el rol id y el nombre del rol traido
-      // this.cliente.domicilio.localidad = {
-      //   id: localidad.id,
-      //   nombre: localidad.nombre,
-      //   provincia: localidad.provincia
+    // seteo el formulario con el rol id y el nombre del rol traido
+    // this.cliente.domicilio.localidad = {
+    //   id: localidad.id,
+    //   nombre: localidad.nombre,
+    //   provincia: localidad.provincia
 
-      // }
-      const control = <FormGroup>this.formulario.controls['domicilio'];
-      // dentro de usuarios se encuentra rol
-      const controllocalidad = control.controls['localidad'];
+    // }
+    const control = <FormGroup>this.formulario.controls['domicilio'];
+    // dentro de usuarios se encuentra rol
+    const controllocalidad = control.controls['localidad'];
 
-      controllocalidad.patchValue({
-        id: localidad.id
-      })
-
-
+    this.listaLocalidades.filter(localidadSeleccionada => {
+      if (localidadSeleccionada.id === id) {
+        controllocalidad.patchValue({
+          id: localidadSeleccionada.id
+        });
+      }
     });
+
+
+
+
+    // });
 
   }
 

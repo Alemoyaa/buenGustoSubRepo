@@ -40,7 +40,7 @@
 
                       <div class="row text-center" style="font-size: 15px;">
 
-                        <div class="col-6 mt-4">
+                        <div class="col-12 mt-4">
 
                           <label for="email"><strong>Email</strong></label>
                           <hr>
@@ -61,12 +61,12 @@
                           <hr>
                         </div>
                   
-                        <div class="col-6 mt-4" *ngIf="cliente.telefono">
-
-                          <label for="telefono"><strong>Telefono</strong></label>
-                          
-                          <p>{{cliente.telefono}}</p>
+                        <div class="col-12 mt-4" *ngIf="cliente.telefono">
                          
+                          <label for="telefono"><strong>Telefono</strong></label>
+                          <hr>
+                          <p>{{cliente.telefono}}</p>
+                         <hr>
                         </div>
                         <div class="row text-center" *ngIf="!cliente.nombre ||  !cliente.apellido || !cliente.telefono">
                           <div class="col-12">
