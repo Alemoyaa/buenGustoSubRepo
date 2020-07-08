@@ -26,7 +26,7 @@ export class ModalFormularioComponent implements OnInit {
     this.BuildForm();
 
     try {
-      if (cliente.domicilio) {
+      if (cliente.nombre && cliente.domicilio) {
         this.cliente = cliente;
         console.log(cliente);
         this.formulario.patchValue({
@@ -52,12 +52,12 @@ export class ModalFormularioComponent implements OnInit {
             aclaracion: cliente.domicilio.aclaracion,
             localidad: {
               id: cliente.domicilio.localidad.id,
-              nombre: cliente.domicilio.localidad.nombre
+
             }
           }
         });
 
-      } else {
+      } else if (cliente.nombre && !cliente.domicilio) {
         this.cliente = cliente;
         this.formulario.patchValue({
           id: cliente.id,
@@ -81,12 +81,39 @@ export class ModalFormularioComponent implements OnInit {
             aclaracion: '',
             localidad: {
               id: 0,
-              nombre: ''
+
             }
           }
         });
+      } else {
+        this.cliente = cliente;
+        this.formulario.patchValue({
+          id: cliente.id,
+          nombre: '',
+          apellido: '',
+          telefono: null,
+          usuario: {
+            id: cliente.usuario.id,
+            email: cliente.usuario.email,
+            uid_firebase: cliente.usuario.uid_firebase,
+            rol: {
+              id: cliente.usuario.rol.id
+            }
+          },
+          domicilio: {
+            id: 0,
+            calle: '',
+            numero: 0,
+            piso: 0,
+            nroDepartamento: 0,
+            aclaracion: '',
+            localidad: {
+              id: 0,
 
-
+            }
+          }
+        });
+        console.log(this.formulario.value);
       }
     } catch (error) {
 
@@ -159,12 +186,20 @@ export class ModalFormularioComponent implements OnInit {
     this.serviceLocalidad.getOne(id).subscribe((localidad) => {
 
       // seteo el formulario con el rol id y el nombre del rol traido
-      this.cliente.domicilio.localidad = {
-        id: localidad.id,
-        nombre: localidad.nombre,
-        provincia: localidad.provincia
+      // this.cliente.domicilio.localidad = {
+      //   id: localidad.id,
+      //   nombre: localidad.nombre,
+      //   provincia: localidad.provincia
 
-      }
+      // }
+      const control = <FormGroup>this.formulario.controls['domicilio'];
+      // dentro de usuarios se encuentra rol
+      const controllocalidad = control.controls['localidad'];
+
+      controllocalidad.patchValue({
+        id: localidad.id
+      })
+
 
     });
 
@@ -194,7 +229,7 @@ export class ModalFormularioComponent implements OnInit {
         aclaracion: new FormControl('', Validators.required),
         localidad: this.fb.group({
           id: new FormControl(0),
-          nombre: new FormControl(null, [Validators.required]),
+
         })
       })
     });
