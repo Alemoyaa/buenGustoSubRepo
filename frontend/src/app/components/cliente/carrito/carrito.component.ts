@@ -182,10 +182,9 @@ export class CarritoComponent implements OnInit {
 
           this.factura.fecha = new Date();
 
-          if (this.envio) {
+          if (this.envio || !this.otroMedioDePago) {
             this.factura.formaPago = 'Efectivo';
             this.factura.montoDescuento = (this.total / 100) * 10;
-            this.factura.nroFactura = 0;
           }
 
           this.factura.tipoFactura = 'C';
