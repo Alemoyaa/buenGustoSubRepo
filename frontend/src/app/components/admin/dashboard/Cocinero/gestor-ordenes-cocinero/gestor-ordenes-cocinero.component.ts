@@ -120,13 +120,31 @@ export class GestorOrdenesCocineroComponent implements OnInit {
   }
 
   atrasar10Min(pedidoARetrasar: Pedido, iterador) {
-    this.pedidoService
-      .atrasarPor10Min(pedidoARetrasar.id)
-      .subscribe((pedidoRetrasado) => {
-        this.pedidos[iterador].hora_estimada_fin =
-          pedidoRetrasado.hora_estimada_fin;
-        console.log(pedidoRetrasado);
-      });
+    Swal.fire({
+      title: 'Seguro que desea retrasarlo?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Aceptar',
+      cancelButtonText: 'Cancelar',
+    }).then((result) => {
+      if (result.value) {
+        this.pedidoService.atrasarPor10Min(pedidoARetrasar.id).subscribe(
+          (pedidoRetrasado) => {
+            this.pedidos[iterador].hora_estimada_fin =
+              pedidoRetrasado.hora_estimada_fin;
+            console.log(pedidoRetrasado);
+            Swal.fire('Pedido retrasado!', '', 'success');
+          },
+          (erorr) => {
+            Swal.fire('Error', 'No se pudo retrasar el pedido', 'error');
+          }
+        );
+      } else {
+        Swal.fire('Retraso cancelado', '', 'warning');
+      }
+    });
   }
 
   //Traer estados de pedido, traerme solo los confirmados
