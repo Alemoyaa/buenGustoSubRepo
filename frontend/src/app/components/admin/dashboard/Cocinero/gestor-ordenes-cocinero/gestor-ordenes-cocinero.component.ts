@@ -112,17 +112,21 @@ export class GestorOrdenesCocineroComponent implements OnInit {
     console.log(this.pedidoOne);
   }
 
-  getHora(hora: Date) {
+  setMinutes(hora: Date) {
     this.horaSeleccionada = hora;
     console.log(this.horaSeleccionada);
-    this.sumarMinutos(this.horaSeleccionada, 10);
+    hora.setMinutes(hora.getMinutes() + 10);
     //return Date;
   }
 
-  sumarMinutos(hora, minutos) {
-    alert(hora);
-    hora.setMinutes(hora.getMinutes() + 10);
-    alert(hora);
+  atrasar10Min(pedidoARetrasar: Pedido, iterador) {
+    this.pedidoService
+      .atrasarPor10Min(pedidoARetrasar.id)
+      .subscribe((pedidoRetrasado) => {
+        this.pedidos[iterador].hora_estimada_fin =
+          pedidoRetrasado.hora_estimada_fin;
+        console.log(pedidoRetrasado);
+      });
   }
 
   //Traer estados de pedido, traerme solo los confirmados
