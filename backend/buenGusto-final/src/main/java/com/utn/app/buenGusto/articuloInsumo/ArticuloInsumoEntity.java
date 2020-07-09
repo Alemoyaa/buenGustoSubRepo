@@ -132,7 +132,7 @@ public class ArticuloInsumoEntity extends CommonEntity implements Serializable {
 		this.categoria = categoria;
 	}
 	
-	public void descontarStock(double cantidad) {
+	public void descontarStock(double cantidad) { 
 		this.stock_actual -= cantidad;
 	}
 	

@@ -169,10 +169,13 @@ export class GestorOrdenesCocineroComponent implements OnInit {
                 this.pedidoSeleccionado.estadoPedido
               )
               .subscribe((data) => {
-                console.log(this.pedidoSeleccionado.id);
-                console.log(data.id);
-                this.pedidoService.descontarStock(this.pedidoSeleccionado.id);
-                console.log(data);
+                if (data.estadoPedido.id === 7) {
+                  this.pedidoService
+                    .descontarStock(this.pedidoSeleccionado.id)
+                    .subscribe((pedidoDescontado) => {
+                      console.log('Pedido descontado: ', pedidoDescontado);
+                    });
+                }
               });
 
             console.log(this.pedidoSeleccionado.estadoPedido.id);

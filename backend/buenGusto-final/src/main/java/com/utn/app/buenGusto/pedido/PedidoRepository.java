@@ -17,6 +17,5 @@ public interface PedidoRepository extends JpaRepository<PedidoEntity, Long> {
 	
 	@Query("SELECT c FROM PedidoEntity c WHERE c.habilitado = ?1 AND c.estadoPedido.id = 4")
 	public List<PedidoEntity> findAllPendientes(boolean hab); 
-	
-
+	 
 }

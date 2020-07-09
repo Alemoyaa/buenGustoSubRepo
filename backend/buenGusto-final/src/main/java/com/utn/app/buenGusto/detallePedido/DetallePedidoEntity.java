@@ -94,9 +94,9 @@ public class DetallePedidoEntity extends CommonEntity implements Serializable {
 
 	public void descontarStock() {
 		if(this.isEsInsumo()) {
-			this.articuloInsumo.descontarStock(this.cantidad);
+			this.articuloInsumo.descontarStock(this.cantidad); 
 		}else {
-			this.articuloManufacturado.descontarStock(this.cantidad);
+			this.articuloManufacturado.descontarStock(this.cantidad); 
 		}
 	}
 	
