@@ -112,13 +112,6 @@ export class GestorOrdenesCocineroComponent implements OnInit {
     console.log(this.pedidoOne);
   }
 
-  setMinutes(hora: Date) {
-    this.horaSeleccionada = hora;
-    console.log(this.horaSeleccionada);
-    hora.setMinutes(hora.getMinutes() + 10);
-    //return Date;
-  }
-
   atrasar10Min(pedidoARetrasar: Pedido, iterador) {
     Swal.fire({
       title: 'Seguro que desea retrasarlo?',
@@ -135,7 +128,7 @@ export class GestorOrdenesCocineroComponent implements OnInit {
             this.pedidos[iterador].hora_estimada_fin =
               pedidoRetrasado.hora_estimada_fin;
             console.log(pedidoRetrasado);
-            Swal.fire('Pedido retrasado!', '', 'success');
+            Swal.fire('Pedido retrasado', '', 'success');
           },
           (erorr) => {
             Swal.fire('Error', 'No se pudo retrasar el pedido', 'error');
@@ -191,7 +184,7 @@ export class GestorOrdenesCocineroComponent implements OnInit {
                 this.pedidoSeleccionado.estadoPedido
               )
               .subscribe((data) => {
-                if (data.estadoPedido.id === 7) {
+                if (data.estadoPedido.nombreEstado === 'Listo') {
                   this.pedidoService
                     .descontarStock(this.pedidoSeleccionado.id)
                     .subscribe((pedidoDescontado) => {
