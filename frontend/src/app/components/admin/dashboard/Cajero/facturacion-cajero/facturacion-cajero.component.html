@@ -61,13 +61,28 @@
             {{ factura.pedidofacturado.clientePedido.apellido }}
           </td>
           <td>{{ factura.pedidofacturado.fechaRealizacion | date }}</td>
-          <td>{{ factura.pedidofacturado.estadoPedido.nombreEstado }}</td>
+          <td>
+            <form [formGroup]="formularioEstado">
+              <select
+                class="form-control"
+                name="estado"
+                formControlName="id"
+                (change)="seleccionarEstado($event.target.value, factura)"
+              >
+                <option class="en camino" value="5">En camino</option>
+                <option class="facturado" value="8">Facturado</option>
+              </select>
+            </form>
+          </td>
           <td>
             <button
               class="btn btn-primary"
               data-toggle="modal"
               data-target="#factura"
               (click)="mostrarFactura(factura)"
+              *ngIf="
+                factura.pedidofacturado.estadoPedido.nombreEstado === 'Listo'
+              "
             >
               Ver factura
             </button>
