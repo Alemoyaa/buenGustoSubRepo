@@ -3,7 +3,7 @@
     class="col-12 text-center jumbotron justify-content-center d-flex"
     style="margin-bottom: 20px;"
   >
-    <h1 class="display-4">Estadisticas</h1>
+    <h1 class="display-4">Estadísticas</h1>
     <div class="buscador">
       <i class="fa fa-user" style="font-size: 35px;"></i>
       <p>Admin</p>
@@ -13,7 +13,8 @@
   <div class="row mb-4 ml-2">
     <p class="lead mt-2">
       <strong
-        >Ranking comidas más pedidas en un periodo de tiempo determinado</strong
+        >Ranking de comidas más pedidas en un período de tiempo
+        determinado</strong
       >
     </p>
   </div>
@@ -97,14 +98,14 @@
         <div class="card" *ngIf="DateDesde && DateHasta">
           <canvas id="canvaFecha"></canvas>
           <div class="card-body">
-            <h4>Desde: {{ DateDesde }} - hasta: {{ DateHasta }}</h4>
+            <h4>Desde: {{ DateDesde }} - Hasta: {{ DateHasta }}</h4>
             <button
               class="btn btn-success"
               (click)="exportAsXLSX()"
               *ngIf="mostrarExcel"
             >
               <i class="fa fa-file-excel-o"></i>
-              <p class="lead">Exportar a excel</p>
+              <p class="lead">Exportar a planilla Excel</p>
             </button>
           </div>
         </div>
@@ -113,7 +114,7 @@
   </div>
 
   <p class="lead mt-2">
-    Ingresos (recaudaciones) por períodos de tiempo. Diario / Mensual
+    Ingresos (recaudaciones) por períodos de tiempo. Diario / Mensual.
   </p>
 
   <button
@@ -122,7 +123,7 @@
     data-toggle="modal"
     data-target="#recaudacionesPorTiempo"
   >
-    Recaudaciones por periodo de tiempo
+    Recaudaciones por período de tiempo
   </button>
 
   <div
@@ -136,7 +137,7 @@
     <div class="modal-dialog modal-xl" role="document">
       <div class="modal-content p-4">
         <div class="modal-header">
-          <h3 class="modal-title">Recaudaciones por periodo de tiempo</h3>
+          <h3 class="modal-title">Recaudaciones por período de tiempo</h3>
           <button
             type="button"
             class="close"
@@ -151,7 +152,7 @@
     </div>
   </div>
 
-  <p class="lead mt-2">Articulos con bajo stock</p>
+  <p class="lead mt-2">Artículos con bajo stock</p>
 
   <button
     type="button"
@@ -159,7 +160,7 @@
     data-toggle="modal"
     data-target="#ArticulosBajoStock"
   >
-    Articulos con stock minimo
+    Artículos con stock mínimo
   </button>
 
   <div
@@ -173,7 +174,7 @@
     <div class="modal-dialog modal-xl" role="document">
       <div class="modal-content p-4">
         <div class="modal-header">
-          <h3 class="modal-title">Articulos con bajo stock</h3>
+          <h3 class="modal-title">Artículos con bajo stock</h3>
           <button
             type="button"
             class="close"
@@ -189,7 +190,7 @@
   </div>
 
   <p class="lead mt-2">
-    Cantidad de pedidos agrupados por cliente en un determinado periodo de
+    Cantidad de pedidos agrupados por cliente en un determinado período de
     tiempo.
   </p>
 

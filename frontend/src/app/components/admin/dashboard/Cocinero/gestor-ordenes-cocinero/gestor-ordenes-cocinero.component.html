@@ -33,14 +33,15 @@
         <tr
           *ngFor="
             let pedido of pedidos
-              | paginate: { itemsPerPage: 4, currentPage: pageActual }
+              | paginate: { itemsPerPage: 4, currentPage: pageActual };
+            let i = index
           "
         >
           <th scope="row">{{ pedido.id }}</th>
           <td>{{ pedido.fechaRealizacion | date: "dd/MM/yyyy" }}</td>
           <td>{{ pedido.hora_estimada_fin | date: "mediumTime":"+0" }}</td>
           <td>
-            <button class="btn btn-danger">
+            <button class="btn btn-danger" (click)="atrasar10Min(pedido, i)">
               +10'
             </button>
           </td>
@@ -171,7 +172,7 @@
                     <p class="alert-danger" *ngIf="detalle.aclaracion">
                       · {{ detalle.aclaracion }}
                     </p>
-                    <p *ngIf="!detalle.aclaracion">No hay aclaracion</p>
+                    <p *ngIf="!detalle.aclaracion">No hay aclaración</p>
                   </td>
                 </tr>
               </tbody>

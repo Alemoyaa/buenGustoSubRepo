@@ -3,7 +3,7 @@
     class="col-lg-12 col-md-12 col-sm-12 text-center jumbotron p-1 justify-content-around d-flex"
     style="margin-bottom: 20px;"
   >
-    <h2 class="display-5 p-2">Administracion de Platos</h2>
+    <h2 class="display-5 p-2">Administración de Platos</h2>
     <div class="buscador">
       <i class="fa fa-user mt-1" style="font-size: 35px;"></i>
       <p>Admin</p>
@@ -14,32 +14,32 @@
     class="custom-select custom-select-lg mt-3"
     [(ngModel)]="valorSelected"
   >
-<!--    <option value="0" selected>Elija un menu</option>-->
+    <!--    <option value="0" selected>Elija un menu</option>-->
     <option value="1" selected>Platos</option>
-<!--    <option value="2">Categoría</option>-->
-<!--    <option value="3">Unidad de medida</option>-->
+    <!--    <option value="2">Categoría</option>-->
+    <!--    <option value="3">Unidad de medida</option>-->
   </select>
 
   <div [ngSwitch]="valorSelected">
     <div *ngSwitchCase="1">
       <app-art-manufacturado-platos></app-art-manufacturado-platos>
     </div>
-<!--    <div *ngSwitchCase="2">-->
-<!--      <app-categoria-platos></app-categoria-platos>-->
-<!--    </div>-->
-<!--    <div *ngSwitchCase="3">-->
-<!--      <app-unidad-medida-platos></app-unidad-medida-platos>-->
-<!--    </div>-->
-<!--    <div-->
-<!--      *ngSwitchDefault-->
-<!--      class="col-12 text-center jumbotron"-->
-<!--      style="margin-top: 20px;"-->
-<!--    >-->
-<!--      <h2 class="display-5 mt-3 mb-3">-->
-<!--        Elija un componente en el menu superior-->
-<!--      </h2>-->
-<!--      <br />-->
-<!--      <br />-->
-<!--    </div>-->
+    <!--    <div *ngSwitchCase="2">-->
+    <!--      <app-categoria-platos></app-categoria-platos>-->
+    <!--    </div>-->
+    <!--    <div *ngSwitchCase="3">-->
+    <!--      <app-unidad-medida-platos></app-unidad-medida-platos>-->
+    <!--    </div>-->
+    <!--    <div-->
+    <!--      *ngSwitchDefault-->
+    <!--      class="col-12 text-center jumbotron"-->
+    <!--      style="margin-top: 20px;"-->
+    <!--    >-->
+    <!--      <h2 class="display-5 mt-3 mb-3">-->
+    <!--        Elija un componente en el menu superior-->
+    <!--      </h2>-->
+    <!--      <br />-->
+    <!--      <br />-->
+    <!--    </div>-->
   </div>
 </div>

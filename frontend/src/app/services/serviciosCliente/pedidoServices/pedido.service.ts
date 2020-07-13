@@ -45,4 +45,13 @@ export class PedidoServices extends CommonService<Pedido> {
       .put<Pedido>(this._url + 'descontar_stock/' + id, null)
       .pipe(catchError(this.handleError));
   }
+
+  postConHoraFin(
+    cantidadCocineros: number,
+    pedidoEntity: Pedido
+  ): Observable<Pedido> {
+    return this.http
+      .post<Pedido>(this._url + 'cocineros/' + cantidadCocineros, pedidoEntity)
+      .pipe(catchError(this.handleError));
+  }
 }

@@ -26,14 +26,14 @@
     >
       <div class="navbar-nav ml-auto">
         <a *ngIf="!navbarUsuario" class="nav-item" role="presentation">
-          <a class="nav-link" [routerLink]="['/login']">Iniciar</a>
+          <a class="nav-link" [routerLink]="['/login']">Entrar</a>
         </a>
 
         <li *ngIf="!navbarUsuario" class="nav-item" role="presentation">
-          <a class="nav-link" [routerLink]="['/register']">Registrar</a>
+          <a class="nav-link" [routerLink]="['/register']">Registrarse</a>
         </li>
         <li>
-          <a class="nav-link" [routerLink]="['/catalogo']">Catalogo</a>
+          <a class="nav-link" [routerLink]="['/catalogo']">Catálogo</a>
         </li>
 
         <li *ngIf="navbarUsuario" class="nav-item" role="presentation">
@@ -44,7 +44,7 @@
         </li>
         <li *ngIf="navbarUsuario" class="nav-item" role="presentation">
           <a class="nav-link btn btn-outline-light" (click)="cerrarSesion()">
-            Cerrar Sesion
+            Cerrar Sesión
           </a>
         </li>
 
@@ -104,7 +104,7 @@
                 class="dropdown-item"
                 [routerLink]="['/dashboard/admin/estadisticas']"
               >
-                <p><i class="fas fa-fw fa-chart-area"></i> Estadisticas</p>
+                <p><i class="fas fa-fw fa-chart-area"></i> Estadísticas</p>
               </a>
             </div>
 
@@ -122,7 +122,7 @@
                   '/dashboard/admin/cajero/administracionDePedidos'
                 ]"
               >
-                <p><i class="fas fa-list"></i> Administracion de Pedidos</p>
+                <p><i class="fas fa-list"></i> Administración de Pedidos</p>
               </a>
 
               <a
@@ -131,7 +131,7 @@
                   '/dashboard/admin/cajero/administracionFacturacion'
                 ]"
               >
-                <p><i class="fas fa-money"></i> Facturacion</p>
+                <p><i class="fas fa-money"></i> Facturación</p>
               </a>
             </div>
             <!-- to do: si es admin o cocinero mostrar este div, sino no -->
@@ -147,7 +147,7 @@
                 class="dropdown-item"
                 [routerLink]="['/dashboard/admin/cocinero/gestorOrdenes']"
               >
-                <p><i class="fas fa-list"></i> Visualizacion de Pedidos</p>
+                <p><i class="fas fa-list"></i> Visualización de Pedidos</p>
               </a>
             </div>
           </div>

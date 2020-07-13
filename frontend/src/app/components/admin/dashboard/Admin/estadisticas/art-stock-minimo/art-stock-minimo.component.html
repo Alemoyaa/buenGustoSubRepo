@@ -1,9 +1,9 @@
 <table class="table table-hover mt-3" *ngIf="mostrar; else elseTemplate">
   <thead>
     <tr>
-      <th scope="col">Denominacion</th>
+      <th scope="col">Denominación</th>
       <th scope="col">Stock Actual</th>
-      <th scope="col">Stock Minimo</th>
+      <th scope="col">Stock Mínimo</th>
     </tr>
   </thead>
   <tbody>
@@ -16,9 +16,9 @@
 </table>
 <button class="btn btn-success" (click)="exportAsXLSX()" *ngIf="mostrar">
   <i class="fa fa-file-excel-o"></i>
-  <p class="lead">Exportar a excel</p>
+  <p class="lead">Exportar a planilla Excel</p>
 </button>
 
 <ng-template #elseTemplate>
-  <h6 class="lead">No existen articulos con stock en minimo</h6>
+  <h6 class="lead">No existen artículos con stock en mínimo</h6>
 </ng-template>

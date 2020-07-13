@@ -112,17 +112,32 @@ export class GestorOrdenesCocineroComponent implements OnInit {
     console.log(this.pedidoOne);
   }
 
-  getHora(hora: Date) {
-    this.horaSeleccionada = hora;
-    console.log(this.horaSeleccionada);
-    this.sumarMinutos(this.horaSeleccionada, 10);
-    //return Date;
-  }
-
-  sumarMinutos(hora, minutos) {
-    alert(hora);
-    hora.setMinutes(hora.getMinutes() + 10);
-    alert(hora);
+  atrasar10Min(pedidoARetrasar: Pedido, iterador) {
+    Swal.fire({
+      title: 'Seguro que desea retrasarlo?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Aceptar',
+      cancelButtonText: 'Cancelar',
+    }).then((result) => {
+      if (result.value) {
+        this.pedidoService.atrasarPor10Min(pedidoARetrasar.id).subscribe(
+          (pedidoRetrasado) => {
+            this.pedidos[iterador].hora_estimada_fin =
+              pedidoRetrasado.hora_estimada_fin;
+            console.log(pedidoRetrasado);
+            Swal.fire('Pedido retrasado', '', 'success');
+          },
+          (erorr) => {
+            Swal.fire('Error', 'No se pudo retrasar el pedido', 'error');
+          }
+        );
+      } else {
+        Swal.fire('Retraso cancelado', '', 'warning');
+      }
+    });
   }
 
   //Traer estados de pedido, traerme solo los confirmados
@@ -169,10 +184,13 @@ export class GestorOrdenesCocineroComponent implements OnInit {
                 this.pedidoSeleccionado.estadoPedido
               )
               .subscribe((data) => {
-                console.log(this.pedidoSeleccionado.id);
-                console.log(data.id);
-                this.pedidoService.descontarStock(this.pedidoSeleccionado.id);
-                console.log(data);
+                if (data.estadoPedido.nombreEstado === 'Listo') {
+                  this.pedidoService
+                    .descontarStock(this.pedidoSeleccionado.id)
+                    .subscribe((pedidoDescontado) => {
+                      console.log('Pedido descontado: ', pedidoDescontado);
+                    });
+                }
               });
 
             console.log(this.pedidoSeleccionado.estadoPedido.id);

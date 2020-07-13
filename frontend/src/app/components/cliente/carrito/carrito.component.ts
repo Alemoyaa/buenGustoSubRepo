@@ -182,34 +182,42 @@ export class CarritoComponent implements OnInit {
 
           this.factura.fecha = new Date();
 
-          if (this.envio) {
+          if (this.envio || !this.otroMedioDePago) {
             this.factura.formaPago = 'Efectivo';
             this.factura.montoDescuento = (this.total / 100) * 10;
-            this.factura.nroFactura = 0;
           }
 
           this.factura.tipoFactura = 'C';
           this.factura.totalFactura = this.total;
 
-          this.pedidoService.post(this.pedido).subscribe((posted) => {
-            this.factura.pedidofacturado = posted;
-            console.log('posted', posted);
-            console.log(this.factura);
-            this.facturaService.post(this.factura).subscribe(
-              (Factura) => {
-                console.log('Factura', Factura);
-                this.alert.mensajeSuccess(
-                  'Realizado',
-                  'Su pedido fue realizado con exito'
-                );
-                this.router.navigate(['user-profile/' + data.uid]);
-                localStorage.clear();
-              },
-              (err) => {
-                console.error(err);
-              }
-            );
-          });
+          this.factura.pedidofacturado = this.pedido;
+
+          console.log(this.factura);
+          console.log(this.pedido);
+
+          // 4 Cocineros
+
+          this.pedidoService
+            .postConHoraFin(4, this.pedido)
+            .subscribe((posted) => {
+              this.factura.pedidofacturado = posted;
+              console.log('posted', posted);
+              console.log(this.factura);
+              this.facturaService.post(this.factura).subscribe(
+                (Factura) => {
+                  console.log('Factura', Factura);
+                  this.alert.mensajeSuccess(
+                    'Realizado',
+                    'Su pedido fue realizado con exito'
+                  );
+                  this.router.navigate(['user-profile/' + data.uid]);
+                  localStorage.clear();
+                },
+                (err) => {
+                  console.error(err);
+                }
+              );
+            });
         },
         (err) => {
           console.log(err);
@@ -252,7 +260,7 @@ export class CarritoComponent implements OnInit {
       horaActual >= 11 &&
       horaActual < 15
     ) {
-      return true;
+      return false;
     } else if (horaActual > 20 && horaActual <= 23) {
       return true;
     } else {

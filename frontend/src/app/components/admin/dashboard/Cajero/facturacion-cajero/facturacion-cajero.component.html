@@ -35,6 +35,8 @@
           <th scope="row">Orden</th>
           <th scope="row">Cliente</th>
           <th scope="row">Fecha</th>
+          <th scope="row">Envió</th>
+          <th scope="row">Enviar</th>
           <th scope="row">Estado</th>
           <th scope="row">Factura</th>
         </tr>
@@ -52,26 +54,42 @@
         <tr
           *ngFor="
             let factura of filtrar
-              | paginate: { itemsPerPage: 5, currentPage: pageActual }
+              | paginate: { itemsPerPage: 5, currentPage: pageActual }; let i = index
           "
         >
-          <th scope="row">1</th>
+          <th scope="row">{{factura.nroFactura}}</th>
           <td>
             {{ factura.pedidofacturado.clientePedido.nombre }}
             {{ factura.pedidofacturado.clientePedido.apellido }}
           </td>
           <td>{{ factura.pedidofacturado.fechaRealizacion | date }}</td>
+          <td *ngIf="factura.pedidofacturado.tipo_Envio; else envioFalso">A domicilio</td>
+          <ng-template #envioFalso>
+            <td>En local</td>
+          </ng-template>
+          <td *ngIf="factura.pedidofacturado.tipo_Envio; else sinEnvio">
+            <button class="btn btn-info" (click)="enviarADomicilio(factura, i)">
+              Enviar a domicilio
+            </button>
+          </td>
+          <ng-template #sinEnvio>
+            <td><button class="btn btn-secondary" disabled>No necesita</button></td>
+          </ng-template>
           <td>{{ factura.pedidofacturado.estadoPedido.nombreEstado }}</td>
-          <td>
+          <td *ngIf="!factura.pedidofacturado.tipo_Envio; else facturaNoDisponible">
             <button
               class="btn btn-primary"
               data-toggle="modal"
               data-target="#factura"
+              data-dismiss="modal"
               (click)="mostrarFactura(factura)"
             >
               Ver factura
             </button>
           </td>
+          <ng-template #facturaNoDisponible>
+            <td> <button class="btn btn-secondary" disabled>No disponible</button></td>
+          </ng-template>
         </tr>
       </tbody>
     </table>

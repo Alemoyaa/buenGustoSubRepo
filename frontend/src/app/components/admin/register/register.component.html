@@ -1,34 +1,39 @@
-
 <main class="page register-page" id="fondo">
-  
-  <section class=""> 
-  
+  <section class="">
     <div class="container col-lg-4 col-md-6 col-sm-6" id="cartaRegister">
-      
-      <div class="col-12 contact100-form-title text-center jumbotron" style="margin-bottom: 20px;">
-
+      <div
+        class="col-12 contact100-form-title text-center jumbotron"
+        style="margin-bottom: 20px;"
+      >
         <span class="contact100-form-title-1">
-         Crear Nueva Cuenta
+          Crear nueva cuenta
         </span>
-  
-  
       </div>
       <form [formGroup]="formularioRegister" class="text-center">
         <div class="form-group">
-          <label for="email"> 
+          <label for="email">
             <h4>Email</h4>
-          </label> 
-          <input class="form-control item" type="email" id="email" formControlName="email"
-            placeholder="ingrese su email">
-          <div class="alert alert-danger" *ngIf="
-          formularioRegister.controls['email'].invalid &&
-          formularioRegister.controls['email'].dirty
-        " role="alert">
+          </label>
+          <input
+            class="form-control item"
+            type="email"
+            id="email"
+            formControlName="email"
+            placeholder="ingrese su email"
+          />
+          <div
+            class="alert alert-danger"
+            *ngIf="
+              formularioRegister.controls['email'].invalid &&
+              formularioRegister.controls['email'].dirty
+            "
+            role="alert"
+          >
             <span *ngIf="formularioRegister.controls['email'].errors.required">
               <p>El email es requerido</p>
             </span>
             <span *ngIf="formularioRegister.controls['email'].errors.email">
-              <p>El email no es valido</p>
+              <p>El email no es válido</p>
             </span>
           </div>
         </div>
@@ -36,41 +41,67 @@
           <label for="password">
             <h4>Contraseña</h4>
           </label>
-          <input class="form-control" type="password" id="password" formControlName="password"
-            placeholder="ingrese su password">
-          <div class="alert alert-danger" *ngIf="
-          formularioRegister.controls['password'].invalid &&
-          formularioRegister.controls['password'].dirty
-        " role="alert">
-            <span *ngIf="formularioRegister.controls['password'].errors.required">
-              <p>password requerida</p>
+          <input
+            class="form-control"
+            type="password"
+            id="password"
+            formControlName="password"
+            placeholder="ingrese su password"
+          />
+          <div
+            class="alert alert-danger"
+            *ngIf="
+              formularioRegister.controls['password'].invalid &&
+              formularioRegister.controls['password'].dirty
+            "
+            role="alert"
+          >
+            <span
+              *ngIf="formularioRegister.controls['password'].errors.required"
+            >
+              <p>Contraseña requerida</p>
             </span>
           </div>
         </div>
 
-
-        <button *ngIf="!mostrarCargar" class="btn btn-primary btn-block" type="submit"
-          [disabled]="!formularioRegister.valid" (click)="registrarConMailPassword()">
-          <h5> <strong>Registrar</strong> </h5>
+        <button
+          *ngIf="!mostrarCargar"
+          class="btn btn-primary btn-block"
+          type="submit"
+          [disabled]="!formularioRegister.valid"
+          (click)="registrarConMailPassword()"
+        >
+          <h5><strong>Registrar</strong></h5>
         </button>
-        <button *ngIf="mostrarCargar" class="btn btn-primary btn-block" type="button" disabled>
-          <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
+        <button
+          *ngIf="mostrarCargar"
+          class="btn btn-primary btn-block"
+          type="button"
+          disabled
+        >
+          <span
+            class="spinner-grow spinner-grow-sm"
+            role="status"
+            aria-hidden="true"
+          ></span>
           <span class="sr-only">
             <p>Cargando...</p>
           </span>
         </button>
 
-        <p><button class="btn btn-danger btn-block mt-4" type="submit" (click)="ingresarConGoogle()"><i
-              class="fab fa-google"></i> Continuar con Google</button></p>
-
+        <p>
+          <button
+            class="btn btn-danger btn-block mt-4"
+            type="submit"
+            (click)="ingresarConGoogle()"
+          >
+            <i class="fab fa-google"></i> Continuar con Google
+          </button>
+        </p>
       </form>
       <div class="alert alert-warning" role="alert" *ngIf="!datosCorrectos">
         {{ textoError }}
       </div>
-
     </div>
-    
-    
   </section>
 </main>
-
