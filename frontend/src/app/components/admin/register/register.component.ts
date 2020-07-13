@@ -19,7 +19,7 @@ export class RegisterComponent implements OnInit {
     private fb: FormBuilder,
     private loginService: LoginService,
     private alertsService: AlertsService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.crearFormularioRegister();
@@ -50,10 +50,12 @@ export class RegisterComponent implements OnInit {
           this.mostrarCargar = false;
           this.alertsService.mensajeError(
             'Error al crear la cuenta',
-            'No se ah podido Crear la cuenta Debido a que este usuario ya esta en uso'
+            this.loginService.mensajeError
           );
           this.textoError =
-            'No se ah podido Crear la cuenta Debido a que este usuario ya esta en uso';
+            this.loginService.mensajeError;
+        } else {
+
         }
       }, 2000);
       // else en caso de q no funcionen las validaciones en el boton
