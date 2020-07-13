@@ -51,6 +51,7 @@
         <!-- comienzo de panel de administrador -->
         <li class="nav-item dropdown" *ngIf="canAccessPanel">
           <a
+            *ngIf="rol === 'Administrador'"
             class="nav-link dropdown-toggle"
             href="#"
             id="navbarDropdown"
@@ -62,13 +63,39 @@
             Panel de Administrador
             <i class="fas fa-tools"> </i>
           </a>
+          <a
+            *ngIf="rol === 'Cocinero'"
+            class="nav-link dropdown-toggle"
+            href="#"
+            id="navbarDropdown"
+            role="button"
+            data-toggle="dropdown"
+            aria-haspopup="true"
+            aria-expanded="false"
+          >
+            Panel de Cocinero
+            <i class="fas fa-tools"> </i>
+          </a>
+          <a
+            *ngIf="rol === 'Cajero'"
+            class="nav-link dropdown-toggle"
+            href="#"
+            id="navbarDropdown"
+            role="button"
+            data-toggle="dropdown"
+            aria-haspopup="true"
+            aria-expanded="false"
+          >
+            Panel de Cajero
+            <i class="fas fa-tools"> </i>
+          </a>
           <div
             class="dropdown-menu"
             id="anyClass"
             aria-labelledby="navbarDropdown"
           >
             <!-- to do:   Condicion si es admin mostrar, si no es admin no mostrar el div seleccionado -->
-            <div class="seccionAdministrador">
+            <div class="seccionAdministrador" *ngIf="rol === 'Administrador'">
               <!-- comienzo de el dropdown menu  -->
               <div class="text-center">
                 <p><strong>Administrador</strong></p>
@@ -109,7 +136,10 @@
             </div>
 
             <!-- to do: si es admin o cajero mostrar este div, sino no  -->
-            <div class="seccionCajero">
+            <div
+              class="seccionCajero"
+              *ngIf="rol === 'Administrador' || rol === 'Cajero'"
+            >
               <div class="dropdown-divider"></div>
               <div class="text-center">
                 <p><strong>Cajero</strong></p>
@@ -135,7 +165,10 @@
               </a>
             </div>
             <!-- to do: si es admin o cocinero mostrar este div, sino no -->
-            <div class="seccionCocinero">
+            <div
+              class="seccionCocinero"
+              *ngIf="rol === 'Administrador' || rol === 'Cocinero'"
+            >
               <div class="dropdown-divider"></div>
               <div class="text-center">
                 <p><strong>Cocinero</strong></p>
