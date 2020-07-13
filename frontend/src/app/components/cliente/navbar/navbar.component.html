@@ -74,7 +74,7 @@
             aria-expanded="false"
           >
             Panel de Cocinero
-            <i class="fas fa-tools"> </i>
+            <i class="fas fa-fw fa-utensils"></i>
           </a>
           <a
             *ngIf="rol === 'Cajero'"
@@ -87,7 +87,7 @@
             aria-expanded="false"
           >
             Panel de Cajero
-            <i class="fas fa-tools"> </i>
+            <i class="fas fa-cash-register"></i>
           </a>
           <div
             class="dropdown-menu"
@@ -181,6 +181,12 @@
                 [routerLink]="['/dashboard/admin/cocinero/gestorOrdenes']"
               >
                 <p><i class="fas fa-list"></i> Visualización de Pedidos</p>
+              </a>
+              <a
+                class="dropdown-item"
+                [routerLink]="['/dashboard/admin/gestionArticulos']"
+              >
+                <p><i class="fas fa-fw fa-pizza-slice"></i> Platos</p>
               </a>
             </div>
           </div>
