@@ -54,7 +54,7 @@
         <tr
           *ngFor="
             let factura of filtrar
-              | paginate: { itemsPerPage: 5, currentPage: pageActual }; let i = index
+              | paginate: { itemsPerPage: 15, currentPage: pageActual }; let i = index
           "
         >
           <th scope="row">{{factura.nroFactura}}</th>
@@ -67,7 +67,7 @@
           <ng-template #envioFalso>
             <td>En local</td>
           </ng-template>
-          <td *ngIf="factura.pedidofacturado.tipo_Envio; else sinEnvio">
+          <td *ngIf="factura.pedidofacturado.tipo_Envio && factura.pedidofacturado.estadoPedido.id !== 5 ; else sinEnvio">
             <button class="btn btn-info" (click)="enviarADomicilio(factura, i)">
               Enviar a domicilio
             </button>
@@ -76,8 +76,12 @@
             <td><button class="btn btn-secondary" disabled>No necesita</button></td>
           </ng-template>
           <td>{{ factura.pedidofacturado.estadoPedido.nombreEstado }}</td>
-          <td *ngIf="!factura.pedidofacturado.tipo_Envio; else facturaNoDisponible">
-            <button
+          <td *ngIf="factura.pedidofacturado.tipo_Envio && factura.pedidofacturado.estadoPedido.id === 7; else facturaNoDisponible">
+            <button class="btn btn-secondary" disabled>No disponible</button>
+          </td>
+          <ng-template #facturaNoDisponible>
+            <td>
+              <button
               class="btn btn-primary"
               data-toggle="modal"
               data-target="#factura"
@@ -86,9 +90,7 @@
             >
               Ver factura
             </button>
-          </td>
-          <ng-template #facturaNoDisponible>
-            <td> <button class="btn btn-secondary" disabled>No disponible</button></td>
+            </td>
           </ng-template>
         </tr>
       </tbody>
