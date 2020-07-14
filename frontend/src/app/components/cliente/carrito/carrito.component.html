@@ -3,7 +3,7 @@
     <div class="container">
       <div class="block-heading">
         <h2 class="text-info" *ngIf="listaDetallePedido.length !== 0">
-          Factura
+          Carrito De Compras
         </h2>
         <h3 *ngIf="listaDetallePedido.length === 0">
           El carrito está vacío
@@ -139,9 +139,11 @@
                   <textarea
                     class="form-control"
                     type="text"
-                    placeholder="Aclaracion"
+                    placeholder="Aclaracion (Desplaza la esquina inferior derecha hacia abajo para agrandar el texto)"
                     name="aclaracion"
                     [(ngModel)]="detallePedidoItem.aclaracion"
+                    cols="40"
+                    rows="5"
                   ></textarea>
                 </div>
 
@@ -238,6 +240,7 @@
                   </div>
                 </ng-template>
               </div>
+              <h3 class="mt-4">Total: {{ total }}</h3>
               <div class="center justify-content-center d-flex">
                 <a [routerLink]="['/catalogo']">
                   <button type="button" class="btn btn-primary mr-3">
@@ -343,6 +346,11 @@
             <br />
             <label>Ingrese su número de tarjeta</label>
             <input type="text" [(ngModel)]="factura.nroTarjeta" />
+            <img
+              id="imgtarjetas"
+              style="background-color: black;"
+              src="../../../../assets/tarjetas-credito.png"
+            />
           </div>
         </div>
         <div class="modal-footer">

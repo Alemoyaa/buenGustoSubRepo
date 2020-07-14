@@ -887,3 +887,8 @@ button {
   border-radius: 10px;
   box-shadow: 4px 4px 10px;
 }
+
+#imgtarjetas {
+  height: 100%;
+  width: 100%;
+}
