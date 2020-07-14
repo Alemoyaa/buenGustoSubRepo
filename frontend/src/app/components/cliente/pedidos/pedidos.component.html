@@ -30,4 +30,22 @@
       </tr>
     </tbody>
   </table>
+
+  <div
+    class="alert alert-danger"
+    id="alerta"
+    role="alert"
+    *ngIf="pedidosCliente.length === 0"
+  >
+    No se encuentran Pedidos para mostrar en este momento...
+    <p>
+      Puede realizar seleccionar su plato favorito y pedirlo a la puerta de su
+      casa!
+    </p>
+    <a [routerLink]="['/catalogo']" data-dismiss="modal">
+      <button class="btn btn-primary">
+        Catalogo
+      </button>
+    </a>
+  </div>
 </div>

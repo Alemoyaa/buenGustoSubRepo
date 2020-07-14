@@ -18,12 +18,12 @@ export class NavbarComponent implements OnInit {
     private route: Router,
     private clienteService: ClienteService,
     private alertService: AlertsService
-  ) {}
+  ) { }
 
   estaLogueado: boolean = true;
 
   uid: string;
-
+  rol: string;
   cliente: Usuario = new Usuario();
 
   navbarUsuario = true;
@@ -44,6 +44,7 @@ export class NavbarComponent implements OnInit {
         this.clienteService.getByUidFirebase(user.uid).subscribe((data) => {
           if (data.usuario.rol.id != 5) {
             this.canAccessPanel = true;
+            this.rol = data.usuario.rol.nombreRol;
           }
         });
       } else {

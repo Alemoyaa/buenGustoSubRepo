@@ -10,6 +10,7 @@ export class ModalHistorialFacturasComponent implements OnInit {
   cliente: Cliente;
   @Input() set clienteUser(cliente) {
     this.cliente = cliente;
+
   };
   constructor() { }
 

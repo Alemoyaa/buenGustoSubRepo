@@ -19,7 +19,7 @@ export class LoginService {
 
   public logueado = false;
   public logged: EventEmitter<boolean>;
-
+  mensajeError: string;
   clientePost: Cliente = new Cliente();
   usuarioPost: Usuario = new Usuario();
   constructor(
@@ -82,9 +82,9 @@ export class LoginService {
         this.route.navigate(['catalogo']);
       },
       (err) => {
-        console.error(err);
+        this.mensajeError = err;
       }
-    );
+    )
   }
 
   async checkEmailExists(emailACheckear) {
@@ -111,6 +111,8 @@ export class LoginService {
         })
         .then(async () => {
           await this.afsAuth.signOut();
+        }).catch(error => {
+          this.mensajeError = error;
         });
     }
   }

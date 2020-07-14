@@ -16,8 +16,8 @@ export class LoginComponent implements OnInit {
   textoError: string = '';
 
   constructor(
-    private fb: FormBuilder, 
-    private loginService: LoginService, 
+    private fb: FormBuilder,
+    private loginService: LoginService,
     private alertsService: AlertsService) { }
 
   ngOnInit(): void {
@@ -52,10 +52,11 @@ export class LoginComponent implements OnInit {
         if (!this.loginService.logueado) {
           this.datosCorrectos = false;
           this.mostrarCargar = false;
-          this.alertsService.mensajeError('Error al iniciar Sesion', 'No se ah podido iniciar sesion. Porfavor revisa que los datos sean correctos')
-          this.textoError = 'No se ah podido iniciar sesion. Porfavor revisa que los datos sean correctos';
+          this.alertsService.mensajeError('Error al iniciar Sesion', this.loginService.mensajeError);
+          this.textoError = this.loginService.mensajeError;
         }
-      }, 2000);
+      },
+        2000);
 
       // si no es q esta mal el formulario( posee una validacion el boton tambien para q no deje apretarse)
     } else {

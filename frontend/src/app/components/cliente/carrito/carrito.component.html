@@ -3,7 +3,7 @@
     <div class="container">
       <div class="block-heading">
         <h2 class="text-info" *ngIf="listaDetallePedido.length !== 0">
-          Factura
+          Carrito De Compras
         </h2>
         <h3 *ngIf="listaDetallePedido.length === 0">
           El carrito está vacío
@@ -14,7 +14,7 @@
           <div class="col-md-12 col-lg-8">
             <div class="items">
               <div
-                class="product"
+                class="row product mt-4"
                 *ngFor="
                   let detallePedidoItem of listaDetallePedido;
                   let i = index
@@ -46,24 +46,25 @@
                     else elseArticuloManufacturado
                   "
                 >
-                  <div class="col-md-3">
+                  <div class="col-md-12">
+                    <h5 class="product-name text-center">
+                      {{ detallePedidoItem.articuloInsumo.denominacion }}
+                    </h5>
+                    <hr />
+                  </div>
+                  <div class="col-md-5 product-info">
                     <div class="product-image">
                       <img
-                        width="100px"
+                        id="imagenProductos"
                         class="img-fluid d-block mx-auto image"
                         src="{{ detallePedidoItem.articuloInsumo.url_imagen }}"
                       />
                     </div>
-                  </div>
-                  <div class="col-md-5 product-info">
-                    <h5 class="product-name">
-                      {{ detallePedidoItem.articuloInsumo.denominacion }}
-                    </h5>
                     <div class="product-specs">
                       <div>
                         <span><b>$</b>&nbsp;</span>
                         <span class="value">
-                          <b>
+                          <b style="font-size: 15px;">
                             {{
                               detallePedidoItem.articuloInsumo.precio_de_venta
                             }}</b
@@ -74,55 +75,103 @@
                   </div>
 
                   <div class="col-6 col-md-2 quantity">
-                    <label class="d-none d-md-block" for="quantity"
-                      >Cantidad</label
-                    ><input
-                      type="number"
-                      id="number"
-                      min="1"
-                      class="form-control quantity-input"
-                      [(ngModel)]="detallePedidoItem.cantidad"
-                      value="detallePedidoItem.cantidad"
-                      disabled
-                    />
-                  </div>
+                    <label class="text-center" for="quantity"
+                      ><strong>Cantidad</strong></label
+                    >
+                    <div class="botones">
+                      <button
+                        (click)="addArticulo(i)"
+                        type="button"
+                        class="btn btn-success ml-1"
+                        data-toggle="modal"
+                      >
+                        <svg
+                          class="bi bi-plus-circle-fill"
+                          width="1em"
+                          height="1em"
+                          viewBox="0 0 16 16"
+                          fill="currentColor"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            fill-rule="evenodd"
+                            d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4a.5.5 0 0 0-1 0v3.5H4a.5.5 0 0 0 0 1h3.5V12a.5.5 0 0 0 1 0V8.5H12a.5.5 0 0 0 0-1H8.5V4z"
+                          />
+                        </svg>
+                      </button>
 
+                      <input
+                        type="number"
+                        id="number"
+                        min="1"
+                        class="form-control quantity-input"
+                        [(ngModel)]="detallePedidoItem.cantidad"
+                        value="detallePedidoItem.cantidad"
+                        disabled
+                      />
+                      <button
+                        type="button"
+                        class="btn btn-danger"
+                        data-toggle="modal"
+                        (click)="reducirArticulo(i)"
+                      >
+                        <svg
+                          class="bi bi-dash-circle-fill"
+                          width="1em"
+                          height="1em"
+                          viewBox="0 0 16 16"
+                          fill="currentColor"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            fill-rule="evenodd"
+                            d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM4 7.5a.5.5 0 0 0 0 1h8a.5.5 0 0 0 0-1H4z"
+                          />
+                        </svg>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-12 text-center">
                   <label class="mt-2">
                     <strong>Aclaración</strong>
                   </label>
-                  <input
+                  <textarea
                     class="form-control"
                     type="text"
-                    placeholder="Aclaracion"
+                    placeholder="Aclaracion (Desplaza la esquina inferior derecha hacia abajo para agrandar el texto)"
                     name="aclaracion"
                     [(ngModel)]="detallePedidoItem.aclaracion"
-                  />
+                    cols="40"
+                    rows="5"
+                  ></textarea>
                 </div>
 
                 <ng-template
                   #elseArticuloManufacturado
                   class="row justify-content-center align-items-center"
                 >
-                  <div class="col-md-3">
+                  <div class="col-md-12 text-center">
+                    <h5 class="product-name">
+                      {{ detallePedidoItem.articuloManufacturado.denominacion }}
+                    </h5>
+                    <hr />
+                  </div>
+                  <div class="col-md-5 product-info">
                     <div class="product-image">
                       <img
-                        width="100px"
+                        id="imagenProductos"
                         class="img-fluid d-block mx-auto image"
                         src="{{
                           detallePedidoItem.articuloManufacturado.url_imagen
                         }}"
                       />
                     </div>
-                  </div>
-                  <div class="col-md-5 product-info">
-                    <h5 class="product-name">
-                      {{ detallePedidoItem.articuloManufacturado.denominacion }}
-                    </h5>
                     <div class="product-specs">
                       <div>
                         <span><b>$</b>&nbsp;</span>
                         <span class="value">
-                          <b>
+                          <b style="font-size: 15px;">
                             {{
                               detallePedidoItem.articuloManufacturado
                                 .precio_de_venta
@@ -133,72 +182,65 @@
                     </div>
                   </div>
                   <div class="col-6 col-md-2 quantity">
-                    <label class="d-none d-md-block" for="quantity"
-                      >Cantidad</label
-                    ><input
-                      type="number"
-                      id="number"
-                      min="1"
-                      class="form-control quantity-input"
-                      [(ngModel)]="detallePedidoItem.cantidad"
-                      value="detallePedidoItem.cantidad"
-                      disabled
-                    />
-                    <label class="mt-2">
-                      <strong>Aclaración</strong>
-                    </label>
-                    <input
-                      class="form-control"
-                      type="text"
-                      placeholder="Aclaracion"
-                      name="aclaracion"
-                      [(ngModel)]="detallePedidoItem.aclaracion"
-                    />
+                    <label class="" for="quantity"
+                      ><strong>Cantidad</strong></label
+                    >
+                    <div class="botones">
+                      <button
+                        (click)="addArticulo(i)"
+                        type="button"
+                        class="btn btn-success ml-1"
+                        data-toggle="modal"
+                      >
+                        <svg
+                          class="bi bi-plus-circle-fill"
+                          width="1em"
+                          height="1em"
+                          viewBox="0 0 16 16"
+                          fill="currentColor"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            fill-rule="evenodd"
+                            d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4a.5.5 0 0 0-1 0v3.5H4a.5.5 0 0 0 0 1h3.5V12a.5.5 0 0 0 1 0V8.5H12a.5.5 0 0 0 0-1H8.5V4z"
+                          />
+                        </svg>
+                      </button>
+
+                      <input
+                        type="number"
+                        id="number"
+                        min="1"
+                        class="form-control quantity-input"
+                        [(ngModel)]="detallePedidoItem.cantidad"
+                        value="detallePedidoItem.cantidad"
+                        disabled
+                      />
+                      <button
+                        type="button"
+                        class="btn btn-danger"
+                        data-toggle="modal"
+                        (click)="reducirArticulo(i)"
+                      >
+                        <svg
+                          class="bi bi-dash-circle-fill"
+                          width="1em"
+                          height="1em"
+                          viewBox="0 0 16 16"
+                          fill="currentColor"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            fill-rule="evenodd"
+                            d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM4 7.5a.5.5 0 0 0 0 1h8a.5.5 0 0 0 0-1H4z"
+                          />
+                        </svg>
+                      </button>
+                    </div>
                   </div>
                 </ng-template>
-                <div class="botones">
-                  <button
-                    type="button"
-                    class="btn btn-danger mr-3"
-                    data-toggle="modal"
-                    (click)="reducirArticulo(i)"
-                  >
-                    <svg
-                      class="bi bi-dash-circle-fill"
-                      width="1em"
-                      height="1em"
-                      viewBox="0 0 16 16"
-                      fill="currentColor"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        fill-rule="evenodd"
-                        d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM4 7.5a.5.5 0 0 0 0 1h8a.5.5 0 0 0 0-1H4z"
-                      />
-                    </svg>
-                  </button>
-                  <button
-                    (click)="addArticulo(i)"
-                    type="button"
-                    class="btn btn-success"
-                    data-toggle="modal"
-                  >
-                    <svg
-                      class="bi bi-plus-circle-fill"
-                      width="1em"
-                      height="1em"
-                      viewBox="0 0 16 16"
-                      fill="currentColor"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        fill-rule="evenodd"
-                        d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4a.5.5 0 0 0-1 0v3.5H4a.5.5 0 0 0 0 1h3.5V12a.5.5 0 0 0 1 0V8.5H12a.5.5 0 0 0 0-1H8.5V4z"
-                      />
-                    </svg>
-                  </button>
-                </div>
               </div>
+              <h3 class="mt-4">Total: {{ total }}</h3>
               <div class="center justify-content-center d-flex">
                 <a [routerLink]="['/catalogo']">
                   <button type="button" class="btn btn-primary mr-3">
@@ -304,6 +346,11 @@
             <br />
             <label>Ingrese su número de tarjeta</label>
             <input type="text" [(ngModel)]="factura.nroTarjeta" />
+            <img
+              id="imgtarjetas"
+              style="background-color: black;"
+              src="../../../../assets/tarjetas-credito.png"
+            />
           </div>
         </div>
         <div class="modal-footer">
