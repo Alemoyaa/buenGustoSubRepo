@@ -149,18 +149,32 @@ export class CarritoComponent implements OnInit {
     }
   }
 
-  pagar(formularioCarrito) {
+  get numeroValido(): boolean {
+    var expresion = /[a-z]|[A-Z]/g;
+
+    if (this.factura.nroTarjeta) {
+      let encontrado = this.factura.nroTarjeta.match(expresion);
+      if (encontrado != null) {
+        return false;
+      } else {
+        if (
+          this.factura.nroTarjeta.length <= 19 &&
+          this.factura.nroTarjeta.length >= 16
+        ) {
+          return true;
+        }
+      }
+    } else {
+      return false;
+    }
+  }
+
+  pagar() {
     console.log('poraca');
     this.loginService.isAuth().subscribe((data) => {
-      console.log('asdas');
       if (data) {
-        console.log('hola');
-        //this.crearPedido();
-        if (formularioCarrito.invalid) {
-          console.log('invalido');
-        } else {
-          console.log(formularioCarrito);
-        }
+        this.crearPedido();
+        console.log('asdas');
       } else {
         this.alert.mensajeWarning(
           'No inicio sesion',

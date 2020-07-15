@@ -350,18 +350,20 @@
               <input
                 name="tipoEnvio"
                 type="text"
-                (click)="pagar(nombre)"
-                placeholder="0000-0000-0000-0000"
-                pattern="[0-9]{16-19}"
-                [class.is-invalid]="nombre.invalid && nombre.touched"
+                placeholder="Minimo 16 digitos - maximo 19 digitos"
+                minlength="16"
+                maxlength="19"
+                [class.is-invalid]="
+                  numeroTarjeta.invalid && numeroTarjeta.touched
+                "
                 [(ngModel)]="factura.nroTarjeta"
-                #nombre="ngModel"
+                #numeroTarjeta="ngModel"
                 title="Por favor ingrese un numero de tarjeta válido"
               />
               <small
-                *ngIf="nombre.invalid && nombre.touched"
+                *ngIf="numeroTarjeta.invalid && numeroTarjeta.touched"
                 class="form-text text-danger"
-                >Ingrese 5 letras</small
+                >Ingrese una tarjeta valida</small
               >
               <img
                 id="imgtarjetas"
@@ -375,7 +377,13 @@
           <button type="button" class="btn btn-secondary" data-dismiss="modal">
             <p>Cerrar</p>
           </button>
-          <button type="submit" class="btn btn-primary" data-dismiss="modal">
+          <button
+            type="submit"
+            class="btn btn-primary"
+            data-dismiss="modal"
+            [disabled]="!numeroValido"
+            (click)="pagar()"
+          >
             <p>Comprar</p>
           </button>
         </div>
