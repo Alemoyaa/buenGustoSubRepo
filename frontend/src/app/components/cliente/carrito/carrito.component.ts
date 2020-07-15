@@ -1,3 +1,4 @@
+import { NgForm } from '@angular/forms';
 import { FacturaService } from './../../../services/serviciosCliente/facturaServices/factura.service';
 import { Domicilio } from './../../../entidades/Domicilio';
 import { Factura } from './../../../entidades/Factura';
@@ -148,10 +149,32 @@ export class CarritoComponent implements OnInit {
     }
   }
 
+  get numeroValido(): boolean {
+    var expresion = /[a-z]|[A-Z]/g;
+
+    if (this.factura.nroTarjeta) {
+      let encontrado = this.factura.nroTarjeta.match(expresion);
+      if (encontrado != null) {
+        return false;
+      } else {
+        if (
+          this.factura.nroTarjeta.length <= 19 &&
+          this.factura.nroTarjeta.length >= 16
+        ) {
+          return true;
+        }
+      }
+    } else {
+      return false;
+    }
+  }
+
   pagar() {
+    console.log('poraca');
     this.loginService.isAuth().subscribe((data) => {
       if (data) {
         this.crearPedido();
+        console.log('asdas');
       } else {
         this.alert.mensajeWarning(
           'No inicio sesion',
@@ -260,7 +283,7 @@ export class CarritoComponent implements OnInit {
       horaActual >= 11 &&
       horaActual < 15
     ) {
-      return false;
+      return true;
     } else if (horaActual > 20 && horaActual <= 23) {
       return true;
     } else {

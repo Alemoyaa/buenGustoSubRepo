@@ -293,10 +293,11 @@
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
+
         <div class="modal-body">
           <h3>Total: {{ total }}</h3>
-          <div class="form-check mt-2">
-            <input type="checkbox" [(ngModel)]="envio" />
+          <div class="form-check mt-1">
+            <input type="checkbox" [(ngModel)]="envio" name="tipoEnvio" />
             <label class="form-check-label ml-3">Envio a domicilio</label>
             <label class="form-check-label ml-3">
               Si el pedido es retirado en el local, obtendrá un
@@ -335,7 +336,12 @@
           <div class="metodoDePago" *ngIf="otroMedioDePago && !envio">
             <p><label for="cars">Elegir método de pago</label></p>
 
-            <select [(ngModel)]="factura.formaPago" name="pago" id="medioPago">
+            <select
+              [(ngModel)]="factura.formaPago"
+              name="pago"
+              id="medioPago"
+              class="mb-1"
+            >
               <option value="Debito">
                 <p>Débito</p>
               </option>
@@ -344,13 +350,36 @@
               </option>
             </select>
             <br />
-            <label>Ingrese su número de tarjeta</label>
-            <input type="text" [(ngModel)]="factura.nroTarjeta" />
-            <img
-              id="imgtarjetas"
-              style="background-color: black;"
-              src="../../../../assets/tarjetas-credito.png"
-            />
+            <div *ngIf="factura.formaPago">
+              <p>
+                Ingrese su número de tarjeta<br />
+                Minimo 16 digitos, Maximo 19 digitos<br />
+              </p>
+              <input
+                name="tipoEnvio"
+                class="mb-2"
+                type="text"
+                placeholder="Ingrese su número de tarjeta"
+                minlength="16"
+                maxlength="19"
+                [class.is-invalid]="
+                  numeroTarjeta.invalid && numeroTarjeta.touched
+                "
+                [(ngModel)]="factura.nroTarjeta"
+                #numeroTarjeta="ngModel"
+                title="Por favor ingrese un numero de tarjeta válido"
+              />
+              <small
+                *ngIf="numeroTarjeta.invalid && numeroTarjeta.touched"
+                class="form-text text-danger"
+                >Ingrese una tarjeta valida</small
+              >
+              <img
+                id="imgtarjetas"
+                style="background-color: black;"
+                src="../../../../assets/tarjetas-credito.png"
+              />
+            </div>
           </div>
         </div>
         <div class="modal-footer">
@@ -358,10 +387,11 @@
             <p>Cerrar</p>
           </button>
           <button
-            (click)="pagar()"
-            type="button"
+            type="submit"
             class="btn btn-primary"
             data-dismiss="modal"
+            [disabled]="!numeroValido"
+            (click)="pagar()"
           >
             <p>Comprar</p>
           </button>
