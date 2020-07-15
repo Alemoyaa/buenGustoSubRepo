@@ -14,6 +14,7 @@ export class ArtManufacturadoPlatosComponent implements OnInit {
   formularioArticulo: FormGroup;
   articuloManufacturado: ArticuloManufacturado[] = [];
   articuloActualizar: ArticuloManufacturado;
+  plato: ArticuloManufacturado;
 
   pageActual: number = 1;
 
@@ -156,5 +157,9 @@ export class ArtManufacturadoPlatosComponent implements OnInit {
   cerrar() {
     this.crearFormulario();
     this.esEditar = false;
+  }
+
+  setearPlato(plato) {
+    this.plato = plato;
   }
 }

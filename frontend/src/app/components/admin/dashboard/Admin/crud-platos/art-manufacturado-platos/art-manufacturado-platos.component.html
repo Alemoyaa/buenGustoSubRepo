@@ -63,6 +63,7 @@
                 class="btn btn-info mr-3"
                 data-target="#ModalProductos"
                 data-toggle="modal"
+                (click)="setearPlato(articulo)"
               >
                 <i class="fas fa-pencil-alt">Editar</i>
               </button>
@@ -84,4 +85,4 @@
   </div>
 </div>
 
-<app-modal-platos></app-modal-platos>
+<app-modal-platos [platoProp]="plato"></app-modal-platos>

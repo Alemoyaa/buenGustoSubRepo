@@ -21,6 +21,7 @@
           class="close"
           data-dismiss="modal"
           type="button"
+          (click)="cerrar()"
         >
           <span aria-hidden="true">&times;</span>
         </button>
@@ -99,9 +100,14 @@
                   <!--    formControlName="es_catalogo" -->
                 </div>
               </div>
-              <div class="float-left">
+              <div class="float-left" *ngIf="!esEditar">
                 <button (click)="agregarIngrediente()" class="btn btn-success">
                   Agregar ingrediente
+                </button>
+              </div>
+              <div class="float-left" *ngIf="esEditar">
+                <button (click)="agregarIngrediente()" class="btn btn-warning">
+                  Mostrar ingredientes del plato y crear uno nuevo
                 </button>
               </div>
 

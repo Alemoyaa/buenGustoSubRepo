@@ -1,16 +1,17 @@
-import {UnidadMedida} from 'src/app/entidades/UnidadMedida';
+import { UnidadMedida } from 'src/app/entidades/UnidadMedida';
 
-import {Component, OnInit} from '@angular/core';
-import {FormArray, FormBuilder, FormGroup} from '@angular/forms';
+import { Component, OnInit, Input } from '@angular/core';
+import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
 import Swal from 'sweetalert2';
-import {ArticuloManufacturadoService} from 'src/app/services/serviciosCliente/articuloManufacturadoServices/articuloManufacturado.service';
-import {AlertsService} from 'src/app/services/alertServices/alerts.service';
-import {ArticuloInsumo} from 'src/app/entidades/ArticuloInsumo';
-import {RubroGeneral} from '../../../../../../entidades/RubroGeneral';
-import {ArticuloInsumoService} from '../../../../../../services/serviciosCliente/articuloInsumoServices/articuloInsumo.service';
-import {UnidadMedidaService} from 'src/app/services/serviciosCliente/unidadMedidaServices/unidad_medida.services';
-import {RubroGeneralService} from 'src/app/services/serviciosCliente/rubroGeneralServices/rubro-general.service';
-import {ArticuloManufacturado} from '../../../../../../entidades/ArticuloManufacturado';
+import { ArticuloManufacturadoService } from 'src/app/services/serviciosCliente/articuloManufacturadoServices/articuloManufacturado.service';
+import { AlertsService } from 'src/app/services/alertServices/alerts.service';
+import { ArticuloInsumo } from 'src/app/entidades/ArticuloInsumo';
+import { RubroGeneral } from '../../../../../../entidades/RubroGeneral';
+import { ArticuloInsumoService } from '../../../../../../services/serviciosCliente/articuloInsumoServices/articuloInsumo.service';
+import { UnidadMedidaService } from 'src/app/services/serviciosCliente/unidadMedidaServices/unidad_medida.services';
+import { RubroGeneralService } from 'src/app/services/serviciosCliente/rubroGeneralServices/rubro-general.service';
+import { ArticuloManufacturado } from '../../../../../../entidades/ArticuloManufacturado';
+import { DetalleManufacturado } from 'src/app/entidades/DetalleManufacturado';
 
 @Component({
   selector: 'app-modal-platos',
@@ -25,11 +26,41 @@ export class ModalPlatosComponent implements OnInit {
 
   esEditar: boolean = false;
 
+
+
   // formulario
   formularioArticulo: FormGroup;
 
   articuloActualizar: ArticuloManufacturado;
   id: number;
+
+
+
+  @Input() set platoProp(plato) {
+    // funciona solo 1 vez el es editar q es cuando se pasa el dato del componente padre
+    // por que el set input se ejecuta 1 vez
+    this.esEditar = true;
+    if (plato) {
+
+      this.articuloActualizar = plato;
+
+      console.log(plato);
+      this.formularioArticulo.patchValue({
+        id: this.articuloActualizar.id,
+        precio_de_venta: this.articuloActualizar.precio_de_venta,
+        url_imagen: this.articuloActualizar.url_imagen,
+        denominacion: this.articuloActualizar.denominacion,
+        // costo_de_manuf: plato.costo_de_manuf,
+        tiempo_estimado_manuf: this.articuloActualizar.tiempo_estimado_manuf,
+        lista_detalleManufacturado: this.fb.array([this.editar()]),
+        rubro: {
+          id: this.articuloActualizar.rubro.id
+        }
+      });
+
+
+    }
+  }
 
   constructor(
     private fb: FormBuilder,
@@ -50,6 +81,7 @@ export class ModalPlatosComponent implements OnInit {
     this.traerNombreIngredientes();
     this.traerUnidadesDeMedida();
     this.traerRubrosGenerales();
+
   }
 
   traerNombreIngredientes() {
@@ -117,7 +149,7 @@ export class ModalPlatosComponent implements OnInit {
       precio_de_venta: [null],
       url_imagen: [''],
       denominacion: [''],
-      costo_de_manuf: [null],
+      // costo_de_manuf: [null],
       tiempo_estimado_manuf: [null],
       lista_detalleManufacturado: this.fb.array([]),
       rubro: this.fb.group({
@@ -141,8 +173,10 @@ export class ModalPlatosComponent implements OnInit {
   }
 
   cerrar() {
+    this.formularioArticulo.reset();
     this.crearFormulario();
     this.esEditar = false;
+    // this.articuloActualizar = null;
   }
 
   crear() {
@@ -168,49 +202,57 @@ export class ModalPlatosComponent implements OnInit {
     this.lista_detalleManufacturado.removeAt(id);
   }
 
-  editar(articulo: ArticuloManufacturado) {
-    console.log(articulo);
+  editar() {
+
     this.esEditar = true;
-    let lista = [];
 
-    articulo.lista_detalleManufacturado.forEach((detalleManufacturado) => {
-      lista.push(detalleManufacturado);
+    const control = <FormArray>this.formularioArticulo.get('lista_detalleManufacturado');
+    this.articuloActualizar.lista_detalleManufacturado.forEach((detalleManufacturado, i) => {
+
+
+      control.push(this.patchValues(detalleManufacturado));
+
     });
 
-    this.formularioArticulo.patchValue({
-      id: articulo.id,
-      precio_de_venta: articulo.precio_de_venta,
-      url_imagen: articulo.url_imagen,
-      denominacion: articulo.denominacion,
-      tiempo_estimado_manuf: articulo.tiempo_estimado_manuf,
-      lista_detalleManufacturado: articulo.lista_detalleManufacturado,
+
+
+  }
+
+  patchValues(detalleManufacturado: DetalleManufacturado) {
+    console.log(detalleManufacturado);
+    return this.fb.group({
+      cantidad: [detalleManufacturado.cantidad],
+      unidadMedidaID: this.fb.group({
+        id: [detalleManufacturado.unidadMedidaID.id],
+      }),
+      articuloInsumoID: this.fb.group({
+        id: [detalleManufacturado.articuloInsumoID.id],
+      })
     });
-    this.id = articulo.id;
-    console.log(this.id);
   }
 
-  actualizar() {
-    this.serviceArtManufac
-      .put(this.id, this.formularioArticulo.value)
-      .subscribe(
-        (res) => {
-          console.log(res);
-          this.alerts.mensajeSuccess(
-            'Actualización realizada',
-            `El articulo ${this.articuloActualizar.denominacion} se actualizo correctamente, recuerde que puede modificarlo cuando usted lo desee`
-          );
-          console.log(this.id);
+  // actualizar() {
+  //   this.serviceArtManufac
+  //     .put(this.id, this.formularioArticulo.value)
+  //     .subscribe(
+  //       (res) => {
+  //         console.log(res);
+  //         this.alerts.mensajeSuccess(
+  //           'Actualización realizada',
+  //           `El articulo ${this.articuloActualizar.denominacion} se actualizo correctamente, recuerde que puede modificarlo cuando usted lo desee`
+  //         );
+  //         console.log(this.id);
 
-          this.esEditar = false;
-          this.formularioArticulo.reset();
-        },
-        (err) => {
-          this.alerts.mensajeError(
-            'No se ah podido actualizar el Rol del usuario',
-            'ah ocurrido un error y no se ah podido realizar la actualización, por favor verifique que este todos los datos correctos'
-          );
-        }
-      );
-  }
+  //         this.esEditar = false;
+  //         this.formularioArticulo.reset();
+  //       },
+  //       (err) => {
+  //         this.alerts.mensajeError(
+  //           'No se ah podido actualizar el Rol del usuario',
+  //           'ah ocurrido un error y no se ah podido realizar la actualización, por favor verifique que este todos los datos correctos'
+  //         );
+  //       }
+  //     );
+  // }
 
 }
