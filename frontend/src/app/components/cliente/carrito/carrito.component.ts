@@ -1,3 +1,4 @@
+import { NgForm } from '@angular/forms';
 import { FacturaService } from './../../../services/serviciosCliente/facturaServices/factura.service';
 import { Domicilio } from './../../../entidades/Domicilio';
 import { Factura } from './../../../entidades/Factura';
@@ -148,10 +149,18 @@ export class CarritoComponent implements OnInit {
     }
   }
 
-  pagar() {
+  pagar(formularioCarrito) {
+    console.log('poraca');
     this.loginService.isAuth().subscribe((data) => {
+      console.log('asdas');
       if (data) {
-        this.crearPedido();
+        console.log('hola');
+        //this.crearPedido();
+        if (formularioCarrito.invalid) {
+          console.log('invalido');
+        } else {
+          console.log(formularioCarrito);
+        }
       } else {
         this.alert.mensajeWarning(
           'No inicio sesion',
@@ -260,7 +269,7 @@ export class CarritoComponent implements OnInit {
       horaActual >= 11 &&
       horaActual < 15
     ) {
-      return false;
+      return true;
     } else if (horaActual > 20 && horaActual <= 23) {
       return true;
     } else {

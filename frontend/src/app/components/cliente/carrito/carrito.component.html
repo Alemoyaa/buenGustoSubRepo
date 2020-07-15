@@ -293,10 +293,11 @@
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
+
         <div class="modal-body">
           <h3>Total: {{ total }}</h3>
           <div class="form-check mt-2">
-            <input type="checkbox" [(ngModel)]="envio" />
+            <input type="checkbox" [(ngModel)]="envio" name="tipoEnvio" />
             <label class="form-check-label ml-3">Envio a domicilio</label>
             <label class="form-check-label ml-3">
               Si el pedido es retirado en el local, obtendrá un
@@ -344,25 +345,37 @@
               </option>
             </select>
             <br />
-            <label>Ingrese su número de tarjeta</label>
-            <input type="text" [(ngModel)]="factura.nroTarjeta" />
-            <img
-              id="imgtarjetas"
-              style="background-color: black;"
-              src="../../../../assets/tarjetas-credito.png"
-            />
+            <div *ngIf="factura.formaPago">
+              <label>Ingrese su número de tarjeta</label>
+              <input
+                name="tipoEnvio"
+                type="text"
+                (click)="pagar(nombre)"
+                placeholder="0000-0000-0000-0000"
+                pattern="[0-9]{16-19}"
+                [class.is-invalid]="nombre.invalid && nombre.touched"
+                [(ngModel)]="factura.nroTarjeta"
+                #nombre="ngModel"
+                title="Por favor ingrese un numero de tarjeta válido"
+              />
+              <small
+                *ngIf="nombre.invalid && nombre.touched"
+                class="form-text text-danger"
+                >Ingrese 5 letras</small
+              >
+              <img
+                id="imgtarjetas"
+                style="background-color: black;"
+                src="../../../../assets/tarjetas-credito.png"
+              />
+            </div>
           </div>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">
             <p>Cerrar</p>
           </button>
-          <button
-            (click)="pagar()"
-            type="button"
-            class="btn btn-primary"
-            data-dismiss="modal"
-          >
+          <button type="submit" class="btn btn-primary" data-dismiss="modal">
             <p>Comprar</p>
           </button>
         </div>
