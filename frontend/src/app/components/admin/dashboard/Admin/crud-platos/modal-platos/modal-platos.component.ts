@@ -1,6 +1,6 @@
 import { UnidadMedida } from 'src/app/entidades/UnidadMedida';
 
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Host } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, AbstractControl } from '@angular/forms';
 import Swal from 'sweetalert2';
 import { ArticuloManufacturadoService } from 'src/app/services/serviciosCliente/articuloManufacturadoServices/articuloManufacturado.service';
@@ -12,6 +12,7 @@ import { UnidadMedidaService } from 'src/app/services/serviciosCliente/unidadMed
 import { RubroGeneralService } from 'src/app/services/serviciosCliente/rubroGeneralServices/rubro-general.service';
 import { ArticuloManufacturado } from '../../../../../../entidades/ArticuloManufacturado';
 import { DetalleManufacturado } from 'src/app/entidades/DetalleManufacturado';
+import { ArtManufacturadoPlatosComponent } from '../art-manufacturado-platos/art-manufacturado-platos.component';
 
 @Component({
   selector: 'app-modal-platos',
@@ -61,7 +62,8 @@ export class ModalPlatosComponent implements OnInit {
     private serviceUnidadDeMedida: UnidadMedidaService,
     private serviceRubroGeneral: RubroGeneralService,
     private sweet: AlertsService,
-    private alerts: AlertsService) {
+    private alerts: AlertsService,
+    @Host() private hostManufacturado: ArtManufacturadoPlatosComponent) {
   }
 
   ngOnInit(): void {
@@ -151,6 +153,7 @@ export class ModalPlatosComponent implements OnInit {
   }
 
   agregarIngrediente() {
+
     const ingredienteNuevo = this.fb.group({
       cantidad: [null],
       unidadMedidaID: this.fb.group({
@@ -229,6 +232,13 @@ export class ModalPlatosComponent implements OnInit {
           console.log(this.id);
 
           this.esEditar = false;
+
+          this.hostManufacturado.articuloManufacturado.filter(articulo => {
+            if (articulo.id === res.id) {
+              const indexOfArticulo = this.hostManufacturado.articuloManufacturado.indexOf(articulo);
+              this.hostManufacturado.articuloManufacturado.splice(indexOfArticulo, 1, res);
+            }
+          });
           this.formularioArticulo.reset();
         },
         (err) => {
