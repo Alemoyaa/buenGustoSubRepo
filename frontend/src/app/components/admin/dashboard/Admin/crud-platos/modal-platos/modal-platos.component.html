@@ -197,8 +197,8 @@
             *ngIf="esEditar"
             [disabled]="formularioArticulo.invalid"
             class="btn btn-info"
-            data-dismiss="modal"
             type="button"
+            (click)="actualizar()"
           >
             Editar plato
           </button>
