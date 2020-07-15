@@ -217,27 +217,27 @@ export class ModalPlatosComponent implements OnInit {
 
   actualizar() {
     console.log(this.formularioArticulo.value);
-    //   this.serviceArtManufac
-    //     .put(this.id, this.formularioArticulo.value)
-    //     .subscribe(
-    //       (res) => {
-    //         console.log(res);
-    //         this.alerts.mensajeSuccess(
-    //           'Actualización realizada',
-    //           `El articulo ${this.articuloActualizar.denominacion} se actualizo correctamente, recuerde que puede modificarlo cuando usted lo desee`
-    //         );
-    //         console.log(this.id);
+    this.serviceArtManufac
+      .put(this.formularioArticulo.value.id, this.formularioArticulo.value)
+      .subscribe(
+        (res) => {
+          console.log(res);
+          this.alerts.mensajeSuccess(
+            'Actualización realizada',
+            `El articulo ${this.articuloActualizar.denominacion} se actualizo correctamente, recuerde que puede modificarlo cuando usted lo desee`
+          );
+          console.log(this.id);
 
-    //         this.esEditar = false;
-    //         this.formularioArticulo.reset();
-    //       },
-    //       (err) => {
-    //         this.alerts.mensajeError(
-    //           'No se ah podido actualizar el Rol del usuario',
-    //           'ah ocurrido un error y no se ah podido realizar la actualización, por favor verifique que este todos los datos correctos'
-    //         );
-    //       }
-    //     );
+          this.esEditar = false;
+          this.formularioArticulo.reset();
+        },
+        (err) => {
+          this.alerts.mensajeError(
+            'No se ah podido actualizar el Rol del usuario',
+            'ah ocurrido un error y no se ah podido realizar la actualización, por favor verifique que este todos los datos correctos'
+          );
+        }
+      );
   }
 
 }
