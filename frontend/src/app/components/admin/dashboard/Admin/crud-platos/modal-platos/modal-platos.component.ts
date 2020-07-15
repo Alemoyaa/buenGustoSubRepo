@@ -34,11 +34,11 @@ export class ModalPlatosComponent implements OnInit {
     // funciona solo 1 vez el es editar q es cuando se pasa el dato del componente padre
     // por que el set input se ejecuta 1 vez
     this.esEditar = true;
+    this.crearFormulario();
     if (plato) {
 
       this.articuloActualizar = plato;
-
-
+      console.log(this.articuloActualizar.lista_detalleManufacturado);
       this.formularioArticulo.patchValue({
         id: this.articuloActualizar.id,
         precio_de_venta: this.articuloActualizar.precio_de_venta,
@@ -49,9 +49,8 @@ export class ModalPlatosComponent implements OnInit {
         rubro: {
           id: this.articuloActualizar.rubro.id,
         },
-        lista_detalleManufacturado: this.editar(),
-
       });
+      this.editar();
       console.log(this.formularioArticulo.value);
     }
   }
@@ -71,10 +70,6 @@ export class ModalPlatosComponent implements OnInit {
     this.traerUnidadesDeMedida();
     this.traerRubrosGenerales();
 
-  }
-
-  get lista_detalleManufacturado() {
-    return this.formularioArticulo.get('lista_detalleManufacturado') as FormArray;
   }
 
   traerNombreIngredientes() {
@@ -151,6 +146,10 @@ export class ModalPlatosComponent implements OnInit {
     });
   }
 
+  get lista_detalleManufacturado() {
+    return this.formularioArticulo.get('lista_detalleManufacturado') as FormArray;
+  }
+
   agregarIngrediente() {
     const ingredienteNuevo = this.fb.group({
       cantidad: [null],
@@ -197,9 +196,10 @@ export class ModalPlatosComponent implements OnInit {
 
   editar() {
     this.esEditar = true;
-    const control = <FormArray>this.formularioArticulo.get('lista_detalleManufacturado');
+    // const control = <FormArray>this.formularioArticulo.get('lista_detalleManufacturado');
     this.articuloActualizar.lista_detalleManufacturado.forEach((detalleManufacturado, i) => {
-      control.push(this.patchValues(detalleManufacturado));
+      this.lista_detalleManufacturado.push(this.patchValues(detalleManufacturado));
+      // control.push(this.patchValues(detalleManufacturado));
     });
   }
   patchValues(detalleManufacturado: DetalleManufacturado): AbstractControl {
