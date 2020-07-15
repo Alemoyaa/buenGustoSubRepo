@@ -54,6 +54,9 @@ export class ModalPlatosComponent implements OnInit {
       this.editar();
       console.log(this.formularioArticulo.value);
     }
+    else {
+      this.crearFormulario();
+    }
   }
   constructor(
     private fb: FormBuilder,
@@ -168,8 +171,8 @@ export class ModalPlatosComponent implements OnInit {
   }
 
   cerrar() {
-    this.formularioArticulo.reset();
-    this.crearFormulario();
+    // this.formularioArticulo.reset();
+    // this.crearFormulario();
     this.esEditar = false;
     // this.articuloActualizar = null;
   }
