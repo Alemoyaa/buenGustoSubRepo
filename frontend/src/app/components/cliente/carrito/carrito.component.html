@@ -296,7 +296,7 @@
 
         <div class="modal-body">
           <h3>Total: {{ total }}</h3>
-          <div class="form-check mt-2">
+          <div class="form-check mt-1">
             <input type="checkbox" [(ngModel)]="envio" name="tipoEnvio" />
             <label class="form-check-label ml-3">Envio a domicilio</label>
             <label class="form-check-label ml-3">
@@ -336,7 +336,12 @@
           <div class="metodoDePago" *ngIf="otroMedioDePago && !envio">
             <p><label for="cars">Elegir método de pago</label></p>
 
-            <select [(ngModel)]="factura.formaPago" name="pago" id="medioPago">
+            <select
+              [(ngModel)]="factura.formaPago"
+              name="pago"
+              id="medioPago"
+              class="mb-1"
+            >
               <option value="Debito">
                 <p>Débito</p>
               </option>
@@ -346,11 +351,15 @@
             </select>
             <br />
             <div *ngIf="factura.formaPago">
-              <label>Ingrese su número de tarjeta</label>
+              <p>
+                Ingrese su número de tarjeta<br />
+                Minimo 16 digitos, Maximo 19 digitos<br />
+              </p>
               <input
                 name="tipoEnvio"
+                class="mb-2"
                 type="text"
-                placeholder="Minimo 16 digitos - maximo 19 digitos"
+                placeholder="Ingrese su número de tarjeta"
                 minlength="16"
                 maxlength="19"
                 [class.is-invalid]="
