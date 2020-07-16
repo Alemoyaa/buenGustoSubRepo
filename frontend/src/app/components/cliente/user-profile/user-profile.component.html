@@ -1,4 +1,3 @@
-
 <div class="container mt-3" id="body" *ngIf="cliente">
   <div id="wrapper">
     <div class="d-flex flex-column" id="content-wrapper">
@@ -10,19 +9,37 @@
               <div class="card mb-3">
                 <div class="mb-3 text-center">
                   <div class="col mt-3">
-                    <a class="btn btn-primary text-white" type="button" data-toggle="modal"
-                      data-target=".bd-pedido-modal-xl" (click)="pasarDatos(cliente)">
-                      Historial de pedidos</a>
+                    <a
+                      class="btn btn-primary text-white"
+                      type="button"
+                      data-toggle="modal"
+                      data-target=".bd-pedido-modal-xl"
+                      (click)="pasarDatos(cliente)"
+                    >
+                      Historial de pedidos</a
+                    >
                   </div>
                   <div class="col mt-3">
-                    <a class="btn btn-primary text-white" type="button" data-toggle="modal"
-                      data-target=".bd-factura-modal-xl" (click)="pasarDatos(cliente)">
-                      Historial de facturas</a>
+                    <a
+                      class="btn btn-primary text-white"
+                      type="button"
+                      data-toggle="modal"
+                      data-target=".bd-factura-modal-xl"
+                      (click)="pasarDatos(cliente)"
+                    >
+                      Historial de facturas</a
+                    >
                   </div>
                   <div class="col mt-3">
-                    <a class="btn btn-primary text-white" type="button" data-toggle="modal"
-                      data-target=".modal-formulario-xl" (click)="pasarDatos(cliente)">
-                      Datos Personales</a>
+                    <a
+                      class="btn btn-primary text-white"
+                      type="button"
+                      data-toggle="modal"
+                      data-target=".modal-formulario-xl"
+                      (click)="pasarDatos(cliente)"
+                    >
+                      Datos Personales</a
+                    >
                   </div>
                 </div>
               </div>
@@ -32,141 +49,177 @@
                 <div class="col">
                   <div class="card shadow mb-3">
                     <div class="card-header py-3">
-                      <p class="text-primary m-0 font-weight-bold" style="font-size: 20px;">
+                      <p
+                        class="text-primary m-0 font-weight-bold"
+                        style="font-size: 20px;"
+                      >
                         Datos del Usuario
                       </p>
                     </div>
                     <div class="card-body">
-
                       <div class="row text-center" style="font-size: 15px;">
-
                         <div class="col-12 mt-4">
-
                           <label for="email"><strong>Email</strong></label>
-                          <hr>
-                          <p>{{cliente.usuario.email}}</p>
-                          <hr>
+                          <hr />
+                          <p>{{ cliente.usuario.email }}</p>
+                          <hr />
                         </div>
                         <div class="col-6" *ngIf="cliente.nombre">
-
-                          <label for="first_name"><strong>Nombre</strong></label>
-                          <hr>
-                          <p>{{cliente.nombre | uppercase}}</p>
-                          <hr>
+                          <label for="first_name"
+                            ><strong>Nombre</strong></label
+                          >
+                          <hr />
+                          <p>{{ cliente.nombre | uppercase }}</p>
+                          <hr />
                         </div>
                         <div class="col-6" *ngIf="cliente.apellido">
-                          <label for="last_name" ><strong>Apellido</strong></label>
-                          <hr>
-                          <p>{{cliente.apellido | uppercase}}</p>
-                          <hr>
+                          <label for="last_name"
+                            ><strong>Apellido</strong></label
+                          >
+                          <hr />
+                          <p>{{ cliente.apellido | uppercase }}</p>
+                          <hr />
                         </div>
-                  
+
                         <div class="col-12 mt-4" *ngIf="cliente.telefono">
-                         
-                          <label for="telefono"><strong>Telefono</strong></label>
-                          <hr>
-                          <p>{{cliente.telefono}}</p>
-                         <hr>
+                          <label for="telefono"
+                            ><strong>Telefono</strong></label
+                          >
+                          <hr />
+                          <p>{{ cliente.telefono }}</p>
+                          <hr />
                         </div>
-                        <div class="row text-center" *ngIf="!cliente.nombre ||  !cliente.apellido || !cliente.telefono">
+                        <div
+                          class="row text-center"
+                          *ngIf="
+                            !cliente.nombre ||
+                            !cliente.apellido ||
+                            !cliente.telefono
+                          "
+                        >
                           <div class="col-12">
-                            <hr>
+                            <hr />
                             <div class="alert alert-danger" role="alert">
-                              <strong>Usted datos basicos en su cuenta!!</strong>
-                              <p>Debe completar los datos basicos de si persona, como por ejemplo nombre, apellido, telefono...</p>
+                              <h4>Ohhh noo!!</h4>
+                              <strong
+                                >Usted no posee datos basicos en su
+                                cuenta!!</strong
+                              >
+                              <p>
+                                Debe completar los datos basicos de su persona,
+                                como por ejemplo nombre, apellido, telefono...
+                              </p>
                               <div class="">
-                                <a class="btn btn-primary text-white" type="button" data-toggle="modal"
-                                  data-target=".modal-formulario-xl" (click)="pasarDatos(cliente)">
-                                  Cargar datos personales basicos</a>
+                                <a
+                                  class="btn btn-primary text-white"
+                                  type="button"
+                                  data-toggle="modal"
+                                  data-target=".modal-formulario-xl"
+                                  (click)="pasarDatos(cliente)"
+                                >
+                                  Cargar datos personales basicos</a
+                                >
                               </div>
                             </div>
                           </div>
                         </div>
-
-                        
-
-
                       </div>
 
                       <div class="row text-center" *ngIf="cliente.domicilio">
-                        <hr>
+                        <hr />
                         <div class="col-6 mt-4">
-
                           <label for="calle"><strong>Calle</strong></label>
-                          <hr>
-                          <p>{{cliente.domicilio.calle  | uppercase}}</p>
-                          <hr>
+                          <hr />
+                          <p>{{ cliente.domicilio.calle | uppercase }}</p>
+                          <hr />
                         </div>
 
                         <div class="col-6 mt-4">
-
-                          <label for="aclaracion"><strong>Aclaracion</strong></label>
-                          <hr>
-                          <p>{{cliente.domicilio.aclaracion}}</p>
-                          <hr>
+                          <label for="aclaracion"
+                            ><strong>Aclaracion</strong></label
+                          >
+                          <hr />
+                          <p>{{ cliente.domicilio.aclaracion }}</p>
+                          <hr />
                         </div>
 
                         <div class="col-4 mt-4">
-
                           <label for="city"><strong>Numeracion</strong></label>
-                          <hr>
-                          <p>{{cliente.domicilio.numero}}</p>
-                          <hr>
+                          <hr />
+                          <p>{{ cliente.domicilio.numero }}</p>
+                          <hr />
                         </div>
 
                         <div class="col-4 mt-4">
-
                           <label for="piso"><strong>Piso</strong></label>
-                          <hr>
-                          <p>{{cliente.domicilio.piso}}</p>
-                          <hr>
+                          <hr />
+                          <p>{{ cliente.domicilio.piso }}</p>
+                          <hr />
                         </div>
                         <div class="col-4 mt-4">
                           <label for="departamento">
                             <strong>Numero Dpto</strong>
                           </label>
-                          <hr>
-                          <p>{{cliente.domicilio.nroDepartamento}}</p>
-                          <hr>
+                          <hr />
+                          <p>{{ cliente.domicilio.nroDepartamento }}</p>
+                          <hr />
                         </div>
 
                         <div class="col-6 mt-4">
-
                           <label for="country">
                             <strong>Localidad</strong>
                           </label>
-                          <hr>
-                          <p>{{cliente.domicilio.localidad.nombre  | uppercase}}</p>
-                          <hr>
+                          <hr />
+                          <p>
+                            {{ cliente.domicilio.localidad.nombre | uppercase }}
+                          </p>
+                          <hr />
                         </div>
-                        <div class="col-6 mt-4" *ngIf="cliente.domicilio.localidad.provincia">
-
+                        <div
+                          class="col-6 mt-4"
+                          *ngIf="cliente.domicilio.localidad.provincia"
+                        >
                           <label for="country">
                             <strong>Provincia</strong>
                           </label>
-                          <hr>
-                          <p>{{cliente.domicilio.localidad.provincia.nombre  | uppercase}}</p>
-                          <hr>
+                          <hr />
+                          <p>
+                            {{
+                              cliente.domicilio.localidad.provincia.nombre
+                                | uppercase
+                            }}
+                          </p>
+                          <hr />
                         </div>
                       </div>
 
                       <div class="row text-center" *ngIf="!cliente.domicilio">
                         <div class="col-12">
-                          <hr>
+                          <hr />
                           <div class="alert alert-danger" role="alert">
-                            <strong>Usted no posee un domicilio asociado a su cuenta!!</strong>
-                            <p>Recuerde que solo podra acceder a la opcion de delivery solo si posee un domicilio en su
-                              perfil</p>
+                            <h4>Ohhh noo!!</h4>
+                            <strong
+                              >Usted no posee un domicilio asociado a su
+                              cuenta!!</strong
+                            >
+                            <p>
+                              Recuerde que solo podra acceder a la opcion de
+                              delivery solo si posee un domicilio en su perfil
+                            </p>
                             <div class="">
-                              <a class="btn btn-primary text-white" type="button" data-toggle="modal"
-                                data-target=".modal-formulario-xl" (click)="pasarDatos(cliente)">
-                                Cargar nuevo domicilio</a>
+                              <a
+                                class="btn btn-primary text-white"
+                                type="button"
+                                data-toggle="modal"
+                                data-target=".modal-formulario-xl"
+                                (click)="pasarDatos(cliente)"
+                              >
+                                Cargar nuevo domicilio</a
+                              >
                             </div>
                           </div>
                         </div>
                       </div>
-
-
                     </div>
                   </div>
                 </div>
@@ -179,9 +232,15 @@
   </div>
 </div>
 
-<app-modal-historial-pedidos [clienteUser]="cliente"></app-modal-historial-pedidos>
+<app-modal-historial-pedidos
+  [clienteUser]="cliente"
+></app-modal-historial-pedidos>
 
+<app-modal-historial-facturas
+  [clienteUser]="cliente"
+></app-modal-historial-facturas>
 
-<app-modal-historial-facturas [clienteUser]="cliente"></app-modal-historial-facturas>
-
-<app-modal-formulario [clienteUser]="cliente" *ngIf="cliente"></app-modal-formulario>
+<app-modal-formulario
+  [clienteUser]="cliente"
+  *ngIf="cliente"
+></app-modal-formulario>
