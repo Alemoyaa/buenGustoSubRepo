@@ -150,7 +150,15 @@ export class CarritoComponent implements OnInit {
   }
 
   get numeroValido(): boolean {
-    var expresion = /[a-z]|[A-Z]/g;
+    var expresion = /[a-zA-Z&\/\\!¡°|¬@#-_()<>{}´^=*+%$~'",.:;?]/g;
+
+    if (this.envio) {
+      return true;
+    }
+
+    if (!this.otroMedioDePago) {
+      return true;
+    }
 
     if (this.factura.nroTarjeta) {
       let encontrado = this.factura.nroTarjeta.match(expresion);
