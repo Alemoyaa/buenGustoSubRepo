@@ -30,6 +30,8 @@ public class PedidoEntity extends CommonEntity implements Serializable {
 	private boolean tipo_Envio;
 	private int numero;
 	private int minTotalsinDelivery;
+	
+	@Transient
 	private DomicilioEntity domilicio;
 
 	@Transient
@@ -123,7 +125,7 @@ public class PedidoEntity extends CommonEntity implements Serializable {
 	}
 
 	public DomicilioEntity getDomilicio() {
-		return domilicio;
+		return clientePedido.getDomicilio();
 	}
 
 	public void setDomilicio(DomicilioEntity domilicio) {
