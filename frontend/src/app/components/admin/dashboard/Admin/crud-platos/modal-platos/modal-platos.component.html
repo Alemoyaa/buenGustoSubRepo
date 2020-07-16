@@ -43,7 +43,11 @@
                     class="form-control"
                     formControlName="denominacion"
                     type="text"
+                    [class.is-invalid]="denominacionNoValido"
                   />
+                  <small *ngIf="denominacionNoValido" class="text-danger">
+                    ingrese un nombre para su plato
+                  </small>
                   <!-- formControlName="denominacion" -->
                 </div>
               </div>
@@ -54,7 +58,11 @@
                     class="form-control"
                     formControlName="precio_de_venta"
                     type="number"
+                    [class.is-invalid]="precioNoValido"
                   />
+                  <small *ngIf="precioNoValido" class="text-danger">
+                    ingrese un precio para su plato
+                  </small>
                   <!--  formControlName="precio_de_venta" -->
                 </div>
               </div>
@@ -65,18 +73,31 @@
                     class="form-control"
                     formControlName="url_imagen"
                     type="text"
+                    [class.is-invalid]="imagenNoValido"
                   />
+                  <small *ngIf="imagenNoValido" class="text-danger">
+                    ingrese una imagen para su plato
+                  </small>
                   <!-- formControlName="url_imagen" -->
                 </div>
               </div>
               <div class="col-md-6">
                 <div class="form-group">
-                  <label>Tiempo estimado de realización:</label>
+                  <label
+                    >Tiempo estimado de realización (Minutos minimos):</label
+                  >
                   <input
                     class="form-control"
                     formControlName="tiempo_estimado_manuf"
                     type="number"
+                    [class.is-invalid]="tiempoManufacturadoNoValido"
                   />
+                  <small
+                    *ngIf="tiempoManufacturadoNoValido"
+                    class="text-danger"
+                  >
+                    ingrese un tiempo minimo de realizacion para su plato
+                  </small>
                   <!--    formControlName="tiempo_estimado_manuf" -->
                 </div>
               </div>
@@ -89,6 +110,7 @@
                     (change)="seleccionarRubro($event.target.value)"
                     class="custom-select"
                     formControlName="id"
+                    [class.is-invalid]="rubroNoValido"
                   >
                     <option
                       *ngFor="let rubro of rubroGeneral"
@@ -97,6 +119,9 @@
                       {{ rubro.denominacion }}
                     </option>
                   </select>
+                  <small *ngIf="rubroNoValido" class="text-danger">
+                    Es necesario seleccionar un rubro para su plato
+                  </small>
                   <!--    formControlName="es_catalogo" -->
                 </div>
               </div>
@@ -130,6 +155,7 @@
                       class="form-control"
                       formControlName="cantidad"
                       type="number"
+                      [class.is-invalid]="ingredientesNoValido"
                     />
                   </div>
 
@@ -145,6 +171,7 @@
                       "
                       class="custom-select"
                       formControlName="id"
+                      [class.is-invalid]="ingredientesNoValido"
                     >
                       <option
                         *ngFor="let unidadMedida of unidadDeMedidaIngrediente"
@@ -164,6 +191,7 @@
                       (change)="seleccionarIngrediente($event.target.value, i)"
                       class="custom-select"
                       formControlName="id"
+                      [class.is-invalid]="ingredientesNoValido"
                     >
                       <option
                         *ngFor="let ingrediente of nombreIngrediente"
@@ -178,6 +206,10 @@
                   <a (click)="removerDetalle(i)" class="btn" id="trash">
                     <i class="fas fa-trash"></i
                   ></a>
+                  <small *ngIf="ingredientesNoValido" class="text-danger">
+                    Recuerde que todos los campos deben ser llenados
+                    correctamente
+                  </small>
                 </div>
               </div>
             </div>
