@@ -138,25 +138,25 @@
                   <!-- Denominacion -->
                   <td
                     class="text-center"
-                    *ngIf="detalle.articuloManufacturado.denominacion"
+                    *ngIf="detalle.articuloManufacturado; else denominacionAI"
                   >
                     {{ detalle.articuloManufacturado.denominacion }}
                   </td>
-                  <td
-                    class="text-center alert-danger"
-                    *ngIf="!detalle.articuloManufacturado.denominacion"
-                  >
-                    VERIFICAR PEDIDO
-                  </td>
+
+                  <ng-template #denominacionAI>
+                    <td class="text-center">
+                      {{ detalle.articuloInsumo.denominacion }}
+                    </td>
+                  </ng-template>
 
                   <!-- Imagen -->
-                  <td>
+                  <td *ngIf="detalle.articuloManufacturado; else imagenAI">
                     <img
+                      *ngIf="detalle.articuloManufacturado.url_imagen"
                       class="img-thumbnail img-fluid"
                       src="{{ detalle.articuloManufacturado.url_imagen }}"
                       width="140"
                       height="40"
-                      *ngIf="detalle.articuloManufacturado.url_imagen"
                     />
                     <img
                       src="../../../../../../assets/image-not-available.png"
@@ -166,6 +166,25 @@
                       *ngIf="!detalle.articuloManufacturado.url_imagen"
                     />
                   </td>
+
+                  <ng-template #imagenAI>
+                    <td>
+                      <img
+                        *ngIf="detalle.articuloInsumo.url_imagen"
+                        class="img-thumbnail img-fluid"
+                        src="{{ detalle.articuloInsumo.url_imagen }}"
+                        width="140"
+                        height="40"
+                      />
+                      <img
+                        src="../../../../../../assets/image-not-available.png"
+                        class="img-thumbnail img-fluid"
+                        width="140"
+                        height="40"
+                        *ngIf="!detalle.articuloInsumo.url_imagen"
+                      />
+                    </td>
+                  </ng-template>
 
                   <!-- Aclaracion -->
                   <td class="text-center">
