@@ -140,11 +140,11 @@ export class ModalPlatosComponent implements OnInit {
   crearFormulario() {
     this.formularioArticulo = this.fb.group({
       id: [null],
-      precio_de_venta: [null, [Validators.required, Validators.pattern('[0-9]')]],
+      precio_de_venta: [null, [Validators.required, Validators.pattern('[0-9]{1,9}')]],
       url_imagen: ['', Validators.required],
       denominacion: ['', Validators.required],
       // costo_de_manuf: [null],
-      tiempo_estimado_manuf: [null, [Validators.required, Validators.pattern('[0-9]')]],
+      tiempo_estimado_manuf: [null, [Validators.required, Validators.pattern('[0-9]{1,3}')]],
       lista_detalleManufacturado: this.fb.array([]),
       rubro: this.fb.group({
         id: [null, Validators.required],
@@ -159,7 +159,7 @@ export class ModalPlatosComponent implements OnInit {
   agregarIngrediente() {
 
     const ingredienteNuevo = this.fb.group({
-      cantidad: [null, [Validators.required, Validators.pattern('[0-9]')]],
+      cantidad: [null, [Validators.required, Validators.pattern('[0-9]{1,4}')]],
       unidadMedidaID: this.fb.group({
         id: [null, Validators.required],
       }),
@@ -250,5 +250,37 @@ export class ModalPlatosComponent implements OnInit {
         }
       );
   }
+  get denominacionNoValido() {
+    return this.formularioArticulo.get('denominacion').invalid &&
+      this.formularioArticulo.get('denominacion').touched;
+  }
+
+  get precioNoValido() {
+    return this.formularioArticulo.get('precio_de_venta').invalid &&
+      this.formularioArticulo.get('precio_de_venta').touched;
+  }
+
+  get imagenNoValido() {
+    return this.formularioArticulo.get('url_imagen').invalid &&
+      this.formularioArticulo.get('url_imagen').touched;
+  }
+  get tiempoManufacturadoNoValido() {
+    return this.formularioArticulo.get('tiempo_estimado_manuf').invalid &&
+      this.formularioArticulo.get('tiempo_estimado_manuf').touched;
+  }
+
+  get rubroNoValido() {
+    return this.formularioArticulo.get('rubro.id').invalid &&
+      this.formularioArticulo.get('rubro.id').touched;
+  }
+
+  get ingredientesNoValido() {
+
+    //this.formularioArticulo.get(['lista_detalleManufacturado'])
+
+    return this.formularioArticulo.get('lista_detalleManufacturado').invalid &&
+      this.formularioArticulo.get('lista_detalleManufacturado').touched;
+  }
+
 
 }
