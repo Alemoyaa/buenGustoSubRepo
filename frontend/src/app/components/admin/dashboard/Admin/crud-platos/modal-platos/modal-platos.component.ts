@@ -1,7 +1,7 @@
 import { UnidadMedida } from 'src/app/entidades/UnidadMedida';
 
 import { Component, OnInit, Input, Host } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup, AbstractControl } from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup, AbstractControl, Validators } from '@angular/forms';
 import Swal from 'sweetalert2';
 import { ArticuloManufacturadoService } from 'src/app/services/serviciosCliente/articuloManufacturadoServices/articuloManufacturado.service';
 import { AlertsService } from 'src/app/services/alertServices/alerts.service';
@@ -13,6 +13,7 @@ import { RubroGeneralService } from 'src/app/services/serviciosCliente/rubroGene
 import { ArticuloManufacturado } from '../../../../../../entidades/ArticuloManufacturado';
 import { DetalleManufacturado } from 'src/app/entidades/DetalleManufacturado';
 import { ArtManufacturadoPlatosComponent } from '../art-manufacturado-platos/art-manufacturado-platos.component';
+
 
 @Component({
   selector: 'app-modal-platos',
@@ -55,6 +56,7 @@ export class ModalPlatosComponent implements OnInit {
       console.log(this.formularioArticulo.value);
     }
     else {
+      this.esEditar = false;
       this.crearFormulario();
     }
   }
@@ -64,7 +66,6 @@ export class ModalPlatosComponent implements OnInit {
     private serviceArticuloInsumo: ArticuloInsumoService,
     private serviceUnidadDeMedida: UnidadMedidaService,
     private serviceRubroGeneral: RubroGeneralService,
-    private sweet: AlertsService,
     private alerts: AlertsService,
     @Host() private hostManufacturado: ArtManufacturadoPlatosComponent) {
   }
@@ -139,14 +140,14 @@ export class ModalPlatosComponent implements OnInit {
   crearFormulario() {
     this.formularioArticulo = this.fb.group({
       id: [null],
-      precio_de_venta: [null],
-      url_imagen: [''],
-      denominacion: [''],
+      precio_de_venta: [null, [Validators.required, Validators.pattern('[0-9]')]],
+      url_imagen: ['', Validators.required],
+      denominacion: ['', Validators.required],
       // costo_de_manuf: [null],
-      tiempo_estimado_manuf: [null],
+      tiempo_estimado_manuf: [null, [Validators.required, Validators.pattern('[0-9]')]],
       lista_detalleManufacturado: this.fb.array([]),
       rubro: this.fb.group({
-        id: [null],
+        id: [null, Validators.required],
       })
     });
   }
@@ -158,12 +159,12 @@ export class ModalPlatosComponent implements OnInit {
   agregarIngrediente() {
 
     const ingredienteNuevo = this.fb.group({
-      cantidad: [null],
+      cantidad: [null, [Validators.required, Validators.pattern('[0-9]')]],
       unidadMedidaID: this.fb.group({
-        id: [null],
+        id: [null, Validators.required],
       }),
       articuloInsumoID: this.fb.group({
-        id: [null],
+        id: [null, Validators.required],
       })
     });
 
@@ -171,10 +172,7 @@ export class ModalPlatosComponent implements OnInit {
   }
 
   cerrar() {
-    // this.formularioArticulo.reset();
-    // this.crearFormulario();
     this.esEditar = false;
-    // this.articuloActualizar = null;
   }
 
   crear() {

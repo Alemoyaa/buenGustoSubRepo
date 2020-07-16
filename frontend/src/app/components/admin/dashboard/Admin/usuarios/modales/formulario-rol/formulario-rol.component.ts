@@ -96,37 +96,37 @@ export class FormularioRolComponent implements OnInit {
     // creo el formulario todo por default vacio y le asigno que sea disabled para q no se puedan editar
     // solo se podra editar el rol de la persona
     this.formularioPersona = new FormGroup({
-      id: new FormControl({value: 0 , disabled: false}),
-      nombre: new FormControl({value: '' , disabled: false}),
-      apellido:  new FormControl({value: '' , disabled: false}),
-      telefono: new FormControl({value: 0 , disabled: false}),
+      id: new FormControl({ value: 0, disabled: false }),
+      nombre: new FormControl({ value: '', disabled: false }),
+      apellido: new FormControl({ value: '', disabled: false }),
+      telefono: new FormControl({ value: 0, disabled: false }),
 
       domicilio: new FormGroup({
-        id: new FormControl({value: 0 , disabled: false}),
-        calle: new FormControl({value: '' , disabled: false}),
-        nroDepartamento: new FormControl({value: 0 , disabled: false}),
-        numero: new FormControl({value: 0 , disabled: false}),
-        piso: new FormControl({value: 0 , disabled: false}),
-        aclaracion: new FormControl({value: '' , disabled: false}),
+        id: new FormControl({ value: 0, disabled: false }),
+        calle: new FormControl({ value: '', disabled: false }),
+        nroDepartamento: new FormControl({ value: 0, disabled: false }),
+        numero: new FormControl({ value: 0, disabled: false }),
+        piso: new FormControl({ value: 0, disabled: false }),
+        aclaracion: new FormControl({ value: '', disabled: false }),
         localidad: new FormGroup({
-          id: new FormControl({value: 0 , disabled: false}),
-          nombre: new FormControl({value: '' , disabled: false}),
+          id: new FormControl({ value: 0, disabled: false }),
+          nombre: new FormControl({ value: '', disabled: false }),
           provincia: new FormGroup({
-            id: new FormControl({value: 0 , disabled: false}),
-            nombre: new FormControl({value: '' , disabled: false}),
+            id: new FormControl({ value: 0, disabled: false }),
+            nombre: new FormControl({ value: '', disabled: false }),
             pais: new FormGroup({
-              id: new FormControl({value: 0 , disabled: false}),
-              nombre: new FormControl({value: '' , disabled: false}),
+              id: new FormControl({ value: 0, disabled: false }),
+              nombre: new FormControl({ value: '', disabled: false }),
             })
           })
         })
       }),
       usuario: new FormGroup({
-        id: new FormControl({value: 0 , disabled: false}),
-        email: new FormControl({value: '' , disabled: false}),
+        id: new FormControl({ value: 0, disabled: false }),
+        email: new FormControl({ value: '', disabled: false }),
         rol: new FormGroup({
-          id: new FormControl({value: 0 }),
-          nombreRol: new FormControl({value: ''}),
+          id: new FormControl({ value: 0 }),
+          nombreRol: new FormControl({ value: '' }),
         })
       }),
     });
@@ -136,8 +136,8 @@ export class FormularioRolComponent implements OnInit {
     console.log(this.formularioPersona.value);
     this.clienteService.put(this.cliente.id, this.formularioPersona.value).subscribe(
       res => {
-        this.alerts.mensajeSuccess('Actualizacion de Rol realizado', 
-        `El rol del usuario ${this.cliente.nombre} se actualizo correctamente, recuerde que puede modificarlo cuando usted lo desee`);
+        this.alerts.mensajeSuccess('Actualizacion de Rol realizado',
+          `El rol del usuario ${this.cliente.nombre} se actualizo correctamente, recuerde que puede modificarlo cuando usted lo desee`);
         this.tabla.usuarios.filter(item => {
           if (item.id === this.cliente.id) {
             const idexOfFactura = this.tabla.usuarios.indexOf(item);
@@ -179,7 +179,7 @@ export class FormularioRolComponent implements OnInit {
   traerRoles() {
     this.rolService.getAll().subscribe((roles) => {
       this.rol = roles;
-      
+
     });
   }
 
