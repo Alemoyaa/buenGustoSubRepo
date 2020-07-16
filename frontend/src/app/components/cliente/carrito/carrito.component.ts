@@ -150,7 +150,7 @@ export class CarritoComponent implements OnInit {
   }
 
   get numeroValido(): boolean {
-    var expresion = /[a-zA-Z&\/\\!¡°|¬@#-_()<>{}´^=*+%$~'",.:;?]/g;
+    var expresion = /[a-zA-Z&\/\\#,+()$~%.'":*?<>{}]/g;
 
     if (this.envio) {
       return true;
