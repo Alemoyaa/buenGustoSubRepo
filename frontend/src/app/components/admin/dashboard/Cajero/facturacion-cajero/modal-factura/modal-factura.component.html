@@ -34,7 +34,7 @@
             </div>
             <div class="datos col-lg-12">
               <div class="row cuadro justify-content-between">
-                <h5>
+                <h5 *ngIf="factura.datosEmpresaID">
                   {{ factura.datosEmpresaID.domicilio.localidad.nombre }},
                   {{ factura.fecha }}
                 </h5>
