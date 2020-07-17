@@ -25,6 +25,7 @@
           <th>Tiempo estimado</th>
           <th>Retraso Pedido</th>
           <th>Detalle</th>
+          <th>Cambiar estado</th>
           <th>Estado</th>
         </tr>
       </thead>
@@ -33,13 +34,26 @@
         <tr
           *ngFor="
             let pedido of pedidos
-              | paginate: { itemsPerPage: 4, currentPage: pageActual };
+              | paginate: { itemsPerPage: 8, currentPage: pageActual };
             let i = index
           "
         >
           <th scope="row">{{ pedido.id }}</th>
-          <td>{{ pedido.fechaRealizacion | date: "dd/MM/yyyy" }}</td>
-          <td>{{ pedido.hora_estimada_fin | date: "mediumTime":"+0" }}</td>
+
+          <td>
+            <label *ngIf="pedido.fechaRealizacion">{{
+              pedido.fechaRealizacion | date: "dd/MM/yyyy"
+            }}</label>
+            <label *ngIf="!pedido.fechaRealizacion"> Consultar</label>
+          </td>
+
+          <td>
+            <label *ngIf="pedido.hora_estimada_fin">
+              {{ pedido.hora_estimada_fin | date: "mediumTime":"+0" }}</label
+            >
+            <label *ngIf="!pedido.hora_estimada_fin"> Consultar</label>
+          </td>
+
           <td>
             <button class="btn btn-danger" (click)="atrasar10Min(pedido, i)">
               +10'
@@ -64,11 +78,24 @@
                 formControlName="id"
                 (change)="seleccionarEstado($event.target.value, pedido)"
               >
-                <option class="preparando" value="4">Preparando</option>
+                <option class="preparando" value="4"> Preparando</option>
                 <option class="listo" value="7">Listo</option>
               </select>
             </form>
           </td>
+
+          <td
+            class="preparando"
+            *ngIf="pedido.estadoPedido.id === 4; else estadoConfirmado"
+          >
+            <strong>{{ pedido.estadoPedido.nombreEstado }}</strong>
+          </td>
+
+          <ng-template #estadoConfirmado>
+            <td class="alert-danger">
+              <strong>Pendiente a Preparar</strong>
+            </td>
+          </ng-template>
         </tr>
       </tbody>
     </table>
@@ -187,10 +214,13 @@
                   </ng-template>
 
                   <!-- Aclaracion -->
-                  <td class="text-center">
-                    <p class="alert-danger" *ngIf="detalle.aclaracion">
-                      · {{ detalle.aclaracion }}
-                    </p>
+
+                  <td>
+                    <textarea class="alert-danger" *ngIf="detalle.aclaracion">
+                      {{ detalle.aclaracion }}
+                      </textarea
+                    >
+
                     <p *ngIf="!detalle.aclaracion">No hay aclaración</p>
                   </td>
                 </tr>
