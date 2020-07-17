@@ -11,8 +11,6 @@ export class ArticuloManufacturadoService extends CommonService<
 > {
   _url = 'http://localhost:8080/api/articulo_manufacturado/';
 
-  articulosManufacturados: ArticuloManufacturado[] = [];
-
   constructor(http: HttpClient) {
     super(http);
   }
