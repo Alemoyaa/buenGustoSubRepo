@@ -31,7 +31,7 @@ export class RegisterComponent implements OnInit {
       // validamos el email para que sea requerido y que tenga formato de email,
       // mientras que a la pw solamente le ponemos una validacion de requerimiento
       email: ['', Validators.compose([Validators.required, Validators.email])],
-      password: ['', Validators.required],
+      password: ['', Validators.compose([Validators.required, Validators.minLength(4)])],
     });
   }
 
@@ -69,5 +69,15 @@ export class RegisterComponent implements OnInit {
 
   ingresarConGoogle() {
     this.loginService.loginGoogle();
+  }
+
+  get emailNoValido() {
+    return this.formularioRegister.get('email').invalid &&
+      this.formularioRegister.get('email').touched;
+  }
+
+  get passwordNoValido() {
+    return this.formularioRegister.get('password').invalid &&
+      this.formularioRegister.get('password').touched;
   }
 }
