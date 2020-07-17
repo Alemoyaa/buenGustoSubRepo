@@ -9,12 +9,18 @@
         <p>Número de factura: {{ factura.nroFactura }}</p>
       </div>
     </div>
-    <div class="datos col-lg-12">
+    <div class="datos col-lg-12" *ngIf="factura.pedidofacturado">
       <div class="row cuadro justify-content-between">
-        <h5>
+        <h5 *ngIf="factura.pedidofacturado.tipo_Envio; else localidadElse">
           {{ factura.datosEmpresaID.domicilio.localidad.nombre }},
           {{ factura.fecha | date }}
         </h5>
+        <ng-template #localidadElse>
+          <h5>
+            Local,
+            {{ factura.fecha | date }}
+          </h5>
+        </ng-template>
         <h5>
           Comprador: {{ factura.pedidofacturado.clientePedido.nombre }}
           {{ factura.pedidofacturado.clientePedido.apellido }}
@@ -33,7 +39,7 @@
         </h5>
       </div>
     </div>
-    <div class="tabla col-lg-12">
+    <div class="tabla col-lg-12" *ngIf="factura.pedidofacturado">
       <div class="row cuadro">
         <table class="table table-striped table-bordered">
           <thead>
