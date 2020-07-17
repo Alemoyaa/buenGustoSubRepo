@@ -1,18 +1,17 @@
-import {FacturaService} from './../../../services/serviciosCliente/facturaServices/factura.service';
-import {Factura} from './../../../entidades/Factura';
-import {AlertsService} from './../../../services/alertServices/alerts.service';
-import {DetallePedido} from 'src/app/entidades/DetallePedido';
-import {Component, OnInit} from '@angular/core';
-import {Pedido} from 'src/app/entidades/Pedido';
-import {LoginService} from 'src/app/services/loginServices/login.service';
-import {ClienteService} from 'src/app/services/serviciosCliente/clienteServices/cliente.service';
-import {PedidoServices} from 'src/app/services/serviciosCliente/pedidoServices/pedido.service';
-import {EstadoPedido} from 'src/app/entidades/EstadoPedido';
-import {ArticuloManufacturado} from 'src/app/entidades/ArticuloManufacturado';
-import {Router} from '@angular/router';
-import {ArticuloInsumo} from 'src/app/entidades/ArticuloInsumo';
+import { FacturaService } from './../../../services/serviciosCliente/facturaServices/factura.service';
+import { Factura } from './../../../entidades/Factura';
+import { AlertsService } from './../../../services/alertServices/alerts.service';
+import { DetallePedido } from 'src/app/entidades/DetallePedido';
+import { Component, OnInit } from '@angular/core';
+import { Pedido } from 'src/app/entidades/Pedido';
+import { LoginService } from 'src/app/services/loginServices/login.service';
+import { ClienteService } from 'src/app/services/serviciosCliente/clienteServices/cliente.service';
+import { PedidoServices } from 'src/app/services/serviciosCliente/pedidoServices/pedido.service';
+import { EstadoPedido } from 'src/app/entidades/EstadoPedido';
+import { ArticuloManufacturado } from 'src/app/entidades/ArticuloManufacturado';
+import { Router } from '@angular/router';
+import { ArticuloInsumo } from 'src/app/entidades/ArticuloInsumo';
 import Swal from 'sweetalert2';
-import swal from 'sweetalert';
 
 @Component({
   selector: 'app-carrito',
@@ -118,8 +117,7 @@ export class CarritoComponent implements OnInit {
     }
   }
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   deleteArticulo(index: number) {
     Swal.fire({
@@ -138,12 +136,13 @@ export class CarritoComponent implements OnInit {
         );
         let newJson: Array<DetallePedido> = [];
 
-        for (let iterador = 0; iterador < detallePedidoStorage.length; iterador++) {
+        for (
+          let iterador = 0;
+          iterador < detallePedidoStorage.length;
+          iterador++
+        ) {
           if (iterador === index) {
-            console.log(
-              'item eliminado ->',
-              detallePedidoStorage[iterador]
-            );
+            console.log('item eliminado ->', detallePedidoStorage[iterador]);
           } else {
             newJson.push(detallePedidoStorage[iterador]);
           }
@@ -153,11 +152,7 @@ export class CarritoComponent implements OnInit {
         localStorage.setItem('carritoDetallesPedido', newJsonString);
         this.listaDetallePedido = [];
         this.getArticulos();
-        Swal.fire(
-          'Eliminado',
-          '',
-          'success'
-        );
+        Swal.fire('Eliminado', '', 'success');
       }
     });
   }
@@ -171,11 +166,11 @@ export class CarritoComponent implements OnInit {
       if (this.listaDetallePedido[iterador].articuloInsumo) {
         this.listaDetallePedido[iterador].subtotal -= this.listaDetallePedido[
           iterador
-          ].articuloInsumo.precio_de_venta;
+        ].articuloInsumo.precio_de_venta;
       } else {
         this.listaDetallePedido[iterador].subtotal -= this.listaDetallePedido[
           iterador
-          ].articuloManufacturado.precio_de_venta;
+        ].articuloManufacturado.precio_de_venta;
       }
 
       let newJsonString = JSON.stringify(this.listaDetallePedido);
@@ -189,12 +184,12 @@ export class CarritoComponent implements OnInit {
       this.listaDetallePedido[iterador].cantidad++;
       this.listaDetallePedido[iterador].subtotal += this.listaDetallePedido[
         iterador
-        ].articuloInsumo.precio_de_venta;
+      ].articuloInsumo.precio_de_venta;
     } else {
       this.listaDetallePedido[iterador].cantidad++;
       this.listaDetallePedido[iterador].subtotal += this.listaDetallePedido[
         iterador
-        ].articuloManufacturado.precio_de_venta;
+      ].articuloManufacturado.precio_de_venta;
     }
 
     let newJsonString = JSON.stringify(this.listaDetallePedido);
@@ -257,7 +252,8 @@ export class CarritoComponent implements OnInit {
                 timer: 2100,
                 showConfirmButton: false,
                 timerProgressBar: true,
-                text: 'Sera direccionado a su perfil para que complete el domicilio',
+                text:
+                  'Sera direccionado a su perfil para que complete el domicilio',
               }).then(() => {
                 this.router.navigate(['user-profile/' + data.uid]);
               });
@@ -312,7 +308,8 @@ export class CarritoComponent implements OnInit {
                         timer: 2100,
                         showConfirmButton: false,
                         timerProgressBar: true,
-                        text: 'Si desea ver el pedido, ingrese en el historial de sus pedidos',
+                        text:
+                          'Si desea ver el pedido, ingrese en el historial de sus pedidos',
                       }).then(() => {
                         this.router.navigate(['user-profile/' + data.uid]);
                         localStorage.clear();
@@ -338,8 +335,8 @@ export class CarritoComponent implements OnInit {
       console.log(value);
       if (value){
         console.log('aaaaaaaaaa ando k emocion', value);*/
-        this.pagar();
-      /*} else{
+    this.pagar();
+    /*} else{
         console.log('no ando', value);
         Swal.fire({
           icon: 'warning',
