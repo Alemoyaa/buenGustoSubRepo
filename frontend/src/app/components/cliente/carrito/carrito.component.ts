@@ -38,7 +38,7 @@ export class CarritoComponent implements OnInit {
   };
   articulosManufactura: Array<ArticuloManufacturado> = [];
   articulosInsumo: Array<ArticuloInsumo> = [];
-  total = 0;
+  total: number = 0;
   otroMedioDePago = false;
   envio = false;
 
