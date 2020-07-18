@@ -34,7 +34,7 @@
                   type="search"
                   placeholder="Nombre de Plato"
                   aria-label="Search"
-                  [(ngModel)]="filtroBuscador"
+                  [(ngModel)]="filtroBuscadorPlato"
                   [ngModelOptions]="{ standalone: true }"
                 />
               </form>
@@ -45,8 +45,11 @@
             </div>
             <div class="row text-center">
               <label for=""> Filtros por categoria</label>
-              <select class="custom-select" id="inputGroupSelect01">
-                <option selected>Seleccionar categoria..</option>
+              <select
+                class="custom-select"
+                (change)="seleccionarFiltroPlato($event.target.value)"
+              >
+                <option selected value="">Todas las categorias..</option>
                 <option
                   *ngFor="let rubro of rubroGeneral"
                   [value]="rubro.denominacion"
@@ -61,13 +64,17 @@
                 <option value="2">Menor precio</option>
               </select>
 
-              <label for=""> Filtros de Bebidas</label>
-              <select class="custom-select">
-                <option selected>Seleccionar Bebida..</option>
-                <option value="1">Gaseosas</option>
-                <option value="2">Vinos</option>
-                <option value="2">Cervezas</option>
-                <option value="2">Jugos</option>
+              <label for=""> Filtros de Bebidas/Postres</label>
+              <select
+                class="custom-select"
+                (change)="seleccionarFiltroBebidas($event.target.value)"
+              >
+                <option selected value="">Todas las Bebidas/Postres..</option>
+                <option
+                  *ngFor="let categoria of categorias"
+                  [value]="categoria.nombreCategoria"
+                  >{{ categoria.nombreCategoria }}</option
+                >
               </select>
 
               <a [routerLink]="['/carrito']">
@@ -81,7 +88,7 @@
           <div class="container-fluid col-lg-9">
             <h3>Platos</h3>
             <div class="row">
-              <ng-container *ngFor="let articulo of filtrar" class="">
+              <ng-container *ngFor="let articulo of filtrarPlatos" class="">
                 <div class="col-lg-4 col-md-4 mt-3">
                   <div class="card" id="cartaProductos">
                     <img
@@ -116,13 +123,30 @@
       <div class="col-lg-12 mt-4">
         <div class="row">
           <div class="container col-lg-3">
-            <div class="row"></div>
+            <div class="row">
+              <!-- Buscador -->
+              <div class="buscador text-center">
+                <form>
+                  <hr />
+                  <p style="font-size: 25px;">Buscador de Bebidas/Postres:</p>
+
+                  <input
+                    class="form-control mr-sm-2"
+                    type="search"
+                    placeholder="Nombre de Bebida/Insumo"
+                    aria-label="Search"
+                    [(ngModel)]="filtroBuscadorBebida"
+                    [ngModelOptions]="{ standalone: true }"
+                  />
+                </form>
+              </div>
+            </div>
           </div>
           <div class="container col-lg-9">
-            <h3>Bebidas e Insumos</h3>
+            <h3>Bebidas y Postres</h3>
             <div class="row">
               <ng-container
-                *ngFor="let articulo of articulosInsumo"
+                *ngFor="let articulo of filtrarBebidas"
                 class="articulo-container"
               >
                 <ng-container *ngIf="articulo.es_catalogo">

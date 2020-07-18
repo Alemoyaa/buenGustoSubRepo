@@ -314,22 +314,4 @@ export class StockComponent implements OnInit {
       this.formStock.get('categoria.id').touched;
   }
 
-  // this.formStock = new FormGroup({
-  //   id: new FormControl(0),
-  //   denominacion: new FormControl('', Validators.required),
-  //   precio_de_venta: new FormControl(null),
-  //   precio_de_compra: new FormControl(null, [Validators.required, Validators.pattern('[0-9]{1,9}')]),
-  //   stock_actual: new FormControl(null, [Validators.required, Validators.pattern('[0-9]{1,9}')]),
-  //   stock_minimo: new FormControl(null, [Validators.required, Validators.pattern('[0-9]{1,9}')]),
-  //   stock_maximo: new FormControl(null, [Validators.required, Validators.pattern('[0-9]{1,9}')]),
-  //   requiere_refrigeracion: new FormControl(null, Validators.required),
-  //   es_catalogo: new FormControl(null, Validators.required),
-  //   url_imagen: new FormControl(''),
-  //   unidadMedidaID: new FormGroup({
-  //     id: new FormControl(null, Validators.required),
-  //   }),
-  //   categoria: new FormGroup({
-  //     id: new FormControl(null, Validators.required)
-  //   }),
-  // });
 }

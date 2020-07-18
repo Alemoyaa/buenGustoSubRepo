@@ -6,6 +6,8 @@ import { ArticuloInsumo } from 'src/app/entidades/ArticuloInsumo';
 import { ArticuloInsumoService } from 'src/app/services/serviciosCliente/articuloInsumoServices/articuloInsumo.service';
 import { RubroGeneralService } from 'src/app/services/serviciosCliente/rubroGeneralServices/rubro-general.service';
 import { RubroGeneral } from 'src/app/entidades/RubroGeneral';
+import { Categoria } from '../../../entidades/Categoria';
+import { CategoriaService } from 'src/app/services/serviciosCliente/categoriaServices/categoria.service';
 
 @Component({
   selector: 'app-catalogo',
@@ -17,26 +19,33 @@ export class CatalogoComponent implements OnInit {
   articulosManufacturado: Array<ArticuloManufacturado> = [];
   articulosInsumo: Array<ArticuloInsumo> = [];
   rubroGeneral: Array<RubroGeneral> = [];
-  filtroBuscador: any = '';
+  categorias: Array<Categoria> = [];
+  filtroBuscadorPlato: any = '';
+  filtroBuscadorBebida: any = '';
+
   constructor(
     public articulosManufacturadosService: ArticuloManufacturadoService,
     public articulosInsumoService: ArticuloInsumoService,
     private serviceRubroGeneral: RubroGeneralService,
+    private categoriaService: CategoriaService,
     private router: Router
   ) { }
 
   ngOnInit() {
     this.getArticulos();
-    this.traerRubrosGenerales();
+
+
   }
 
   getArticulos() {
     this.articulosManufacturadosService.getAll().subscribe((data) => {
       this.articulosManufacturado = data;
     });
+    this.traerRubrosGenerales();
     this.articulosInsumoService.getAll().subscribe((data) => {
       this.articulosInsumo = data;
     });
+    this.getAllCategorias();
   }
 
   goToDetail(id, articulo) {
@@ -53,13 +62,61 @@ export class CatalogoComponent implements OnInit {
     });
   }
 
+  getAllCategorias() {
+    this.categoriaService.getAll().subscribe(
+      (categorias) => {
+        categorias.forEach(categoria => {
+          if (categoria.esCategoriaCatalogo) {
+            this.categorias.push(categoria);
+          }
 
-  get filtrar(): ArticuloManufacturado[] {
+        });
+        console.log(this.categorias);
 
-    var matcher = new RegExp(this.filtroBuscador, 'i');
+      },
+      (error) => {
+        console.warn('error =>  ', error);
+      }
+    );
+  }
+
+
+  get filtrarPlatos(): ArticuloManufacturado[] {
+
+    var matcher = new RegExp(this.filtroBuscadorPlato, 'i');
 
     return this.articulosManufacturado.filter(function (plato) {
       return matcher.test([plato.denominacion, plato.rubro.denominacion, plato.precio_de_venta].join());
     });
   }
+
+  get filtrarBebidas(): ArticuloInsumo[] {
+
+    var matcher = new RegExp(this.filtroBuscadorBebida, 'i');
+
+    return this.articulosInsumo.filter(function (articulo) {
+      return matcher.test([articulo.denominacion, articulo.categoria.nombreCategoria, articulo.precio_de_venta].join());
+    });
+  }
+
+
+  seleccionarFiltroPlato(busqueda: string) {
+
+    if (busqueda) {
+      this.filtroBuscadorPlato = busqueda;
+    } else {
+      this.filtroBuscadorPlato = '';
+    }
+  }
+
+  seleccionarFiltroBebidas(busqueda: string) {
+    if (busqueda) {
+      this.filtroBuscadorBebida = busqueda;
+    } else {
+      this.filtroBuscadorBebida = '';
+    }
+  }
+
+
+
 }
