@@ -26,15 +26,14 @@
             <!-- Buscador -->
             <div class="buscador text-center">
               <form>
-                <hr />
-                <p style="font-size: 25px;">Buscador de platos:</p>
+                <p style="font-size: 25px;">Buscador:</p>
 
                 <input
                   class="form-control mr-sm-2"
                   type="search"
                   placeholder="Nombre de Plato"
                   aria-label="Search"
-                  [(ngModel)]="filtroBuscadorPlato"
+                  [(ngModel)]="this.filtroBuscador"
                   [ngModelOptions]="{ standalone: true }"
                 />
               </form>
@@ -87,7 +86,8 @@
           </div>
           <div class="container-fluid col-lg-9">
             <h3>Platos</h3>
-            <div class="row">
+            <hr />
+            <div class="row" *ngIf="filtrarPlatos.length > 0; else noPlatos">
               <ng-container *ngFor="let articulo of filtrarPlatos" class="">
                 <div class="col-lg-4 col-md-4 mt-3">
                   <div class="card" id="cartaProductos">
@@ -116,6 +116,11 @@
                 </div>
               </ng-container>
             </div>
+            <ng-template #noPlatos>
+              <div class="alert alert-success" role="alert">
+                No se encontraron resultados con esas especificaciones
+              </div>
+            </ng-template>
           </div>
         </div>
       </div>
@@ -123,28 +128,12 @@
       <div class="col-lg-12 mt-4">
         <div class="row">
           <div class="container col-lg-3">
-            <div class="row">
-              <!-- Buscador -->
-              <div class="buscador text-center">
-                <form>
-                  <hr />
-                  <p style="font-size: 25px;">Buscador de Bebidas/Postres:</p>
-
-                  <input
-                    class="form-control mr-sm-2"
-                    type="search"
-                    placeholder="Nombre de Bebida/Insumo"
-                    aria-label="Search"
-                    [(ngModel)]="filtroBuscadorBebida"
-                    [ngModelOptions]="{ standalone: true }"
-                  />
-                </form>
-              </div>
-            </div>
+            <div class="row"></div>
           </div>
           <div class="container col-lg-9">
             <h3>Bebidas y Postres</h3>
-            <div class="row">
+            <hr />
+            <div class="row" *ngIf="filtrarBebidas.length > 0; else noBebidas">
               <ng-container
                 *ngFor="let articulo of filtrarBebidas"
                 class="articulo-container"
@@ -177,6 +166,11 @@
                 </ng-container>
               </ng-container>
             </div>
+            <ng-template #noBebidas>
+              <div class="alert alert-success" role="alert">
+                No se encontraron resultados con esas especificaciones
+              </div>
+            </ng-template>
           </div>
         </div>
       </div>

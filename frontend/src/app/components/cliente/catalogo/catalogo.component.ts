@@ -20,9 +20,8 @@ export class CatalogoComponent implements OnInit {
   articulosInsumo: Array<ArticuloInsumo> = [];
   rubroGeneral: Array<RubroGeneral> = [];
   categorias: Array<Categoria> = [];
-  filtroBuscadorPlato: any = '';
-  filtroBuscadorBebida: any = '';
 
+  filtroBuscador: any = '';
   constructor(
     public articulosManufacturadosService: ArticuloManufacturadoService,
     public articulosInsumoService: ArticuloInsumoService,
@@ -83,7 +82,7 @@ export class CatalogoComponent implements OnInit {
 
   get filtrarPlatos(): ArticuloManufacturado[] {
 
-    var matcher = new RegExp(this.filtroBuscadorPlato, 'i');
+    var matcher = new RegExp(this.filtroBuscador, 'i');
 
     return this.articulosManufacturado.filter(function (plato) {
       return matcher.test([plato.denominacion, plato.rubro.denominacion, plato.precio_de_venta].join());
@@ -92,7 +91,7 @@ export class CatalogoComponent implements OnInit {
 
   get filtrarBebidas(): ArticuloInsumo[] {
 
-    var matcher = new RegExp(this.filtroBuscadorBebida, 'i');
+    var matcher = new RegExp(this.filtroBuscador, 'i');
 
     return this.articulosInsumo.filter(function (articulo) {
       return matcher.test([articulo.denominacion, articulo.categoria.nombreCategoria, articulo.precio_de_venta].join());
@@ -103,17 +102,17 @@ export class CatalogoComponent implements OnInit {
   seleccionarFiltroPlato(busqueda: string) {
 
     if (busqueda) {
-      this.filtroBuscadorPlato = busqueda;
+      this.filtroBuscador = busqueda;
     } else {
-      this.filtroBuscadorPlato = '';
+      this.filtroBuscador = '';
     }
   }
 
   seleccionarFiltroBebidas(busqueda: string) {
     if (busqueda) {
-      this.filtroBuscadorBebida = busqueda;
+      this.filtroBuscador = busqueda;
     } else {
-      this.filtroBuscadorBebida = '';
+      this.filtroBuscador = '';
     }
   }
 
