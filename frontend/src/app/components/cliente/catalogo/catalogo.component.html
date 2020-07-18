@@ -56,12 +56,22 @@
                 >
               </select>
               <hr />
-              <label for=""> Filtros por Precio</label>
-              <select class="custom-select">
-                <option selected>Seleccionar precio..</option>
-                <option value="1">Mayor precio</option>
-                <option value="2">Menor precio</option>
-              </select>
+              <!-- <label for=""> Filtros por Precio</label>
+
+              <select
+                class="custom-select"
+                (change)="
+                  seleccionarPrecio(
+                    filtrarPlatos,
+                    'precio_de_venta',
+                    $event.target.value
+                  )
+                "
+              >
+                <option selected value="">Seleccionar precio..</option>
+                <option value="desc">Mayor precio</option>
+                <option value="asc">Menor precio</option>
+              </select> -->
 
               <label for=""> Filtros de Bebidas/Postres</label>
               <select

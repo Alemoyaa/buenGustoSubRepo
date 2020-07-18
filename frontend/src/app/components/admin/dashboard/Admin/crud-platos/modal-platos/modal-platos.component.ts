@@ -22,7 +22,7 @@ import { ArtManufacturadoPlatosComponent } from '../art-manufacturado-platos/art
 })
 export class ModalPlatosComponent implements OnInit {
   // cargar datos de ingredientes
-  nombreIngrediente: ArticuloInsumo[];
+  nombreIngrediente: Array<ArticuloInsumo> = [];
   unidadDeMedidaIngrediente: UnidadMedida[];
   rubroGeneral: RubroGeneral[];
   esEditar: boolean = false;
@@ -63,6 +63,7 @@ export class ModalPlatosComponent implements OnInit {
       this.crearFormulario();
     }
   }
+
   constructor(
     private fb: FormBuilder,
     private serviceArtManufac: ArticuloManufacturadoService,
@@ -83,7 +84,12 @@ export class ModalPlatosComponent implements OnInit {
 
   traerNombreIngredientes() {
     this.serviceArticuloInsumo.getAll().subscribe(articuloInsumo => {
-      this.nombreIngrediente = articuloInsumo;
+      articuloInsumo.forEach(articulo => {
+        if (!articulo.es_catalogo) {
+          this.nombreIngrediente.push(articulo);
+        }
+      });
+
     });
   }
 
