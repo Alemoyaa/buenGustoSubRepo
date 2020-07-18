@@ -5,11 +5,14 @@
         <h2 class="text-info" *ngIf="listaDetallePedido.length !== 0">
           Carrito De Compras
         </h2>
-        <h3 *ngIf="listaDetallePedido.length === 0">
+        <!-- <h3 *ngIf="listaDetallePedido.length === 0">
           El carrito está vacío
-        </h3>
+        </h3> -->
       </div>
-      <div class="content" *ngIf="listaDetallePedido">
+      <div
+        class="content"
+        *ngIf="listaDetallePedido.length > 0; else carritoVacio"
+      >
         <div class="row no-gutters">
           <div class="col-md-12 col-lg-8">
             <div class="items">
@@ -270,6 +273,18 @@
           </div>
         </div>
       </div>
+      <ng-template #carritoVacio>
+        <div class="block-heading">
+          <h3>
+            El carrito está vacío
+          </h3>
+          <a [routerLink]="['/catalogo']">
+            <button type="button" class="btn btn-primary mt-3">
+              <p>Volver a catalogo</p>
+            </button>
+          </a>
+        </div>
+      </ng-template>
     </div>
   </section>
 
