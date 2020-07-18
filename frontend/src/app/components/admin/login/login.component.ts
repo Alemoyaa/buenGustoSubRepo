@@ -77,4 +77,14 @@ export class LoginComponent implements OnInit {
         this.alertsService.mensajeSuccess('Recuperacion de contraseña', 'Se ha enviado un correo a su cuenta. Porfavor siga los pasos indicados');
       });
   }
+
+  get emailNoValido() {
+    return this.formularioLogin.get('email').invalid &&
+      this.formularioLogin.get('email').touched;
+  }
+
+  get passwordNoValido() {
+    return this.formularioLogin.get('password').invalid &&
+      this.formularioLogin.get('password').touched;
+  }
 }
