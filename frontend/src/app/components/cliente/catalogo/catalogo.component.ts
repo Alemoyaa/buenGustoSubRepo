@@ -17,6 +17,7 @@ export class CatalogoComponent implements OnInit {
   articulosManufacturado: Array<ArticuloManufacturado> = [];
   articulosInsumo: Array<ArticuloInsumo> = [];
   rubroGeneral: Array<RubroGeneral> = [];
+  filtroBuscador: any = '';
   constructor(
     public articulosManufacturadosService: ArticuloManufacturadoService,
     public articulosInsumoService: ArticuloInsumoService,
@@ -49,6 +50,16 @@ export class CatalogoComponent implements OnInit {
   traerRubrosGenerales() {
     this.serviceRubroGeneral.getAll().subscribe(rubro => {
       this.rubroGeneral = rubro;
+    });
+  }
+
+
+  get filtrar(): ArticuloManufacturado[] {
+
+    var matcher = new RegExp(this.filtroBuscador, 'i');
+
+    return this.articulosManufacturado.filter(function (plato) {
+      return matcher.test([plato.denominacion, plato.rubro.denominacion, plato.precio_de_venta].join());
     });
   }
 }

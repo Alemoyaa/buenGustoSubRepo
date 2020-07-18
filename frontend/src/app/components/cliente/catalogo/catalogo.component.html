@@ -1,14 +1,17 @@
 <div class="page catalog-page" id="fondo">
   <section class="clean-block clean-catalog dark">
     <div class="container container-catalogo">
-      <div class="row justify-content-around d-flex">
+      <div class="row d-flex">
         <div
-          class="col-12 text-center jumbotron"
+          class="col-12 jumbotron"
           style="margin-bottom: 20px;"
           id="cartaProductos"
         >
-          <h1 class="display-4"><strong>Nuestros productos </strong></h1>
+          <h1 class="display-4 text-center">
+            <strong>Nuestros productos </strong>
+          </h1>
         </div>
+
         <!-- <a [routerLink]="['/carrito']">
           <button type="button" class="btn btn-primary">
             <i class="fas fa-shopping-cart"></i>
@@ -20,7 +23,24 @@
       <div class="catalogo col-lg-12 mt-4">
         <div class="row">
           <div class="container-fluid col-lg-3">
+            <!-- Buscador -->
+            <div class="buscador text-center">
+              <form>
+                <hr />
+                <p style="font-size: 25px;">Buscador de platos:</p>
+
+                <input
+                  class="form-control mr-sm-2"
+                  type="search"
+                  placeholder="Nombre de Plato"
+                  aria-label="Search"
+                  [(ngModel)]="filtroBuscador"
+                  [ngModelOptions]="{ standalone: true }"
+                />
+              </form>
+            </div>
             <div class="text-center">
+              <hr />
               <h3>Filtros</h3>
             </div>
             <div class="row text-center">
@@ -41,7 +61,6 @@
                 <option value="2">Menor precio</option>
               </select>
 
-              <hr />
               <label for=""> Filtros de Bebidas</label>
               <select class="custom-select">
                 <option selected>Seleccionar Bebida..</option>
@@ -51,17 +70,6 @@
                 <option value="2">Jugos</option>
               </select>
 
-              <hr />
-              <label for=""> Filtros de Postres</label>
-              <select class="custom-select">
-                <option selected>Seleccionar Postre..</option>
-                <option value="1">Flan</option>
-                <option value="2">Helado</option>
-                <option value="2">Ensalada de frutas</option>
-                <option value="2">Torta</option>
-              </select>
-
-              <hr />
               <a [routerLink]="['/carrito']">
                 <button class="btn btn-primary btn-block mt-5">
                   <i class="fas fa-shopping-cart"></i>
@@ -73,10 +81,7 @@
           <div class="container-fluid col-lg-9">
             <h3>Platos</h3>
             <div class="row">
-              <ng-container
-                *ngFor="let articulo of articulosManufacturado"
-                class=""
-              >
+              <ng-container *ngFor="let articulo of filtrar" class="">
                 <div class="col-lg-4 col-md-4 mt-3">
                   <div class="card" id="cartaProductos">
                     <img
