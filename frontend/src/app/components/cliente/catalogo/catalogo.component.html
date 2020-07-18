@@ -1,4 +1,4 @@
-<div class="page catalog-page">
+  <div class="page catalog-page">
   <section class="clean-block clean-catalog dark">
     <div class="container container-catalogo">
       <div class="row justify-content-around d-flex">
@@ -15,14 +15,14 @@
 
       <div class="catalogo col-lg-12 mt-4">
         <h3>Platos</h3>
-        <div class="container platos col-lg-9">
-          <div class="row articulo">
+        <div class="container-fluid col-lg-9">
+          <div class="row">
             <ng-container
               *ngFor="let articulo of articulosManufacturado"
-              class="articulo-container"
+              class=""
             >
-              <div class="card-container col-lg-4 col-md-4">
-                <div class="card articulo">
+              <div class="col-lg-4 col-md-4 mt-3">
+                <div class="card">
                   <img
                     class="card-img-top card-img-recomendado"
                     src="{{ articulo.url_imagen }}"
@@ -35,25 +35,9 @@
                     <strong
                       ><h3>${{ articulo.precio_de_venta }}</h3></strong
                     >
-                    <div class="stars"></div>
-                    <div class="ingredientes">
-                      <ul>
-                        <ng-container
-                          *ngFor="
-                            let ingrediente of articulo.lista_detalleManufacturado
-                          "
-                        >
-                          <li class="align-left">
-                            <small>{{
-                              ingrediente.articuloInsumoID.denominacion
-                            }}</small>
-                          </li>
-                        </ng-container>
-                      </ul>
-                    </div>
                     <button
                       type="button"
-                      class="btn btn-primary"
+                      class="btn btn-success"
                       data-toggle="modal"
                       (click)="goToDetail(articulo.id, 0)"
                     >
@@ -67,17 +51,17 @@
         </div>
       </div>
 
-      <div class="catalogo col-lg-12 mt-4">
+      <div class="col-lg-12 mt-4">
         <h3>Insumos</h3>
-        <div class="container platos col-lg-9">
-          <div class="row articulo">
+        <div class="container col-lg-9">
+          <div class="row">
             <ng-container
               *ngFor="let articulo of articulosInsumo"
               class="articulo-container"
             >
               <ng-container *ngIf="articulo.es_catalogo">
                 <div class="card-container col-lg-4 col-md-4">
-                  <div class="card articulo">
+                  <div class="card">
                     <img
                       class="card-img-top card-img-recomendado"
                       src="{{ articulo.url_imagen }}"
@@ -89,8 +73,6 @@
                       <strong
                         ><h3>${{ articulo.precio_de_venta }}</h3></strong
                       >
-                      <div class="stars"></div>
-
                       <button
                         type="button"
                         class="btn btn-primary"

@@ -14,7 +14,6 @@ li {
     "Segoe UI Symbol";
 }
 
-
 .container-catalogo {
   margin-top: 2em;
   text-align: center;
@@ -25,12 +24,22 @@ li {
   margin-top: 0.5em;
 }
 
+.articulo-container {
+  text-align: center;
+}
+
 .recomendados {
   margin-top: 1em;
 }
 
 .card-img-recomendado {
-  max-height: 120px;
+  height: 120px;
+}
+
+@media (max-width: 770px) {
+  .card-img-recomendado {
+    height: auto;
+  }
 }
 
 .plato {
@@ -60,10 +69,6 @@ li {
   display: block;
   margin: auto;
   margin-bottom: 2em;
-}
-
-.articulo-container {
-  text-align: center;
 }
 
 .float-right {
