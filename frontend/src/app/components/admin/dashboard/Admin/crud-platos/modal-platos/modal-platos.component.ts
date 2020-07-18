@@ -182,11 +182,11 @@ export class ModalPlatosComponent implements OnInit {
     console.log(this.formularioArticulo.value);
     this.serviceArtManufac.post(this.formularioArticulo.value).subscribe(
       (data) => {
-        console.log('Alito el lápiz', data);
+        this.hostManufacturado.articuloManufacturado.push(data);
         this.formularioArticulo.reset();
-        Swal.fire('success', 'Articulo agregado ', 'success');
       },
       (err) => {
+        console.log(err);
         Swal.fire({
           icon: 'error',
           title: 'Ocurrió un problema',
