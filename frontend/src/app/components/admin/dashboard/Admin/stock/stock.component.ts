@@ -50,10 +50,10 @@ export class StockComponent implements OnInit {
       id: new FormControl(0),
       denominacion: new FormControl('', Validators.required),
       precio_de_venta: new FormControl(null),
-      precio_de_compra: new FormControl(null, Validators.required),
-      stock_actual: new FormControl(null, Validators.required),
-      stock_minimo: new FormControl(null, Validators.required),
-      stock_maximo: new FormControl(null, Validators.required),
+      precio_de_compra: new FormControl(null, [Validators.required, Validators.pattern('[0-9]{1,9}')]),
+      stock_actual: new FormControl(null, [Validators.required, Validators.pattern('[0-9]{1,9}')]),
+      stock_minimo: new FormControl(null, [Validators.required, Validators.pattern('[0-9]{1,9}')]),
+      stock_maximo: new FormControl(null, [Validators.required, Validators.pattern('[0-9]{1,9}')]),
       requiere_refrigeracion: new FormControl(null, Validators.required),
       es_catalogo: new FormControl(null, Validators.required),
       url_imagen: new FormControl(''),
@@ -274,4 +274,62 @@ export class StockComponent implements OnInit {
       return matcher.test([articulo.denominacion, articulo.categoria.nombreCategoria].join());
     });
   }
+
+
+  get denominacionNoValido() {
+    return this.formStock.get('denominacion').invalid &&
+      this.formStock.get('denominacion').touched;
+  }
+  get precioDeCompraNoValido() {
+    return this.formStock.get('precio_de_compra').invalid &&
+      this.formStock.get('precio_de_compra').touched;
+  }
+  get stockActualNoValido() {
+    return this.formStock.get('stock_actual').invalid &&
+      this.formStock.get('stock_actual').touched;
+  }
+  get stockMinimoNoValido() {
+    return this.formStock.get('stock_minimo').invalid &&
+      this.formStock.get('stock_minimo').touched;
+  }
+  get stockMaximoNoValido() {
+    return this.formStock.get('stock_maximo').invalid &&
+      this.formStock.get('stock_maximo').touched;
+  }
+  get requiereRefrigeracionNoValido() {
+    return this.formStock.get('requiere_refrigeracion').invalid &&
+      this.formStock.get('requiere_refrigeracion').touched;
+  }
+  get esCatalogoNoValido() {
+    return this.formStock.get('es_catalogo').invalid &&
+      this.formStock.get('es_catalogo').touched;
+  }
+
+  get unidadMedidaIDNoValido() {
+    return this.formStock.get('unidadMedidaID.id').invalid &&
+      this.formStock.get('unidadMedidaID.id').touched;
+  }
+  get categoriaNoValido() {
+    return this.formStock.get('categoria.id').invalid &&
+      this.formStock.get('categoria.id').touched;
+  }
+
+  // this.formStock = new FormGroup({
+  //   id: new FormControl(0),
+  //   denominacion: new FormControl('', Validators.required),
+  //   precio_de_venta: new FormControl(null),
+  //   precio_de_compra: new FormControl(null, [Validators.required, Validators.pattern('[0-9]{1,9}')]),
+  //   stock_actual: new FormControl(null, [Validators.required, Validators.pattern('[0-9]{1,9}')]),
+  //   stock_minimo: new FormControl(null, [Validators.required, Validators.pattern('[0-9]{1,9}')]),
+  //   stock_maximo: new FormControl(null, [Validators.required, Validators.pattern('[0-9]{1,9}')]),
+  //   requiere_refrigeracion: new FormControl(null, Validators.required),
+  //   es_catalogo: new FormControl(null, Validators.required),
+  //   url_imagen: new FormControl(''),
+  //   unidadMedidaID: new FormGroup({
+  //     id: new FormControl(null, Validators.required),
+  //   }),
+  //   categoria: new FormGroup({
+  //     id: new FormControl(null, Validators.required)
+  //   }),
+  // });
 }
