@@ -37,6 +37,7 @@ export class ModalPlatosComponent implements OnInit {
     // por que el set input se ejecuta 1 vez
     this.esEditar = true;
     this.crearFormulario();
+    // si plato tiene datos es decir es un plato para actualizar
     if (plato) {
 
       this.articuloActualizar = plato;
@@ -55,7 +56,9 @@ export class ModalPlatosComponent implements OnInit {
       this.editar();
       console.log(this.formularioArticulo.value);
     }
+    // sino es un nuevo plato
     else {
+
       this.esEditar = false;
       this.crearFormulario();
     }
@@ -281,6 +284,5 @@ export class ModalPlatosComponent implements OnInit {
     return this.formularioArticulo.get('lista_detalleManufacturado').invalid &&
       this.formularioArticulo.get('lista_detalleManufacturado').touched;
   }
-
 
 }

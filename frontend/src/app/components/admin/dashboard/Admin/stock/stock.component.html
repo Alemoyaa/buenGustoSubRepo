@@ -204,7 +204,7 @@
         </button>
       </div>
       <div class="modal-body text-lg-center">
-        <form name="formStock" [formGroup]="formStock">
+        <form name="formStock" [formGroup]="formStock" *ngIf="this.formStock">
           <div class="row">
             <div class="col-12 contact100-form-title imagen-titulo">
               <span class="contact100-form-title-1">
@@ -487,7 +487,7 @@
         </button>
 
         <button
-          *ngIf="!esEditar"
+          *ngIf="this.formStock && !esEditar"
           data-dismiss="modal"
           [disabled]="formStock.invalid"
           type="button"

@@ -20,22 +20,11 @@
             id="email"
             formControlName="email"
             placeholder="ingrese su email"
+            [class.is-invalid]="emailNoValido"
           />
-          <div
-            class="alert alert-danger"
-            *ngIf="
-              formularioRegister.controls['email'].invalid &&
-              formularioRegister.controls['email'].dirty
-            "
-            role="alert"
-          >
-            <span *ngIf="formularioRegister.controls['email'].errors.required">
-              <p>El email es requerido</p>
-            </span>
-            <span *ngIf="formularioRegister.controls['email'].errors.email">
-              <p>El email no es válido</p>
-            </span>
-          </div>
+          <small *ngIf="emailNoValido" class="text-danger">
+            El email no cumple con los parametros requeridos
+          </small>
         </div>
         <div class="form-group">
           <label for="password">
@@ -47,21 +36,11 @@
             id="password"
             formControlName="password"
             placeholder="ingrese su password"
+            [class.is-invalid]="passwordNoValido"
           />
-          <div
-            class="alert alert-danger"
-            *ngIf="
-              formularioRegister.controls['password'].invalid &&
-              formularioRegister.controls['password'].dirty
-            "
-            role="alert"
-          >
-            <span
-              *ngIf="formularioRegister.controls['password'].errors.required"
-            >
-              <p>Contraseña requerida</p>
-            </span>
-          </div>
+          <small *ngIf="passwordNoValido" class="text-danger">
+            La contraseña es requerida y debe tener un minimo de 4 caracteres
+          </small>
         </div>
 
         <button
