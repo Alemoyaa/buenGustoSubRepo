@@ -179,14 +179,18 @@ export class ModalPlatosComponent implements OnInit {
   }
 
   crear() {
-    console.log(this.formularioArticulo.value);
+
     this.serviceArtManufac.post(this.formularioArticulo.value).subscribe(
       (data) => {
+        this.alerts.mensajeSuccess(
+          'Creacion de plato realizada satisfactoriamente',
+          `El Plato ${this.formularioArticulo.value.denominacion} se creo correctamente, recuerde que puede modificarlo cuando usted lo desee`
+        );
         this.hostManufacturado.articuloManufacturado.push(data);
         this.formularioArticulo.reset();
       },
       (err) => {
-        console.log(err);
+
         Swal.fire({
           icon: 'error',
           title: 'Ocurrió un problema',
@@ -223,17 +227,17 @@ export class ModalPlatosComponent implements OnInit {
   }
 
   actualizar() {
-    console.log(this.formularioArticulo.value);
+
     this.serviceArtManufac
       .put(this.formularioArticulo.value.id, this.formularioArticulo.value)
       .subscribe(
         (res) => {
-          console.log(res);
+
           this.alerts.mensajeSuccess(
             'Actualización realizada',
             `El articulo ${this.articuloActualizar.denominacion} se actualizo correctamente, recuerde que puede modificarlo cuando usted lo desee`
           );
-          console.log(this.id);
+
 
           this.esEditar = false;
 

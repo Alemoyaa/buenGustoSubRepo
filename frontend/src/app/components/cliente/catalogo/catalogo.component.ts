@@ -4,6 +4,8 @@ import { ArticuloManufacturado } from 'src/app/entidades/ArticuloManufacturado';
 import { ArticuloManufacturadoService } from 'src/app/services/serviciosCliente/articuloManufacturadoServices/articuloManufacturado.service';
 import { ArticuloInsumo } from 'src/app/entidades/ArticuloInsumo';
 import { ArticuloInsumoService } from 'src/app/services/serviciosCliente/articuloInsumoServices/articuloInsumo.service';
+import { RubroGeneralService } from 'src/app/services/serviciosCliente/rubroGeneralServices/rubro-general.service';
+import { RubroGeneral } from 'src/app/entidades/RubroGeneral';
 
 @Component({
   selector: 'app-catalogo',
@@ -14,22 +16,24 @@ export class CatalogoComponent implements OnInit {
   pageActual: number = 1; //paginador
   articulosManufacturado: Array<ArticuloManufacturado> = [];
   articulosInsumo: Array<ArticuloInsumo> = [];
-
+  rubroGeneral: Array<RubroGeneral> = [];
   constructor(
     public articulosManufacturadosService: ArticuloManufacturadoService,
     public articulosInsumoService: ArticuloInsumoService,
+    private serviceRubroGeneral: RubroGeneralService,
     private router: Router
-  ) {}
+  ) { }
 
-  async ngOnInit() {
-    await this.getArticulos();
+  ngOnInit() {
+    this.getArticulos();
+    this.traerRubrosGenerales();
   }
 
-  async getArticulos() {
-    await this.articulosManufacturadosService.getAll().subscribe((data) => {
+  getArticulos() {
+    this.articulosManufacturadosService.getAll().subscribe((data) => {
       this.articulosManufacturado = data;
     });
-    await this.articulosInsumoService.getAll().subscribe((data) => {
+    this.articulosInsumoService.getAll().subscribe((data) => {
       this.articulosInsumo = data;
     });
   }
@@ -40,5 +44,11 @@ export class CatalogoComponent implements OnInit {
     } else {
       this.router.navigate(['detalle-insumo/', id]);
     }
+  }
+
+  traerRubrosGenerales() {
+    this.serviceRubroGeneral.getAll().subscribe(rubro => {
+      this.rubroGeneral = rubro;
+    });
   }
 }

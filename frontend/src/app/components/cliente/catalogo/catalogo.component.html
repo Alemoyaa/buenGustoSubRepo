@@ -1,67 +1,84 @@
-<div class="page catalog-page">
+<div class="page catalog-page" id="fondo">
   <section class="clean-block clean-catalog dark">
     <div class="container container-catalogo">
       <div class="row justify-content-around d-flex">
-        <div class="col-12 text-center jumbotron" style="margin-bottom: 20px;">
+        <div
+          class="col-12 text-center jumbotron"
+          style="margin-bottom: 20px;"
+          id="cartaProductos"
+        >
           <h1 class="display-4"><strong>Nuestros productos </strong></h1>
         </div>
-        <a [routerLink]="['/carrito']">
+        <!-- <a [routerLink]="['/carrito']">
           <button type="button" class="btn btn-primary">
             <i class="fas fa-shopping-cart"></i>
             <p>Carrito</p>
           </button>
-        </a>
+        </a> -->
       </div>
 
       <div class="catalogo col-lg-12 mt-4">
-        <h3>Platos</h3>
-        <div class="container-fluid col-lg-9">
-          <div class="row">
-            <ng-container
-              *ngFor="let articulo of articulosManufacturado"
-              class=""
-            >
-              <div class="col-lg-4 col-md-4 mt-3">
-                <div class="card">
-                  <img
-                    class="card-img-top card-img-recomendado"
-                    src="{{ articulo.url_imagen }}"
-                  />
-                  <div class="card-body">
-                    <h4 class="card-text">
-                      {{ articulo.denominacion }}
-                    </h4>
-                    <p>Categoria: {{ articulo.rubro.denominacion }}</p>
-                    <strong
-                      ><h3>${{ articulo.precio_de_venta }}</h3></strong
-                    >
-                    <button
-                      type="button"
-                      class="btn btn-success"
-                      data-toggle="modal"
-                      (click)="goToDetail(articulo.id, 0)"
-                    >
-                      <p>Ver más</p>
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </ng-container>
-          </div>
-        </div>
-      </div>
+        <div class="row">
+          <div class="container-fluid col-lg-3">
+            <div class="text-center">
+              <h3>Filtros</h3>
+            </div>
+            <div class="row text-center">
+              <label for=""> Filtros por categoria</label>
+              <select class="custom-select" id="inputGroupSelect01">
+                <option selected>Seleccionar categoria..</option>
+                <option
+                  *ngFor="let rubro of rubroGeneral"
+                  [value]="rubro.denominacion"
+                  >{{ rubro.denominacion }}</option
+                >
+              </select>
+              <hr />
+              <label for=""> Filtros por Precio</label>
+              <select class="custom-select">
+                <option selected>Seleccionar precio..</option>
+                <option value="1">Mayor precio</option>
+                <option value="2">Menor precio</option>
+              </select>
 
-      <div class="col-lg-12 mt-4">
-        <h3>Insumos</h3>
-        <div class="container col-lg-9">
-          <div class="row">
-            <ng-container
-              *ngFor="let articulo of articulosInsumo"
-              class="articulo-container"
-            >
-              <ng-container *ngIf="articulo.es_catalogo">
-                <div class="card-container col-lg-4 col-md-4">
-                  <div class="card">
+              <hr />
+              <label for=""> Filtros de Bebidas</label>
+              <select class="custom-select">
+                <option selected>Seleccionar Bebida..</option>
+                <option value="1">Gaseosas</option>
+                <option value="2">Vinos</option>
+                <option value="2">Cervezas</option>
+                <option value="2">Jugos</option>
+              </select>
+
+              <hr />
+              <label for=""> Filtros de Postres</label>
+              <select class="custom-select">
+                <option selected>Seleccionar Postre..</option>
+                <option value="1">Flan</option>
+                <option value="2">Helado</option>
+                <option value="2">Ensalada de frutas</option>
+                <option value="2">Torta</option>
+              </select>
+
+              <hr />
+              <a [routerLink]="['/carrito']">
+                <button class="btn btn-primary btn-block mt-5">
+                  <i class="fas fa-shopping-cart"></i>
+                  Carrito
+                </button>
+              </a>
+            </div>
+          </div>
+          <div class="container-fluid col-lg-9">
+            <h3>Platos</h3>
+            <div class="row">
+              <ng-container
+                *ngFor="let articulo of articulosManufacturado"
+                class=""
+              >
+                <div class="col-lg-4 col-md-4 mt-3">
+                  <div class="card" id="cartaProductos">
                     <img
                       class="card-img-top card-img-recomendado"
                       src="{{ articulo.url_imagen }}"
@@ -70,14 +87,15 @@
                       <h4 class="card-text">
                         {{ articulo.denominacion }}
                       </h4>
+                      <p>Categoria: {{ articulo.rubro.denominacion }}</p>
                       <strong
                         ><h3>${{ articulo.precio_de_venta }}</h3></strong
                       >
                       <button
                         type="button"
-                        class="btn btn-primary"
+                        class="btn btn-success"
                         data-toggle="modal"
-                        (click)="goToDetail(articulo.id, 1)"
+                        (click)="goToDetail(articulo.id, 0)"
                       >
                         <p>Ver más</p>
                       </button>
@@ -85,7 +103,51 @@
                   </div>
                 </div>
               </ng-container>
-            </ng-container>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-12 mt-4">
+        <div class="row">
+          <div class="container col-lg-3">
+            <div class="row"></div>
+          </div>
+          <div class="container col-lg-9">
+            <h3>Bebidas e Insumos</h3>
+            <div class="row">
+              <ng-container
+                *ngFor="let articulo of articulosInsumo"
+                class="articulo-container"
+              >
+                <ng-container *ngIf="articulo.es_catalogo">
+                  <div class="card-container col-lg-4 col-md-4">
+                    <div class="card" id="cartaProductos">
+                      <img
+                        class="card-img-top card-img-recomendado"
+                        src="{{ articulo.url_imagen }}"
+                      />
+                      <div class="card-body">
+                        <h4 class="card-text">
+                          {{ articulo.denominacion }}
+                        </h4>
+                        <strong
+                          ><h3>${{ articulo.precio_de_venta }}</h3></strong
+                        >
+                        <button
+                          type="button"
+                          class="btn btn-primary"
+                          data-toggle="modal"
+                          (click)="goToDetail(articulo.id, 1)"
+                        >
+                          <p>Ver más</p>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </ng-container>
+              </ng-container>
+            </div>
           </div>
         </div>
       </div>

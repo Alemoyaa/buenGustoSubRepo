@@ -1,6 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Chelsea+Market&display=swap");
 
-
 h1,
 h2,
 h3,
@@ -77,4 +76,19 @@ li {
 
 .align-left {
   text-align: left;
+}
+/* 
+#fondo {
+  background-image: url("../../../../assets/59880.jpg");
+
+  background-size: cover;
+  width: 100%;
+  height: 100%;
+} */
+
+#cartaProductos {
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+  box-shadow: 4px 4px 10px;
 }
