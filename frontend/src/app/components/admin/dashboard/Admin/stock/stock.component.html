@@ -227,43 +227,28 @@
                   name="denominacion"
                   formControlName="denominacion"
                   placeholder="nombre articulo.."
+                  [class.is-invalid]="denominacionNoValido"
                 />
-                <div
-                  *ngIf="
-                    formStock.controls['denominacion'].invalid &&
-                    formStock.controls['denominacion'].dirty
-                  "
-                  class="alert alert-danger"
-                  role="alert"
-                >
-                  <span
-                    *ngIf="formStock.controls['denominacion'].errors.required"
-                    >El nombre es requerido
-                  </span>
-                </div>
+                <small *ngIf="denominacionNoValido" class="text-danger">
+                  ingrese un nombre para su Articulo
+                </small>
               </div>
             </div>
 
             <div class="col-md-4">
               <div class="form-group">
                 <label>Es catálogo ?</label>
-                <select formControlName="es_catalogo" class="form-control">
+                <select
+                  formControlName="es_catalogo"
+                  [class.is-invalid]="esCatalogoNoValido"
+                  class="form-control"
+                >
                   <option value="true">Si</option>
                   <option value="false">No</option>
                 </select>
-                <div
-                  *ngIf="
-                    formStock.controls['es_catalogo'].invalid &&
-                    formStock.controls['es_catalogo'].dirty
-                  "
-                  class="alert alert-danger"
-                  role="alert"
-                >
-                  <span
-                    *ngIf="formStock.controls['es_catalogo'].errors.required"
-                    >La selección es requerida
-                  </span>
-                </div>
+                <small *ngIf="esCatalogoNoValido" class="text-danger">
+                  Es necesaria una especificacion de catalogo
+                </small>
               </div>
             </div>
 
@@ -273,26 +258,17 @@
                 <select
                   formControlName="requiere_refrigeracion"
                   class="form-control"
+                  [class.is-invalid]="requiereRefrigeracionNoValido"
                 >
                   <option value="true">Si</option>
                   <option value="false">No</option>
                 </select>
-                <div
-                  *ngIf="
-                    formStock.controls['requiere_refrigeracion'].invalid &&
-                    formStock.controls['requiere_refrigeracion'].dirty
-                  "
-                  class="alert alert-danger"
-                  role="alert"
+                <small
+                  *ngIf="requiereRefrigeracionNoValido"
+                  class="text-danger"
                 >
-                  <span
-                    *ngIf="
-                      formStock.controls['requiere_refrigeracion'].errors
-                        .required
-                    "
-                    >La selección es requerida
-                  </span>
-                </div>
+                  Es necesaria una especificacion de catalogo
+                </small>
               </div>
             </div>
           </div>
@@ -306,22 +282,11 @@
                   class="form-control"
                   name="precio_de_compra"
                   formControlName="precio_de_compra"
+                  [class.is-invalid]="precioDeCompraNoValido"
                 />
-                <div
-                  *ngIf="
-                    formStock.controls['precio_de_compra'].invalid &&
-                    formStock.controls['precio_de_compra'].dirty
-                  "
-                  class="alert alert-danger"
-                  role="alert"
-                >
-                  <span
-                    *ngIf="
-                      formStock.controls['precio_de_compra'].errors.required
-                    "
-                    >El <strong>precio de compra</strong> es requerido
-                  </span>
-                </div>
+                <small *ngIf="precioDeCompraNoValido" class="text-danger">
+                  ingrese un precio de compra valido para su Articulo
+                </small>
               </div>
             </div>
 
@@ -347,20 +312,11 @@
                   class="form-control"
                   name="stock_actual"
                   formControlName="stock_actual"
+                  [class.is-invalid]="stockActualNoValido"
                 />
-                <div
-                  *ngIf="
-                    formStock.controls['stock_actual'].invalid &&
-                    formStock.controls['stock_actual'].dirty
-                  "
-                  class="alert alert-danger"
-                  role="alert"
-                >
-                  <span
-                    *ngIf="formStock.controls['stock_actual'].errors.required"
-                    >El <strong>Stock Actual</strong> es requerido
-                  </span>
-                </div>
+                <small *ngIf="stockActualNoValido" class="text-danger">
+                  ingrese un stock Actual valido para su Articulo
+                </small>
               </div>
             </div>
 
@@ -372,20 +328,11 @@
                   class="form-control"
                   name="stock_minimo"
                   formControlName="stock_minimo"
+                  [class.is-invalid]="stockMinimoNoValido"
                 />
-                <div
-                  *ngIf="
-                    formStock.controls['stock_minimo'].invalid &&
-                    formStock.controls['stock_minimo'].dirty
-                  "
-                  class="alert alert-danger"
-                  role="alert"
-                >
-                  <span
-                    *ngIf="formStock.controls['stock_minimo'].errors.required"
-                    >El <strong>Stock Mínimo</strong> es requerido
-                  </span>
-                </div>
+                <small *ngIf="stockMinimoNoValido" class="text-danger">
+                  ingrese un stock minimo valido para su Articulo
+                </small>
               </div>
             </div>
 
@@ -397,20 +344,11 @@
                   class="form-control"
                   name="stock_maximo"
                   formControlName="stock_maximo"
+                  [class.is-invalid]="stockMaximoNoValido"
                 />
-                <div
-                  *ngIf="
-                    formStock.controls['stock_maximo'].invalid &&
-                    formStock.controls['stock_maximo'].dirty
-                  "
-                  class="alert alert-danger"
-                  role="alert"
-                >
-                  <span
-                    *ngIf="formStock.controls['stock_maximo'].errors.required"
-                    >El <strong>Stock Máximo</strong> es requerido
-                  </span>
-                </div>
+                <small *ngIf="stockMaximoNoValido" class="text-danger">
+                  ingrese un stock maximo valido para su Articulo
+                </small>
               </div>
             </div>
           </div>
@@ -436,6 +374,7 @@
                   class="form-control"
                   name="unidadMedidaID"
                   formControlName="id"
+                  [class.is-invalid]="unidadMedidaIDNoValido"
                 >
                   <option
                     *ngFor="let unidad of unidadesMedida"
@@ -444,6 +383,9 @@
                     {{ unidad.denominacion }}
                   </option>
                 </select>
+                <small *ngIf="unidadMedidaIDNoValido" class="text-danger">
+                  ingrese una unidad de medida valida para su Articulo
+                </small>
               </div>
             </div>
 
@@ -455,11 +397,15 @@
                   class="form-control"
                   name="categoria"
                   formControlName="id"
+                  [class.is-invalid]="categoriaNoValido"
                 >
                   <option *ngFor="let padre of categorias" [value]="padre.id">
                     {{ padre.nombreCategoria }}
                   </option>
                 </select>
+                <small *ngIf="categoriaNoValido" class="text-danger">
+                  ingrese una categoria valida para su Articulo
+                </small>
               </div>
             </div>
           </div>
