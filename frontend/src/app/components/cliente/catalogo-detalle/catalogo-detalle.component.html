@@ -1,13 +1,4 @@
-<div class="container">
-  <a [routerLink]="['/catalogo']">
-    <button type="button" class="btn btn-primary margin-top">
-      <p>Volver al catálogo</p>
-    </button>
-  </a>
-</div>
-
-<div class="container col-12"
-     *ngIf="articuloManuf">
+<div class="container col-12" *ngIf="articuloManuf" id="fondo">
   <div class="container col-lg-4 col-md-12 col-sm-12 container-card">
     <div class="card articulo-detalle">
       <img
@@ -28,13 +19,21 @@
               class="btn btn-warning"
               (click)="agregarLocalStorage(articuloManuf)"
             >
-              <p>Agregar al carrito</p>
+              <i class="fas fa-cart-plus"></i>
+              Agregar al carrito
             </button>
           </div>
+          <a [routerLink]="['/catalogo']">
+            <button type="button" class="btn btn-primary margin-top">
+              <i class="fas fa-arrow-left"></i>
+              Volver al catálogo
+            </button>
+          </a>
         </div>
       </div>
     </div>
   </div>
+
   <div class="container col-lg-4 col-md-12 col-sm-12 container-card">
     <div class="card articulo-detalle">
       <img

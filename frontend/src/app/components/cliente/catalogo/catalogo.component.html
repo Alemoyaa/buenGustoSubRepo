@@ -11,20 +11,13 @@
             <strong>Nuestros productos </strong>
           </h1>
         </div>
-
-        <!-- <a [routerLink]="['/carrito']">
-          <button type="button" class="btn btn-primary">
-            <i class="fas fa-shopping-cart"></i>
-            <p>Carrito</p>
-          </button>
-        </a> -->
       </div>
 
       <div class="catalogo col-lg-12 mt-4">
         <div class="row">
           <div class="container-fluid col-lg-3">
             <!-- Buscador -->
-            <div class="buscador text-center">
+            <div class="buscador text-center mt-5">
               <form>
                 <p style="font-size: 25px;">Buscador:</p>
 
@@ -57,7 +50,7 @@
               </select>
               <hr />
 
-              <label for=""> Filtros de Bebidas/Postres</label>
+              <label for="" class="mt-2"> Filtros de Bebidas/Postres</label>
               <select
                 class="custom-select"
                 (change)="seleccionarFiltroBebidas($event.target.value)"
@@ -86,7 +79,7 @@
                 *ngFor="
                   let articulo of filtrarPlatos
                     | paginate
-                      : { itemsPerPage: 9, currentPage: pageActualPlatos }
+                      : { itemsPerPage: 6, currentPage: pageActualPlatos }
                 "
               >
                 <div class="col-lg-4 col-md-4 mt-3">
@@ -144,7 +137,7 @@
                 *ngFor="
                   let articulo of filtrarBebidas
                     | paginate
-                      : { itemsPerPage: 9, currentPage: pageActualArticulos }
+                      : { itemsPerPage: 10, currentPage: pageActualArticulos }
                 "
                 class="articulo-container"
               >
