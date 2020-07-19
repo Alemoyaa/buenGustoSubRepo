@@ -34,6 +34,7 @@
         <tr>
           <th scope="row">Orden</th>
           <th scope="row">Cliente</th>
+
           <th scope="row">Fecha</th>
           <th scope="row">Envió</th>
           <th scope="row">Enviar</th>
@@ -54,42 +55,59 @@
         <tr
           *ngFor="
             let factura of filtrar
-              | paginate: { itemsPerPage: 15, currentPage: pageActual }; let i = index
+              | paginate: { itemsPerPage: 15, currentPage: pageActual };
+            let i = index
           "
         >
-          <th scope="row">{{factura.nroFactura}}</th>
+          <th scope="row">{{ factura.nroFactura }}</th>
           <td>
             {{ factura.pedidofacturado.clientePedido.nombre }}
             {{ factura.pedidofacturado.clientePedido.apellido }}
           </td>
           <td>{{ factura.pedidofacturado.fechaRealizacion | date }}</td>
-          <td *ngIf="factura.pedidofacturado.tipo_Envio; else envioFalso">A domicilio</td>
+          <td *ngIf="factura.pedidofacturado.tipo_Envio; else envioFalso">
+            A domicilio
+          </td>
           <ng-template #envioFalso>
             <td>En local</td>
           </ng-template>
-          <td *ngIf="factura.pedidofacturado.tipo_Envio && factura.pedidofacturado.estadoPedido.id !== 5 ; else sinEnvio">
+          <td
+            *ngIf="
+              factura.pedidofacturado.tipo_Envio &&
+                factura.pedidofacturado.estadoPedido.id !== 5;
+              else sinEnvio
+            "
+          >
             <button class="btn btn-info" (click)="enviarADomicilio(factura, i)">
               Enviar a domicilio
             </button>
           </td>
           <ng-template #sinEnvio>
-            <td><button class="btn btn-secondary" disabled>No necesita</button></td>
+            <td>
+              <button class="btn btn-secondary" disabled>No necesita</button>
+            </td>
           </ng-template>
           <td>{{ factura.pedidofacturado.estadoPedido.nombreEstado }}</td>
-          <td *ngIf="factura.pedidofacturado.tipo_Envio && factura.pedidofacturado.estadoPedido.id === 7; else facturaNoDisponible">
+          <td
+            *ngIf="
+              factura.pedidofacturado.tipo_Envio &&
+                factura.pedidofacturado.estadoPedido.id === 7;
+              else facturaNoDisponible
+            "
+          >
             <button class="btn btn-secondary" disabled>No disponible</button>
           </td>
           <ng-template #facturaNoDisponible>
             <td>
               <button
-              class="btn btn-primary"
-              data-toggle="modal"
-              data-target="#factura"
-              data-dismiss="modal"
-              (click)="mostrarFactura(factura)"
-            >
-              Ver factura
-            </button>
+                class="btn btn-primary"
+                data-toggle="modal"
+                data-target="#factura"
+                data-dismiss="modal"
+                (click)="mostrarFactura(factura)"
+              >
+                Ver factura
+              </button>
             </td>
           </ng-template>
         </tr>

@@ -34,6 +34,7 @@
         <tr>
           <th scope="row">Orden</th>
           <th scope="row">Cliente</th>
+          <th scope="row">Telefono</th>
           <th scope="row">Tiempo estimado</th>
           <th scope="row">Tipo de envío</th>
           <th scope="row">Fecha</th>
@@ -51,8 +52,9 @@
               | paginate: { itemsPerPage: 5, currentPage: pageActual }
           "
         >
-          <th scope="row">1</th>
+          <th scope="row">{{ pedido.numero }}</th>
           <td>{{ pedido.clientePedido.nombre }}</td>
+          <td>{{ pedido.clientePedido.telefono }}</td>
           <td>{{ pedido.hora_estimada_fin | date }}</td>
           <td>
             <p *ngIf="pedido.tipo_Envio == false">Retira en Local</p>

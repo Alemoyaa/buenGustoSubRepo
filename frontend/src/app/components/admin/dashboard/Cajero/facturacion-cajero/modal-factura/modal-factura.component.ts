@@ -22,9 +22,9 @@ export class ModalFacturaComponent implements OnInit {
     private pedidoService: PedidoServices,
     private alerts: AlertsService,
     private estadoPedidoService: EstadoPedidoServices
-  ) {}
+  ) { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
   crearFacturaPDF() {
     var data = document.getElementById('facturaPDF');
