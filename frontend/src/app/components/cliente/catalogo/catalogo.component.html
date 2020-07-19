@@ -56,22 +56,6 @@
                 >
               </select>
               <hr />
-              <!-- <label for=""> Filtros por Precio</label>
-
-              <select
-                class="custom-select"
-                (change)="
-                  seleccionarPrecio(
-                    filtrarPlatos,
-                    'precio_de_venta',
-                    $event.target.value
-                  )
-                "
-              >
-                <option selected value="">Seleccionar precio..</option>
-                <option value="desc">Mayor precio</option>
-                <option value="asc">Menor precio</option>
-              </select> -->
 
               <label for=""> Filtros de Bebidas/Postres</label>
               <select
@@ -94,11 +78,17 @@
               </a>
             </div>
           </div>
-          <div class="container-fluid col-lg-9">
+          <div class="container-fluid col-lg-9 mt-3">
             <h3>Platos</h3>
             <hr />
             <div class="row" *ngIf="filtrarPlatos.length > 0; else noPlatos">
-              <ng-container *ngFor="let articulo of filtrarPlatos" class="">
+              <ng-container
+                *ngFor="
+                  let articulo of filtrarPlatos
+                    | paginate
+                      : { itemsPerPage: 9, currentPage: pageActualPlatos }
+                "
+              >
                 <div class="col-lg-4 col-md-4 mt-3">
                   <div class="card" id="cartaProductos">
                     <img
@@ -131,6 +121,12 @@
                 No se encontraron resultados con esas especificaciones
               </div>
             </ng-template>
+
+            <div class="text-center mt-4">
+              <pagination-controls
+                (pageChange)="pageActualPlatos = $event"
+              ></pagination-controls>
+            </div>
           </div>
         </div>
       </div>
@@ -145,7 +141,11 @@
             <hr />
             <div class="row" *ngIf="filtrarBebidas.length > 0; else noBebidas">
               <ng-container
-                *ngFor="let articulo of filtrarBebidas"
+                *ngFor="
+                  let articulo of filtrarBebidas
+                    | paginate
+                      : { itemsPerPage: 9, currentPage: pageActualArticulos }
+                "
                 class="articulo-container"
               >
                 <ng-container *ngIf="articulo.es_catalogo">
@@ -181,6 +181,11 @@
                 No se encontraron resultados con esas especificaciones
               </div>
             </ng-template>
+            <div class="text-center mt-4">
+              <pagination-controls
+                (pageChange)="pageActualArticulos = $event"
+              ></pagination-controls>
+            </div>
           </div>
         </div>
       </div>

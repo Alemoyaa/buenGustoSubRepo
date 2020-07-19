@@ -15,7 +15,8 @@ import { CategoriaService } from 'src/app/services/serviciosCliente/categoriaSer
   styleUrls: ['./catalogo.component.css'],
 })
 export class CatalogoComponent implements OnInit {
-  pageActual: number = 1; //paginador
+  pageActualPlatos: number = 1; //paginador
+  pageActualArticulos: number = 1; //paginador
   articulosManufacturado: Array<ArticuloManufacturado> = [];
   articulosInsumo: Array<ArticuloInsumo> = [];
   rubroGeneral: Array<RubroGeneral> = [];
@@ -69,7 +70,6 @@ export class CatalogoComponent implements OnInit {
           if (categoria.esCategoriaCatalogo) {
             this.categorias.push(categoria);
           }
-
         });
         console.log(this.categorias);
 
@@ -97,7 +97,12 @@ export class CatalogoComponent implements OnInit {
     var matcher = new RegExp(this.filtroBuscador, 'i');
 
     return this.articulosInsumo.filter(function (articulo) {
-      return matcher.test([articulo.denominacion, articulo.categoria.nombreCategoria, articulo.precio_de_venta].join());
+      return matcher.test([
+        articulo.denominacion,
+        articulo.categoria.nombreCategoria,
+        articulo.precio_de_venta,
+        articulo.categoria.padre?.nombreCategoria
+      ].join());
     });
   }
 
