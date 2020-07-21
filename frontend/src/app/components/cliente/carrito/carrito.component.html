@@ -1,5 +1,5 @@
 <div class="page shopping-cart-page">
-  <section class="clean-block clean-cart dark">
+  <section class="clean-block clean-cart dark" id="fondo">
     <div class="container">
       <div class="block-heading">
         <h2 class="text-info" *ngIf="listaDetallePedido.length !== 0">
@@ -10,6 +10,7 @@
         </h3> -->
       </div>
       <div
+        id="fondo"
         class="content"
         *ngIf="listaDetallePedido.length > 0; else carritoVacio"
       >
@@ -17,7 +18,7 @@
           <div class="col-md-12 col-lg-8">
             <div class="items">
               <div
-                class="row product mt-4"
+                class="row product"
                 *ngFor="
                   let detallePedidoItem of listaDetallePedido;
                   let i = index

@@ -13,7 +13,6 @@ export class ArticulosManufacturadosCatalogoComponent implements OnInit {
   articulosManufacturado: Array<ArticuloManufacturado> = [];
   filtroBuscador: any = '';
   pageActualPlatos: number = 1;
-
   @Input() set parametroBusqueda(param) {
     if (param) {
       this.filtroBuscador = param;
@@ -24,24 +23,19 @@ export class ArticulosManufacturadosCatalogoComponent implements OnInit {
   constructor(
     public articulosManufacturadosService: ArticuloManufacturadoService,
     private router: Router) { }
-
   ngOnInit(): void {
     this.getArticulos();
   }
-
-
   getArticulos() {
     this.articulosManufacturadosService.getAll().subscribe((data) => {
       this.articulosManufacturado = data;
     });
   }
-
   goToDetail(id, articulo) {
 
     this.router.navigate(['detalle-manufacturado/', id]);
 
   }
-
   get filtrarPlatos(): ArticuloManufacturado[] {
 
     var matcher = new RegExp(this.filtroBuscador, 'i');

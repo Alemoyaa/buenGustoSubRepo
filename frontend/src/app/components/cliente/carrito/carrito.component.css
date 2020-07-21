@@ -892,3 +892,12 @@ button {
   height: 100%;
   width: 100%;
 }
+
+#fondo {
+  background-image: url("https://i.pinimg.com/originals/c1/64/c6/c164c6ad28221f348063e514529ec38c.jpg");
+  background-size: cover;
+
+  background-position: right bottom;
+  width: 100%;
+  height: 100%;
+}
