@@ -15,46 +15,22 @@ import { CategoriaService } from 'src/app/services/serviciosCliente/categoriaSer
   styleUrls: ['./catalogo.component.css'],
 })
 export class CatalogoComponent implements OnInit {
-  pageActualPlatos: number = 1; //paginador
-  pageActualArticulos: number = 1; //paginador
-  articulosManufacturado: Array<ArticuloManufacturado> = [];
-  articulosInsumo: Array<ArticuloInsumo> = [];
   rubroGeneral: Array<RubroGeneral> = [];
   categorias: Array<Categoria> = [];
-  preciomenor = 0;
   filtroBuscador: any = '';
-  propiedad: any;
   constructor(
-    public articulosManufacturadosService: ArticuloManufacturadoService,
-    public articulosInsumoService: ArticuloInsumoService,
     private serviceRubroGeneral: RubroGeneralService,
     private categoriaService: CategoriaService,
-    private router: Router
   ) { }
-
   ngOnInit() {
-    this.getArticulos();
+    this.getParametrosdeBuscador();
 
 
   }
+  getParametrosdeBuscador() {
 
-  getArticulos() {
-    this.articulosManufacturadosService.getAll().subscribe((data) => {
-      this.articulosManufacturado = data;
-    });
     this.traerRubrosGenerales();
-    this.articulosInsumoService.getAll().subscribe((data) => {
-      this.articulosInsumo = data;
-    });
     this.getAllCategorias();
-  }
-
-  goToDetail(id, articulo) {
-    if (articulo === 0) {
-      this.router.navigate(['detalle-manufacturado/', id]);
-    } else {
-      this.router.navigate(['detalle-insumo/', id]);
-    }
   }
 
   traerRubrosGenerales() {
@@ -80,42 +56,13 @@ export class CatalogoComponent implements OnInit {
     );
   }
 
-
-  get filtrarPlatos(): ArticuloManufacturado[] {
-
-    var matcher = new RegExp(this.filtroBuscador, 'i');
-
-    return this.articulosManufacturado.filter(function (plato) {
-      return matcher.test([plato.denominacion, plato.rubro.denominacion, plato.precio_de_venta,
-      ].join());
-
-    });
-  }
-
-  get filtrarBebidas(): ArticuloInsumo[] {
-
-    var matcher = new RegExp(this.filtroBuscador, 'i');
-
-    return this.articulosInsumo.filter(function (articulo) {
-      return matcher.test([
-        articulo.denominacion,
-        articulo.categoria.nombreCategoria,
-        articulo.precio_de_venta,
-        articulo.categoria.padre?.nombreCategoria
-      ].join());
-    });
-  }
-
-
   seleccionarFiltroPlato(busqueda: string) {
-
     if (busqueda) {
       this.filtroBuscador = busqueda;
     } else {
       this.filtroBuscador = '';
     }
   }
-
   seleccionarFiltroBebidas(busqueda: string) {
     if (busqueda) {
       this.filtroBuscador = busqueda;

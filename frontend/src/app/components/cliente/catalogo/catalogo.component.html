@@ -2,11 +2,7 @@
   <section class="clean-block clean-catalog dark">
     <div class="container container-catalogo">
       <div class="row d-flex">
-        <div
-          class="col-12 jumbotron"
-          style="margin-bottom: 20px;"
-          id="cartaProductos"
-        >
+        <div class="col-12 jumbotron" id="cartaProductos">
           <h1 class="display-4 text-center">
             <strong>Nuestros productos </strong>
           </h1>
@@ -36,7 +32,7 @@
               <h3>Filtros</h3>
             </div>
             <div class="row text-center">
-              <label for=""> Filtros por categoria</label>
+              <label for="" class="mt-5"> Filtros por categoria</label>
               <select
                 class="custom-select"
                 (change)="seleccionarFiltroPlato($event.target.value)"
@@ -50,7 +46,7 @@
               </select>
               <hr />
 
-              <label for="" class="mt-2"> Filtros de Bebidas/Postres</label>
+              <label for="" class="mt-5"> Filtros de Bebidas/Postres</label>
               <select
                 class="custom-select"
                 (change)="seleccionarFiltroBebidas($event.target.value)"
@@ -72,54 +68,9 @@
             </div>
           </div>
           <div class="container-fluid col-lg-9 mt-3">
-            <h3>Platos</h3>
-            <hr />
-            <div class="row" *ngIf="filtrarPlatos.length > 0; else noPlatos">
-              <ng-container
-                *ngFor="
-                  let articulo of filtrarPlatos
-                    | paginate
-                      : { itemsPerPage: 6, currentPage: pageActualPlatos }
-                "
-              >
-                <div class="col-lg-4 col-md-4 mt-3">
-                  <div class="card" id="cartaProductos">
-                    <img
-                      class="card-img-top card-img-recomendado"
-                      src="{{ articulo.url_imagen }}"
-                    />
-                    <div class="card-body">
-                      <h4 class="card-text">
-                        {{ articulo.denominacion }}
-                      </h4>
-                      <p>Categoria: {{ articulo.rubro.denominacion }}</p>
-                      <strong
-                        ><h3>${{ articulo.precio_de_venta }}</h3></strong
-                      >
-                      <button
-                        type="button"
-                        class="btn btn-success"
-                        data-toggle="modal"
-                        (click)="goToDetail(articulo.id, 0)"
-                      >
-                        <p>Ver más</p>
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </ng-container>
-            </div>
-            <ng-template #noPlatos>
-              <div class="alert alert-success" role="alert">
-                No se encontraron resultados con esas especificaciones
-              </div>
-            </ng-template>
-
-            <div class="text-center mt-4">
-              <pagination-controls
-                (pageChange)="pageActualPlatos = $event"
-              ></pagination-controls>
-            </div>
+            <app-articulos-manufacturados-catalogo
+              [parametroBusqueda]="filtroBuscador"
+            ></app-articulos-manufacturados-catalogo>
           </div>
         </div>
       </div>
@@ -130,55 +81,9 @@
             <div class="row"></div>
           </div>
           <div class="container col-lg-9">
-            <h3>Bebidas y Postres</h3>
-            <hr />
-            <div class="row" *ngIf="filtrarBebidas.length > 0; else noBebidas">
-              <ng-container
-                *ngFor="
-                  let articulo of filtrarBebidas
-                    | paginate
-                      : { itemsPerPage: 10, currentPage: pageActualArticulos }
-                "
-                class="articulo-container"
-              >
-                <ng-container *ngIf="articulo.es_catalogo">
-                  <div class="card-container col-lg-4 col-md-4">
-                    <div class="card" id="cartaProductos">
-                      <img
-                        class="card-img-top card-img-recomendado"
-                        src="{{ articulo.url_imagen }}"
-                      />
-                      <div class="card-body">
-                        <h4 class="card-text">
-                          {{ articulo.denominacion }}
-                        </h4>
-                        <strong
-                          ><h3>${{ articulo.precio_de_venta }}</h3></strong
-                        >
-                        <button
-                          type="button"
-                          class="btn btn-primary"
-                          data-toggle="modal"
-                          (click)="goToDetail(articulo.id, 1)"
-                        >
-                          <p>Ver más</p>
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                </ng-container>
-              </ng-container>
-            </div>
-            <ng-template #noBebidas>
-              <div class="alert alert-success" role="alert">
-                No se encontraron resultados con esas especificaciones
-              </div>
-            </ng-template>
-            <div class="text-center mt-4">
-              <pagination-controls
-                (pageChange)="pageActualArticulos = $event"
-              ></pagination-controls>
-            </div>
+            <app-articulos-insumo-catalogo
+              [parametroBusqueda]="filtroBuscador"
+            ></app-articulos-insumo-catalogo>
           </div>
         </div>
       </div>

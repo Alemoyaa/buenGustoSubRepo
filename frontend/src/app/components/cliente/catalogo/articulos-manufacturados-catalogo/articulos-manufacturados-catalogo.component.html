@@ -1,0 +1,47 @@
+<h3>Platos</h3>
+<hr />
+<div class="row" *ngIf="filtrarPlatos.length > 0; else noPlatos">
+  <ng-container
+    *ngFor="
+      let articulo of filtrarPlatos
+        | paginate: { itemsPerPage: 6, currentPage: pageActualPlatos }
+    "
+  >
+    <div class="col-lg-4 col-md-4 mt-3">
+      <div class="card" id="cartaProductos">
+        <img
+          class="card-img-top card-img-recomendado"
+          src="{{ articulo.url_imagen }}"
+        />
+        <div class="card-body">
+          <h4 class="card-text">
+            {{ articulo.denominacion }}
+          </h4>
+          <p>Categoria: {{ articulo.rubro.denominacion }}</p>
+          <strong
+            ><h3>${{ articulo.precio_de_venta }}</h3></strong
+          >
+          <button
+            type="button"
+            class="btn btn-success"
+            data-toggle="modal"
+            (click)="goToDetail(articulo.id, 0)"
+          >
+            <p>Ver más</p>
+          </button>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+</div>
+<ng-template #noPlatos>
+  <div class="alert alert-success" role="alert">
+    No se encontraron resultados con esas especificaciones
+  </div>
+</ng-template>
+
+<div class="text-center mt-4">
+  <pagination-controls
+    (pageChange)="pageActualPlatos = $event"
+  ></pagination-controls>
+</div>

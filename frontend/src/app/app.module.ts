@@ -57,6 +57,8 @@ import { ModalPlatosComponent } from './components/admin/dashboard/Admin/crud-pl
 import { ModalHistorialFacturasComponent } from './components/cliente/user-profile/modales/modal-historial-facturas/modal-historial-facturas.component';
 import { ModalHistorialPedidosComponent } from './components/cliente/user-profile/modales/modal-historial-pedidos/modal-historial-pedidos.component';
 import { ModalFormularioComponent } from './components/cliente/user-profile/modales/modal-formulario/modal-formulario.component';
+import { ArticulosManufacturadosCatalogoComponent } from './components/cliente/catalogo/articulos-manufacturados-catalogo/articulos-manufacturados-catalogo.component';
+import { ArticulosInsumoCatalogoComponent } from './components/cliente/catalogo/articulos-insumo-catalogo/articulos-insumo-catalogo.component';
 
 @NgModule({
   declarations: [
@@ -96,6 +98,8 @@ import { ModalFormularioComponent } from './components/cliente/user-profile/moda
     ModalHistorialFacturasComponent,
     ModalHistorialPedidosComponent,
     ModalFormularioComponent,
+    ArticulosManufacturadosCatalogoComponent,
+    ArticulosInsumoCatalogoComponent,
   ],
   imports: [
     BrowserModule,
