@@ -4,7 +4,7 @@
   <ng-container
     *ngFor="
       let articulo of filtrarPlatos
-        | paginate: { itemsPerPage: 6, currentPage: pageActualPlatos }
+        | paginate: { id:'paginadoManufacturado', itemsPerPage: 6, currentPage: pageActualPlatos }
     "
   >
     <div class="col-lg-4 col-md-4 mt-3">
@@ -42,6 +42,7 @@
 
 <div class="text-center mt-4">
   <pagination-controls
+    id = "paginadoManufacturado"
     (pageChange)="pageActualPlatos = $event"
   ></pagination-controls>
 </div>

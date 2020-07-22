@@ -4,7 +4,7 @@
   <ng-container
     *ngFor="
       let articulo of filtrarBebidas
-        | paginate: { itemsPerPage: 13, currentPage: pageActualArticulos }
+        | paginate: { id: 'paginadorInsumo', itemsPerPage: 13, currentPage: pageActualArticulos }
     "
     class="articulo-container"
   >
@@ -43,6 +43,7 @@
 </ng-template>
 <div class="text-center mt-4">
   <pagination-controls
+    id="paginadorInsumo"
     (pageChange)="pageActualArticulos = $event"
   ></pagination-controls>
 </div>
