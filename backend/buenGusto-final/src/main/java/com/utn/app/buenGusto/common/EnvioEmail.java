@@ -8,7 +8,6 @@ import org.springframework.mail.MailParseException;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
-import org.springframework.web.multipart.MultipartFile;
 
 public class EnvioEmail
 {
@@ -23,7 +22,7 @@ public class EnvioEmail
 		this.mailSender = mailSender;
 	}
 
-	public void sendMail(String to, String subject, String dear, String date, MultipartFile file) {
+	public void sendMail(String to, String subject, String dear, String date, String fileURL) {
 
 	   MimeMessage message = mailSender.createMimeMessage();
 
@@ -34,11 +33,8 @@ public class EnvioEmail
 		helper.setTo(to);
 		helper.setSubject(subject);
 		helper.setText(String.format(simpleMailMessage.getText(), dear, date));
-		
-		
-
-		/*FileSystemResource file = new FileSystemResource("/home/luis/Escritorio/TRABAJO FINAL.pdf")
-		helper.addAttachment(file.getFilename(), file);*/
+		FileSystemResource file = new FileSystemResource(fileURL);
+		helper.addAttachment(file.getFilename(), file);
 
 	     }catch (MessagingException e) {
 		throw new MailParseException(e);

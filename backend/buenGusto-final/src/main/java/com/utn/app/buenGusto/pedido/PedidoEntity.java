@@ -11,6 +11,7 @@ import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import com.utn.app.buenGusto.cliente.ClienteEntity;
@@ -30,6 +31,9 @@ public class PedidoEntity extends CommonEntity implements Serializable {
 	private boolean tipo_Envio;
 	private int numero;
 	private int minTotalsinDelivery;
+	
+	@OneToOne(cascade = CascadeType.ALL, optional = true)
+	@JoinColumn(name = "domicilio_id")
 	private DomicilioEntity domilicio;
 
 	@Transient

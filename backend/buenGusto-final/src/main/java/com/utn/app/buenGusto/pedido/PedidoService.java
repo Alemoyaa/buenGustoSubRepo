@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
-
 import org.springframework.stereotype.Service;
 import com.utn.app.buenGusto.common.CommonService;
 import com.utn.app.buenGusto.estadoPedido.EstadoPedidoEntity;
@@ -135,6 +134,8 @@ public class PedidoService extends CommonService<PedidoEntity, PedidoRepository>
 			entity.setHora_estimada_fin(horaFin);
 			numeroPedido++;
 			entity.setNumero(numeroPedido);
+			entity.setClientePedido(entity.getClientePedido());
+			
 			entity = repository.save(entity);
 			return entity;
 		} catch (Exception e) {

@@ -111,7 +111,7 @@ public class FacturaEntity extends CommonEntity implements Serializable {
 	}
 
 	public List<DetallePedidoEntity> getDetalleFactura() {
-		return detalleFactura;
+		return this.getPedidofacturado().getLista_detallePedido();
 	}
 
 	public void setDetalleFactura(List<DetallePedidoEntity> detalleFactura) {
