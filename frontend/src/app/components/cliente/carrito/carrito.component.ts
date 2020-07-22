@@ -12,6 +12,8 @@ import { ArticuloManufacturado } from 'src/app/entidades/ArticuloManufacturado';
 import { Router } from '@angular/router';
 import { ArticuloInsumo } from 'src/app/entidades/ArticuloInsumo';
 import Swal from 'sweetalert2';
+import { DatosEmpresaService } from 'src/app/services/serviciosCliente/datosEmpresaServices/datos-empresa.service';
+import { DatosEmpresa } from 'src/app/entidades/DatosEmpresa';
 
 @Component({
   selector: 'app-carrito',
@@ -38,24 +40,32 @@ export class CarritoComponent implements OnInit {
   };
   articulosManufactura: Array<ArticuloManufacturado> = [];
   articulosInsumo: Array<ArticuloInsumo> = [];
-  total: number = 0;
+  total = 0;
   otroMedioDePago = false;
   envio = false;
+  datosEmpresa: DatosEmpresa;
 
   constructor(
     private loginService: LoginService,
     private clienteService: ClienteService,
     private pedidoService: PedidoServices,
     private facturaService: FacturaService,
+    private datosEmpresaService: DatosEmpresaService,
     private router: Router,
     private alert: AlertsService
   ) {
     this.getArticulos();
   }
-
+  ngOnInit() {
+    this.datosEmpresaService.getOne(3).subscribe((res) => {
+      this.datosEmpresa = res;
+    }, error => {
+      console.log('Error de datosEmpresa', error);
+    });
+  }
   get numeroValido(): boolean {
-    //Caracteres que si se ingresan no se podra realizar el pedido
-    var expresion = /[a-zA-Z&\/\\#,+()$~%.'":*?<>{}]/g; //RegExp
+    // Caracteres que si se ingresan no se podra realizar el pedido
+    const expresion = /[a-zA-Z&\/\\#,+()$~%.'":*?<>{}]/g; // RegExp
 
     if (this.envio) {
       return true;
@@ -66,8 +76,8 @@ export class CarritoComponent implements OnInit {
     }
 
     if (this.factura.nroTarjeta) {
-      //Si tenemos coincidencias se desabilita el boton
-      let encontrado = this.factura.nroTarjeta.match(expresion);
+      // Si tenemos coincidencias se desabilita el boton
+      const encontrado = this.factura.nroTarjeta.match(expresion);
       if (encontrado != null) {
         return false;
       } else {
@@ -84,11 +94,11 @@ export class CarritoComponent implements OnInit {
   }
 
   get checkearHorario(): boolean {
-    var diayHoraActual = new Date();
-    var horaActual = diayHoraActual.getHours();
-    var minutoActual = diayHoraActual.getMinutes();
-    var segundoActual = diayHoraActual.getSeconds();
-    var dia = new Array(7);
+    const diayHoraActual = new Date();
+    const horaActual = diayHoraActual.getHours();
+    const minutoActual = diayHoraActual.getMinutes();
+    const segundoActual = diayHoraActual.getSeconds();
+    const dia = new Array(7);
     dia[0] = 'Domingo';
     dia[1] = 'Lunes';
     dia[2] = 'Martes';
@@ -96,7 +106,7 @@ export class CarritoComponent implements OnInit {
     dia[4] = 'Jueves';
     dia[5] = 'Viernes';
     dia[6] = 'Sabado';
-    var nombredia = dia[diayHoraActual.getDay()];
+    let nombredia = dia[diayHoraActual.getDay()];
 
     // console.log(diayHoraActual);
     // console.log(horaActual);
@@ -117,8 +127,6 @@ export class CarritoComponent implements OnInit {
     }
   }
 
-  ngOnInit() {}
-
   deleteArticulo(index: number) {
     Swal.fire({
       title: 'Estas seguro?',
@@ -131,10 +139,10 @@ export class CarritoComponent implements OnInit {
       cancelButtonText: 'Cancelar',
     }).then((result) => {
       if (result.value) {
-        let detallePedidoStorage = JSON.parse(
+        const detallePedidoStorage = JSON.parse(
           localStorage.getItem('carritoDetallesPedido')
         );
-        let newJson: Array<DetallePedido> = [];
+        const newJson: Array<DetallePedido> = [];
 
         for (
           let iterador = 0;
@@ -148,7 +156,7 @@ export class CarritoComponent implements OnInit {
           }
         }
 
-        let newJsonString = JSON.stringify(newJson);
+        const newJsonString = JSON.stringify(newJson);
         localStorage.setItem('carritoDetallesPedido', newJsonString);
         this.listaDetallePedido = [];
         this.getArticulos();
@@ -173,7 +181,7 @@ export class CarritoComponent implements OnInit {
         ].articuloManufacturado.precio_de_venta;
       }
 
-      let newJsonString = JSON.stringify(this.listaDetallePedido);
+      const newJsonString = JSON.stringify(this.listaDetallePedido);
       localStorage.setItem('carritoDetallesPedido', newJsonString);
     }
     this.getTotal();
@@ -192,15 +200,15 @@ export class CarritoComponent implements OnInit {
       ].articuloManufacturado.precio_de_venta;
     }
 
-    let newJsonString = JSON.stringify(this.listaDetallePedido);
+    const newJsonString = JSON.stringify(this.listaDetallePedido);
     localStorage.setItem('carritoDetallesPedido', newJsonString);
 
     this.getTotal();
   }
 
   getArticulos() {
-    let detallesPedidoStorage = localStorage.getItem('carritoDetallesPedido');
-    let detallesPedido = JSON.parse(detallesPedidoStorage);
+    const detallesPedidoStorage = localStorage.getItem('carritoDetallesPedido');
+    const detallesPedido = JSON.parse(detallesPedidoStorage);
     console.log(detallesPedido);
     this.listaDetallePedido = detallesPedido;
 
@@ -280,8 +288,6 @@ export class CarritoComponent implements OnInit {
             this.factura.tipoFactura = 'C';
             this.factura.totalFactura = this.total;
 
-            this.factura.pedidofacturado = this.pedido;
-
             console.log(this.factura);
             console.log(this.pedido);
 
@@ -290,6 +296,7 @@ export class CarritoComponent implements OnInit {
               .postConHoraFin(4, this.pedido)
               .subscribe((posted) => {
                 this.factura.pedidofacturado = posted;
+                this.factura.datosEmpresaID = this.datosEmpresa;
                 console.log('posted', posted);
                 console.log(this.factura);
                 this.facturaService.post(this.factura).subscribe(
