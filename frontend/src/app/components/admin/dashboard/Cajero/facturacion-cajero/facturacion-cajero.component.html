@@ -19,7 +19,7 @@
         <input
           class="form-control mr-sm-2"
           type="search"
-          placeholder="Nombre/Apellido"
+          placeholder="Nombre cliente | Estado"
           aria-label="Search"
           [(ngModel)]="filtroBuscador"
           [ngModelOptions]="{ standalone: true }"
@@ -55,7 +55,7 @@
         <tr
           *ngFor="
             let factura of filtrar
-              | paginate: { itemsPerPage: 15, currentPage: pageActual };
+              | paginate: { itemsPerPage: 12, currentPage: pageActual };
             let i = index
           "
         >

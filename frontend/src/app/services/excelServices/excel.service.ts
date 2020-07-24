@@ -27,9 +27,17 @@ export class ExcelService {
 
   private saveAsExcelFile(buffer: any, fileName: string): void {
     const data: Blob = new Blob([buffer], { type: EXCEL_TYPE });
+    let fecha = new Date();
     FileSaver.saveAs(
       data,
-      fileName + '_export_' + new Date().getTime() + EXCEL_EXTENSION
+      fileName +
+        '_export_' +
+        fecha.getDay() +
+        '/' +
+        fecha.getMonth() +
+        '/' +
+        fecha.getFullYear() +
+        EXCEL_EXTENSION
     );
   }
 }

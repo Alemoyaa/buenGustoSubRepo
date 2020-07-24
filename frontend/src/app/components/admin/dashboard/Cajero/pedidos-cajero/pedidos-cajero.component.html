@@ -19,7 +19,7 @@
         <input
           class="form-control mr-sm-2"
           type="search"
-          placeholder="Nombre/Apellido"
+          placeholder="Nombre cliente | fecha"
           aria-label="Search"
           [(ngModel)]="filtroBuscador"
           [ngModelOptions]="{ standalone: true }"
@@ -55,12 +55,12 @@
           <th scope="row">{{ pedido.numero }}</th>
           <td>{{ pedido.clientePedido.nombre }}</td>
           <td>{{ pedido.clientePedido.telefono }}</td>
-          <td>{{ pedido.hora_estimada_fin | date }}</td>
+          <td>{{ pedido.hora_estimada_fin | date: "shortTime" }}</td>
           <td>
             <p *ngIf="pedido.tipo_Envio == false">Retira en Local</p>
             <p *ngIf="pedido.tipo_Envio == true">Delivery</p>
           </td>
-          <td>{{ pedido.fechaRealizacion | date }}</td>
+          <td>{{ pedido.fechaRealizacion | date: "short" }}</td>
           <td>{{ pedido.estadoPedido.nombreEstado }}</td>
           <td>
             <button

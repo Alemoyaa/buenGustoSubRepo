@@ -37,6 +37,7 @@ export class PedidosCajeroComponent implements OnInit {
   ngOnInit(): void {
     this.getPedidosPendientes();
     this.crearFormulario();
+
     // this.alerts.mensajeSuccess('Bienvenido al tablero de Pedidos del modulo Cajero', 'Aqui usted podra aceptar y enviar a cocina o rechazar pedidos entrantes');
   }
 
@@ -44,7 +45,11 @@ export class PedidosCajeroComponent implements OnInit {
     const matcher = new RegExp(this.filtroBuscador, 'i');
     return this.pedidos.filter((pedido) => {
       return matcher.test(
-        [pedido.clientePedido.nombre, pedido.clientePedido.apellido].join()
+        [
+          pedido.clientePedido.nombre,
+          pedido.clientePedido.apellido,
+          pedido.fechaRealizacion,
+        ].join()
       );
     });
   }

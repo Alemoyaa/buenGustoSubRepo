@@ -4,11 +4,16 @@
   <ng-container
     *ngFor="
       let articulo of filtrarPlatos
-        | paginate: { id:'paginadoManufacturado', itemsPerPage: 6, currentPage: pageActualPlatos }
+        | paginate
+          : {
+              id: 'paginadoManufacturado',
+              itemsPerPage: 6,
+              currentPage: pageActualPlatos
+            }
     "
   >
     <div class="col-lg-4 col-md-4 mt-3">
-      <div class="card" id="cartaProductos">
+      <div class="card" id="cartaProductos" style="height: 450px;">
         <img
           class="card-img-top card-img-recomendado"
           src="{{ articulo.url_imagen }}"
@@ -42,7 +47,7 @@
 
 <div class="text-center mt-4">
   <pagination-controls
-    id = "paginadoManufacturado"
+    id="paginadoManufacturado"
     (pageChange)="pageActualPlatos = $event"
   ></pagination-controls>
 </div>

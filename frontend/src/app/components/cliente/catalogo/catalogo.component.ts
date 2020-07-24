@@ -20,21 +20,18 @@ export class CatalogoComponent implements OnInit {
   filtroBuscador: any = '';
   constructor(
     private serviceRubroGeneral: RubroGeneralService,
-    private categoriaService: CategoriaService,
-  ) { }
+    private categoriaService: CategoriaService
+  ) {}
   ngOnInit() {
     this.getParametrosdeBuscador();
-
-
   }
   getParametrosdeBuscador() {
-
     this.traerRubrosGenerales();
     this.getAllCategorias();
   }
 
   traerRubrosGenerales() {
-    this.serviceRubroGeneral.getAll().subscribe(rubro => {
+    this.serviceRubroGeneral.getAll().subscribe((rubro) => {
       this.rubroGeneral = rubro;
     });
   }
@@ -42,13 +39,12 @@ export class CatalogoComponent implements OnInit {
   getAllCategorias() {
     this.categoriaService.getAll().subscribe(
       (categorias) => {
-        categorias.forEach(categoria => {
+        categorias.forEach((categoria) => {
           if (categoria.esCategoriaCatalogo) {
             this.categorias.push(categoria);
           }
         });
         console.log(this.categorias);
-
       },
       (error) => {
         console.warn('error =>  ', error);
@@ -70,6 +66,4 @@ export class CatalogoComponent implements OnInit {
       this.filtroBuscador = '';
     }
   }
-
-
 }

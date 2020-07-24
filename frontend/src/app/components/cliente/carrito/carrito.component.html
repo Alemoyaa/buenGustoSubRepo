@@ -2,23 +2,22 @@
   <section class="clean-block clean-cart dark" id="fondo">
     <div class="container">
       <div class="block-heading">
-        <h2 class="text-info" *ngIf="listaDetallePedido.length !== 0">
+        <h2
+          class="text-info font-weight-bold"
+          *ngIf="listaDetallePedido.length !== 0"
+        >
           Carrito De Compras
         </h2>
         <!-- <h3 *ngIf="listaDetallePedido.length === 0">
           El carrito está vacío
         </h3> -->
       </div>
-      <div
-        id="fondo"
-        class="content"
-        *ngIf="listaDetallePedido.length > 0; else carritoVacio"
-      >
-        <div class="row no-gutters">
+      <div class="" *ngIf="listaDetallePedido.length > 0; else carritoVacio">
+        <div class="row no-gutters fondo3">
           <div class="col-md-12 col-lg-8">
             <div class="items">
               <div
-                class="row product"
+                class="row product fondo2 ml-1"
                 *ngFor="
                   let detallePedidoItem of listaDetallePedido;
                   let i = index
@@ -143,8 +142,9 @@
                   <textarea
                     class="form-control"
                     type="text"
-                    placeholder="Aclaracion (Desplaza la esquina inferior derecha hacia abajo para agrandar el texto)"
+                    placeholder="Aclaracion (Desplaza la esquina inferior derecha hacia abajo para agrandar el texto 180 caracteres) "
                     name="aclaracion"
+                    maxlength="180"
                     [(ngModel)]="detallePedidoItem.aclaracion"
                     cols="40"
                     rows="5"

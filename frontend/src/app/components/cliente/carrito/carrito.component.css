@@ -894,10 +894,17 @@ button {
 }
 
 #fondo {
-  background-image: url("https://i.pinimg.com/originals/c1/64/c6/c164c6ad28221f348063e514529ec38c.jpg");
-  background-size: cover;
+  background-image: url("../../../../assets/catalogo.jpg");
 
-  background-position: right bottom;
-  width: 100%;
-  height: 100%;
+  background-size: 100%;
+
+  background-repeat: no-repeat repeat;
+}
+
+.fondo2 {
+  background-color: rgb(231, 231, 231);
+}
+
+.fondo3 {
+  background-color: rgba(0, 0, 0, 0.075);
 }

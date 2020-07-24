@@ -4,13 +4,18 @@
   <ng-container
     *ngFor="
       let articulo of filtrarBebidas
-        | paginate: { id: 'paginadorInsumo', itemsPerPage: 13, currentPage: pageActualArticulos }
+        | paginate
+          : {
+              id: 'paginadorInsumo',
+              itemsPerPage: 13,
+              currentPage: pageActualArticulos
+            }
     "
     class="articulo-container"
   >
     <ng-container *ngIf="articulo.es_catalogo">
       <div class="card-container col-lg-4 col-md-4">
-        <div class="card" id="cartaProductos">
+        <div class="card mt-2" id="cartaProductos" style="height: 500px;">
           <img
             class="card-img-top card-img-recomendado"
             src="{{ articulo.url_imagen }}"
