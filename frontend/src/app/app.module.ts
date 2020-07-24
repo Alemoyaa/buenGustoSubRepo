@@ -59,6 +59,7 @@ import { ModalHistorialPedidosComponent } from './components/cliente/user-profil
 import { ModalFormularioComponent } from './components/cliente/user-profile/modales/modal-formulario/modal-formulario.component';
 import { ArticulosManufacturadosCatalogoComponent } from './components/cliente/catalogo/articulos-manufacturados-catalogo/articulos-manufacturados-catalogo.component';
 import { ArticulosInsumoCatalogoComponent } from './components/cliente/catalogo/articulos-insumo-catalogo/articulos-insumo-catalogo.component';
+import { RouterTestingModule } from '@angular/router/testing';
 
 @NgModule({
   declarations: [
@@ -102,8 +103,9 @@ import { ArticulosInsumoCatalogoComponent } from './components/cliente/catalogo/
     ArticulosInsumoCatalogoComponent,
   ],
   imports: [
-    BrowserModule,
     HttpClientModule,
+    RouterTestingModule,
+    BrowserModule,
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     FormsModule,

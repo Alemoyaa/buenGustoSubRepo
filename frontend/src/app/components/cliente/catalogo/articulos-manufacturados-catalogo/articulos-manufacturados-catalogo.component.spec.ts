@@ -1,6 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ArticulosManufacturadosCatalogoComponent } from './articulos-manufacturados-catalogo.component';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { RouterTestingModule } from '@angular/router/testing';
 
 describe('ArticulosManufacturadosCatalogoComponent', () => {
   let component: ArticulosManufacturadosCatalogoComponent;
@@ -8,9 +10,9 @@ describe('ArticulosManufacturadosCatalogoComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ArticulosManufacturadosCatalogoComponent ]
-    })
-    .compileComponents();
+      imports: [HttpClientTestingModule, RouterTestingModule],
+      declarations: [ArticulosManufacturadosCatalogoComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {

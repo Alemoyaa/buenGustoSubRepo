@@ -1,6 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CatalogoDetalleComponent } from './catalogo-detalle.component';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { RouterTestingModule } from '@angular/router/testing';
 
 describe('CatalogoDetalleComponent', () => {
   let component: CatalogoDetalleComponent;
@@ -8,9 +10,9 @@ describe('CatalogoDetalleComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CatalogoDetalleComponent ]
-    })
-    .compileComponents();
+      imports: [HttpClientTestingModule, RouterTestingModule],
+      declarations: [CatalogoDetalleComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {

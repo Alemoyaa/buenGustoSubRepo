@@ -1,6 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ArtStockMinimoComponent } from './art-stock-minimo.component';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { RouterTestingModule } from '@angular/router/testing';
 
 describe('ArtStockMinimoComponent', () => {
   let component: ArtStockMinimoComponent;
@@ -8,9 +10,9 @@ describe('ArtStockMinimoComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ArtStockMinimoComponent ]
-    })
-    .compileComponents();
+      imports: [HttpClientTestingModule, RouterTestingModule],
+      declarations: [ArtStockMinimoComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {

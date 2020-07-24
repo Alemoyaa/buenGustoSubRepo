@@ -1,6 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { PedidosComponent } from './pedidos.component';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { RouterTestingModule } from '@angular/router/testing';
 
 describe('PedidosComponent', () => {
   let component: PedidosComponent;
@@ -8,9 +10,9 @@ describe('PedidosComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ PedidosComponent ]
-    })
-    .compileComponents();
+      imports: [HttpClientTestingModule, RouterTestingModule],
+      declarations: [PedidosComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {
