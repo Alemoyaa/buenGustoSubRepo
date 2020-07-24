@@ -1,10 +1,10 @@
-import { PedidoExcel } from './../../../../../../services/excelServices/entidades/PedidoExcel';
-import { ExcelService } from './../../../../../../services/excelServices/excel.service';
-import { Pedido } from './../../../../../../entidades/Pedido';
-import { PedidoServices } from './../../../../../../services/serviciosCliente/pedidoServices/pedido.service';
-import { Component, OnInit } from '@angular/core';
+import {PedidoExcel} from '../../../../../../services/excelServices/entidades/PedidoExcel';
+import {ExcelService} from '../../../../../../services/excelServices/excel.service';
+import {Pedido} from '../../../../../../entidades/Pedido';
+import {PedidoServices} from '../../../../../../services/serviciosCliente/pedidoServices/pedido.service';
+import {Component, OnInit} from '@angular/core';
 import Swal from 'sweetalert2';
-import { NgForm } from '@angular/forms';
+import {NgForm} from '@angular/forms';
 
 @Component({
   selector: 'app-recaudacion-tiempo',
@@ -16,8 +16,7 @@ export class RecaudacionTiempoComponent implements OnInit {
   DateHasta: Date;
   DateDesde: Date;
 
-  recaudacionTotal: number;
-  mostrar: boolean = true;
+  mostrar = true;
 
   listaDePedidos: Pedido[];
   pedidoParaExcel: PedidoExcel = new PedidoExcel();
@@ -26,12 +25,14 @@ export class RecaudacionTiempoComponent implements OnInit {
   constructor(
     private servicePedido: PedidoServices,
     private excelService: ExcelService
-  ) {}
+  ) {
+  }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+  }
 
   onSubmit(form: NgForm) {
-    if (form.controls['desdeday'].value >= form.controls['hastaday'].value) {
+    if (form.controls.desdeday.value >= form.controls.hastaday.value) {
       Swal.fire({
         icon: 'error',
         title: 'La fecha son incorrectas',
@@ -42,8 +43,16 @@ export class RecaudacionTiempoComponent implements OnInit {
         .getPedidosEntreDosFechas(this.DateDesde, this.DateHasta)
         .subscribe(
           (res) => {
-            this.calcularRecaudacion(res);
-            this.listaDePedidos = res;
+            if (res === null){
+              Swal.fire({
+                icon: 'info',
+                title: 'No hay pedidos',
+                html: 'Por favor indique otra fecha',
+              });
+            }else{
+              this.calcularRecaudacion(res);
+              this.listaDePedidos = res;
+            }
           },
           (err) => {
             Swal.fire({
@@ -59,29 +68,28 @@ export class RecaudacionTiempoComponent implements OnInit {
   }
 
   calcularRecaudacion(listaDePedidos: Pedido[]) {
-    this.recaudacionTotal = 0;
+    this.pedidoParaExcel.totalPedido = 0;
 
     listaDePedidos.forEach((pedidoItem) => {
-      this.recaudacionTotal += pedidoItem.totalPedido;
-      this.pedidoParaExcel.totalPedido = this.recaudacionTotal;
+      this.pedidoParaExcel.totalPedido += pedidoItem.totalPedido;
     });
   }
 
   exportAsXLSX(): void {
-    let totalPedido = this.pedidoParaExcel.totalPedido;
+    const totalPedido = this.pedidoParaExcel.totalPedido;
 
-    //Casteo de pedido a pedidoExcel.
-    //Esto es totalmente removible si lo casteamos apenas entra a el array listaDePedidos
-    //Se ahorra 1 for each, 1 arreglo y una variable
+    // Casteo de pedido a pedidoExcel.
+    // Esto es totalmente removible si lo casteamos apenas entra a el array listaDePedidos
+    // Se ahorra 1 for each, 1 arreglo y una variable
     for (const key in this.listaDePedidos) {
       this.pedidoParaExcel = new PedidoExcel();
       this.pedidoParaExcel.numero = this.listaDePedidos[key].numero;
       this.pedidoParaExcel.fechaRealizacion = this.listaDePedidos[
         key
-      ].fechaRealizacion;
+        ].fechaRealizacion;
       this.pedidoParaExcel.hora_estimada_fin = this.listaDePedidos[
         key
-      ].hora_estimada_fin;
+        ].hora_estimada_fin;
       this.pedidoParaExcel.tipo_Envio = this.listaDePedidos[key].tipo_Envio;
       this.pedidoParaExcel.totalPedido = this.listaDePedidos[key].totalPedido;
 

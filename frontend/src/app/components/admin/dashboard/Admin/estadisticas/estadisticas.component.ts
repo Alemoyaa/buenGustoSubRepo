@@ -1,10 +1,10 @@
-import { ExcelService } from './../../../../../services/excelServices/excel.service';
-import { Pedido } from './../../../../../entidades/Pedido';
-import { PedidoServices } from './../../../../../services/serviciosCliente/pedidoServices/pedido.service';
-import { Chart } from 'node_modules/chart.js';
-import { Component, OnInit } from '@angular/core';
+import {ExcelService} from './../../../../../services/excelServices/excel.service';
+import {Pedido} from './../../../../../entidades/Pedido';
+import {PedidoServices} from './../../../../../services/serviciosCliente/pedidoServices/pedido.service';
+import {Chart} from 'node_modules/chart.js';
+import {Component, OnInit} from '@angular/core';
 import Swal from 'sweetalert2';
-import { NgForm } from '@angular/forms';
+import {NgForm} from '@angular/forms';
 
 @Component({
   selector: 'app-estadisticas',
@@ -18,17 +18,17 @@ export class EstadisticasComponent implements OnInit {
 
   mostrarExcel: boolean = false;
 
-  pedidosRecuperadosDesdeHasta: Pedido[] = [];
-
   elementosSinRepetir: Array<string> = [];
   cantidadElementos: Array<number> = [];
 
   constructor(
     private servicePedido: PedidoServices,
     private excelService: ExcelService
-  ) {}
+  ) {
+  }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+  }
 
   onSubmit(form: NgForm) {
     if (form.controls['desdeday'].value >= form.controls['hastaday'].value) {
@@ -42,8 +42,7 @@ export class EstadisticasComponent implements OnInit {
         .getPedidosEntreDosFechas(this.DateDesde, this.DateHasta)
         .subscribe(
           (res) => {
-            this.pedidosRecuperadosDesdeHasta = res;
-            this.getCantidades(this.pedidosRecuperadosDesdeHasta);
+            this.getCantidades(res);
           },
           (err) => {
             Swal.fire({

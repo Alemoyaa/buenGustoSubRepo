@@ -1,9 +1,10 @@
-import { ExcelService } from './../../../../../../services/excelServices/excel.service';
-import { ArticuloInsumo } from './../../../../../../entidades/ArticuloInsumo';
-import { ArticuloInsumoService } from './../../../../../../services/serviciosCliente/articuloInsumoServices/articuloInsumo.service';
-import { Component, OnInit } from '@angular/core';
+import {ExcelService} from '../../../../../../services/excelServices/excel.service';
+import {ArticuloInsumo} from '../../../../../../entidades/ArticuloInsumo';
+import {ArticuloInsumoService} from '../../../../../../services/serviciosCliente/articuloInsumoServices/articuloInsumo.service';
+import {ArticuloInsumoExcel} from 'src/app/services/excelServices/entidades/ArticuloInsumoExcel';
+import {Component, OnInit} from '@angular/core';
 import Swal from 'sweetalert2';
-import { ArticuloInsumoExcel } from 'src/app/services/excelServices/entidades/ArticuloInsumoExcel';
+
 
 @Component({
   selector: 'app-art-stock-minimo',
@@ -13,7 +14,7 @@ import { ArticuloInsumoExcel } from 'src/app/services/excelServices/entidades/Ar
 export class ArtStockMinimoComponent implements OnInit {
   articulosBajoStock: ArticuloInsumo[] = [];
   articulosInsumoAExcel: ArticuloInsumoExcel[] = [];
-  mostrar: boolean = false;
+  mostrar = false;
 
   constructor(
     private serviceArtInsumo: ArticuloInsumoService,
@@ -22,7 +23,8 @@ export class ArtStockMinimoComponent implements OnInit {
     this.getArticulosBajoStock();
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+  }
 
   getArticulosBajoStock() {
     this.esperarAlert();
@@ -67,23 +69,23 @@ export class ArtStockMinimoComponent implements OnInit {
   }
 
   exportAsXLSX(): void {
-    //Casteo de articulo insumo a insumoExcel.
-    //Esto es totalmente removible si lo casteamos apenas entra a el array articulosBajoStock
-    //Se ahorra 1 for each, 1 arreglo y una variable
+    // Casteo de articulo insumo a insumoExcel.
+    // Esto es totalmente removible si lo casteamos apenas entra a el array articulosBajoStock
+    // Se ahorra 1 for each, 1 arreglo y una variable
     for (const key in this.articulosBajoStock) {
-      let articuloTemp = new ArticuloInsumoExcel();
+      const articuloTemp = new ArticuloInsumoExcel();
       articuloTemp.id = this.articulosBajoStock[key].id;
       articuloTemp.denominacion = this.articulosBajoStock[key].denominacion;
       articuloTemp.es_catalogo = this.articulosBajoStock[key].es_catalogo;
       articuloTemp.precio_de_compra = this.articulosBajoStock[
         key
-      ].precio_de_compra;
+        ].precio_de_compra;
       articuloTemp.precio_de_venta = this.articulosBajoStock[
         key
-      ].precio_de_venta;
+        ].precio_de_venta;
       articuloTemp.requiere_refrigeracion = this.articulosBajoStock[
         key
-      ].requiere_refrigeracion;
+        ].requiere_refrigeracion;
       articuloTemp.stock_actual = this.articulosBajoStock[key].stock_actual;
       articuloTemp.stock_maximo = this.articulosBajoStock[key].stock_maximo;
       articuloTemp.stock_minimo = this.articulosBajoStock[key].stock_minimo;

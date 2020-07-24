@@ -1,34 +1,34 @@
-<form (ngSubmit)="onSubmit(form)" #form="ngForm">
+<form #form="ngForm" (ngSubmit)="onSubmit(form)">
   <div class="row">
     <div class="form-group col mt-2">
       <label>Desde</label>
       <input
-        type="date"
-        name="desdeday"
-        min="2020-01-01"
-        max="{{ this.fechaAhora.toJSON() | date: 'yyyy-MM-dd' }}"
-        class="form-control"
         [(ngModel)]="DateDesde"
+        class="form-control"
+        max="{{ this.fechaAhora.toJSON() | date: 'yyyy-MM-dd' }}"
+        min="2020-01-01"
+        name="desdeday"
+        type="date"
       />
     </div>
     <div class="form-group col mt-2">
       <label>Hasta</label>
       <input
-        type="date"
-        name="hastaday"
-        min="2020-01-01"
-        max="{{ this.fechaAhora.toJSON() | date: 'yyyy-MM-dd' }}"
-        class="form-control"
         [(ngModel)]="DateHasta"
+        class="form-control"
+        max="{{ this.fechaAhora.toJSON() | date: 'yyyy-MM-dd' }}"
+        min="2020-01-01"
+        name="hastaday"
+        type="date"
       />
     </div>
     <div class="form-group mt-2 mr-3">
       <label class="text-center">Realizar consulta</label>
 
       <button
-        type="submit"
-        class="btn btn-success form-control"
         *ngIf="DateHasta != null && DateDesde != null; else elseTemplate"
+        class="btn btn-success form-control"
+        type="submit"
       >
         Aceptar
       </button>
@@ -41,11 +41,11 @@
   </div>
 </form>
 
-<div class="jumbotron jumbotron-fluid" *ngIf="mostrar; else elseRecaudacion">
+<div *ngIf="mostrar; else elseRecaudacion" class="jumbotron jumbotron-fluid">
   <div class="container">
     <h1 class="display-4">
-      Ventas totales: {{ recaudacionTotal }}
-      <br />
+      Ventas totales: {{ pedidoParaExcel.totalPedido }}
+      <br/>
     </h1>
     <h2 *ngIf="mostrar">
       Monto de la fecha: {{ DateDesde }} hasta {{ DateHasta }}
@@ -56,9 +56,9 @@
     </p>
   </div>
   <button
-    class="btn btn-success"
     (click)="exportAsXLSX()"
     *ngIf="mostrar; else elseExcel"
+    class="btn btn-success"
   >
     <i class="fa fa-file-excel-o"></i>
     <p class="lead">Exportar a planilla Excel</p>

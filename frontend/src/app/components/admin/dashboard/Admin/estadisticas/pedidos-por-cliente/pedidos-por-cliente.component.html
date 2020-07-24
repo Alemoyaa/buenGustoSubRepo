@@ -2,12 +2,12 @@
   <p class="mt-4">Buscador por nombre y apellido de cliente <br /></p>
   <form class="form-inline mt-2">
     <input
-      class="form-control mr-sm-2"
-      type="search"
-      placeholder="Buscador"
-      aria-label="Search"
       [(ngModel)]="filtroBuscador"
       [ngModelOptions]="{ standalone: true }"
+      aria-label="Search"
+      class="form-control mr-sm-2"
+      placeholder="Buscador"
+      type="search"
     />
   </form>
 
@@ -16,7 +16,7 @@
     <table class="table table-hover">
       <thead class="thead-dark">
         <tr>
-          <th scope="col" hidden>id</th>
+          <th hidden scope="col">id</th>
           <th scope="col">Nombre</th>
           <th scope="col">Apellido</th>
           <th scope="col">Numero de teléfono</th>
@@ -35,7 +35,7 @@
           <td>{{ item.apellido }}</td>
           <td>{{ item.telefono }}</td>
           <td>
-            <button class="btn btn-success" (click)="recuperarID(item)">
+            <button (click)="recuperarID(item)" class="btn btn-success">
               Ver pedidos
             </button>
           </td>
@@ -46,42 +46,42 @@
 
   <pagination-controls (pageChange)="pageActual = $event"></pagination-controls>
 
-  <div class="modal-dialog modal-xl" role="document" *ngIf="idCliente">
+  <div *ngIf="idCliente" class="modal-dialog modal-xl" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <h3 class="modal-title">Pedidos en tiempo determinado</h3>
       </div>
-      <form (ngSubmit)="onSubmit(form)" #form="ngForm" class="p-4">
+      <form #form="ngForm" (ngSubmit)="onSubmit(form)" class="p-4">
         <div class="row">
           <div class="form-group col">
             <label>Desde</label>
             <input
-              type="date"
-              name="desdeday"
-              min="2020-01-01"
-              max="{{ this.fechaAhora.toJSON() | date: 'yyyy-MM-dd' }}"
-              class="form-control"
               [(ngModel)]="DateDesde"
+              class="form-control"
+              max="{{ this.fechaAhora.toJSON() | date: 'yyyy-MM-dd' }}"
+              min="2020-01-01"
+              name="desdeday"
+              type="date"
             />
           </div>
           <div class="form-group col">
             <label>Hasta</label>
             <input
-              type="date"
-              name="hastaday"
-              min="2020-01-01"
-              max="{{ this.fechaAhora.toJSON() | date: 'yyyy-MM-dd' }}"
-              class="form-control"
               [(ngModel)]="DateHasta"
+              class="form-control"
+              max="{{ this.fechaAhora.toJSON() | date: 'yyyy-MM-dd' }}"
+              min="2020-01-01"
+              name="hastaday"
+              type="date"
             />
           </div>
           <div class="form-group">
             <label class="text-center">Realizar consulta</label>
 
             <button
-              type="submit"
-              class="btn btn-success form-control"
               *ngIf="DateHasta != null && DateDesde != null; else elseTemplate"
+              class="btn btn-success form-control"
+              type="submit"
             >
               Aceptar
             </button>
@@ -96,8 +96,8 @@
 
       <div class="table-responsive">
         <table
-          class="table table-hover"
           *ngIf="pedidosRecuperadosDesdeHasta; else templatePedidos"
+          class="table table-hover"
         >
           <thead class="thead-dark">
             <tr>
@@ -119,9 +119,9 @@
               <td>
                 <button
                   class="btn btn-primary dropdown-toggle"
-                  type="button"
                   data-toggle="dropdown"
                   role="menu"
+                  type="button"
                 >
                   Artículos <span class="caret"></span>
                 </button>
@@ -160,7 +160,7 @@
       <ng-template #templatePedidos>
         <h2>Este cliente no tiene pedidos</h2>
       </ng-template>
-      <button class="btn btn-success" (click)="exportAsXLSX()" *ngIf="mostrar">
+      <button (click)="exportAsXLSX()" *ngIf="mostrar" class="btn btn-success">
         <i class="fa fa-file-excel-o"></i>
         <p class="lead">Exportar a planilla Excel</p>
       </button>

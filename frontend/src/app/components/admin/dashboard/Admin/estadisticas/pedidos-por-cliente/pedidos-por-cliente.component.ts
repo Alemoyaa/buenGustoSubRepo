@@ -3,9 +3,9 @@ import { ExcelService } from './../../../../../../services/excelServices/excel.s
 import { PedidoServices } from './../../../../../../services/serviciosCliente/pedidoServices/pedido.service';
 import Swal from 'sweetalert2';
 import { NgForm } from '@angular/forms';
-import { Pedido } from './../../../../../../entidades/Pedido';
-import { ClienteService } from './../../../../../../services/serviciosCliente/clienteServices/cliente.service';
-import { Cliente } from './../../../../../../entidades/Cliente';
+import { Pedido } from '../../../../../../entidades/Pedido';
+import { ClienteService } from '../../../../../../services/serviciosCliente/clienteServices/cliente.service';
+import { Cliente } from '../../../../../../entidades/Cliente';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -20,13 +20,13 @@ export class PedidosPorClienteComponent implements OnInit {
   DateHasta: Date;
   DateDesde: Date;
 
-  mostrar: boolean = false;
+  mostrar = false;
 
   idCliente: number;
   nombreCliente: string;
 
   pedidosRecuperadosDesdeHasta: Pedido[] = [];
-  pageActual: number = 1;
+  pageActual = 1;
 
   pedidoParaExcel: PedidoExcel = new PedidoExcel();
   listaPedidosParaExcel: PedidoExcel[] = [];
@@ -39,15 +39,15 @@ export class PedidosPorClienteComponent implements OnInit {
     private excelService: ExcelService
   ) {}
 
-  ngOnInit(): void {
-    this.getAll();
-  }
-
   get filtrar(): Cliente[] {
     const matcher = new RegExp(this.filtroBuscador, 'i');
     return this.clientesEncontrados.filter((cliente) => {
       return matcher.test([cliente.nombre, cliente.apellido].join());
     });
+  }
+
+  ngOnInit(): void {
+    this.getAll();
   }
 
   getAll() {
@@ -75,11 +75,11 @@ export class PedidosPorClienteComponent implements OnInit {
   }
 
   exportAsXLSX(): void {
-    let totalPedido = this.pedidoParaExcel.totalPedido;
+    const totalPedido = this.pedidoParaExcel.totalPedido;
 
-    //Casteo de pedido a pedidoExcel.
-    //Esto es totalmente removible si lo casteamos apenas entra a el array pedidosRecuperadosDesdeHasta
-    //Se ahorra 1 for each, 1 arreglo y una variable
+    // Casteo de pedido a pedidoExcel.
+    // Esto es totalmente removible si lo casteamos apenas entra a el array pedidosRecuperadosDesdeHasta
+    // Se ahorra 1 for each, 1 arreglo y una variable
     for (const key in this.pedidosRecuperadosDesdeHasta) {
       this.pedidoParaExcel = new PedidoExcel();
       this.pedidoParaExcel.numero = this.pedidosRecuperadosDesdeHasta[
@@ -114,7 +114,7 @@ export class PedidosPorClienteComponent implements OnInit {
   }
 
   onSubmit(form: NgForm) {
-    if (form.controls['desdeday'].value >= form.controls['hastaday'].value) {
+    if (form.controls.desdeday.value >= form.controls.hastaday.value) {
       Swal.fire({
         icon: 'error',
         title: 'La fecha son incorrectas',

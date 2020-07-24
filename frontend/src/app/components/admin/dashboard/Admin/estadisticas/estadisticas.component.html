@@ -1,4 +1,4 @@
-<div class="col-12 container mt-3" id="body">
+<div class="col-12 mt-3 container" id="body">
   <div
     class="col-12 text-center jumbotron justify-content-center d-flex"
     style="margin-bottom: 20px;"
@@ -10,79 +10,79 @@
     </div>
   </div>
 
-  <div class="row mb-4 ml-2">
+  <div class="row ml-2">
     <p class="lead mt-2">
       <strong
-        >Ranking de comidas más pedidas en un período de tiempo
+      >Ranking de comidas más pedidas en un período de tiempo
         determinado</strong
       >
     </p>
   </div>
 
   <button
-    type="button"
     class="btn btn-primary"
-    data-toggle="modal"
     data-target="#RankingComida"
+    data-toggle="modal"
+    type="button"
   >
     Ranking de comidas
   </button>
 
   <div
-    class="modal fade bd-example-modal-xl"
-    tabindex="-1"
-    role="dialog"
-    aria-labelledby="myExtraLargeModalLabel"
     aria-hidden="true"
+    aria-labelledby="myExtraLargeModalLabel"
+    class="modal fade bd-example-modal-xl"
     id="RankingComida"
+    role="dialog"
+    tabindex="-1"
   >
     <div class="modal-dialog modal-xl" role="document">
       <div class="modal-content">
         <div class="modal-header">
           <h3 class="modal-title">Ranking de comidas</h3>
           <button
-            type="button"
+            aria-label="Close"
             class="close"
             data-dismiss="modal"
-            aria-label="Close"
+            type="button"
           >
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
-        <form (ngSubmit)="onSubmit(form)" #form="ngForm" class="p-4">
+        <form #form="ngForm" (ngSubmit)="onSubmit(form)" class="p-4">
           <div class="row">
             <div class="form-group col">
               <label>Desde</label>
               <input
-                type="date"
-                name="desdeday"
-                min="2020-01-01"
-                max="{{ this.fechaAhora.toJSON() | date: 'yyyy-MM-dd' }}"
-                class="form-control"
                 [(ngModel)]="DateDesde"
+                class="form-control"
+                max="{{ this.fechaAhora.toJSON() | date: 'yyyy-MM-dd' }}"
+                min="2020-01-01"
+                name="desdeday"
+                type="date"
               />
             </div>
             <div class="form-group col">
               <label>Hasta</label>
               <input
-                type="date"
-                name="hastaday"
-                min="2020-01-01"
-                max="{{ this.fechaAhora.toJSON() | date: 'yyyy-MM-dd' }}"
-                class="form-control"
                 [(ngModel)]="DateHasta"
+                class="form-control"
+                max="{{ this.fechaAhora.toJSON() | date: 'yyyy-MM-dd' }}"
+                min="2020-01-01"
+                name="hastaday"
+                type="date"
               />
             </div>
             <div class="form-group">
               <label class="text-center">Realizar consulta</label>
 
               <button
-                type="submit"
-                class="btn btn-success form-control"
                 *ngIf="
                   DateHasta != null && DateDesde != null;
                   else elseTemplate
                 "
+                class="btn btn-success form-control"
+                type="submit"
               >
                 Aceptar
               </button>
@@ -95,14 +95,14 @@
           </div>
         </form>
 
-        <div class="card" *ngIf="DateDesde && DateHasta">
+        <div *ngIf="DateDesde && DateHasta" class="card">
           <canvas id="canvaFecha"></canvas>
           <div class="card-body">
             <h4>Desde: {{ DateDesde }} - Hasta: {{ DateHasta }}</h4>
             <button
-              class="btn btn-success"
               (click)="exportAsXLSX()"
               *ngIf="mostrarExcel"
+              class="btn btn-success"
             >
               <i class="fa fa-file-excel-o"></i>
               <p class="lead">Exportar a planilla Excel</p>
@@ -118,31 +118,31 @@
   </p>
 
   <button
-    type="button"
     class="btn btn-primary"
-    data-toggle="modal"
     data-target="#recaudacionesPorTiempo"
+    data-toggle="modal"
+    type="button"
   >
     Recaudaciones por período de tiempo
   </button>
 
   <div
-    class="modal fade bd-example-modal-xl"
-    tabindex="-1"
-    role="dialog"
-    aria-labelledby="myExtraLargeModalLabel"
     aria-hidden="true"
+    aria-labelledby="myExtraLargeModalLabel"
+    class="modal fade bd-example-modal-xl"
     id="recaudacionesPorTiempo"
+    role="dialog"
+    tabindex="-1"
   >
     <div class="modal-dialog modal-xl" role="document">
       <div class="modal-content p-4">
         <div class="modal-header">
           <h3 class="modal-title">Recaudaciones por período de tiempo</h3>
           <button
-            type="button"
+            aria-label="Close"
             class="close"
             data-dismiss="modal"
-            aria-label="Close"
+            type="button"
           >
             <span aria-hidden="true">&times;</span>
           </button>
@@ -155,31 +155,31 @@
   <p class="lead mt-2">Artículos con bajo stock</p>
 
   <button
-    type="button"
     class="btn btn-primary"
-    data-toggle="modal"
     data-target="#ArticulosBajoStock"
+    data-toggle="modal"
+    type="button"
   >
     Artículos con stock mínimo
   </button>
 
   <div
-    class="modal fade bd-example-modal-xl"
-    tabindex="-1"
-    role="dialog"
-    aria-labelledby="myExtraLargeModalLabel"
     aria-hidden="true"
+    aria-labelledby="myExtraLargeModalLabel"
+    class="modal fade bd-example-modal-xl"
     id="ArticulosBajoStock"
+    role="dialog"
+    tabindex="-1"
   >
     <div class="modal-dialog modal-xl" role="document">
       <div class="modal-content p-4">
         <div class="modal-header">
           <h3 class="modal-title">Artículos con bajo stock</h3>
           <button
-            type="button"
+            aria-label="Close"
             class="close"
             data-dismiss="modal"
-            aria-label="Close"
+            type="button"
           >
             <span aria-hidden="true">&times;</span>
           </button>
@@ -195,11 +195,11 @@
   </p>
 
   <button
-    type="button"
-    class="btn btn-primary"
     [routerLink]="['/dashboard/admin/estadisticas/cliente']"
+    class="btn btn-primary"
+    type="button"
   >
     Pedidos por cliente por periodo de tiempo
   </button>
 </div>
-<br /><br /><br />
+<br/><br/><br/>
