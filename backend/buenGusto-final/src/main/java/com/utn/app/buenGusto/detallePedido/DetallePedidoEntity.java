@@ -108,5 +108,13 @@ public class DetallePedidoEntity extends CommonEntity implements Serializable {
 		}
 	}
 	
+	public boolean stockSuficiente() {
+		if(this.isEsInsumo()) {
+			return this.articuloInsumo.comprobarStock(this.cantidad);
+		}else {
+			return this.articuloManufacturado.comprobarStock(this.cantidad);
+		}
+	}
+	
 	
 }

@@ -29,9 +29,6 @@ public class ClienteEntity extends CommonEntity implements Serializable {
 	@JoinColumn(name = "usuario_id")
 	private UsuarioEntity usuario;
 
-	@OneToOne(cascade = CascadeType.ALL, optional = true)
-	@JoinColumn(name = "domicilio_id")
-	private DomicilioEntity domicilio;
 	
 	public String getNombre() {
 		return nombre;
@@ -63,14 +60,6 @@ public class ClienteEntity extends CommonEntity implements Serializable {
 
 	public void setUsuario(UsuarioEntity usuario) {
 		this.usuario = usuario;
-	}
-
-	public DomicilioEntity getDomicilio() {
-		return domicilio;
-	}
-
-	public void setDomicilio(DomicilioEntity domicilio) {
-		this.domicilio = domicilio;
 	}
 
 }
