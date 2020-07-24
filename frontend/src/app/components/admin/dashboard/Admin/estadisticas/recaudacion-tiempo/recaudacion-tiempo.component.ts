@@ -1,3 +1,4 @@
+import { PedidoExcel } from './../../../../../../services/excelServices/entidades/PedidoExcel';
 import { ExcelService } from './../../../../../../services/excelServices/excel.service';
 import { Pedido } from './../../../../../../entidades/Pedido';
 import { PedidoServices } from './../../../../../../services/serviciosCliente/pedidoServices/pedido.service';
@@ -20,7 +21,8 @@ export class RecaudacionTiempoComponent implements OnInit {
   mostrar: boolean = true;
 
   listaDePedidos: Pedido[];
-  totalParaExcel: Pedido = new Pedido();
+  pedidoParaExcel: PedidoExcel = new PedidoExcel();
+  listaPedidosParaExcel: PedidoExcel[] = [];
 
   constructor(
     private servicePedido: PedidoServices,
@@ -59,29 +61,44 @@ export class RecaudacionTiempoComponent implements OnInit {
 
   calcularRecaudacion(listaDePedidos: Pedido[]) {
     this.recaudacionTotal = 0;
-    let precioDetallePedido = 0;
 
     listaDePedidos.forEach((pedidoItem) => {
-      pedidoItem.lista_detallePedido.forEach((detallePedidoItem) => {
-        if (detallePedidoItem.articuloInsumo) {
-          precioDetallePedido +=
-            detallePedidoItem.articuloInsumo.precio_de_venta *
-            detallePedidoItem.cantidad;
-        } else {
-          precioDetallePedido +=
-            detallePedidoItem.articuloManufacturado.precio_de_venta *
-            detallePedidoItem.cantidad;
-        }
-      });
-      this.recaudacionTotal += precioDetallePedido;
-      this.totalParaExcel.totalPedido = this.recaudacionTotal;
+      this.recaudacionTotal += pedidoItem.totalPedido;
+      this.pedidoParaExcel.totalPedido = this.recaudacionTotal;
     });
   }
 
   exportAsXLSX(): void {
-    this.listaDePedidos.push(this.totalParaExcel);
+    let totalPedido = this.pedidoParaExcel.totalPedido;
+
+    //Casteo de pedido a pedidoExcel.
+    //Esto es totalmente removible si lo casteamos apenas entra a el array listaDePedidos
+    //Se ahorra 1 for each, 1 arreglo y una variable
+    for (const key in this.listaDePedidos) {
+      this.pedidoParaExcel = new PedidoExcel();
+      this.pedidoParaExcel.id = this.listaDePedidos[key].id;
+      this.pedidoParaExcel.fechaRealizacion = this.listaDePedidos[
+        key
+      ].fechaRealizacion;
+      this.pedidoParaExcel.hora_estimada_fin = this.listaDePedidos[
+        key
+      ].hora_estimada_fin;
+      this.pedidoParaExcel.minutosTotal = this.listaDePedidos[key].minutosTotal;
+      this.pedidoParaExcel.numero = this.listaDePedidos[key].numero;
+      this.pedidoParaExcel.tipo_Envio = this.listaDePedidos[key].tipo_Envio;
+      this.pedidoParaExcel.totalPedido = this.listaDePedidos[key].totalPedido;
+
+      this.listaPedidosParaExcel.push(this.pedidoParaExcel);
+    }
+
+    this.pedidoParaExcel = new PedidoExcel();
+
+    this.pedidoParaExcel.totalPedido = totalPedido;
+
+    this.listaPedidosParaExcel.push(this.pedidoParaExcel);
+
     this.excelService.exportAsExcelFile(
-      this.listaDePedidos,
+      this.listaPedidosParaExcel,
       'Recaudacion por tiempo'
     );
   }
