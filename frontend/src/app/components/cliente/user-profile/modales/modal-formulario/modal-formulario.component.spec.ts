@@ -3,6 +3,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ModalFormularioComponent } from './modal-formulario.component';
 import { RouterTestingModule } from '@angular/router/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { FormBuilder, ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 describe('ModalFormularioComponent', () => {
   let component: ModalFormularioComponent;
@@ -10,8 +11,14 @@ describe('ModalFormularioComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule, RouterTestingModule],
+      imports: [
+        HttpClientTestingModule,
+        RouterTestingModule,
+        ReactiveFormsModule,
+        FormsModule,
+      ],
       declarations: [ModalFormularioComponent],
+      providers: [FormBuilder],
     }).compileComponents();
   }));
 

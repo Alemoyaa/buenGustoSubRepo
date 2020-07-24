@@ -8,9 +8,8 @@ describe('ArtManufacturadoPlatosComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ArtManufacturadoPlatosComponent ]
-    })
-    .compileComponents();
+      declarations: [ArtManufacturadoPlatosComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {

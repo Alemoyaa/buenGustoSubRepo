@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { PedidosCajeroComponent } from './pedidos-cajero.component';
+import { FormBuilder } from '@angular/forms';
 
 describe('PedidosCajeroComponent', () => {
   let component: PedidosCajeroComponent;
@@ -8,9 +9,9 @@ describe('PedidosCajeroComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ PedidosCajeroComponent ]
-    })
-    .compileComponents();
+      declarations: [PedidosCajeroComponent],
+      providers: [FormBuilder],
+    }).compileComponents();
   }));
 
   beforeEach(() => {

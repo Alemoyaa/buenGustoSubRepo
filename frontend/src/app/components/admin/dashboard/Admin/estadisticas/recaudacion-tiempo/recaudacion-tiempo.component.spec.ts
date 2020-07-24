@@ -3,6 +3,8 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { RecaudacionTiempoComponent } from './recaudacion-tiempo.component';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { RouterTestingModule } from '@angular/router/testing';
+import { FormsModule } from '@angular/forms';
+import { BrowserModule } from '@angular/platform-browser';
 
 describe('RecaudacionTiempoComponent', () => {
   let component: RecaudacionTiempoComponent;
@@ -10,7 +12,12 @@ describe('RecaudacionTiempoComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule, RouterTestingModule],
+      imports: [
+        HttpClientTestingModule,
+        RouterTestingModule,
+        BrowserModule,
+        FormsModule,
+      ],
       declarations: [RecaudacionTiempoComponent],
     }).compileComponents();
   }));
