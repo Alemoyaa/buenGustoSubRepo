@@ -2,3 +2,11 @@
   border-radius: 10px;
   box-shadow: 4px 4px 10px;
 }
+
+.imagen-limitada {
+  border-radius: 10px 10px 0px 0px;
+  min-width: 180px;
+  min-height: 180px;
+  max-width: 400px;
+  max-height: 300px;
+}
