@@ -75,14 +75,13 @@ export class RecaudacionTiempoComponent implements OnInit {
     //Se ahorra 1 for each, 1 arreglo y una variable
     for (const key in this.listaDePedidos) {
       this.pedidoParaExcel = new PedidoExcel();
-      this.pedidoParaExcel.id = this.listaDePedidos[key].id;
+      this.pedidoParaExcel.numero = this.listaDePedidos[key].numero;
       this.pedidoParaExcel.fechaRealizacion = this.listaDePedidos[
         key
       ].fechaRealizacion;
       this.pedidoParaExcel.hora_estimada_fin = this.listaDePedidos[
         key
       ].hora_estimada_fin;
-      this.pedidoParaExcel.numero = this.listaDePedidos[key].numero;
       this.pedidoParaExcel.tipo_Envio = this.listaDePedidos[key].tipo_Envio;
       this.pedidoParaExcel.totalPedido = this.listaDePedidos[key].totalPedido;
 
@@ -97,7 +96,7 @@ export class RecaudacionTiempoComponent implements OnInit {
 
     this.excelService.exportAsExcelFile(
       this.listaPedidosParaExcel,
-      'Recaudacion por tiempo'
+      'Recaudacion_por_tiempo'
     );
   }
 }

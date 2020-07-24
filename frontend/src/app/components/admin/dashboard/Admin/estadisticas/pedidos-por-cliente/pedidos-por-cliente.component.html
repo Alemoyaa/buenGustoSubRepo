@@ -1,9 +1,10 @@
 <div class="container">
-  <form class="form-inline mt-4">
+  <p class="mt-4">Buscador por nombre y apellido de cliente <br /></p>
+  <form class="form-inline mt-2">
     <input
       class="form-control mr-sm-2"
       type="search"
-      placeholder="Nombre"
+      placeholder="Buscador"
       aria-label="Search"
       [(ngModel)]="filtroBuscador"
       [ngModelOptions]="{ standalone: true }"
@@ -26,7 +27,7 @@
         <tr
           *ngFor="
             let item of filtrar
-              | paginate: { itemsPerPage: 5, currentPage: pageActual }
+              | paginate: { itemsPerPage: 8, currentPage: pageActual }
           "
         >
           <td hidden>{{ item.id }}</td>

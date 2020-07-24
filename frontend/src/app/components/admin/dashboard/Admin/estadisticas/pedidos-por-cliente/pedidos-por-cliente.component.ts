@@ -1,3 +1,4 @@
+import { PedidoExcel } from './../../../../../../services/excelServices/entidades/PedidoExcel';
 import { ExcelService } from './../../../../../../services/excelServices/excel.service';
 import { PedidoServices } from './../../../../../../services/serviciosCliente/pedidoServices/pedido.service';
 import Swal from 'sweetalert2';
@@ -26,6 +27,9 @@ export class PedidosPorClienteComponent implements OnInit {
 
   pedidosRecuperadosDesdeHasta: Pedido[] = [];
   pageActual: number = 1;
+
+  pedidoParaExcel: PedidoExcel = new PedidoExcel();
+  listaPedidosParaExcel: PedidoExcel[] = [];
 
   filtroBuscador: any = '';
 
@@ -71,9 +75,41 @@ export class PedidosPorClienteComponent implements OnInit {
   }
 
   exportAsXLSX(): void {
+    let totalPedido = this.pedidoParaExcel.totalPedido;
+
+    //Casteo de pedido a pedidoExcel.
+    //Esto es totalmente removible si lo casteamos apenas entra a el array pedidosRecuperadosDesdeHasta
+    //Se ahorra 1 for each, 1 arreglo y una variable
+    for (const key in this.pedidosRecuperadosDesdeHasta) {
+      this.pedidoParaExcel = new PedidoExcel();
+      this.pedidoParaExcel.numero = this.pedidosRecuperadosDesdeHasta[
+        key
+      ].numero;
+      this.pedidoParaExcel.fechaRealizacion = this.pedidosRecuperadosDesdeHasta[
+        key
+      ].fechaRealizacion;
+      this.pedidoParaExcel.hora_estimada_fin = this.pedidosRecuperadosDesdeHasta[
+        key
+      ].hora_estimada_fin;
+      this.pedidoParaExcel.tipo_Envio = this.pedidosRecuperadosDesdeHasta[
+        key
+      ].tipo_Envio;
+      this.pedidoParaExcel.totalPedido = this.pedidosRecuperadosDesdeHasta[
+        key
+      ].totalPedido;
+
+      this.listaPedidosParaExcel.push(this.pedidoParaExcel);
+    }
+
+    this.pedidoParaExcel = new PedidoExcel();
+
+    this.pedidoParaExcel.totalPedido = totalPedido;
+
+    this.listaPedidosParaExcel.push(this.pedidoParaExcel);
+
     this.excelService.exportAsExcelFile(
-      this.pedidosRecuperadosDesdeHasta,
-      'Pedidos por cliente: ' + this.nombreCliente
+      this.listaPedidosParaExcel,
+      'Pedidos_por_cliente_' + this.nombreCliente
     );
   }
 
@@ -91,6 +127,7 @@ export class PedidosPorClienteComponent implements OnInit {
         .subscribe(
           (res) => {
             if (res) {
+              this.calcularRecaudacion(res);
               res.forEach((pedidoRecuperado) => {
                 if (pedidoRecuperado.clientePedido.id === this.idCliente) {
                   this.pedidosRecuperadosDesdeHasta.push(pedidoRecuperado);
@@ -126,5 +163,12 @@ export class PedidosPorClienteComponent implements OnInit {
           }
         );
     }
+  }
+
+  calcularRecaudacion(listaDePedidos: Pedido[]) {
+    this.pedidoParaExcel.totalPedido = 0;
+    listaDePedidos.forEach((pedidoItem) => {
+      this.pedidoParaExcel.totalPedido += pedidoItem.totalPedido;
+    });
   }
 }
