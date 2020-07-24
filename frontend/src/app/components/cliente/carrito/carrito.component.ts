@@ -57,11 +57,14 @@ export class CarritoComponent implements OnInit {
     this.getArticulos();
   }
   ngOnInit() {
-    this.datosEmpresaService.getOne(3).subscribe((res) => {
-      this.datosEmpresa = res;
-    }, error => {
-      console.log('Error de datosEmpresa', error);
-    });
+    this.datosEmpresaService.getOne(3).subscribe(
+      (res) => {
+        this.datosEmpresa = res;
+      },
+      (error) => {
+        console.log('Error de datosEmpresa', error);
+      }
+    );
   }
   get numeroValido(): boolean {
     // Caracteres que si se ingresan no se podra realizar el pedido
@@ -283,6 +286,7 @@ export class CarritoComponent implements OnInit {
             if (this.envio || !this.otroMedioDePago) {
               this.factura.formaPago = 'Efectivo';
               this.factura.montoDescuento = (this.total / 100) * 10;
+              this.factura.nroTarjeta = '0';
             }
 
             this.factura.tipoFactura = 'C';
@@ -331,7 +335,7 @@ export class CarritoComponent implements OnInit {
           }
         },
         (err) => {
-          console.log(err);
+          console.error(err);
         }
       );
     });
