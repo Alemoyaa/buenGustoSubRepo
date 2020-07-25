@@ -1,10 +1,10 @@
-import {ExcelService} from './../../../../../services/excelServices/excel.service';
-import {Pedido} from './../../../../../entidades/Pedido';
-import {PedidoServices} from './../../../../../services/serviciosCliente/pedidoServices/pedido.service';
-import {Chart} from 'node_modules/chart.js';
-import {Component, OnInit} from '@angular/core';
+import { ExcelService } from './../../../../../services/excelServices/excel.service';
+import { Pedido } from './../../../../../entidades/Pedido';
+import { PedidoServices } from './../../../../../services/serviciosCliente/pedidoServices/pedido.service';
+import { Chart } from 'node_modules/chart.js';
+import { Component, OnInit } from '@angular/core';
 import Swal from 'sweetalert2';
-import {NgForm} from '@angular/forms';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-estadisticas',
@@ -16,6 +16,8 @@ export class EstadisticasComponent implements OnInit {
   DateHasta: Date;
   DateDesde: Date;
 
+  myChart: any;
+
   mostrarExcel: boolean = false;
 
   elementosSinRepetir: Array<string> = [];
@@ -24,11 +26,9 @@ export class EstadisticasComponent implements OnInit {
   constructor(
     private servicePedido: PedidoServices,
     private excelService: ExcelService
-  ) {
-  }
+  ) {}
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   onSubmit(form: NgForm) {
     if (form.controls['desdeday'].value >= form.controls['hastaday'].value) {
@@ -42,6 +42,11 @@ export class EstadisticasComponent implements OnInit {
         .getPedidosEntreDosFechas(this.DateDesde, this.DateHasta)
         .subscribe(
           (res) => {
+            if (this.myChart) {
+              this.myChart.destroy();
+            }
+            this.elementosSinRepetir = [];
+            this.cantidadElementos = [];
             this.getCantidades(res);
           },
           (err) => {
@@ -138,7 +143,7 @@ export class EstadisticasComponent implements OnInit {
 
   newChart(nombre, labels, data) {
     var ctx = document.getElementById(nombre);
-    var myChart = new Chart(ctx, {
+    this.myChart = new Chart(ctx, {
       type: 'pie',
       data: {
         labels: labels,
