@@ -28,52 +28,98 @@ export class FormularioRolComponent implements OnInit {
   // traigo los datos del componente padre y seteo el formulario con sus datos
   @Input() set clienteSeleccionado(cliente) {
     this.crearFormulario();
-    if (cliente.usuario) {
-      this.cliente = cliente;
-      this.formularioPersona.setValue({
-        id: cliente.id,
-        nombre: cliente.nombre,
-        apellido: cliente.apellido,
-        telefono: cliente.telefono,
 
-        usuario: {
-          id: cliente.usuario.id,
-          email: cliente.usuario.email,
-          rol: {
-            id: cliente.usuario.rol.id,
-            nombreRol: cliente.usuario.rol.nombreRol
-          }
-
-        },
-
-        domicilio: {
-          id: cliente.domicilio.id,
-          calle: cliente.domicilio.calle,
-          nroDepartamento: cliente.domicilio.nroDepartamento,
-          numero: cliente.domicilio.numero,
-          piso: cliente.domicilio.piso,
-          aclaracion: cliente.domicilio.aclaracion,
-          localidad: {
-            id: cliente.domicilio.localidad.id,
-            nombre: cliente.domicilio.localidad.nombre,
-            provincia: {
-              id: cliente.domicilio.localidad.provincia.id,
-              nombre: cliente.domicilio.localidad.provincia.nombre,
-              pais: {
-                id: cliente.domicilio.localidad.provincia.pais.id,
-                nombre: cliente.domicilio.localidad.provincia.pais.nombre
-              }
+    try {
+      if (cliente.nombre && cliente.domicilio) {
+        this.cliente = cliente;
+        console.log(cliente);
+        this.formularioPersona.patchValue({
+          id: cliente.id,
+          nombre: cliente.nombre,
+          apellido: cliente.apellido,
+          telefono: cliente.telefono,
+          usuario: {
+            id: cliente.usuario.id,
+            email: cliente.usuario.email,
+            uid_firebase: cliente.usuario.uid_firebase,
+            rol: {
+              id: cliente.usuario.rol.id
+            }
+          },
+          domicilio: {
+            id: cliente.domicilio.id,
+            calle: cliente.domicilio.calle,
+            numero: cliente.domicilio.numero,
+            piso: cliente.domicilio.piso,
+            nroDepartamento: cliente.domicilio.nroDepartamento,
+            aclaracion: cliente.domicilio.aclaracion,
+            localidad: {
+              id: cliente.domicilio.localidad.id,
             }
           }
-        },
+        });
 
+      } else if (cliente.nombre && !cliente.domicilio) {
+        this.cliente = cliente;
+        this.formularioPersona.patchValue({
+          id: cliente.id,
+          nombre: cliente.nombre,
+          apellido: cliente.apellido,
+          telefono: cliente.telefono,
+          usuario: {
+            id: cliente.usuario.id,
+            email: cliente.usuario.email,
+            uid_firebase: cliente.usuario.uid_firebase,
+            rol: {
+              id: cliente.usuario.rol.id
+            }
+          },
+          domicilio: {
+            id: 0,
+            calle: '',
+            numero: 0,
+            piso: 0,
+            nroDepartamento: 0,
+            aclaracion: '',
+            localidad: {
+              id: 0,
 
-      });
+            }
+          }
+        });
+      } else {
+        this.cliente = cliente;
+        this.formularioPersona.patchValue({
+          id: cliente.id,
+          nombre: '',
+          apellido: '',
+          telefono: null,
+          usuario: {
+            id: cliente.usuario.id,
+            email: cliente.usuario.email,
+            uid_firebase: cliente.usuario.uid_firebase,
+            rol: {
+              id: cliente.usuario.rol.id
+            }
+          },
+          domicilio: {
+            id: 0,
+            calle: '',
+            numero: 0,
+            piso: 0,
+            nroDepartamento: 0,
+            aclaracion: '',
+            localidad: {
+              id: 0,
+
+            }
+          }
+        });
+        console.log(this.formularioPersona.value);
+      }
+    } catch (error) {
+      console.log(error);
     }
-
-
-
-
 
   }
   constructor(
@@ -90,7 +136,7 @@ export class FormularioRolComponent implements OnInit {
 
   }
 
-  // creao el formulario con new formControls para 
+  // creao el formulario con new formControls para
   // poder setearle la propiedad disable y que el usuario no pueda modificar los datos
   crearFormulario() {
     // creo el formulario todo por default vacio y le asigno que sea disabled para q no se puedan editar
@@ -133,7 +179,7 @@ export class FormularioRolComponent implements OnInit {
   }
 
   actualizar() {
-    console.log(this.formularioPersona.value);
+    // console.log(this.formularioPersona.value);
     this.clienteService.put(this.cliente.id, this.formularioPersona.value).subscribe(
       res => {
         this.alerts.mensajeSuccess('Actualizacion de Rol realizado',
@@ -146,7 +192,7 @@ export class FormularioRolComponent implements OnInit {
         });
       },
       err => {
-        this.alerts.mensajeError('No se ah podido actualizar el Rol del usuario', 'ah ocurrido un error y no se ah podido realizar la actualizacio, porfavor verifique que esten todos los datos correctos');
+        this.alerts.mensajeError('No se ah podido actualizar el Rol del usuario', 'Recuerde que para asignar un rol a un usuario se debe obtener domicilio y datos personales actualizados');
       }
     );
 
@@ -154,25 +200,30 @@ export class FormularioRolComponent implements OnInit {
   }
 
   //  selecciono el rol en el formulario, traigo el rol seleccionado y lo seteo a mi usuario
-  seleccionarRol(id: number) {
-
+  seleccionarRol(id: string) {
+    // console.log(id);
     // accedo al control usuario
     const control = <FormGroup>this.formularioPersona.controls['usuario'];
     // dentro de usuarios se encuentra rol
     const controlrol = control.controls['rol'];
     // verifico q no me envie un null
-    if (id != null) {
-      // traigo el rol utilizando el id que me envian por formulario
-      this.rolService.getOne(id).subscribe((rol) => {
-        this.rolSeleccionado = rol;
-        // seteo el formulario con el rol id y el nombre del rol traido
-        controlrol.setValue({
-          id: rol.id,
-          nombreRol: rol.nombreRol
-        });
+    if (parseInt(id)) {
+      this.rol.filter(rol => {
+        // traigo el rol utilizando el id que me envian por formulario y lo comparo con el array de roles
+        if (rol.id === parseInt(id)) {
 
+          return controlrol.setValue({
+            id: rol.id,
+            nombreRol: rol.nombreRol
+          });
+
+        }
       });
     }
+
+
+
+
   }
 
   // traigo los roles para mostrarlos en el formulario

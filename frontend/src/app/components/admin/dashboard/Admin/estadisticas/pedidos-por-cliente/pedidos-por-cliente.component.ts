@@ -37,7 +37,7 @@ export class PedidosPorClienteComponent implements OnInit {
     private serviceCliente: ClienteService,
     private servicePedidos: PedidoServices,
     private excelService: ExcelService
-  ) {}
+  ) { }
 
   get filtrar(): Cliente[] {
     const matcher = new RegExp(this.filtroBuscador, 'i');
@@ -68,6 +68,7 @@ export class PedidosPorClienteComponent implements OnInit {
   }
 
   recuperarID(clienteSeleccionado: Cliente) {
+    this.mostrar = false;
     this.idCliente = clienteSeleccionado.id;
     this.nombreCliente =
       clienteSeleccionado.nombre + ' ' + clienteSeleccionado.apellido;
@@ -120,6 +121,7 @@ export class PedidosPorClienteComponent implements OnInit {
         title: 'La fecha son incorrectas',
         html: 'Por favor revise el orden de las fechas ingresadas',
       });
+      this.mostrar = false;
     } else {
       this.pedidosRecuperadosDesdeHasta = [];
       this.servicePedidos
@@ -127,6 +129,7 @@ export class PedidosPorClienteComponent implements OnInit {
         .subscribe(
           (res) => {
             if (res) {
+
               this.calcularRecaudacion(res);
               res.forEach((pedidoRecuperado) => {
                 if (pedidoRecuperado.clientePedido.id === this.idCliente) {
@@ -135,6 +138,7 @@ export class PedidosPorClienteComponent implements OnInit {
               });
               this.mostrar = true;
             } else {
+              this.mostrar = false;
               Swal.fire({
                 icon: 'error',
                 title: 'Cuidado',
@@ -143,6 +147,7 @@ export class PedidosPorClienteComponent implements OnInit {
             }
           },
           (err) => {
+            this.mostrar = false;
             Swal.fire({
               icon: 'error',
               title: 'Error',
@@ -152,6 +157,7 @@ export class PedidosPorClienteComponent implements OnInit {
           },
           () => {
             if (this.pedidosRecuperadosDesdeHasta.length === 0) {
+              this.mostrar = false;
               Swal.fire({
                 icon: 'info',
                 title: 'No hay pedidos',
