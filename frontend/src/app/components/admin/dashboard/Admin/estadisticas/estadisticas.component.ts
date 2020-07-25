@@ -45,9 +45,17 @@ export class EstadisticasComponent implements OnInit {
             if (this.myChart) {
               this.myChart.destroy();
             }
-            this.elementosSinRepetir = [];
-            this.cantidadElementos = [];
-            this.getCantidades(res);
+            if (res) {
+              this.elementosSinRepetir = [];
+              this.cantidadElementos = [];
+              this.getCantidades(res);
+            } else {
+              Swal.fire({
+                icon: 'info',
+                title: 'No articulos en esa fecha',
+                html: 'Por favor ingrese otra fecha',
+              });
+            }
           },
           (err) => {
             Swal.fire({
