@@ -1,10 +1,10 @@
-import {PedidoExcel} from '../../../../../../services/excelServices/entidades/PedidoExcel';
-import {ExcelService} from '../../../../../../services/excelServices/excel.service';
-import {Pedido} from '../../../../../../entidades/Pedido';
-import {PedidoServices} from '../../../../../../services/serviciosCliente/pedidoServices/pedido.service';
-import {Component, OnInit} from '@angular/core';
+import { PedidoExcel } from '../../../../../../services/excelServices/entidades/PedidoExcel';
+import { ExcelService } from '../../../../../../services/excelServices/excel.service';
+import { Pedido } from '../../../../../../entidades/Pedido';
+import { PedidoServices } from '../../../../../../services/serviciosCliente/pedidoServices/pedido.service';
+import { Component, OnInit } from '@angular/core';
 import Swal from 'sweetalert2';
-import {NgForm} from '@angular/forms';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-recaudacion-tiempo',
@@ -16,7 +16,7 @@ export class RecaudacionTiempoComponent implements OnInit {
   DateHasta: Date;
   DateDesde: Date;
 
-  mostrar = true;
+  mostrar: boolean;
 
   listaDePedidos: Pedido[];
   pedidoParaExcel: PedidoExcel = new PedidoExcel();
@@ -43,13 +43,15 @@ export class RecaudacionTiempoComponent implements OnInit {
         .getPedidosEntreDosFechas(this.DateDesde, this.DateHasta)
         .subscribe(
           (res) => {
-            if (res === null){
+            if (res === null) {
+              this.mostrar = false;
               Swal.fire({
                 icon: 'info',
                 title: 'No hay pedidos',
                 html: 'Por favor indique otra fecha',
               });
-            }else{
+            } else {
+              this.mostrar = true;
               this.calcularRecaudacion(res);
               this.listaDePedidos = res;
             }
@@ -86,10 +88,10 @@ export class RecaudacionTiempoComponent implements OnInit {
       this.pedidoParaExcel.numero = this.listaDePedidos[key].numero;
       this.pedidoParaExcel.fechaRealizacion = this.listaDePedidos[
         key
-        ].fechaRealizacion;
+      ].fechaRealizacion;
       this.pedidoParaExcel.hora_estimada_fin = this.listaDePedidos[
         key
-        ].hora_estimada_fin;
+      ].hora_estimada_fin;
       this.pedidoParaExcel.tipo_Envio = this.listaDePedidos[key].tipo_Envio;
       this.pedidoParaExcel.totalPedido = this.listaDePedidos[key].totalPedido;
 
