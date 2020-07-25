@@ -34,9 +34,9 @@ export class PedidoServices extends CommonService<Pedido> {
       .pipe(catchError(this.handleError));
   }
 
-  comprobarStock(pedidoEnviado: Pedido): Observable<boolean> {
+  comprobarStock(pedidoEnviado: Pedido): Observable<any> {
     return this.http
-      .post<boolean>(this._url + 'comprobar_stock/', pedidoEnviado)
+      .post<any>(this._url + 'comprobar_stock/', pedidoEnviado)
       .pipe(catchError(this.handleError));
   }
 

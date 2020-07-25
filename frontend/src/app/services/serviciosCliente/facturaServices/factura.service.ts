@@ -1,3 +1,5 @@
+import { catchError } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 import { CommonService } from './../commonServices/common.service';
 import { Factura } from './../../../entidades/Factura';
 import { HttpClient } from '@angular/common/http';
@@ -11,5 +13,11 @@ export class FacturaService extends CommonService<Factura> {
 
   constructor(http: HttpClient) {
     super(http);
+  }
+
+  postPDF(entidad: Factura): Observable<Factura> {
+    return this.http
+      .post<Factura>(this._url + 'pdf/', entidad)
+      .pipe(catchError(this.handleError));
   }
 }
