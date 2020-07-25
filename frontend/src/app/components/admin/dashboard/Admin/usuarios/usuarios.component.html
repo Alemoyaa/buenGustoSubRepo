@@ -70,9 +70,21 @@
             <td>{{ cliente.usuario.rol.nombreRol }}</td>
             <td>
               <button
+                *ngIf="cliente.domicilio"
                 class="btn btn-dark"
                 data-toggle="modal"
                 data-target="#domicilio"
+                (click)="mostrarDomicilio(cliente)"
+              >
+                <i class="fas fa-home"> </i>
+                <p>Ver Domicilio</p>
+              </button>
+              <button
+                *ngIf="!cliente.domicilio"
+                class="btn btn-dark"
+                data-toggle="modal"
+                data-target="#domicilio"
+                disabled
                 (click)="mostrarDomicilio(cliente)"
               >
                 <i class="fas fa-home"> </i>
