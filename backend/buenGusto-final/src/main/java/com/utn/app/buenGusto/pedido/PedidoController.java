@@ -83,7 +83,7 @@ public class PedidoController extends CommonController<PedidoEntity, PedidoServi
 	}
 	
 	@PostMapping("/comprobar_stock/")
-	public ResponseEntity<Boolean> comprobarStock(@RequestBody PedidoEntity entidad) {
+	public ResponseEntity<?> comprobarStock(@RequestBody PedidoEntity entidad) {
 		try {
 			return ResponseEntity.status(HttpStatus.OK).body(service.comprobarStockPedido(entidad));
 		} catch (Exception e) {
