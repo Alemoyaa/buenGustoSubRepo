@@ -222,12 +222,12 @@ export class ModalPlatosComponent implements OnInit {
   patchValues(detalleManufacturado: DetalleManufacturado): AbstractControl {
     console.log(detalleManufacturado);
     return this.fb.group({
-      cantidad: [detalleManufacturado.cantidad],
+      cantidad: [detalleManufacturado.cantidad, [Validators.required, Validators.pattern('[0-9]{1,4}')]],
       unidadMedidaID: this.fb.group({
-        id: [detalleManufacturado.unidadMedidaID.id],
+        id: [detalleManufacturado.unidadMedidaID.id, Validators.required],
       }),
       articuloInsumoID: this.fb.group({
-        id: [detalleManufacturado.articuloInsumoID.id],
+        id: [detalleManufacturado.articuloInsumoID.id, Validators.required],
       })
     });
   }

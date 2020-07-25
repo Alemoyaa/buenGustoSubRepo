@@ -73,26 +73,35 @@ export class ArtManufacturadoPlatosComponent implements OnInit {
   }
 
   actualizar() {
-    this.serviceArtManufac
-      .put(this.id, this.formularioArticulo.value)
-      .subscribe(
-        (res) => {
-          this.alerts.mensajeSuccess(
-            'Actualizacion realizada',
-            `El articulo ${this.articuloActualizar.denominacion} se actualizo correctamente, recuerde que puede modificarlo cuando usted lo desee`
-          );
-          console.log(this.id);
-          this.getAllArtManufac();
-          this.esEditar = false;
-          this.formularioArticulo.reset();
-        },
-        (err) => {
-          this.alerts.mensajeError(
-            'No se ah podido actualizar el Rol del usuario',
-            'ah ocurrido un error y no se ah podido realizar la actualizacio, porfavor verifique que esten todos los datos correctos'
-          );
-        }
+    if (this.formularioArticulo.valid) {
+      this.serviceArtManufac
+        .put(this.id, this.formularioArticulo.value)
+        .subscribe(
+          (res) => {
+            this.alerts.mensajeSuccess(
+              'Actualizacion realizada',
+              `El articulo ${this.articuloActualizar.denominacion} se actualizo correctamente, recuerde que puede modificarlo cuando usted lo desee`
+            );
+            console.log(this.id);
+            this.getAllArtManufac();
+            this.esEditar = false;
+            this.formularioArticulo.reset();
+          },
+          (err) => {
+            this.alerts.mensajeError(
+              'No se ah podido actualizar el Plato',
+              'ah ocurrido un error y no se ah podido realizar la actualizacion, porfavor verifique que esten todos los datos correctos'
+            );
+          }
+        );
+    }
+    else {
+      this.alerts.mensajeError(
+        'No se ah podido actualizar el Plato',
+        'ah ocurrido un error y no se ah podido realizar la actualizacion, porfavor verifique que esten todos los datos correctos'
       );
+    }
+
   }
 
   eliminar(articulo: ArticuloManufacturado) {
