@@ -50,6 +50,7 @@ export class EstadisticasComponent implements OnInit {
               this.cantidadElementos = [];
               this.getCantidades(res);
             } else {
+              this.mostrarExcel = false;
               Swal.fire({
                 icon: 'info',
                 title: 'No articulos en esa fecha',
