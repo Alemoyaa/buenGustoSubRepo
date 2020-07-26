@@ -15,8 +15,6 @@ import { Domicilio } from 'src/app/entidades/Domicilio';
   providedIn: 'root',
 })
 export class LoginService {
-  public providerId: string = 'null';
-
   public logueado = false;
   public logged: EventEmitter<boolean>;
   mensajeError: string;
@@ -33,12 +31,14 @@ export class LoginService {
   }
 
   public ingresar(): void {
+    localStorage.clear();
     console.log('Sesion iniciada');
     this.logueado = true;
     this.logged.emit(true);
   }
 
   public salir(): void {
+    localStorage.clear();
     console.log('Sesion cerrada');
     this.logueado = false;
     this.logged.emit(false);
@@ -60,16 +60,17 @@ export class LoginService {
     this.afsAuth.signInWithPopup(new auth.GoogleAuthProvider()).then((data) => {
       this.usuarioService.getByEmail(data.user.email).subscribe((respuesta) => {
         if (respuesta === true) {
-          console.log('if');
+          // console.log('if');
 
           this.route.navigate(['user-profile/' + data.user.uid]);
 
           // this.postCliente(data, true);
         } else {
-          console.log('else');
-          console.log('data', data.user.uid);
+          // console.log('else');
+          // console.log('data', data.user.uid);
           this.postCliente(data, true);
-          this.route.navigate(['user-profile/' + data.user.uid]);
+          this.logout();
+          this.route.navigate(['login']);
         }
       });
     });
@@ -84,12 +85,12 @@ export class LoginService {
       (err) => {
         this.mensajeError = err;
       }
-    )
+    );
   }
 
   async checkEmailExists(emailACheckear) {
     await this.usuarioService.getByEmail(emailACheckear).subscribe((data) => {
-      console.log(data);
+      // console.log(data);
       return data;
     });
   }
@@ -101,8 +102,7 @@ export class LoginService {
       this.afsAuth
         .createUserWithEmailAndPassword(email, password)
         .then((data) => {
-          //console.log(data);
-          // this.logout();
+          // console.log(data);
           this.ingresar();
           data.user.sendEmailVerification();
           this.postCliente(data, false);
@@ -111,7 +111,8 @@ export class LoginService {
         })
         .then(async () => {
           await this.afsAuth.signOut();
-        }).catch(error => {
+        })
+        .catch((error) => {
           this.mensajeError = error;
         });
     }

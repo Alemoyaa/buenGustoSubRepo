@@ -37,7 +37,6 @@ export class PedidosCajeroComponent implements OnInit {
   ngOnInit(): void {
     this.getPedidosPendientes();
     this.crearFormulario();
-
     // this.alerts.mensajeSuccess('Bienvenido al tablero de Pedidos del modulo Cajero', 'Aqui usted podra aceptar y enviar a cocina o rechazar pedidos entrantes');
   }
 

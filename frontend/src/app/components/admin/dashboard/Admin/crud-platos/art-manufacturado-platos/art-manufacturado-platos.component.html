@@ -60,23 +60,25 @@
             <td>${{ articulo.precio_de_venta }}</td>
             <td>
               <!-- (click)="editar(articulo)" -->
-              <button
-                class="btn btn-info mb-2 mr-1"
-                data-target="#ModalProductos"
-                data-toggle="modal"
-                (click)="setearPlato(articulo)"
-              >
-                <i class="fas fa-pencil-alt"></i>
-                <p>Editar</p>
-              </button>
-              <button
-                (click)="eliminar(articulo)"
-                class="btn btn-danger"
-                data-toggle="modal"
-              >
-                <i class="fas fa-trash"></i>
-                <p>Eliminar</p>
-              </button>
+              <div class="row">
+                <button
+                  class="btn btn-info mr-1"
+                  data-target="#ModalProductos"
+                  data-toggle="modal"
+                  (click)="setearPlato(articulo)"
+                >
+                  <i class="fas fa-pencil-alt"></i>
+                  <p>Editar</p>
+                </button>
+                <button
+                  class="btn btn-danger"
+                  (click)="eliminar(articulo)"
+                  data-toggle="modal"
+                >
+                  <i class="fas fa-trash"></i>
+                  <p>Eliminar</p>
+                </button>
+              </div>
             </td>
           </tr>
         </tbody>

@@ -1,19 +1,17 @@
-import { FacturaService } from './../../../services/serviciosCliente/facturaServices/factura.service';
-import { Factura } from './../../../entidades/Factura';
-import { AlertsService } from './../../../services/alertServices/alerts.service';
-import { DetallePedido } from 'src/app/entidades/DetallePedido';
-import { Component, OnInit } from '@angular/core';
-import { Pedido } from 'src/app/entidades/Pedido';
-import { LoginService } from 'src/app/services/loginServices/login.service';
-import { ClienteService } from 'src/app/services/serviciosCliente/clienteServices/cliente.service';
-import { PedidoServices } from 'src/app/services/serviciosCliente/pedidoServices/pedido.service';
-import { EstadoPedido } from 'src/app/entidades/EstadoPedido';
-import { ArticuloManufacturado } from 'src/app/entidades/ArticuloManufacturado';
-import { Router } from '@angular/router';
-import { ArticuloInsumo } from 'src/app/entidades/ArticuloInsumo';
+import {FacturaService} from './../../../services/serviciosCliente/facturaServices/factura.service';
+import {Factura} from './../../../entidades/Factura';
+import {AlertsService} from './../../../services/alertServices/alerts.service';
+import {DetallePedido} from 'src/app/entidades/DetallePedido';
+import {Component, OnInit} from '@angular/core';
+import {Pedido} from 'src/app/entidades/Pedido';
+import {LoginService} from 'src/app/services/loginServices/login.service';
+import {ClienteService} from 'src/app/services/serviciosCliente/clienteServices/cliente.service';
+import {PedidoServices} from 'src/app/services/serviciosCliente/pedidoServices/pedido.service';
+import {EstadoPedido} from 'src/app/entidades/EstadoPedido';
+import {Router} from '@angular/router';
 import Swal from 'sweetalert2';
-import { DatosEmpresaService } from 'src/app/services/serviciosCliente/datosEmpresaServices/datos-empresa.service';
-import { DatosEmpresa } from 'src/app/entidades/DatosEmpresa';
+import {DatosEmpresaService} from 'src/app/services/serviciosCliente/datosEmpresaServices/datos-empresa.service';
+import {DatosEmpresa} from 'src/app/entidades/DatosEmpresa';
 
 @Component({
   selector: 'app-carrito',
@@ -38,8 +36,7 @@ export class CarritoComponent implements OnInit {
     lista_detallePedido: null,
     tipo_Envio: null,
   };
-  articulosManufactura: Array<ArticuloManufacturado> = [];
-  articulosInsumo: Array<ArticuloInsumo> = [];
+
   total = 0;
   otroMedioDePago = false;
   envio = false;
@@ -56,6 +53,7 @@ export class CarritoComponent implements OnInit {
   ) {
     this.getArticulos();
   }
+
   ngOnInit() {
     this.datosEmpresaService.getOne(3).subscribe(
       (res) => {
@@ -233,135 +231,98 @@ export class CarritoComponent implements OnInit {
     }
   }
 
-  pagar() {
-    this.loginService.isAuth().subscribe(
-      (data) => {
-        if (data) {
-          this.crearPedido();
-        } else {
-          this.alert.mensajeWarning(
-            'No inicio sesion',
-            'Debe registrarse para poder comprar'
-          );
-          this.router.navigate(['/login']);
-        }
-      },
-      (errPagarLogin) => {
-        this.alert.mensajeWarning(
-          'Ocurrio un problema',
-          'Vuelva a intentarlo mas tarde'
-        );
-        console.error(errPagarLogin);
-      }
-    );
-  }
-
-  async crearPedido() {
+  crearPedido() {
     this.getTotal();
-    await this.loginService.isAuth().subscribe(
-      async (data) => {
-        await this.clienteService.getByUidFirebase(data.uid).subscribe(
-          (user) => {
-            if (this.envio && !user.domicilio) {
+    if (this.envio && !this.clienteService.clienteCargadoDesdeBD.domicilio) {
+      Swal.fire({
+        icon: 'warning',
+        title: 'Cuidado',
+        timer: 1600,
+        timerProgressBar: true,
+        showConfirmButton: false,
+        text: 'Su perfil no posee domicilio',
+      }).then(() => {
+        Swal.fire({
+          icon: 'success',
+          title: 'Direccionando al perfil',
+          timer: 2100,
+          showConfirmButton: false,
+          timerProgressBar: true,
+          text:
+            'Sera direccionado a su perfil para que complete el domicilio',
+        }).then(() => {
+          this.router.navigate(['user-profile/' + this.clienteService.clienteCargadoDesdeBD.usuario.uid_firebase]);
+        });
+      });
+    } else {
+      this.pedido.clientePedido = this.clienteService.clienteCargadoDesdeBD;
+
+      this.factura.fecha = new Date();
+
+      if (this.envio || !this.otroMedioDePago) {
+        this.factura.formaPago = 'Efectivo';
+        this.factura.montoDescuento = (this.total / 100) * 10;
+        this.factura.nroTarjeta = '0';
+      }
+
+      this.factura.tipoFactura = 'C';
+      this.factura.totalFactura = this.total;
+
+      // console.log(this.factura);
+      // console.log(this.pedido);
+
+      // 4 Cocineros
+      this.pedidoService.postConHoraFin(4, this.pedido).subscribe(
+        (posted) => {
+          this.factura.pedidofacturado = posted;
+          this.factura.datosEmpresaID = this.datosEmpresa;
+
+          console.log('Pedido', posted);
+          // console.log(this.factura);
+
+          Swal.fire({
+            title: 'Por favor espere',
+            html: 'Enviando los datos...',
+            // timer: 1500,
+            onBeforeOpen: () => {
+              Swal.showLoading();
+            },
+          });
+
+          this.facturaService.postPDF(this.factura).subscribe(
+            (facturaRes) => {
+              console.log('Factura', facturaRes);
               Swal.fire({
                 icon: 'warning',
-                title: 'Cuidado',
+                title: 'Realizado',
                 timer: 1600,
-                timerProgressBar: true,
                 showConfirmButton: false,
-                text: 'Su perfil no posee domicilio',
+                timerProgressBar: true,
+                text: 'Su pedido fue realizado con exito',
               }).then(() => {
                 Swal.fire({
                   icon: 'success',
-                  title: 'Direccionando al perfil',
                   timer: 2100,
                   showConfirmButton: false,
                   timerProgressBar: true,
                   text:
-                    'Sera direccionado a su perfil para que complete el domicilio',
+                    'Si desea ver el pedido, ingrese en el historial de sus pedidos',
                 }).then(() => {
-                  this.router.navigate(['user-profile/' + data.uid]);
+                  this.router.navigate(['user-profile/' + this.clienteService.clienteCargadoDesdeBD.usuario.uid_firebase]);
+                  localStorage.clear();
                 });
               });
-            } else {
-              this.pedido.clientePedido = user;
-
-              this.factura.fecha = new Date();
-
-              if (this.envio || !this.otroMedioDePago) {
-                this.factura.formaPago = 'Efectivo';
-                this.factura.montoDescuento = (this.total / 100) * 10;
-                this.factura.nroTarjeta = '0';
-              }
-
-              this.factura.tipoFactura = 'C';
-              this.factura.totalFactura = this.total;
-
-              console.log(this.factura);
-              console.log(this.pedido);
-
-              // 4 Cocineros
-              this.pedidoService.postConHoraFin(4, this.pedido).subscribe(
-                (posted) => {
-                  this.factura.pedidofacturado = posted;
-                  this.factura.datosEmpresaID = this.datosEmpresa;
-
-                  console.log('posted', posted);
-                  console.log(this.factura);
-
-                  Swal.fire({
-                    title: 'Por favor espere',
-                    html: 'Enviando los datos...',
-                    // timer: 1500,
-                    onBeforeOpen: () => {
-                      Swal.showLoading();
-                    },
-                  });
-
-                  this.facturaService.postPDF(this.factura).subscribe(
-                    (facturaRes) => {
-                      console.log('Factura', facturaRes);
-                      Swal.fire({
-                        icon: 'warning',
-                        title: 'Realizado',
-                        timer: 1600,
-                        showConfirmButton: false,
-                        timerProgressBar: true,
-                        text: 'Su pedido fue realizado con exito',
-                      }).then(() => {
-                        Swal.fire({
-                          icon: 'success',
-                          timer: 2100,
-                          showConfirmButton: false,
-                          timerProgressBar: true,
-                          text:
-                            'Si desea ver el pedido, ingrese en el historial de sus pedidos',
-                        }).then(() => {
-                          this.router.navigate(['user-profile/' + data.uid]);
-                          localStorage.clear();
-                        });
-                      });
-                    },
-                    (errFactura) => {
-                      console.error('Error de factura => ', errFactura);
-                    }
-                  );
-                },
-                (errPedido) => {
-                  console.error('Error de pedido => ', errPedido);
-                }
-              );
+            },
+            (errFactura) => {
+              console.error('Error de factura => ', errFactura);
             }
-          },
-          (errCliente) => {
-            console.error('Error de cliente => ', errCliente);
-          }
-        );
-      },
-      (errLogin) => {
-        console.error('Error de login => ', errLogin);
-      }
-    );
+          );
+        },
+        (errPedido) => {
+          console.error('Error de pedido => ', errPedido);
+        }
+      );
+    }
   }
 
   stockValido() {
@@ -375,45 +336,49 @@ export class CarritoComponent implements OnInit {
 
     this.pedido.lista_detallePedido = this.listaDetallePedido;
 
-    this.pedidoService.comprobarStock(this.pedido).subscribe(
-      (value) => {
-        if (value) {
-          this.pagar();
-        } else {
-          Swal.fire({
-            icon: 'warning',
-            timer: 2300,
-            title: 'Su pedido fue cancelado',
-            showConfirmButton: false,
-            timerProgressBar: true,
-            text:
-              'El restaurante no cuenta con los articulos necesarios para preparar su pedido',
-          }).then(() => {
+    if (this.listaDetallePedido.length !== 0) {
+      this.pedidoService.comprobarStock(this.pedido).subscribe(
+        (value) => {
+          if (value) {
+            this.crearPedido();
+          } else {
             Swal.fire({
-              icon: 'info',
+              icon: 'warning',
               timer: 2300,
-              title: 'Cambie articulos del pedido',
+              title: 'Su pedido fue cancelado',
               showConfirmButton: false,
               timerProgressBar: true,
               text:
-                'Cambie las cantidades o los articulos de su pedido para realizar la compra',
+                'El restaurante no cuenta con los articulos necesarios para preparar su pedido',
+            }).then(() => {
+              Swal.fire({
+                icon: 'info',
+                timer: 2300,
+                title: 'Cambie articulos del pedido',
+                showConfirmButton: false,
+                timerProgressBar: true,
+                text:
+                  'Cambie las cantidades o los articulos de su pedido para realizar la compra',
+              });
             });
+          }
+        },
+        (error) => {
+          console.error('Error de pedido => ', error);
+          Swal.fire({
+            icon: 'error',
+            timer: 2100,
+            title: 'Ocurrio un error',
+            showConfirmButton: false,
+            timerProgressBar: true,
+            text: 'Por favor vuelva a intentarlo mas tarde',
           });
+          return false;
         }
-      },
-      (error) => {
-        console.error('Error de pedido => ', error);
-        Swal.fire({
-          icon: 'error',
-          timer: 2100,
-          title: 'Ocurrio un error',
-          showConfirmButton: false,
-          timerProgressBar: true,
-          text: 'Por favor vuelva a intentarlo mas tarde',
-        });
-        return false;
-      }
-    );
+      );
+    } else {
+      console.log('Estoy en el else de stock kinga');
+    }
   }
 
   setPago(pago) {

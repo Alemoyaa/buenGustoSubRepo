@@ -48,10 +48,9 @@ export class UserProfileComponent implements OnInit {
     private serviceLocalidad: LocalidadService,
     private serviceAlert: AlertsService
   ) {}
- 
+
   ngOnInit(): void {
     this.traerDatos();
-    
    }
 
   datosUser() {
@@ -64,7 +63,7 @@ export class UserProfileComponent implements OnInit {
       (data) => {
         if (data.id !== null) {
           this.getOneByUid(data.id);
-        
+
         }
       },
       (err) => {
@@ -83,7 +82,7 @@ export class UserProfileComponent implements OnInit {
     this.esperarAlert();
     await this.serviceCliente.getByUidFirebase(uid).subscribe(
       (data) => {
-
+        this.serviceCliente.clienteCargadoDesdeBD = data;
         this.cliente = data;
         Swal.fire({
           icon: 'success',
@@ -96,7 +95,7 @@ export class UserProfileComponent implements OnInit {
     );
   }
 
- 
+
 
 
   pasarDatos(cliente){
@@ -115,5 +114,5 @@ export class UserProfileComponent implements OnInit {
       console.log(result);
     });
   }
- 
+
 }

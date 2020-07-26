@@ -8,6 +8,9 @@ import { Cliente } from 'src/app/entidades/Cliente';
   providedIn: 'root',
 })
 export class ClienteService extends CommonService<Cliente> {
+
+  clienteCargadoDesdeBD: Cliente;
+
   _url = 'http://localhost:8080/api/cliente/';
 
   constructor(http: HttpClient) {

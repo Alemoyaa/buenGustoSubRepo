@@ -33,16 +33,18 @@ export class ClienteGuard implements CanActivate {
     return new Promise((resolve) => {
       this.logService.isAuth().subscribe(
         (data) => {
-          this.clienteService.getByUidFirebase(data.uid).subscribe(
-            (user) => {
-              if (user) {
-                resolve(true);
-              } else {
-                resolve(false);
-              }
-            },
-            (error) => {}
-          );
+          if(data){
+            this.clienteService.getByUidFirebase(data.uid).subscribe(
+              (user) => {
+                if (user) {
+                  resolve(true);
+                } else {
+                  resolve(false);
+                }
+              },
+              (error) => {}
+            );
+          }
         },
         (error) => {}
       );
