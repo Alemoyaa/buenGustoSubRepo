@@ -213,9 +213,13 @@ export class CarritoComponent implements OnInit {
     const detallesPedidoStorage = localStorage.getItem('carritoDetallesPedido');
     const detallesPedido = JSON.parse(detallesPedidoStorage);
     console.log(detallesPedido);
-    this.listaDetallePedido = detallesPedido;
+    if (detallesPedido) {
+      this.listaDetallePedido = detallesPedido;
 
-    this.getTotal();
+      this.getTotal();
+    } else {
+      this.listaDetallePedido = [];
+    }
   }
 
   getTotal() {
