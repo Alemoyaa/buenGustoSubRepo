@@ -7,14 +7,20 @@ import { LocalidadService } from 'src/app/services/serviciosCliente/localidadSer
 import { AlertsService } from 'src/app/services/alertServices/alerts.service';
 import { ClienteService } from 'src/app/services/serviciosCliente/clienteServices/cliente.service';
 import { Localidad } from 'src/app/entidades/Localidad';
-import { NgForm, FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
+import {
+  NgForm,
+  FormBuilder,
+  FormGroup,
+  FormControl,
+  Validators,
+} from '@angular/forms';
 import { Domicilio } from '../../../../../entidades/Domicilio';
 import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-modal-formulario',
   templateUrl: './modal-formulario.component.html',
-  styleUrls: ['./modal-formulario.component.css']
+  styleUrls: ['./modal-formulario.component.css'],
 })
 export class ModalFormularioComponent implements OnInit {
   formulario: FormGroup;
@@ -22,7 +28,6 @@ export class ModalFormularioComponent implements OnInit {
   cliente: Cliente;
   domicilio = new Domicilio();
   @Input() set clienteUser(cliente) {
-
     this.BuildForm();
 
     try {
@@ -39,8 +44,8 @@ export class ModalFormularioComponent implements OnInit {
             email: cliente.usuario.email,
             uid_firebase: cliente.usuario.uid_firebase,
             rol: {
-              id: cliente.usuario.rol.id
-            }
+              id: cliente.usuario.rol.id,
+            },
           },
           domicilio: {
             id: cliente.domicilio.id,
@@ -51,10 +56,9 @@ export class ModalFormularioComponent implements OnInit {
             aclaracion: cliente.domicilio.aclaracion,
             localidad: {
               id: cliente.domicilio.localidad.id,
-            }
-          }
+            },
+          },
         });
-
       } else if (cliente.nombre && !cliente.domicilio) {
         this.cliente = cliente;
         this.formulario.patchValue({
@@ -67,8 +71,8 @@ export class ModalFormularioComponent implements OnInit {
             email: cliente.usuario.email,
             uid_firebase: cliente.usuario.uid_firebase,
             rol: {
-              id: cliente.usuario.rol.id
-            }
+              id: cliente.usuario.rol.id,
+            },
           },
           domicilio: {
             id: 0,
@@ -79,9 +83,8 @@ export class ModalFormularioComponent implements OnInit {
             aclaracion: '',
             localidad: {
               id: 0,
-
-            }
-          }
+            },
+          },
         });
       } else {
         this.cliente = cliente;
@@ -95,8 +98,8 @@ export class ModalFormularioComponent implements OnInit {
             email: cliente.usuario.email,
             uid_firebase: cliente.usuario.uid_firebase,
             rol: {
-              id: cliente.usuario.rol.id
-            }
+              id: cliente.usuario.rol.id,
+            },
           },
           domicilio: {
             id: 0,
@@ -107,30 +110,25 @@ export class ModalFormularioComponent implements OnInit {
             aclaracion: '',
             localidad: {
               id: 0,
-
-            }
-          }
+            },
+          },
         });
         console.log(this.formulario.value);
       }
-    } catch (error) {
-
-    }
-
-  };
+    } catch (error) {}
+  }
   constructor(
     private serviceCliente: ClienteService,
     private rutaActiva: ActivatedRoute,
     private serviceLocalidad: LocalidadService,
     private serviceAlert: AlertsService,
     private fb: FormBuilder,
-    @Host() private perfil: UserProfileComponent) { }
+    @Host() private perfil: UserProfileComponent
+  ) {}
 
   ngOnInit(): void {
-
     this.BuildForm();
     this.getLocalidades();
-
   }
 
   updateUsuario() {
@@ -142,9 +140,9 @@ export class ModalFormularioComponent implements OnInit {
         'Por favor revise que todos los datos sean completados en su formato correcto'
       );
     } else {
-
       this.serviceCliente.put(this.cliente.id, this.formulario.value).subscribe(
         (res) => {
+          this.serviceCliente.clienteCargadoDesdeBD = res;
           console.log(res);
           this.cliente = res;
           this.perfil.cliente = this.cliente;
@@ -165,10 +163,8 @@ export class ModalFormularioComponent implements OnInit {
     }
   }
 
-
   async getLocalidades() {
     await this.serviceLocalidad.getAll().subscribe(
-
       (res) => {
         console.log('localidad ', res);
         this.listaLocalidades = res;
@@ -194,19 +190,15 @@ export class ModalFormularioComponent implements OnInit {
     // dentro de usuarios se encuentra rol
     const controllocalidad = control.controls['localidad'];
 
-    this.listaLocalidades.filter(localidadSeleccionada => {
+    this.listaLocalidades.filter((localidadSeleccionada) => {
       if (localidadSeleccionada.id === id) {
         controllocalidad.patchValue({
-          id: localidadSeleccionada.id
+          id: localidadSeleccionada.id,
         });
       }
     });
 
-
-
-
     // });
-
   }
 
   BuildForm() {
@@ -222,7 +214,7 @@ export class ModalFormularioComponent implements OnInit {
         uid_firebase: new FormControl('', Validators.required),
         rol: this.fb.group({
           id: new FormControl(0),
-        })
+        }),
       }),
       domicilio: this.fb.group({
         id: new FormControl(0),
@@ -233,11 +225,8 @@ export class ModalFormularioComponent implements OnInit {
         aclaracion: new FormControl('', Validators.required),
         localidad: this.fb.group({
           id: new FormControl(0),
-
-        })
-      })
+        }),
+      }),
     });
   }
-
-
 }
