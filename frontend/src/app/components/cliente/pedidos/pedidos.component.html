@@ -12,7 +12,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let pedido of pedidosCliente">
+      <tr *ngFor="let pedido of filtrarPedidos">
         <td hidden>{{ pedido.id }}</td>
         <td>{{ pedido.fechaRealizacion | date }}</td>
         <td>{{ pedido.numero }}</td>

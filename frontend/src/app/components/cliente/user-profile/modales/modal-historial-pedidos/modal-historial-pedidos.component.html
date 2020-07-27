@@ -21,7 +21,52 @@
         </button>
       </div>
       <div class="modal-body">
-        <app-pedidos [clienteUser]="cliente"></app-pedidos>
+        <div class="row">
+          <div class="col-lg-3 col-md-12 col-sm-12">
+            <form>
+              <p style="font-size: 25px;">Buscador:</p>
+
+              <input
+                class="form-control mr-sm-2"
+                type="search"
+                placeholder="Fecha/nro de Factura/ precio total"
+                aria-label="Search"
+                [(ngModel)]="this.filtroBuscador"
+                [ngModelOptions]="{ standalone: true }"
+              />
+            </form>
+          </div>
+          <div class="col-lg-3 col-md-12 col-sm-12">
+            <p style="font-size: 25px;">Filtros por Estado:</p>
+            <select
+              class="custom-select"
+              (change)="seleccionarFiltro($event.target.value)"
+            >
+              <option selected value="">Todos los estados..</option>
+              <option
+                *ngFor="let estado of estados"
+                [value]="estado.nombreEstado"
+                >{{ estado.nombreEstado }}</option
+              >
+            </select>
+          </div>
+          <div class="col-lg-3 col-md-12 col-sm-12">
+            <p style="font-size: 25px;">Por Tipo de envio:</p>
+
+            <select
+              class="custom-select"
+              (change)="seleccionarFiltro($event.target.value)"
+            >
+              <option selected value="">Todos los pedidos..</option>
+              <option value="true">Delivery</option>
+              <option value="false">Retiro en local</option>
+            </select>
+          </div>
+        </div>
+        <app-pedidos
+          [clienteUser]="cliente"
+          [parametroBusqueda]="filtroBuscador"
+        ></app-pedidos>
         <div
           data-spy="scroll"
           data-target="#navbar-example2"
