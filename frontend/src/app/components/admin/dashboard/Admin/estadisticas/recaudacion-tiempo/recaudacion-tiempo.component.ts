@@ -25,11 +25,9 @@ export class RecaudacionTiempoComponent implements OnInit {
   constructor(
     private servicePedido: PedidoServices,
     private excelService: ExcelService
-  ) {
-  }
+  ) {}
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   onSubmit(form: NgForm) {
     if (form.controls.desdeday.value >= form.controls.hastaday.value) {
@@ -53,6 +51,7 @@ export class RecaudacionTiempoComponent implements OnInit {
             } else {
               this.mostrar = true;
               this.calcularRecaudacion(res);
+              this.listaDePedidos = [];
               this.listaDePedidos = res;
             }
           },
@@ -78,6 +77,7 @@ export class RecaudacionTiempoComponent implements OnInit {
   }
 
   exportAsXLSX(): void {
+    this.listaPedidosParaExcel = [];
     const totalPedido = this.pedidoParaExcel.totalPedido;
 
     // Casteo de pedido a pedidoExcel.
