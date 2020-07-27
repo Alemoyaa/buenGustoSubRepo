@@ -74,7 +74,7 @@
           <td
             *ngIf="
               factura.pedidofacturado.tipo_Envio &&
-                factura.pedidofacturado.estadoPedido.id !== 5;
+                factura.pedidofacturado.estadoPedido.id === 7;
               else sinEnvio
             "
           >
