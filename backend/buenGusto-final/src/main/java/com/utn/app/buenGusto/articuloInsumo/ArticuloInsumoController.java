@@ -21,7 +21,7 @@ public class ArticuloInsumoController extends CommonController<ArticuloInsumoEnt
 	
 	@PutMapping("/reponer/{id}")
 	@Transactional
-	public ResponseEntity<?> put(@PathVariable long id, @RequestBody ArticuloInsumoEntity entity) {
+	public ResponseEntity<?> putReponer(@PathVariable long id, @RequestBody ArticuloInsumoEntity entity) {
 		try {
 			return ResponseEntity.status(HttpStatus.OK).body(service.reponerStockService(id, entity.getStock_actual(), entity.getPrecio_de_compra()));
 		} catch (Exception e) {
