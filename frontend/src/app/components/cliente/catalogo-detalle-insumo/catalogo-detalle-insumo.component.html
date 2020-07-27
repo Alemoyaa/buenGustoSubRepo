@@ -6,8 +6,7 @@
   </a>
 </div>
 
-<div class="container justify-content-center d-flex"
- *ngIf="articulo">
+<div class="container justify-content-center d-flex" *ngIf="articulo">
   <div class="container col-lg-6 col-md-12 col-sm-12">
     <div class="card articulo-detalle">
       <img
@@ -22,7 +21,10 @@
           <div class="col-lg-4 col-md-4 col-sm-4 left-align">
             <h4>${{ articulo.precio_de_venta }}</h4>
           </div>
-          <div class="col-lg-8 col-md-8 col-sm-8 right-align">
+          <div
+            class="col-lg-8 col-md-8 col-sm-8 right-align"
+            *ngIf="this.mostrarBotonardo"
+          >
             <button
               type="button"
               class="btn btn-warning"

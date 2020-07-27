@@ -13,7 +13,10 @@
           <div class="col-lg-4 col-md-4 col-sm-4 left-align">
             <h4>${{ articuloManuf.precio_de_venta }}</h4>
           </div>
-          <div class="col-lg-8 col-md-8 col-sm-8 right-align">
+          <div
+            class="col-lg-8 col-md-8 col-sm-8 right-align"
+            *ngIf="mostrarBotonardo"
+          >
             <button
               type="button"
               class="btn btn-warning"

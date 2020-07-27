@@ -1,3 +1,4 @@
+import { LoginService } from './../../../services/loginServices/login.service';
 import { DetallePedido } from './../../../entidades/DetallePedido';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -13,14 +14,20 @@ import { ArticuloInsumoService } from 'src/app/services/serviciosCliente/articul
 export class CatalogoDetalleInsumoComponent implements OnInit {
   articulo: ArticuloInsumo;
   id: number;
+  mostrarBotonardo: boolean = false;
 
   constructor(
     private articuloService: ArticuloInsumoService,
     private routerActive: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private loginService: LoginService
   ) {}
 
   ngOnInit(): void {
+    this.loginService.isAuth().subscribe((dataLogin) => {
+      if (dataLogin) this.mostrarBotonardo = true;
+      else this.mostrarBotonardo = false;
+    });
     this.routerActive.params.subscribe((data) => {
       this.id = data.id;
       this.getOne(data.id);
