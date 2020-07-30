@@ -1,12 +1,22 @@
-<div class="modal fade bd-factura-modal-xl" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel"
-  aria-hidden="true">
+<div
+  class="modal fade bd-factura-modal-xl"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="myExtraLargeModalLabel"
+  aria-hidden="true"
+>
   <div class="modal-dialog modal-xl modal-dialog-scrollable" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalCenterTitle">
           Historial de facturas
         </h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
@@ -16,21 +26,37 @@
             <form>
               <p style="font-size: 25px;">Buscador:</p>
 
-              <input class="form-control mr-sm-2" type="search" placeholder="Fecha/nro de Factura/ precio total"
-                aria-label="Search" [(ngModel)]="this.filtroBuscador" [ngModelOptions]="{ standalone: true }" />
+              <input
+                class="form-control mr-sm-2"
+                type="search"
+                placeholder="Nro de Factura/Total"
+                aria-label="Search"
+                [(ngModel)]="this.filtroBuscador"
+                [ngModelOptions]="{ standalone: true }"
+              />
             </form>
           </div>
           <div class="col-lg-3 col-md-12 col-sm-12">
             <p style="font-size: 25px;">Filtros por Estado:</p>
-            <select class="custom-select" (change)="seleccionarFiltro($event.target.value)">
+            <select
+              class="custom-select"
+              (change)="seleccionarFiltro($event.target.value)"
+            >
               <option selected value="">Todos los estados..</option>
-              <option *ngFor="let estado of estados" [value]="estado.nombreEstado">{{ estado.nombreEstado }}</option>
+              <option
+                *ngFor="let estado of estados"
+                [value]="estado.nombreEstado"
+                >{{ estado.nombreEstado }}</option
+              >
             </select>
           </div>
           <div class="col-lg-3 col-md-12 col-sm-12">
             <p style="font-size: 25px;">Por Tipo de envio:</p>
 
-            <select class="custom-select" (change)="seleccionarFiltro($event.target.value)">
+            <select
+              class="custom-select"
+              (change)="seleccionarFiltro($event.target.value)"
+            >
               <option selected value="">Todos los pedidos..</option>
               <option value="true">Delivery</option>
               <option value="false">Retiro en local</option>
@@ -39,15 +65,25 @@
           <div class="col-lg-3 col-md-12 col-sm-12">
             <p style="font-size: 25px;">Por forma de pago:</p>
 
-            <select class="custom-select" (change)="seleccionarFiltro($event.target.value)">
+            <select
+              class="custom-select"
+              (change)="seleccionarFiltro($event.target.value)"
+            >
               <option selected value="">Todos los pedidos..</option>
               <option value="Efectivo">Efectivo</option>
               <option value="Tarjeta">Tarjeta</option>
             </select>
           </div>
         </div>
-        <app-factura [clienteUser]="cliente" [parametroBusqueda]="filtroBuscador"></app-factura>
-        <div data-spy="scroll" data-target="#navbar-example2" data-offset="0"></div>
+        <app-factura
+          [clienteUser]="cliente"
+          [parametroBusqueda]="filtroBuscador"
+        ></app-factura>
+        <div
+          data-spy="scroll"
+          data-target="#navbar-example2"
+          data-offset="0"
+        ></div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">

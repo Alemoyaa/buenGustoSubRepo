@@ -18,7 +18,7 @@ export class NavbarComponent implements OnInit {
     private route: Router,
     private clienteService: ClienteService,
     private alertService: AlertsService
-  ) { }
+  ) {}
 
   estaLogueado: boolean = true;
 
@@ -45,6 +45,8 @@ export class NavbarComponent implements OnInit {
           if (data.usuario.rol.id != 5) {
             this.canAccessPanel = true;
             this.rol = data.usuario.rol.nombreRol;
+          } else {
+            console.info('Cliente');
           }
         });
       } else {

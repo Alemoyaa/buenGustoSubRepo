@@ -20,7 +20,7 @@ export class PedidosComponent implements OnInit {
       this.parametro = '';
     }
   }
-  constructor(private servicio: PedidoServices) { }
+  constructor(private servicio: PedidoServices) {}
 
   ngOnInit() {
     this.getAll();
@@ -44,22 +44,20 @@ export class PedidosComponent implements OnInit {
     );
   }
 
-
   get filtrarPedidos(): Pedido[] {
-
     var matcher = new RegExp(this.parametro, 'i');
 
     return this.pedidosCliente.filter(function (pedido) {
-      return matcher.test([
-        pedido.clientePedido.nombre,
-        pedido.clientePedido.apellido,
-        pedido.clientePedido.telefono,
-        pedido.estadoPedido.nombreEstado,
-        pedido.numero,
-        pedido.totalPedido,
-        pedido.tipo_Envio,
-      ].join());
-
+      return matcher.test(
+        [
+          pedido.clientePedido.nombre,
+          pedido.clientePedido.apellido,
+          pedido.estadoPedido.nombreEstado,
+          pedido.numero,
+          pedido.totalPedido,
+          pedido.tipo_Envio,
+        ].join()
+      );
     });
   }
 }
