@@ -89,13 +89,13 @@ export class ArtStockMinimoComponent implements OnInit {
       articuloTemp.stock_actual = this.articulosBajoStock[key].stock_actual;
       articuloTemp.stock_maximo = this.articulosBajoStock[key].stock_maximo;
       articuloTemp.stock_minimo = this.articulosBajoStock[key].stock_minimo;
-
+      articuloTemp.tipo_unidad = this.articulosBajoStock[key].unidadMedidaID.denominacion;
       this.articulosInsumoAExcel.push(articuloTemp);
     }
 
     this.excelService.exportAsExcelFile(
       this.articulosInsumoAExcel,
-      'Articulos con stock bajo'
+      'Articulos_stock_minimo_'
     );
   }
 }

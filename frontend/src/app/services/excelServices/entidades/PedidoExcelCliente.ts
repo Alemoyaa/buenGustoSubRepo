@@ -1,4 +1,4 @@
-export class PedidoExcel {
+export class PedidoExcelCliente {
   fechaRealizacion: Date;
   hora_estimada_fin: Date;
   tipo_Envio: boolean;

@@ -71,8 +71,6 @@ export class EstadisticasComponent implements OnInit {
   }
 
   getCantidades(listaDePedidos: Pedido[]) {
-    // let elementosSinRepetir: Array<string> = [];
-    // let cantidadElementos: Array<number> = [];
 
     listaDePedidos.forEach((pedidoItem) => {
       pedidoItem.lista_detallePedido.forEach((articuloDetallePedido) => {
@@ -140,14 +138,14 @@ export class EstadisticasComponent implements OnInit {
 
     for (let index = 0; index < this.elementosSinRepetir.length; index++) {
       let objAExcel = {
-        nombreArticulo: this.elementosSinRepetir[index],
-        cantidadVendida: this.cantidadElementos[index],
+        nombre_articulo: this.elementosSinRepetir[index],
+        cantidad_vendida: this.cantidadElementos[index],
       };
 
       array.push(objAExcel);
     }
 
-    this.excelService.exportAsExcelFile(array, 'Ranking comidas');
+    this.excelService.exportAsExcelFile(array, 'Ranking_comidas_');
   }
 
   newChart(nombre, labels, data) {

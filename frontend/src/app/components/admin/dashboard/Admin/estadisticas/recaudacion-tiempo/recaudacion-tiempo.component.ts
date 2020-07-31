@@ -5,6 +5,7 @@ import { PedidoServices } from '../../../../../../services/serviciosCliente/pedi
 import { Component, OnInit } from '@angular/core';
 import Swal from 'sweetalert2';
 import { NgForm } from '@angular/forms';
+import { PedidoExcelCliente } from '../../../../../../services/excelServices/entidades/PedidoExcelCliente';
 
 @Component({
   selector: 'app-recaudacion-tiempo',
@@ -19,8 +20,8 @@ export class RecaudacionTiempoComponent implements OnInit {
   mostrar: boolean;
 
   listaDePedidos: Pedido[];
-  pedidoParaExcel: PedidoExcel = new PedidoExcel();
-  listaPedidosParaExcel: PedidoExcel[] = [];
+  pedidoParaExcel: PedidoExcel = new PedidoExcelCliente();
+  listaPedidosParaExcel: PedidoExcelCliente[] = [];
 
   constructor(
     private servicePedido: PedidoServices,
@@ -94,6 +95,10 @@ export class RecaudacionTiempoComponent implements OnInit {
       ].hora_estimada_fin;
       this.pedidoParaExcel.tipo_Envio = this.listaDePedidos[key].tipo_Envio;
       this.pedidoParaExcel.totalPedido = this.listaDePedidos[key].totalPedido;
+      this.pedidoParaExcel.NombreDeCliente = this.listaDePedidos[key].clientePedido.nombre;
+      this.pedidoParaExcel.ApellidoDeCliente = this.listaDePedidos[key].clientePedido.apellido;
+      this.pedidoParaExcel.TelefonoDeCliente = this.listaDePedidos[key].clientePedido.telefono;
+      this.pedidoParaExcel.EmailDeCliente = this.listaDePedidos[key].clientePedido.usuario.email;
 
       this.listaPedidosParaExcel.push(this.pedidoParaExcel);
     }
@@ -106,7 +111,7 @@ export class RecaudacionTiempoComponent implements OnInit {
 
     this.excelService.exportAsExcelFile(
       this.listaPedidosParaExcel,
-      'Recaudacion_por_tiempo'
+      'Recaudacion_por_tiempo_'
     );
   }
 }

@@ -8,4 +8,5 @@ export class ArticuloInsumoExcel {
   stock_maximo: number;
   requiere_refrigeracion: boolean;
   es_catalogo: boolean;
+  tipo_unidad: string;
 }
