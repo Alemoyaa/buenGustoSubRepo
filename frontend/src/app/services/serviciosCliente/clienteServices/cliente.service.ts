@@ -11,7 +11,7 @@ export class ClienteService extends CommonService<Cliente> {
 
   clienteCargadoDesdeBD: Cliente;
 
-  _url = 'http://localhost:8080/api/cliente/';
+  _url = 'https://buengusto-backend.herokuapp.com/clienteEntities/';
 
   constructor(http: HttpClient) {
     super(http);

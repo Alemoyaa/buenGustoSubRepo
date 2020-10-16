@@ -7,7 +7,7 @@ import { Categoria } from 'src/app/entidades/Categoria';
   providedIn: 'root',
 })
 export class CategoriaService extends CommonService<Categoria> {
-  _url = 'http://localhost:8080/api/categoria/';
+  _url = 'https://buengusto-backend.herokuapp.com/categoriaEntities/';
 
   constructor(http: HttpClient) {
     super(http);

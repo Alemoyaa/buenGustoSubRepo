@@ -7,7 +7,7 @@ import { Pais } from 'src/app/entidades/Pais';
   providedIn: 'root',
 })
 export class PaisService extends CommonService<Pais> {
-  _url = 'http://localhost:8080/api/pais/';
+  _url = 'https://buengusto-backend.herokuapp.com/paisEntities/';
 
   constructor(http: HttpClient) {
     super(http);

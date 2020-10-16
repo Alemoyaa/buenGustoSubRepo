@@ -7,7 +7,7 @@ import { Domicilio } from 'src/app/entidades/Domicilio';
   providedIn: 'root',
 })
 export class DomicilioService extends CommonService<Domicilio> {
-  _url = 'http://localhost:8080/api/domicilio/';
+  _url = 'https://buengusto-backend.herokuapp.com/domicilioEntities/';
 
   constructor(http: HttpClient) {
     super(http);

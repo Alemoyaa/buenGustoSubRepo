@@ -7,7 +7,7 @@ import { Provincia } from 'src/app/entidades/Provincia';
   providedIn: 'root',
 })
 export class ProvinciaServices extends CommonService<Provincia> {
-  _url = 'http://localhost:8080/api/provincia/';
+  _url = 'https://buengusto-backend.herokuapp.com/provinciaEntities/';
 
   constructor(http: HttpClient) {
     super(http);

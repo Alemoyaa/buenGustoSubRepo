@@ -7,7 +7,7 @@ import { CommonService } from '../commonServices/common.service';
 })
 export class RubroGeneralService extends CommonService<UnidadMedida> {
 
-  _url = 'http://localhost:8080/api/rubro_general/';
+  _url = 'https://buengusto-backend.herokuapp.com/rubroGeneralEntities/';
   constructor(http: HttpClient) {
     super(http);
   }

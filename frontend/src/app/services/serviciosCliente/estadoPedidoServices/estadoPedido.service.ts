@@ -7,7 +7,7 @@ import { EstadoPedido } from 'src/app/entidades/EstadoPedido';
   providedIn: 'root',
 })
 export class EstadoPedidoServices extends CommonService<EstadoPedido> {
-  _url = 'http://localhost:8080/api/estado_pedido/';
+  _url = 'https://buengusto-backend.herokuapp.com/estadoPedidoEntities/';
 
   constructor(http: HttpClient) {
     super(http);

@@ -7,7 +7,7 @@ import { Localidad } from 'src/app/entidades/Localidad';
   providedIn: 'root',
 })
 export class LocalidadService extends CommonService<Localidad> {
-  _url = 'http://localhost:8080/api/localidad/';
+  _url = 'https://buengusto-backend.herokuapp.com/localidadEntities/';
 
   constructor(http: HttpClient) {
     super(http);

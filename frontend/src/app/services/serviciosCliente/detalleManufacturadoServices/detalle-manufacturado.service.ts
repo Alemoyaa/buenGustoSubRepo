@@ -9,7 +9,7 @@ import { DetalleManufacturado } from 'src/app/entidades/DetalleManufacturado';
 export class DetalleManufacturadoService extends CommonService<
   DetalleManufacturado
 > {
-  _url = 'http://localhost:8080/api/detalle_manufacturado/';
+  _url = 'https://buengusto-backend.herokuapp.com/detalleManufacturadoEntities/';
 
   constructor(http: HttpClient) {
     super(http);

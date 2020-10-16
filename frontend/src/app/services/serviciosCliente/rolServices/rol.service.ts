@@ -8,7 +8,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class RolService extends CommonService<Rol>{
 
-  _url = 'http://localhost:8080/api/rol/';
+  _url = 'https://buengusto-backend.herokuapp.com/rolEntities/';
  
   constructor(http: HttpClient) { super(http) }
 }

@@ -8,7 +8,7 @@ import { CommonService } from '../commonServices/common.service';
   providedIn: 'root',
 })
 export class UsuarioServices extends CommonService<Usuario> {
-  _url = 'http://localhost:8080/api/usuario/';
+  _url = 'https://buengusto-backend.herokuapp.com/usuarioEntities/';
 
   constructor(http: HttpClient) {
     super(http);

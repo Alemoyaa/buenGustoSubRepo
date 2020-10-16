@@ -9,7 +9,7 @@ import { ArticuloInsumo } from 'src/app/entidades/ArticuloInsumo';
   providedIn: 'root',
 })
 export class ArticuloInsumoService extends CommonService<ArticuloInsumo> {
-  _url = 'http://localhost:8080/api/articulo_insumo/';
+  _url = 'https://buengusto-backend.herokuapp.com/articuloInsumoEntities/';
 
   articulosInsumo: ArticuloInsumo[] = [];
 

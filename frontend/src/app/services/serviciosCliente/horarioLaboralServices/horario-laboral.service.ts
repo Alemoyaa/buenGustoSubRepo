@@ -9,7 +9,7 @@ import { HorarioLaboral } from 'src/app/entidades/HorarioLaboral';
   providedIn: 'root',
 })
 export class HorarioLaboralService extends CommonService<HorarioLaboral> {
-  _url = 'http://localhost:8080/api/pedido/';
+  _url = 'https://buengusto-backend.herokuapp.com/pedidoEntities/';
 
   constructor(http: HttpClient) {
     super(http);

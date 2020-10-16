@@ -9,7 +9,7 @@ import { Configuracion_General } from 'src/app/entidades/Configuracion_General';
 export class ConfiguracionGeneralServices extends CommonService<
   Configuracion_General
 > {
-  _url = 'http://localhost:8080/api/configuracion_general/';
+  _url = 'https://buengusto-backend.herokuapp.com/configuracionGeneralEntities/';
 
   constructor(http: HttpClient) {
     super(http);

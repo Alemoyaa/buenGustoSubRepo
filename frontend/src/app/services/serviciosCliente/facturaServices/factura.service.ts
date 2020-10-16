@@ -9,7 +9,7 @@ import { Injectable } from '@angular/core';
   providedIn: 'root',
 })
 export class FacturaService extends CommonService<Factura> {
-  _url = 'http://localhost:8080/api/factura/';
+  _url = 'https://buengusto-backend.herokuapp.com/facturaEntities/';
 
   constructor(http: HttpClient) {
     super(http);

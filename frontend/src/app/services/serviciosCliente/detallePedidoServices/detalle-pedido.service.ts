@@ -7,7 +7,7 @@ import { DetallePedido } from 'src/app/entidades/DetallePedido';
   providedIn: 'root',
 })
 export class DetallePedidoService extends CommonService<DetallePedido> {
-  _url = 'http://localhost:8080/api/detalle_pedido/';
+  _url = 'https://buengusto-backend.herokuapp.com/detallePedidoEntities/';
 
   constructor(http: HttpClient) {
     super(http);

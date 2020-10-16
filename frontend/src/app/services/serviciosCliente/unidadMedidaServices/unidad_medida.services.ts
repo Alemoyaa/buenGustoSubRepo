@@ -7,7 +7,7 @@ import { UnidadMedida } from 'src/app/entidades/UnidadMedida';
   providedIn: 'root',
 })
 export class UnidadMedidaService extends CommonService<UnidadMedida> {
-  _url = 'http://localhost:8080/api/unidad_medida/';
+  _url = 'https://buengusto-backend.herokuapp.com/unidadMedidaEntities/';
 
   constructor(http: HttpClient) {
     super(http);

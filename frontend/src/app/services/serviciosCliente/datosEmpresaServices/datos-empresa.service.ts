@@ -7,7 +7,7 @@ import { DatosEmpresa } from 'src/app/entidades/DatosEmpresa';
   providedIn: 'root',
 })
 export class DatosEmpresaService extends CommonService<DatosEmpresa> {
-  _url = 'http://localhost:8080/api/datos_empresa/';
+  _url = 'https://buengusto-backend.herokuapp.com/datosEmpresaEntities/';
 
   constructor(http: HttpClient) {
     super(http);
